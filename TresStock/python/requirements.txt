@@ -1,0 +1,18 @@
+# TresStock - Dependencias Python
+# Carpeta: python/importacion (lectura/limpieza de DimaSoft) y python/analitica (ML)
+
+# --- Conexión a PostgreSQL (usado por utilidades/conexion_base_datos.py) ---
+psycopg2-binary==2.9.9
+SQLAlchemy==2.0.35
+
+# --- Lectura y manipulación de datos (leer_csv, leer_excel, limpiar_datos, procesar_importacion, validar_archivo) ---
+pandas==2.2.3
+openpyxl==3.1.5
+
+# --- Analítica y Machine Learning (prediccion_demanda, tendencias_ventas, rotacion_productos, recomendaciones_reposicion) ---
+numpy==2.1.3
+scikit-learn==1.5.2
+matplotlib==3.9.2
+
+# --- Variables de entorno (para leer el mismo .env que usa el backend Node, o uno propio) ---
+python-dotenv==1.0.1

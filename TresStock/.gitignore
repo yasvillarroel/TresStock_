@@ -1,0 +1,19 @@
+# Evitar entorno
+
+python/venv/
+
+# Node.js
+node_modules/
+npm-debug.log
+
+# Archivos temporales de python
+
+__pycache__
+*.pyc
+
+# Variables de entorno (credenciales)
+.env
+
+# Sistema
+.DS_Store
+Thumbs.db
