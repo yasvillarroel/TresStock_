@@ -38,4 +38,5 @@ Este proyecto utiliza:
     <!-- PROBAR CONEXION BASE DE DATOS -->
 
     - Desde TresStock
-    - terminal: node backend/probar_conexion.js (revisar credenciales en .env)
+    - terminal: node backend/servidor.js
+    - navegador: http://localhost:3000/api/estado_conexion
