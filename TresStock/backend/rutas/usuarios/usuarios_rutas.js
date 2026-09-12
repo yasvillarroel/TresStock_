@@ -33,6 +33,9 @@ router.put('/:id/contrasena', usuariosControlador.cambiarContrasena);
 // ruta para cambiar el estado del usuario
 router.put('/:id/estado', usuariosControlador.cambiarEstadoUsuario);
 
+// ruta para cambiar el rol del usuario
+router.put('/:id/rol', usuariosControlador.cambiarRolUsuario);
+
 
 // exporta las rutas
 module.exports = router;

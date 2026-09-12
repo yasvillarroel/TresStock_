@@ -215,7 +215,37 @@ const usuariosServicio = require('../../servicios/usuarios/usuarios_servicio');
         }
     };
 
+    // FUNCION 8 CAMBIAR ROL DEL USUARIO
+    const cambiarRolUsuario = async (req, res) => {
 
+        try {
+
+            // obtiene el id del usuario
+            const { id } = req.params;
+
+            // obtiene el nuevo rol
+            const { id_rol } = req.body;
+
+            // cambia el rol del usuario
+            const usuario = await usuariosServicio.cambiarRolUsuario(
+                id,
+                id_rol
+            );
+
+            // envia el usuario actualizado
+            res.json(usuario);
+
+        } catch (error) {
+
+            // muestra el error en la consola
+            console.error('Error al cambiar rol del usuario:', error);
+
+            // envia el error
+            res.status(500).json({
+                mensaje: 'Error al cambiar rol del usuario'
+            });
+        }
+    };
 
     // EXPORTAR FUNCIONES 
     module.exports = {
@@ -225,5 +255,6 @@ const usuariosServicio = require('../../servicios/usuarios/usuarios_servicio');
         actualizarUsuario,
         eliminarUsuario,
         cambiarContrasena,
-        cambiarEstadoUsuario
+        cambiarEstadoUsuario,
+        cambiarRolUsuario
     };

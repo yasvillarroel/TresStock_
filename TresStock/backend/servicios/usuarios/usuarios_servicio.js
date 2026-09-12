@@ -152,7 +152,7 @@ const bcrypt = require('bcrypt');
         // devuelve el usuario actualizado
         return resultado.rows[0];
     };
-    
+
     // FUNCION 7 CAMBIAR ESTADO DEL USUARIO
     const cambiarEstadoUsuario = async (id, activo) => {
 
@@ -169,6 +169,22 @@ const bcrypt = require('bcrypt');
         return resultado.rows[0];
     };
 
+    // FUNCION 8 CAMBIAR ROL DEL USUARIO
+    const cambiarRolUsuario = async (id, id_rol) => {
+
+        // actualiza el rol del usuario
+        const resultado = await pool.query(
+            `UPDATE base_datos.usuarios
+            SET id_rol = $1
+            WHERE id_usuario = $2
+            RETURNING id_usuario, nombre, email, id_rol, activo`,
+            [id_rol, id]
+        );
+
+        // devuelve el usuario actualizado
+        return resultado.rows[0];
+    };
+
 // EXPORTAR FUNCIONES
 module.exports = {
     crearUsuario,
@@ -177,5 +193,6 @@ module.exports = {
     actualizarUsuario,
     eliminarUsuario,
     cambiarContrasena,
-    cambiarEstadoUsuario
+    cambiarEstadoUsuario,
+    cambiarRolUsuario
 };
