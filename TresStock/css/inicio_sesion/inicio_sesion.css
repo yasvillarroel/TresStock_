@@ -1,0 +1,19 @@
+.contenedor_inicio_sesion{
+    background-color: lightblue;
+}
+
+.boton_inicio_sesion{
+    padding: 15px 5px;
+    background-color: rgb(97, 97, 223);
+    cursor: pointer;
+    color: white;
+    font-family: arial, sans-serif;
+    width: 25%;
+    height: 25%;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.boton_inicio_sesion:hover{
+    background-color: blue;
+}

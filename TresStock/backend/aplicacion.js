@@ -18,9 +18,6 @@ app.use(cors());
 // permite recibir datos en formato JSON
 app.use(express.json());
 
-// aqui se iran agregando las rutas de cada modulo
-// registra las rutas de usuarios
-app.use('/api/usuarios', require('./rutas/usuarios/usuarios_rutas'));
 
 // crea una ruta para verificar la conexion con PostgreSQL
 app.get('/api/estado_conexion', async (req, res) => {
@@ -64,8 +61,11 @@ app.get('/api/estado_conexion', async (req, res) => {
 
 // aqui se iran agregando las rutas de cada modulo
 
-// registra las rutas de productos
-// app.use('/api/productos', require('./rutas/productos_rutas'));
+// registra las rutas de usuarios
+app.use('/api/usuarios', require('./rutas/usuarios/usuarios_rutas'));
+
+// registra las rutas de autenticacion
+app.use('/api/autenticacion', require('./rutas/autenticacion/autenticacion_rutas'));
 
 // exporta la aplicacion para utilizarla desde otros archivos
 module.exports = app;
