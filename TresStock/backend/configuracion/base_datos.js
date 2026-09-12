@@ -4,6 +4,10 @@ require('dotenv').config();
 // importa la herramienta para crear un grupo de conexiones
 const { Pool } = require('pg');
 
+
+// muestra si la contraseña fue cargada
+console.log('password:', process.env.DB_PASSWORD ? 'cargada' : 'no cargada');
+
 // crea el grupo de conexiones con PostgreSQL
 const pool = new Pool({
 

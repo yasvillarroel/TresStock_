@@ -18,6 +18,10 @@ app.use(cors());
 // permite recibir datos en formato JSON
 app.use(express.json());
 
+// aqui se iran agregando las rutas de cada modulo
+// registra las rutas de usuarios
+app.use('/api/usuarios', require('./rutas/usuarios/usuarios_rutas'));
+
 // crea una ruta para verificar la conexion con PostgreSQL
 app.get('/api/estado_conexion', async (req, res) => {
 
