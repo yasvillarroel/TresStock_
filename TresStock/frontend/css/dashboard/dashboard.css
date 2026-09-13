@@ -1,0 +1,627 @@
+/* TITULO 1 CONTENEDOR DASHBOARD */
+
+    /* clase para establecer el espacio general de la vista Dashboard */
+    .contenedor_dashboard {
+        width: 100%;
+        padding: 30px;
+        box-sizing: border-box;
+    }
+
+/* TITULO 2 INDICADORES PRINCIPALES */
+
+    /* clase para distribuir los indicadores principales en cuatro columnas */
+    .contenedor_indicadores_dashboard {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin-bottom: 22px;
+    }
+
+    /* clase para establecer el diseño del indicador de stock actual */
+    .tarjeta_stock_actual_dashboard {
+        min-height: 115px;
+        display: flex;
+        align-items: center;
+        background-color: #ffffff;
+        border: 1px solid #d9e1e5;
+        border-radius: 6px;
+        padding: 18px;
+        box-sizing: border-box;
+    }
+
+    /* clase para establecer el diseño del icono de stock actual */
+    .icono_stock_actual_dashboard {
+        width: 52px;
+        height: 52px;
+        background-color: #e8f7f8;
+        margin-right: 16px;
+        border-radius: 5px;
+    }
+
+    /* clase para organizar el contenido del indicador de stock actual */
+    .contenido_stock_actual_dashboard {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* clase para establecer el texto del indicador de stock actual */
+    .texto_stock_actual_dashboard {
+        color: #44515a;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+
+    /* clase para establecer el valor del stock actual */
+    .valor_stock_actual_dashboard {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 25px;
+        font-weight: bold;
+    }
+
+
+    /* clase para establecer el diseño del indicador de stock bajo */
+    .tarjeta_stock_bajo_dashboard {
+        min-height: 115px;
+        display: flex;
+        align-items: center;
+        background-color: #ffffff;
+        border: 1px solid #d9e1e5;
+        border-radius: 6px;
+        padding: 18px;
+        box-sizing: border-box;
+    }
+
+    /* clase para establecer el diseño del icono de stock bajo */
+    .icono_stock_bajo_dashboard {
+        width: 52px;
+        height: 52px;
+        background-color: #fff4dc;
+        margin-right: 16px;
+        border-radius: 5px;
+    }
+
+    /* clase para organizar el contenido del indicador de stock bajo */
+    .contenido_stock_bajo_dashboard {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* clase para establecer el texto del indicador de stock bajo */
+    .texto_stock_bajo_dashboard {
+        color: #44515a;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+
+    /* clase para establecer el valor de productos con stock bajo */
+    .valor_stock_bajo_dashboard {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 25px;
+        font-weight: bold;
+    }
+
+
+    /* clase para establecer el diseño del indicador de productos agotados */
+    .tarjeta_productos_agotados_dashboard {
+        min-height: 115px;
+        display: flex;
+        align-items: center;
+        background-color: #ffffff;
+        border: 1px solid #d9e1e5;
+        border-radius: 6px;
+        padding: 18px;
+        box-sizing: border-box;
+    }
+
+    /* clase para establecer el diseño del icono de productos agotados */
+    .icono_productos_agotados_dashboard {
+        width: 52px;
+        height: 52px;
+        background-color: #fde7e7;
+        margin-right: 16px;
+        border-radius: 5px;
+    }
+
+    /* clase para organizar el contenido del indicador de productos agotados */
+    .contenido_productos_agotados_dashboard {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* clase para establecer el texto del indicador de productos agotados */
+    .texto_productos_agotados_dashboard {
+        color: #44515a;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+
+    /* clase para establecer el valor de productos agotados */
+    .valor_productos_agotados_dashboard {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 25px;
+        font-weight: bold;
+    }
+
+
+    /* clase para establecer el diseño del indicador de ventas del mes */
+    .tarjeta_ventas_mes_dashboard {
+        min-height: 115px;
+        display: flex;
+        align-items: center;
+        background-color: #ffffff;
+        border: 1px solid #d9e1e5;
+        border-radius: 6px;
+        padding: 18px;
+        box-sizing: border-box;
+    }
+
+    /* clase para establecer el diseño del icono de ventas del mes */
+    .icono_ventas_mes_dashboard {
+        width: 52px;
+        height: 52px;
+        background-color: #e8f7f8;
+        margin-right: 16px;
+        border-radius: 5px;
+    }
+
+    /* clase para organizar el contenido del indicador de ventas del mes */
+    .contenido_ventas_mes_dashboard {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* clase para establecer el texto del indicador de ventas del mes */
+    .texto_ventas_mes_dashboard {
+        color: #44515a;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+
+    /* clase para establecer el valor de ventas del mes */
+    .valor_ventas_mes_dashboard {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 25px;
+        font-weight: bold;
+    }
+
+/* TITULO 3 ACCIONES RAPIDAS */
+
+    /* clase para distribuir las acciones rápidas del Dashboard */
+    .contenedor_acciones_dashboard {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-bottom: 22px;
+    }
+
+    /* clase para establecer el diseño de la opción importar Excel */
+    .boton_importar_dashboard {
+        height: 62px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #ffffff;
+        border: 1px solid #d9e1e5;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    /* cambia el fondo de importar Excel al posicionar el cursor */
+    .boton_importar_dashboard:hover {
+        background-color: #eef8f8;
+    }
+
+    /* clase para representar el icono de importación */
+    .icono_importar_dashboard {
+        width: 30px;
+        height: 30px;
+        background-color: #159ba3;
+        margin-right: 12px;
+        border-radius: 4px;
+    }
+
+    /* clase para establecer el texto de importación */
+    .texto_importar_dashboard {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+
+    /* clase para establecer el diseño de la opción registrar entrada */
+    .boton_entrada_dashboard {
+        height: 62px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #ffffff;
+        border: 1px solid #d9e1e5;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    /* cambia el fondo de registrar entrada al posicionar el cursor */
+    .boton_entrada_dashboard:hover {
+        background-color: #eef8f8;
+    }
+
+    /* clase para representar el icono de entrada */
+    .icono_entrada_dashboard {
+        width: 30px;
+        height: 30px;
+        background-color: #159ba3;
+        margin-right: 12px;
+        border-radius: 4px;
+    }
+
+    /* clase para establecer el texto de registrar entrada */
+    .texto_entrada_dashboard {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+
+    /* clase para establecer el diseño de la opción registrar salida */
+    .boton_salida_dashboard {
+        height: 62px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #ffffff;
+        border: 1px solid #d9e1e5;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    /* cambia el fondo de registrar salida al posicionar el cursor */
+    .boton_salida_dashboard:hover {
+        background-color: #eef8f8;
+    }
+
+    /* clase para representar el icono de salida */
+    .icono_salida_dashboard {
+        width: 30px;
+        height: 30px;
+        background-color: #159ba3;
+        margin-right: 12px;
+        border-radius: 4px;
+    }
+
+    /* clase para establecer el texto de registrar salida */
+    .texto_salida_dashboard {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+/* TITULO 4 GRAFICOS */
+
+    /* clase para distribuir los gráficos del Dashboard */
+    .contenedor_graficos_dashboard {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 22px;
+    }
+
+    /* clase para establecer el diseño de la tarjeta de ventas */
+    .tarjeta_ventas_seis_meses_dashboard {
+        min-height: 290px;
+        background-color: #ffffff;
+        border: 1px solid #d9e1e5;
+        border-radius: 6px;
+        padding: 18px;
+        box-sizing: border-box;
+    }
+
+    /* clase para establecer el título del gráfico de ventas */
+    .titulo_ventas_seis_meses_dashboard {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 15px;
+        font-weight: bold;
+        margin-bottom: 18px;
+    }
+
+    /* clase para reservar el espacio del gráfico de ventas */
+    .grafico_ventas_dashboard {
+        width: 100%;
+        height: 220px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f5f7f9;
+        border-radius: 5px;
+    }
+
+    /* clase para mostrar temporalmente el texto del gráfico de ventas */
+    .texto_grafico_pendiente_dashboard {
+        color: #7a8790;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+    }
+
+
+    /* clase para establecer el diseño de la tarjeta de inventario */
+    .tarjeta_inventario_familia_dashboard {
+        min-height: 290px;
+        background-color: #ffffff;
+        border: 1px solid #d9e1e5;
+        border-radius: 6px;
+        padding: 18px;
+        box-sizing: border-box;
+    }
+
+    /* clase para establecer el título del gráfico de inventario */
+    .titulo_inventario_familia_dashboard {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 15px;
+        font-weight: bold;
+        margin-bottom: 18px;
+    }
+
+    /* clase para reservar el espacio del gráfico de inventario */
+    .grafico_inventario_dashboard {
+        width: 100%;
+        height: 220px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f5f7f9;
+        border-radius: 5px;
+    }
+
+    /* clase para mostrar temporalmente el texto del gráfico de inventario */
+    .texto_grafico_inventario_dashboard {
+        color: #7a8790;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+    }
+
+/* TITULO 5 INFORMACION INFERIOR */
+
+    /* clase para distribuir la tabla y la información lateral */
+    .contenedor_informacion_dashboard {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+    }
+
+/* TITULO 6 PRODUCTOS CON BAJO STOCK */
+
+    /* clase para establecer el diseño de la tarjeta de productos con bajo stock */
+    .tarjeta_productos_stock_bajo_dashboard {
+        min-height: 300px;
+        background-color: #ffffff;
+        border: 1px solid #d9e1e5;
+        border-radius: 6px;
+        padding: 18px;
+        box-sizing: border-box;
+    }
+
+    /* clase para establecer el título de productos con bajo stock */
+    .titulo_productos_stock_bajo_dashboard {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 15px;
+        font-weight: bold;
+        margin-bottom: 16px;
+    }
+
+    /* clase para permitir desplazamiento horizontal en la tabla si es necesario */
+    .contenedor_tabla_stock_bajo_dashboard {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    /* clase para establecer la estructura general de la tabla */
+    .tabla_stock_bajo_dashboard {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    /* clase para establecer el fondo del encabezado de la tabla */
+    .encabezado_tabla_stock_bajo_dashboard {
+        background-color: #f5f7f9;
+    }
+
+    /* clase para establecer la fila del encabezado */
+    .fila_encabezado_stock_bajo_dashboard {
+        border-bottom: 1px solid #d9e1e5;
+    }
+
+    /* clase para establecer la columna Producto */
+    .columna_producto_stock_bajo_dashboard {
+        padding: 11px 8px;
+        text-align: left;
+        color: #5f6c74;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+    }
+
+    /* clase para establecer la columna Familia */
+    .columna_familia_stock_bajo_dashboard {
+        padding: 11px 8px;
+        text-align: left;
+        color: #5f6c74;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+    }
+
+    /* clase para establecer la columna Stock actual */
+    .columna_stock_actual_dashboard {
+        padding: 11px 8px;
+        text-align: center;
+        color: #5f6c74;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+    }
+
+    /* clase para establecer la columna Stock mínimo */
+    .columna_stock_minimo_dashboard {
+        padding: 11px 8px;
+        text-align: center;
+        color: #5f6c74;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+    }
+
+    /* clase para establecer la columna Estado */
+    .columna_estado_stock_dashboard {
+        padding: 11px 8px;
+        text-align: center;
+        color: #5f6c74;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+    }
+
+    /* clase para establecer la fila de información de stock bajo */
+    .fila_stock_bajo_dashboard {
+        border-bottom: 1px solid #edf0f2;
+    }
+
+    /* clase para establecer el dato Producto */
+    .dato_producto_stock_bajo_dashboard {
+        padding: 11px 8px;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+    }
+
+    /* clase para establecer el dato Familia */
+    .dato_familia_stock_bajo_dashboard {
+        padding: 11px 8px;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+    }
+
+    /* clase para establecer el dato Stock actual */
+    .dato_stock_actual_dashboard {
+        padding: 11px 8px;
+        text-align: center;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+    }
+
+    /* clase para establecer el dato Stock mínimo */
+    .dato_stock_minimo_dashboard {
+        padding: 11px 8px;
+        text-align: center;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+    }
+
+    /* clase para establecer el dato Estado */
+    .dato_estado_stock_dashboard {
+        padding: 11px 8px;
+        text-align: center;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+    }
+
+/* TITULO 7 INFORMACION LATERAL */
+
+    /* clase para organizar alertas y recomendaciones verticalmente */
+    .contenedor_lateral_dashboard {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    /* clase para establecer el diseño de la tarjeta de alertas actuales */
+    .tarjeta_alertas_actuales_dashboard {
+        min-height: 140px;
+        background-color: #ffffff;
+        border: 1px solid #d9e1e5;
+        border-radius: 6px;
+        padding: 18px;
+        box-sizing: border-box;
+    }
+
+    /* clase para establecer el título de alertas actuales */
+    .titulo_alertas_actuales_dashboard {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 15px;
+        font-weight: bold;
+        margin-bottom: 14px;
+    }
+
+    /* clase para organizar las alertas mostradas */
+    .lista_alertas_dashboard {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    /* clase para establecer el diseño de una alerta */
+    .alerta_dashboard {
+        background-color: #f5f7f9;
+        color: #44515a;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        padding: 10px;
+        border-radius: 4px;
+    }
+
+
+    /* clase para establecer el diseño de la tarjeta de recomendaciones */
+    .tarjeta_recomendaciones_dashboard {
+        min-height: 140px;
+        background-color: #ffffff;
+        border: 1px solid #d9e1e5;
+        border-radius: 6px;
+        padding: 18px;
+        box-sizing: border-box;
+    }
+
+    /* clase para establecer el título de recomendaciones */
+    .titulo_recomendaciones_dashboard {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 15px;
+        font-weight: bold;
+        margin-bottom: 14px;
+    }
+
+    /* clase para organizar las recomendaciones mostradas */
+    .lista_recomendaciones_dashboard {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    /* clase para establecer el diseño de una recomendación */
+    .recomendacion_dashboard {
+        background-color: #f5f7f9;
+        color: #44515a;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        padding: 10px;
+        border-radius: 4px;
+    }

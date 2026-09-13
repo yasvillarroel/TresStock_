@@ -1,0 +1,233 @@
+<!-- TITULO 1 CONTENEDOR DASHBOARD -->
+
+    <!-- contenedor principal de la vista Dashboard -->
+    <div class="contenedor_dashboard">
+
+        <!-- TITULO 2 INDICADORES PRINCIPALES -->
+
+            <!-- contenedor que agrupa los indicadores principales del sistema -->
+            <div class="contenedor_indicadores_dashboard">
+
+                <!-- indicador para mostrar el stock actual total -->
+                <div class="tarjeta_stock_actual_dashboard">
+
+                    <div class="icono_stock_actual_dashboard"></div>
+
+                    <div class="contenido_stock_actual_dashboard">
+
+                        <div class="texto_stock_actual_dashboard">Stock actual</div>
+
+                        <div class="valor_stock_actual_dashboard" id="valor_stock_actual_dashboard">0</div>
+
+                    </div>
+
+                </div>
+
+                <!-- indicador para mostrar los productos con stock bajo -->
+                <div class="tarjeta_stock_bajo_dashboard">
+
+                    <div class="icono_stock_bajo_dashboard"></div>
+
+                    <div class="contenido_stock_bajo_dashboard">
+
+                        <div class="texto_stock_bajo_dashboard">Productos con bajo stock</div>
+
+                        <div class="valor_stock_bajo_dashboard" id="valor_stock_bajo_dashboard">0</div>
+
+                    </div>
+
+                </div>
+
+                <!-- indicador para mostrar los productos agotados -->
+                <div class="tarjeta_productos_agotados_dashboard">
+
+                    <div class="icono_productos_agotados_dashboard"></div>
+
+                    <div class="contenido_productos_agotados_dashboard">
+
+                        <div class="texto_productos_agotados_dashboard">Productos agotados</div>
+
+                        <div class="valor_productos_agotados_dashboard" id="valor_productos_agotados_dashboard">0</div>
+
+                    </div>
+
+                </div>
+
+                <!-- indicador para mostrar el total de ventas del mes -->
+                <div class="tarjeta_ventas_mes_dashboard">
+
+                    <div class="icono_ventas_mes_dashboard"></div>
+
+                    <div class="contenido_ventas_mes_dashboard">
+
+                        <div class="texto_ventas_mes_dashboard">Ventas del mes</div>
+
+                        <div class="valor_ventas_mes_dashboard" id="valor_ventas_mes_dashboard">$0</div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        <!-- TITULO 3 ACCIONES RAPIDAS -->
+
+            <!-- contenedor que agrupa las principales acciones operativas -->
+            <div class="contenedor_acciones_dashboard">
+
+                <!-- opción para acceder a importación DimaSoft -->
+                <div class="boton_importar_dashboard" id="boton_importar_dashboard">
+
+                    <div class="icono_importar_dashboard"></div>
+
+                    <div class="texto_importar_dashboard">Importar Excel</div>
+
+                </div>
+
+                <!-- opción para registrar una entrada de inventario -->
+                <div class="boton_entrada_dashboard" id="boton_entrada_dashboard">
+
+                    <div class="icono_entrada_dashboard"></div>
+
+                    <div class="texto_entrada_dashboard">Registrar entrada</div>
+
+                </div>
+
+                <!-- opción para registrar una salida de inventario -->
+                <div class="boton_salida_dashboard" id="boton_salida_dashboard">
+
+                    <div class="icono_salida_dashboard"></div>
+
+                    <div class="texto_salida_dashboard">Registrar salida</div>
+
+                </div>
+
+            </div>
+
+        <!-- TITULO 4 GRAFICOS -->
+
+            <!-- contenedor que agrupa los gráficos principales del Dashboard -->
+            <div class="contenedor_graficos_dashboard">
+
+                <!-- contenedor del gráfico de ventas -->
+                <div class="tarjeta_ventas_seis_meses_dashboard">
+
+                    <div class="titulo_ventas_seis_meses_dashboard">Ventas en los últimos 6 meses</div>
+
+                    <div class="grafico_ventas_dashboard" id="grafico_ventas_dashboard">
+
+                        <div class="texto_grafico_pendiente_dashboard">Gráfico de ventas</div>
+
+                    </div>
+
+                </div>
+
+                <!-- contenedor del gráfico de inventario por familia -->
+                <div class="tarjeta_inventario_familia_dashboard">
+
+                    <div class="titulo_inventario_familia_dashboard">Inventario por familia</div>
+
+                    <div class="grafico_inventario_dashboard" id="grafico_inventario_dashboard">
+
+                        <div class="texto_grafico_inventario_dashboard">Gráfico de inventario</div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        <!-- TITULO 5 INFORMACION INFERIOR -->
+
+            <!-- contenedor que agrupa las tablas, alertas y recomendaciones -->
+            <div class="contenedor_informacion_dashboard">
+
+                <!-- TITULO 6 PRODUCTOS CON BAJO STOCK -->
+
+                    <!-- contenedor para mostrar los productos que necesitan reposición -->
+                    <div class="tarjeta_productos_stock_bajo_dashboard">
+
+                        <div class="titulo_productos_stock_bajo_dashboard">Productos con bajo stock</div>
+
+                        <div class="contenedor_tabla_stock_bajo_dashboard">
+
+                            <table class="tabla_stock_bajo_dashboard">
+
+                                <thead class="encabezado_tabla_stock_bajo_dashboard">
+
+                                    <tr class="fila_encabezado_stock_bajo_dashboard">
+
+                                        <th class="columna_producto_stock_bajo_dashboard">Producto</th>
+
+                                        <th class="columna_familia_stock_bajo_dashboard">Familia</th>
+
+                                        <th class="columna_stock_actual_dashboard">Stock actual</th>
+
+                                        <th class="columna_stock_minimo_dashboard">Stock mínimo</th>
+
+                                        <th class="columna_estado_stock_dashboard">Estado</th>
+
+                                    </tr>
+
+                                </thead>
+
+                                <tbody class="cuerpo_tabla_stock_bajo_dashboard" id="cuerpo_tabla_stock_bajo_dashboard">
+
+                                    <tr class="fila_stock_bajo_dashboard">
+
+                                        <td class="dato_producto_stock_bajo_dashboard">Sin datos</td>
+
+                                        <td class="dato_familia_stock_bajo_dashboard">-</td>
+
+                                        <td class="dato_stock_actual_dashboard">-</td>
+
+                                        <td class="dato_stock_minimo_dashboard">-</td>
+
+                                        <td class="dato_estado_stock_dashboard">-</td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                <!-- TITULO 7 INFORMACION LATERAL -->
+
+                    <!-- contenedor que agrupa alertas y recomendaciones -->
+                    <div class="contenedor_lateral_dashboard">
+
+                        <!-- contenedor para mostrar las alertas actuales -->
+                        <div class="tarjeta_alertas_actuales_dashboard">
+
+                            <div class="titulo_alertas_actuales_dashboard">Alertas actuales</div>
+
+                            <div class="lista_alertas_dashboard" id="lista_alertas_dashboard">
+
+                                <div class="alerta_dashboard">Sin alertas disponibles</div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- contenedor para mostrar recomendaciones -->
+                        <div class="tarjeta_recomendaciones_dashboard">
+
+                            <div class="titulo_recomendaciones_dashboard">Recomendaciones</div>
+
+                            <div class="lista_recomendaciones_dashboard" id="lista_recomendaciones_dashboard">
+
+                                <div class="recomendacion_dashboard">Sin recomendaciones disponibles</div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+            </div>
+
+    </div>

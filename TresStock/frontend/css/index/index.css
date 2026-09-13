@@ -1,0 +1,59 @@
+/* TITULO 1 BODY INDEX */
+
+    /* clase para establecer la configuración general del cuerpo principal del sistema */
+    .body_index {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        background-color: #f5f7f9;
+        font-family: Arial, sans-serif;
+        box-sizing: border-box;
+    }
+
+/* TITULO 2 CONTENEDOR PRINCIPAL */
+
+    /* clase para organizar el menú lateral y el área principal del sistema */
+    .contenedor_principal {
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        box-sizing: border-box;
+    }
+
+/* TITULO 3 CONTENEDOR MENU */
+
+    /* clase para reservar el espacio correspondiente al menú lateral */
+    .contenedor_menu {
+        width: 240px;
+        min-width: 240px;
+        min-height: 100vh;
+        box-sizing: border-box;
+    }
+
+/* TITULO 4 CONTENEDOR AREA PRINCIPAL */
+
+    /* clase para organizar la cabecera y el contenido principal del sistema */
+    .contenedor_area_principal {
+        width: calc(100% - 240px);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+    }
+
+/* TITULO 5 CONTENEDOR CABECERA */
+
+    /* clase para establecer el espacio donde se cargará la cabecera del sistema */
+    .contenedor_cabecera {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+/* TITULO 6 CONTENEDOR CONTENIDO */
+
+    /* clase para establecer el espacio donde se cargarán las diferentes vistas del sistema */
+    .contenedor_contenido {
+        width: 100%;
+        flex: 1;
+        box-sizing: border-box;
+    }
