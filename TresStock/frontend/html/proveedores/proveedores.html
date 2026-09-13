@@ -1,0 +1,182 @@
+<!-- TITULO 1 CONTENEDOR PROVEEDORES -->
+
+    <!-- contenedor principal de la vista de gestión de proveedores -->
+    <div class="contenedor_proveedores">
+
+        <!-- TITULO 2 ENCABEZADO PROVEEDORES -->
+
+            <!-- contenedor que agrupa la información principal y la opción de agregar proveedor -->
+            <div class="contenedor_encabezado_proveedores">
+
+                <!-- contenedor de información de la vista -->
+                <div class="contenedor_informacion_proveedores">
+
+                    <!-- título principal de la gestión de proveedores -->
+                    <div class="titulo_proveedores">Gestión de proveedores</div>
+
+                    <!-- descripción de la funcionalidad de la vista -->
+                    <div class="descripcion_proveedores">Consulta y administra los proveedores registrados en TresStock.</div>
+
+                </div>
+
+                <!-- opción para abrir el formulario de registro de proveedor -->
+                <div class="boton_nuevo_proveedor" id="boton_nuevo_proveedor" onclick="abrirFormularioProveedor()">
+
+                    <!-- icono visual para agregar un proveedor -->
+                    <div class="icono_nuevo_proveedor">+</div>
+
+                    <!-- texto de la opción para agregar un proveedor -->
+                    <div class="texto_nuevo_proveedor">Nuevo proveedor</div>
+
+                </div>
+
+            </div>
+
+        <!-- TITULO 3 BUSQUEDA PROVEEDORES -->
+
+            <!-- contenedor que agrupa las opciones de búsqueda -->
+            <div class="contenedor_busqueda_proveedores">
+
+                <!-- contenedor del buscador de proveedores -->
+                <div class="campo_busqueda_proveedores">
+
+                    <!-- texto descriptivo del buscador -->
+                    <div class="texto_busqueda_proveedores">Buscar proveedor</div>
+
+                    <!-- campo para buscar proveedores por nombre, teléfono o correo -->
+                    <input class="input_busqueda_proveedores" id="input_busqueda_proveedores" type="text" placeholder="Nombre, teléfono o correo">
+
+                </div>
+
+            </div>
+
+        <!-- TITULO 4 TABLA PROVEEDORES -->
+
+            <!-- contenedor principal de la tabla de proveedores -->
+            <div class="contenedor_tabla_proveedores">
+
+                <!-- tabla para mostrar los proveedores registrados -->
+                <table class="tabla_proveedores">
+
+                    <!-- encabezado de la tabla de proveedores -->
+                    <thead class="encabezado_tabla_proveedores">
+
+                        <tr class="fila_encabezado_proveedores">
+
+                            <!-- columna para mostrar el nombre -->
+                            <th class="columna_nombre_proveedores">Nombre</th>
+
+                            <!-- columna para mostrar el teléfono -->
+                            <th class="columna_telefono_proveedores">Teléfono</th>
+
+                            <!-- columna para mostrar el correo electrónico -->
+                            <th class="columna_email_proveedores">Email</th>
+
+                            <!-- columna para mostrar la dirección -->
+                            <th class="columna_direccion_proveedores">Dirección</th>
+
+                            <!-- columna para mostrar las opciones disponibles -->
+                            <th class="columna_acciones_proveedores">Acciones</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <!-- cuerpo donde se cargarán los proveedores -->
+                    <tbody class="cuerpo_tabla_proveedores" id="cuerpo_tabla_proveedores">
+
+                        <!-- fila temporal mientras no existan datos cargados -->
+                        <tr class="fila_sin_proveedores">
+
+                            <td class="dato_sin_proveedores" colspan="5">No hay proveedores cargados para mostrar.</td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        <!-- TITULO 5 FORMULARIO PROVEEDOR -->
+
+            <!-- contenedor superpuesto del formulario de proveedor -->
+            <div class="contenedor_formulario_proveedor contenedor_formulario_proveedor_oculto" id="contenedor_formulario_proveedor">
+
+                <!-- contenedor interior del formulario -->
+                <div class="formulario_proveedor">
+
+                    <!-- TITULO 6 CABECERA FORMULARIO -->
+
+                        <!-- contenedor que agrupa el título y cierre del formulario -->
+                        <div class="cabecera_formulario_proveedor">
+
+                            <!-- título del formulario -->
+                            <div class="titulo_formulario_proveedor" id="titulo_formulario_proveedor">Nuevo proveedor</div>
+
+                            <!-- opción para cerrar el formulario -->
+                            <div class="boton_cerrar_formulario_proveedor" id="boton_cerrar_formulario_proveedor" onclick="cerrarFormularioProveedor()">×</div>
+
+                        </div>
+
+                    <!-- TITULO 7 CAMPOS FORMULARIO -->
+
+                        <!-- contenedor que agrupa los campos del proveedor -->
+                        <div class="contenedor_campos_proveedor">
+
+                            <!-- campo para ingresar el nombre del proveedor -->
+                            <div class="campo_nombre_proveedor">
+
+                                <div class="texto_campo_nombre_proveedor">Nombre</div>
+
+                                <input class="input_nombre_proveedor" id="input_nombre_proveedor" type="text">
+
+                            </div>
+
+                            <!-- campo para ingresar el teléfono del proveedor -->
+                            <div class="campo_telefono_proveedor">
+
+                                <div class="texto_campo_telefono_proveedor">Teléfono</div>
+
+                                <input class="input_telefono_proveedor" id="input_telefono_proveedor" type="text">
+
+                            </div>
+
+                            <!-- campo para ingresar el correo electrónico -->
+                            <div class="campo_email_proveedor">
+
+                                <div class="texto_campo_email_proveedor">Email</div>
+
+                                <input class="input_email_proveedor" id="input_email_proveedor" type="email">
+
+                            </div>
+
+                            <!-- campo para ingresar la dirección -->
+                            <div class="campo_direccion_proveedor">
+
+                                <div class="texto_campo_direccion_proveedor">Dirección</div>
+
+                                <input class="input_direccion_proveedor" id="input_direccion_proveedor" type="text">
+
+                            </div>
+
+                        </div>
+
+                    <!-- TITULO 8 ACCIONES FORMULARIO -->
+
+                        <!-- contenedor de las opciones inferiores del formulario -->
+                        <div class="contenedor_acciones_formulario_proveedor">
+
+                            <!-- opción para cancelar el registro -->
+                            <div class="boton_cancelar_proveedor" id="boton_cancelar_proveedor" onclick="cerrarFormularioProveedor()">Cancelar</div>
+
+                            <!-- opción para guardar el proveedor -->
+                            <div class="boton_guardar_proveedor" id="boton_guardar_proveedor">Guardar proveedor</div>
+
+                        </div>
+
+                </div>
+
+            </div>
+
+    </div>

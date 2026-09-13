@@ -1,0 +1,610 @@
+/* TITULO 1 CONTENEDOR USUARIOS */
+
+    /* clase para establecer el espacio general de la vista de usuarios */
+    .contenedor_usuarios {
+        width: 100%;
+        padding: 30px;
+        box-sizing: border-box;
+    }
+
+/* TITULO 2 ENCABEZADO USUARIOS */
+
+    /* clase para organizar el encabezado principal de la vista */
+    .contenedor_encabezado_usuarios {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 24px;
+    }
+
+    /* clase para organizar el título y descripción de usuarios */
+    .contenedor_informacion_usuarios {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* clase para establecer el diseño del título de usuarios */
+    .titulo_usuarios {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    /* clase para establecer el diseño de la descripción */
+    .descripcion_usuarios {
+        color: #6c757d;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+    }
+
+    /* clase para establecer el diseño de la opción nuevo usuario */
+    .boton_nuevo_usuario {
+        height: 42px;
+        display: flex;
+        align-items: center;
+        background-color: #159ba3;
+        color: #ffffff;
+        padding: 0 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+    /* cambia el fondo de nuevo usuario al posicionar el cursor */
+    .boton_nuevo_usuario:hover {
+        background-color: #0f858d;
+    }
+
+    /* clase para establecer el icono de nuevo usuario */
+    .icono_nuevo_usuario {
+        color: #ffffff;
+        font-family: Arial, sans-serif;
+        font-size: 22px;
+        font-weight: bold;
+        margin-right: 8px;
+    }
+
+    /* clase para establecer el texto de nuevo usuario */
+    .texto_nuevo_usuario {
+        color: #ffffff;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+/* TITULO 3 FILTROS USUARIOS */
+
+    /* clase para organizar las opciones de búsqueda y filtrado */
+    .contenedor_filtros_usuarios {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 18px;
+        background-color: #ffffff;
+        border: 1px solid #d9e1e5;
+        border-radius: 6px;
+        padding: 18px;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+    }
+
+    /* clase para organizar el campo de búsqueda */
+    .contenedor_busqueda_usuarios {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* clase para establecer el texto del buscador */
+    .texto_busqueda_usuarios {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        margin-bottom: 7px;
+    }
+
+    /* clase para establecer el diseño del campo de búsqueda */
+    .input_busqueda_usuarios {
+        width: 100%;
+        height: 40px;
+        border: 1px solid #cbd5da;
+        border-radius: 5px;
+        padding: 0 12px;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        box-sizing: border-box;
+        outline: none;
+    }
+
+    /* clase para organizar el filtro por rol */
+    .contenedor_rol_usuarios {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* clase para establecer el texto del filtro por rol */
+    .texto_rol_usuarios {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        margin-bottom: 7px;
+    }
+
+    /* clase para establecer el selector de rol */
+    .select_rol_usuarios {
+        width: 100%;
+        height: 40px;
+        border: 1px solid #cbd5da;
+        border-radius: 5px;
+        padding: 0 10px;
+        background-color: #ffffff;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        box-sizing: border-box;
+        outline: none;
+    }
+
+    /* clase para establecer las opciones del filtro por rol */
+    .opcion_rol_usuarios {
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+    }
+
+    /* clase para organizar el filtro por estado */
+    .contenedor_estado_usuarios {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* clase para establecer el texto del filtro por estado */
+    .texto_estado_usuarios {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        margin-bottom: 7px;
+    }
+
+    /* clase para establecer el selector de estado */
+    .select_estado_usuarios {
+        width: 100%;
+        height: 40px;
+        border: 1px solid #cbd5da;
+        border-radius: 5px;
+        padding: 0 10px;
+        background-color: #ffffff;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        box-sizing: border-box;
+        outline: none;
+    }
+
+    /* clase para establecer las opciones del filtro por estado */
+    .opcion_estado_usuarios {
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+    }
+
+/* TITULO 4 TABLA USUARIOS */
+
+    /* clase para establecer el contenedor visual de la tabla */
+    .contenedor_tabla_usuarios {
+        width: 100%;
+        background-color: #ffffff;
+        border: 1px solid #d9e1e5;
+        border-radius: 6px;
+        overflow-x: auto;
+        box-sizing: border-box;
+    }
+
+    /* clase para establecer la estructura general de la tabla */
+    .tabla_usuarios {
+        width: 100%;
+        min-width: 850px;
+        border-collapse: collapse;
+    }
+
+    /* clase para establecer el fondo del encabezado */
+    .encabezado_tabla_usuarios {
+        background-color: #eef3f5;
+    }
+
+    /* clase para establecer el borde inferior del encabezado */
+    .fila_encabezado_usuarios {
+        border-bottom: 1px solid #d9e1e5;
+    }
+
+    /* clase para establecer la columna nombre */
+    .columna_nombre_usuarios {
+        padding: 13px 12px;
+        text-align: left;
+        color: #44515a;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+    }
+
+    /* clase para establecer la columna email */
+    .columna_email_usuarios {
+        padding: 13px 12px;
+        text-align: left;
+        color: #44515a;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+    }
+
+    /* clase para establecer la columna rol */
+    .columna_rol_tabla_usuarios {
+        padding: 13px 12px;
+        text-align: center;
+        color: #44515a;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+    }
+
+    /* clase para establecer la columna estado */
+    .columna_estado_tabla_usuarios {
+        padding: 13px 12px;
+        text-align: center;
+        color: #44515a;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+    }
+
+    /* clase para establecer la columna fecha de creación */
+    .columna_fecha_creacion_usuarios {
+        padding: 13px 12px;
+        text-align: center;
+        color: #44515a;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+    }
+
+    /* clase para establecer la columna acciones */
+    .columna_acciones_usuarios {
+        padding: 13px 12px;
+        text-align: center;
+        color: #44515a;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+    }
+
+    /* clase para establecer la fila temporal sin usuarios */
+    .fila_sin_usuarios {
+        border-bottom: 1px solid #edf0f2;
+    }
+
+    /* clase para establecer el mensaje cuando no existen usuarios */
+    .dato_sin_usuarios {
+        padding: 35px 15px;
+        text-align: center;
+        color: #7a8790;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+    }
+
+/* TITULO 5 FORMULARIO USUARIO */
+
+    /* clase para establecer el fondo superpuesto del formulario */
+    .contenedor_formulario_usuario {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.45);
+        z-index: 1100;
+    }
+
+    /* clase para ocultar el formulario cuando no se está utilizando */
+    .contenedor_formulario_usuario_oculto {
+        display: none;
+    }
+
+    /* clase para establecer el diseño principal del formulario */
+    .formulario_usuario {
+        width: 620px;
+        max-width: calc(100% - 40px);
+        background-color: #ffffff;
+        border-radius: 7px;
+        padding: 22px;
+        box-sizing: border-box;
+    }
+
+/* TITULO 6 CABECERA FORMULARIO */
+
+    /* clase para organizar el título y cierre del formulario */
+    .cabecera_formulario_usuario {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 22px;
+    }
+
+    /* clase para establecer el título del formulario */
+    .titulo_formulario_usuario {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 21px;
+        font-weight: bold;
+    }
+
+    /* clase para establecer la opción de cierre del formulario */
+    .boton_cerrar_formulario_usuario {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #64727a;
+        font-family: Arial, sans-serif;
+        font-size: 25px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    /* cambia el fondo de cerrar formulario al posicionar el cursor */
+    .boton_cerrar_formulario_usuario:hover {
+        background-color: #edf1f3;
+    }
+
+/* TITULO 7 CAMPOS FORMULARIO */
+
+    /* clase para distribuir los campos en dos columnas */
+    .contenedor_campos_usuario {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 17px;
+    }
+
+    /* clase para organizar el campo nombre */
+    .campo_nombre_usuario {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* clase para establecer el texto del campo nombre */
+    .texto_campo_nombre_usuario {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        margin-bottom: 6px;
+    }
+
+    /* clase para establecer el campo nombre */
+    .input_nombre_usuario {
+        height: 40px;
+        border: 1px solid #cbd5da;
+        border-radius: 5px;
+        padding: 0 10px;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        outline: none;
+        box-sizing: border-box;
+    }
+
+    /* clase para organizar el campo email */
+    .campo_email_usuario {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* clase para establecer el texto del campo email */
+    .texto_campo_email_usuario {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        margin-bottom: 6px;
+    }
+
+    /* clase para establecer el campo email */
+    .input_email_usuario {
+        height: 40px;
+        border: 1px solid #cbd5da;
+        border-radius: 5px;
+        padding: 0 10px;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        outline: none;
+        box-sizing: border-box;
+    }
+
+    /* clase para organizar el campo contraseña */
+    .campo_password_usuario {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* clase para establecer el texto del campo contraseña */
+    .texto_campo_password_usuario {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        margin-bottom: 6px;
+    }
+
+    /* clase para establecer el campo contraseña */
+    .input_password_usuario {
+        height: 40px;
+        border: 1px solid #cbd5da;
+        border-radius: 5px;
+        padding: 0 10px;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        outline: none;
+        box-sizing: border-box;
+    }
+
+    /* clase para organizar el campo rol */
+    .campo_rol_usuario {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* clase para establecer el texto del campo rol */
+    .texto_campo_rol_usuario {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        margin-bottom: 6px;
+    }
+
+    /* clase para establecer el selector de rol */
+    .select_rol_usuario {
+        height: 40px;
+        border: 1px solid #cbd5da;
+        border-radius: 5px;
+        padding: 0 10px;
+        background-color: #ffffff;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        outline: none;
+        box-sizing: border-box;
+    }
+
+    /* clase para establecer las opciones del rol */
+    .opcion_rol_usuario {
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+    }
+
+    /* clase para organizar el campo estado */
+    .campo_estado_usuario {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* clase para establecer el texto del campo estado */
+    .texto_campo_estado_usuario {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        margin-bottom: 6px;
+    }
+
+    /* clase para establecer el selector de estado */
+    .select_estado_usuario {
+        height: 40px;
+        border: 1px solid #cbd5da;
+        border-radius: 5px;
+        padding: 0 10px;
+        background-color: #ffffff;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        outline: none;
+        box-sizing: border-box;
+    }
+
+    /* clase para establecer las opciones del estado */
+    .opcion_estado_usuario {
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+    }
+
+/* TITULO 8 ACCIONES FORMULARIO */
+
+    /* clase para organizar las opciones inferiores del formulario */
+    .contenedor_acciones_formulario_usuario {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 24px;
+    }
+
+    /* clase para establecer la opción cancelar */
+    .boton_cancelar_usuario {
+        height: 40px;
+        display: flex;
+        align-items: center;
+        padding: 0 16px;
+        background-color: #edf1f3;
+        color: #44515a;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+    /* cambia el fondo de cancelar al posicionar el cursor */
+    .boton_cancelar_usuario:hover {
+        background-color: #dfe6e9;
+    }
+
+    /* clase para establecer la opción guardar usuario */
+    .boton_guardar_usuario {
+        height: 40px;
+        display: flex;
+        align-items: center;
+        padding: 0 16px;
+        background-color: #159ba3;
+        color: #ffffff;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+    /* cambia el fondo de guardar usuario al posicionar el cursor */
+    .boton_guardar_usuario:hover {
+        background-color: #0f858d;
+    }
+
+/* TITULO 9 RESPONSIVE USUARIOS */
+
+    /* adapta los filtros y formulario para pantallas medianas */
+    @media (max-width: 900px) {
+
+        .contenedor_filtros_usuarios {
+            grid-template-columns: 1fr;
+        }
+
+        .contenedor_campos_usuario {
+            grid-template-columns: 1fr;
+        }
+
+    }
+
+    /* adapta el encabezado de usuarios para dispositivos móviles */
+    @media (max-width: 600px) {
+
+        .contenedor_usuarios {
+            padding: 18px;
+        }
+
+        .contenedor_encabezado_usuarios {
+            align-items: flex-start;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+    }

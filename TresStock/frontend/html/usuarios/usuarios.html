@@ -1,0 +1,240 @@
+<!-- TITULO 1 CONTENEDOR USUARIOS -->
+
+    <!-- contenedor principal de la vista de gestión de usuarios -->
+    <div class="contenedor_usuarios">
+
+        <!-- TITULO 2 ENCABEZADO USUARIOS -->
+
+            <!-- contenedor que agrupa la información principal y la opción de agregar usuario -->
+            <div class="contenedor_encabezado_usuarios">
+
+                <!-- contenedor de información de la vista -->
+                <div class="contenedor_informacion_usuarios">
+
+                    <!-- título principal de la gestión de usuarios -->
+                    <div class="titulo_usuarios">Gestión de usuarios</div>
+
+                    <!-- descripción de la funcionalidad de la vista -->
+                    <div class="descripcion_usuarios">Consulta y administra los usuarios con acceso a TresStock.</div>
+
+                </div>
+
+                <!-- opción para abrir el formulario de registro de usuario -->
+                <div class="boton_nuevo_usuario" id="boton_nuevo_usuario" onclick="abrirFormularioUsuario()">
+
+                    <!-- icono visual para agregar un usuario -->
+                    <div class="icono_nuevo_usuario">+</div>
+
+                    <!-- texto de la opción para agregar un usuario -->
+                    <div class="texto_nuevo_usuario">Nuevo usuario</div>
+
+                </div>
+
+            </div>
+
+        <!-- TITULO 3 FILTROS USUARIOS -->
+
+            <!-- contenedor que agrupa las opciones de búsqueda y filtrado -->
+            <div class="contenedor_filtros_usuarios">
+
+                <!-- contenedor del buscador de usuarios -->
+                <div class="contenedor_busqueda_usuarios">
+
+                    <!-- texto descriptivo del buscador -->
+                    <div class="texto_busqueda_usuarios">Buscar usuario</div>
+
+                    <!-- campo para buscar por nombre o correo electrónico -->
+                    <input class="input_busqueda_usuarios" id="input_busqueda_usuarios" type="text" placeholder="Nombre o correo electrónico">
+
+                </div>
+
+                <!-- contenedor del filtro por rol -->
+                <div class="contenedor_rol_usuarios">
+
+                    <!-- texto descriptivo del filtro por rol -->
+                    <div class="texto_rol_usuarios">Rol</div>
+
+                    <!-- selector para filtrar los usuarios por rol -->
+                    <select class="select_rol_usuarios" id="select_rol_usuarios">
+
+                        <option class="opcion_rol_usuarios" value="">Todos los roles</option>
+
+                        <option class="opcion_rol_usuarios" value="Administrador">Administrador</option>
+
+                        <option class="opcion_rol_usuarios" value="Usuario">Usuario</option>
+
+                    </select>
+
+                </div>
+
+                <!-- contenedor del filtro por estado -->
+                <div class="contenedor_estado_usuarios">
+
+                    <!-- texto descriptivo del filtro por estado -->
+                    <div class="texto_estado_usuarios">Estado</div>
+
+                    <!-- selector para filtrar los usuarios por estado -->
+                    <select class="select_estado_usuarios" id="select_estado_usuarios">
+
+                        <option class="opcion_estado_usuarios" value="">Todos los estados</option>
+
+                        <option class="opcion_estado_usuarios" value="activo">Activo</option>
+
+                        <option class="opcion_estado_usuarios" value="inactivo">Inactivo</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        <!-- TITULO 4 TABLA USUARIOS -->
+
+            <!-- contenedor principal de la tabla de usuarios -->
+            <div class="contenedor_tabla_usuarios">
+
+                <!-- tabla para mostrar los usuarios registrados -->
+                <table class="tabla_usuarios">
+
+                    <!-- encabezado de la tabla de usuarios -->
+                    <thead class="encabezado_tabla_usuarios">
+
+                        <tr class="fila_encabezado_usuarios">
+
+                            <th class="columna_nombre_usuarios">Nombre</th>
+
+                            <th class="columna_email_usuarios">Email</th>
+
+                            <th class="columna_rol_tabla_usuarios">Rol</th>
+
+                            <th class="columna_estado_tabla_usuarios">Estado</th>
+
+                            <th class="columna_fecha_creacion_usuarios">Fecha de creación</th>
+
+                            <th class="columna_acciones_usuarios">Acciones</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <!-- cuerpo donde se cargarán los usuarios -->
+                    <tbody class="cuerpo_tabla_usuarios" id="cuerpo_tabla_usuarios">
+
+                        <!-- fila temporal mientras no existan datos cargados -->
+                        <tr class="fila_sin_usuarios">
+
+                            <td class="dato_sin_usuarios" colspan="6">No hay usuarios cargados para mostrar.</td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        <!-- TITULO 5 FORMULARIO USUARIO -->
+
+            <!-- contenedor superpuesto del formulario de usuario -->
+            <div class="contenedor_formulario_usuario contenedor_formulario_usuario_oculto" id="contenedor_formulario_usuario">
+
+                <!-- contenedor interior del formulario -->
+                <div class="formulario_usuario">
+
+                    <!-- TITULO 6 CABECERA FORMULARIO -->
+
+                        <!-- contenedor que agrupa el título y cierre del formulario -->
+                        <div class="cabecera_formulario_usuario">
+
+                            <!-- título del formulario -->
+                            <div class="titulo_formulario_usuario" id="titulo_formulario_usuario">Nuevo usuario</div>
+
+                            <!-- opción para cerrar el formulario -->
+                            <div class="boton_cerrar_formulario_usuario" id="boton_cerrar_formulario_usuario" onclick="cerrarFormularioUsuario()">×</div>
+
+                        </div>
+
+                    <!-- TITULO 7 CAMPOS FORMULARIO -->
+
+                        <!-- contenedor que agrupa los campos del usuario -->
+                        <div class="contenedor_campos_usuario">
+
+                            <!-- campo para ingresar el nombre del usuario -->
+                            <div class="campo_nombre_usuario">
+
+                                <div class="texto_campo_nombre_usuario">Nombre</div>
+
+                                <input class="input_nombre_usuario" id="input_nombre_usuario" type="text">
+
+                            </div>
+
+                            <!-- campo para ingresar el correo electrónico -->
+                            <div class="campo_email_usuario">
+
+                                <div class="texto_campo_email_usuario">Email</div>
+
+                                <input class="input_email_usuario" id="input_email_usuario" type="email">
+
+                            </div>
+
+                            <!-- campo para ingresar la contraseña -->
+                            <div class="campo_password_usuario">
+
+                                <div class="texto_campo_password_usuario">Contraseña</div>
+
+                                <input class="input_password_usuario" id="input_password_usuario" type="password">
+
+                            </div>
+
+                            <!-- campo para seleccionar el rol -->
+                            <div class="campo_rol_usuario">
+
+                                <div class="texto_campo_rol_usuario">Rol</div>
+
+                                <select class="select_rol_usuario" id="select_rol_usuario">
+
+                                    <option class="opcion_rol_usuario" value="">Seleccionar rol</option>
+
+                                    <option class="opcion_rol_usuario" value="Administrador">Administrador</option>
+
+                                    <option class="opcion_rol_usuario" value="Usuario">Usuario</option>
+
+                                </select>
+
+                            </div>
+
+                            <!-- campo para seleccionar el estado de la cuenta -->
+                            <div class="campo_estado_usuario">
+
+                                <div class="texto_campo_estado_usuario">Estado</div>
+
+                                <select class="select_estado_usuario" id="select_estado_usuario">
+
+                                    <option class="opcion_estado_usuario" value="activo">Activo</option>
+
+                                    <option class="opcion_estado_usuario" value="inactivo">Inactivo</option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                    <!-- TITULO 8 ACCIONES FORMULARIO -->
+
+                        <!-- contenedor de las opciones inferiores del formulario -->
+                        <div class="contenedor_acciones_formulario_usuario">
+
+                            <!-- opción para cancelar el registro -->
+                            <div class="boton_cancelar_usuario" id="boton_cancelar_usuario" onclick="cerrarFormularioUsuario()">Cancelar</div>
+
+                            <!-- opción para guardar el usuario -->
+                            <div class="boton_guardar_usuario" id="boton_guardar_usuario">Guardar usuario</div>
+
+                        </div>
+
+                </div>
+
+            </div>
+
+    </div>

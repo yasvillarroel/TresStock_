@@ -22,10 +22,50 @@
             'contenedor_menu'
         );
 
+        await cargarComponente(
+            './html/cabecera/cabecera.html',
+            'contenedor_cabecera'
+        );
+
+        await cargarVista('dashboard');
+
     }
 
 
-// TITULO 3 INICIO DEL SISTEMA
+// TITULO 3 CARGA DE VISTAS
 
-    // llama a la función principal al cargar el index
-    cargarSistema();
+    // función para cargar la vista seleccionada desde el menú lateral
+    async function cargarVista(vista) {
+
+        const rutasVistas = {
+            dashboard: './html/dashboard/dashboard.html',
+            productos: './html/productos/productos.html',
+            proveedores: './html/proveedores/proveedores.html',
+            administracion: './html/usuarios/usuarios.html'
+        };
+
+        const titulosVistas = {
+            dashboard: 'Dashboard',
+            productos: 'Productos',
+            proveedores: 'Proveedores',
+            administracion: 'Administracion'        
+        };
+
+        const rutaVista = rutasVistas[vista];
+
+        if (!rutaVista) {
+            return;
+        }
+
+        await cargarComponente(
+            rutaVista,
+            'contenedor_contenido'
+        );
+
+        const tituloVistaCabecera = document.getElementById('titulo_vista_cabecera');
+
+        if (tituloVistaCabecera) {
+            tituloVistaCabecera.textContent = titulosVistas[vista];
+        }
+
+    }

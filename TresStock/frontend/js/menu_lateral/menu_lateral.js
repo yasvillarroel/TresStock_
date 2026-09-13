@@ -35,4 +35,8 @@
             opcionSeleccionada.classList.add('opcion_menu_activa');
         }
 
+        if (typeof cargarVista === 'function') {
+            cargarVista(opcion);
+        }
+
     }
