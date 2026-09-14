@@ -1,19 +1,353 @@
-.contenedor_inicio_sesion{
-    background-color: lightblue;
-}
+/* TITULO 1 BODY INICIO SESION */
 
-.boton_inicio_sesion{
-    padding: 15px 5px;
-    background-color: rgb(97, 97, 223);
-    cursor: pointer;
-    color: white;
-    font-family: arial, sans-serif;
-    width: 25%;
-    height: 25%;
-    text-align: center;
-    border-radius: 8px;
-}
+    /* clase para establecer la configuración general de la pantalla */
+    .body_inicio_sesion {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        min-height: 100vh;
+        background-color: #f5f7f9;
+        font-family: Arial, sans-serif;
+        box-sizing: border-box;
+    }
 
-.boton_inicio_sesion:hover{
-    background-color: blue;
-}
+
+/* TITULO 2 CONTENEDOR INICIO SESION */
+
+    /* clase para dividir la pantalla entre identidad y acceso */
+    .contenedor_inicio_sesion {
+        width: 100%;
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: 42% 58%;
+        box-sizing: border-box;
+    }
+
+
+/* TITULO 3 IDENTIDAD TRESSTOCK */
+
+    /* clase para establecer el panel de identidad visual */
+    .contenedor_identidad_inicio_sesion {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #062d44;
+        padding: 50px;
+        box-sizing: border-box;
+    }
+
+    /* clase para establecer el tamaño del logo */
+    .imagen_logo_inicio_sesion {
+        width: 230px;
+        height: auto;
+        margin-bottom: 32px;
+    }
+
+    /* clase para establecer el título descriptivo del sistema */
+    .titulo_identidad_inicio_sesion {
+        max-width: 420px;
+        color: #ffffff;
+        font-family: Arial, sans-serif;
+        font-size: 28px;
+        font-weight: bold;
+        line-height: 36px;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    /* clase para establecer la descripción del sistema */
+    .descripcion_identidad_inicio_sesion {
+        max-width: 430px;
+        color: #c4d4dc;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        line-height: 22px;
+        text-align: center;
+    }
+
+
+/* TITULO 4 ACCESO TRESSTOCK */
+
+    /* clase para centrar el formulario de inicio de sesión */
+    .contenedor_acceso_inicio_sesion {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f5f7f9;
+        padding: 40px;
+        box-sizing: border-box;
+    }
+
+    /* clase para establecer el diseño principal del formulario */
+    .formulario_inicio_sesion {
+        width: 440px;
+        max-width: 100%;
+        background-color: #ffffff;
+        border: 1px solid #dce4e8;
+        border-radius: 10px;
+        padding: 36px;
+        box-sizing: border-box;
+        box-shadow: 0 8px 24px rgba(18, 53, 72, 0.08);
+    }
+
+
+/* TITULO 5 ENCABEZADO FORMULARIO */
+
+    /* clase para organizar el encabezado del formulario */
+    .contenedor_encabezado_inicio_sesion {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    /* clase para establecer el título del formulario */
+    .titulo_inicio_sesion {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 27px;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+
+    /* clase para establecer la descripción del formulario */
+    .descripcion_inicio_sesion {
+        color: #71818a;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        line-height: 20px;
+    }
+
+
+/* TITULO 6 CORREO ELECTRONICO */
+
+    /* clase para organizar el campo correo electrónico */
+    .campo_email_inicio_sesion {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 19px;
+    }
+
+    /* clase para establecer el texto del correo electrónico */
+    .texto_email_inicio_sesion {
+        color: #425966;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        margin-bottom: 7px;
+    }
+
+    /* clase para establecer el campo correo electrónico */
+    .input_email_inicio_sesion {
+        width: 100%;
+        height: 44px;
+        border: 1px solid #ced9de;
+        border-radius: 6px;
+        padding: 0 12px;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        outline: none;
+        box-sizing: border-box;
+    }
+
+
+/* TITULO 7 CONTRASEÑA */
+
+    /* clase para organizar el campo contraseña */
+    .campo_contrasena_inicio_sesion {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 17px;
+    }
+
+    /* clase para establecer el texto del campo contraseña */
+    .texto_contrasena_inicio_sesion {
+        color: #425966;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        margin-bottom: 7px;
+    }
+
+    /* clase para agrupar el campo contraseña y la opción mostrar */
+    .contenedor_input_contrasena_inicio_sesion {
+        width: 100%;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        border: 1px solid #ced9de;
+        border-radius: 6px;
+        background-color: #ffffff;
+        box-sizing: border-box;
+    }
+
+    /* clase para establecer el campo contraseña */
+    .input_contrasena_inicio_sesion {
+        height: 100%;
+        min-width: 0;
+        flex: 1;
+        border: none;
+        outline: none;
+        padding: 0 12px;
+        color: #37434b;
+        background-color: transparent;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        box-sizing: border-box;
+    }
+
+    /* clase para establecer la opción mostrar contraseña */
+    .boton_mostrar_contrasena_inicio_sesion {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        padding: 0 12px;
+        color: #159ba3;
+        font-family: Arial, sans-serif;
+        font-size: 11px;
+        font-weight: bold;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+    /* cambia el color al posicionar el cursor */
+    .boton_mostrar_contrasena_inicio_sesion:hover {
+        color: #0b3650;
+    }
+
+
+/* TITULO 8 RECORDAR SESION */
+
+    /* clase para organizar la opción recordar sesión */
+    .contenedor_recordar_inicio_sesion {
+        display: flex;
+        align-items: center;
+        margin-bottom: 18px;
+    }
+
+    /* clase para establecer el selector recordar sesión */
+    .checkbox_recordar_inicio_sesion {
+        width: 15px;
+        height: 15px;
+        margin: 0 8px 0 0;
+        cursor: pointer;
+    }
+
+    /* clase para establecer el texto recordar sesión */
+    .texto_recordar_inicio_sesion {
+        color: #62737c;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+    }
+
+
+/* TITULO 9 MENSAJE INICIO SESION */
+
+    /* clase para establecer el espacio de mensajes del inicio de sesión */
+    .mensaje_login {
+        width: 100%;
+        min-height: 18px;
+        color: #c25757;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        margin-bottom: 12px;
+        box-sizing: border-box;
+    }
+
+
+/* TITULO 10 BOTON INICIO SESION */
+
+    /* clase para establecer el diseño de la opción ingresar */
+    .boton_inicio_sesion {
+        width: 100%;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #159ba3;
+        border-radius: 6px;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+    /* cambia el fondo de ingresar al posicionar el cursor */
+    .boton_inicio_sesion:hover {
+        background-color: #0f858d;
+    }
+
+    /* clase para establecer el texto de ingresar */
+    .texto_boton_inicio_sesion {
+        color: #ffffff;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+    }
+
+
+/* TITULO 11 INFORMACION INFERIOR */
+
+    /* clase para establecer el texto informativo inferior */
+    .texto_inferior_inicio_sesion {
+        width: 100%;
+        color: #96a2a8;
+        font-family: Arial, sans-serif;
+        font-size: 11px;
+        text-align: center;
+        margin-top: 24px;
+    }
+
+
+/* TITULO 12 RESPONSIVE INICIO SESION */
+
+    /* adapta la pantalla para tablets */
+    @media (max-width: 900px) {
+
+        .contenedor_inicio_sesion {
+            grid-template-columns: 1fr;
+        }
+
+        .contenedor_identidad_inicio_sesion {
+            min-height: 300px;
+            padding: 40px 25px;
+        }
+
+        .imagen_logo_inicio_sesion {
+            width: 190px;
+        }
+
+        .titulo_identidad_inicio_sesion {
+            font-size: 23px;
+            line-height: 30px;
+        }
+
+        .contenedor_acceso_inicio_sesion {
+            min-height: auto;
+            padding: 40px 20px;
+        }
+
+    }
+
+    /* adapta el formulario para dispositivos móviles */
+    @media (max-width: 500px) {
+
+        .contenedor_identidad_inicio_sesion {
+            min-height: 250px;
+        }
+
+        .descripcion_identidad_inicio_sesion {
+            font-size: 12px;
+        }
+
+        .formulario_inicio_sesion {
+            padding: 26px 20px;
+        }
+
+        .titulo_inicio_sesion {
+            font-size: 24px;
+        }
+
+    }

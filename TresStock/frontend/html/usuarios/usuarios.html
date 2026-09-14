@@ -3,6 +3,7 @@
     <!-- contenedor principal de la vista de gestión de usuarios -->
     <div class="contenedor_usuarios">
 
+
         <!-- TITULO 2 ENCABEZADO USUARIOS -->
 
             <!-- contenedor que agrupa la información principal y la opción de agregar usuario -->
@@ -15,46 +16,117 @@
                     <div class="titulo_usuarios">Gestión de usuarios</div>
 
                     <!-- descripción de la funcionalidad de la vista -->
-                    <div class="descripcion_usuarios">Consulta y administra los usuarios con acceso a TresStock.</div>
+                    <div class="descripcion_usuarios">Administra los usuarios con acceso al sistema TresStock.</div>
 
                 </div>
+
 
                 <!-- opción para abrir el formulario de registro de usuario -->
                 <div class="boton_nuevo_usuario" id="boton_nuevo_usuario" onclick="abrirFormularioUsuario()">
 
-                    <!-- icono visual para agregar un usuario -->
                     <div class="icono_nuevo_usuario">+</div>
 
-                    <!-- texto de la opción para agregar un usuario -->
                     <div class="texto_nuevo_usuario">Nuevo usuario</div>
 
                 </div>
 
             </div>
 
-        <!-- TITULO 3 FILTROS USUARIOS -->
+
+        <!-- TITULO 3 INDICADORES USUARIOS -->
+
+            <!-- contenedor que agrupa los indicadores principales de usuarios -->
+            <div class="contenedor_indicadores_usuarios">
+
+
+                <!-- indicador para mostrar la cantidad total de usuarios -->
+                <div class="tarjeta_total_usuarios">
+
+                    <div class="icono_total_usuarios"></div>
+
+                    <div class="contenido_total_usuarios">
+
+                        <div class="texto_total_usuarios">Total usuarios</div>
+
+                        <div class="valor_total_usuarios" id="valor_total_usuarios">0</div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- indicador para mostrar usuarios activos -->
+                <div class="tarjeta_usuarios_activos">
+
+                    <div class="icono_usuarios_activos"></div>
+
+                    <div class="contenido_usuarios_activos">
+
+                        <div class="texto_usuarios_activos">Usuarios activos</div>
+
+                        <div class="valor_usuarios_activos" id="valor_usuarios_activos">0</div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- indicador para mostrar usuarios inactivos -->
+                <div class="tarjeta_usuarios_inactivos">
+
+                    <div class="icono_usuarios_inactivos"></div>
+
+                    <div class="contenido_usuarios_inactivos">
+
+                        <div class="texto_usuarios_inactivos">Usuarios inactivos</div>
+
+                        <div class="valor_usuarios_inactivos" id="valor_usuarios_inactivos">0</div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- indicador para mostrar usuarios administradores -->
+                <div class="tarjeta_administradores_usuarios">
+
+                    <div class="icono_administradores_usuarios"></div>
+
+                    <div class="contenido_administradores_usuarios">
+
+                        <div class="texto_administradores_usuarios">Administradores</div>
+
+                        <div class="valor_administradores_usuarios" id="valor_administradores_usuarios">0</div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        <!-- TITULO 4 FILTROS USUARIOS -->
 
             <!-- contenedor que agrupa las opciones de búsqueda y filtrado -->
             <div class="contenedor_filtros_usuarios">
 
+
                 <!-- contenedor del buscador de usuarios -->
                 <div class="contenedor_busqueda_usuarios">
 
-                    <!-- texto descriptivo del buscador -->
                     <div class="texto_busqueda_usuarios">Buscar usuario</div>
 
-                    <!-- campo para buscar por nombre o correo electrónico -->
                     <input class="input_busqueda_usuarios" id="input_busqueda_usuarios" type="text" placeholder="Nombre o correo electrónico">
 
                 </div>
 
+
                 <!-- contenedor del filtro por rol -->
                 <div class="contenedor_rol_usuarios">
 
-                    <!-- texto descriptivo del filtro por rol -->
                     <div class="texto_rol_usuarios">Rol</div>
 
-                    <!-- selector para filtrar los usuarios por rol -->
                     <select class="select_rol_usuarios" id="select_rol_usuarios">
 
                         <option class="opcion_rol_usuarios" value="">Todos los roles</option>
@@ -67,13 +139,12 @@
 
                 </div>
 
+
                 <!-- contenedor del filtro por estado -->
                 <div class="contenedor_estado_usuarios">
 
-                    <!-- texto descriptivo del filtro por estado -->
                     <div class="texto_estado_usuarios">Estado</div>
 
-                    <!-- selector para filtrar los usuarios por estado -->
                     <select class="select_estado_usuarios" id="select_estado_usuarios">
 
                         <option class="opcion_estado_usuarios" value="">Todos los estados</option>
@@ -88,15 +159,24 @@
 
             </div>
 
-        <!-- TITULO 4 TABLA USUARIOS -->
 
-            <!-- contenedor principal de la tabla de usuarios -->
+        <!-- TITULO 5 TABLA USUARIOS -->
+
+            <!-- contenedor principal de la tabla -->
             <div class="contenedor_tabla_usuarios">
+
+
+                <!-- cabecera visual de la tabla -->
+                <div class="cabecera_contenedor_tabla_usuarios">
+
+                    <div class="titulo_tabla_usuarios">Usuarios registrados</div>
+
+                </div>
+
 
                 <!-- tabla para mostrar los usuarios registrados -->
                 <table class="tabla_usuarios">
 
-                    <!-- encabezado de la tabla de usuarios -->
                     <thead class="encabezado_tabla_usuarios">
 
                         <tr class="fila_encabezado_usuarios">
@@ -117,7 +197,7 @@
 
                     </thead>
 
-                    <!-- cuerpo donde se cargarán los usuarios -->
+
                     <tbody class="cuerpo_tabla_usuarios" id="cuerpo_tabla_usuarios">
 
                         <!-- fila temporal mientras no existan datos cargados -->
@@ -133,7 +213,8 @@
 
             </div>
 
-        <!-- TITULO 5 FORMULARIO USUARIO -->
+
+        <!-- TITULO 6 FORMULARIO USUARIO -->
 
             <!-- contenedor superpuesto del formulario de usuario -->
             <div class="contenedor_formulario_usuario contenedor_formulario_usuario_oculto" id="contenedor_formulario_usuario">
@@ -141,25 +222,26 @@
                 <!-- contenedor interior del formulario -->
                 <div class="formulario_usuario">
 
-                    <!-- TITULO 6 CABECERA FORMULARIO -->
+
+                    <!-- TITULO 7 CABECERA FORMULARIO -->
 
                         <!-- contenedor que agrupa el título y cierre del formulario -->
                         <div class="cabecera_formulario_usuario">
 
-                            <!-- título del formulario -->
                             <div class="titulo_formulario_usuario" id="titulo_formulario_usuario">Nuevo usuario</div>
 
-                            <!-- opción para cerrar el formulario -->
                             <div class="boton_cerrar_formulario_usuario" id="boton_cerrar_formulario_usuario" onclick="cerrarFormularioUsuario()">×</div>
 
                         </div>
 
-                    <!-- TITULO 7 CAMPOS FORMULARIO -->
+
+                    <!-- TITULO 8 CAMPOS FORMULARIO -->
 
                         <!-- contenedor que agrupa los campos del usuario -->
                         <div class="contenedor_campos_usuario">
 
-                            <!-- campo para ingresar el nombre del usuario -->
+
+                            <!-- campo nombre -->
                             <div class="campo_nombre_usuario">
 
                                 <div class="texto_campo_nombre_usuario">Nombre</div>
@@ -168,7 +250,8 @@
 
                             </div>
 
-                            <!-- campo para ingresar el correo electrónico -->
+
+                            <!-- campo email -->
                             <div class="campo_email_usuario">
 
                                 <div class="texto_campo_email_usuario">Email</div>
@@ -177,7 +260,8 @@
 
                             </div>
 
-                            <!-- campo para ingresar la contraseña -->
+
+                            <!-- campo contraseña -->
                             <div class="campo_password_usuario">
 
                                 <div class="texto_campo_password_usuario">Contraseña</div>
@@ -186,10 +270,11 @@
 
                             </div>
 
-                            <!-- campo para seleccionar el rol -->
+
+                            <!-- campo rol -->
                             <div class="campo_rol_usuario">
 
-                                <div class="texto_campo_rol_usuario">Rol</div>
+                                <div class="texto_campo_rol"></div>
 
                                 <select class="select_rol_usuario" id="select_rol_usuario">
 
@@ -203,7 +288,8 @@
 
                             </div>
 
-                            <!-- campo para seleccionar el estado de la cuenta -->
+
+                            <!-- campo estado -->
                             <div class="campo_estado_usuario">
 
                                 <div class="texto_campo_estado_usuario">Estado</div>
@@ -218,17 +304,17 @@
 
                             </div>
 
+
                         </div>
 
-                    <!-- TITULO 8 ACCIONES FORMULARIO -->
+
+                    <!-- TITULO 9 ACCIONES FORMULARIO -->
 
                         <!-- contenedor de las opciones inferiores del formulario -->
                         <div class="contenedor_acciones_formulario_usuario">
 
-                            <!-- opción para cancelar el registro -->
                             <div class="boton_cancelar_usuario" id="boton_cancelar_usuario" onclick="cerrarFormularioUsuario()">Cancelar</div>
 
-                            <!-- opción para guardar el usuario -->
                             <div class="boton_guardar_usuario" id="boton_guardar_usuario">Guardar usuario</div>
 
                         </div>

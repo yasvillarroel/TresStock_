@@ -1,13 +1,11 @@
-
-
 /* TITULO 1 CONTENEDOR MENU LATERAL */
 
     /* clase para establecer el tamaño, posición y color principal del menú lateral */
     .contenedor_menu_lateral {
         width: 240px;
         height: 100vh;
-        background-color: #0b3650;
-        padding: 18px 14px;
+        background-color: #062d44;
+        padding: 24px 15px;
         box-sizing: border-box;
         position: fixed;
         top: 0;
@@ -15,14 +13,16 @@
         overflow-y: auto;
     }
 
-/* TITULO 2 LOGO TRESSTOCK */
 
-    /* clase para centrar y organizar el logo dentro del menú lateral */
-    .contenedor_logo_menu_lateral {
+/* TITULO 2 IDENTIDAD TRESSTOCK */
+
+    /* clase para organizar el logo y la descripción principal de TresStock */
+    .contenedor_identidad_menu_lateral {
         width: 100%;
         display: flex;
-        justify-content: center;
-        margin-bottom: 26px;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 34px;
     }
 
     /* clase para establecer el tamaño de la imagen del logo de TresStock */
@@ -31,6 +31,18 @@
         height: auto;
     }
 
+    /* clase para establecer el texto descriptivo del sistema */
+    .descripcion_logo_menu_lateral {
+        width: 170px;
+        color: #c7d7df;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        line-height: 18px;
+        text-align: center;
+        margin-top: 9px;
+    }
+
+
 /* TITULO 3 CONTENEDOR OPCIONES MENU */
 
     /* clase para organizar verticalmente las opciones del menú lateral */
@@ -38,36 +50,46 @@
         width: 100%;
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 5px;
     }
+
 
 /* TITULO 4 OPCION DASHBOARD */
 
     /* clase para establecer el diseño de la opción Dashboard */
     .opcion_dashboard_menu {
         width: 100%;
-        height: 46px;
+        height: 48px;
         display: flex;
         align-items: center;
-        background-color: #0b3048;
-        border: 1px solid #082b40;
-        border-radius: 5px;
+        background-color: transparent;
+        border: 1px solid transparent;
+        border-radius: 7px;
         cursor: pointer;
         box-sizing: border-box;
-        padding: 0 12px;
+        padding: 0 13px;
     }
 
     /* cambia el fondo de la opción Dashboard al posicionar el cursor */
     .opcion_dashboard_menu:hover {
-        background-color: #10445f;
+        background-color: #0b455f;
     }
 
-    /* clase para representar el espacio del icono de Dashboard */
+    /* clase para organizar el icono de Dashboard */
     .icono_dashboard_menu {
-        width: 22px;
-        height: 22px;
-        background-color: #ffffff;
-        margin-right: 12px;
+        width: 21px;
+        height: 21px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 13px;
+    }
+
+    /* clase para establecer el tamaño del icono de Dashboard */
+    .imagen_icono_dashboard_menu {
+        width: 21px;
+        height: 21px;
+        filter: brightness(0) invert(1);
     }
 
     /* clase para establecer el texto de la opción Dashboard */
@@ -77,33 +99,43 @@
         font-size: 14px;
     }
 
+
 /* TITULO 5 OPCION INVENTARIO */
 
-/* clase para establecer el diseño de la opción Inventario */
+    /* clase para establecer el diseño de la opción Inventario */
     .opcion_inventario_menu {
         width: 100%;
-        height: 46px;
+        height: 48px;
         display: flex;
         align-items: center;
-        background-color: #0b3048;
-        border: 1px solid #082b40;
-        border-radius: 5px;
+        background-color: transparent;
+        border: 1px solid transparent;
+        border-radius: 7px;
         cursor: pointer;
         box-sizing: border-box;
-        padding: 0 12px;
+        padding: 0 13px;
     }
 
     /* cambia el fondo de la opción Inventario al posicionar el cursor */
     .opcion_inventario_menu:hover {
-        background-color: #10445f;
+        background-color: #0b455f;
     }
 
-    /* clase para representar el espacio del icono de Inventario */
+    /* clase para organizar el icono de Inventario */
     .icono_inventario_menu {
-        width: 22px;
-        height: 22px;
-        background-color: #ffffff;
-        margin-right: 12px;
+        width: 21px;
+        height: 21px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 13px;
+    }
+
+    /* clase para establecer el tamaño del icono de Inventario */
+    .imagen_icono_inventario_menu {
+        width: 21px;
+        height: 21px;
+        filter: brightness(0) invert(1);
     }
 
     /* clase para establecer el texto de la opción Inventario */
@@ -113,33 +145,43 @@
         font-size: 14px;
     }
 
+
 /* TITULO 6 OPCION PRODUCTOS */
 
     /* clase para establecer el diseño de la opción Productos */
     .opcion_productos_menu {
         width: 100%;
-        height: 46px;
+        height: 48px;
         display: flex;
         align-items: center;
-        background-color: #0b3048;
-        border: 1px solid #082b40;
-        border-radius: 5px;
+        background-color: transparent;
+        border: 1px solid transparent;
+        border-radius: 7px;
         cursor: pointer;
         box-sizing: border-box;
-        padding: 0 12px;
+        padding: 0 13px;
     }
 
     /* cambia el fondo de la opción Productos al posicionar el cursor */
     .opcion_productos_menu:hover {
-        background-color: #10445f;
+        background-color: #0b455f;
     }
 
-    /* clase para representar el espacio del icono de Productos */
+    /* clase para organizar el icono de Productos */
     .icono_productos_menu {
-        width: 22px;
-        height: 22px;
-        background-color: #ffffff;
-        margin-right: 12px;
+        width: 21px;
+        height: 21px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 13px;
+    }
+
+    /* clase para establecer el tamaño del icono de Productos */
+    .imagen_icono_productos_menu {
+        width: 21px;
+        height: 21px;
+        filter: brightness(0) invert(1);
     }
 
     /* clase para establecer el texto de la opción Productos */
@@ -149,33 +191,43 @@
         font-size: 14px;
     }
 
+
 /* TITULO 7 OPCION VENTAS */
 
     /* clase para establecer el diseño de la opción Ventas */
     .opcion_ventas_menu {
         width: 100%;
-        height: 46px;
+        height: 48px;
         display: flex;
         align-items: center;
-        background-color: #0b3048;
-        border: 1px solid #082b40;
-        border-radius: 5px;
+        background-color: transparent;
+        border: 1px solid transparent;
+        border-radius: 7px;
         cursor: pointer;
         box-sizing: border-box;
-        padding: 0 12px;
+        padding: 0 13px;
     }
 
     /* cambia el fondo de la opción Ventas al posicionar el cursor */
     .opcion_ventas_menu:hover {
-        background-color: #10445f;
+        background-color: #0b455f;
     }
 
-    /* clase para representar el espacio del icono de Ventas */
+    /* clase para organizar el icono de Ventas */
     .icono_ventas_menu {
-        width: 22px;
-        height: 22px;
-        background-color: #ffffff;
-        margin-right: 12px;
+        width: 21px;
+        height: 21px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 13px;
+    }
+
+    /* clase para establecer el tamaño del icono de Ventas */
+    .imagen_icono_ventas_menu {
+        width: 21px;
+        height: 21px;
+        filter: brightness(0) invert(1);
     }
 
     /* clase para establecer el texto de la opción Ventas */
@@ -185,33 +237,43 @@
         font-size: 14px;
     }
 
+
 /* TITULO 8 OPCION PROVEEDORES */
 
     /* clase para establecer el diseño de la opción Proveedores */
     .opcion_proveedores_menu {
         width: 100%;
-        height: 46px;
+        height: 48px;
         display: flex;
         align-items: center;
-        background-color: #0b3048;
-        border: 1px solid #082b40;
-        border-radius: 5px;
+        background-color: transparent;
+        border: 1px solid transparent;
+        border-radius: 7px;
         cursor: pointer;
         box-sizing: border-box;
-        padding: 0 12px;
+        padding: 0 13px;
     }
 
     /* cambia el fondo de la opción Proveedores al posicionar el cursor */
     .opcion_proveedores_menu:hover {
-        background-color: #10445f;
+        background-color: #0b455f;
     }
 
-    /* clase para representar el espacio del icono de Proveedores */
+    /* clase para organizar el icono de Proveedores */
     .icono_proveedores_menu {
-        width: 22px;
-        height: 22px;
-        background-color: #ffffff;
-        margin-right: 12px;
+        width: 21px;
+        height: 21px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 13px;
+    }
+
+    /* clase para establecer el tamaño del icono de Proveedores */
+    .imagen_icono_proveedores_menu {
+        width: 21px;
+        height: 21px;
+        filter: brightness(0) invert(1);
     }
 
     /* clase para establecer el texto de la opción Proveedores */
@@ -221,33 +283,43 @@
         font-size: 14px;
     }
 
+
 /* TITULO 9 OPCION IMPORTACION */
 
     /* clase para establecer el diseño de la opción Importación */
     .opcion_importacion_menu {
         width: 100%;
-        height: 46px;
+        height: 48px;
         display: flex;
         align-items: center;
-        background-color: #0b3048;
-        border: 1px solid #082b40;
-        border-radius: 5px;
+        background-color: transparent;
+        border: 1px solid transparent;
+        border-radius: 7px;
         cursor: pointer;
         box-sizing: border-box;
-        padding: 0 12px;
+        padding: 0 13px;
     }
 
     /* cambia el fondo de la opción Importación al posicionar el cursor */
     .opcion_importacion_menu:hover {
-        background-color: #10445f;
+        background-color: #0b455f;
     }
 
-    /* clase para representar el espacio del icono de Importación */
+    /* clase para organizar el icono de Importación */
     .icono_importacion_menu {
-        width: 22px;
-        height: 22px;
-        background-color: #ffffff;
-        margin-right: 12px;
+        width: 21px;
+        height: 21px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 13px;
+    }
+
+    /* clase para establecer el tamaño del icono de Importación */
+    .imagen_icono_importacion_menu {
+        width: 21px;
+        height: 21px;
+        filter: brightness(0) invert(1);
     }
 
     /* clase para establecer el texto de la opción Importación */
@@ -257,34 +329,45 @@
         font-size: 14px;
     }
 
+
 /* TITULO 10 OPCION ALERTAS */
 
     /* clase para establecer el diseño de la opción Alertas */
     .opcion_alertas_menu {
         width: 100%;
-        height: 46px;
+        height: 48px;
         display: flex;
         align-items: center;
-        background-color: #0b3048;
-        border: 1px solid #082b40;
-        border-radius: 5px;
+        background-color: transparent;
+        border: 1px solid transparent;
+        border-radius: 7px;
         cursor: pointer;
         box-sizing: border-box;
-        padding: 0 12px;
+        padding: 0 13px;
     }
 
     /* cambia el fondo de la opción Alertas al posicionar el cursor */
     .opcion_alertas_menu:hover {
-        background-color: #10445f;
+        background-color: #0b455f;
     }
 
-    /* clase para representar el espacio del icono de Alertas */
+    /* clase para organizar el icono de Alertas */
     .icono_alertas_menu {
-        width: 22px;
-        height: 22px;
-        background-color: #ffffff;
-        margin-right: 12px;
+        width: 21px;
+        height: 21px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 13px;
     }
+
+    /* clase para establecer el tamaño del icono de Alertas */
+    .imagen_icono_alertas_menu {
+        width: 21px;
+        height: 21px;
+        filter: brightness(0) invert(1);
+    }
+
 
     /* clase para establecer el texto de la opción Alertas */
     .texto_alertas_menu {
@@ -293,33 +376,43 @@
         font-size: 14px;
     }
 
+
 /* TITULO 11 OPCION ANALISIS */
 
     /* clase para establecer el diseño de la opción Análisis */
     .opcion_analisis_menu {
         width: 100%;
-        height: 46px;
+        height: 48px;
         display: flex;
         align-items: center;
-        background-color: #0b3048;
-        border: 1px solid #082b40;
-        border-radius: 5px;
+        background-color: transparent;
+        border: 1px solid transparent;
+        border-radius: 7px;
         cursor: pointer;
         box-sizing: border-box;
-        padding: 0 12px;
+        padding: 0 13px;
     }
 
     /* cambia el fondo de la opción Análisis al posicionar el cursor */
     .opcion_analisis_menu:hover {
-        background-color: #10445f;
+        background-color: #0b455f;
     }
 
-    /* clase para representar el espacio del icono de Análisis */
+    /* clase para organizar el icono de Análisis */
     .icono_analisis_menu {
-        width: 22px;
-        height: 22px;
-        background-color: #ffffff;
-        margin-right: 12px;
+        width: 21px;
+        height: 21px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 13px;
+    }
+
+    /* clase para establecer el tamaño del icono de Análisis */
+    .imagen_icono_analisis_menu {
+        width: 21px;
+        height: 21px;
+        filter: brightness(0) invert(1);
     }
 
     /* clase para establecer el texto de la opción Análisis */
@@ -329,33 +422,43 @@
         font-size: 14px;
     }
 
+
 /* TITULO 12 OPCION ADMINISTRACION */
 
     /* clase para establecer el diseño de la opción Administración */
     .opcion_administracion_menu {
         width: 100%;
-        height: 46px;
+        height: 48px;
         display: flex;
         align-items: center;
-        background-color: #0b3048;
-        border: 1px solid #082b40;
-        border-radius: 5px;
+        background-color: transparent;
+        border: 1px solid transparent;
+        border-radius: 7px;
         cursor: pointer;
         box-sizing: border-box;
-        padding: 0 12px;
+        padding: 0 13px;
     }
 
     /* cambia el fondo de la opción Administración al posicionar el cursor */
     .opcion_administracion_menu:hover {
-        background-color: #10445f;
+        background-color: #0b455f;
     }
 
-    /* clase para representar el espacio del icono de Administración */
+    /* clase para organizar el icono de Administración */
     .icono_administracion_menu {
-        width: 22px;
-        height: 22px;
-        background-color: #ffffff;
-        margin-right: 12px;
+        width: 21px;
+        height: 21px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 13px;
+    }
+
+    /* clase para establecer el tamaño del icono de Administración */
+    .imagen_icono_administracion_menu {
+        width: 21px;
+        height: 21px;
+        filter: brightness(0) invert(1);
     }
 
     /* clase para establecer el texto de la opción Administración */
@@ -365,10 +468,17 @@
         font-size: 14px;
     }
 
+
 /* TITULO 13 OPCION ACTIVA */
 
     /* clase para destacar visualmente la opción actualmente seleccionada */
     .opcion_menu_activa {
-        background-color: #159ba3;
-        border-color: #159ba3;
+        background-color: #1299a3;
+        border-color: #1299a3;
+    }
+
+    /* mantiene el diseño de la opción activa al posicionar el cursor */
+    .opcion_menu_activa:hover {
+        background-color: #1299a3;
+        border-color: #1299a3;
     }

@@ -39,16 +39,26 @@
 
         const rutasVistas = {
             dashboard: './html/dashboard/dashboard.html',
+            inventario: './html/inventario/inventario.html',
             productos: './html/productos/productos.html',
+            ventas: './html/ventas/ventas.html',
             proveedores: './html/proveedores/proveedores.html',
+            importacion: './html/importacion/importacion.html',
+            alertas: './html/alertas_vencimientos/alertas_vencimientos.html',
+            analisis: './html/reportes_analitica/reportes_analitica.html',
             administracion: './html/usuarios/usuarios.html'
         };
 
         const titulosVistas = {
             dashboard: 'Dashboard',
+            inventario: 'Inventario',
             productos: 'Productos',
+            ventas: 'Ventas',
             proveedores: 'Proveedores',
-            administracion: 'Administracion'        
+            importacion: 'Importación DimaSoft',
+            alertas: 'Alertas y vencimientos',
+            analisis: 'Análisis',
+            administracion: 'Administración'
         };
 
         const rutaVista = rutasVistas[vista];
@@ -69,3 +79,9 @@
         }
 
     }
+
+
+// TITULO 4 INICIO DEL SISTEMA
+
+    // llama a la función principal al cargar el index
+    cargarSistema();

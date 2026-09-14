@@ -1,37 +1,100 @@
-    
-//TITULO 1 FUNCION COMPORTAMIENTO DE BOTON
-    //comportamiento de boton
-    const boton = document.getElementById('boton_inicio_sesion');
+// TITULO 1 COMPORTAMIENTO BOTON INICIO SESION
 
-    boton.addEventListener('click', function () {
+    // obtiene la opción utilizada para iniciar sesión
+    const botonInicioSesion = document.getElementById('boton_inicio_sesion');
 
-        document.getElementById('formulario_inicio_sesion').requestSubmit();
+    // detecta el clic sobre la opción de inicio de sesión
+    botonInicioSesion.addEventListener('click', function () {
+
+        const formularioInicioSesion = document.getElementById(
+            'formulario_inicio_sesion'
+        );
+
+        formularioInicioSesion.requestSubmit();
 
     });
 
-// TITULO 2 FUNCION INICIAR SESION
 
-    // obtiene el formulario
-    const formulario = document.getElementById('formulario_inicio_sesion');
+// TITULO 2 VISIBILIDAD CONTRASEÑA
 
-    // obtiene el mensaje
-    const mensaje = document.getElementById('mensaje_login');
+    // función para mostrar u ocultar la contraseña ingresada
+    function mostrarOcultarContrasena() {
 
-    // detecta el envio del formulario
-    formulario.addEventListener('submit', async function (evento) {
+        const inputContrasena = document.getElementById('contrasena');
 
-        // evita recargar la pagina
+        const botonMostrarContrasena = document.getElementById(
+            'boton_mostrar_contrasena_inicio_sesion'
+        );
+
+        if (inputContrasena.type === 'password') {
+
+            inputContrasena.type = 'text';
+
+            botonMostrarContrasena.textContent = 'Ocultar';
+
+        } else {
+
+            inputContrasena.type = 'password';
+
+            botonMostrarContrasena.textContent = 'Mostrar';
+
+        }
+
+    }
+
+
+// TITULO 3 FUNCION INICIAR SESION
+
+    // obtiene el formulario de inicio de sesión
+    const formularioInicioSesion = document.getElementById(
+        'formulario_inicio_sesion'
+    );
+
+    // obtiene el espacio utilizado para mostrar mensajes
+    const mensajeInicioSesion = document.getElementById('mensaje_login');
+
+    // detecta el envío del formulario
+    formularioInicioSesion.addEventListener('submit', async function (evento) {
+
+        // evita que la página se recargue al enviar el formulario
         evento.preventDefault();
 
-        // obtiene el correo
-        const email = document.getElementById('email').value;
+        // obtiene el correo ingresado
+        const email = document.getElementById('email').value.trim();
 
-        // obtiene la contrasena
+        // obtiene la contraseña ingresada
         const password = document.getElementById('contrasena').value;
+
+
+        // comprueba que el correo haya sido ingresado
+        if (email === '') {
+
+            mensajeInicioSesion.textContent =
+                'Debes ingresar el correo electrónico.';
+
+            return;
+
+        }
+
+
+        // comprueba que la contraseña haya sido ingresada
+        if (password === '') {
+
+            mensajeInicioSesion.textContent =
+                'Debes ingresar la contraseña.';
+
+            return;
+
+        }
+
+
+        // limpia mensajes anteriores
+        mensajeInicioSesion.textContent = '';
+
 
         try {
 
-            // envia los datos al backend
+            // envía las credenciales al backend para realizar la autenticación
             const respuesta = await fetch(
                 'http://localhost:3000/api/autenticacion/login',
                 {
@@ -48,30 +111,47 @@
                 }
             );
 
-            // convierte la respuesta a JSON
+
+            // convierte la respuesta del backend a JSON
             const datos = await respuesta.json();
 
-            // comprueba si el inicio de sesion fue correcto
+
+            // comprueba si el inicio de sesión fue rechazado
             if (!respuesta.ok) {
 
-                mensaje.textContent = datos.mensaje;
+                mensajeInicioSesion.textContent =
+                    datos.mensaje || 'No fue posible iniciar sesión.';
 
                 return;
+
             }
 
-            // muestra los datos del usuario
-            console.log('usuario:', datos);
 
-            mensaje.textContent =
+            // muestra en consola la respuesta recibida desde el backend
+            console.log('Usuario:', datos);
+
+
+            // muestra temporalmente un mensaje de acceso correcto
+            mensajeInicioSesion.textContent =
                 'Bienvenido ' + datos.nombre;
+
+
+            // redirecciona al usuario hacia el sistema
+            window.location.href = '../../index.html';
+
 
         } catch (error) {
 
-            // muestra el error
-            console.error('Error al iniciar sesion:', error);
+            // muestra el error en consola
+            console.error(
+                'Error al iniciar sesión:',
+                error
+            );
 
-            mensaje.textContent =
-                'No se pudo conectar con el servidor';
+
+            // informa cuando no existe conexión con el servidor
+            mensajeInicioSesion.textContent =
+                'No se pudo conectar con el servidor.';
 
         }
 

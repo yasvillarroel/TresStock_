@@ -3,9 +3,10 @@
     /* clase para establecer el espacio general de la vista de proveedores */
     .contenedor_proveedores {
         width: 100%;
-        padding: 30px;
+        padding: 28px;
         box-sizing: border-box;
     }
+
 
 /* TITULO 2 ENCABEZADO PROVEEDORES */
 
@@ -15,16 +16,16 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-bottom: 24px;
+        margin-bottom: 22px;
     }
 
-    /* clase para organizar el título y descripción de proveedores */
+    /* clase para organizar el título y descripción */
     .contenedor_informacion_proveedores {
         display: flex;
         flex-direction: column;
     }
 
-    /* clase para establecer el diseño del título de proveedores */
+    /* clase para establecer el título de proveedores */
     .titulo_proveedores {
         color: #0b3650;
         font-family: Arial, sans-serif;
@@ -33,22 +34,21 @@
         margin-bottom: 5px;
     }
 
-    /* clase para establecer el diseño de la descripción */
+    /* clase para establecer la descripción */
     .descripcion_proveedores {
-        color: #6c757d;
+        color: #71818a;
         font-family: Arial, sans-serif;
-        font-size: 14px;
+        font-size: 13px;
     }
 
-    /* clase para establecer el diseño de la opción nuevo proveedor */
+    /* clase para establecer la opción nuevo proveedor */
     .boton_nuevo_proveedor {
         height: 42px;
         display: flex;
         align-items: center;
         background-color: #159ba3;
-        color: #ffffff;
-        padding: 0 16px;
-        border-radius: 5px;
+        padding: 0 17px;
+        border-radius: 6px;
         cursor: pointer;
         box-sizing: border-box;
     }
@@ -58,11 +58,11 @@
         background-color: #0f858d;
     }
 
-    /* clase para establecer el icono visual de nuevo proveedor */
+    /* clase para establecer el icono de nuevo proveedor */
     .icono_nuevo_proveedor {
         color: #ffffff;
         font-family: Arial, sans-serif;
-        font-size: 22px;
+        font-size: 21px;
         font-weight: bold;
         margin-right: 8px;
     }
@@ -71,18 +71,206 @@
     .texto_nuevo_proveedor {
         color: #ffffff;
         font-family: Arial, sans-serif;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: bold;
     }
 
-/* TITULO 3 BUSQUEDA PROVEEDORES */
+
+/* TITULO 3 INDICADORES PROVEEDORES */
+
+    /* clase para distribuir los indicadores de proveedores */
+    .contenedor_indicadores_proveedores {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin-bottom: 22px;
+    }
+
+    /* clase para establecer la tarjeta total proveedores */
+    .tarjeta_total_proveedores {
+        min-height: 105px;
+        display: flex;
+        align-items: center;
+        background-color: #ffffff;
+        border: 1px solid #dce4e8;
+        border-radius: 8px;
+        padding: 18px;
+        box-sizing: border-box;
+    }
+
+    /* clase para establecer el icono total proveedores */
+    .icono_total_proveedores {
+        width: 46px;
+        height: 46px;
+        background-color: #e4f6f6;
+        border-radius: 8px;
+        margin-right: 14px;
+    }
+
+    /* clase para organizar el contenido total proveedores */
+    .contenido_total_proveedores {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* clase para establecer el texto total proveedores */
+    .texto_total_proveedores {
+        color: #697a83;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+
+    /* clase para establecer el valor total proveedores */
+    .valor_total_proveedores {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 23px;
+        font-weight: bold;
+    }
+
+
+    /* clase para establecer la tarjeta proveedores asociados */
+    .tarjeta_proveedores_asociados {
+        min-height: 105px;
+        display: flex;
+        align-items: center;
+        background-color: #ffffff;
+        border: 1px solid #dce4e8;
+        border-radius: 8px;
+        padding: 18px;
+        box-sizing: border-box;
+    }
+
+    /* clase para establecer el icono proveedores asociados */
+    .icono_proveedores_asociados {
+        width: 46px;
+        height: 46px;
+        background-color: #e9f0fb;
+        border-radius: 8px;
+        margin-right: 14px;
+    }
+
+    /* clase para organizar el contenido proveedores asociados */
+    .contenido_proveedores_asociados {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* clase para establecer el texto proveedores asociados */
+    .texto_proveedores_asociados {
+        color: #697a83;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+
+    /* clase para establecer el valor proveedores asociados */
+    .valor_proveedores_asociados {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 23px;
+        font-weight: bold;
+    }
+
+
+    /* clase para establecer la tarjeta productos asociados */
+    .tarjeta_productos_asociados_proveedores {
+        min-height: 105px;
+        display: flex;
+        align-items: center;
+        background-color: #ffffff;
+        border: 1px solid #dce4e8;
+        border-radius: 8px;
+        padding: 18px;
+        box-sizing: border-box;
+    }
+
+    /* clase para establecer el icono productos asociados */
+    .icono_productos_asociados_proveedores {
+        width: 46px;
+        height: 46px;
+        background-color: #eef0fa;
+        border-radius: 8px;
+        margin-right: 14px;
+    }
+
+    /* clase para organizar el contenido productos asociados */
+    .contenido_productos_asociados_proveedores {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* clase para establecer el texto productos asociados */
+    .texto_productos_asociados_proveedores {
+        color: #697a83;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+
+    /* clase para establecer el valor productos asociados */
+    .valor_productos_asociados_proveedores {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 23px;
+        font-weight: bold;
+    }
+
+
+    /* clase para establecer la tarjeta productos sin proveedor */
+    .tarjeta_productos_sin_proveedor {
+        min-height: 105px;
+        display: flex;
+        align-items: center;
+        background-color: #ffffff;
+        border: 1px solid #dce4e8;
+        border-radius: 8px;
+        padding: 18px;
+        box-sizing: border-box;
+    }
+
+    /* clase para establecer el icono productos sin proveedor */
+    .icono_productos_sin_proveedor {
+        width: 46px;
+        height: 46px;
+        background-color: #fff0df;
+        border-radius: 8px;
+        margin-right: 14px;
+    }
+
+    /* clase para organizar el contenido productos sin proveedor */
+    .contenido_productos_sin_proveedor {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* clase para establecer el texto productos sin proveedor */
+    .texto_productos_sin_proveedor {
+        color: #697a83;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+
+    /* clase para establecer el valor productos sin proveedor */
+    .valor_productos_sin_proveedor {
+        color: #d58226;
+        font-family: Arial, sans-serif;
+        font-size: 23px;
+        font-weight: bold;
+    }
+
+
+/* TITULO 4 BUSQUEDA PROVEEDORES */
 
     /* clase para establecer el contenedor del buscador */
     .contenedor_busqueda_proveedores {
         width: 100%;
         background-color: #ffffff;
-        border: 1px solid #d9e1e5;
-        border-radius: 6px;
+        border: 1px solid #dce4e8;
+        border-radius: 8px;
         padding: 18px;
         margin-bottom: 20px;
         box-sizing: border-box;
@@ -97,19 +285,19 @@
 
     /* clase para establecer el texto del buscador */
     .texto_busqueda_proveedores {
-        color: #0b3650;
+        color: #536873;
         font-family: Arial, sans-serif;
-        font-size: 13px;
+        font-size: 12px;
         font-weight: bold;
         margin-bottom: 7px;
     }
 
-    /* clase para establecer el diseño del campo de búsqueda */
+    /* clase para establecer el campo de búsqueda */
     .input_busqueda_proveedores {
         width: 100%;
         height: 40px;
-        border: 1px solid #cbd5da;
-        border-radius: 5px;
+        border: 1px solid #ced9de;
+        border-radius: 6px;
         padding: 0 12px;
         color: #37434b;
         font-family: Arial, sans-serif;
@@ -118,16 +306,33 @@
         outline: none;
     }
 
-/* TITULO 4 TABLA PROVEEDORES */
+
+/* TITULO 5 TABLA PROVEEDORES */
 
     /* clase para establecer el contenedor visual de la tabla */
     .contenedor_tabla_proveedores {
         width: 100%;
         background-color: #ffffff;
-        border: 1px solid #d9e1e5;
-        border-radius: 6px;
+        border: 1px solid #dce4e8;
+        border-radius: 8px;
         overflow-x: auto;
         box-sizing: border-box;
+    }
+
+    /* clase para establecer la cabecera visual de la tabla */
+    .cabecera_contenedor_tabla_proveedores {
+        min-width: 800px;
+        padding: 17px 18px;
+        border-bottom: 1px solid #e2e8eb;
+        box-sizing: border-box;
+    }
+
+    /* clase para establecer el título de la tabla */
+    .titulo_tabla_proveedores {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: bold;
     }
 
     /* clase para establecer la estructura general de la tabla */
@@ -137,76 +342,77 @@
         border-collapse: collapse;
     }
 
-    /* clase para establecer el fondo del encabezado de la tabla */
+    /* clase para establecer el encabezado de la tabla */
     .encabezado_tabla_proveedores {
-        background-color: #eef3f5;
+        background-color: #f4f7f8;
     }
 
-    /* clase para establecer el borde inferior del encabezado */
+    /* clase para establecer la fila del encabezado */
     .fila_encabezado_proveedores {
-        border-bottom: 1px solid #d9e1e5;
+        border-bottom: 1px solid #dce4e8;
     }
 
     /* clase para establecer la columna nombre */
     .columna_nombre_proveedores {
         padding: 13px 12px;
         text-align: left;
-        color: #44515a;
+        color: #667881;
         font-family: Arial, sans-serif;
-        font-size: 12px;
+        font-size: 11px;
     }
 
     /* clase para establecer la columna teléfono */
     .columna_telefono_proveedores {
         padding: 13px 12px;
         text-align: left;
-        color: #44515a;
+        color: #667881;
         font-family: Arial, sans-serif;
-        font-size: 12px;
+        font-size: 11px;
     }
 
     /* clase para establecer la columna email */
     .columna_email_proveedores {
         padding: 13px 12px;
         text-align: left;
-        color: #44515a;
+        color: #667881;
         font-family: Arial, sans-serif;
-        font-size: 12px;
+        font-size: 11px;
     }
 
     /* clase para establecer la columna dirección */
     .columna_direccion_proveedores {
         padding: 13px 12px;
         text-align: left;
-        color: #44515a;
+        color: #667881;
         font-family: Arial, sans-serif;
-        font-size: 12px;
+        font-size: 11px;
     }
 
     /* clase para establecer la columna acciones */
     .columna_acciones_proveedores {
         padding: 13px 12px;
         text-align: center;
-        color: #44515a;
+        color: #667881;
         font-family: Arial, sans-serif;
-        font-size: 12px;
+        font-size: 11px;
     }
 
     /* clase para establecer la fila temporal sin proveedores */
     .fila_sin_proveedores {
-        border-bottom: 1px solid #edf0f2;
+        border-bottom: 1px solid #edf1f3;
     }
 
     /* clase para establecer el mensaje cuando no existen proveedores */
     .dato_sin_proveedores {
-        padding: 35px 15px;
+        padding: 38px 15px;
         text-align: center;
-        color: #7a8790;
+        color: #84939a;
         font-family: Arial, sans-serif;
         font-size: 13px;
     }
 
-/* TITULO 5 FORMULARIO PROVEEDOR */
+
+/* TITULO 6 FORMULARIO PROVEEDOR */
 
     /* clase para establecer el fondo superpuesto del formulario */
     .contenedor_formulario_proveedor {
@@ -218,11 +424,11 @@
         position: fixed;
         top: 0;
         left: 0;
-        background-color: rgba(0, 0, 0, 0.45);
+        background-color: rgba(5, 31, 45, 0.55);
         z-index: 1100;
     }
 
-    /* clase para ocultar el formulario cuando no está siendo utilizado */
+    /* clase para ocultar el formulario */
     .contenedor_formulario_proveedor_oculto {
         display: none;
     }
@@ -232,14 +438,15 @@
         width: 620px;
         max-width: calc(100% - 40px);
         background-color: #ffffff;
-        border-radius: 7px;
-        padding: 22px;
+        border-radius: 8px;
+        padding: 23px;
         box-sizing: border-box;
     }
 
-/* TITULO 6 CABECERA FORMULARIO */
 
-    /* clase para organizar el título y cierre del formulario */
+/* TITULO 7 CABECERA FORMULARIO */
+
+    /* clase para organizar el título y cierre */
     .cabecera_formulario_proveedor {
         width: 100%;
         display: flex;
@@ -252,11 +459,11 @@
     .titulo_formulario_proveedor {
         color: #0b3650;
         font-family: Arial, sans-serif;
-        font-size: 21px;
+        font-size: 20px;
         font-weight: bold;
     }
 
-    /* clase para establecer la opción de cierre del formulario */
+    /* clase para establecer la opción de cierre */
     .boton_cerrar_formulario_proveedor {
         width: 32px;
         height: 32px;
@@ -267,17 +474,18 @@
         font-family: Arial, sans-serif;
         font-size: 25px;
         cursor: pointer;
-        border-radius: 4px;
+        border-radius: 5px;
     }
 
-    /* cambia el fondo de cerrar formulario al posicionar el cursor */
+    /* cambia el fondo del cierre al posicionar el cursor */
     .boton_cerrar_formulario_proveedor:hover {
         background-color: #edf1f3;
     }
 
-/* TITULO 7 CAMPOS FORMULARIO */
 
-    /* clase para distribuir los campos del proveedor en dos columnas */
+/* TITULO 8 CAMPOS FORMULARIO */
+
+    /* clase para distribuir los campos del proveedor */
     .contenedor_campos_proveedor {
         width: 100%;
         display: grid;
@@ -293,9 +501,9 @@
 
     /* clase para establecer el texto del campo nombre */
     .texto_campo_nombre_proveedor {
-        color: #0b3650;
+        color: #425966;
         font-family: Arial, sans-serif;
-        font-size: 13px;
+        font-size: 12px;
         font-weight: bold;
         margin-bottom: 6px;
     }
@@ -303,8 +511,8 @@
     /* clase para establecer el campo nombre */
     .input_nombre_proveedor {
         height: 40px;
-        border: 1px solid #cbd5da;
-        border-radius: 5px;
+        border: 1px solid #ced9de;
+        border-radius: 6px;
         padding: 0 10px;
         color: #37434b;
         font-family: Arial, sans-serif;
@@ -321,9 +529,9 @@
 
     /* clase para establecer el texto del campo teléfono */
     .texto_campo_telefono_proveedor {
-        color: #0b3650;
+        color: #425966;
         font-family: Arial, sans-serif;
-        font-size: 13px;
+        font-size: 12px;
         font-weight: bold;
         margin-bottom: 6px;
     }
@@ -331,8 +539,8 @@
     /* clase para establecer el campo teléfono */
     .input_telefono_proveedor {
         height: 40px;
-        border: 1px solid #cbd5da;
-        border-radius: 5px;
+        border: 1px solid #ced9de;
+        border-radius: 6px;
         padding: 0 10px;
         color: #37434b;
         font-family: Arial, sans-serif;
@@ -340,7 +548,6 @@
         outline: none;
         box-sizing: border-box;
     }
-
 
     /* clase para organizar el campo email */
     .campo_email_proveedor {
@@ -350,9 +557,9 @@
 
     /* clase para establecer el texto del campo email */
     .texto_campo_email_proveedor {
-        color: #0b3650;
+        color: #425966;
         font-family: Arial, sans-serif;
-        font-size: 13px;
+        font-size: 12px;
         font-weight: bold;
         margin-bottom: 6px;
     }
@@ -360,8 +567,8 @@
     /* clase para establecer el campo email */
     .input_email_proveedor {
         height: 40px;
-        border: 1px solid #cbd5da;
-        border-radius: 5px;
+        border: 1px solid #ced9de;
+        border-radius: 6px;
         padding: 0 10px;
         color: #37434b;
         font-family: Arial, sans-serif;
@@ -369,7 +576,6 @@
         outline: none;
         box-sizing: border-box;
     }
-
 
     /* clase para organizar el campo dirección */
     .campo_direccion_proveedor {
@@ -379,9 +585,9 @@
 
     /* clase para establecer el texto del campo dirección */
     .texto_campo_direccion_proveedor {
-        color: #0b3650;
+        color: #425966;
         font-family: Arial, sans-serif;
-        font-size: 13px;
+        font-size: 12px;
         font-weight: bold;
         margin-bottom: 6px;
     }
@@ -389,8 +595,8 @@
     /* clase para establecer el campo dirección */
     .input_direccion_proveedor {
         height: 40px;
-        border: 1px solid #cbd5da;
-        border-radius: 5px;
+        border: 1px solid #ced9de;
+        border-radius: 6px;
         padding: 0 10px;
         color: #37434b;
         font-family: Arial, sans-serif;
@@ -399,7 +605,8 @@
         box-sizing: border-box;
     }
 
-/* TITULO 8 ACCIONES FORMULARIO */
+
+/* TITULO 9 ACCIONES FORMULARIO */
 
     /* clase para organizar las opciones inferiores del formulario */
     .contenedor_acciones_formulario_proveedor {
@@ -452,9 +659,19 @@
         background-color: #0f858d;
     }
 
-/* TITULO 9 RESPONSIVE PROVEEDORES */
 
-    /* adapta los campos del formulario para pantallas medianas */
+/* TITULO 10 RESPONSIVE PROVEEDORES */
+
+    /* adapta los indicadores para pantallas medianas */
+    @media (max-width: 1100px) {
+
+        .contenedor_indicadores_proveedores {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+    }
+
+    /* adapta el formulario para tablets */
     @media (max-width: 900px) {
 
         .contenedor_campos_proveedor {
@@ -463,7 +680,7 @@
 
     }
 
-    /* adapta el encabezado de proveedores para dispositivos móviles */
+    /* adapta la vista para dispositivos móviles */
     @media (max-width: 600px) {
 
         .contenedor_proveedores {
@@ -474,6 +691,10 @@
             align-items: flex-start;
             flex-direction: column;
             gap: 16px;
+        }
+
+        .contenedor_indicadores_proveedores {
+            grid-template-columns: 1fr;
         }
 
     }

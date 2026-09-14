@@ -3,22 +3,46 @@
     /* clase para establecer la estructura principal de la cabecera */
     .contenedor_principal_cabecera {
         width: 100%;
-        height: 70px;
-        display: flex;
+        height: 72px;
+        display: grid;
+        grid-template-columns: 1fr minmax(300px, 420px) 1fr;
         align-items: center;
-        justify-content: space-between;
         background-color: #ffffff;
         border-bottom: 1px solid #d9e1e5;
-        padding: 0 30px;
+        padding: 0 28px;
         box-sizing: border-box;
+        gap: 24px;
     }
 
-/* TITULO 2 TITULO VISTA */
 
-    /* clase para organizar el título correspondiente a la vista actual */
-    .contenedor_titulo_cabecera {
+/* TITULO 2 SECCION IZQUIERDA CABECERA */
+
+    /* clase para organizar el menú responsive y el título de la vista */
+    .contenedor_izquierdo_cabecera {
         display: flex;
         align-items: center;
+        gap: 18px;
+    }
+
+    /* clase para establecer el diseño de la opción del menú responsive */
+    .boton_menu_cabecera {
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    /* clase para establecer el tamaño del icono de menú */
+    .imagen_boton_menu_cabecera {
+        width: 22px;
+        height: 22px;
+    }
+
+    /* cambia el color de la opción del menú al posicionar el cursor */
+    .boton_menu_cabecera:hover {
+        color: #159ba3;
     }
 
     /* clase para establecer el diseño del nombre de la vista actual */
@@ -27,67 +51,180 @@
         font-family: Arial, sans-serif;
         font-size: 22px;
         font-weight: bold;
+        white-space: nowrap;
     }
 
-/* TITULO 3 USUARIO */
 
-    /* clase para organizar la información y opciones del usuario conectado */
+/* TITULO 3 BUSCADOR CABECERA */
+
+    /* clase para organizar el buscador general del sistema */
+    .contenedor_busqueda_cabecera {
+        width: 100%;
+        height: 42px;
+        display: flex;
+        align-items: center;
+        background-color: #ffffff;
+        border: 1px solid #ced9de;
+        border-radius: 7px;
+        box-sizing: border-box;
+        padding: 0 12px;
+    }
+
+    /* clase para establecer el diseño del icono del buscador */
+    .icono_busqueda_cabecera {
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 9px;
+    }
+
+    /* clase para establecer el tamaño del icono de búsqueda */
+    .imagen_busqueda_cabecera {
+        width: 17px;
+        height: 17px;
+    }
+
+    /* clase para establecer el diseño del campo de búsqueda */
+    .input_busqueda_cabecera {
+        width: 100%;
+        height: 100%;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        box-sizing: border-box;
+    }
+
+
+/* TITULO 4 OPCIONES USUARIO */
+
+    /* clase para organizar las opciones del usuario conectado */
     .contenedor_usuario_cabecera {
         display: flex;
         align-items: center;
-        gap: 12px;
+        justify-content: flex-end;
+        gap: 11px;
     }
 
-    /* clase para organizar el nombre y rol del usuario */
+    /* clase para establecer el espacio de notificaciones */
+    .contenedor_notificaciones_cabecera {
+        width: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border-radius: 50%;
+    }
+
+    /* cambia el fondo de notificaciones al posicionar el cursor */
+    .contenedor_notificaciones_cabecera:hover {
+        background-color: #eef5f6;
+    }
+
+    /* clase para establecer el diseño del icono de notificaciones */
+    .icono_notificaciones_cabecera {
+        width: 22px;
+        height: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* clase para establecer el tamaño del icono de notificaciones */
+    .imagen_notificaciones_cabecera {
+        width: 20px;
+        height: 20px;
+    }
+
+    /* clase para establecer el diseño del icono del usuario conectado */
+    .icono_usuario_cabecera {
+        width: 42px;
+        height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #e4f6f6;
+        border-radius: 50%;
+        box-sizing: border-box;
+    }
+
+    /* clase para establecer el tamaño del icono de usuario */
+    .imagen_usuario_cabecera {
+        width: 20px;
+        height: 20px;
+    }
+
+    /* clase para organizar el nombre y correo del usuario */
     .contenedor_datos_usuario_cabecera {
         display: flex;
         flex-direction: column;
-        align-items: flex-end;
+        min-width: 130px;
     }
 
     /* clase para establecer el diseño del nombre del usuario */
     .nombre_usuario_cabecera {
         color: #0b3650;
         font-family: Arial, sans-serif;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: bold;
     }
 
-    /* clase para establecer el diseño del rol del usuario */
-    .rol_usuario_cabecera {
-        color: #6c757d;
+    /* clase para establecer el diseño del correo del usuario */
+    .email_usuario_cabecera {
+        color: #7b8b94;
         font-family: Arial, sans-serif;
-        font-size: 12px;
+        font-size: 11px;
         margin-top: 2px;
     }
 
-    /* clase para representar visualmente el icono del usuario */
-    .icono_usuario_cabecera {
-        width: 38px;
-        height: 38px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #159ba3;
-        color: #ffffff;
+    /* clase para establecer la opción de acciones del usuario */
+    .boton_usuario_cabecera {
+        color: #415865;
         font-family: Arial, sans-serif;
-        font-size: 15px;
-        font-weight: bold;
-        border-radius: 50%;
-    }
-
-    /* clase para establecer el diseño de la opción cerrar sesión */
-    .boton_cerrar_sesion_cabecera {
-        padding: 9px 13px;
-        background-color: #0b3650;
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        border-radius: 5px;
+        font-size: 16px;
         cursor: pointer;
+        padding: 7px;
     }
 
-    /* cambia el fondo de la opción cerrar sesión al posicionar el cursor */
-    .boton_cerrar_sesion_cabecera:hover {
-        background-color: #159ba3;
+    /* cambia el color de la opción de usuario al posicionar el cursor */
+    .boton_usuario_cabecera:hover {
+        color: #159ba3;
+    }
+
+
+/* TITULO 5 RESPONSIVE CABECERA */
+
+    /* adapta la cabecera para pantallas medianas */
+    @media (max-width: 1100px) {
+
+        .contenedor_principal_cabecera {
+            grid-template-columns: 1fr auto;
+        }
+
+        .contenedor_busqueda_cabecera {
+            display: none;
+        }
+
+    }
+
+    /* adapta la información del usuario para dispositivos pequeños */
+    @media (max-width: 700px) {
+
+        .contenedor_principal_cabecera {
+            padding: 0 16px;
+        }
+
+        .contenedor_datos_usuario_cabecera {
+            display: none;
+        }
+
+        .titulo_vista_cabecera {
+            font-size: 19px;
+        }
+
     }

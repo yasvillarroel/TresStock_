@@ -3,29 +3,29 @@
     /* clase para establecer el espacio general de la vista de productos */
     .contenedor_productos {
         width: 100%;
-        padding: 30px;
+        padding: 28px;
         box-sizing: border-box;
     }
 
 
 /* TITULO 2 ENCABEZADO PRODUCTOS */
 
-    /* clase para organizar el encabezado principal de la vista de productos */
+    /* clase para organizar el encabezado principal de la vista */
     .contenedor_encabezado_productos {
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-bottom: 24px;
+        margin-bottom: 22px;
     }
 
-    /* clase para organizar el título y descripción de la vista */
+    /* clase para organizar el título y descripción */
     .contenedor_informacion_productos {
         display: flex;
         flex-direction: column;
     }
 
-    /* clase para establecer el diseño del título de gestión de productos */
+    /* clase para establecer el título principal */
     .titulo_productos {
         color: #0b3650;
         font-family: Arial, sans-serif;
@@ -34,50 +34,236 @@
         margin-bottom: 5px;
     }
 
-    /* clase para establecer el diseño de la descripción de productos */
+    /* clase para establecer la descripción de la vista */
     .descripcion_productos {
-        color: #6c757d;
+        color: #71818a;
         font-family: Arial, sans-serif;
-        font-size: 14px;
+        font-size: 13px;
     }
 
-    /* clase para establecer el diseño de la opción nuevo producto */
+    /* clase para establecer la opción nuevo producto */
     .boton_nuevo_producto {
         height: 42px;
         display: flex;
         align-items: center;
         background-color: #159ba3;
-        color: #ffffff;
-        padding: 0 16px;
-        border-radius: 5px;
+        padding: 0 17px;
+        border-radius: 6px;
         cursor: pointer;
         box-sizing: border-box;
     }
 
-    /* cambia el fondo de la opción nuevo producto al posicionar el cursor */
+    /* cambia el fondo de nuevo producto al posicionar el cursor */
     .boton_nuevo_producto:hover {
         background-color: #0f858d;
     }
 
-    /* clase para establecer el diseño del icono de nuevo producto */
+    /* clase para establecer el icono de nuevo producto */
     .icono_nuevo_producto {
         color: #ffffff;
         font-family: Arial, sans-serif;
-        font-size: 22px;
+        font-size: 21px;
         font-weight: bold;
         margin-right: 8px;
     }
 
-    /* clase para establecer el texto de la opción nuevo producto */
+    /* clase para establecer el texto de nuevo producto */
     .texto_nuevo_producto {
         color: #ffffff;
         font-family: Arial, sans-serif;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: bold;
     }
 
 
-/* TITULO 3 FILTROS PRODUCTOS */
+/* TITULO 3 INDICADORES PRODUCTOS */
+
+    /* clase para distribuir los indicadores principales */
+    .contenedor_indicadores_productos {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin-bottom: 22px;
+    }
+
+    /* clase para establecer el diseño del indicador total productos */
+    .tarjeta_total_productos {
+        min-height: 105px;
+        display: flex;
+        align-items: center;
+        background-color: #ffffff;
+        border: 1px solid #dce4e8;
+        border-radius: 8px;
+        padding: 18px;
+        box-sizing: border-box;
+    }
+
+    /* clase para establecer el icono del indicador total productos */
+    .icono_total_productos {
+        width: 46px;
+        height: 46px;
+        background-color: #e4f6f6;
+        border-radius: 8px;
+        margin-right: 14px;
+    }
+
+    /* clase para organizar el contenido de total productos */
+    .contenido_total_productos {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* clase para establecer el texto total productos */
+    .texto_total_productos {
+        color: #697a83;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+
+    /* clase para establecer el valor total productos */
+    .valor_total_productos {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 23px;
+        font-weight: bold;
+    }
+
+
+    /* clase para establecer el diseño del indicador familias */
+    .tarjeta_familias_productos {
+        min-height: 105px;
+        display: flex;
+        align-items: center;
+        background-color: #ffffff;
+        border: 1px solid #dce4e8;
+        border-radius: 8px;
+        padding: 18px;
+        box-sizing: border-box;
+    }
+
+    /* clase para establecer el icono del indicador familias */
+    .icono_familias_productos {
+        width: 46px;
+        height: 46px;
+        background-color: #e9f0fb;
+        border-radius: 8px;
+        margin-right: 14px;
+    }
+
+    /* clase para organizar el contenido del indicador familias */
+    .contenido_familias_productos {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* clase para establecer el texto familias */
+    .texto_familias_productos {
+        color: #697a83;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+
+    /* clase para establecer el valor familias */
+    .valor_familias_productos {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 23px;
+        font-weight: bold;
+    }
+
+
+    /* clase para establecer el diseño del indicador proveedores */
+    .tarjeta_proveedores_productos {
+        min-height: 105px;
+        display: flex;
+        align-items: center;
+        background-color: #ffffff;
+        border: 1px solid #dce4e8;
+        border-radius: 8px;
+        padding: 18px;
+        box-sizing: border-box;
+    }
+
+    /* clase para establecer el icono del indicador proveedores */
+    .icono_proveedores_productos {
+        width: 46px;
+        height: 46px;
+        background-color: #eef0fa;
+        border-radius: 8px;
+        margin-right: 14px;
+    }
+
+    /* clase para organizar el contenido del indicador proveedores */
+    .contenido_proveedores_productos {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* clase para establecer el texto proveedores */
+    .texto_proveedores_productos {
+        color: #697a83;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+
+    /* clase para establecer el valor proveedores */
+    .valor_proveedores_productos {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 23px;
+        font-weight: bold;
+    }
+
+
+    /* clase para establecer el diseño del indicador stock bajo */
+    .tarjeta_stock_bajo_productos {
+        min-height: 105px;
+        display: flex;
+        align-items: center;
+        background-color: #ffffff;
+        border: 1px solid #dce4e8;
+        border-radius: 8px;
+        padding: 18px;
+        box-sizing: border-box;
+    }
+
+    /* clase para establecer el icono del indicador stock bajo */
+    .icono_stock_bajo_productos {
+        width: 46px;
+        height: 46px;
+        background-color: #fff0df;
+        border-radius: 8px;
+        margin-right: 14px;
+    }
+
+    /* clase para organizar el contenido del indicador stock bajo */
+    .contenido_stock_bajo_productos {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* clase para establecer el texto stock bajo */
+    .texto_stock_bajo_productos {
+        color: #697a83;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+
+    /* clase para establecer el valor stock bajo */
+    .valor_stock_bajo_productos {
+        color: #d58226;
+        font-family: Arial, sans-serif;
+        font-size: 23px;
+        font-weight: bold;
+    }
+
+
+/* TITULO 4 FILTROS PRODUCTOS */
 
     /* clase para organizar las opciones de búsqueda y filtrado */
     .contenedor_filtros_productos {
@@ -86,14 +272,14 @@
         grid-template-columns: 2fr 1fr;
         gap: 18px;
         background-color: #ffffff;
-        border: 1px solid #d9e1e5;
-        border-radius: 6px;
+        border: 1px solid #dce4e8;
+        border-radius: 8px;
         padding: 18px;
         margin-bottom: 20px;
         box-sizing: border-box;
     }
 
-    /* clase para organizar el buscador de productos */
+    /* clase para organizar el buscador */
     .contenedor_busqueda_productos {
         display: flex;
         flex-direction: column;
@@ -101,19 +287,19 @@
 
     /* clase para establecer el texto del buscador */
     .texto_busqueda_productos {
-        color: #0b3650;
+        color: #536873;
         font-family: Arial, sans-serif;
-        font-size: 13px;
+        font-size: 12px;
         font-weight: bold;
         margin-bottom: 7px;
     }
 
-    /* clase para establecer el diseño del campo de búsqueda */
+    /* clase para establecer el campo de búsqueda */
     .input_busqueda_productos {
         width: 100%;
         height: 40px;
-        border: 1px solid #cbd5da;
-        border-radius: 5px;
+        border: 1px solid #ced9de;
+        border-radius: 6px;
         padding: 0 12px;
         color: #37434b;
         font-family: Arial, sans-serif;
@@ -128,21 +314,21 @@
         flex-direction: column;
     }
 
-    /* clase para establecer el texto del filtro por familia */
+    /* clase para establecer el texto del filtro familia */
     .texto_familia_productos {
-        color: #0b3650;
+        color: #536873;
         font-family: Arial, sans-serif;
-        font-size: 13px;
+        font-size: 12px;
         font-weight: bold;
         margin-bottom: 7px;
     }
 
-    /* clase para establecer el diseño del selector de familia */
+    /* clase para establecer el selector de familia */
     .select_familia_productos {
         width: 100%;
         height: 40px;
-        border: 1px solid #cbd5da;
-        border-radius: 5px;
+        border: 1px solid #ced9de;
+        border-radius: 6px;
         padding: 0 10px;
         background-color: #ffffff;
         color: #37434b;
@@ -152,7 +338,7 @@
         outline: none;
     }
 
-    /* clase para establecer las opciones del filtro por familia */
+    /* clase para establecer las opciones de familia */
     .opcion_familia_productos {
         color: #37434b;
         font-family: Arial, sans-serif;
@@ -160,16 +346,32 @@
     }
 
 
-/* TITULO 4 TABLA PRODUCTOS */
+/* TITULO 5 TABLA PRODUCTOS */
 
-    /* clase para establecer el contenedor visual de la tabla de productos */
+    /* clase para establecer el contenedor principal de la tabla */
     .contenedor_tabla_productos {
         width: 100%;
         background-color: #ffffff;
-        border: 1px solid #d9e1e5;
-        border-radius: 6px;
+        border: 1px solid #dce4e8;
+        border-radius: 8px;
         overflow-x: auto;
         box-sizing: border-box;
+    }
+
+    /* clase para establecer la cabecera visual del contenedor de la tabla */
+    .cabecera_contenedor_tabla_productos {
+        min-width: 1050px;
+        padding: 17px 18px;
+        border-bottom: 1px solid #e2e8eb;
+        box-sizing: border-box;
+    }
+
+    /* clase para establecer el título de la tabla */
+    .titulo_tabla_productos {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: bold;
     }
 
     /* clase para establecer la estructura general de la tabla */
@@ -179,113 +381,113 @@
         border-collapse: collapse;
     }
 
-    /* clase para establecer el fondo del encabezado de la tabla */
+    /* clase para establecer el fondo del encabezado */
     .encabezado_tabla_productos {
-        background-color: #eef3f5;
+        background-color: #f4f7f8;
     }
 
-    /* clase para establecer el borde inferior del encabezado */
+    /* clase para establecer la fila del encabezado */
     .fila_encabezado_productos {
-        border-bottom: 1px solid #d9e1e5;
+        border-bottom: 1px solid #dce4e8;
     }
 
     /* clase para establecer la columna código */
     .columna_codigo_productos {
         padding: 13px 12px;
         text-align: left;
-        color: #44515a;
+        color: #667881;
         font-family: Arial, sans-serif;
-        font-size: 12px;
+        font-size: 11px;
     }
 
     /* clase para establecer la columna código de barras */
     .columna_codigo_barra_productos {
         padding: 13px 12px;
         text-align: left;
-        color: #44515a;
+        color: #667881;
         font-family: Arial, sans-serif;
-        font-size: 12px;
+        font-size: 11px;
     }
 
     /* clase para establecer la columna descripción */
     .columna_descripcion_productos {
         padding: 13px 12px;
         text-align: left;
-        color: #44515a;
+        color: #667881;
         font-family: Arial, sans-serif;
-        font-size: 12px;
+        font-size: 11px;
     }
 
     /* clase para establecer la columna familia */
     .columna_familia_productos {
         padding: 13px 12px;
         text-align: left;
-        color: #44515a;
+        color: #667881;
         font-family: Arial, sans-serif;
-        font-size: 12px;
+        font-size: 11px;
     }
 
     /* clase para establecer la columna precio */
     .columna_precio_productos {
         padding: 13px 12px;
         text-align: right;
-        color: #44515a;
+        color: #667881;
         font-family: Arial, sans-serif;
-        font-size: 12px;
+        font-size: 11px;
     }
 
     /* clase para establecer la columna stock actual */
     .columna_stock_actual_productos {
         padding: 13px 12px;
         text-align: center;
-        color: #44515a;
+        color: #667881;
         font-family: Arial, sans-serif;
-        font-size: 12px;
+        font-size: 11px;
     }
 
     /* clase para establecer la columna stock mínimo */
     .columna_stock_minimo_productos {
         padding: 13px 12px;
         text-align: center;
-        color: #44515a;
+        color: #667881;
         font-family: Arial, sans-serif;
-        font-size: 12px;
+        font-size: 11px;
     }
 
     /* clase para establecer la columna proveedor */
     .columna_proveedor_productos {
         padding: 13px 12px;
         text-align: left;
-        color: #44515a;
+        color: #667881;
         font-family: Arial, sans-serif;
-        font-size: 12px;
+        font-size: 11px;
     }
 
     /* clase para establecer la columna acciones */
     .columna_acciones_productos {
         padding: 13px 12px;
         text-align: center;
-        color: #44515a;
+        color: #667881;
         font-family: Arial, sans-serif;
-        font-size: 12px;
+        font-size: 11px;
     }
 
-    /* clase para establecer la fila que informa que no existen productos */
+    /* clase para establecer la fila temporal sin productos */
     .fila_sin_productos {
-        border-bottom: 1px solid #edf0f2;
+        border-bottom: 1px solid #edf1f3;
     }
 
-    /* clase para establecer el mensaje cuando no existen productos cargados */
+    /* clase para establecer el mensaje cuando no existen productos */
     .dato_sin_productos {
-        padding: 35px 15px;
+        padding: 38px 15px;
         text-align: center;
-        color: #7a8790;
+        color: #84939a;
         font-family: Arial, sans-serif;
         font-size: 13px;
     }
 
 
-/* TITULO 5 FORMULARIO PRODUCTO */
+/* TITULO 6 FORMULARIO PRODUCTO */
 
     /* clase para establecer el fondo superpuesto del formulario */
     .contenedor_formulario_producto {
@@ -297,7 +499,7 @@
         position: fixed;
         top: 0;
         left: 0;
-        background-color: rgba(0, 0, 0, 0.45);
+        background-color: rgba(5, 31, 45, 0.55);
         z-index: 1100;
     }
 
@@ -311,13 +513,13 @@
         width: 620px;
         max-width: calc(100% - 40px);
         background-color: #ffffff;
-        border-radius: 7px;
-        padding: 22px;
+        border-radius: 8px;
+        padding: 23px;
         box-sizing: border-box;
     }
 
 
-/* TITULO 6 CABECERA FORMULARIO */
+/* TITULO 7 CABECERA FORMULARIO */
 
     /* clase para organizar el título y cierre del formulario */
     .cabecera_formulario_producto {
@@ -332,11 +534,11 @@
     .titulo_formulario_producto {
         color: #0b3650;
         font-family: Arial, sans-serif;
-        font-size: 21px;
+        font-size: 20px;
         font-weight: bold;
     }
 
-    /* clase para establecer la opción de cierre del formulario */
+    /* clase para establecer la opción de cierre */
     .boton_cerrar_formulario_producto {
         width: 32px;
         height: 32px;
@@ -347,18 +549,18 @@
         font-family: Arial, sans-serif;
         font-size: 25px;
         cursor: pointer;
-        border-radius: 4px;
+        border-radius: 5px;
     }
 
-    /* cambia el fondo de cerrar formulario al posicionar el cursor */
+    /* cambia el fondo del cierre al posicionar el cursor */
     .boton_cerrar_formulario_producto:hover {
         background-color: #edf1f3;
     }
 
 
-/* TITULO 7 CAMPOS FORMULARIO */
+/* TITULO 8 CAMPOS FORMULARIO */
 
-    /* clase para distribuir los campos del formulario en dos columnas */
+    /* clase para distribuir los campos del formulario */
     .contenedor_campos_producto {
         width: 100%;
         display: grid;
@@ -374,18 +576,18 @@
 
     /* clase para establecer el texto del campo código */
     .texto_campo_codigo_producto {
-        color: #0b3650;
+        color: #425966;
         font-family: Arial, sans-serif;
-        font-size: 13px;
+        font-size: 12px;
         font-weight: bold;
         margin-bottom: 6px;
     }
 
-    /* clase para establecer el campo de código */
+    /* clase para establecer el campo código */
     .input_codigo_producto {
         height: 40px;
-        border: 1px solid #cbd5da;
-        border-radius: 5px;
+        border: 1px solid #ced9de;
+        border-radius: 6px;
         padding: 0 10px;
         color: #37434b;
         font-family: Arial, sans-serif;
@@ -393,7 +595,6 @@
         outline: none;
         box-sizing: border-box;
     }
-
 
     /* clase para organizar el campo código de barras */
     .campo_codigo_barra_producto {
@@ -403,18 +604,18 @@
 
     /* clase para establecer el texto del campo código de barras */
     .texto_campo_codigo_barra_producto {
-        color: #0b3650;
+        color: #425966;
         font-family: Arial, sans-serif;
-        font-size: 13px;
+        font-size: 12px;
         font-weight: bold;
         margin-bottom: 6px;
     }
 
-    /* clase para establecer el campo de código de barras */
+    /* clase para establecer el campo código de barras */
     .input_codigo_barra_producto {
         height: 40px;
-        border: 1px solid #cbd5da;
-        border-radius: 5px;
+        border: 1px solid #ced9de;
+        border-radius: 6px;
         padding: 0 10px;
         color: #37434b;
         font-family: Arial, sans-serif;
@@ -422,7 +623,6 @@
         outline: none;
         box-sizing: border-box;
     }
-
 
     /* clase para organizar el campo descripción */
     .campo_descripcion_producto {
@@ -432,9 +632,9 @@
 
     /* clase para establecer el texto del campo descripción */
     .texto_campo_descripcion_producto {
-        color: #0b3650;
+        color: #425966;
         font-family: Arial, sans-serif;
-        font-size: 13px;
+        font-size: 12px;
         font-weight: bold;
         margin-bottom: 6px;
     }
@@ -442,8 +642,8 @@
     /* clase para establecer el campo descripción */
     .input_descripcion_producto {
         height: 40px;
-        border: 1px solid #cbd5da;
-        border-radius: 5px;
+        border: 1px solid #ced9de;
+        border-radius: 6px;
         padding: 0 10px;
         color: #37434b;
         font-family: Arial, sans-serif;
@@ -451,7 +651,6 @@
         outline: none;
         box-sizing: border-box;
     }
-
 
     /* clase para organizar el campo familia */
     .campo_familia_producto {
@@ -461,9 +660,9 @@
 
     /* clase para establecer el texto del campo familia */
     .texto_campo_familia_producto {
-        color: #0b3650;
+        color: #425966;
         font-family: Arial, sans-serif;
-        font-size: 13px;
+        font-size: 12px;
         font-weight: bold;
         margin-bottom: 6px;
     }
@@ -471,8 +670,8 @@
     /* clase para establecer el campo familia */
     .input_familia_producto {
         height: 40px;
-        border: 1px solid #cbd5da;
-        border-radius: 5px;
+        border: 1px solid #ced9de;
+        border-radius: 6px;
         padding: 0 10px;
         color: #37434b;
         font-family: Arial, sans-serif;
@@ -480,7 +679,6 @@
         outline: none;
         box-sizing: border-box;
     }
-
 
     /* clase para organizar el campo precio */
     .campo_precio_producto {
@@ -490,9 +688,9 @@
 
     /* clase para establecer el texto del campo precio */
     .texto_campo_precio_producto {
-        color: #0b3650;
+        color: #425966;
         font-family: Arial, sans-serif;
-        font-size: 13px;
+        font-size: 12px;
         font-weight: bold;
         margin-bottom: 6px;
     }
@@ -500,8 +698,8 @@
     /* clase para establecer el campo precio */
     .input_precio_producto {
         height: 40px;
-        border: 1px solid #cbd5da;
-        border-radius: 5px;
+        border: 1px solid #ced9de;
+        border-radius: 6px;
         padding: 0 10px;
         color: #37434b;
         font-family: Arial, sans-serif;
@@ -509,7 +707,6 @@
         outline: none;
         box-sizing: border-box;
     }
-
 
     /* clase para organizar el campo proveedor */
     .campo_proveedor_producto {
@@ -519,9 +716,9 @@
 
     /* clase para establecer el texto del campo proveedor */
     .texto_campo_proveedor_producto {
-        color: #0b3650;
+        color: #425966;
         font-family: Arial, sans-serif;
-        font-size: 13px;
+        font-size: 12px;
         font-weight: bold;
         margin-bottom: 6px;
     }
@@ -529,8 +726,8 @@
     /* clase para establecer el selector de proveedor */
     .select_proveedor_producto {
         height: 40px;
-        border: 1px solid #cbd5da;
-        border-radius: 5px;
+        border: 1px solid #ced9de;
+        border-radius: 6px;
         padding: 0 10px;
         background-color: #ffffff;
         color: #37434b;
@@ -540,7 +737,7 @@
         box-sizing: border-box;
     }
 
-    /* clase para establecer las opciones del proveedor */
+    /* clase para establecer las opciones de proveedor */
     .opcion_proveedor_producto {
         color: #37434b;
         font-family: Arial, sans-serif;
@@ -548,7 +745,7 @@
     }
 
 
-/* TITULO 8 ACCIONES FORMULARIO */
+/* TITULO 9 ACCIONES FORMULARIO */
 
     /* clase para organizar las opciones inferiores del formulario */
     .contenedor_acciones_formulario_producto {
@@ -602,9 +799,18 @@
     }
 
 
-/* TITULO 9 RESPONSIVE PRODUCTOS */
+/* TITULO 10 RESPONSIVE PRODUCTOS */
 
-    /* adapta los filtros y formulario para pantallas medianas */
+    /* adapta los indicadores y filtros para pantallas medianas */
+    @media (max-width: 1100px) {
+
+        .contenedor_indicadores_productos {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+    }
+
+    /* adapta filtros y formulario para tablets */
     @media (max-width: 900px) {
 
         .contenedor_filtros_productos {
@@ -617,7 +823,7 @@
 
     }
 
-    /* adapta el encabezado de productos para dispositivos móviles */
+    /* adapta la vista para dispositivos móviles */
     @media (max-width: 600px) {
 
         .contenedor_productos {
@@ -628,6 +834,10 @@
             align-items: flex-start;
             flex-direction: column;
             gap: 16px;
+        }
+
+        .contenedor_indicadores_productos {
+            grid-template-columns: 1fr;
         }
 
     }

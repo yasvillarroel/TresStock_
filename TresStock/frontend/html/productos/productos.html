@@ -3,9 +3,10 @@
     <!-- contenedor principal de la vista de gestión de productos -->
     <div class="contenedor_productos">
 
+
         <!-- TITULO 2 ENCABEZADO PRODUCTOS -->
 
-            <!-- contenedor que agrupa la descripción y la opción para agregar productos -->
+            <!-- contenedor que agrupa la información principal y la opción para agregar productos -->
             <div class="contenedor_encabezado_productos">
 
                 <!-- contenedor de información principal de la vista -->
@@ -15,25 +16,103 @@
                     <div class="titulo_productos">Gestión de productos</div>
 
                     <!-- descripción de la funcionalidad de la vista -->
-                    <div class="descripcion_productos">Consulta y administra los productos registrados en TresStock.</div>
+                    <div class="descripcion_productos">Administra el catálogo de productos del minimarket.</div>
 
                 </div>
+
 
                 <!-- opción para abrir el formulario de registro de producto -->
                 <div class="boton_nuevo_producto" id="boton_nuevo_producto" onclick="abrirFormularioProducto()">
 
+                    <!-- icono visual para agregar un producto -->
                     <div class="icono_nuevo_producto">+</div>
 
+                    <!-- texto de la opción para agregar un producto -->
                     <div class="texto_nuevo_producto">Nuevo producto</div>
 
                 </div>
 
             </div>
 
-        <!-- TITULO 3 FILTROS PRODUCTOS -->
+
+        <!-- TITULO 3 INDICADORES PRODUCTOS -->
+
+            <!-- contenedor que agrupa los indicadores principales de productos -->
+            <div class="contenedor_indicadores_productos">
+
+
+                <!-- indicador para mostrar la cantidad total de productos -->
+                <div class="tarjeta_total_productos">
+
+                    <div class="icono_total_productos"></div>
+
+                    <div class="contenido_total_productos">
+
+                        <div class="texto_total_productos">Total productos</div>
+
+                        <div class="valor_total_productos" id="valor_total_productos">0</div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- indicador para mostrar la cantidad de familias -->
+                <div class="tarjeta_familias_productos">
+
+                    <div class="icono_familias_productos"></div>
+
+                    <div class="contenido_familias_productos">
+
+                        <div class="texto_familias_productos">Familias</div>
+
+                        <div class="valor_familias_productos" id="valor_familias_productos">0</div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- indicador para mostrar la cantidad de proveedores -->
+                <div class="tarjeta_proveedores_productos">
+
+                    <div class="icono_proveedores_productos"></div>
+
+                    <div class="contenido_proveedores_productos">
+
+                        <div class="texto_proveedores_productos">Proveedores</div>
+
+                        <div class="valor_proveedores_productos" id="valor_proveedores_productos">0</div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- indicador para mostrar productos con stock bajo -->
+                <div class="tarjeta_stock_bajo_productos">
+
+                    <div class="icono_stock_bajo_productos"></div>
+
+                    <div class="contenido_stock_bajo_productos">
+
+                        <div class="texto_stock_bajo_productos">Productos con bajo stock</div>
+
+                        <div class="valor_stock_bajo_productos" id="valor_stock_bajo_productos">0</div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        <!-- TITULO 4 FILTROS PRODUCTOS -->
 
             <!-- contenedor que agrupa las opciones de búsqueda y filtrado -->
             <div class="contenedor_filtros_productos">
+
 
                 <!-- contenedor del buscador de productos -->
                 <div class="contenedor_busqueda_productos">
@@ -45,6 +124,7 @@
                     <input class="input_busqueda_productos" id="input_busqueda_productos" type="text" placeholder="Código, código de barras o descripción">
 
                 </div>
+
 
                 <!-- contenedor del filtro por familia -->
                 <div class="contenedor_familia_productos">
@@ -61,17 +141,27 @@
 
                 </div>
 
+
             </div>
 
-        <!-- TITULO 4 TABLA PRODUCTOS -->
+
+        <!-- TITULO 5 TABLA PRODUCTOS -->
 
             <!-- contenedor principal de la tabla de productos -->
             <div class="contenedor_tabla_productos">
 
+                <!-- cabecera visual de la tabla -->
+                <div class="cabecera_contenedor_tabla_productos">
+
+                    <div class="titulo_tabla_productos">Productos registrados</div>
+
+                </div>
+
+
                 <!-- tabla para mostrar los productos registrados -->
                 <table class="tabla_productos">
 
-                    <!-- encabezado de la tabla de productos -->
+                    <!-- encabezado de la tabla -->
                     <thead class="encabezado_tabla_productos">
 
                         <tr class="fila_encabezado_productos">
@@ -98,10 +188,11 @@
 
                     </thead>
 
+
                     <!-- cuerpo donde se cargarán los productos -->
                     <tbody class="cuerpo_tabla_productos" id="cuerpo_tabla_productos">
 
-                        <!-- fila temporal mientras no existan datos cargados desde el backend -->
+                        <!-- fila temporal mientras no existan datos cargados -->
                         <tr class="fila_sin_productos">
 
                             <td class="dato_sin_productos" colspan="9">No hay productos cargados para mostrar.</td>
@@ -114,7 +205,8 @@
 
             </div>
 
-        <!-- TITULO 5 FORMULARIO PRODUCTO -->
+
+        <!-- TITULO 6 FORMULARIO PRODUCTO -->
 
             <!-- contenedor superpuesto del formulario de producto -->
             <div class="contenedor_formulario_producto contenedor_formulario_producto_oculto" id="contenedor_formulario_producto">
@@ -123,12 +215,12 @@
                 <div class="formulario_producto">
 
 
-                    <!-- TITULO 6 CABECERA FORMULARIO -->
+                    <!-- TITULO 7 CABECERA FORMULARIO -->
 
                         <!-- contenedor del título y cierre del formulario -->
                         <div class="cabecera_formulario_producto">
 
-                            <!-- título del formulario de producto -->
+                            <!-- título del formulario -->
                             <div class="titulo_formulario_producto" id="titulo_formulario_producto">Nuevo producto</div>
 
                             <!-- opción para cerrar el formulario -->
@@ -136,12 +228,14 @@
 
                         </div>
 
-                    <!-- TITULO 7 CAMPOS FORMULARIO -->
+
+                    <!-- TITULO 8 CAMPOS FORMULARIO -->
 
                         <!-- contenedor de los campos del formulario -->
                         <div class="contenedor_campos_producto">
 
-                            <!-- campo para ingresar el código del producto -->
+
+                            <!-- campo código -->
                             <div class="campo_codigo_producto">
 
                                 <div class="texto_campo_codigo_producto">Código</div>
@@ -150,7 +244,8 @@
 
                             </div>
 
-                            <!-- campo para ingresar el código de barras -->
+
+                            <!-- campo código de barras -->
                             <div class="campo_codigo_barra_producto">
 
                                 <div class="texto_campo_codigo_barra_producto">Código de barras</div>
@@ -159,7 +254,8 @@
 
                             </div>
 
-                            <!-- campo para ingresar la descripción -->
+
+                            <!-- campo descripción -->
                             <div class="campo_descripcion_producto">
 
                                 <div class="texto_campo_descripcion_producto">Descripción</div>
@@ -168,7 +264,8 @@
 
                             </div>
 
-                            <!-- campo para ingresar la familia del producto -->
+
+                            <!-- campo familia -->
                             <div class="campo_familia_producto">
 
                                 <div class="texto_campo_familia_producto">Familia</div>
@@ -177,7 +274,8 @@
 
                             </div>
 
-                            <!-- campo para ingresar el precio público -->
+
+                            <!-- campo precio público -->
                             <div class="campo_precio_producto">
 
                                 <div class="texto_campo_precio_producto">Precio público</div>
@@ -186,7 +284,8 @@
 
                             </div>
 
-                            <!-- campo para seleccionar el proveedor asociado -->
+
+                            <!-- campo proveedor -->
                             <div class="campo_proveedor_producto">
 
                                 <div class="texto_campo_proveedor_producto">Proveedor</div>
@@ -199,23 +298,27 @@
 
                             </div>
 
+
                         </div>
 
-                    <!-- TITULO 8 ACCIONES FORMULARIO -->
 
-                        <!-- contenedor que agrupa las opciones del formulario -->
+                    <!-- TITULO 9 ACCIONES FORMULARIO -->
+
+                        <!-- contenedor de las opciones inferiores del formulario -->
                         <div class="contenedor_acciones_formulario_producto">
 
                             <!-- opción para cancelar el formulario -->
                             <div class="boton_cancelar_producto" id="boton_cancelar_producto" onclick="cerrarFormularioProducto()">Cancelar</div>
 
-                            <!-- opción para guardar los datos del producto -->
+                            <!-- opción para guardar el producto -->
                             <div class="boton_guardar_producto" id="boton_guardar_producto">Guardar producto</div>
 
                         </div>
 
+
                 </div>
 
             </div>
+
 
     </div>

@@ -4,10 +4,18 @@
     <div class="contenedor_principal_cabecera">
 
 
-        <!-- TITULO 2 TITULO VISTA -->
+        <!-- TITULO 2 SECCION IZQUIERDA CABECERA -->
 
-            <!-- contenedor para mostrar el nombre de la vista actual -->
-            <div class="contenedor_titulo_cabecera">
+            <!-- contenedor que agrupa el menú responsive y el título de la vista -->
+            <div class="contenedor_izquierdo_cabecera">
+
+                <!-- opción para mostrar u ocultar el menú lateral en dispositivos pequeños -->
+                <div class="boton_menu_cabecera" id="boton_menu_cabecera">
+
+                    <!-- imagen del icono de menú -->
+                    <img class="imagen_boton_menu_cabecera" src="./imagenes/cabecera/menu.svg" alt="Menú">
+
+                </div>
 
                 <!-- texto que muestra el nombre de la vista seleccionada -->
                 <div class="titulo_vista_cabecera" id="titulo_vista_cabecera">Dashboard</div>
@@ -15,29 +23,68 @@
             </div>
 
 
-        <!-- TITULO 3 USUARIO -->
+        <!-- TITULO 3 BUSCADOR CABECERA -->
 
-            <!-- contenedor para mostrar la información del usuario conectado -->
+            <!-- contenedor del buscador general del sistema -->
+            <div class="contenedor_busqueda_cabecera">
+
+                <!-- icono visual del buscador -->
+                <div class="icono_busqueda_cabecera">
+
+                    <!-- imagen del icono de búsqueda -->
+                    <img class="imagen_busqueda_cabecera" src="./imagenes/cabecera/search.svg" alt="Buscar">
+
+                </div>
+
+                <!-- campo para realizar búsquedas generales -->
+                <input class="input_busqueda_cabecera" id="input_busqueda_cabecera" type="text" placeholder="Buscar productos, ventas, proveedores...">
+
+            </div>
+
+
+        <!-- TITULO 4 OPCIONES USUARIO -->
+
+            <!-- contenedor que agrupa las opciones relacionadas con el usuario conectado -->
             <div class="contenedor_usuario_cabecera">
 
-                <!-- contenedor de los datos del usuario -->
+
+                <!-- contenedor de notificaciones -->
+                <div class="contenedor_notificaciones_cabecera" id="contenedor_notificaciones_cabecera">
+
+                    <!-- icono visual de notificaciones -->
+                    <div class="icono_notificaciones_cabecera">
+
+                        <!-- imagen del icono de notificaciones -->
+                        <img class="imagen_notificaciones_cabecera" src="./imagenes/cabecera/bell.svg" alt="Notificaciones">
+
+                    </div>
+
+                </div>
+
+
+                <!-- icono visual del usuario conectado -->
+                <div class="icono_usuario_cabecera" id="icono_usuario_cabecera">
+
+                    <img class="imagen_usuario_cabecera" src="./imagenes/cabecera/user.svg" alt="Usuario">
+
+                </div>
+
+
+                <!-- contenedor de los datos del usuario conectado -->
                 <div class="contenedor_datos_usuario_cabecera">
 
                     <!-- nombre del usuario conectado -->
                     <div class="nombre_usuario_cabecera" id="nombre_usuario_cabecera">Usuario</div>
 
-                    <!-- rol del usuario conectado -->
-                    <div class="rol_usuario_cabecera" id="rol_usuario_cabecera">Administrador</div>
+                    <!-- correo electrónico del usuario conectado -->
+                    <div class="email_usuario_cabecera" id="email_usuario_cabecera">usuario@tresstock.cl</div>
 
                 </div>
 
 
-                <!-- icono visual del usuario -->
-                <div class="icono_usuario_cabecera">U</div>
+                <!-- opción para desplegar acciones de la cuenta -->
+                <div class="boton_usuario_cabecera" id="boton_usuario_cabecera">▾</div>
 
-
-                <!-- opción para cerrar la sesión -->
-                <div class="boton_cerrar_sesion_cabecera" id="boton_cerrar_sesion_cabecera">Cerrar sesión</div>
 
             </div>
 
