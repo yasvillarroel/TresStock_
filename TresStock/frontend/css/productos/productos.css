@@ -41,6 +41,40 @@
         font-size: 13px;
     }
 
+    /* clase para establecer la opción importar excel */
+    .boton_importar_productos {
+        height: 42px;
+        display: flex;
+        align-items: center;
+        background-color: #159ba3;
+        padding: 0 17px;
+        border-radius: 6px;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+    /* cambia el fondo de nuevo producto al posicionar el cursor */
+    .boton_importar_productos:hover {
+        background-color: #0f858d;
+    }
+
+    /* clase para establecer el icono de nuevo producto */
+    .icono_importar_productos {
+        color: #ffffff;
+        font-family: Arial, sans-serif;
+        font-size: 21px;
+        font-weight: bold;
+        margin-right: 8px;
+    }
+
+    /* clase para establecer el texto de nuevo producto */
+    .texto_importar_productos {
+        color: #ffffff;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+    }
+
     /* clase para establecer la opción nuevo producto */
     .boton_nuevo_producto {
         height: 42px;

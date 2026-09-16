@@ -67,5 +67,8 @@ app.use('/api/usuarios', require('./rutas/usuarios/usuarios_rutas'));
 // registra las rutas de autenticacion
 app.use('/api/autenticacion', require('./rutas/autenticacion/autenticacion_rutas'));
 
+// registra las rutas de productos
+app.use('/api/productos', require('./rutas/productos/productos_rutas'));
+
 // exporta la aplicacion para utilizarla desde otros archivos
 module.exports = app;
