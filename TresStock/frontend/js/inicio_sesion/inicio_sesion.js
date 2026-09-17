@@ -96,18 +96,15 @@
 
             // envía las credenciales al backend para realizar la autenticación
             const respuesta = await fetch(
-                'http://localhost:3000/api/autenticacion/login',
+                'http://127.0.0.1:3000/api/autenticacion/login',
                 {
                     method: 'POST',
+                    
+                    credentials: 'include',
+                    
+                    headers: {'Content-Type': 'application/json'},
 
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-
-                    body: JSON.stringify({
-                        email: email,
-                        password: password
-                    })
+                    body: JSON.stringify({email: email, password: password})
                 }
             );
 

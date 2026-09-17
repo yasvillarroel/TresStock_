@@ -1,6 +1,9 @@
 // importa express
 const express = require('express');
 
+// importar cookie-parser
+const cookieParser = require('cookie-parser');
+
 // importa cors para permitir peticiones desde otros origenes
 const cors = require('cors');
 
@@ -13,11 +16,18 @@ const app = express();
 // configura los middlewares globales
 
 // permite peticiones desde otros origenes
-app.use(cors());
+// app.use(cors());
+// configura cors para permitir el frontend
+app.use(cors({
+    origin: 'http://127.0.0.1:5500', //esto podria variar :P
+    credentials: true
+}));
 
 // permite recibir datos en formato JSON
 app.use(express.json());
 
+// permite leer y manejar las cookies que llegan https
+app.use(cookieParser());
 
 // crea una ruta para verificar la conexion con PostgreSQL
 app.get('/api/estado_conexion', async (req, res) => {
@@ -57,6 +67,20 @@ app.get('/api/estado_conexion', async (req, res) => {
 
     }
 
+});
+// ruta de prueba para probar cookies
+app.get('/api/prueba-cookie', (req, res) => {
+
+    res.cookie('sesion', '123', {
+        httpOnly: false,
+        secure: false,
+        sameSite: 'lax',
+        path: '/'
+    });
+
+    res.json({
+        cookies: req.cookies
+    });
 });
 
 // aqui se iran agregando las rutas de cada modulo

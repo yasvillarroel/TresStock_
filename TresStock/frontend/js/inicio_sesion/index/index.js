@@ -12,18 +12,48 @@
     }
 
 
-// TITULO 2 CARGA INICIAL DEL SISTEMA
+// TITULO 2 VERIFICACIÓN DE SESIÓN
+
+    // función que consulta al backend si la cookie de sesión sigue siendo válida
+    // (esto luego se puede mover a js/comun/autenticacion.js para reutilizarlo en otras páginas)
+    async function verificarSesion() {
+
+        try {
+
+            const respuesta = await fetch(
+                'http://127.0.0.1:3000/api/autenticacion/sesion',
+                {
+                    method: 'GET',
+                    credentials: 'include'
+                }
+            );
+
+            if (!respuesta.ok) {
+                return null;
+            }
+
+            const datos = await respuesta.json();
+
+            return datos.usuario;
+
+        } catch (error) {
+
+            return null;
+        }
+    }
+
+// TITULO 3 CARGA INICIAL DEL SISTEMA
 
     // función para cargar los componentes principales de TresStock
     async function cargarSistema() {
 
         await cargarComponente(
-            './html/menu_lateral/menu_lateral.html',
+            './html/inicio_sesion/cuerpo_pagina/menu_lateral/menu_lateral.html',
             'contenedor_menu'
         );
 
         await cargarComponente(
-            './html/cabecera/cabecera.html',
+            './html/inicio_sesion/cuerpo_pagina/cabecera/cabecera.html',
             'contenedor_cabecera'
         );
 
@@ -31,22 +61,21 @@
 
     }
 
-
-// TITULO 3 CARGA DE VISTAS
+// TITULO 4 CARGA DE VISTAS
 
     // función para cargar la vista seleccionada desde el menú lateral
     async function cargarVista(vista) {
 
         const rutasVistas = {
-            dashboard: './html/dashboard/dashboard.html',
-            inventario: './html/inventario/inventario.html',
-            productos: './html/productos/productos.html',
-            ventas: './html/ventas/ventas.html',
-            proveedores: './html/proveedores/proveedores.html',
-            importacion: './html/importacion/importacion.html',
-            alertas: './html/alertas_vencimientos/alertas_vencimientos.html',
-            analisis: './html/reportes_analitica/reportes_analitica.html',
-            administracion: './html/usuarios/usuarios.html'
+            dashboard: './html/inicio_sesion/cuerpo_pagina/secciones/dashboard/dashboard.html',
+            inventario: './html/inicio_sesion/cuerpo_pagina/secciones/inventario/inventario.html',
+            productos: './html/inicio_sesion/cuerpo_pagina/secciones/productos/productos.html',
+            ventas: './html/inicio_sesion/cuerpo_pagina/secciones/ventas/ventas.html',
+            proveedores: './html/inicio_sesion/cuerpo_pagina/secciones/proveedores/proveedores.html',
+            importacion: './html/inicio_sesion/cuerpo_pagina/secciones/importacion/importacion.html',
+            alertas: './html/inicio_sesion/cuerpo_pagina/secciones/alertas_vencimientos/alertas_vencimientos.html',
+            analisis: './html/inicio_sesion/cuerpo_pagina/secciones/reportes_analitica/reportes_analitica.html',
+            administracion: './html/inicio_sesion/cuerpo_pagina/secciones/usuarios/usuarios.html'
         };
 
         const titulosVistas = {
@@ -80,8 +109,22 @@
 
     }
 
+// TITULO 5 INICIO DEL SISTEMA
 
-// TITULO 4 INICIO DEL SISTEMA
+    // función que decide si mostrar el sistema o mandar a inicio_sesion
+    async function iniciarAplicacion() {
+
+        const usuario = await verificarSesion();
+
+        if (!usuario) {
+            window.location.href = './html/inicio_sesion/inicio_sesion.html';
+            return;
+        }
+
+        console.log('Usuario autenticado:', usuario);
+
+        await cargarSistema();
+    }
 
     // llama a la función principal al cargar el index
-    cargarSistema();
+    iniciarAplicacion();
