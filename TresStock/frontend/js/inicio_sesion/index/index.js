@@ -52,6 +52,9 @@
             'contenedor_menu'
         );
 
+        // activa las opciones del menú después de cargar su HTML
+        inicializarMenuLateral();
+
         await cargarComponente(
             './html/inicio_sesion/cuerpo_pagina/cabecera/cabecera.html',
             'contenedor_cabecera'
@@ -67,15 +70,15 @@
     async function cargarVista(vista) {
 
         const rutasVistas = {
-            dashboard: './html/inicio_sesion/cuerpo_pagina/secciones/dashboard/dashboard.html',
-            inventario: './html/inicio_sesion/cuerpo_pagina/secciones/inventario/inventario.html',
-            productos: './html/inicio_sesion/cuerpo_pagina/secciones/productos/productos.html',
-            ventas: './html/inicio_sesion/cuerpo_pagina/secciones/ventas/ventas.html',
-            proveedores: './html/inicio_sesion/cuerpo_pagina/secciones/proveedores/proveedores.html',
-            importacion: './html/inicio_sesion/cuerpo_pagina/secciones/importacion/importacion.html',
-            alertas: './html/inicio_sesion/cuerpo_pagina/secciones/alertas_vencimientos/alertas_vencimientos.html',
-            analisis: './html/inicio_sesion/cuerpo_pagina/secciones/reportes_analitica/reportes_analitica.html',
-            administracion: './html/inicio_sesion/cuerpo_pagina/secciones/usuarios/usuarios.html'
+            dashboard: './html/inicio_sesion/cuerpo_pagina/secciones/dashboard.html',
+            inventario: './html/inicio_sesion/cuerpo_pagina/secciones/inventario.html',
+            productos: './html/inicio_sesion/cuerpo_pagina/secciones/productos.html',
+            ventas: './html/inicio_sesion/cuerpo_pagina/secciones/ventas.html',
+            proveedores: './html/inicio_sesion/cuerpo_pagina/secciones/proveedores.html',
+            importacion: './html/inicio_sesion/cuerpo_pagina/secciones/importacion.html',
+            alertas: './html/inicio_sesion/cuerpo_pagina/secciones/alertas_vencimientos.html',
+            analisis: './html/inicio_sesion/cuerpo_pagina/secciones/reportes_analitica.html',
+            administracion: './html/inicio_sesion/cuerpo_pagina/secciones/usuarios.html'
         };
 
         const titulosVistas = {
