@@ -6,6 +6,8 @@
         padding: 0;
         width: 100%;
         min-height: 100vh;
+        display: flex;
+        flex-direction: column;
         background-color: #f5f7f9;
         font-family: Arial, sans-serif;
         box-sizing: border-box;
@@ -17,9 +19,9 @@
     /* clase para dividir la pantalla entre identidad y acceso */
     .contenedor_inicio_sesion {
         width: 100%;
-        min-height: 100vh;
+        min-height: calc(100vh - 65px);
         display: grid;
-        grid-template-columns: 42% 58%;
+        grid-template-columns: 46% 54%;
         box-sizing: border-box;
     }
 
@@ -28,42 +30,68 @@
 
     /* clase para establecer el panel de identidad visual */
     .contenedor_identidad_inicio_sesion {
-        min-height: 100vh;
+        min-height: calc(100vh - 65px);
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        position: relative;
         background-color: #062d44;
         padding: 50px;
         box-sizing: border-box;
+        /* genera el corte diagonal */
+        clip-path: polygon(
+            0 0,
+            100% 0,
+            86% 100%,
+            0 100%
+        );
+    }
+
+    /* clase para centrar visualmente el contenido del panel de identidad */
+    .contenido_identidad_inicio_sesion {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        /* compensa el corte diagonal del panel */
+        transform: translateX(-8%);
+    }
+
+    /* clase para establecer el borde diagonal del panel de identidad */
+    .borde_identidad_inicio_sesion {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: #20cdd2;
+        clip-path: polygon(
+            98.8% 0,
+            100% 0,
+            86% 100%,
+            84.8% 100%
+        );
+        pointer-events: none;
     }
 
     /* clase para establecer el tamaño del logo */
     .imagen_logo_inicio_sesion {
-        width: 230px;
+        width: 330px;
         height: auto;
-        margin-bottom: 32px;
+
     }
 
     /* clase para establecer el título descriptivo del sistema */
     .titulo_identidad_inicio_sesion {
-        max-width: 420px;
+        max-width: 520px;
         color: #ffffff;
         font-family: Arial, sans-serif;
-        font-size: 28px;
-        font-weight: bold;
-        line-height: 36px;
-        text-align: center;
-        margin-bottom: 15px;
-    }
-
-    /* clase para establecer la descripción del sistema */
-    .descripcion_identidad_inicio_sesion {
-        max-width: 430px;
-        color: #c4d4dc;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        line-height: 22px;
+        font-size: 25px;
+        font-weight: normal;
+        line-height: 34px;
         text-align: center;
     }
 
@@ -72,41 +100,61 @@
 
     /* clase para centrar el formulario de inicio de sesión */
     .contenedor_acceso_inicio_sesion {
-        min-height: 100vh;
+        min-height: calc(100vh - 65px);
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: #f5f7f9;
+        background-color: #f8fafb;
         padding: 40px;
         box-sizing: border-box;
     }
 
     /* clase para establecer el diseño principal del formulario */
     .formulario_inicio_sesion {
-        width: 440px;
+        width: 520px;
         max-width: 100%;
         background-color: #ffffff;
-        border: 1px solid #dce4e8;
-        border-radius: 10px;
-        padding: 36px;
+        border: 1px solid #e1e7ea;
+        border-radius: 20px;
+        padding: 38px 40px 34px 40px;
         box-sizing: border-box;
-        box-shadow: 0 8px 24px rgba(18, 53, 72, 0.08);
+        box-shadow: 0 12px 35px rgba(18, 53, 72, 0.10);
     }
 
 
 /* TITULO 5 ENCABEZADO FORMULARIO */
 
+    /* clase para establecer el contenedor del icono superior */
+    .contenedor_icono_usuario_inicio_sesion {
+        width: 72px;
+        height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 14px auto;
+        background-color: #e5f7f7;
+        border-radius: 50%;
+    }
+
+    /* clase para establecer el tamaño del icono superior */
+    .icono_usuario_inicio_sesion {
+        width: 32px;
+        height: 32px;
+        object-fit: contain;
+    }
+
     /* clase para organizar el encabezado del formulario */
     .contenedor_encabezado_inicio_sesion {
         width: 100%;
-        margin-bottom: 30px;
+        margin-bottom: 34px;
+        text-align: center;
     }
 
     /* clase para establecer el título del formulario */
     .titulo_inicio_sesion {
-        color: #0b3650;
+        color: #082f48;
         font-family: Arial, sans-serif;
-        font-size: 27px;
+        font-size: 32px;
         font-weight: bold;
         margin-bottom: 8px;
     }
@@ -115,8 +163,8 @@
     .descripcion_inicio_sesion {
         color: #71818a;
         font-family: Arial, sans-serif;
-        font-size: 13px;
-        line-height: 20px;
+        font-size: 16px;
+        line-height: 22px;
     }
 
 
@@ -127,29 +175,62 @@
         width: 100%;
         display: flex;
         flex-direction: column;
-        margin-bottom: 19px;
+        margin-bottom: 20px;
     }
 
-    /* clase para establecer el texto del correo electrónico */
+    /* clase para establecer el texto del correo */
     .texto_email_inicio_sesion {
-        color: #425966;
+        color: #173c54;
         font-family: Arial, sans-serif;
-        font-size: 12px;
+        font-size: 15px;
         font-weight: bold;
-        margin-bottom: 7px;
+        margin-bottom: 8px;
     }
 
-    /* clase para establecer el campo correo electrónico */
-    .input_email_inicio_sesion {
+    /* clase para agrupar el icono y campo correo */
+    .contenedor_input_email_inicio_sesion {
         width: 100%;
-        height: 44px;
+        height: 54px;
+        display: flex;
+        align-items: center;
         border: 1px solid #ced9de;
-        border-radius: 6px;
-        padding: 0 12px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
+        border-radius: 7px;
+        background-color: #ffffff;
+        box-sizing: border-box;
+    }
+
+    /* clase para establecer el icono del correo */
+    .icono_email_inicio_sesion {
+        width: 52px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-right: 1px solid #e1e7ea;
+        box-sizing: border-box;
+        background-color: #f1f3f6;
+    }
+
+    /* clase para establecer el tamaño del icono del correo */
+    .imagen_icono_email_inicio_sesion {
+        width: 18px;
+        height: 18px;
+        object-fit: contain;
+        opacity: 0.75;
+    }
+
+    /* clase para establecer el campo correo */
+    .input_email_inicio_sesion {
+        min-width: 0;
+        height: 100%;
+        flex: 1;
+        border: none;
         outline: none;
+        padding: 0 14px;
+        color: #37434b;
+        background-color: transparent;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
         box-sizing: border-box;
     }
 
@@ -161,143 +242,160 @@
         width: 100%;
         display: flex;
         flex-direction: column;
-        margin-bottom: 17px;
+        margin-bottom: 20px;
     }
 
-    /* clase para establecer el texto del campo contraseña */
+    /* clase para establecer el texto de contraseña */
     .texto_contrasena_inicio_sesion {
-        color: #425966;
+        color: #173c54;
         font-family: Arial, sans-serif;
-        font-size: 12px;
+        font-size: 15px;
         font-weight: bold;
-        margin-bottom: 7px;
+        margin-bottom: 8px;
     }
 
-    /* clase para agrupar el campo contraseña y la opción mostrar */
+    /* clase para agrupar el icono y campo contraseña */
     .contenedor_input_contrasena_inicio_sesion {
         width: 100%;
-        height: 44px;
+        height: 54px;
         display: flex;
         align-items: center;
         border: 1px solid #ced9de;
-        border-radius: 6px;
+        border-radius: 7px;
         background-color: #ffffff;
         box-sizing: border-box;
     }
 
+    /* clase para establecer el contenedor del icono contraseña */
+    .contenedor_icono_input_inicio_sesion {
+        width: 52px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-right: 1px solid #e1e7ea;
+        box-sizing: border-box;
+        background-color: #f1f3f6;
+    }
+
+    /* clase para establecer el tamaño del icono contraseña */
+    .icono_input_inicio_sesion {
+        width: 18px;
+        height: 18px;
+        object-fit: contain;
+        opacity: 0.75;
+    }
+
     /* clase para establecer el campo contraseña */
     .input_contrasena_inicio_sesion {
-        height: 100%;
         min-width: 0;
+        height: 100%;
         flex: 1;
         border: none;
         outline: none;
-        padding: 0 12px;
+        padding: 0 14px;
         color: #37434b;
         background-color: transparent;
         font-family: Arial, sans-serif;
-        font-size: 13px;
+        font-size: 14px;
         box-sizing: border-box;
     }
 
-    /* clase para establecer la opción mostrar contraseña */
-    .boton_mostrar_contrasena_inicio_sesion {
-        height: 100%;
-        display: flex;
-        align-items: center;
-        padding: 0 12px;
-        color: #159ba3;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        font-weight: bold;
-        cursor: pointer;
-        box-sizing: border-box;
-    }
 
-    /* cambia el color al posicionar el cursor */
-    .boton_mostrar_contrasena_inicio_sesion:hover {
-        color: #0b3650;
-    }
+/* TITULO 8 MENSAJE Y RECUPERAR CONTRASEÑA */
 
-
-/* TITULO 8 RECORDAR SESION */
-
-    /* clase para organizar la opción recordar sesión */
-    .contenedor_recordar_inicio_sesion {
-        display: flex;
-        align-items: center;
-        margin-bottom: 18px;
-    }
-
-    /* clase para establecer el selector recordar sesión */
-    .checkbox_recordar_inicio_sesion {
-        width: 15px;
-        height: 15px;
-        margin: 0 8px 0 0;
-        cursor: pointer;
-    }
-
-    /* clase para establecer el texto recordar sesión */
-    .texto_recordar_inicio_sesion {
-        color: #62737c;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-    }
-
-
-/* TITULO 9 MENSAJE INICIO SESION */
-
-    /* clase para establecer el espacio de mensajes del inicio de sesión */
-    .mensaje_login {
+    /* clase para organizar el mensaje y la recuperación de contraseña */
+    .contenedor_mensaje_recuperar_inicio_sesion {
         width: 100%;
-        min-height: 18px;
+        min-height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        margin-bottom: 18px;
+        box-sizing: border-box;
+    }
+
+    /* clase para establecer los mensajes del formulario */
+    .mensaje_login {
+        flex: 1;
+        min-width: 0;
         color: #c25757;
         font-family: Arial, sans-serif;
-        font-size: 12px;
-        margin-bottom: 12px;
+        font-size: 14px;
+        line-height: 18px;
         box-sizing: border-box;
+    }
+
+    /* clase para establecer la opción recuperar contraseña */
+    .recuperar_contrasena_inicio_sesion {
+        flex-shrink: 0;
+        color: #159ba3;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        cursor: pointer;
+        white-space: nowrap;
+    }
+
+    .recuperar_contrasena_inicio_sesion:hover {
+        color: #0b3650;
     }
 
 
 /* TITULO 10 BOTON INICIO SESION */
 
-    /* clase para establecer el diseño de la opción ingresar */
+    /* clase para establecer la opción ingresar */
     .boton_inicio_sesion {
         width: 100%;
-        height: 44px;
+        height: 58px;
         display: flex;
         align-items: center;
         justify-content: center;
+        position: relative;
         background-color: #159ba3;
-        border-radius: 6px;
+        border-radius: 7px;
         cursor: pointer;
         box-sizing: border-box;
     }
 
-    /* cambia el fondo de ingresar al posicionar el cursor */
+    /* cambia el fondo al posicionar el cursor */
     .boton_inicio_sesion:hover {
         background-color: #0f858d;
     }
 
-    /* clase para establecer el texto de ingresar */
+    /* clase para establecer el texto ingresar */
     .texto_boton_inicio_sesion {
         color: #ffffff;
         font-family: Arial, sans-serif;
-        font-size: 13px;
+        font-size: 18px;
         font-weight: bold;
     }
 
-
-/* TITULO 11 INFORMACION INFERIOR */
-
-    /* clase para establecer el texto informativo inferior */
-    .texto_inferior_inicio_sesion {
-        width: 100%;
-        color: #96a2a8;
+    /* clase para establecer la flecha del botón */
+    .flecha_boton_inicio_sesion {
+        position: absolute;
+        right: 34px;
+        color: #ffffff;
         font-family: Arial, sans-serif;
-        font-size: 11px;
+        font-size: 31px;
+    }
+
+
+/* TITULO 11 PIE INICIO SESION */
+
+    /* clase para establecer el pie inferior */
+    .pie_inicio_sesion {
+        width: 100%;
+        min-height: 65px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #39586b;
+        background-color: #ffffff;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
         text-align: center;
-        margin-top: 24px;
+        box-sizing: border-box;
     }
 
 
@@ -307,47 +405,98 @@
     @media (max-width: 900px) {
 
         .contenedor_inicio_sesion {
+            width: 100%;
+            min-height: auto;
             grid-template-columns: 1fr;
         }
 
         .contenedor_identidad_inicio_sesion {
             min-height: 300px;
-            padding: 40px 25px;
+            padding: 35px 25px;
+            clip-path: none;
+        }
+
+        .contenido_identidad_inicio_sesion {
+            transform: translateX(0);
+        }
+
+        .borde_identidad_inicio_sesion {
+            display: none;
         }
 
         .imagen_logo_inicio_sesion {
-            width: 190px;
+            width: 230px;
         }
 
         .titulo_identidad_inicio_sesion {
-            font-size: 23px;
+            font-size: 22px;
             line-height: 30px;
         }
 
         .contenedor_acceso_inicio_sesion {
+            width: 100%;
             min-height: auto;
             padding: 40px 20px;
+            box-sizing: border-box;
+        }
+
+        .pie_inicio_sesion {
+            min-height: 55px;
         }
 
     }
 
-    /* adapta el formulario para dispositivos móviles */
+
+    /* adapta la pantalla para dispositivos móviles */
     @media (max-width: 500px) {
 
-        .contenedor_identidad_inicio_sesion {
-            min-height: 250px;
+        .contenedor_inicio_sesion {
+            width: 100%;
+            min-height: auto;
+            grid-template-columns: 1fr;
         }
 
-        .descripcion_identidad_inicio_sesion {
-            font-size: 12px;
+        .contenedor_identidad_inicio_sesion {
+            min-height: 50px;
+        }
+
+        .imagen_logo_inicio_sesion {
+            width: 200px;
+        }
+
+        .contenedor_acceso_inicio_sesion {
+            width: 100%;
+            min-height: auto;
+            padding: 28px 12px;
+            box-sizing: border-box;
         }
 
         .formulario_inicio_sesion {
-            padding: 26px 20px;
+            width: 100%;
+            max-width: 100%;
+            padding: 28px 20px;
         }
 
         .titulo_inicio_sesion {
-            font-size: 24px;
+            font-size: 27px;
+        }
+
+        .descripcion_inicio_sesion {
+            font-size: 14px;
+        }
+
+        .pie_inicio_sesion {
+            width: 100%;
+            min-height: 50px;
+            padding: 15px 20px;
+            font-size: 13px;
+            line-height: 14px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .mensaje_login, .recuperar_contrasena_inicio_sesion {
+            font-size: 12px;
         }
 
     }

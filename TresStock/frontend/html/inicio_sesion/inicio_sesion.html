@@ -28,17 +28,17 @@
 
             <!-- TITULO 2 IDENTIDAD TRESSTOCK -->
 
-                <!-- contenedor izquierdo para mostrar la identidad visual del sistema -->
                 <div class="contenedor_identidad_inicio_sesion">
 
-                    <!-- imagen principal del logo de TresStock -->
-                    <img class="imagen_logo_inicio_sesion" src="../../imagenes/inicio_sesion/inicio_sesion_img1.png" alt="Logo TresStock">
+                    <div class="borde_identidad_inicio_sesion"></div>
 
-                    <!-- título descriptivo del sistema -->
-                    <div class="titulo_identidad_inicio_sesion">Gestión inteligente de inventario</div>
+                    <div class="contenido_identidad_inicio_sesion">
 
-                    <!-- descripción breve del sistema -->
-                    <div class="descripcion_identidad_inicio_sesion">Controla productos, inventario, proveedores y ventas desde un solo lugar.</div>
+                        <img class="imagen_logo_inicio_sesion" src="../../imagenes/inicio_sesion/inicio_sesion_img1.png" alt="Logo TresStock" >
+
+                        <div class="titulo_identidad_inicio_sesion">Gestión inteligente de inventario</div>
+
+                    </div>
 
                 </div>
 
@@ -50,19 +50,27 @@
 
 
                     <!-- formulario para ingresar al sistema -->
-                    <form class="formulario_inicio_sesion" id="formulario_inicio_sesion">
+                    <form class="formulario_inicio_sesion" id="formulario_inicio_sesion" >
 
 
                         <!-- TITULO 4 ENCABEZADO FORMULARIO -->
+
+                            <!-- icono visual del usuario -->
+                            <div class="contenedor_icono_usuario_inicio_sesion">
+
+                                <img class="icono_usuario_inicio_sesion" src="../../imagenes/inicio_sesion/user.svg" alt="Usuario" >
+
+                            </div>
+
 
                             <!-- contenedor del título y descripción del formulario -->
                             <div class="contenedor_encabezado_inicio_sesion">
 
                                 <!-- título principal del formulario -->
-                                <div class="titulo_inicio_sesion">Iniciar sesión</div>
+                                <div class="titulo_inicio_sesion">Bienvenid@</div>
 
                                 <!-- descripción del formulario -->
-                                <div class="descripcion_inicio_sesion">Ingresa tus credenciales para acceder a TresStock.</div>
+                                <div class="descripcion_inicio_sesion">Inicia sesión para continuar</div>
 
                             </div>
 
@@ -75,8 +83,20 @@
                                 <!-- texto descriptivo del campo -->
                                 <div class="texto_email_inicio_sesion">Correo electrónico</div>
 
-                                <!-- campo para ingresar el correo -->
-                                <input class="input_email_inicio_sesion" id="email" type="email" placeholder="usuario@tresstock.cl" autocomplete="email">
+                                <!-- contenedor del campo correo -->
+                                <div class="contenedor_input_email_inicio_sesion">
+
+                                    <!-- icono visual del correo -->
+                                    <div class="icono_email_inicio_sesion">
+
+                                        <img class="imagen_icono_email_inicio_sesion" src="../../imagenes/inicio_sesion/user.svg" alt="Usuario" >
+
+                                    </div>
+
+                                    <!-- campo para ingresar el correo -->
+                                    <input class="input_email_inicio_sesion" id="email" type="email" placeholder="usuario@tresstock.cl" autocomplete="email" >
+
+                                </div>
 
                             </div>
 
@@ -89,55 +109,47 @@
                                 <!-- texto descriptivo del campo -->
                                 <div class="texto_contrasena_inicio_sesion">Contraseña</div>
 
-
-                                <!-- contenedor del campo contraseña y opción mostrar -->
+                                <!-- contenedor del campo contraseña -->
                                 <div class="contenedor_input_contrasena_inicio_sesion">
 
-                                    <!-- campo para ingresar la contraseña -->
-                                    <input class="input_contrasena_inicio_sesion" id="contrasena" type="password" placeholder="Ingresa tu contraseña" autocomplete="current-password">
+                                    <!-- icono visual de contraseña -->
+                                    <div class="contenedor_icono_input_inicio_sesion">
 
-                                    <!-- opción para mostrar u ocultar la contraseña -->
-                                    <div class="boton_mostrar_contrasena_inicio_sesion" id="boton_mostrar_contrasena_inicio_sesion" onclick="mostrarOcultarContrasena()"> Mostrar </div>
+                                        <img class="icono_input_inicio_sesion" src="../../imagenes/inicio_sesion/lock-keyhole.svg" alt="Contraseña" >
+
+                                    </div>
+
+                                    <!-- campo para ingresar la contraseña -->
+                                    <input class="input_contrasena_inicio_sesion" id="contrasena" type="password" placeholder="Ingresa tu contraseña" autocomplete="current-password" >
 
                                 </div>
 
                             </div>
 
 
-                        <!-- TITULO 7 RECORDAR SESION -->
+                        <!-- TITULO 7 MENSAJE Y RECUPERAR CONTRASEÑA -->
 
-                            <!-- contenedor de la opción recordar sesión -->
-                            <div class="contenedor_recordar_inicio_sesion">
+                            <div class="contenedor_mensaje_recuperar_inicio_sesion">
 
-                                <!-- selector para recordar la sesión -->
-                                <input class="checkbox_recordar_inicio_sesion" id="recordar_inicio_sesion" type="checkbox">
+                                <!-- espacio para mostrar mensajes de validación -->
+                                <div class="mensaje_login" id="mensaje_login"></div>
 
-                                <!-- texto de la opción recordar sesión -->
-                                <div class="texto_recordar_inicio_sesion">Recordarme</div>
+                                <!-- opción para recuperar la contraseña -->
+                                <div class="recuperar_contrasena_inicio_sesion" id="recuperar_contrasena_inicio_sesion" > ¿Olvidaste tu contraseña? </div>
 
                             </div>
-
-
-                        <!-- TITULO 8 MENSAJE INICIO SESION -->
-
-                            <!-- espacio para mostrar mensajes enviados por la validación o backend -->
-                            <div class="mensaje_login" id="mensaje_login"></div>
 
 
                         <!-- TITULO 9 BOTON INICIO SESION -->
 
-                            <!-- opción para enviar el formulario de inicio de sesión -->
-                            <div class="boton_inicio_sesion" id="boton_inicio_sesion">
+                            <!-- opción para ingresar al sistema -->
+                            <div class="boton_inicio_sesion" id="boton_inicio_sesion" >
 
                                 <div class="texto_boton_inicio_sesion">Ingresar</div>
 
+                                <div class="flecha_boton_inicio_sesion">→</div>
+
                             </div>
-
-
-                        <!-- TITULO 10 INFORMACION INFERIOR -->
-
-                            <!-- texto informativo del sistema -->
-                            <div class="texto_inferior_inicio_sesion">Sistema de gestión y control de inventario TresStock</div>
 
                     </form>
 
@@ -145,9 +157,12 @@
 
         </div>
 
+    <!-- TITULO 10 PIE INICIO SESION -->
+
+        <div class="pie_inicio_sesion">© 2026 TresStock. Todos los derechos reservados.</div>
+
     <!-- JS INICIO SESION -->
     <script src="../../js/inicio_sesion/inicio_sesion.js"></script>
-
 
 </body>
 
