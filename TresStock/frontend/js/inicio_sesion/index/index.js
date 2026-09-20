@@ -52,13 +52,15 @@
             'contenedor_menu'
         );
 
-        // activa las opciones del menú después de cargar su HTML
-        inicializarMenuLateral();
-
         await cargarComponente(
             './html/inicio_sesion/cuerpo_pagina/cabecera/cabecera.html',
             'contenedor_cabecera'
         );
+
+
+        // activa el funcionamiento responsive del menú lateral
+        inicializarMenuLateral();
+
 
         await cargarVista('dashboard');
 

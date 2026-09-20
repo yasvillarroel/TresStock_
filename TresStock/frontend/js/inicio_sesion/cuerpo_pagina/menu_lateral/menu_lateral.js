@@ -15,6 +15,8 @@
             'opcion_administracion_menu'
         ];
 
+
+        // elimina el estado activo de todas las opciones
         opcionesMenu.forEach(function(idOpcion) {
 
             const elementoOpcion = document.getElementById(idOpcion);
@@ -25,16 +27,47 @@
 
         });
 
+
+        // obtiene la opción seleccionada
         const opcionSeleccionada = document.getElementById(
             'opcion_' + opcion + '_menu'
         );
 
+
+        // agrega el estado activo a la opción seleccionada
         if (opcionSeleccionada) {
-            opcionSeleccionada.classList.add('opcion_menu_activa');
+
+            opcionSeleccionada.classList.add(
+                'opcion_menu_activa'
+            );
+
         }
 
+
+        // carga la vista correspondiente
         if (typeof cargarVista === 'function') {
+
             cargarVista(opcion);
+
+        }
+
+
+        // cierra el menú lateral después de seleccionar una opción
+        // solamente en tablets y dispositivos móviles
+        if (window.innerWidth <= 1024) {
+
+            const menuLateral = document.getElementById(
+                'contenedor_menu_lateral'
+            );
+
+            if (menuLateral) {
+
+                menuLateral.classList.remove(
+                    'contenedor_menu_lateral_abierto'
+                );
+
+            }
+
         }
 
     }
@@ -57,20 +90,57 @@
             opcion_administracion_menu: 'administracion'
         };
 
+
+        // asigna el funcionamiento a cada opción del menú
         Object.keys(opcionesMenu).forEach(function(idOpcion) {
 
             const elementoOpcion = document.getElementById(idOpcion);
 
             if (elementoOpcion) {
 
-                elementoOpcion.addEventListener('click', function () {
+                elementoOpcion.addEventListener(
+                    'click',
+                    function () {
 
-                    seleccionarOpcionMenu(opcionesMenu[idOpcion]);
+                        seleccionarOpcionMenu(
+                            opcionesMenu[idOpcion]
+                        );
 
-                });
+                    }
+                );
 
             }
 
         });
+
+
+        // obtiene el botón hamburguesa de la cabecera
+        const botonMenuCabecera = document.getElementById(
+            'boton_menu_cabecera'
+        );
+
+
+        // obtiene el menú lateral
+        const menuLateral = document.getElementById(
+            'contenedor_menu_lateral'
+        );
+
+
+        // muestra u oculta el menú lateral al presionar
+        // el botón hamburguesa
+        if (botonMenuCabecera && menuLateral) {
+
+            botonMenuCabecera.addEventListener(
+                'click',
+                function () {
+
+                    menuLateral.classList.toggle(
+                        'contenedor_menu_lateral_abierto'
+                    );
+
+                }
+            );
+
+        }
 
     }

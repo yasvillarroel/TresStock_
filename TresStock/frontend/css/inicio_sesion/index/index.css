@@ -67,3 +67,22 @@
         flex: 1;
         box-sizing: border-box;
     }
+
+
+/* TITULO 7 RESPONSIVE INDEX */
+
+    /* adapta la estructura principal para tablets y dispositivos móviles */
+    @media (max-width: 1024px) {
+
+        .contenedor_menu {
+            width: 0;
+            min-width: 0;
+            min-height: 0;
+        }
+
+        .contenedor_area_principal {
+            width: 100%;
+            min-height: 100dvh;
+        }
+
+    }

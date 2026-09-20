@@ -5,7 +5,7 @@
         width: 240px;
         height: 100vh;
         background-color: #062d44;
-        padding: 24px 15px;
+        padding: 13px 15px;
         box-sizing: border-box;
         position: fixed;
         top: 0;
@@ -481,4 +481,39 @@
     .opcion_menu_activa:hover {
         background-color: #1299a3;
         border-color: #1299a3;
+    }
+
+/* TITULO 14 RESPONSIVE MENU LATERAL */
+
+    /* adapta el menú lateral para tablets y dispositivos móviles */
+    @media (max-width: 1024px) {
+
+        .contenedor_menu_lateral {
+            width: 260px;
+            height: 100dvh;
+            left: -260px;
+            z-index: 1200;
+        }
+
+        .contenedor_menu_lateral_abierto {
+            left: 0;
+        }
+
+    }
+
+
+    /* adapta el menú lateral para dispositivos móviles */
+    @media (max-width: 500px) {
+
+        .contenedor_menu_lateral {
+            width: 82%;
+            max-width: 280px;
+            left: -82%;
+            padding: 20px 12px;
+        }
+
+        .contenedor_menu_lateral_abierto {
+            left: 0;
+        }
+
     }

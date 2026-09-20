@@ -28,21 +28,21 @@
     .boton_menu_cabecera {
         width: 24px;
         height: 24px;
-        display: flex;
+        display: none;
         align-items: center;
         justify-content: center;
         cursor: pointer;
+    }
+
+    /* cambia el color de la opción del menú al posicionar el cursor */
+    .boton_menu_cabecera:hover {
+        color: #159ba3;
     }
 
     /* clase para establecer el tamaño del icono de menú */
     .imagen_boton_menu_cabecera {
         width: 22px;
         height: 22px;
-    }
-
-    /* cambia el color de la opción del menú al posicionar el cursor */
-    .boton_menu_cabecera:hover {
-        color: #159ba3;
     }
 
     /* clase para establecer el diseño del nombre de la vista actual */
@@ -199,11 +199,15 @@
 
 /* TITULO 5 RESPONSIVE CABECERA */
 
-    /* adapta la cabecera para pantallas medianas */
-    @media (max-width: 1100px) {
+    /* adapta la cabecera para tablets */
+    @media (max-width: 1024px) {
 
         .contenedor_principal_cabecera {
             grid-template-columns: 1fr auto;
+        }
+
+        .boton_menu_cabecera {
+            display: flex;
         }
 
         .contenedor_busqueda_cabecera {
@@ -212,11 +216,18 @@
 
     }
 
+
     /* adapta la información del usuario para dispositivos pequeños */
     @media (max-width: 700px) {
 
         .contenedor_principal_cabecera {
+            height: 64px;
             padding: 0 16px;
+            gap: 12px;
+        }
+
+        .contenedor_izquierdo_cabecera {
+            gap: 12px;
         }
 
         .contenedor_datos_usuario_cabecera {
@@ -225,6 +236,41 @@
 
         .titulo_vista_cabecera {
             font-size: 19px;
+        }
+
+        .contenedor_usuario_cabecera {
+            gap: 6px;
+        }
+
+        .icono_usuario_cabecera {
+            width: 38px;
+            height: 38px;
+        }
+
+        .contenedor_notificaciones_cabecera {
+            width: 36px;
+            height: 36px;
+        }
+
+    }
+
+
+    /* adapta la cabecera para dispositivos móviles pequeños */
+    @media (max-width: 430px) {
+
+        .contenedor_principal_cabecera {
+            padding: 0 12px;
+        }
+
+        .titulo_vista_cabecera {
+            max-width: 135px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .boton_usuario_cabecera {
+            display: none;
         }
 
     }

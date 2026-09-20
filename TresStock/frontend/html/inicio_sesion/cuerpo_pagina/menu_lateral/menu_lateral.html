@@ -1,27 +1,7 @@
-
-
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Iniciar sesión | TresStock</title>
-
-    <!-- favicon -->
-    <!-- <link rel="icon" type="image/png" href="./imagenes/favicon.png"> -->
-
-    <!-- CSS INICIO SESION -->
-    <link rel="stylesheet" href="./css/inicio_sesion/cuerpo_pagina/menu_lateral/menu_lateral.css">
-
-</head>
-<body>
 <!-- TITULO 1 CONTENEDOR MENU LATERAL -->
 
     <!-- contenedor principal del menú lateral del sistema -->
-    <div class="contenedor_menu_lateral">
+    <div class="contenedor_menu_lateral" id="contenedor_menu_lateral">
 
 
         <!-- TITULO 2 IDENTIDAD TRESSTOCK -->
@@ -45,7 +25,7 @@
 
 
                 <!-- opción para acceder al dashboard -->
-                <div class="opcion_dashboard_menu opcion_menu_activa" id="opcion_dashboard_menu" onclick="seleccionarOpcionMenu('dashboard')">
+                <div class="opcion_dashboard_menu opcion_menu_activa" id="opcion_dashboard_menu">
 
                     <div class="icono_dashboard_menu">
 
@@ -59,7 +39,7 @@
 
 
                 <!-- opción para acceder al inventario -->
-                <div class="opcion_inventario_menu" id="opcion_inventario_menu" onclick="seleccionarOpcionMenu('inventario')">
+                <div class="opcion_inventario_menu" id="opcion_inventario_menu">
 
                     <div class="icono_inventario_menu">
 
@@ -73,7 +53,7 @@
 
 
                 <!-- opción para acceder a productos -->
-                <div class="opcion_productos_menu" id="opcion_productos_menu" onclick="seleccionarOpcionMenu('productos')">
+                <div class="opcion_productos_menu" id="opcion_productos_menu">
 
                     <div class="icono_productos_menu">
 
@@ -87,7 +67,7 @@
 
 
                 <!-- opción para acceder a ventas -->
-                <div class="opcion_ventas_menu" id="opcion_ventas_menu" onclick="seleccionarOpcionMenu('ventas')">
+                <div class="opcion_ventas_menu" id="opcion_ventas_menu">
 
                     <div class="icono_ventas_menu">
 
@@ -101,7 +81,7 @@
 
 
                 <!-- opción para acceder a proveedores -->
-                <div class="opcion_proveedores_menu" id="opcion_proveedores_menu" onclick="seleccionarOpcionMenu('proveedores')">
+                <div class="opcion_proveedores_menu" id="opcion_proveedores_menu">
 
                     <div class="icono_proveedores_menu">
 
@@ -115,7 +95,7 @@
 
 
                 <!-- opción para acceder a importación -->
-                <div class="opcion_importacion_menu" id="opcion_importacion_menu" onclick="seleccionarOpcionMenu('importacion')">
+                <div class="opcion_importacion_menu" id="opcion_importacion_menu">
 
                     <div class="icono_importacion_menu">
 
@@ -129,7 +109,7 @@
 
 
                 <!-- opción para acceder a alertas y vencimientos -->
-                <div class="opcion_alertas_menu" id="opcion_alertas_menu" onclick="seleccionarOpcionMenu('alertas')">
+                <div class="opcion_alertas_menu" id="opcion_alertas_menu">
 
                     <div class="icono_alertas_menu">
 
@@ -143,7 +123,7 @@
 
 
                 <!-- opción para acceder a análisis, predicciones y recomendaciones -->
-                <div class="opcion_analisis_menu" id="opcion_analisis_menu" onclick="seleccionarOpcionMenu('analisis')">
+                <div class="opcion_analisis_menu" id="opcion_analisis_menu">
 
                     <div class="icono_analisis_menu">
 
@@ -157,7 +137,7 @@
 
 
                 <!-- opción para acceder a la administración de usuarios -->
-                <div class="opcion_administracion_menu" id="opcion_administracion_menu" onclick="seleccionarOpcionMenu('administracion')">
+                <div class="opcion_administracion_menu" id="opcion_administracion_menu">
 
                     <div class="icono_administracion_menu">
 
@@ -174,6 +154,3 @@
 
 
     </div>
-
-    <script src="./js/inicio_sesion/cuerpo_pagina/menu_lateral/menu_lateral.js"></script>
-</body>
