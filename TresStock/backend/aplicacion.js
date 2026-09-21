@@ -94,5 +94,8 @@ app.use('/api/autenticacion', require('./rutas/autenticacion/autenticacion_rutas
 // registra las rutas de productos
 app.use('/api/productos', require('./rutas/productos/productos_rutas'));
 
+// registra las rutas de proveedores
+app.use('/api/proveedores', require('./rutas/proveedores/proveedores_rutas'));
+
 // exporta la aplicacion para utilizarla desde otros archivos
 module.exports = app;

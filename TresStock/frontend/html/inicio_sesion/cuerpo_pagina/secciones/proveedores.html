@@ -16,17 +16,25 @@
                     <div class="titulo_proveedores">Gestión de proveedores</div>
 
                     <!-- descripción de la funcionalidad de la vista -->
-                    <div class="descripcion_proveedores">Administra los proveedores asociados a los productos del minimarket.</div>
+                    <div class="descripcion_proveedores">
+                        Administra los proveedores registrados en el sistema.
+                    </div>
 
                 </div>
 
 
                 <!-- opción para abrir el formulario de registro de proveedor -->
-                <div class="boton_nuevo_proveedor" id="boton_nuevo_proveedor" onclick="abrirFormularioProveedor()">
+                <div
+                    class="boton_nuevo_proveedor"
+                    id="boton_nuevo_proveedor"
+                    onclick="abrirFormularioProveedor()"
+                >
 
                     <div class="icono_nuevo_proveedor">+</div>
 
-                    <div class="texto_nuevo_proveedor">Nuevo proveedor</div>
+                    <div class="texto_nuevo_proveedor">
+                        Nuevo proveedor
+                    </div>
 
                 </div>
 
@@ -39,64 +47,122 @@
             <div class="contenedor_indicadores_proveedores">
 
 
-                <!-- indicador para mostrar la cantidad total de proveedores -->
+                <!-- indicador total proveedores -->
                 <div class="tarjeta_total_proveedores">
 
-                    <div class="icono_total_proveedores"></div>
+                    <div class="icono_total_proveedores">
+                        <img
+                            class="imagen_icono_indicador_proveedores"
+                            src="./imagenes/inicio_sesion/cuerpo_pagina/secciones/building-complex.svg"
+                            alt="Total proveedores"
+                        >
+                    </div>
 
                     <div class="contenido_total_proveedores">
 
-                        <div class="texto_total_proveedores">Total proveedores</div>
+                        <div class="texto_total_proveedores">
+                            Total proveedores
+                        </div>
 
-                        <div class="valor_total_proveedores" id="valor_total_proveedores">0</div>
+                        <div
+                            class="valor_total_proveedores"
+                            id="valor_total_proveedores"
+                        >
+                            0
+                        </div>
 
                     </div>
 
                 </div>
 
 
-                <!-- indicador para mostrar proveedores asociados a productos -->
+                <!-- indicador proveedores con RUT -->
                 <div class="tarjeta_proveedores_asociados">
 
-                    <div class="icono_proveedores_asociados"></div>
+                    <div class="icono_proveedores_asociados">
+
+                        <img
+                            class="imagen_icono_indicador_proveedores"
+                            src="./imagenes/inicio_sesion/cuerpo_pagina/secciones/badge-check.svg"
+                            alt="Proveedores con RUT"
+                        >
+
+                    </div>
 
                     <div class="contenido_proveedores_asociados">
 
-                        <div class="texto_proveedores_asociados">Proveedores con productos</div>
+                        <div class="texto_proveedores_asociados">
+                            Con RUT
+                        </div>
 
-                        <div class="valor_proveedores_asociados" id="valor_proveedores_asociados">0</div>
+                        <div
+                            class="valor_proveedores_asociados"
+                            id="valor_proveedores_con_rut"
+                        >
+                            0
+                        </div>
 
                     </div>
 
                 </div>
 
 
-                <!-- indicador para mostrar productos asociados a proveedores -->
+                <!-- indicador proveedores con contacto -->
                 <div class="tarjeta_productos_asociados_proveedores">
 
-                    <div class="icono_productos_asociados_proveedores"></div>
+                    <div class="icono_productos_asociados_proveedores">
+
+                        <img
+                            class="imagen_icono_indicador_proveedores"
+                            src="./imagenes/inicio_sesion/cuerpo_pagina/secciones/phone-call.svg"
+                            alt="Proveedores con contacto"
+                        >
+
+                    </div>
 
                     <div class="contenido_productos_asociados_proveedores">
 
-                        <div class="texto_productos_asociados_proveedores">Productos asociados</div>
+                        <div class="texto_productos_asociados_proveedores">
+                            Con contacto
+                        </div>
 
-                        <div class="valor_productos_asociados_proveedores" id="valor_productos_asociados_proveedores">0</div>
+                        <div
+                            class="valor_productos_asociados_proveedores"
+                            id="valor_proveedores_con_contacto"
+                        >
+                            0
+                        </div>
 
                     </div>
 
                 </div>
 
 
-                <!-- indicador para mostrar productos sin proveedor asociado -->
+                <!-- indicador proveedores sin contacto -->
                 <div class="tarjeta_productos_sin_proveedor">
 
-                    <div class="icono_productos_sin_proveedor"></div>
+                    <div class="icono_productos_sin_proveedor">
+
+                        <img
+                            class="imagen_icono_indicador_proveedores"
+                            src="./imagenes/inicio_sesion/cuerpo_pagina/secciones/phone-off.svg"
+                            alt="Proveedores sin contacto"
+                        >
+
+                    </div>
 
                     <div class="contenido_productos_sin_proveedor">
 
-                        <div class="texto_productos_sin_proveedor">Productos sin proveedor</div>
+                        <div class="texto_productos_sin_proveedor">
+                            Sin contacto
+                        </div>
 
-                        <div class="valor_productos_sin_proveedor" id="valor_productos_sin_proveedor">0</div>
+                        <div
+                            class="valor_productos_sin_proveedor"
+                            id="valor_proveedores_sin_contacto"
+                        >
+                            0
+                        </div>
 
                     </div>
 
@@ -107,17 +173,20 @@
 
         <!-- TITULO 4 BUSQUEDA PROVEEDORES -->
 
-            <!-- contenedor que agrupa las opciones de búsqueda -->
             <div class="contenedor_busqueda_proveedores">
 
-                <!-- contenedor del buscador de proveedores -->
                 <div class="campo_busqueda_proveedores">
 
-                    <!-- texto descriptivo del buscador -->
-                    <div class="texto_busqueda_proveedores">Buscar proveedor</div>
+                    <div class="texto_busqueda_proveedores">
+                        Buscar proveedor
+                    </div>
 
-                    <!-- campo para buscar proveedores -->
-                    <input class="input_busqueda_proveedores" id="input_busqueda_proveedores" type="text" placeholder="Nombre, teléfono o correo">
+                    <input
+                        class="input_busqueda_proveedores"
+                        id="input_busqueda_proveedores"
+                        type="text"
+                        placeholder="Nombre comercial, razón social, RUT, teléfono o correo"
+                    >
 
                 </div>
 
@@ -126,46 +195,70 @@
 
         <!-- TITULO 5 TABLA PROVEEDORES -->
 
-            <!-- contenedor principal de la tabla -->
             <div class="contenedor_tabla_proveedores">
 
 
-                <!-- cabecera visual de la tabla -->
                 <div class="cabecera_contenedor_tabla_proveedores">
 
-                    <div class="titulo_tabla_proveedores">Proveedores registrados</div>
+                    <div class="titulo_tabla_proveedores">
+                        Proveedores registrados
+                    </div>
 
                 </div>
 
 
-                <!-- tabla para mostrar los proveedores registrados -->
                 <table class="tabla_proveedores">
 
                     <thead class="encabezado_tabla_proveedores">
 
                         <tr class="fila_encabezado_proveedores">
 
-                            <th class="columna_nombre_proveedores">Nombre</th>
+                            <th class="columna_nombre_proveedores">
+                                Nombre comercial
+                            </th>
 
-                            <th class="columna_telefono_proveedores">Teléfono</th>
+                            <th class="columna_razon_social_proveedores">
+                                Razón social
+                            </th>
 
-                            <th class="columna_email_proveedores">Email</th>
+                            <th class="columna_rut_proveedores">
+                                RUT
+                            </th>
 
-                            <th class="columna_direccion_proveedores">Dirección</th>
+                            <th class="columna_telefono_proveedores">
+                                Teléfono
+                            </th>
 
-                            <th class="columna_acciones_proveedores">Acciones</th>
+                            <th class="columna_email_proveedores">
+                                Email
+                            </th>
+
+                            <th class="columna_direccion_proveedores">
+                                Dirección
+                            </th>
+
+                            <th class="columna_acciones_proveedores">
+                                Acciones
+                            </th>
 
                         </tr>
 
                     </thead>
 
 
-                    <tbody class="cuerpo_tabla_proveedores" id="cuerpo_tabla_proveedores">
+                    <tbody
+                        class="cuerpo_tabla_proveedores"
+                        id="cuerpo_tabla_proveedores"
+                    >
 
-                        <!-- fila temporal mientras no existan datos cargados -->
                         <tr class="fila_sin_proveedores">
 
-                            <td class="dato_sin_proveedores" colspan="5">No hay proveedores cargados para mostrar.</td>
+                            <td
+                                class="dato_sin_proveedores"
+                                colspan="7"
+                            >
+                                No hay proveedores cargados para mostrar.
+                            </td>
 
                         </tr>
 
@@ -178,37 +271,86 @@
 
         <!-- TITULO 6 FORMULARIO PROVEEDOR -->
 
-            <!-- contenedor superpuesto del formulario de proveedor -->
-            <div class="contenedor_formulario_proveedor contenedor_formulario_proveedor_oculto" id="contenedor_formulario_proveedor">
+            <div
+                class="contenedor_formulario_proveedor contenedor_formulario_proveedor_oculto"
+                id="contenedor_formulario_proveedor"
+            >
 
-                <!-- contenedor interior del formulario -->
                 <div class="formulario_proveedor">
 
 
                     <!-- TITULO 7 CABECERA FORMULARIO -->
 
-                        <!-- contenedor que agrupa el título y cierre del formulario -->
                         <div class="cabecera_formulario_proveedor">
 
-                            <div class="titulo_formulario_proveedor" id="titulo_formulario_proveedor">Nuevo proveedor</div>
+                            <div
+                                class="titulo_formulario_proveedor"
+                                id="titulo_formulario_proveedor"
+                            >
+                                Nuevo proveedor
+                            </div>
 
-                            <div class="boton_cerrar_formulario_proveedor" id="boton_cerrar_formulario_proveedor" onclick="cerrarFormularioProveedor()">×</div>
+                            <div
+                                class="boton_cerrar_formulario_proveedor"
+                                id="boton_cerrar_formulario_proveedor"
+                                onclick="cerrarFormularioProveedor()"
+                            >
+                                ×
+                            </div>
 
                         </div>
 
 
                     <!-- TITULO 8 CAMPOS FORMULARIO -->
 
-                        <!-- contenedor que agrupa los campos del proveedor -->
                         <div class="contenedor_campos_proveedor">
 
 
-                            <!-- campo nombre -->
+                            <!-- campo nombre comercial -->
                             <div class="campo_nombre_proveedor">
 
-                                <div class="texto_campo_nombre_proveedor">Nombre</div>
+                                <div class="texto_campo_nombre_proveedor">
+                                    Nombre comercial
+                                </div>
 
-                                <input class="input_nombre_proveedor" id="input_nombre_proveedor" type="text">
+                                <input
+                                    class="input_nombre_proveedor"
+                                    id="input_nombre_proveedor"
+                                    type="text"
+                                >
+
+                            </div>
+
+
+                            <!-- campo razón social -->
+                            <div class="campo_razon_social_proveedor">
+
+                                <div class="texto_campo_razon_social_proveedor">
+                                    Razón social
+                                </div>
+
+                                <input
+                                    class="input_razon_social_proveedor"
+                                    id="input_razon_social_proveedor"
+                                    type="text"
+                                >
+
+                            </div>
+
+
+                            <!-- campo RUT -->
+                            <div class="campo_rut_proveedor">
+
+                                <div class="texto_campo_rut_proveedor">
+                                    RUT
+                                </div>
+
+                                <input
+                                    class="input_rut_proveedor"
+                                    id="input_rut_proveedor"
+                                    type="text"
+                                    placeholder="12.345.678-9"
+                                >
 
                             </div>
 
@@ -216,9 +358,15 @@
                             <!-- campo teléfono -->
                             <div class="campo_telefono_proveedor">
 
-                                <div class="texto_campo_telefono_proveedor">Teléfono</div>
+                                <div class="texto_campo_telefono_proveedor">
+                                    Teléfono
+                                </div>
 
-                                <input class="input_telefono_proveedor" id="input_telefono_proveedor" type="text">
+                                <input
+                                    class="input_telefono_proveedor"
+                                    id="input_telefono_proveedor"
+                                    type="text"
+                                >
 
                             </div>
 
@@ -226,9 +374,15 @@
                             <!-- campo email -->
                             <div class="campo_email_proveedor">
 
-                                <div class="texto_campo_email_proveedor">Email</div>
+                                <div class="texto_campo_email_proveedor">
+                                    Email
+                                </div>
 
-                                <input class="input_email_proveedor" id="input_email_proveedor" type="email">
+                                <input
+                                    class="input_email_proveedor"
+                                    id="input_email_proveedor"
+                                    type="email"
+                                >
 
                             </div>
 
@@ -236,9 +390,15 @@
                             <!-- campo dirección -->
                             <div class="campo_direccion_proveedor">
 
-                                <div class="texto_campo_direccion_proveedor">Dirección</div>
+                                <div class="texto_campo_direccion_proveedor">
+                                    Dirección
+                                </div>
 
-                                <input class="input_direccion_proveedor" id="input_direccion_proveedor" type="text">
+                                <input
+                                    class="input_direccion_proveedor"
+                                    id="input_direccion_proveedor"
+                                    type="text"
+                                >
 
                             </div>
 
@@ -247,12 +407,22 @@
 
                     <!-- TITULO 9 ACCIONES FORMULARIO -->
 
-                        <!-- contenedor de las opciones inferiores del formulario -->
                         <div class="contenedor_acciones_formulario_proveedor">
 
-                            <div class="boton_cancelar_proveedor" id="boton_cancelar_proveedor" onclick="cerrarFormularioProveedor()">Cancelar</div>
+                            <div
+                                class="boton_cancelar_proveedor"
+                                id="boton_cancelar_proveedor"
+                                onclick="cerrarFormularioProveedor()"
+                            >
+                                Cancelar
+                            </div>
 
-                            <div class="boton_guardar_proveedor" id="boton_guardar_proveedor">Guardar proveedor</div>
+                            <div
+                                class="boton_guardar_proveedor"
+                                id="boton_guardar_proveedor"
+                            >
+                                Guardar proveedor
+                            </div>
 
                         </div>
 

@@ -99,6 +99,12 @@
         box-sizing: border-box;
     }
 
+    /* clase para establecer el tamaño de los iconos de los indicadores */
+    .imagen_icono_indicador_proveedores {
+        width: 24px;
+        height: 24px;
+    }
+
     /* clase para establecer el icono total proveedores */
     .icono_total_proveedores {
         width: 46px;
@@ -106,6 +112,9 @@
         background-color: #e4f6f6;
         border-radius: 8px;
         margin-right: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     /* clase para organizar el contenido total proveedores */
@@ -147,9 +156,12 @@
     .icono_proveedores_asociados {
         width: 46px;
         height: 46px;
-        background-color: #e9f0fb;
+        background-color: #e4f6f6;
         border-radius: 8px;
         margin-right: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     /* clase para organizar el contenido proveedores asociados */
@@ -191,9 +203,12 @@
     .icono_productos_asociados_proveedores {
         width: 46px;
         height: 46px;
-        background-color: #eef0fa;
+        background-color: #e4f6f6;
         border-radius: 8px;
         margin-right: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     /* clase para organizar el contenido productos asociados */
@@ -235,9 +250,12 @@
     .icono_productos_sin_proveedor {
         width: 46px;
         height: 46px;
-        background-color: #fff0df;
+        background-color: #e4f6f6;
         border-radius: 8px;
         margin-right: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     /* clase para organizar el contenido productos sin proveedor */
@@ -321,7 +339,7 @@
 
     /* clase para establecer la cabecera visual de la tabla */
     .cabecera_contenedor_tabla_proveedores {
-        min-width: 800px;
+        min-width: 1250px;
         padding: 17px 18px;
         border-bottom: 1px solid #e2e8eb;
         box-sizing: border-box;
@@ -338,8 +356,9 @@
     /* clase para establecer la estructura general de la tabla */
     .tabla_proveedores {
         width: 100%;
-        min-width: 800px;
+        min-width: 1250px;
         border-collapse: collapse;
+        table-layout: fixed;
     }
 
     /* clase para establecer el encabezado de la tabla */
@@ -352,49 +371,235 @@
         border-bottom: 1px solid #dce4e8;
     }
 
-    /* clase para establecer la columna nombre */
+    /* clase para establecer la columna nombre comercial */
     .columna_nombre_proveedores {
+        width: 13%;
         padding: 13px 12px;
         text-align: left;
         color: #667881;
         font-family: Arial, sans-serif;
         font-size: 11px;
+        box-sizing: border-box;
     }
 
-    /* clase para establecer la columna teléfono */
-    .columna_telefono_proveedores {
+
+    /* clase para establecer la columna razón social */
+    .columna_razon_social_proveedores {
+        width: 20%;
         padding: 13px 12px;
         text-align: left;
         color: #667881;
         font-family: Arial, sans-serif;
         font-size: 11px;
+        box-sizing: border-box;
     }
 
-    /* clase para establecer la columna email */
-    .columna_email_proveedores {
-        padding: 13px 12px;
-        text-align: left;
-        color: #667881;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-    }
 
-    /* clase para establecer la columna dirección */
-    .columna_direccion_proveedores {
-        padding: 13px 12px;
-        text-align: left;
-        color: #667881;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-    }
-
-    /* clase para establecer la columna acciones */
-    .columna_acciones_proveedores {
+    /* clase para establecer la columna RUT */
+    .columna_rut_proveedores {
+        width: 7%;
         padding: 13px 12px;
         text-align: center;
         color: #667881;
         font-family: Arial, sans-serif;
         font-size: 11px;
+        box-sizing: border-box;
+    }
+
+
+    /* clase para establecer la columna teléfono */
+    .columna_telefono_proveedores {
+        width: 10%;
+        padding: 13px 12px;
+        text-align: center;
+        color: #667881;
+        font-family: Arial, sans-serif;
+        font-size: 11px;
+        box-sizing: border-box;
+    }
+
+
+    /* clase para establecer la columna email */
+    .columna_email_proveedores {
+        width: 15%;
+        padding: 13px 12px;
+        text-align: left;
+        color: #667881;
+        font-family: Arial, sans-serif;
+        font-size: 11px;
+        box-sizing: border-box;
+    }
+
+
+    /* clase para establecer la columna dirección */
+    .columna_direccion_proveedores {
+        width: 20%;
+        padding: 13px 12px;
+        text-align: left;
+        color: #667881;
+        font-family: Arial, sans-serif;
+        font-size: 11px;
+        box-sizing: border-box;
+    }
+
+
+    /* clase para establecer la columna acciones */
+    .columna_acciones_proveedores {
+        width: 10%;
+        padding: 13px 12px;
+        text-align: center;
+        color: #667881;
+        font-family: Arial, sans-serif;
+        font-size: 11px;
+        box-sizing: border-box;
+    }
+
+
+    /* clase para establecer las filas de proveedores */
+    .fila_proveedor {
+        min-height: 56px;
+        border-bottom: 1px solid #edf1f3;
+    }
+
+
+    /* cambia el fondo de una fila al posicionar el cursor */
+    .fila_proveedor:hover {
+        background-color: #f8fafb;
+    }
+
+
+    /* clase para establecer el nombre comercial */
+    .dato_nombre_proveedores {
+        padding: 14px 12px;
+        color: #263a45;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        text-align: left;
+        vertical-align: middle;
+        box-sizing: border-box;
+    }
+
+
+    /* clase para establecer la razón social */
+    .dato_razon_social_proveedores {
+        padding: 14px 12px;
+        color: #536873;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        text-align: left;
+        vertical-align: middle;
+        box-sizing: border-box;
+    }
+
+
+    /* clase para establecer el RUT */
+    .dato_rut_proveedores {
+        padding: 14px 12px;
+        color: #536873;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        text-align: center;
+        vertical-align: middle;
+        white-space: nowrap;
+        box-sizing: border-box;
+    }
+
+
+    /* clase para establecer el teléfono */
+    .dato_telefono_proveedores {
+        padding: 14px 12px;
+        color: #536873;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        text-align: center;
+        vertical-align: middle;
+        white-space: nowrap;
+        box-sizing: border-box;
+    }
+
+
+    /* clase para establecer el correo */
+    .dato_email_proveedores {
+        padding: 14px 12px;
+        color: #536873;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        text-align: left;
+        vertical-align: middle;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        box-sizing: border-box;
+    }
+
+
+    /* clase para establecer la dirección */
+    .dato_direccion_proveedores {
+        padding: 14px 12px;
+        color: #536873;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        text-align: left;
+        vertical-align: middle;
+        box-sizing: border-box;
+    }
+
+
+    /* clase para organizar las acciones */
+    .dato_acciones_proveedores {
+        padding: 10px 8px;
+        text-align: center;
+        vertical-align: middle;
+        box-sizing: border-box;
+    }
+
+
+    /* clase para establecer la opción editar */
+    .boton_editar_proveedor {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px 9px;
+        margin: 2px;
+        background-color: #e4f6f6;
+        color: #117d84;
+        font-family: Arial, sans-serif;
+        font-size: 11px;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+
+    /* cambia el fondo de editar al posicionar el cursor */
+    .boton_editar_proveedor:hover {
+        background-color: #cceced;
+    }
+
+
+    /* clase para establecer la opción eliminar */
+    .boton_eliminar_proveedor {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px 9px;
+        margin: 2px;
+        background-color: #fceaea;
+        color: #c75b5b;
+        font-family: Arial, sans-serif;
+        font-size: 11px;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+
+    /* cambia el fondo de eliminar al posicionar el cursor */
+    .boton_eliminar_proveedor:hover {
+        background-color: #f5d6d6;
     }
 
     /* clase para establecer la fila temporal sin proveedores */
@@ -594,6 +799,67 @@
 
     /* clase para establecer el campo dirección */
     .input_direccion_proveedor {
+        height: 40px;
+        border: 1px solid #ced9de;
+        border-radius: 6px;
+        padding: 0 10px;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        outline: none;
+        box-sizing: border-box;
+    }
+
+        /* clase para organizar el campo razón social */
+    .campo_razon_social_proveedor {
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    /* clase para establecer el texto del campo razón social */
+    .texto_campo_razon_social_proveedor {
+        color: #425966;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        margin-bottom: 6px;
+    }
+
+
+    /* clase para establecer el campo razón social */
+    .input_razon_social_proveedor {
+        height: 40px;
+        border: 1px solid #ced9de;
+        border-radius: 6px;
+        padding: 0 10px;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        outline: none;
+        box-sizing: border-box;
+    }
+
+
+    /* clase para organizar el campo RUT */
+    .campo_rut_proveedor {
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    /* clase para establecer el texto del campo RUT */
+    .texto_campo_rut_proveedor {
+        color: #425966;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        margin-bottom: 6px;
+    }
+
+
+    /* clase para establecer el campo RUT */
+    .input_rut_proveedor {
         height: 40px;
         border: 1px solid #ced9de;
         border-radius: 6px;

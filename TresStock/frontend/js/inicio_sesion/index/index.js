@@ -132,6 +132,12 @@
 
         }
 
+        if (vista === 'proveedores') {
+
+            inicializarProveedores();
+
+        }
+
 
         // actualiza el título de la cabecera
         const tituloVistaCabecera =
