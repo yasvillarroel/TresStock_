@@ -329,6 +329,111 @@
                 </div>
 
             </div>
+        
+        <!-- FORMULARIO IMPORTAR PRODUCTO -->
+            
+            <!-- TITULO 10 FORMULARIO IMPORTACION PRODUCTOS -->
 
+                <!-- contenedor superpuesto del formulario de importacion -->
+                <div class="contenedor_importacion_productos contenedor_importacion_productos_oculto" id="contenedor_importacion_productos">
+
+                    <!-- contenedor interior de la importacion -->
+                    <div class="formulario_importacion_productos">
+
+                        <!-- TITULO 11 CABECERA IMPORTACION -->
+
+                        <!-- contenedor del titulo y cierre de la importacion -->
+                        <div class="cabecera_importacion_productos">
+
+                            <!-- titulo del formulario -->
+                            <div class="titulo_importacion_productos">
+                                Importar base de datos
+                            </div>
+
+                            <!-- opcion para cerrar la importacion -->
+                            <div
+                                class="boton_cerrar_importacion_productos"
+                                id="boton_cerrar_importacion_productos"
+                                onclick="cerrarImportacionProductos()"
+                            >
+                                ×
+                            </div>
+
+                        </div>
+
+
+                        <!-- TITULO 12 CONTENIDO IMPORTACION -->
+
+                        <!-- contenedor del contenido principal -->
+                        <div class="contenido_importacion_productos">
+
+                            <!-- descripcion de la importacion -->
+                            <div class="descripcion_importacion_productos">
+                                Selecciona un archivo Excel para importar los productos.
+                            </div>
+
+                            <!-- selector del archivo -->
+                            <div
+                                class="zona_seleccion_archivo_productos"
+                                id="zona_seleccion_archivo_productos"
+                                onclick="seleccionarArchivoProductos()"
+                            >
+
+                                <!-- icono visual -->
+                                <div class="icono_archivo_productos">
+                                    ↑
+                                </div>
+
+                                <!-- texto principal -->
+                                <div class="texto_seleccion_archivo_productos">
+                                    Seleccionar archivo Excel
+                                </div>
+
+                                <!-- formatos permitidos -->
+                                <div class="formatos_archivo_productos">
+                                    Formatos permitidos: .xlsx y .xls
+                                </div>
+
+                            </div>
+
+                            <!-- input oculto para seleccionar el archivo -->
+                            <input
+                                type="file"
+                                id="input_archivo_productos"
+                                accept=".xlsx,.xls"
+                                hidden
+                            >
+
+                            <!-- informacion del archivo seleccionado -->
+                            <div
+                                class="informacion_archivo_productos"
+                                id="informacion_archivo_productos"
+                            >
+                                No se ha seleccionado ningún archivo.
+                            </div>
+
+                        </div>
+
+
+                        <!-- TITULO 13 ACCIONES IMPORTACION -->
+
+                        <!-- contenedor de las opciones inferiores -->
+                        <div class="contenedor_acciones_importacion_productos">
+
+                            <!-- opcion para cancelar -->
+                            <div class="boton_cancelar_importacion_productos" id="boton_cancelar_importacion_productos" onclick="cerrarImportacionProductos()">
+                                Cancelar
+                            </div>
+
+                            <!-- opcion para importar -->
+                            <div class="boton_confirmar_importacion_productos" id="boton_confirmar_importacion_productos" onclick="importarProductos()">
+                                Importar productos
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
 
     </div>

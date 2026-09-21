@@ -175,6 +175,56 @@ const eliminarProducto = async (req, res) => {
 
 };
 
+// FUNCION 6 IMPORTAR PRODUCTOS
+const importarProductos = async (req, res) => {
+    try {
+
+        if (!req.file) {
+            return res.status(400).json({
+                mensaje: 'No se ha seleccionado ningún archivo'
+            });
+        }
+
+        const resultado = await productosServicio.importarProductos(
+            req.file
+        );
+
+        res.json(resultado);
+
+    } catch (error) {
+
+        console.error('Error al importar productos:', error);
+
+        res.status(400).json({
+            mensaje: error.message
+        });
+
+    }
+};
+
+// FUNCION 7 OBTENER FAMILIAS
+const obtenerFamilias = async (req, res) => {
+
+    try {
+
+        const familias = await productosServicio.obtenerFamilias();
+
+        res.json(familias);
+
+    } catch (error) {
+
+        console.error(
+            'Error al obtener familias:',
+            error
+        );
+
+        res.status(500).json({
+            mensaje: 'No se pudieron obtener las familias'
+        });
+
+    }
+
+};
 
 // exporta las funciones
 module.exports = {
@@ -182,5 +232,7 @@ module.exports = {
     obtenerProductos,
     obtenerProducto,
     actualizarProducto,
-    eliminarProducto
+    eliminarProducto,
+    importarProductos,
+    obtenerFamilias
 };

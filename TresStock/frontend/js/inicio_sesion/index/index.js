@@ -105,6 +105,17 @@
             rutaVista,
             'contenedor_contenido'
         );
+        
+        // asegurar la carga de funciones "productos"
+        if (vista === 'productos') {
+
+            cargarProductos();
+            cargarFamilias();
+            configurarFiltroFamilias();
+            configurarBusquedaProductos();
+            configurarImportacionProductos();
+
+        }
 
         const tituloVistaCabecera = document.getElementById('titulo_vista_cabecera');
 
@@ -133,3 +144,5 @@
 
     // llama a la función principal al cargar el index
     iniciarAplicacion();
+
+    
