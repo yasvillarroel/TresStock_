@@ -41,7 +41,7 @@
         const inputEmailUsuario = document.getElementById('input_email_usuario');
         const inputPasswordUsuario = document.getElementById('input_password_usuario');
         const selectRolUsuario = document.getElementById('select_rol_usuario');
-        const selectEstadoUsuario = document.getElementById('select_estado_usuario');
+        const inputConfirmarPasswordUsuario  = document.getElementById('input_confirmar_password_usuario');
 
         if (inputNombreUsuario) {
             inputNombreUsuario.value = '';
@@ -59,8 +59,8 @@
             selectRolUsuario.value = '';
         }
 
-        if (selectEstadoUsuario) {
-            selectEstadoUsuario.value = 'activo';
+        if (inputConfirmarPasswordUsuario) {
+            inputConfirmarPasswordUsuario.value = '';
         }
 
     }

@@ -99,10 +99,22 @@
         box-sizing: border-box;
     }
 
+
+    .imagen_icono_total_usuarios,
+    .imagen_icono_usuarios_activos,
+    .imagen_icono_usuarios_inactivos,
+    .imagen_icono_administradores_usuarios {
+        width: 24px;
+        height: 24px;
+    }
+
     /* clase para establecer el icono total usuarios */
     .icono_total_usuarios {
         width: 46px;
         height: 46px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         background-color: #e4f6f6;
         border-radius: 8px;
         margin-right: 14px;
@@ -147,6 +159,9 @@
     .icono_usuarios_activos {
         width: 46px;
         height: 46px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         background-color: #e5f5ed;
         border-radius: 8px;
         margin-right: 14px;
@@ -191,6 +206,9 @@
     .icono_usuarios_inactivos {
         width: 46px;
         height: 46px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         background-color: #fceaea;
         border-radius: 8px;
         margin-right: 14px;
@@ -235,6 +253,9 @@
     .icono_administradores_usuarios {
         width: 46px;
         height: 46px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         background-color: #eef0fa;
         border-radius: 8px;
         margin-right: 14px;
@@ -698,14 +719,14 @@
         font-size: 13px;
     }
 
-    /* clase para organizar el campo estado */
-    .campo_estado_usuario {
+    /* clase para organizar el campo confirmar contraseña */
+    .campo_confirmar_password_usuario {
         display: flex;
         flex-direction: column;
     }
 
-    /* clase para establecer el texto del campo estado */
-    .texto_campo_estado_usuario {
+    /* clase para establecer el texto del campo confirmar contraseña */
+    .texto_campo_confirmar_password_usuario {
         color: #425966;
         font-family: Arial, sans-serif;
         font-size: 12px;
@@ -713,25 +734,17 @@
         margin-bottom: 6px;
     }
 
-    /* clase para establecer el selector de estado */
-    .select_estado_usuario {
+    /* clase para establecer el campo confirmar contraseña */
+    .input_confirmar_password_usuario {
         height: 40px;
         border: 1px solid #ced9de;
         border-radius: 6px;
         padding: 0 10px;
-        background-color: #ffffff;
         color: #37434b;
         font-family: Arial, sans-serif;
         font-size: 13px;
         outline: none;
         box-sizing: border-box;
-    }
-
-    /* clase para establecer las opciones de estado */
-    .opcion_estado_usuario {
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
     }
 
 
@@ -743,7 +756,7 @@
         display: flex;
         justify-content: flex-end;
         gap: 10px;
-        margin-top: 24px;
+        margin-top: 18px;
     }
 
     /* clase para establecer la opción cancelar */
