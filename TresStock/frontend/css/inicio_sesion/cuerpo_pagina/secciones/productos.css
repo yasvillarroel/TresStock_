@@ -13,9 +13,10 @@
     /* clase para organizar el encabezado principal de la vista */
     .contenedor_encabezado_productos {
         width: 100%;
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr auto auto;
         align-items: center;
-        justify-content: space-between;
+        gap: 12px;
         margin-bottom: 22px;
     }
 
@@ -41,13 +42,15 @@
         font-size: 13px;
     }
 
-    /* BOTON IMPORTAR PRODUCTOS */
+
+    /* SUBTITULO 1 BOTON IMPORTAR PRODUCTOS */
 
         /* clase para establecer la opción importar excel */
         .boton_importar_productos {
             height: 42px;
             display: flex;
             align-items: center;
+            justify-content: center;
             background-color: #159ba3;
             padding: 0 17px;
             border-radius: 6px;
@@ -55,12 +58,12 @@
             box-sizing: border-box;
         }
 
-        /* cambia el fondo de nuevo producto al posicionar el cursor */
+        /* cambia el fondo de importar productos al posicionar el cursor */
         .boton_importar_productos:hover {
             background-color: #0f858d;
         }
 
-        /* clase para establecer el icono de nuevo producto */
+        /* clase para establecer el icono de importar productos */
         .icono_importar_productos {
             color: #ffffff;
             font-family: Arial, sans-serif;
@@ -69,155 +72,53 @@
             margin-right: 8px;
         }
 
-        /* clase para establecer el texto de nuevo producto */
+        /* clase para establecer el texto de importar productos */
         .texto_importar_productos {
             color: #ffffff;
             font-family: Arial, sans-serif;
             font-size: 13px;
             font-weight: bold;
+            white-space: nowrap;
         }
-    
-    /* PANEL IMPORTAR PRODUCTOS */
 
-        /* ventana de importacion de productos */
-        .contenedor_importacion_productos {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+
+    /* SUBTITULO 2 BOTON NUEVO PRODUCTO */
+
+        /* clase para establecer la opción nuevo producto */
+        .boton_nuevo_producto {
+            height: 42px;
             display: flex;
+            align-items: center;
             justify-content: center;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-        }
-
-        /* oculta la ventana de importacion */
-        .contenedor_importacion_productos_oculto {
-            display: none;
-        }
-
-        /* formulario de importacion */
-        .formulario_importacion_productos {
-            width: 500px;
-            max-width: 90%;
-            background: white;
-            border-radius: 10px;
-            padding: 25px;
-        }
-
-        /* cabecera de la importacion */
-        .cabecera_importacion_productos {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* titulo de la importacion */
-        .titulo_importacion_productos {
-            font-size: 22px;
-            font-weight: bold;
-        }
-
-        /* boton cerrar */
-        .boton_cerrar_importacion_productos {
-            font-size: 28px;
-            cursor: pointer;
-        }
-
-        /* contenido de la importacion */
-        .contenido_importacion_productos {
-            margin-top: 25px;
-        }
-
-        /* descripcion */
-        .descripcion_importacion_productos {
-            margin-bottom: 20px;
-        }
-
-        /* zona para seleccionar archivo */
-        .zona_seleccion_archivo_productos {
-            padding: 40px 20px;
-            border: 2px dashed #aaa;
-            border-radius: 8px;
-            text-align: center;
-            cursor: pointer;
-        }
-
-        /* icono */
-        .icono_archivo_productos {
-            font-size: 35px;
-        }
-
-        /* texto principal */
-        .texto_seleccion_archivo_productos {
-            margin-top: 10px;
-            font-weight: bold;
-        }
-
-        /* formatos permitidos */
-        .formatos_archivo_productos {
-            margin-top: 8px;
-            font-size: 13px;
-        }
-
-        /* informacion del archivo */
-        .informacion_archivo_productos {
-            margin-top: 15px;
-        }
-
-        /* acciones */
-        .contenedor_acciones_importacion_productos {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-top: 25px;
-        }
-
-        /* botones */
-        .boton_cancelar_importacion_productos,
-        .boton_confirmar_importacion_productos {
-            padding: 10px 18px;
+            background-color: #159ba3;
+            padding: 0 17px;
             border-radius: 6px;
             cursor: pointer;
+            box-sizing: border-box;
         }
-    
-    /* BOTON NUEVO PRODUCTO */
-    
-    /* clase para establecer la opción nuevo producto */
-    .boton_nuevo_producto {
-        height: 42px;
-        display: flex;
-        align-items: center;
-        background-color: #159ba3;
-        padding: 0 17px;
-        border-radius: 6px;
-        cursor: pointer;
-        box-sizing: border-box;
-    }
 
-    /* cambia el fondo de nuevo producto al posicionar el cursor */
-    .boton_nuevo_producto:hover {
-        background-color: #0f858d;
-    }
+        /* cambia el fondo de nuevo producto al posicionar el cursor */
+        .boton_nuevo_producto:hover {
+            background-color: #0f858d;
+        }
 
-    /* clase para establecer el icono de nuevo producto */
-    .icono_nuevo_producto {
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size: 21px;
-        font-weight: bold;
-        margin-right: 8px;
-    }
+        /* clase para establecer el icono de nuevo producto */
+        .icono_nuevo_producto {
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            font-size: 21px;
+            font-weight: bold;
+            margin-right: 8px;
+        }
 
-    /* clase para establecer el texto de nuevo producto */
-    .texto_nuevo_producto {
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        font-weight: bold;
-    }
+        /* clase para establecer el texto de nuevo producto */
+        .texto_nuevo_producto {
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
 
 
 /* TITULO 3 INDICADORES PRODUCTOS */
@@ -231,180 +132,229 @@
         margin-bottom: 22px;
     }
 
-    /* clase para establecer el diseño del indicador total productos */
-    .tarjeta_total_productos {
-        min-height: 105px;
-        display: flex;
-        align-items: center;
-        background-color: #ffffff;
-        border: 1px solid #dce4e8;
-        border-radius: 8px;
-        padding: 18px;
-        box-sizing: border-box;
-    }
 
-    /* clase para establecer el icono del indicador total productos */
-    .icono_total_productos {
-        width: 46px;
-        height: 46px;
-        background-color: #e4f6f6;
-        border-radius: 8px;
-        margin-right: 14px;
-    }
+    /* SUBTITULO 1 TOTAL PRODUCTOS */
 
-    /* clase para organizar el contenido de total productos */
-    .contenido_total_productos {
-        display: flex;
-        flex-direction: column;
-    }
+        /* clase para establecer el diseño del indicador total productos */
+        .tarjeta_total_productos {
+            min-height: 105px;
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            border: 1px solid #dce4e8;
+            border-radius: 8px;
+            padding: 18px;
+            box-sizing: border-box;
+        }
 
-    /* clase para establecer el texto total productos */
-    .texto_total_productos {
-        color: #697a83;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        margin-bottom: 6px;
-    }
+        /* clase para establecer el icono del indicador total productos */
+        .icono_total_productos {
+            width: 46px;
+            height: 46px;
+            min-width: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #e4f6f6;
+            border-radius: 8px;
+            margin-right: 14px;
+        }
 
-    /* clase para establecer el valor total productos */
-    .valor_total_productos {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 23px;
-        font-weight: bold;
-    }
+        /* clase para establecer la imagen del icono total productos */
+        .imagen_icono_total_productos {
+            width: 24px;
+            height: 24px;
+        }
 
+        /* clase para organizar el contenido de total productos */
+        .contenido_total_productos {
+            display: flex;
+            flex-direction: column;
+        }
 
-    /* clase para establecer el diseño del indicador familias */
-    .tarjeta_familias_productos {
-        min-height: 105px;
-        display: flex;
-        align-items: center;
-        background-color: #ffffff;
-        border: 1px solid #dce4e8;
-        border-radius: 8px;
-        padding: 18px;
-        box-sizing: border-box;
-    }
+        /* clase para establecer el texto total productos */
+        .texto_total_productos {
+            color: #697a83;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
 
-    /* clase para establecer el icono del indicador familias */
-    .icono_familias_productos {
-        width: 46px;
-        height: 46px;
-        background-color: #e9f0fb;
-        border-radius: 8px;
-        margin-right: 14px;
-    }
-
-    /* clase para organizar el contenido del indicador familias */
-    .contenido_familias_productos {
-        display: flex;
-        flex-direction: column;
-    }
-
-    /* clase para establecer el texto familias */
-    .texto_familias_productos {
-        color: #697a83;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        margin-bottom: 6px;
-    }
-
-    /* clase para establecer el valor familias */
-    .valor_familias_productos {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 23px;
-        font-weight: bold;
-    }
+        /* clase para establecer el valor total productos */
+        .valor_total_productos {
+            color: #0b3650;
+            font-family: Arial, sans-serif;
+            font-size: 23px;
+            font-weight: bold;
+        }
 
 
-    /* clase para establecer el diseño del indicador proveedores */
-    .tarjeta_proveedores_productos {
-        min-height: 105px;
-        display: flex;
-        align-items: center;
-        background-color: #ffffff;
-        border: 1px solid #dce4e8;
-        border-radius: 8px;
-        padding: 18px;
-        box-sizing: border-box;
-    }
+    /* SUBTITULO 2 FAMILIAS */
 
-    /* clase para establecer el icono del indicador proveedores */
-    .icono_proveedores_productos {
-        width: 46px;
-        height: 46px;
-        background-color: #eef0fa;
-        border-radius: 8px;
-        margin-right: 14px;
-    }
+        /* clase para establecer el diseño del indicador familias */
+        .tarjeta_familias_productos {
+            min-height: 105px;
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            border: 1px solid #dce4e8;
+            border-radius: 8px;
+            padding: 18px;
+            box-sizing: border-box;
+        }
 
-    /* clase para organizar el contenido del indicador proveedores */
-    .contenido_proveedores_productos {
-        display: flex;
-        flex-direction: column;
-    }
+        /* clase para establecer el icono del indicador familias */
+        .icono_familias_productos {
+            width: 46px;
+            height: 46px;
+            min-width: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #e9f0fb;
+            border-radius: 8px;
+            margin-right: 14px;
+        }
 
-    /* clase para establecer el texto proveedores */
-    .texto_proveedores_productos {
-        color: #697a83;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        margin-bottom: 6px;
-    }
+        /* clase para establecer la imagen del icono familias */
+        .imagen_icono_familias_productos {
+            width: 24px;
+            height: 24px;
+        }
 
-    /* clase para establecer el valor proveedores */
-    .valor_proveedores_productos {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 23px;
-        font-weight: bold;
-    }
+        /* clase para organizar el contenido del indicador familias */
+        .contenido_familias_productos {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* clase para establecer el texto familias */
+        .texto_familias_productos {
+            color: #697a83;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        /* clase para establecer el valor familias */
+        .valor_familias_productos {
+            color: #0b3650;
+            font-family: Arial, sans-serif;
+            font-size: 23px;
+            font-weight: bold;
+        }
 
 
-    /* clase para establecer el diseño del indicador stock bajo */
-    .tarjeta_stock_bajo_productos {
-        min-height: 105px;
-        display: flex;
-        align-items: center;
-        background-color: #ffffff;
-        border: 1px solid #dce4e8;
-        border-radius: 8px;
-        padding: 18px;
-        box-sizing: border-box;
-    }
+    /* SUBTITULO 3 PROVEEDORES */
 
-    /* clase para establecer el icono del indicador stock bajo */
-    .icono_stock_bajo_productos {
-        width: 46px;
-        height: 46px;
-        background-color: #fff0df;
-        border-radius: 8px;
-        margin-right: 14px;
-    }
+        /* clase para establecer el diseño del indicador proveedores */
+        .tarjeta_proveedores_productos {
+            min-height: 105px;
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            border: 1px solid #dce4e8;
+            border-radius: 8px;
+            padding: 18px;
+            box-sizing: border-box;
+        }
 
-    /* clase para organizar el contenido del indicador stock bajo */
-    .contenido_stock_bajo_productos {
-        display: flex;
-        flex-direction: column;
-    }
+        /* clase para establecer el icono del indicador proveedores */
+        .icono_proveedores_productos {
+            width: 46px;
+            height: 46px;
+            min-width: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #eef0fa;
+            border-radius: 8px;
+            margin-right: 14px;
+        }
 
-    /* clase para establecer el texto stock bajo */
-    .texto_stock_bajo_productos {
-        color: #697a83;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        margin-bottom: 6px;
-    }
+        /* clase para establecer la imagen del icono proveedores */
+        .imagen_icono_proveedores_productos {
+            width: 24px;
+            height: 24px;
+        }
 
-    /* clase para establecer el valor stock bajo */
-    .valor_stock_bajo_productos {
-        color: #d58226;
-        font-family: Arial, sans-serif;
-        font-size: 23px;
-        font-weight: bold;
-    }
+        /* clase para organizar el contenido del indicador proveedores */
+        .contenido_proveedores_productos {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* clase para establecer el texto proveedores */
+        .texto_proveedores_productos {
+            color: #697a83;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        /* clase para establecer el valor proveedores */
+        .valor_proveedores_productos {
+            color: #0b3650;
+            font-family: Arial, sans-serif;
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+
+    /* SUBTITULO 4 STOCK BAJO */
+
+        /* clase para establecer el diseño del indicador stock bajo */
+        .tarjeta_stock_bajo_productos {
+            min-height: 105px;
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            border: 1px solid #dce4e8;
+            border-radius: 8px;
+            padding: 18px;
+            box-sizing: border-box;
+        }
+
+        /* clase para establecer el icono del indicador stock bajo */
+        .icono_stock_bajo_productos {
+            width: 46px;
+            height: 46px;
+            min-width: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff0df;
+            border-radius: 8px;
+            margin-right: 14px;
+        }
+
+        /* clase para establecer la imagen del icono stock bajo */
+        .imagen_icono_stock_bajo_productos {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* clase para organizar el contenido de stock bajo */
+        .contenido_stock_bajo_productos {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* clase para establecer el texto stock bajo */
+        .texto_stock_bajo_productos {
+            color: #697a83;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        /* clase para establecer el valor stock bajo */
+        .valor_stock_bajo_productos {
+            color: #d58226;
+            font-family: Arial, sans-serif;
+            font-size: 23px;
+            font-weight: bold;
+        }
 
 
 /* TITULO 4 FILTROS PRODUCTOS */
@@ -504,7 +454,7 @@
 
     /* clase para establecer la cabecera visual del contenedor de la tabla */
     .cabecera_contenedor_tabla_productos {
-        min-width: 1050px;
+        min-width: 1250px;
         padding: 17px 18px;
         border-bottom: 1px solid #e2e8eb;
         box-sizing: border-box;
@@ -521,7 +471,7 @@
     /* clase para establecer la estructura general de la tabla */
     .tabla_productos {
         width: 100%;
-        min-width: 1050px;
+        min-width: 1250px;
         border-collapse: collapse;
     }
 
@@ -542,6 +492,7 @@
         color: #667881;
         font-family: Arial, sans-serif;
         font-size: 11px;
+        white-space: nowrap;
     }
 
     /* clase para establecer la columna código de barras */
@@ -551,10 +502,12 @@
         color: #667881;
         font-family: Arial, sans-serif;
         font-size: 11px;
+        white-space: nowrap;
     }
 
     /* clase para establecer la columna descripción */
     .columna_descripcion_productos {
+        min-width: 280px;
         padding: 13px 12px;
         text-align: left;
         color: #667881;
@@ -569,6 +522,7 @@
         color: #667881;
         font-family: Arial, sans-serif;
         font-size: 11px;
+        white-space: nowrap;
     }
 
     /* clase para establecer la columna precio */
@@ -578,6 +532,7 @@
         color: #667881;
         font-family: Arial, sans-serif;
         font-size: 11px;
+        white-space: nowrap;
     }
 
     /* clase para establecer la columna stock actual */
@@ -587,6 +542,7 @@
         color: #667881;
         font-family: Arial, sans-serif;
         font-size: 11px;
+        white-space: nowrap;
     }
 
     /* clase para establecer la columna stock mínimo */
@@ -596,6 +552,7 @@
         color: #667881;
         font-family: Arial, sans-serif;
         font-size: 11px;
+        white-space: nowrap;
     }
 
     /* clase para establecer la columna proveedor */
@@ -605,6 +562,7 @@
         color: #667881;
         font-family: Arial, sans-serif;
         font-size: 11px;
+        white-space: nowrap;
     }
 
     /* clase para establecer la columna acciones */
@@ -614,6 +572,113 @@
         color: #667881;
         font-family: Arial, sans-serif;
         font-size: 11px;
+        white-space: nowrap;
+    }
+
+
+/* TITULO 6 DATOS TABLA PRODUCTOS */
+
+    /* clase para establecer el diseño de cada fila de producto */
+    .fila_producto {
+        border-bottom: 1px solid #edf1f3;
+    }
+
+    /* cambia el fondo de la fila al posicionar el cursor */
+    .fila_producto:hover {
+        background-color: #f8fafb;
+    }
+
+    /* clase para establecer el dato código */
+    .dato_codigo_productos {
+        padding: 14px 12px;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        text-align: left;
+        white-space: nowrap;
+    }
+
+    /* clase para establecer el dato código de barras */
+    .dato_codigo_barra_productos {
+        padding: 14px 12px;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        text-align: left;
+        white-space: nowrap;
+    }
+
+    /* clase para establecer el dato descripción */
+    .dato_descripcion_productos {
+        min-width: 280px;
+        max-width: 380px;
+        padding: 14px 12px;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        line-height: 17px;
+        text-align: left;
+    }
+
+    /* clase para establecer el dato familia */
+    .dato_familia_productos {
+        padding: 14px 12px;
+        color: #536873;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        text-align: left;
+        white-space: nowrap;
+    }
+
+    /* clase para establecer el dato precio */
+    .dato_precio_productos {
+        padding: 14px 12px;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        text-align: right;
+        white-space: nowrap;
+    }
+
+    /* clase para establecer el dato stock actual */
+    .dato_stock_actual_productos {
+        padding: 14px 12px;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    /* clase para establecer el dato stock mínimo */
+    .dato_stock_minimo_productos {
+        padding: 14px 12px;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    /* clase para establecer el dato proveedor */
+    .dato_proveedor_productos {
+        padding: 14px 12px;
+        color: #536873;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        text-align: left;
+        white-space: nowrap;
+    }
+
+    /* clase para establecer el dato acciones */
+    .dato_acciones_productos {
+        padding: 14px 12px;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        text-align: center;
+        white-space: nowrap;
     }
 
     /* clase para establecer la fila temporal sin productos */
@@ -631,7 +696,7 @@
     }
 
 
-/* TITULO 6 FORMULARIO PRODUCTO */
+/* TITULO 7 FORMULARIO PRODUCTO */
 
     /* clase para establecer el fondo superpuesto del formulario */
     .contenedor_formulario_producto {
@@ -663,7 +728,7 @@
     }
 
 
-/* TITULO 7 CABECERA FORMULARIO */
+/* TITULO 8 CABECERA FORMULARIO */
 
     /* clase para organizar el título y cierre del formulario */
     .cabecera_formulario_producto {
@@ -702,7 +767,7 @@
     }
 
 
-/* TITULO 8 CAMPOS FORMULARIO */
+/* TITULO 9 CAMPOS FORMULARIO */
 
     /* clase para distribuir los campos del formulario */
     .contenedor_campos_producto {
@@ -889,7 +954,7 @@
     }
 
 
-/* TITULO 9 ACCIONES FORMULARIO */
+/* TITULO 10 ACCIONES FORMULARIO */
 
     /* clase para organizar las opciones inferiores del formulario */
     .contenedor_acciones_formulario_producto {
@@ -938,14 +1003,199 @@
     }
 
     /* cambia el fondo de guardar producto al posicionar el cursor */
-    .boton_guardar_producto:hover {
+    .boton_guardardar_producto:hover {
         background-color: #0f858d;
     }
 
 
-/* TITULO 10 RESPONSIVE PRODUCTOS */
+/* TITULO 11 FORMULARIO IMPORTACION PRODUCTOS */
 
-    /* adapta los indicadores y filtros para pantallas medianas */
+    /* clase para establecer el fondo superpuesto de la importación */
+    .contenedor_importacion_productos {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(5, 31, 45, 0.55);
+        z-index: 1100;
+    }
+
+    /* clase para ocultar la ventana de importación */
+    .contenedor_importacion_productos_oculto {
+        display: none;
+    }
+
+    /* clase para establecer el formulario de importación */
+    .formulario_importacion_productos {
+        width: 500px;
+        max-width: calc(100% - 40px);
+        background-color: #ffffff;
+        border-radius: 8px;
+        padding: 23px;
+        box-sizing: border-box;
+    }
+
+    /* clase para organizar el título y cierre de la importación */
+    .cabecera_importacion_productos {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 22px;
+    }
+
+    /* clase para establecer el título de la importación */
+    .titulo_importacion_productos {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    /* clase para establecer la opción para cerrar la importación */
+    .boton_cerrar_importacion_productos {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #64727a;
+        font-family: Arial, sans-serif;
+        font-size: 25px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    /* cambia el fondo del cierre al posicionar el cursor */
+    .boton_cerrar_importacion_productos:hover {
+        background-color: #edf1f3;
+    }
+
+    /* clase para establecer el contenido principal */
+    .contenido_importacion_productos {
+        width: 100%;
+    }
+
+    /* clase para establecer la descripción de la importación */
+    .descripcion_importacion_productos {
+        color: #71818a;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        line-height: 19px;
+        margin-bottom: 20px;
+    }
+
+    /* clase para establecer la zona de selección del archivo */
+    .zona_seleccion_archivo_productos {
+        width: 100%;
+        padding: 38px 20px;
+        border: 2px dashed #b8c7ce;
+        border-radius: 8px;
+        text-align: center;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+    /* cambia el fondo de la selección de archivo al posicionar el cursor */
+    .zona_seleccion_archivo_productos:hover {
+        background-color: #f6fafb;
+        border-color: #159ba3;
+    }
+
+    /* clase para establecer el icono de archivo */
+    .icono_archivo_productos {
+        color: #159ba3;
+        font-family: Arial, sans-serif;
+        font-size: 35px;
+        font-weight: bold;
+    }
+
+    /* clase para establecer el texto principal de selección */
+    .texto_seleccion_archivo_productos {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    /* clase para establecer los formatos permitidos */
+    .formatos_archivo_productos {
+        color: #84939a;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        margin-top: 8px;
+    }
+
+    /* clase para establecer la información del archivo */
+    .informacion_archivo_productos {
+        color: #536873;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        line-height: 18px;
+        margin-top: 15px;
+        white-space: pre-line;
+    }
+
+    /* clase para organizar las opciones de importación */
+    .contenedor_acciones_importacion_productos {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 25px;
+    }
+
+    /* clase para establecer la opción cancelar importación */
+    .boton_cancelar_importacion_productos {
+        height: 40px;
+        display: flex;
+        align-items: center;
+        padding: 0 16px;
+        background-color: #edf1f3;
+        color: #44515a;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+    /* cambia el fondo de cancelar importación al posicionar el cursor */
+    .boton_cancelar_importacion_productos:hover {
+        background-color: #dfe6e9;
+    }
+
+    /* clase para establecer la opción confirmar importación */
+    .boton_confirmar_importacion_productos {
+        height: 40px;
+        display: flex;
+        align-items: center;
+        padding: 0 16px;
+        background-color: #159ba3;
+        color: #ffffff;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+    /* cambia el fondo de confirmar importación al posicionar el cursor */
+    .boton_confirmar_importacion_productos:hover {
+        background-color: #0f858d;
+    }
+
+
+/* TITULO 12 RESPONSIVE PRODUCTOS */
+
+    /* adapta los indicadores para pantallas medianas */
     @media (max-width: 1100px) {
 
         .contenedor_indicadores_productos {
@@ -954,8 +1204,25 @@
 
     }
 
-    /* adapta filtros y formulario para tablets */
+
+    /* adapta la vista para tablets */
     @media (max-width: 900px) {
+
+        .contenedor_encabezado_productos {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .contenedor_informacion_productos {
+            grid-column: 1 / 3;
+        }
+
+        .boton_importar_productos {
+            width: 100%;
+        }
+
+        .boton_nuevo_producto {
+            width: 100%;
+        }
 
         .contenedor_filtros_productos {
             grid-template-columns: 1fr;
@@ -967,6 +1234,7 @@
 
     }
 
+
     /* adapta la vista para dispositivos móviles */
     @media (max-width: 600px) {
 
@@ -975,13 +1243,57 @@
         }
 
         .contenedor_encabezado_productos {
-            align-items: flex-start;
-            flex-direction: column;
-            gap: 16px;
+            grid-template-columns: 1fr;
+        }
+
+        .contenedor_informacion_productos {
+            grid-column: auto;
+        }
+
+        .boton_importar_productos {
+            width: 100%;
+        }
+
+        .boton_nuevo_producto {
+            width: 100%;
         }
 
         .contenedor_indicadores_productos {
             grid-template-columns: 1fr;
+        }
+
+        .formulario_producto {
+            max-width: calc(100% - 24px);
+            padding: 20px;
+        }
+
+        .formulario_importacion_productos {
+            max-width: calc(100% - 24px);
+            padding: 20px;
+        }
+
+        .contenedor_acciones_formulario_producto {
+            flex-direction: column;
+        }
+
+        .boton_cancelar_producto {
+            justify-content: center;
+        }
+
+        .boton_guardar_producto {
+            justify-content: center;
+        }
+
+        .contenedor_acciones_importacion_productos {
+            flex-direction: column;
+        }
+
+        .boton_cancelar_importacion_productos {
+            justify-content: center;
+        }
+
+        .boton_confirmar_importacion_productos {
+            justify-content: center;
         }
 
     }
