@@ -46,6 +46,7 @@
         height: 42px;
         display: flex;
         align-items: center;
+        justify-content: center;
         background-color: #159ba3;
         padding: 0 17px;
         border-radius: 6px;
@@ -73,6 +74,7 @@
         font-family: Arial, sans-serif;
         font-size: 13px;
         font-weight: bold;
+        white-space: nowrap;
     }
 
 
@@ -87,201 +89,229 @@
         margin-bottom: 22px;
     }
 
-    /* clase para establecer la tarjeta total usuarios */
-    .tarjeta_total_usuarios {
-        min-height: 105px;
-        display: flex;
-        align-items: center;
-        background-color: #ffffff;
-        border: 1px solid #dce4e8;
-        border-radius: 8px;
-        padding: 18px;
-        box-sizing: border-box;
-    }
+
+    /* SUBTITULO 1 TOTAL USUARIOS */
+
+        /* clase para establecer la tarjeta total usuarios */
+        .tarjeta_total_usuarios {
+            min-height: 105px;
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            border: 1px solid #dce4e8;
+            border-radius: 8px;
+            padding: 18px;
+            box-sizing: border-box;
+        }
+
+        /* clase para establecer el icono total usuarios */
+        .icono_total_usuarios {
+            width: 46px;
+            height: 46px;
+            min-width: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #e4f6f6;
+            border-radius: 8px;
+            margin-right: 14px;
+        }
+
+        /* clase para establecer la imagen del icono total usuarios */
+        .imagen_icono_total_usuarios {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* clase para organizar el contenido total usuarios */
+        .contenido_total_usuarios {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* clase para establecer el texto total usuarios */
+        .texto_total_usuarios {
+            color: #697a83;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        /* clase para establecer el valor total usuarios */
+        .valor_total_usuarios {
+            color: #0b3650;
+            font-family: Arial, sans-serif;
+            font-size: 23px;
+            font-weight: bold;
+        }
 
 
-    .imagen_icono_total_usuarios,
-    .imagen_icono_usuarios_activos,
-    .imagen_icono_usuarios_inactivos,
-    .imagen_icono_administradores_usuarios {
-        width: 24px;
-        height: 24px;
-    }
+    /* SUBTITULO 2 USUARIOS ACTIVOS */
 
-    /* clase para establecer el icono total usuarios */
-    .icono_total_usuarios {
-        width: 46px;
-        height: 46px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #e4f6f6;
-        border-radius: 8px;
-        margin-right: 14px;
-    }
+        /* clase para establecer la tarjeta usuarios activos */
+        .tarjeta_usuarios_activos {
+            min-height: 105px;
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            border: 1px solid #dce4e8;
+            border-radius: 8px;
+            padding: 18px;
+            box-sizing: border-box;
+        }
 
-    /* clase para organizar el contenido total usuarios */
-    .contenido_total_usuarios {
-        display: flex;
-        flex-direction: column;
-    }
+        /* clase para establecer el icono usuarios activos */
+        .icono_usuarios_activos {
+            width: 46px;
+            height: 46px;
+            min-width: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #e5f5ed;
+            border-radius: 8px;
+            margin-right: 14px;
+        }
 
-    /* clase para establecer el texto total usuarios */
-    .texto_total_usuarios {
-        color: #697a83;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        margin-bottom: 6px;
-    }
+        /* clase para establecer la imagen del icono usuarios activos */
+        .imagen_icono_usuarios_activos {
+            width: 24px;
+            height: 24px;
+        }
 
-    /* clase para establecer el valor total usuarios */
-    .valor_total_usuarios {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 23px;
-        font-weight: bold;
-    }
+        /* clase para organizar el contenido usuarios activos */
+        .contenido_usuarios_activos {
+            display: flex;
+            flex-direction: column;
+        }
 
+        /* clase para establecer el texto usuarios activos */
+        .texto_usuarios_activos {
+            color: #697a83;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
 
-    /* clase para establecer la tarjeta usuarios activos */
-    .tarjeta_usuarios_activos {
-        min-height: 105px;
-        display: flex;
-        align-items: center;
-        background-color: #ffffff;
-        border: 1px solid #dce4e8;
-        border-radius: 8px;
-        padding: 18px;
-        box-sizing: border-box;
-    }
-
-    /* clase para establecer el icono usuarios activos */
-    .icono_usuarios_activos {
-        width: 46px;
-        height: 46px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #e5f5ed;
-        border-radius: 8px;
-        margin-right: 14px;
-    }
-
-    /* clase para organizar el contenido usuarios activos */
-    .contenido_usuarios_activos {
-        display: flex;
-        flex-direction: column;
-    }
-
-    /* clase para establecer el texto usuarios activos */
-    .texto_usuarios_activos {
-        color: #697a83;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        margin-bottom: 6px;
-    }
-
-    /* clase para establecer el valor usuarios activos */
-    .valor_usuarios_activos {
-        color: #2f9164;
-        font-family: Arial, sans-serif;
-        font-size: 23px;
-        font-weight: bold;
-    }
+        /* clase para establecer el valor usuarios activos */
+        .valor_usuarios_activos {
+            color: #2f9164;
+            font-family: Arial, sans-serif;
+            font-size: 23px;
+            font-weight: bold;
+        }
 
 
-    /* clase para establecer la tarjeta usuarios inactivos */
-    .tarjeta_usuarios_inactivos {
-        min-height: 105px;
-        display: flex;
-        align-items: center;
-        background-color: #ffffff;
-        border: 1px solid #dce4e8;
-        border-radius: 8px;
-        padding: 18px;
-        box-sizing: border-box;
-    }
+    /* SUBTITULO 3 USUARIOS INACTIVOS */
 
-    /* clase para establecer el icono usuarios inactivos */
-    .icono_usuarios_inactivos {
-        width: 46px;
-        height: 46px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #fceaea;
-        border-radius: 8px;
-        margin-right: 14px;
-    }
+        /* clase para establecer la tarjeta usuarios inactivos */
+        .tarjeta_usuarios_inactivos {
+            min-height: 105px;
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            border: 1px solid #dce4e8;
+            border-radius: 8px;
+            padding: 18px;
+            box-sizing: border-box;
+        }
 
-    /* clase para organizar el contenido usuarios inactivos */
-    .contenido_usuarios_inactivos {
-        display: flex;
-        flex-direction: column;
-    }
+        /* clase para establecer el icono usuarios inactivos */
+        .icono_usuarios_inactivos {
+            width: 46px;
+            height: 46px;
+            min-width: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fceaea;
+            border-radius: 8px;
+            margin-right: 14px;
+        }
 
-    /* clase para establecer el texto usuarios inactivos */
-    .texto_usuarios_inactivos {
-        color: #697a83;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        margin-bottom: 6px;
-    }
+        /* clase para establecer la imagen del icono usuarios inactivos */
+        .imagen_icono_usuarios_inactivos {
+            width: 24px;
+            height: 24px;
+        }
 
-    /* clase para establecer el valor usuarios inactivos */
-    .valor_usuarios_inactivos {
-        color: #c75b5b;
-        font-family: Arial, sans-serif;
-        font-size: 23px;
-        font-weight: bold;
-    }
+        /* clase para organizar el contenido usuarios inactivos */
+        .contenido_usuarios_inactivos {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* clase para establecer el texto usuarios inactivos */
+        .texto_usuarios_inactivos {
+            color: #697a83;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        /* clase para establecer el valor usuarios inactivos */
+        .valor_usuarios_inactivos {
+            color: #c75b5b;
+            font-family: Arial, sans-serif;
+            font-size: 23px;
+            font-weight: bold;
+        }
 
 
-    /* clase para establecer la tarjeta administradores */
-    .tarjeta_administradores_usuarios {
-        min-height: 105px;
-        display: flex;
-        align-items: center;
-        background-color: #ffffff;
-        border: 1px solid #dce4e8;
-        border-radius: 8px;
-        padding: 18px;
-        box-sizing: border-box;
-    }
+    /* SUBTITULO 4 ADMINISTRADORES */
 
-    /* clase para establecer el icono administradores */
-    .icono_administradores_usuarios {
-        width: 46px;
-        height: 46px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #eef0fa;
-        border-radius: 8px;
-        margin-right: 14px;
-    }
+        /* clase para establecer la tarjeta administradores */
+        .tarjeta_administradores_usuarios {
+            min-height: 105px;
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            border: 1px solid #dce4e8;
+            border-radius: 8px;
+            padding: 18px;
+            box-sizing: border-box;
+        }
 
-    /* clase para organizar el contenido administradores */
-    .contenido_administradores_usuarios {
-        display: flex;
-        flex-direction: column;
-    }
+        /* clase para establecer el icono administradores */
+        .icono_administradores_usuarios {
+            width: 46px;
+            height: 46px;
+            min-width: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #eef0fa;
+            border-radius: 8px;
+            margin-right: 14px;
+        }
 
-    /* clase para establecer el texto administradores */
-    .texto_administradores_usuarios {
-        color: #697a83;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        margin-bottom: 6px;
-    }
+        /* clase para establecer la imagen del icono administradores */
+        .imagen_icono_administradores_usuarios {
+            width: 24px;
+            height: 24px;
+        }
 
-    /* clase para establecer el valor administradores */
-    .valor_administradores_usuarios {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 23px;
-        font-weight: bold;
-    }
+        /* clase para organizar el contenido administradores */
+        .contenido_administradores_usuarios {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* clase para establecer el texto administradores */
+        .texto_administradores_usuarios {
+            color: #697a83;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        /* clase para establecer el valor administradores */
+        .valor_administradores_usuarios {
+            color: #0b3650;
+            font-family: Arial, sans-serif;
+            font-size: 23px;
+            font-weight: bold;
+        }
 
 
 /* TITULO 4 FILTROS USUARIOS */
@@ -418,7 +448,7 @@
 
     /* clase para establecer la cabecera visual de la tabla */
     .cabecera_contenedor_tabla_usuarios {
-        min-width: 850px;
+        min-width: 900px;
         padding: 17px 18px;
         border-bottom: 1px solid #e2e8eb;
         box-sizing: border-box;
@@ -435,7 +465,8 @@
     /* clase para establecer la estructura general de la tabla */
     .tabla_usuarios {
         width: 100%;
-        min-width: 850px;
+        min-width: 900px;
+        table-layout: fixed;
         border-collapse: collapse;
     }
 
@@ -449,58 +480,195 @@
         border-bottom: 1px solid #dce4e8;
     }
 
-    /* clase para establecer la columna nombre */
-    .columna_nombre_usuarios {
-        padding: 13px 12px;
+
+    /* SUBTITULO 1 COLUMNAS TABLA */
+
+        /* clase para establecer la columna nombre */
+        .columna_nombre_usuarios {
+            width: 18%;
+            padding: 13px 14px;
+            text-align: left;
+            color: #667881;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            font-weight: bold;
+            box-sizing: border-box;
+        }
+
+        /* clase para establecer la columna email */
+        .columna_email_usuarios {
+            width: 26%;
+            padding: 13px 14px;
+            text-align: left;
+            color: #667881;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            font-weight: bold;
+            box-sizing: border-box;
+        }
+
+        /* clase para establecer la columna rol */
+        .columna_rol_tabla_usuarios {
+            width: 15%;
+            padding: 13px 14px;
+            text-align: center;
+            color: #667881;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            font-weight: bold;
+            box-sizing: border-box;
+        }
+
+        /* clase para establecer la columna estado */
+        .columna_estado_tabla_usuarios {
+            width: 12%;
+            padding: 13px 14px;
+            text-align: center;
+            color: #667881;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            font-weight: bold;
+            box-sizing: border-box;
+        }
+
+        /* clase para establecer la columna fecha de creación */
+        .columna_fecha_creacion_usuarios {
+            width: 17%;
+            padding: 13px 14px;
+            text-align: center;
+            color: #667881;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            font-weight: bold;
+            box-sizing: border-box;
+        }
+
+        /* clase para establecer la columna acciones */
+        .columna_acciones_usuarios {
+            width: 12%;
+            padding: 13px 14px;
+            text-align: center;
+            color: #667881;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            font-weight: bold;
+            box-sizing: border-box;
+        }
+
+
+/* TITULO 6 DATOS TABLA USUARIOS */
+
+    /* clase para establecer cada fila de usuario */
+    .fila_usuario {
+        height: 56px;
+        border-bottom: 1px solid #edf1f3;
+    }
+
+    /* cambia el fondo de la fila al posicionar el cursor */
+    .fila_usuario:hover {
+        background-color: #f8fafb;
+    }
+
+    /* clase para establecer el dato nombre */
+    .dato_nombre_usuarios {
+        padding: 14px;
+        color: #263a45;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        font-weight: bold;
         text-align: left;
-        color: #667881;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
+        vertical-align: middle;
+        box-sizing: border-box;
     }
 
-    /* clase para establecer la columna email */
-    .columna_email_usuarios {
-        padding: 13px 12px;
+    /* clase para establecer el dato email */
+    .dato_email_usuarios {
+        padding: 14px;
+        color: #647782;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
         text-align: left;
-        color: #667881;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
+        vertical-align: middle;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        box-sizing: border-box;
     }
 
-    /* clase para establecer la columna rol */
-    .columna_rol_tabla_usuarios {
-        padding: 13px 12px;
-        text-align: center;
-        color: #667881;
+    /* clase para establecer el dato rol */
+    .dato_rol_usuarios {
+        padding: 14px;
+        color: #37434b;
         font-family: Arial, sans-serif;
-        font-size: 11px;
+        font-size: 12px;
+        text-align: center;
+        vertical-align: middle;
+        box-sizing: border-box;
     }
 
-    /* clase para establecer la columna estado */
-    .columna_estado_tabla_usuarios {
-        padding: 13px 12px;
-        text-align: center;
-        color: #667881;
+    /* clase para establecer el dato estado */
+    .dato_estado_usuarios {
+        padding: 14px;
         font-family: Arial, sans-serif;
-        font-size: 11px;
+        font-size: 12px;
+        text-align: center;
+        vertical-align: middle;
+        box-sizing: border-box;
     }
 
-    /* clase para establecer la columna fecha de creación */
-    .columna_fecha_creacion_usuarios {
-        padding: 13px 12px;
-        text-align: center;
-        color: #667881;
+    /* clase para establecer un usuario activo */
+    .estado_usuario_activo {
+        min-width: 62px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px 10px;
+        background-color: #e5f5ed;
+        color: #2f9164;
+        border-radius: 14px;
         font-family: Arial, sans-serif;
         font-size: 11px;
+        font-weight: bold;
+        box-sizing: border-box;
     }
 
-    /* clase para establecer la columna acciones */
-    .columna_acciones_usuarios {
-        padding: 13px 12px;
-        text-align: center;
-        color: #667881;
+    /* clase para establecer un usuario inactivo */
+    .estado_usuario_inactivo {
+        min-width: 62px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px 10px;
+        background-color: #fceaea;
+        color: #c75b5b;
+        border-radius: 14px;
         font-family: Arial, sans-serif;
         font-size: 11px;
+        font-weight: bold;
+        box-sizing: border-box;
+    }
+
+    /* clase para establecer la fecha de creación */
+    .dato_fecha_creacion_usuarios {
+        padding: 14px;
+        color: #536873;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        text-align: center;
+        vertical-align: middle;
+        white-space: nowrap;
+        box-sizing: border-box;
+    }
+
+    /* clase para establecer las acciones */
+    .dato_acciones_usuarios {
+        padding: 14px;
+        color: #536873;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        text-align: center;
+        vertical-align: middle;
+        box-sizing: border-box;
     }
 
     /* clase para establecer la fila temporal sin usuarios */
@@ -518,7 +686,7 @@
     }
 
 
-/* TITULO 6 FORMULARIO USUARIO */
+/* TITULO 7 FORMULARIO USUARIO */
 
     /* clase para establecer el fondo superpuesto del formulario */
     .contenedor_formulario_usuario {
@@ -550,7 +718,7 @@
     }
 
 
-/* TITULO 7 CABECERA FORMULARIO */
+/* TITULO 8 CABECERA FORMULARIO */
 
     /* clase para organizar el título y cierre */
     .cabecera_formulario_usuario {
@@ -589,7 +757,7 @@
     }
 
 
-/* TITULO 8 CAMPOS FORMULARIO */
+/* TITULO 9 CAMPOS FORMULARIO */
 
     /* clase para distribuir los campos del usuario */
     .contenedor_campos_usuario {
@@ -683,6 +851,34 @@
         box-sizing: border-box;
     }
 
+    /* clase para organizar el campo confirmar contraseña */
+    .campo_confirmar_password_usuario {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* clase para establecer el texto del campo confirmar contraseña */
+    .texto_campo_confirmar_password_usuario {
+        color: #425966;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        margin-bottom: 6px;
+    }
+
+    /* clase para establecer el campo confirmar contraseña */
+    .input_confirmar_password_usuario {
+        height: 40px;
+        border: 1px solid #ced9de;
+        border-radius: 6px;
+        padding: 0 10px;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        outline: none;
+        box-sizing: border-box;
+    }
+
     /* clase para organizar el campo rol */
     .campo_rol_usuario {
         display: flex;
@@ -719,36 +915,8 @@
         font-size: 13px;
     }
 
-    /* clase para organizar el campo confirmar contraseña */
-    .campo_confirmar_password_usuario {
-        display: flex;
-        flex-direction: column;
-    }
 
-    /* clase para establecer el texto del campo confirmar contraseña */
-    .texto_campo_confirmar_password_usuario {
-        color: #425966;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 6px;
-    }
-
-    /* clase para establecer el campo confirmar contraseña */
-    .input_confirmar_password_usuario {
-        height: 40px;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        padding: 0 10px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        outline: none;
-        box-sizing: border-box;
-    }
-
-
-/* TITULO 9 ACCIONES FORMULARIO */
+/* TITULO 10 ACCIONES FORMULARIO */
 
     /* clase para organizar las opciones inferiores */
     .contenedor_acciones_formulario_usuario {
@@ -756,7 +924,7 @@
         display: flex;
         justify-content: flex-end;
         gap: 10px;
-        margin-top: 18px;
+        margin-top: 24px;
     }
 
     /* clase para establecer la opción cancelar */
@@ -764,6 +932,7 @@
         height: 40px;
         display: flex;
         align-items: center;
+        justify-content: center;
         padding: 0 16px;
         background-color: #edf1f3;
         color: #44515a;
@@ -785,6 +954,7 @@
         height: 40px;
         display: flex;
         align-items: center;
+        justify-content: center;
         padding: 0 16px;
         background-color: #159ba3;
         color: #ffffff;
@@ -802,7 +972,7 @@
     }
 
 
-/* TITULO 10 RESPONSIVE USUARIOS */
+/* TITULO 11 RESPONSIVE USUARIOS */
 
     /* adapta los indicadores para pantallas medianas */
     @media (max-width: 1100px) {
@@ -812,6 +982,7 @@
         }
 
     }
+
 
     /* adapta filtros y formulario para tablets */
     @media (max-width: 900px) {
@@ -826,6 +997,7 @@
 
     }
 
+
     /* adapta la vista para dispositivos móviles */
     @media (max-width: 600px) {
 
@@ -839,8 +1011,29 @@
             gap: 16px;
         }
 
+        .boton_nuevo_usuario {
+            width: 100%;
+        }
+
         .contenedor_indicadores_usuarios {
             grid-template-columns: 1fr;
+        }
+
+        .formulario_usuario {
+            max-width: calc(100% - 24px);
+            padding: 20px;
+        }
+
+        .contenedor_acciones_formulario_usuario {
+            flex-direction: column;
+        }
+
+        .boton_cancelar_usuario {
+            width: 100%;
+        }
+
+        .boton_guardar_usuario {
+            width: 100%;
         }
 
     }

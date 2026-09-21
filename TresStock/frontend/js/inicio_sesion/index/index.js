@@ -72,18 +72,22 @@
     async function cargarVista(vista) {
 
         const rutasVistas = {
-            dashboard: './html/inicio_sesion/cuerpo_pagina/secciones/dashboard.html',
-            inventario: './html/inicio_sesion/cuerpo_pagina/secciones/inventario.html',
-            productos: './html/inicio_sesion/cuerpo_pagina/secciones/productos.html',
-            ventas: './html/inicio_sesion/cuerpo_pagina/secciones/ventas.html',
-            proveedores: './html/inicio_sesion/cuerpo_pagina/secciones/proveedores.html',
-            importacion: './html/inicio_sesion/cuerpo_pagina/secciones/importacion.html',
-            alertas: './html/inicio_sesion/cuerpo_pagina/secciones/alertas_vencimientos.html',
-            analisis: './html/inicio_sesion/cuerpo_pagina/secciones/reportes_analitica.html',
-            administracion: './html/inicio_sesion/cuerpo_pagina/secciones/usuarios.html'
+
+            dashboard:'./html/inicio_sesion/cuerpo_pagina/secciones/dashboard.html',
+            inventario:'./html/inicio_sesion/cuerpo_pagina/secciones/inventario.html',
+            productos:'./html/inicio_sesion/cuerpo_pagina/secciones/productos.html',
+            ventas:'./html/inicio_sesion/cuerpo_pagina/secciones/ventas.html',
+            proveedores:'./html/inicio_sesion/cuerpo_pagina/secciones/proveedores.html',
+            importacion:'./html/inicio_sesion/cuerpo_pagina/secciones/importacion.html',
+            alertas:'./html/inicio_sesion/cuerpo_pagina/secciones/alertas_vencimientos.html',
+            analisis:'./html/inicio_sesion/cuerpo_pagina/secciones/reportes_analitica.html',
+            administracion:'./html/inicio_sesion/cuerpo_pagina/secciones/usuarios.html'
+
         };
 
+
         const titulosVistas = {
+
             dashboard: 'Dashboard',
             inventario: 'Inventario',
             productos: 'Productos',
@@ -93,34 +97,54 @@
             alertas: 'Alertas y vencimientos',
             analisis: 'Análisis',
             administracion: 'Administración'
+
         };
 
-        const rutaVista = rutasVistas[vista];
+        const rutaVista =
+            rutasVistas[vista];
 
         if (!rutaVista) {
             return;
         }
 
+
+        // carga el contenido de la vista seleccionada
         await cargarComponente(
             rutaVista,
             'contenedor_contenido'
         );
-        
-        // asegurar la carga de funciones "productos"
-        if (vista === 'productos') {
 
+
+        // inicializa el funcionamiento de productos
+        if (vista === 'productos') {
             cargarProductos();
             cargarFamilias();
             configurarFiltroFamilias();
             configurarBusquedaProductos();
             configurarImportacionProductos();
+        }
+
+
+        // inicializa el funcionamiento de usuarios
+        if (vista === 'administracion') {
+
+            inicializarUsuarios();
 
         }
 
-        const tituloVistaCabecera = document.getElementById('titulo_vista_cabecera');
+
+        // actualiza el título de la cabecera
+        const tituloVistaCabecera =
+            document.getElementById(
+                'titulo_vista_cabecera'
+            );
+
 
         if (tituloVistaCabecera) {
-            tituloVistaCabecera.textContent = titulosVistas[vista];
+
+            tituloVistaCabecera.textContent =
+                titulosVistas[vista];
+
         }
 
     }
