@@ -1,7 +1,7 @@
 // TITULO 1 SELECCION DE OPCIONES DEL MENU LATERAL
 
     // función para cambiar visualmente la opción activa del menú lateral
-    function seleccionarOpcionMenu(opcion) {
+    function seleccionarOpcionMenu(opcion, cargar = true) {
 
         const opcionesMenu = [
             'opcion_dashboard_menu',
@@ -15,26 +15,27 @@
             'opcion_administracion_menu'
         ];
 
-
         // elimina el estado activo de todas las opciones
         opcionesMenu.forEach(function(idOpcion) {
 
             const elementoOpcion = document.getElementById(idOpcion);
 
             if (elementoOpcion) {
-                elementoOpcion.classList.remove('opcion_menu_activa');
+
+                elementoOpcion.classList.remove(
+                    'opcion_menu_activa'
+                );
+
             }
 
         });
 
-
-        // obtiene la opción seleccionada
+        // obtiene la opción actual
         const opcionSeleccionada = document.getElementById(
             'opcion_' + opcion + '_menu'
         );
 
-
-        // agrega el estado activo a la opción seleccionada
+        // agrega el estado activo
         if (opcionSeleccionada) {
 
             opcionSeleccionada.classList.add(
@@ -43,14 +44,12 @@
 
         }
 
-
         // carga la vista correspondiente
-        if (typeof cargarVista === 'function') {
+        if (cargar && typeof cargarVista === 'function') {
 
             cargarVista(opcion);
 
         }
-
 
         // cierra el menú lateral después de seleccionar una opción
         // solamente en tablets y dispositivos móviles
@@ -67,16 +66,14 @@
                 );
 
             }
-
         }
-
     }
 
 
 // TITULO 2 FUNCIONAMIENTO OPCIONES MENU LATERAL
 
     // función para activar los clics de las opciones del menú lateral
-    function inicializarMenuLateral() {
+    function inicializarMenuLateral(vistaActual) {
 
         const opcionesMenu = {
             opcion_dashboard_menu: 'dashboard',
@@ -140,6 +137,13 @@
 
                 }
             );
+
+        }
+
+        // marca la vista actual en el menu
+        if (vistaActual) {
+
+            seleccionarOpcionMenu(vistaActual, false);
 
         }
 

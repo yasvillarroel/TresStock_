@@ -1,0 +1,11 @@
+// TITULO 1 CONTENEDOR CONTENIDO INVENTARIO
+
+    // Sin funcion
+
+    // SUBTITULO 2 CONTENEDOR DE OPCIONES DE INVENTARIO
+
+        // Sin funcion
+
+        // SUB-SUBTITULO 1 BOTON ESCANEAR PRODUCTOS
+
+            // Sin funcion

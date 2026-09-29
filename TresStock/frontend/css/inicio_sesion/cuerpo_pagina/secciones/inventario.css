@@ -1,0 +1,19 @@
+
+/* TITULO 1 CONTENEDOR CONTENIDO INVENTARIO */
+
+    .contenedor_inventario{
+        margin: 0;
+    }
+
+    /* SUBTITULO 2 CONTENEDOR DE OPCIONES DE INVENTARIO */
+
+        .menu_botones_inventario{
+            display: flex;
+            flex-direction: row;
+        }
+
+        /* SUB-SUBTITULO 1 BOTON ESCANEAR PRODUCTOS */
+
+        .boton_escanear_producto{
+            margin: 20px;
+        }

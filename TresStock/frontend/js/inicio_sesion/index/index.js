@@ -57,13 +57,16 @@
             'contenedor_cabecera'
         );
 
+        const vistaGuardada = sessionStorage.getItem(
+            'vista_actual'
+        );
+
+        const vistaActual = vistaGuardada || 'dashboard';
 
         // activa el funcionamiento responsive del menú lateral
-        inicializarMenuLateral();
+        inicializarMenuLateral(vistaActual);
 
-
-        await cargarVista('dashboard');
-
+        await cargarVista(vistaActual);
     }
 
 // TITULO 4 CARGA DE VISTAS
@@ -100,20 +103,21 @@
 
         };
 
-        const rutaVista =
-            rutasVistas[vista];
+        const rutaVista = rutasVistas[vista];
 
         if (!rutaVista) {
             return;
         }
 
+        sessionStorage.setItem(
+            'vista_actual',
+            vista
+        )
 
-        // carga el contenido de la vista seleccionada
         await cargarComponente(
             rutaVista,
             'contenedor_contenido'
         );
-
 
         // inicializa el funcionamiento de productos
         if (vista === 'productos') {
