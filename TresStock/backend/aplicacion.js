@@ -19,7 +19,11 @@ const app = express();
 // app.use(cors());
 // configura cors para permitir el frontend
 app.use(cors({
-    origin: 'http://127.0.0.1:5500', //esto podria variar :P
+    origin: [
+        'http://127.0.0.1:5500',
+        'http://localhost:5500',
+        /^http:\/\/192\.168\.\d+\.\d+:5500$/   // cualquier IP de red local en el puerto 5500
+    ],
     credentials: true
 }));
 

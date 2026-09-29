@@ -75,7 +75,7 @@
 
                 // envía las credenciales al backend para realizar la autenticación
                 const respuesta = await fetch(
-                    'http://127.0.0.1:3000/api/autenticacion/login',
+                    `${URL_API}/api/autenticacion/login`,
                     {
                         method: 'POST',
 

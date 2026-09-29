@@ -1,10 +1,8 @@
-
-
 <!-- TITULO 1 CONTENEDOR CONTENIDO INVENTARIO -->
 
     <div class="contenedor_inventario">
 
-        <!-- SUBTITULO 2 CONTENEDOR DE OPCIONES DE INVENTARIO -->
+        <!-- SUBTITULO 1 CONTENEDOR DE OPCIONES DE INVENTARIO -->
 
             <div class="menu_botones_inventario">
 
@@ -13,11 +11,34 @@
                         <!-- boton para escanear un producto -->
                         <div class="boton_escanear_producto" id="boton_escanear_producto" onclick="abrirEscanerProducto()">
 
-                            <div class="icono_escanear_producto">⌗</div>
+                            <div class="icono_escanear_producto">𝄃𝄃𝄂𝄂𝄀𝄁𝄃𝄂𝄂𝄃</div>
 
                             <div class="texto_escanear_producto">Escanear producto</div>
 
                         </div>
+
+                        <!-- SUB-SUB-TITULO 2 CONTENEDOR CAMARA ESCANER -->
+
+                            <!-- contenedor del escaner de productos -->
+                            <div class="contenedor_escaner_producto contenedor_escaner_producto_oculto" id="contenedor_escaner_producto">
+
+                                <!-- contenido del escaner -->
+                                <div class="contenido_escaner_producto">
+
+                                    <!-- titulo del escaner -->
+                                    <div class="titulo_escaner_producto">Escanear producto</div>
+
+                                    <!-- lector donde aparece la camara (tiene que ser un video) -->
+                                    <video class="lector_codigo_barras" id="lector_codigo_barras" playsinline muted></video>
+
+                                    <!-- boton para cerrar el escaner -->
+                                    <button type="button" class="boton_cerrar_escaner_producto" onclick="cerrarEscanerProducto()">
+                                        Cerrar
+                                    </button>
+
+                                </div>
+
+                            </div>
 
             </div>
     </div>

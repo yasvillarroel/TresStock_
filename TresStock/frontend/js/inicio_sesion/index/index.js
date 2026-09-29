@@ -21,7 +21,7 @@
         try {
 
             const respuesta = await fetch(
-                'http://127.0.0.1:3000/api/autenticacion/sesion',
+                `${URL_API}/api/autenticacion/sesion`,
                 {
                     method: 'GET',
                     credentials: 'include'
