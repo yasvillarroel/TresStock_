@@ -1,6 +1,13 @@
 // variable para almacenar los productos obtenidos desde el backend
 let productosCargados = [];
 
+// variables de paginacion
+
+let paginaActualProductos = 1;
+const productosPorPagina = 120;
+
+// almacenar los productos actuales que se estan mostrando 
+let productosFiltradosActuales = [];
 
 // TITULO 1 FORMULARIO PRODUCTO
 
@@ -382,108 +389,159 @@ let productosCargados = [];
     // función para mostrar los productos dentro de la tabla
     function mostrarProductos(productos) {
 
-        const cuerpoTabla = document.getElementById(
-            'cuerpo_tabla_productos'
+    const cuerpoTabla = document.getElementById(
+        'cuerpo_tabla_productos'
+    );
+
+    if (!cuerpoTabla) {
+        return;
+    }
+
+
+    // guarda los productos que corresponden al filtro actual
+
+    productosFiltradosActuales = productos;
+
+
+    // calcula la cantidad de paginas
+
+    const totalPaginas = Math.ceil(
+        productos.length / productosPorPagina
+    );
+
+
+    // evita quedar en una pagina que ya no existe
+
+    if (
+        paginaActualProductos > totalPaginas &&
+        totalPaginas > 0
+    ) {
+        paginaActualProductos = totalPaginas;
+    }
+
+
+    // calcula desde que producto comienza la pagina
+
+    const indiceInicio =
+        (paginaActualProductos - 1) *
+        productosPorPagina;
+
+
+    // calcula hasta que producto llega la pagina
+
+    const indiceFin =
+        indiceInicio +
+        productosPorPagina;
+
+
+    // obtiene solamente los productos de la pagina actual
+
+    const productosPagina =
+        productos.slice(
+            indiceInicio,
+            indiceFin
         );
 
 
-        if (!cuerpoTabla) {
-            return;
-        }
+    cuerpoTabla.innerHTML = '';
 
 
-        cuerpoTabla.innerHTML = '';
+    if (!productos.length) {
 
-
-        if (!productos.length) {
-
-            cuerpoTabla.innerHTML = `
-                <tr class="fila_sin_productos">
-
-                    <td
-                        class="dato_sin_productos"
-                        colspan="9"
-                    >
-                        No hay productos cargados para mostrar.
-                    </td>
-
-                </tr>
-            `;
-
-            return;
-
-        }
-
-
-        productos.forEach(function(producto) {
-
-            const fila = document.createElement(
-                'tr'
-            );
-
-
-            fila.className =
-                'fila_producto';
-
-            // formatea el precio público en pesos chilenos
-            const precioPublico = Number(
-                producto.precio_publico ?? 0
-            ).toLocaleString(
-                'es-CL',
-                {
-                    style: 'currency',
-                    currency: 'CLP',
-                    maximumFractionDigits: 0
-                }
-            );
-
-            fila.innerHTML = `
-
-                <td class="dato_codigo_productos">
-                    ${producto.codigo || '-'}
+        cuerpoTabla.innerHTML = `
+            <tr class="fila_sin_productos">
+                <td
+                    class="dato_sin_productos"
+                    colspan="9"
+                >
+                    No hay productos cargados para mostrar.
                 </td>
+            </tr>
+        `;
 
-                <td class="dato_codigo_barra_productos">
-                    ${producto.cod_barra || '-'}
-                </td>
+        mostrarPaginacionProductos(0);
 
-                <td class="dato_descripcion_productos">
-                    ${producto.descripcion || '-'}
-                </td>
-
-                <td class="dato_familia_productos">
-                    ${producto.familia || '-'}
-                </td>
-
-                <td class="dato_precio_productos">
-                    ${precioPublico}
-                </td>
-
-                <td class="dato_stock_actual_productos">
-                    ${producto.stock_actual ?? 0}
-                </td>
-
-                <td class="dato_stock_minimo_productos">
-                    ${producto.stock_minimo ?? 0}
-                </td>
-
-                <td class="dato_proveedor_productos">
-                    ${producto.proveedor || '-'}
-                </td>
-
-                <td class="dato_acciones_productos">
-                    -
-                </td>
-
-            `;
-
-            cuerpoTabla.appendChild(
-                fila
-            );
-
-        });
-
+        return;
     }
+
+
+    productosPagina.forEach(function(producto) {
+
+        const fila = document.createElement(
+            'tr'
+        );
+
+
+        fila.className =
+            'fila_producto';
+
+
+        // formatea el precio publico en pesos chilenos
+
+        const precioPublico = Number(
+            producto.precio_publico ?? 0
+        ).toLocaleString(
+            'es-CL',
+            {
+                style: 'currency',
+                currency: 'CLP',
+                maximumFractionDigits: 0
+            }
+        );
+
+
+        fila.innerHTML = `
+            <td class="dato_codigo_productos">
+                ${producto.codigo || '-'}
+            </td>
+
+            <td class="dato_codigo_barra_productos">
+                ${producto.cod_barra || '-'}
+            </td>
+
+            <td class="dato_descripcion_productos">
+                ${producto.descripcion || '-'}
+            </td>
+
+            <td class="dato_familia_productos">
+                ${producto.familia || '-'}
+            </td>
+
+            <td class="dato_precio_productos">
+                ${precioPublico}
+            </td>
+
+            <td class="dato_stock_actual_productos">
+                ${producto.stock_actual ?? 0}
+            </td>
+
+            <td class="dato_stock_minimo_productos">
+                ${producto.stock_minimo ?? 0}
+            </td>
+
+            <td class="dato_proveedor_productos">
+                ${producto.proveedor || '-'}
+            </td>
+
+            <td class="dato_acciones_productos">
+                -
+            </td>
+        `;
+
+
+        cuerpoTabla.appendChild(
+            fila
+        );
+
+    });
+
+
+    // actualiza los botones de paginacion
+
+    mostrarPaginacionProductos(
+        totalPaginas
+    );
+}
 
 
 // TITULO 6 INDICADORES PRODUCTOS
@@ -852,6 +910,8 @@ let productosCargados = [];
                 }
             );
 
+        paginaActualProductos = 1;
+
         mostrarProductos(
             productosFiltrados
         );
@@ -867,8 +927,393 @@ let productosCargados = [];
         configurarImportacionProductos();
         configurarFiltroFamilias();
         configurarBusquedaProductos();
+        configurarPaginacionProductos();
 
         await cargarProductos();
         await cargarFamilias();
         await cargarCantidadProveedores();
     }
+
+// TITULO 13 PAGINACION DE PRODUCTOS
+
+    // cambia la pagina actual
+
+    function cambiarPaginaProductos(pagina) {
+
+        paginaActualProductos =
+            pagina;
+
+        mostrarProductos(
+            productosFiltradosActuales
+        );
+    }
+
+
+    // muestra los controles de paginacion
+
+function mostrarPaginacionProductos(totalPaginas) {
+
+    const contenedorPaginacion =
+        document.getElementById(
+            'contenedor_paginacion_productos'
+        );
+
+    const botonAnterior =
+        document.getElementById(
+            'boton_pagina_anterior_productos'
+        );
+
+    const numerosPaginas =
+        document.getElementById(
+            'numeros_paginas_productos'
+        );
+
+    const botonSiguiente =
+        document.getElementById(
+            'boton_pagina_siguiente_productos'
+        );
+
+    if (
+        !contenedorPaginacion ||
+        !botonAnterior ||
+        !numerosPaginas ||
+        !botonSiguiente
+    ) {
+        return;
+    }
+
+    // oculta la paginacion si no es necesaria
+
+    if (totalPaginas <= 1) {
+
+        contenedorPaginacion.style.display =
+            'none';
+
+        return;
+    }
+
+    contenedorPaginacion.style.display =
+        'flex';
+
+    // configura el estado del boton anterior
+
+    botonAnterior.disabled =
+        paginaActualProductos === 1;
+
+    // configura el estado del boton siguiente
+
+    botonSiguiente.disabled =
+        paginaActualProductos === totalPaginas;
+
+    // configura el boton anterior
+
+    botonAnterior.onclick = function() {
+
+        if (paginaActualProductos > 1) {
+
+            cambiarPaginaProductos(
+                paginaActualProductos - 1
+            );
+
+        }
+
+    };
+
+    // configura el boton siguiente
+
+    botonSiguiente.onclick = function() {
+
+        const totalPaginasActuales =
+            Math.ceil(
+                productosFiltradosActuales.length /
+                productosPorPagina
+            );
+
+        if (
+            paginaActualProductos <
+            totalPaginasActuales
+        ) {
+
+            cambiarPaginaProductos(
+                paginaActualProductos + 1
+            );
+
+        }
+
+    };
+
+    // limpia los numeros anteriores
+
+    numerosPaginas.innerHTML = '';
+
+    // crea los botones de cada pagina
+
+    mostrarNumerosPaginasProductos(
+    totalPaginas
+        );{
+
+        const botonPagina =
+            document.createElement(
+                'button'
+            );
+
+        botonPagina.type =
+            'button';
+
+        botonPagina.className =
+            'boton_numero_pagina_productos';
+
+        botonPagina.textContent =
+            pagina;
+
+        if (
+            pagina === paginaActualProductos
+        ) {
+
+            botonPagina.classList.add(
+                'pagina_actual_productos'
+            );
+
+        }
+
+        botonPagina.addEventListener(
+            'click',
+            function() {
+
+                cambiarPaginaProductos(
+                    pagina
+                );
+
+            }
+        );
+
+        numerosPaginas.appendChild(
+            botonPagina
+        );
+    }
+}
+
+  // configura los botones anterior y siguiente
+
+function configurarPaginacionProductos() {
+
+    const botonAnterior =
+        document.getElementById(
+            'boton_pagina_anterior_productos'
+        );
+
+    const botonSiguiente =
+        document.getElementById(
+            'boton_pagina_siguiente_productos'
+        );
+
+
+    if (
+        !botonAnterior ||
+        !botonSiguiente
+    ) {
+        return;
+    }
+
+
+    botonAnterior.onclick = function() {
+
+        if (
+            paginaActualProductos > 1
+        ) {
+
+            cambiarPaginaProductos(
+                paginaActualProductos - 1
+            );
+
+        }
+
+    };
+
+
+    botonSiguiente.onclick = function() {
+
+        const totalPaginas =
+            Math.ceil(
+                productosFiltradosActuales.length /
+                productosPorPagina
+            );
+
+
+        if (
+            paginaActualProductos <
+            totalPaginas
+        ) {
+
+            cambiarPaginaProductos(
+                paginaActualProductos + 1
+            );
+
+        }
+
+    };
+
+}
+
+function mostrarNumerosPaginasProductos(totalPaginas) {
+
+    const numerosPaginas =
+        document.getElementById(
+            'numeros_paginas_productos'
+        );
+
+    if (!numerosPaginas) {
+        return;
+    }
+
+    numerosPaginas.innerHTML = '';
+
+    // calcula las paginas que se mostraran
+
+    let paginasMostrar = [];
+
+    // muestra todas las paginas si son pocas
+
+    if (totalPaginas <= 7) {
+
+        for (
+            let pagina = 1;
+            pagina <= totalPaginas;
+            pagina++
+        ) {
+
+            paginasMostrar.push(pagina);
+
+        }
+
+    } else {
+
+        // siempre muestra la primera pagina
+
+        paginasMostrar.push(1);
+
+        // muestra paginas cercanas a la actual
+
+        if (paginaActualProductos > 4) {
+
+            paginasMostrar.push('...');
+
+        }
+
+        const inicio =
+            Math.max(
+                2,
+                paginaActualProductos - 2
+            );
+
+        const fin =
+            Math.min(
+                totalPaginas - 1,
+                paginaActualProductos + 2
+            );
+
+        for (
+            let pagina = inicio;
+            pagina <= fin;
+            pagina++
+        ) {
+
+            paginasMostrar.push(pagina);
+
+        }
+
+        // muestra puntos antes de la ultima
+
+        if (
+            paginaActualProductos <
+            totalPaginas - 3
+        ) {
+
+            paginasMostrar.push('...');
+
+        }
+
+        // siempre muestra la ultima pagina
+
+        paginasMostrar.push(
+            totalPaginas
+        );
+    }
+
+    // crea los botones
+
+    paginasMostrar.forEach(
+        function(pagina) {
+
+            // crea los puntos suspensivos
+
+            if (pagina === '...') {
+
+                const puntos =
+                    document.createElement(
+                        'span'
+                    );
+
+                puntos.className =
+                    'puntos_paginacion_productos';
+                puntos.innerHTML = `
+                    <div class="punto_paginacion"></div>
+                    <div class="punto_paginacion"></div>
+                    <div class="punto_paginacion"></div>
+                `;
+
+                numerosPaginas.appendChild(
+                    puntos
+                );
+
+                return;
+            }
+
+            // crea el boton de pagina
+
+            const botonPagina =
+                document.createElement(
+                    'button'
+                );
+
+            botonPagina.type =
+                'button';
+
+            botonPagina.className =
+                'boton_numero_pagina_productos';
+
+            botonPagina.textContent =
+                pagina;
+
+            // marca la pagina actual
+
+            if (
+                pagina === paginaActualProductos
+            ) {
+
+                botonPagina.classList.add(
+                    'pagina_actual_productos'
+                );
+
+            }
+
+            // cambia a la pagina seleccionada
+
+            botonPagina.addEventListener(
+                'click',
+                function() {
+
+                    cambiarPaginaProductos(
+                        pagina
+                    );
+
+                }
+            );
+
+            numerosPaginas.appendChild(
+                botonPagina
+            );
+
+        }
+    );
+}

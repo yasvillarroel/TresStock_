@@ -575,6 +575,118 @@
         white-space: nowrap;
     }
 
+    /* SUBTITULO 1 CONTENEDOR BOTONES PAGINACION */
+
+        /* estilos del contenedor inferior que tiene los botones de paginacion */
+        .contenedor_paginacion_productos{
+            width: 100%;
+            justify-content: center;
+            display: flex;
+            flex-direction: row;
+            max-height: 50px;
+            gap: 10px;
+            margin: 15px 0px;
+        }
+
+        /* estilos para contenedor de los numeros de pagina */
+        .numeros_paginas_productos {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            min-width: 390px;
+        }
+
+        /* estilos para los botones numeros de pagina dentro de numeros_paginas_productos */
+        .boton_numero_pagina_productos{
+            font-size: 25px;
+            border: none;
+            background: none;
+            cursor: pointer;   
+        }
+
+        /* estilos para contenedor de los tres puntos de paginacion (creado dinamicamente con js) */
+        .puntos_paginacion_productos {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            width: 36px;
+            height: 36px;
+        }
+
+        /* estilos para los puntitos en paginacion (creado dinamicamente con js) */
+        .punto_paginacion {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        /* estilos para el boton pagina anterior */
+        .boton_pagina_anterior_productos{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            margin: 0;
+            border: none;
+            background: none;
+            cursor: pointer;
+            transition: filter 1.2s ease;   
+        }
+
+        .boton_pagina_anterior_productos:disabled{
+            opacity: 0.5;
+            cursor: not-allowed;
+            filter: grayscale(100%);
+        }
+
+        /* estilos del icono paginacion izquierda */
+        .icono_paginacion_flecha_izquierda{
+            display: block;
+            width: 50px;
+            height: auto;
+            object-fit: contain;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .icono_paginacion_flecha_izquierda:hover{
+            transform: translateX(-5px);
+        }
+
+        /* estilos para el boton pagina siguiente */
+        .boton_pagina_siguiente_productos{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            margin: 0;
+            border: none;
+            background: none;
+            cursor: pointer;
+            transition: filter 1.2s ease;    
+        }
+
+        .boton_pagina_siguiente_productos:disabled{
+            opacity: 0.5;
+            cursor: not-allowed;
+            filter: grayscale(100%);
+        }
+
+        /* estilos del icono paginacion derecha */
+        .icono_paginacion_flecha_derecha{
+            display: block;
+            width: 50px;
+            height: auto;
+            object-fit: contain;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .icono_paginacion_flecha_derecha:hover{
+            transform: translateX(5px);
+        }
+
 
 /* TITULO 6 DATOS TABLA PRODUCTOS */
 
