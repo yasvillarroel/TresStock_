@@ -1163,6 +1163,7 @@ function mostrarNumerosPaginasProductos(totalPaginas) {
         );
 
     if (!numerosPaginas) {
+
         return;
     }
 
@@ -1177,13 +1178,16 @@ function mostrarNumerosPaginasProductos(totalPaginas) {
     if (totalPaginas <= 7) {
 
         for (
+
             let pagina = 1;
+
             pagina <= totalPaginas;
+
             pagina++
+
         ) {
 
             paginasMostrar.push(pagina);
-
         }
 
     } else {
@@ -1197,7 +1201,6 @@ function mostrarNumerosPaginasProductos(totalPaginas) {
         if (paginaActualProductos > 4) {
 
             paginasMostrar.push('...');
-
         }
 
         const inicio =
@@ -1213,13 +1216,16 @@ function mostrarNumerosPaginasProductos(totalPaginas) {
             );
 
         for (
+
             let pagina = inicio;
+
             pagina <= fin;
+
             pagina++
+
         ) {
 
             paginasMostrar.push(pagina);
-
         }
 
         // muestra puntos antes de la ultima
@@ -1230,7 +1236,6 @@ function mostrarNumerosPaginasProductos(totalPaginas) {
         ) {
 
             paginasMostrar.push('...');
-
         }
 
         // siempre muestra la ultima pagina
@@ -1256,6 +1261,7 @@ function mostrarNumerosPaginasProductos(totalPaginas) {
 
                 puntos.className =
                     'puntos_paginacion_productos';
+
                 puntos.innerHTML = `
                     <div class="punto_paginacion"></div>
                     <div class="punto_paginacion"></div>
@@ -1294,7 +1300,6 @@ function mostrarNumerosPaginasProductos(totalPaginas) {
                 botonPagina.classList.add(
                     'pagina_actual_productos'
                 );
-
             }
 
             // cambia a la pagina seleccionada
@@ -1306,14 +1311,12 @@ function mostrarNumerosPaginasProductos(totalPaginas) {
                     cambiarPaginaProductos(
                         pagina
                     );
-
                 }
             );
 
             numerosPaginas.appendChild(
                 botonPagina
             );
-
         }
     );
 }

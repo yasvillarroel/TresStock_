@@ -598,11 +598,36 @@
         }
 
         /* estilos para los botones numeros de pagina dentro de numeros_paginas_productos */
-        .boton_numero_pagina_productos{
+        .boton_numero_pagina_productos {
             font-size: 25px;
             border: none;
-            background: none;
-            cursor: pointer;   
+            background: #159BA3;
+            color: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease-in-out, background-color 0.2s ease-in-out;
+        }
+
+        /* estilos de la pagina actual resaltada */
+        .pagina_actual_productos {
+            background-color: #0D6970;
+            color: white;
+            font-weight: bold;
+            border: 2px solid #159BA3;
+            transform: scale(1.1);
+        }
+
+        /* estilos del boton numero al pasar mouse por encima */
+        .boton_numero_pagina_productos:hover {
+            transform: translatey(-3px);
+            background-color: #0D6970;
         }
 
         /* estilos para contenedor de los tres puntos de paginacion (creado dinamicamente con js) */
@@ -633,7 +658,8 @@
             border: none;
             background: none;
             cursor: pointer;
-            transition: filter 1.2s ease;   
+            transition: filter 1.2s ease;
+            user-select: none;
         }
 
         .boton_pagina_anterior_productos:disabled{
@@ -666,7 +692,8 @@
             background: none;
             cursor: pointer;
             transition: filter 1.2s ease;    
-        }
+            user-select: none;
+        }   
 
         .boton_pagina_siguiente_productos:disabled{
             opacity: 0.5;
