@@ -963,11 +963,6 @@ function mostrarPaginacionProductos(totalPaginas) {
             'boton_pagina_anterior_productos'
         );
 
-    const numerosPaginas =
-        document.getElementById(
-            'numeros_paginas_productos'
-        );
-
     const botonSiguiente =
         document.getElementById(
             'boton_pagina_siguiente_productos'
@@ -976,7 +971,6 @@ function mostrarPaginacionProductos(totalPaginas) {
     if (
         !contenedorPaginacion ||
         !botonAnterior ||
-        !numerosPaginas ||
         !botonSiguiente
     ) {
         return;
@@ -995,17 +989,15 @@ function mostrarPaginacionProductos(totalPaginas) {
     contenedorPaginacion.style.display =
         'flex';
 
-    // configura el estado del boton anterior
+    // estado de los botones
 
     botonAnterior.disabled =
         paginaActualProductos === 1;
 
-    // configura el estado del boton siguiente
-
     botonSiguiente.disabled =
         paginaActualProductos === totalPaginas;
 
-    // configura el boton anterior
+    // boton anterior
 
     botonAnterior.onclick = function() {
 
@@ -1019,7 +1011,7 @@ function mostrarPaginacionProductos(totalPaginas) {
 
     };
 
-    // configura el boton siguiente
+    // boton siguiente
 
     botonSiguiente.onclick = function() {
 
@@ -1042,57 +1034,12 @@ function mostrarPaginacionProductos(totalPaginas) {
 
     };
 
-    // limpia los numeros anteriores
-
-    numerosPaginas.innerHTML = '';
-
-    // crea los botones de cada pagina
+    // dibuja los numeros de pagina
 
     mostrarNumerosPaginasProductos(
-    totalPaginas
-        );{
-
-        const botonPagina =
-            document.createElement(
-                'button'
-            );
-
-        botonPagina.type =
-            'button';
-
-        botonPagina.className =
-            'boton_numero_pagina_productos';
-
-        botonPagina.textContent =
-            pagina;
-
-        if (
-            pagina === paginaActualProductos
-        ) {
-
-            botonPagina.classList.add(
-                'pagina_actual_productos'
-            );
-
-        }
-
-        botonPagina.addEventListener(
-            'click',
-            function() {
-
-                cambiarPaginaProductos(
-                    pagina
-                );
-
-            }
-        );
-
-        numerosPaginas.appendChild(
-            botonPagina
-        );
-    }
+        totalPaginas
+    );
 }
-
   // configura los botones anterior y siguiente
 
 function configurarPaginacionProductos() {

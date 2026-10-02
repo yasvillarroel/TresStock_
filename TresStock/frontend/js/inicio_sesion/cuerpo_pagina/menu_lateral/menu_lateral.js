@@ -35,8 +35,8 @@
             'opcion_' + opcion + '_menu'
         );
 
-        // agrega el estado activo
-        if (opcionSeleccionada) {
+        // agrega el estado activo (el escaner no se marca para no alterar sus estilos)
+        if (opcionSeleccionada && opcion !== 'escaner') {
 
             opcionSeleccionada.classList.add(
                 'opcion_menu_activa'
@@ -109,6 +109,25 @@
             }
 
         });
+
+
+        // el escaner usa el boton interno para no alterar los estilos del contenedor
+        const botonEscanear = document.getElementById(
+            'boton_escanear_producto'
+        );
+
+        if (botonEscanear) {
+
+            botonEscanear.addEventListener(
+                'click',
+                function () {
+
+                    seleccionarOpcionMenu('escaner');
+
+                }
+            );
+
+        }
 
 
         // obtiene el botón hamburguesa de la cabecera

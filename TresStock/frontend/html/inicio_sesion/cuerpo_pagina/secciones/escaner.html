@@ -1,0 +1,24 @@
+
+<!-- TITULO 1 CONTENEDOR MODAL DE ESCANEO -->
+
+<!-- contenedor del escaner de productos -->
+<div class="contenedor_escaner_producto contenedor_escaner_producto_oculto" id="contenedor_escaner_producto">
+
+    <!-- contenido del escaner -->
+    <div class="contenido_escaner_producto">
+
+        <!-- titulo del escaner -->
+        <div class="titulo_escaner_producto">Escanear producto</div>
+
+        <!-- lector donde aparece la camara (tiene que ser un video) -->
+        <video class="lector_codigo_barras" id="lector_codigo_barras" playsinline muted></video>
+
+        <!-- boton para cerrar el escaner -->
+        <button type="button" class="boton_cerrar_escaner_producto"
+                onclick="cerrarEscanerProducto(); cargarVista('inventario')">
+            Cerrar
+        </button>
+        
+    </div>
+
+</div>

@@ -1,0 +1,73 @@
+
+
+/* BOTON ESCANEAR PRODUCTOS */
+
+.boton_escanear_producto{
+    background: #159ba3;
+    margin: 20px;
+    text-align: center;
+    padding: 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+    user-select: none;
+}
+.icono_escanear_producto{
+    background: white;
+    display: inline;
+    font-size: 30px;
+    font-weight: 400;
+    padding: 0 5px;
+}
+.texto_escanear_producto{
+    color: white;
+    margin-top: 15px;
+    font-size: 15px;
+    font-weight: 700;
+}
+.boton_escanear_producto:hover{
+    background: #23adb4;
+    transform: scale(1.1);
+}
+
+
+/* CONTENEDOR CAMARA ESCANER */
+
+    /* contenedor principal del escaner */
+    .contenedor_escaner_producto {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        background-color: white;
+        margin: auto;
+        text-align: center;
+        padding: 30px;
+        max-width: 1300px;
+        max-height: 800px;
+
+    }
+
+    /* contenido del escaner */
+    .contenido_escaner_producto {
+        width: 90%;
+        max-width: 500px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* contenedor oculto del escaner */
+    .contenedor_escaner_producto.contenedor_escaner_producto_oculto {
+        display: none;
+    }
+
+    .lector_codigo_barras {
+        width: 100%;
+        max-width: 400px;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+        background: #000;
+    }

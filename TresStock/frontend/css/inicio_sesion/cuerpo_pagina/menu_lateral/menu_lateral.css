@@ -68,6 +68,7 @@
         cursor: pointer;
         box-sizing: border-box;
         padding: 0 13px;
+        user-select: none;
     }
 
     /* cambia el fondo de la opción Dashboard al posicionar el cursor */
@@ -114,6 +115,7 @@
         cursor: pointer;
         box-sizing: border-box;
         padding: 0 13px;
+        user-select: none;
     }
 
     /* cambia el fondo de la opción Inventario al posicionar el cursor */
@@ -160,6 +162,7 @@
         cursor: pointer;
         box-sizing: border-box;
         padding: 0 13px;
+        user-select: none;
     }
 
     /* cambia el fondo de la opción Productos al posicionar el cursor */
@@ -206,6 +209,7 @@
         cursor: pointer;
         box-sizing: border-box;
         padding: 0 13px;
+        user-select: none;
     }
 
     /* cambia el fondo de la opción Ventas al posicionar el cursor */
@@ -252,6 +256,7 @@
         cursor: pointer;
         box-sizing: border-box;
         padding: 0 13px;
+        user-select: none;
     }
 
     /* cambia el fondo de la opción Proveedores al posicionar el cursor */
@@ -298,6 +303,7 @@
         cursor: pointer;
         box-sizing: border-box;
         padding: 0 13px;
+        user-select: none;
     }
 
     /* cambia el fondo de la opción Importación al posicionar el cursor */
@@ -344,6 +350,7 @@
         cursor: pointer;
         box-sizing: border-box;
         padding: 0 13px;
+        user-select: none;
     }
 
     /* cambia el fondo de la opción Alertas al posicionar el cursor */
@@ -391,6 +398,7 @@
         cursor: pointer;
         box-sizing: border-box;
         padding: 0 13px;
+        user-select: none;
     }
 
     /* cambia el fondo de la opción Análisis al posicionar el cursor */
@@ -437,6 +445,7 @@
         cursor: pointer;
         box-sizing: border-box;
         padding: 0 13px;
+        user-select: none;
     }
 
     /* cambia el fondo de la opción Administración al posicionar el cursor */

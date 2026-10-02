@@ -84,8 +84,8 @@
             importacion:'./html/inicio_sesion/cuerpo_pagina/secciones/importacion.html',
             alertas:'./html/inicio_sesion/cuerpo_pagina/secciones/alertas_vencimientos.html',
             analisis:'./html/inicio_sesion/cuerpo_pagina/secciones/reportes_analitica.html',
-            administracion:'./html/inicio_sesion/cuerpo_pagina/secciones/usuarios.html'
-
+            administracion:'./html/inicio_sesion/cuerpo_pagina/secciones/usuarios.html',
+            escaner:'./html/inicio_sesion/cuerpo_pagina/secciones/escaner.html'
         };
 
 
@@ -99,8 +99,8 @@
             importacion: 'Importación DimaSoft',
             alertas: 'Alertas y vencimientos',
             analisis: 'Análisis',
-            administracion: 'Administración'
-
+            administracion: 'Administración',
+            escaner: 'Escáner'
         };
 
         const rutaVista = rutasVistas[vista];
@@ -109,10 +109,19 @@
             return;
         }
 
-        sessionStorage.setItem(
-            'vista_actual',
-            vista
-        )
+        // apaga la camara si venia del escaner
+        if (typeof cerrarEscanerProducto === 'function') {
+            cerrarEscanerProducto();
+        }
+
+        // el escaner no se guarda como vista actual, para que al recargar
+        // no se vuelva a pedir la camara
+        if (vista !== 'escaner') {
+            sessionStorage.setItem(
+                'vista_actual',
+                vista
+            );
+        }
 
         await cargarComponente(
             rutaVista,
@@ -121,11 +130,7 @@
 
         // inicializa el funcionamiento de productos
         if (vista === 'productos') {
-            cargarProductos();
-            cargarFamilias();
-            configurarFiltroFamilias();
-            configurarBusquedaProductos();
-            configurarImportacionProductos();
+            await inicializarProductos();
         }
 
 
@@ -140,6 +145,11 @@
 
             inicializarProveedores();
 
+        }
+
+        // inicializa el escaner (su HTML ya esta cargado)
+        if (vista === 'escaner') {
+            inicializarEscaner();
         }
 
 
@@ -178,5 +188,3 @@
 
     // llama a la función principal al cargar el index
     iniciarAplicacion();
-
-    
