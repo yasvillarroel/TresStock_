@@ -1,0 +1,449 @@
+<!-- TITULO 1 CONTENEDOR INVENTARIO -->
+
+    <!-- contenedor principal de la vista de inventario -->
+    <div class="contenedor_inventario">
+
+
+        <!-- TITULO 2 ENCABEZADO INVENTARIO -->
+
+            <!-- contenedor de información principal de inventario -->
+            <div class="contenedor_encabezado_inventario">
+
+                <div class="contenedor_informacion_inventario">
+
+                    <div class="titulo_inventario">
+                        Gestión de inventario
+                    </div>
+
+                    <div class="descripcion_inventario">
+                        Controla el stock actual, stock mínimo y estado de los productos.
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        <!-- TITULO 3 INDICADORES INVENTARIO -->
+
+            <!-- contenedor de indicadores principales -->
+            <div class="contenedor_indicadores_inventario">
+
+
+                <!-- indicador total productos -->
+                <div class="tarjeta_total_productos_inventario">
+
+                    <div class="icono_total_productos_inventario">
+                        ▣
+                    </div>
+
+                    <div class="contenido_total_productos_inventario">
+
+                        <div class="texto_total_productos_inventario">
+                            Total productos
+                        </div>
+
+                        <div
+                            class="valor_total_productos_inventario"
+                            id="valor_total_productos_inventario"
+                        >
+                            0
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- indicador stock bajo -->
+                <div class="tarjeta_stock_bajo_inventario">
+
+                    <div class="icono_stock_bajo_inventario">
+                        ↓
+                    </div>
+
+                    <div class="contenido_stock_bajo_inventario">
+
+                        <div class="texto_stock_bajo_inventario">
+                            Stock bajo
+                        </div>
+
+                        <div
+                            class="valor_stock_bajo_inventario"
+                            id="valor_stock_bajo_inventario"
+                        >
+                            0
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- indicador sin stock -->
+                <div class="tarjeta_sin_stock_inventario">
+
+                    <div class="icono_sin_stock_inventario">
+                        ×
+                    </div>
+
+                    <div class="contenido_sin_stock_inventario">
+
+                        <div class="texto_sin_stock_inventario">
+                            Sin stock
+                        </div>
+
+                        <div
+                            class="valor_sin_stock_inventario"
+                            id="valor_sin_stock_inventario"
+                        >
+                            0
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- indicador próximos a vencer -->
+                <div class="tarjeta_proximos_vencer_inventario">
+
+                    <div class="icono_proximos_vencer_inventario">
+                        ◫
+                    </div>
+
+                    <div class="contenido_proximos_vencer_inventario">
+
+                        <div class="texto_proximos_vencer_inventario">
+                            Próximos a vencer
+                        </div>
+
+                        <div
+                            class="valor_proximos_vencer_inventario"
+                            id="valor_proximos_vencer_inventario"
+                        >
+                            0
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        <!-- TITULO 4 PESTAÑAS INVENTARIO -->
+
+            <!-- contenedor de navegación interna de inventario -->
+            <div class="contenedor_pestanas_inventario">
+
+                <div class="pestana_stock_actual_inventario">
+                    Stock actual
+                </div>
+
+                <div class="pestana_entradas_inventario">
+                    Entradas
+                </div>
+
+                <div class="pestana_salidas_inventario">
+                    Salidas
+                </div>
+
+                <div class="pestana_ajustes_inventario">
+                    Ajustes
+                </div>
+
+                <div class="pestana_movimientos_inventario">
+                    Movimientos
+                </div>
+
+            </div>
+
+
+        <!-- TITULO 5 FILTROS INVENTARIO -->
+
+            <!-- contenedor de búsqueda y filtros -->
+            <div class="contenedor_filtros_inventario">
+
+
+                <!-- búsqueda de producto -->
+                <div class="campo_busqueda_inventario">
+
+                    <div class="texto_busqueda_inventario">
+                        Buscar producto
+                    </div>
+
+                    <input
+                        class="input_busqueda_inventario"
+                        id="input_busqueda_inventario"
+                        type="text"
+                        placeholder="Nombre, código o código de barras"
+                    >
+
+                </div>
+
+
+                <!-- filtro por familia -->
+                <div class="campo_familia_inventario">
+
+                    <div class="texto_familia_inventario">
+                        Familia
+                    </div>
+
+                    <select
+                        class="select_familia_inventario"
+                        id="select_familia_inventario"
+                    >
+
+                        <option
+                            class="opcion_familia_inventario"
+                            value=""
+                        >
+                            Todas las familias
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- filtro por estado -->
+                <div class="campo_estado_inventario">
+
+                    <div class="texto_estado_inventario">
+                        Estado
+                    </div>
+
+                    <select
+                        class="select_estado_inventario"
+                        id="select_estado_inventario"
+                    >
+
+                        <option
+                            class="opcion_estado_inventario"
+                            value=""
+                        >
+                            Todos los estados
+                        </option>
+
+                        <option
+                            class="opcion_estado_inventario"
+                            value="OPTIMO"
+                        >
+                            Óptimo
+                        </option>
+
+                        <option
+                            class="opcion_estado_inventario"
+                            value="STOCK BAJO"
+                        >
+                            Stock bajo
+                        </option>
+
+                        <option
+                            class="opcion_estado_inventario"
+                            value="SIN STOCK"
+                        >
+                            Sin stock
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+        <!-- TITULO 6 TABLA INVENTARIO -->
+
+            <!-- contenedor principal de la tabla -->
+            <div class="contenedor_tabla_inventario">
+
+
+                <!-- cabecera visual de la tabla -->
+                <div class="cabecera_contenedor_tabla_inventario">
+
+                    <div class="titulo_tabla_inventario">
+                        Stock de productos
+                    </div>
+
+                </div>
+
+
+                <!-- tabla del inventario -->
+                <table class="tabla_inventario">
+
+                    <thead class="encabezado_tabla_inventario">
+
+                        <tr class="fila_encabezado_inventario">
+
+                            <th class="columna_producto_inventario">
+                                Producto
+                            </th>
+
+                            <th class="columna_familia_inventario">
+                                Familia
+                            </th>
+
+                            <th class="columna_stock_actual_inventario">
+                                Stock actual
+                            </th>
+
+                            <th class="columna_stock_minimo_inventario">
+                                Stock mínimo
+                            </th>
+
+                            <th class="columna_estado_inventario">
+                                Estado
+                            </th>
+
+                            <th class="columna_acciones_inventario">
+                                Acciones
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody
+                        class="cuerpo_tabla_inventario"
+                        id="cuerpo_tabla_inventario"
+                    >
+
+                        <tr class="fila_sin_inventario">
+
+                            <td
+                                class="dato_sin_inventario"
+                                colspan="6"
+                            >
+                                No hay productos cargados para mostrar.
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+        <!-- TITULO 7 PAGINACION INVENTARIO -->
+
+            <!-- contenedor inferior de paginación -->
+            <div class="contenedor_paginacion_inventario">
+
+                <div
+                    class="texto_paginacion_inventario"
+                    id="texto_paginacion_inventario"
+                >
+                    Mostrando 0 productos
+                </div>
+
+                <div
+                    class="controles_paginacion_inventario"
+                    id="controles_paginacion_inventario"
+                >
+                </div>
+
+            </div>
+
+
+        <!-- TITULO 8 FORMULARIO STOCK MINIMO -->
+
+            <!-- fondo superpuesto para configurar stock mínimo -->
+            <div
+                class="contenedor_formulario_stock_minimo_inventario contenedor_formulario_stock_minimo_inventario_oculto"
+                id="contenedor_formulario_stock_minimo_inventario"
+            >
+
+                <div class="formulario_stock_minimo_inventario">
+
+
+                    <!-- TITULO 9 CABECERA FORMULARIO STOCK MINIMO -->
+
+                        <div class="cabecera_formulario_stock_minimo_inventario">
+
+                            <div class="titulo_formulario_stock_minimo_inventario">
+                                Configurar stock mínimo
+                            </div>
+
+                            <div
+                                class="boton_cerrar_stock_minimo_inventario"
+                                id="boton_cerrar_stock_minimo_inventario"
+                            >
+                                ×
+                            </div>
+
+                        </div>
+
+
+                        <div class="contenido_formulario_stock_minimo_inventario">
+
+                            <div class="campo_producto_stock_minimo_inventario">
+
+                                <div class="texto_producto_stock_minimo_inventario">
+                                    Producto
+                                </div>
+
+                                <div
+                                    class="valor_producto_stock_minimo_inventario"
+                                    id="valor_producto_stock_minimo_inventario"
+                                >
+                                    -
+                                </div>
+
+                            </div>
+
+
+                            <div class="campo_valor_stock_minimo_inventario">
+
+                                <div class="texto_valor_stock_minimo_inventario">
+                                    Stock mínimo
+                                </div>
+
+                                <input
+                                    class="input_stock_minimo_inventario"
+                                    id="input_stock_minimo_inventario"
+                                    type="number"
+                                    min="0"
+                                    step="0.001"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                    <!-- TITULO 10 ACCIONES FORMULARIO STOCK MINIMO -->
+
+                        <div class="contenedor_acciones_stock_minimo_inventario">
+
+                            <div
+                                class="boton_cancelar_stock_minimo_inventario"
+                                id="boton_cancelar_stock_minimo_inventario"
+                            >
+                                Cancelar
+                            </div>
+
+                            <div
+                                class="boton_guardar_stock_minimo_inventario"
+                                id="boton_guardar_stock_minimo_inventario"
+                            >
+                                Guardar
+                            </div>
+
+                        </div>
+
+                </div>
+
+            </div>
+
+
+        <!-- TITULO 11 INICIALIZACION INVENTARIO -->
+
+            <!-- sin estructura -->
+
+
+    </div>

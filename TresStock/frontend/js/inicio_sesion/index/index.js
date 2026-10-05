@@ -105,67 +105,35 @@
 
         const rutaVista = rutasVistas[vista];
 
-        if (!rutaVista) {
-            return;
-        }
+        if (!rutaVista) {return;}
 
         // apaga la camara si venia del escaner
-        if (typeof cerrarEscanerProducto === 'function') {
-            cerrarEscanerProducto();
-        }
+        if (typeof cerrarEscanerProducto === 'function') {cerrarEscanerProducto();}
 
         // el escaner no se guarda como vista actual, para que al recargar
         // no se vuelva a pedir la camara
-        if (vista !== 'escaner') {
-            sessionStorage.setItem(
-                'vista_actual',
-                vista
-            );
-        }
+        if (vista !== 'escaner') {sessionStorage.setItem('vista_actual',vista);}
 
-        await cargarComponente(
-            rutaVista,
-            'contenedor_contenido'
-        );
+        await cargarComponente(rutaVista,'contenedor_contenido');
+
+        // inicializa el funcionamiento de inventario
+        if (vista === 'inventario') {await inicializarInventario();}
 
         // inicializa el funcionamiento de productos
-        if (vista === 'productos') {
-            await inicializarProductos();
-        }
-
+        if (vista === 'productos') {await inicializarProductos();}
 
         // inicializa el funcionamiento de usuarios
-        if (vista === 'administracion') {
+        if (vista === 'administracion') {inicializarUsuarios();}
 
-            inicializarUsuarios();
-
-        }
-
-        if (vista === 'proveedores') {
-
-            inicializarProveedores();
-
-        }
+        if (vista === 'proveedores') {inicializarProveedores();}
 
         // inicializa el escaner (su HTML ya esta cargado)
-        if (vista === 'escaner') {
-            inicializarEscaner();
-        }
-
+        if (vista === 'escaner') {inicializarEscaner();}
 
         // actualiza el título de la cabecera
-        const tituloVistaCabecera =
-            document.getElementById(
-                'titulo_vista_cabecera'
-            );
+        const tituloVistaCabecera =document.getElementById('titulo_vista_cabecera');
 
-
-        if (tituloVistaCabecera) {
-
-            tituloVistaCabecera.textContent =
-                titulosVistas[vista];
-
-        }
+        if (tituloVistaCabecera) {tituloVistaCabecera.textContent =titulosVistas[vista];}
 
     }
 
@@ -176,10 +144,7 @@
 
         const usuario = await verificarSesion();
 
-        if (!usuario) {
-            window.location.href = './html/inicio_sesion/inicio_sesion.html';
-            return;
-        }
+        if (!usuario) {window.location.href = './html/inicio_sesion/inicio_sesion.html';return;}
 
         console.log('Usuario autenticado:', usuario);
 
