@@ -148,14 +148,14 @@ async function buscarCodigoProducto(video, miId) {
 
             if (codigos.length > 0) {
 
-                console.log(
-                    'Codigo detectado:',
-                    codigos[0].rawValue
-                );
+                const codigo = codigos[0].rawValue;
 
-                // aqui despues se buscara el producto con ese codigo
+                console.log('Codigo detectado:', codigo);
 
                 cerrarEscanerProducto();
+
+                // busca en el backend el producto con ese codigo
+                consultarProductoEscaneado(codigo);
 
                 return;
             }
@@ -170,6 +170,49 @@ async function buscarCodigoProducto(video, miId) {
             setTimeout(resolver, 150);
         });
     }
+}
+
+
+// consulta al backend el producto que corresponde al codigo escaneado
+async function consultarProductoEscaneado(codigo) {
+
+    try {
+
+        const respuesta = await fetch(
+            `${URL_API}/api/escaneo/producto/${encodeURIComponent(codigo)}`,
+            { credentials: 'include' }
+        );
+
+        if (respuesta.status === 404) {
+
+            alert('No se encontró un producto con el código ' + codigo);
+
+            return;
+        }
+
+        if (!respuesta.ok) {
+
+            throw new Error('Respuesta ' + respuesta.status);
+
+        }
+
+        const datos = await respuesta.json();
+
+        mostrarProductoEscaneado(datos.producto);
+
+    } catch (error) {
+
+        console.error('Error al consultar el producto:', error);
+
+        alert('No se pudo consultar el producto');
+    }
+}
+
+
+// por ahora solo muestra el resultado en consola; aqui va la vista del producto
+function mostrarProductoEscaneado(producto) {
+
+    console.log('Producto escaneado:', producto);
 }
 
 

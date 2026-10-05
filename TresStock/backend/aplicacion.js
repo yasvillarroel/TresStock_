@@ -107,5 +107,8 @@ app.use('/api/inventario',require('./rutas/inventario/inventario_rutas'));
 // registra las rutas de ventas
 app.use('/api/ventas',require('./rutas/ventas/ventas_rutas'));
 
+// registra las rutas de escaneo
+app.use('/api/escaneo', require('./rutas/escaneo/escaneo_rutas'));
+
 // exporta la aplicacion para utilizarla desde otros archivos
 module.exports = app;
