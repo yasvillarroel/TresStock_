@@ -289,53 +289,6 @@
     }
 
 
-/* TITULO 9 OPCION IMPORTACION */
-
-    /* clase para establecer el diseño de la opción Importación */
-    .opcion_importacion_menu {
-        width: 100%;
-        height: 48px;
-        display: flex;
-        align-items: center;
-        background-color: transparent;
-        border: 1px solid transparent;
-        border-radius: 7px;
-        cursor: pointer;
-        box-sizing: border-box;
-        padding: 0 13px;
-        user-select: none;
-    }
-
-    /* cambia el fondo de la opción Importación al posicionar el cursor */
-    .opcion_importacion_menu:hover {
-        background-color: #0b455f;
-    }
-
-    /* clase para organizar el icono de Importación */
-    .icono_importacion_menu {
-        width: 21px;
-        height: 21px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 13px;
-    }
-
-    /* clase para establecer el tamaño del icono de Importación */
-    .imagen_icono_importacion_menu {
-        width: 21px;
-        height: 21px;
-        filter: brightness(0) invert(1);
-    }
-
-    /* clase para establecer el texto de la opción Importación */
-    .texto_importacion_menu {
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-    }
-
-
 /* TITULO 10 OPCION ALERTAS */
 
     /* clase para establecer el diseño de la opción Alertas */

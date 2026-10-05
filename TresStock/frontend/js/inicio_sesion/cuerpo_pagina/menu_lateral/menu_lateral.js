@@ -9,7 +9,6 @@
             'opcion_productos_menu',
             'opcion_ventas_menu',
             'opcion_proveedores_menu',
-            'opcion_importacion_menu',
             'opcion_alertas_menu',
             'opcion_analisis_menu',
             'opcion_administracion_menu'
@@ -81,7 +80,6 @@
             opcion_productos_menu: 'productos',
             opcion_ventas_menu: 'ventas',
             opcion_proveedores_menu: 'proveedores',
-            opcion_importacion_menu: 'importacion',
             opcion_alertas_menu: 'alertas',
             opcion_analisis_menu: 'analisis',
             opcion_administracion_menu: 'administracion'
