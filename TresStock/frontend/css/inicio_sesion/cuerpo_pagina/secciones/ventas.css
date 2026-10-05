@@ -1,0 +1,901 @@
+/* TITULO 1 CONTENEDOR VENTAS */
+
+    /* espacio general de la vista */
+    .contenedor_ventas {
+        width: 100%;
+        padding: 28px;
+        box-sizing: border-box;
+    }
+
+
+/* TITULO 2 ENCABEZADO VENTAS */
+
+    /* organiza el encabezado */
+    .contenedor_encabezado_ventas {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 22px;
+    }
+
+    /* organiza título y descripción */
+    .contenedor_informacion_ventas {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* título principal */
+    .titulo_ventas {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    /* descripción */
+    .descripcion_ventas {
+        color: #71818a;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+    }
+
+
+    /* SUBTITULO 1 BOTON IMPORTAR */
+
+        /* botón importar ventas */
+        .boton_importar_ventas {
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #159ba3;
+            padding: 0 17px;
+            border-radius: 6px;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+
+        /* efecto hover */
+        .boton_importar_ventas:hover {
+            background-color: #0f858d;
+        }
+
+        /* icono */
+        .icono_importar_ventas {
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            font-size: 21px;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        /* texto */
+        .texto_importar_ventas {
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+
+/* TITULO 3 INDICADORES VENTAS */
+
+    /* distribuye los indicadores */
+    .contenedor_indicadores_ventas {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-bottom: 22px;
+    }
+
+
+    /* SUBTITULO 1 TOTAL VENTAS */
+
+        .tarjeta_total_ventas {
+            min-height: 105px;
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            border: 1px solid #dce4e8;
+            border-radius: 8px;
+            padding: 18px;
+            box-sizing: border-box;
+        }
+
+        .icono_total_ventas {
+            width: 46px;
+            height: 46px;
+            min-width: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #e4f6f6;
+            color: #159ba3;
+            border-radius: 8px;
+            margin-right: 14px;
+            font-family: Arial, sans-serif;
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .contenido_total_ventas {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .texto_total_ventas {
+            color: #697a83;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        .valor_total_ventas {
+            color: #0b3650;
+            font-family: Arial, sans-serif;
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+
+    /* SUBTITULO 2 VENTAS DEL DIA */
+
+        .tarjeta_ventas_dia {
+            min-height: 105px;
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            border: 1px solid #dce4e8;
+            border-radius: 8px;
+            padding: 18px;
+            box-sizing: border-box;
+        }
+
+        .icono_ventas_dia {
+            width: 46px;
+            height: 46px;
+            min-width: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #e9f0fb;
+            color: #3869a8;
+            border-radius: 8px;
+            margin-right: 14px;
+            font-family: Arial, sans-serif;
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .contenido_ventas_dia {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .texto_ventas_dia {
+            color: #697a83;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        .valor_ventas_dia {
+            color: #0b3650;
+            font-family: Arial, sans-serif;
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+
+    /* SUBTITULO 3 TOTAL VENDIDO */
+
+        .tarjeta_total_vendido {
+            min-height: 105px;
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            border: 1px solid #dce4e8;
+            border-radius: 8px;
+            padding: 18px;
+            box-sizing: border-box;
+        }
+
+        .icono_total_vendido {
+            width: 46px;
+            height: 46px;
+            min-width: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #edf8ee;
+            color: #469451;
+            border-radius: 8px;
+            margin-right: 14px;
+            font-family: Arial, sans-serif;
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .contenido_total_vendido {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .texto_total_vendido {
+            color: #697a83;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        .valor_total_vendido {
+            color: #0b3650;
+            font-family: Arial, sans-serif;
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+
+/* TITULO 4 FILTROS VENTAS */
+
+    /* organiza los filtros */
+    .contenedor_filtros_ventas {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 18px;
+        background-color: #ffffff;
+        border: 1px solid #dce4e8;
+        border-radius: 8px;
+        padding: 18px;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+    }
+
+    .contenedor_busqueda_ventas {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .contenedor_fecha_desde_ventas {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .contenedor_fecha_hasta_ventas {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .texto_busqueda_ventas,
+    .texto_fecha_desde_ventas,
+    .texto_fecha_hasta_ventas {
+        color: #536873;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        margin-bottom: 7px;
+    }
+
+    .input_busqueda_ventas,
+    .input_fecha_desde_ventas,
+    .input_fecha_hasta_ventas {
+        width: 100%;
+        height: 40px;
+        border: 1px solid #ced9de;
+        border-radius: 6px;
+        padding: 0 12px;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        box-sizing: border-box;
+        outline: none;
+        background-color: #ffffff;
+    }
+
+
+/* TITULO 5 TABLA VENTAS */
+
+    /* contenedor de tabla */
+    .contenedor_tabla_ventas {
+        width: 100%;
+        background-color: #ffffff;
+        border: 1px solid #dce4e8;
+        border-radius: 8px;
+        overflow-x: auto;
+        box-sizing: border-box;
+    }
+
+    .cabecera_contenedor_tabla_ventas {
+        padding: 17px 18px;
+        border-bottom: 1px solid #e2e8eb;
+        box-sizing: border-box;
+    }
+
+    .titulo_tabla_ventas {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .tabla_ventas {
+        width: 100%;
+        min-width: 720px;
+        border-collapse: collapse;
+    }
+
+    .encabezado_tabla_ventas {
+        background-color: #f4f7f8;
+    }
+
+    .fila_encabezado_ventas {
+        border-bottom: 1px solid #dce4e8;
+    }
+
+    .columna_boleta_ventas,
+    .columna_fecha_ventas,
+    .columna_hora_ventas,
+    .columna_total_ventas,
+    .columna_acciones_ventas {
+        padding: 13px 12px;
+        color: #667881;
+        font-family: Arial, sans-serif;
+        font-size: 11px;
+        white-space: nowrap;
+    }
+
+    .columna_boleta_ventas {
+        text-align: left;
+    }
+
+    .columna_fecha_ventas {
+        text-align: left;
+    }
+
+    .columna_hora_ventas {
+        text-align: center;
+    }
+
+    .columna_total_ventas {
+        text-align: right;
+    }
+
+    .columna_acciones_ventas {
+        text-align: center;
+    }
+
+
+/* TITULO 6 DATOS TABLA VENTAS */
+
+    .fila_venta {
+        border-bottom: 1px solid #edf1f3;
+    }
+
+    .fila_venta:hover {
+        background-color: #f8fafb;
+    }
+
+    .dato_boleta_ventas,
+    .dato_fecha_ventas,
+    .dato_hora_ventas,
+    .dato_total_ventas,
+    .dato_acciones_ventas {
+        padding: 14px 12px;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        white-space: nowrap;
+    }
+
+    .dato_boleta_ventas {
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .dato_fecha_ventas {
+        text-align: left;
+    }
+
+    .dato_hora_ventas {
+        text-align: center;
+    }
+
+    .dato_total_ventas {
+        text-align: right;
+        font-weight: bold;
+    }
+
+    .dato_acciones_ventas {
+        text-align: center;
+    }
+
+    .boton_ver_venta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 32px;
+        padding: 0 13px;
+        background-color: #e4f6f6;
+        color: #0f7f86;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .boton_ver_venta:hover {
+        background-color: #cceeee;
+    }
+
+    .fila_sin_ventas {
+        border-bottom: 1px solid #edf1f3;
+    }
+
+    .dato_sin_ventas {
+        padding: 38px 15px;
+        text-align: center;
+        color: #84939a;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+    }
+
+
+/* TITULO 7 PAGINACION VENTAS */
+
+    .contenedor_paginacion_ventas {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        padding: 15px;
+        box-sizing: border-box;
+    }
+
+    .numeros_paginas_ventas {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+    }
+
+    .boton_numero_pagina_ventas {
+        width: 36px;
+        height: 36px;
+        border: none;
+        border-radius: 50%;
+        background-color: #159ba3;
+        color: #ffffff;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        cursor: pointer;
+    }
+
+    .boton_numero_pagina_ventas:hover {
+        background-color: #0d6970;
+    }
+
+    .pagina_actual_ventas {
+        background-color: #0d6970;
+        font-weight: bold;
+    }
+
+    .boton_pagina_anterior_ventas,
+    .boton_pagina_siguiente_ventas {
+        width: 40px;
+        height: 40px;
+        border: none;
+        background-color: transparent;
+        color: #159ba3;
+        font-family: Arial, sans-serif;
+        font-size: 32px;
+        cursor: pointer;
+    }
+
+    .boton_pagina_anterior_ventas:hover,
+    .boton_pagina_siguiente_ventas:hover {
+        color: #0d6970;
+    }
+
+    .boton_pagina_anterior_ventas:disabled,
+    .boton_pagina_siguiente_ventas:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+    }
+
+    .puntos_paginacion_ventas {
+        color: #71818a;
+        font-family: Arial, sans-serif;
+        font-size: 15px;
+        padding: 0 4px;
+    }
+
+
+/* TITULO 8 DETALLE VENTA */
+
+    .contenedor_detalle_venta {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(5, 31, 45, 0.55);
+        z-index: 1100;
+    }
+
+    .contenedor_detalle_venta_oculto {
+        display: none;
+    }
+
+    .formulario_detalle_venta {
+        width: 760px;
+        max-width: calc(100% - 40px);
+        max-height: calc(100vh - 60px);
+        overflow-y: auto;
+        background-color: #ffffff;
+        border-radius: 8px;
+        padding: 23px;
+        box-sizing: border-box;
+    }
+
+
+/* TITULO 9 CABECERA DETALLE */
+
+    .cabecera_detalle_venta {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 18px;
+    }
+
+    .titulo_detalle_venta {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .boton_cerrar_detalle_venta {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #64727a;
+        font-family: Arial, sans-serif;
+        font-size: 25px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .boton_cerrar_detalle_venta:hover {
+        background-color: #edf1f3;
+    }
+
+
+/* TITULO 10 INFORMACION DETALLE */
+
+    .informacion_detalle_venta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 18px;
+    }
+
+    .fecha_detalle_venta {
+        color: #536873;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+    }
+
+    .total_detalle_venta {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    .contenedor_tabla_detalle_venta {
+        width: 100%;
+        overflow-x: auto;
+        border: 1px solid #dce4e8;
+        border-radius: 7px;
+    }
+
+    .tabla_detalle_venta {
+        width: 100%;
+        min-width: 600px;
+        border-collapse: collapse;
+    }
+
+    .encabezado_tabla_detalle_venta {
+        background-color: #f4f7f8;
+    }
+
+    .fila_encabezado_detalle_venta {
+        border-bottom: 1px solid #dce4e8;
+    }
+
+    .columna_producto_detalle_venta,
+    .columna_cantidad_detalle_venta,
+    .columna_precio_detalle_venta,
+    .columna_valorizado_detalle_venta {
+        padding: 12px;
+        color: #667881;
+        font-family: Arial, sans-serif;
+        font-size: 11px;
+    }
+
+    .columna_producto_detalle_venta {
+        text-align: left;
+    }
+
+    .columna_cantidad_detalle_venta {
+        text-align: center;
+    }
+
+    .columna_precio_detalle_venta,
+    .columna_valorizado_detalle_venta {
+        text-align: right;
+    }
+
+    .fila_producto_detalle_venta {
+        border-bottom: 1px solid #edf1f3;
+    }
+
+    .dato_producto_detalle_venta,
+    .dato_cantidad_detalle_venta,
+    .dato_precio_detalle_venta,
+    .dato_valorizado_detalle_venta {
+        padding: 13px 12px;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+    }
+
+    .dato_producto_detalle_venta {
+        text-align: left;
+    }
+
+    .dato_cantidad_detalle_venta {
+        text-align: center;
+    }
+
+    .dato_precio_detalle_venta,
+    .dato_valorizado_detalle_venta {
+        text-align: right;
+        white-space: nowrap;
+    }
+
+
+/* TITULO 11 FORMULARIO IMPORTACION VENTAS */
+
+    .contenedor_importacion_ventas {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(5, 31, 45, 0.55);
+        z-index: 1100;
+    }
+
+    .contenedor_importacion_ventas_oculto {
+        display: none;
+    }
+
+    .formulario_importacion_ventas {
+        width: 500px;
+        max-width: calc(100% - 40px);
+        background-color: #ffffff;
+        border-radius: 8px;
+        padding: 23px;
+        box-sizing: border-box;
+    }
+
+
+/* TITULO 12 CABECERA IMPORTACION */
+
+    .cabecera_importacion_ventas {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 22px;
+    }
+
+    .titulo_importacion_ventas {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .boton_cerrar_importacion_ventas {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #64727a;
+        font-family: Arial, sans-serif;
+        font-size: 25px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    .boton_cerrar_importacion_ventas:hover {
+        background-color: #edf1f3;
+    }
+
+
+/* TITULO 13 CONTENIDO IMPORTACION */
+
+    .contenido_importacion_ventas {
+        width: 100%;
+    }
+
+    .descripcion_importacion_ventas {
+        color: #71818a;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        line-height: 19px;
+        margin-bottom: 20px;
+    }
+
+    .zona_seleccion_archivo_ventas {
+        width: 100%;
+        padding: 38px 20px;
+        border: 2px dashed #b8c7ce;
+        border-radius: 8px;
+        text-align: center;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+    .zona_seleccion_archivo_ventas:hover {
+        background-color: #f6fafb;
+        border-color: #159ba3;
+    }
+
+    .icono_archivo_ventas {
+        color: #159ba3;
+        font-family: Arial, sans-serif;
+        font-size: 35px;
+        font-weight: bold;
+    }
+
+    .texto_seleccion_archivo_ventas {
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    .formatos_archivo_ventas {
+        color: #84939a;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        margin-top: 8px;
+    }
+
+    .informacion_archivo_ventas {
+        color: #536873;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        line-height: 18px;
+        margin-top: 15px;
+        white-space: pre-line;
+    }
+
+
+/* TITULO 14 ACCIONES IMPORTACION */
+
+    .contenedor_acciones_importacion_ventas {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 25px;
+    }
+
+    .boton_cancelar_importacion_ventas {
+        height: 40px;
+        display: flex;
+        align-items: center;
+        padding: 0 16px;
+        background-color: #edf1f3;
+        color: #44515a;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+    .boton_cancelar_importacion_ventas:hover {
+        background-color: #dfe6e9;
+    }
+
+    .boton_confirmar_importacion_ventas {
+        height: 40px;
+        display: flex;
+        align-items: center;
+        padding: 0 16px;
+        background-color: #159ba3;
+        color: #ffffff;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+    .boton_confirmar_importacion_ventas:hover {
+        background-color: #0f858d;
+    }
+
+
+/* TITULO 15 RESPONSIVE VENTAS */
+
+    @media (max-width: 900px) {
+
+        .contenedor_indicadores_ventas {
+            grid-template-columns: 1fr;
+        }
+
+        .contenedor_filtros_ventas {
+            grid-template-columns: 1fr;
+        }
+
+    }
+
+
+    @media (max-width: 600px) {
+
+        .contenedor_ventas {
+            padding: 18px;
+        }
+
+        .contenedor_encabezado_ventas {
+            grid-template-columns: 1fr;
+        }
+
+        .boton_importar_ventas {
+            width: 100%;
+        }
+
+        .formulario_detalle_venta,
+        .formulario_importacion_ventas {
+            max-width: calc(100% - 24px);
+            padding: 20px;
+        }
+
+        .contenedor_acciones_importacion_ventas {
+            flex-direction: column;
+        }
+
+        .boton_cancelar_importacion_ventas,
+        .boton_confirmar_importacion_ventas {
+            justify-content: center;
+        }
+
+    }

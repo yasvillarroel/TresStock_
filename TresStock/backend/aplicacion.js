@@ -104,5 +104,8 @@ app.use('/api/proveedores', require('./rutas/proveedores/proveedores_rutas'));
 // registra las rutas de inventario
 app.use('/api/inventario',require('./rutas/inventario/inventario_rutas'));
 
+// registra las rutas de ventas
+app.use('/api/ventas',require('./rutas/ventas/ventas_rutas'));
+
 // exporta la aplicacion para utilizarla desde otros archivos
 module.exports = app;

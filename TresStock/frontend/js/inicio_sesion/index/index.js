@@ -117,6 +117,9 @@
         // inicializa el funcionamiento de inventario
         if (vista === 'inventario') {await inicializarInventario();}
 
+        // inicializa ventas
+        if (vista === 'ventas') {await inicializarVentas();}
+
         // inicializa el funcionamiento de productos
         if (vista === 'productos') {await inicializarProductos();}
 

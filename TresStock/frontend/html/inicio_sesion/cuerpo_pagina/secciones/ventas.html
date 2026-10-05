@@ -1,0 +1,478 @@
+<!-- TITULO 1 CONTENEDOR VENTAS -->
+
+    <!-- contenedor principal de la vista de ventas -->
+    <div class="contenedor_ventas">
+
+
+        <!-- TITULO 2 ENCABEZADO VENTAS -->
+
+            <!-- contenedor del encabezado principal -->
+            <div class="contenedor_encabezado_ventas">
+
+                <!-- información principal de la vista -->
+                <div class="contenedor_informacion_ventas">
+
+                    <div class="titulo_ventas">
+                        Gestión de ventas
+                    </div>
+
+                    <div class="descripcion_ventas">
+                        Consulta e importa las ventas registradas en DimaSoft.
+                    </div>
+
+                </div>
+
+
+                <!-- opción para importar ventas -->
+                <div
+                    class="boton_importar_ventas"
+                    id="boton_importar_ventas"
+                    onclick="abrirImportacionVentas()"
+                >
+
+                    <div class="icono_importar_ventas">
+                        ↑
+                    </div>
+
+                    <div class="texto_importar_ventas">
+                        Importar ventas
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        <!-- TITULO 3 INDICADORES VENTAS -->
+
+            <!-- contenedor de indicadores -->
+            <div class="contenedor_indicadores_ventas">
+
+                <!-- total de ventas -->
+                <div class="tarjeta_total_ventas">
+
+                    <div class="icono_total_ventas">
+                        #
+                    </div>
+
+                    <div class="contenido_total_ventas">
+
+                        <div class="texto_total_ventas">
+                            Total ventas
+                        </div>
+
+                        <div
+                            class="valor_total_ventas"
+                            id="valor_total_ventas"
+                        >
+                            0
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ventas del día -->
+                <div class="tarjeta_ventas_dia">
+
+                    <div class="icono_ventas_dia">
+                        ↑
+                    </div>
+
+                    <div class="contenido_ventas_dia">
+
+                        <div class="texto_ventas_dia">
+                            Ventas del día
+                        </div>
+
+                        <div
+                            class="valor_ventas_dia"
+                            id="valor_ventas_dia"
+                        >
+                            0
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- total vendido -->
+                <div class="tarjeta_total_vendido">
+
+                    <div class="icono_total_vendido">
+                        $
+                    </div>
+
+                    <div class="contenido_total_vendido">
+
+                        <div class="texto_total_vendido">
+                            Total vendido
+                        </div>
+
+                        <div
+                            class="valor_total_vendido"
+                            id="valor_total_vendido"
+                        >
+                            $0
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        <!-- TITULO 4 FILTROS VENTAS -->
+
+            <!-- contenedor de filtros -->
+            <div class="contenedor_filtros_ventas">
+
+                <!-- búsqueda -->
+                <div class="contenedor_busqueda_ventas">
+
+                    <div class="texto_busqueda_ventas">
+                        Buscar venta
+                    </div>
+
+                    <input
+                        class="input_busqueda_ventas"
+                        id="input_busqueda_ventas"
+                        type="text"
+                        placeholder="Número de boleta"
+                    >
+
+                </div>
+
+
+                <!-- fecha desde -->
+                <div class="contenedor_fecha_desde_ventas">
+
+                    <div class="texto_fecha_desde_ventas">
+                        Desde
+                    </div>
+
+                    <input
+                        class="input_fecha_desde_ventas"
+                        id="input_fecha_desde_ventas"
+                        type="date"
+                    >
+
+                </div>
+
+
+                <!-- fecha hasta -->
+                <div class="contenedor_fecha_hasta_ventas">
+
+                    <div class="texto_fecha_hasta_ventas">
+                        Hasta
+                    </div>
+
+                    <input
+                        class="input_fecha_hasta_ventas"
+                        id="input_fecha_hasta_ventas"
+                        type="date"
+                    >
+
+                </div>
+
+            </div>
+
+
+        <!-- TITULO 5 TABLA VENTAS -->
+
+            <!-- contenedor principal de la tabla -->
+            <div class="contenedor_tabla_ventas">
+
+                <div class="cabecera_contenedor_tabla_ventas">
+
+                    <div class="titulo_tabla_ventas">
+                        Ventas registradas
+                    </div>
+
+                </div>
+
+
+                <table class="tabla_ventas">
+
+                    <thead class="encabezado_tabla_ventas">
+
+                        <tr class="fila_encabezado_ventas">
+
+                            <th class="columna_boleta_ventas">
+                                Boleta
+                            </th>
+
+                            <th class="columna_fecha_ventas">
+                                Fecha
+                            </th>
+
+                            <th class="columna_hora_ventas">
+                                Hora
+                            </th>
+
+                            <th class="columna_total_ventas">
+                                Total
+                            </th>
+
+                            <th class="columna_acciones_ventas">
+                                Acciones
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody
+                        class="cuerpo_tabla_ventas"
+                        id="cuerpo_tabla_ventas"
+                    >
+
+                        <tr class="fila_sin_ventas">
+
+                            <td
+                                class="dato_sin_ventas"
+                                colspan="5"
+                            >
+                                No hay ventas cargadas para mostrar.
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+
+                <!-- SUBTITULO 1 PAGINACION VENTAS -->
+
+                    <div
+                        class="contenedor_paginacion_ventas"
+                        id="contenedor_paginacion_ventas"
+                    >
+
+                        <button
+                            class="boton_pagina_anterior_ventas"
+                            id="boton_pagina_anterior_ventas"
+                            type="button"
+                        >
+                            ‹
+                        </button>
+
+                        <div
+                            class="numeros_paginas_ventas"
+                            id="numeros_paginas_ventas"
+                        ></div>
+
+                        <button
+                            class="boton_pagina_siguiente_ventas"
+                            id="boton_pagina_siguiente_ventas"
+                            type="button"
+                        >
+                            ›
+                        </button>
+
+                    </div>
+
+            </div>
+
+
+        <!-- TITULO 6 DETALLE VENTA -->
+
+            <!-- fondo del detalle de la venta -->
+            <div
+                class="contenedor_detalle_venta contenedor_detalle_venta_oculto"
+                id="contenedor_detalle_venta"
+            >
+
+                <div class="formulario_detalle_venta">
+
+
+                    <!-- TITULO 7 CABECERA DETALLE -->
+
+                        <div class="cabecera_detalle_venta">
+
+                            <div
+                                class="titulo_detalle_venta"
+                                id="titulo_detalle_venta"
+                            >
+                                Detalle de venta
+                            </div>
+
+                            <div
+                                class="boton_cerrar_detalle_venta"
+                                onclick="cerrarDetalleVenta()"
+                            >
+                                ×
+                            </div>
+
+                        </div>
+
+
+                    <!-- TITULO 8 INFORMACION DETALLE -->
+
+                        <div class="informacion_detalle_venta">
+
+                            <div
+                                class="fecha_detalle_venta"
+                                id="fecha_detalle_venta"
+                            >
+                                -
+                            </div>
+
+                            <div
+                                class="total_detalle_venta"
+                                id="total_detalle_venta"
+                            >
+                                Total: $0
+                            </div>
+
+                        </div>
+
+
+                        <div class="contenedor_tabla_detalle_venta">
+
+                            <table class="tabla_detalle_venta">
+
+                                <thead class="encabezado_tabla_detalle_venta">
+
+                                    <tr class="fila_encabezado_detalle_venta">
+
+                                        <th class="columna_producto_detalle_venta">
+                                            Producto
+                                        </th>
+
+                                        <th class="columna_cantidad_detalle_venta">
+                                            Cantidad
+                                        </th>
+
+                                        <th class="columna_precio_detalle_venta">
+                                            Precio
+                                        </th>
+
+                                        <th class="columna_valorizado_detalle_venta">
+                                            Total
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+                                <tbody
+                                    class="cuerpo_tabla_detalle_venta"
+                                    id="cuerpo_tabla_detalle_venta"
+                                >
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                </div>
+
+            </div>
+
+
+        <!-- TITULO 9 FORMULARIO IMPORTACION VENTAS -->
+
+            <!-- contenedor superpuesto del formulario -->
+            <div
+                class="contenedor_importacion_ventas contenedor_importacion_ventas_oculto"
+                id="contenedor_importacion_ventas"
+            >
+
+                <div class="formulario_importacion_ventas">
+
+
+                    <!-- TITULO 10 CABECERA IMPORTACION -->
+
+                        <div class="cabecera_importacion_ventas">
+
+                            <div class="titulo_importacion_ventas">
+                                Importar ventas
+                            </div>
+
+                            <div
+                                class="boton_cerrar_importacion_ventas"
+                                onclick="cerrarImportacionVentas()"
+                            >
+                                ×
+                            </div>
+
+                        </div>
+
+
+                    <!-- TITULO 11 CONTENIDO IMPORTACION -->
+
+                        <div class="contenido_importacion_ventas">
+
+                            <div class="descripcion_importacion_ventas">
+                                Selecciona el archivo CSV exportado desde DimaSoft.
+                            </div>
+
+                            <div
+                                class="zona_seleccion_archivo_ventas"
+                                onclick="seleccionarArchivoVentas()"
+                            >
+
+                                <div class="icono_archivo_ventas">
+                                    ↑
+                                </div>
+
+                                <div class="texto_seleccion_archivo_ventas">
+                                    Seleccionar archivo CSV
+                                </div>
+
+                                <div class="formatos_archivo_ventas">
+                                    Formato permitido: .csv
+                                </div>
+
+                            </div>
+
+
+                            <input
+                                type="file"
+                                id="input_archivo_ventas"
+                                accept=".csv"
+                                hidden
+                            >
+
+
+                            <div
+                                class="informacion_archivo_ventas"
+                                id="informacion_archivo_ventas"
+                            >
+                                No se ha seleccionado ningún archivo.
+                            </div>
+
+                        </div>
+
+
+                    <!-- TITULO 12 ACCIONES IMPORTACION -->
+
+                        <div class="contenedor_acciones_importacion_ventas">
+
+                            <div
+                                class="boton_cancelar_importacion_ventas"
+                                onclick="cerrarImportacionVentas()"
+                            >
+                                Cancelar
+                            </div>
+
+                            <div
+                                class="boton_confirmar_importacion_ventas"
+                                onclick="importarVentas()"
+                            >
+                                Importar ventas
+                            </div>
+
+                        </div>
+
+                </div>
+
+            </div>
+
+    </div>
