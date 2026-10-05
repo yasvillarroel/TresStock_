@@ -148,11 +148,135 @@ const actualizarStockMinimo = async (
     return resultado.rows[0];
 };
 
+// FUNCION RECALCULAR STOCK MINIMO
+
+const recalcularStockMinimo = async () => {
+
+    const resultado = await pool.query(
+        `
+        WITH periodo AS
+        (
+            SELECT
+                MAX(fecha_hora)::date AS fecha_fin,
+                (
+                    MAX(fecha_hora)::date
+                    - INTERVAL '6 months'
+                )::date AS fecha_inicio
+            FROM base_datos.ventas
+        ),
+
+        ventas_6_meses AS
+        (
+            SELECT
+                dv.codigo,
+
+                SUM(
+                    dv.cantidad
+                ) AS cantidad_vendida,
+
+                (
+                    p.fecha_fin -
+                    p.fecha_inicio
+                ) AS dias_periodo
+
+            FROM base_datos.detalle_venta dv
+
+            INNER JOIN base_datos.ventas v
+                ON v.id_venta = dv.id_venta
+
+            CROSS JOIN periodo p
+
+            WHERE
+                v.fecha_hora::date >
+                p.fecha_inicio
+
+                AND
+
+                v.fecha_hora::date <=
+                p.fecha_fin
+
+            GROUP BY
+                dv.codigo,
+                p.fecha_inicio,
+                p.fecha_fin
+        ),
+
+        calculo_stock AS
+        (
+            SELECT
+                pp.codigo,
+
+                CEIL(
+                    GREATEST(
+                        COALESCE(
+                            v6.cantidad_vendida,
+                            0
+                        ),
+                        0
+                    )
+                    /
+                    NULLIF(
+                        v6.dias_periodo,
+                        0
+                    )
+                    *
+                    MAX(
+                        prov.tiempo_entrega_dias
+                    )
+                )::INTEGER
+                AS stock_minimo
+
+            FROM base_datos.producto_proveedor pp
+
+            INNER JOIN base_datos.proveedores prov
+                ON prov.id_proveedor =
+                pp.id_proveedor
+
+            INNER JOIN ventas_6_meses v6
+                ON v6.codigo =
+                pp.codigo
+
+            WHERE
+                prov.tiempo_entrega_dias
+                IS NOT NULL
+
+            GROUP BY
+                pp.codigo,
+                v6.cantidad_vendida,
+                v6.dias_periodo
+        )
+
+        UPDATE base_datos.inventario i
+
+        SET stock_minimo =
+            cs.stock_minimo
+
+        FROM calculo_stock cs
+
+        WHERE
+            i.codigo =
+            cs.codigo
+
+        RETURNING
+            i.codigo,
+            i.stock_minimo
+        `
+    );
+
+
+    return {
+        productos_actualizados:
+            resultado.rowCount
+    };
+
+};
+
 
 // exporta las funciones
 module.exports = {
     obtenerInventario,
     obtenerResumenInventario,
     obtenerFamilias,
-    actualizarStockMinimo
+    actualizarStockMinimo,
+    recalcularStockMinimo
 };

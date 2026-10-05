@@ -1284,6 +1284,54 @@
     }
 
 
+// recalcula el stock minimo utilizando las ventas y proveedores
+async function recalcularStockMinimoInventario() {
+
+    try {
+
+        const respuesta = await fetch(
+            'http://127.0.0.1:3000/api/inventario/recalcular-stock-minimo',
+            {
+                method: 'PUT',
+                credentials: 'include'
+            }
+        );
+
+
+        const resultado =
+            await respuesta.json();
+
+
+        if (!respuesta.ok) {
+
+            console.error(
+                'Error al recalcular stock mínimo:',
+                resultado
+            );
+
+            return;
+
+        }
+
+
+        console.log(
+            'Stock mínimo recalculado:',
+            resultado
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            'Error al recalcular stock mínimo:',
+            error
+        );
+
+    }
+
+}
+
+
 // TITULO 11 INICIALIZACION INVENTARIO
 
     // función para inicializar la vista de inventario
@@ -1337,6 +1385,8 @@
 
         }
 
+        // recalcula el stock minimo antes de cargar los datos
+        await recalcularStockMinimoInventario();
 
         await Promise.all([
             cargarFamiliasInventario(),

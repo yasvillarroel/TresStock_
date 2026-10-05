@@ -175,11 +175,47 @@ const actualizarStockMinimo = async (req, res) => {
 
 };
 
+// FUNCION RECALCULAR STOCK MINIMO
+
+const recalcularStockMinimo = async (req, res) => {
+
+    try {
+
+        const resultado =
+            await inventarioServicio
+                .recalcularStockMinimo();
+
+
+        res.json(
+            resultado
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            'Error al recalcular stock mínimo:',
+            error
+        );
+
+
+        res.status(500).json(
+            {
+                mensaje:
+                    'No se pudo recalcular el stock mínimo'
+            }
+        );
+
+    }
+
+};
+
 
 // exporta las funciones
 module.exports = {
     obtenerInventario,
     obtenerResumenInventario,
     obtenerFamilias,
-    actualizarStockMinimo
+    actualizarStockMinimo,
+    recalcularStockMinimo
 };

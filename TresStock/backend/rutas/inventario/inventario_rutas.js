@@ -31,6 +31,11 @@ router.get(
     inventarioControlador.obtenerFamilias
 );
 
+// ruta para recalcular automaticamente el stock minimo
+router.put(
+    '/recalcular-stock-minimo',
+    inventarioControlador.recalcularStockMinimo
+);
 
 // ruta para actualizar el stock minimo
 router.put(

@@ -52,16 +52,39 @@ const obtenerProductos = async () => {
             p.precio_publico,
             p.imagen,
             i.stock_actual,
-            i.stock_minimo
+            i.stock_minimo,
+            proveedores_producto.proveedor
+
         FROM base_datos.productos p
+
         LEFT JOIN base_datos.inventario i
-        ON p.codigo = i.codigo
+            ON p.codigo = i.codigo
+
+        LEFT JOIN (
+            SELECT
+                pp.codigo,
+
+                STRING_AGG(
+                    DISTINCT pr.nombre_comercial,
+                    ', '
+                    ORDER BY pr.nombre_comercial
+                ) AS proveedor
+
+            FROM base_datos.producto_proveedor pp
+
+            INNER JOIN base_datos.proveedores pr
+                ON pr.id_proveedor = pp.id_proveedor
+
+            GROUP BY pp.codigo
+
+        ) proveedores_producto
+            ON proveedores_producto.codigo = p.codigo
+
         ORDER BY p.codigo`
     );
 
     return resultado.rows;
 };
-
 
 // FUNCION 3 OBTENER PRODUCTO POR ID
 const obtenerProducto = async (id) => {
