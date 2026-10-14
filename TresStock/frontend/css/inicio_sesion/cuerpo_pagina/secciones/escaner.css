@@ -1,5 +1,7 @@
-
-
+/* fondo del contenedor al mostrar el escaner */
+.contenedor_contenido.contenedor_contenido_escaner {
+    background-color: #1e7c88;
+}
 /* BOTON ESCANEAR PRODUCTOS */
 
 .boton_escanear_producto{
@@ -33,21 +35,48 @@
 
 /* CONTENEDOR CAMARA ESCANER */
 
+    /* movimiento hacia la derecha */
+    @keyframes entrada_escaner_producto {
+        from {
+            opacity: 0;
+            transform: translate(-60%, -50%);
+        }
+
+        to {
+            opacity: 1;
+            transform: translate(-50%, -50%);
+        }
+    }
+
     /* contenedor principal del escaner */
     .contenedor_escaner_producto {
         position: fixed;
-        inset: 0;
+        top: 50%;
+        left: 55%;
+        transform: translate(-50%, -50%);
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
         z-index: 1000;
-        background-color: white;
-        margin: auto;
+        background-color: #01bec5;
         text-align: center;
         padding: 30px;
-        max-width: 1300px;
-        max-height: 800px;
+        width: max-content;
+        height: max-content;
+        max-width: none;
+        max-height: none;
+        flex-shrink: 0;
+        border-radius: 12px;
+        overflow: hidden;
+        animation: entrada_escaner_producto 1.0s ease;
+    }
 
+    .contenedor_escaner_producto video {
+        display: block;
+        width: 640px;
+        max-width: none;
+        height: auto;
     }
 
     /* contenido del escaner */
@@ -71,3 +100,174 @@
         object-fit: cover;
         background: #000;
     }
+
+    .titulo_escaner_producto{
+        color: white;
+        margin-bottom: 30px;
+        font-weight: 700;
+        font-size: 30px;
+    }
+
+    .boton_cerrar_escaner_producto{
+        background: none;
+        border: none;
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+        margin-top: 30px;
+        padding: 15px 50px;
+        color: white;
+        font-weight: 700;
+        font-size: 15px;
+        background-color: #265d7d;
+        border-radius: 10px;
+        transition: background-color 1.0s ease;
+    }
+
+    .boton_cerrar_escaner_producto:hover{
+        background-color: #062d44;
+    }
+
+    /* pantallas grandes (monitores Full HD+, iMac, monitores gaming QHD/4K) */
+    @media (min-width: 1441px) {
+        /* Sin media */
+    }
+
+    /* notebooks grandes (1600x900, 1920x1080) */
+    @media (max-width: 1440px) {
+        /* contenedor principal del escaner */
+        .contenedor_escaner_producto {
+            left: 60%;
+        }
+    }
+
+    /* notebooks comunes (1366x768, MacBook Air/Pro) */
+    @media (max-width: 1200px) {
+
+        /* contenedor principal del escaner */
+        .contenedor_escaner_producto {
+            left: 50%;
+        }
+
+    }
+
+    /* tablets horizontales / pantallas medianas (iPad Pro en horizontal, notebooks pequeños) */
+    @media (max-width: 992px) {
+        /* Sin media */
+    }
+
+    /* tablets verticales (iPad clásico, tablets Android estándar) */
+    @media (max-width: 768px) {
+
+        .contenedor_escaner_producto video {
+            width: 350px;
+        }
+
+    }
+
+    /* móviles grandes (iPhone 11, iPhone Plus/Max, Android grandes) */
+    @media (max-width: 414px) {
+        /* Sin media */
+    }
+
+    /* móviles medianos (iPhone 12/13/14, Android gama media) */
+    @media (max-width: 390px) {
+        /* Sin media */
+    }
+
+    /* móviles pequeños (Android estándar, iPhone SE) */
+    @media (max-width: 360px) {
+        /* Sin media */
+    }
+
+/* CONTENEDOR DE GESTION DEL PRODUCTO */
+
+/* contenedor del menu de gestion */
+.contenedor_menu_producto {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* ocultar menu de gestion */
+.contenedor_menu_producto_oculto {
+    display: none;
+}
+
+/* contenido del menu */
+.contenido_menu_producto {
+    width: 100%;
+    max-width: 450px;
+    padding: 25px;
+    box-sizing: border-box;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* titulo del menu */
+.titulo_menu_producto {
+    margin-bottom: 20px;
+    color: #333333;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* codigo escaneado */
+#codigo_producto_escaneado {
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #f2f2f2;
+    border-radius: 5px;
+    overflow-wrap: anywhere;
+}
+
+/* datos del producto */
+#datos_producto_escaneado {
+    margin-bottom: 20px;
+    color: #333333;
+}
+
+/* botones del menu */
+.contenido_menu_producto button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background: #334e68;
+    color: #ffffff;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+/* efecto al pasar el cursor */
+.contenido_menu_producto button:hover {
+    background: #243b53;
+}
+
+/* resultados para asociar productos */
+#resultados_productos_asociar {
+    margin-top: 20px;
+}
+
+/* adaptacion a pantallas pequenas */
+@media (max-width: 480px) {
+    .contenido_menu_producto {
+        padding: 18px;
+    }
+
+    .titulo_menu_producto {
+        font-size: 20px;
+    }
+}

@@ -22,3 +22,56 @@
     </div>
 
 </div>
+
+<!-- TITULO 2 CONTENEDOR DEL MENU DE GESTION -->
+
+    <!-- contenedor del menu de gestion -->
+    <div class="contenedor_menu_producto contenedor_menu_producto_oculto"
+        id="contenedor_menu_producto">
+
+        <!-- contenido del menu -->
+        <div class="contenido_menu_producto">
+
+            <!-- titulo del menu -->
+            <div class="titulo_menu_producto">
+                Gestionar producto
+            </div>
+
+            <!-- codigo escaneado -->
+            <div id="codigo_producto_escaneado"></div>
+
+            <!-- datos del producto encontrado -->
+            <div id="datos_producto_escaneado"></div>
+
+            <!-- boton para asociar el codigo -->
+            <button type="button"
+                    id="boton_asociar_codigo"
+                    onclick="mostrarProductosParaAsociar()">
+                Asociar código
+            </button>
+
+            <!-- boton para ajustar el producto -->
+            <button type="button"
+                    id="boton_ajustar_producto"
+                    onclick="ajustarProductoEscaneado()">
+                Ajustar
+            </button>
+
+            <!-- boton para escanear otro codigo -->
+            <button type="button"
+                    onclick="volverAlEscanerProducto()">
+                Escanear otro código
+            </button>
+
+            <!-- boton para cerrar el menu -->
+            <button type="button"
+                    onclick="cerrarMenuProducto(); cargarVista('inventario')">
+                Cerrar
+            </button>
+
+            <!-- resultados para asociar un codigo -->
+            <div id="resultados_productos_asociar" hidden></div>
+
+        </div>
+
+    </div>
