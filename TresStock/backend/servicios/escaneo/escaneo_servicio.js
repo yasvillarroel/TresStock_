@@ -58,8 +58,104 @@ const buscarProductoPorCodigo = async (codigo) => {
 
 };
 
+// BUSCAR PRODUCTOS PARA ASOCIAR UN CODIGO
+const buscarProductosParaAsociar = async (termino) => {
+
+    const resultado = await pool.query(
+        `
+        SELECT
+            p.codigo,
+            p.cod_barra,
+            p.descripcion,
+            p.familia,
+            p.precio_publico
+        FROM base_datos.productos p
+        WHERE
+            p.codigo ILIKE $1
+            OR p.descripcion ILIKE $1
+            OR p.cod_barra ILIKE $1
+        ORDER BY p.descripcion
+        LIMIT 20
+        `,
+        [`%${termino}%`]
+    );
+
+    return resultado.rows;
+
+};
+
+
+// ASOCIAR CODIGO DE BARRAS A UN PRODUCTO
+const asociarCodigoProducto = async (
+    codigoProducto,
+    codigoBarras,
+    tipoFormato,
+    cantidadUnidades
+) => {
+
+    // comprueba si el codigo ya esta registrado
+    const existente = await pool.query(
+        `
+        SELECT codigo
+        FROM base_datos.productos
+        WHERE cod_barra = $1
+
+        UNION ALL
+
+        SELECT codigo_producto AS codigo
+        FROM base_datos.codigos_asociados
+        WHERE codigo_barras = $1
+
+        LIMIT 1
+        `,
+        [codigoBarras]
+    );
+
+    if (existente.rows.length > 0) {
+
+        const error = new Error(
+            'El codigo de barras ya esta registrado'
+        );
+
+        error.codigo = 'CODIGO_DUPLICADO';
+
+        throw error;
+
+    }
+
+    // registra la asociacion
+    const resultado = await pool.query(
+        `
+        INSERT INTO base_datos.codigos_asociados (
+            codigo_producto,
+            codigo_barras,
+            tipo_formato,
+            cantidad_unidades
+        )
+        VALUES ($1, $2, $3, $4)
+        RETURNING
+            id_codigo,
+            codigo_producto,
+            codigo_barras,
+            tipo_formato,
+            cantidad_unidades
+        `,
+        [
+            codigoProducto,
+            codigoBarras,
+            tipoFormato,
+            cantidadUnidades
+        ]
+    );
+
+    return resultado.rows[0];
+
+};
+
 
 // exporta las funciones
 module.exports = {
-    buscarProductoPorCodigo
+    buscarProductoPorCodigo,
+    buscarProductosParaAsociar,
+    asociarCodigoProducto
 };

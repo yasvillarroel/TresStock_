@@ -271,6 +271,118 @@ const recalcularStockMinimo = async () => {
 
 };
 
+// FUNCION AJUSTAR INVENTARIO
+const ajustarInventario = async (
+    codigo,
+    cantidad
+) => {
+
+    // inicia una transaccion
+    const cliente = await pool.connect();
+
+    try {
+
+        // inicia la transaccion
+        await cliente.query('BEGIN');
+
+        // verifica que el producto exista
+        const producto = await cliente.query(
+            `SELECT codigo
+            FROM base_datos.productos
+            WHERE codigo = $1`,
+            [codigo]
+        );
+
+        // verifica si el producto existe
+        if (producto.rowCount === 0) {
+
+            const error = new Error(
+                'Producto no encontrado'
+            );
+
+            error.status = 404;
+
+            throw error;
+
+        }
+
+        // crea el registro de inventario si no existe
+        await cliente.query(
+            `INSERT INTO base_datos.inventario
+            (
+                codigo,
+                stock_actual,
+                stock_minimo
+            )
+            VALUES ($1, 0, 0)
+            ON CONFLICT (codigo) DO NOTHING`,
+            [codigo]
+        );
+
+        // bloquea el registro para evitar ajustes simultaneos
+        const inventario = await cliente.query(
+            `SELECT stock_actual
+            FROM base_datos.inventario
+            WHERE codigo = $1
+            FOR UPDATE`,
+            [codigo]
+        );
+
+        // obtiene el stock anterior
+        const stockAnterior = Number(
+            inventario.rows[0].stock_actual
+        );
+
+        // calcula el nuevo stock
+        const stockNuevo = stockAnterior + cantidad;
+
+        // actualiza el stock
+        const resultado = await cliente.query(
+            `UPDATE base_datos.inventario
+            SET stock_actual = $1
+            WHERE codigo = $2
+            RETURNING
+                codigo,
+                stock_actual,
+                stock_minimo`,
+            [
+                stockNuevo,
+                codigo
+            ]
+        );
+
+        // confirma la transaccion
+        await cliente.query('COMMIT');
+
+        // devuelve el resultado del ajuste
+        return {
+            codigo: resultado.rows[0].codigo,
+            stock_anterior: stockAnterior,
+            cantidad_anadida: cantidad,
+            stock_actual: Number(
+                resultado.rows[0].stock_actual
+            ),
+            stock_minimo: Number(
+                resultado.rows[0].stock_minimo
+            )
+        };
+
+    } catch (error) {
+
+        // revierte la transaccion si ocurre un error
+        await cliente.query('ROLLBACK');
+
+        throw error;
+
+    } finally {
+
+        // libera la conexion
+        cliente.release();
+
+    }
+
+};
+
 
 // exporta las funciones
 module.exports = {
@@ -278,5 +390,6 @@ module.exports = {
     obtenerResumenInventario,
     obtenerFamilias,
     actualizarStockMinimo,
-    recalcularStockMinimo
+    recalcularStockMinimo,
+    ajustarInventario
 };

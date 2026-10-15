@@ -43,6 +43,12 @@ router.put(
     inventarioControlador.actualizarStockMinimo
 );
 
+// ruta para ajustar el inventario
+router.post(
+    '/ajustar',
+    inventarioControlador.ajustarInventario
+);
+
 
 // exporta el router
 module.exports = router;

@@ -210,6 +210,82 @@ const recalcularStockMinimo = async (req, res) => {
 
 };
 
+// FUNCION AJUSTAR INVENTARIO
+const ajustarInventario = async (req, res) => {
+
+    try {
+
+        // obtiene el codigo del producto
+        const { codigo } = req.body;
+
+        // obtiene la cantidad a añadir
+        const cantidad = Number(
+            req.body.cantidad
+        );
+
+        // verifica el codigo del producto
+        if (
+            typeof codigo !== 'string' ||
+            codigo.trim() === ''
+        ) {
+
+            return res.status(400).json({
+                mensaje: 'El código del producto es obligatorio'
+            });
+
+        }
+
+        // verifica la cantidad a añadir
+        if (
+            !Number.isSafeInteger(cantidad) ||
+            cantidad < 1
+        ) {
+
+            return res.status(400).json({
+                mensaje: 'La cantidad debe ser un entero mayor que 0'
+            });
+
+        }
+
+        // ajusta el inventario
+        const inventario =
+            await inventarioServicio.ajustarInventario(
+                codigo.trim(),
+                cantidad
+            );
+
+        // envia el resultado del ajuste
+        return res.json({
+            mensaje: 'Inventario actualizado correctamente',
+            inventario
+        });
+
+    } catch (error) {
+
+        // muestra el error en la consola
+        console.error(
+            'Error al ajustar inventario:',
+            error
+        );
+
+        // verifica si el producto no existe
+        if (error.status === 404) {
+
+            return res.status(404).json({
+                mensaje: error.message
+            });
+
+        }
+
+        // envia el error
+        return res.status(500).json({
+            mensaje: 'Error al ajustar inventario'
+        });
+
+    }
+
+};
+
 
 // exporta las funciones
 module.exports = {
@@ -217,5 +293,6 @@ module.exports = {
     obtenerResumenInventario,
     obtenerFamilias,
     actualizarStockMinimo,
-    recalcularStockMinimo
+    recalcularStockMinimo,
+    ajustarInventario
 };
