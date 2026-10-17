@@ -496,7 +496,7 @@ let productosFiltradosActuales = [];
             <tr class="fila_sin_productos">
                 <td
                     class="dato_sin_productos"
-                    colspan="9"
+                    colspan="8"
                 >
                     No hay productos cargados para mostrar.
                 </td>
@@ -537,6 +537,23 @@ let productosFiltradosActuales = [];
 
 
         fila.innerHTML = `
+            <!-- miniatura de la fotografia del producto -->
+            <td class="dato_imagen_productos">
+                <button
+                    class="boton_accion_producto boton_ver_producto boton_imagen_producto"
+                    type="button"
+                    title="Ver detalle del producto"
+                    aria-label="Ver detalle del producto"
+                >
+                    <img
+                        class="imagen_miniatura_producto"
+                        alt="Producto sin fotografía"
+                        loading="lazy"
+                        decoding="async"
+                    >
+                </button>
+            </td>
+
             <td class="dato_codigo_productos">
                 ${producto.codigo || '-'}
             </td>
@@ -620,6 +637,37 @@ let productosFiltradosActuales = [];
 
         `;
 
+
+        // usa la imagen ya guardada en PostgreSQL, sin consultar la API
+        const miniatura = fila.querySelector(
+            '.imagen_miniatura_producto'
+        );
+
+        if (miniatura) {
+
+            const imagenGuardada = String(producto.imagen ?? '').trim();
+            const imagenPredeterminada =
+                './imagenes/inicio_sesion/cuerpo_pagina/secciones/package.svg';
+
+            // si no tiene fotografia, muestra el icono predeterminado
+            miniatura.src = imagenGuardada || imagenPredeterminada;
+            miniatura.alt = imagenGuardada
+                ? 'Fotografía de ' + (producto.descripcion || 'producto')
+                : 'Producto sin fotografía';
+
+            if (!imagenGuardada) {
+                miniatura.classList.add('imagen_miniatura_producto_vacia');
+            }
+
+            // evita mostrar el icono de imagen rota si la URL falla
+            miniatura.onerror = function () {
+                this.onerror = null;
+                this.src = imagenPredeterminada;
+                this.alt = 'Producto sin fotografía';
+                this.classList.add('imagen_miniatura_producto_vacia');
+            };
+
+        }
 
         cuerpoTabla.appendChild(
             fila
