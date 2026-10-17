@@ -994,6 +994,8 @@
         border-radius: 8px;
         padding: 23px;
         box-sizing: border-box;
+        max-height: calc(100vh - 36px);
+        overflow-y: auto;
     }
 
 
@@ -1607,3 +1609,166 @@
     width: 36px;
     height: 36px;
 }
+
+
+/* TITULO 13 IMAGEN DEL PRODUCTO */
+
+    /* seccion de fotografia dentro del formulario */
+    .contenedor_imagen_producto {
+        margin-top: 21px;
+        padding-top: 18px;
+        border-top: 1px solid #e2e8eb;
+    }
+
+    /* titulo del campo imagen */
+    .texto_campo_imagen_producto {
+        color: #425966;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    /* distribucion de la fotografia y sus controles */
+    .contenido_imagen_producto {
+        display: flex;
+        align-items: flex-start;
+        gap: 18px;
+    }
+
+    /* marco donde se muestra la fotografia */
+    .marco_imagen_producto {
+        width: 138px;
+        height: 138px;
+        min-width: 138px;
+        border: 1px solid #dce4e8;
+        border-radius: 7px;
+        background-color: #f8fafb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+
+    /* fotografia del producto */
+    .imagen_vista_previa_producto {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    /* oculta la fotografia si no existe */
+    .imagen_vista_previa_producto[hidden] {
+        display: none;
+    }
+
+    /* texto que aparece cuando no existe fotografia */
+    .mensaje_sin_imagen_producto {
+        padding: 10px;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        color: #84939a;
+        text-align: center;
+    }
+
+    .mensaje_sin_imagen_producto[hidden] {
+        display: none;
+    }
+
+    /* area con las opciones de fotografia */
+    .controles_imagen_producto {
+        display: flex;
+        flex: 1;
+        min-width: 0;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    /* organiza los botones */
+    .botones_imagen_producto {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    /* diseño de buscar imagen */
+    .boton_buscar_imagen_producto {
+        min-height: 39px;
+        background-color: #159ba3;
+        color: #ffffff;
+        border: 1px solid #159ba3;
+        border-radius: 6px;
+        padding: 0 13px;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .boton_buscar_imagen_producto:hover {
+        background-color: #0f858d;
+        border-color: #0f858d;
+    }
+
+    /* diseño de quitar imagen */
+    .boton_quitar_imagen_producto {
+        min-height: 39px;
+        background-color: #ffffff;
+        color: #536873;
+        border: 1px solid #ced9de;
+        border-radius: 6px;
+        padding: 0 13px;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        cursor: pointer;
+    }
+
+    .boton_quitar_imagen_producto:hover {
+        background-color: #edf1f3;
+    }
+
+    /* controles inactivos */
+    .boton_buscar_imagen_producto:disabled,
+    .boton_quitar_imagen_producto:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+    }
+
+    /* mensaje sobre el resultado de la busqueda */
+    .texto_estado_imagen_producto {
+        color: #697a83;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    /* indica la fuente de la fotografia */
+    .enlace_fuente_imagen_producto {
+        color: #0f858d;
+        font-family: Arial, sans-serif;
+        font-size: 11px;
+        text-decoration: underline;
+        overflow-wrap: anywhere;
+    }
+
+    .enlace_fuente_imagen_producto[hidden] {
+        display: none;
+    }
+
+    /* organiza el campo de imagen en pantallas pequeñas */
+    @media (max-width: 600px) {
+
+        .contenido_imagen_producto {
+            flex-direction: column;
+        }
+
+        .marco_imagen_producto {
+            width: 120px;
+            height: 120px;
+            min-width: 120px;
+        }
+
+    }

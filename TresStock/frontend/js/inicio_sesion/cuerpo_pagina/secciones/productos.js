@@ -5,6 +5,11 @@ let productosCargados = [];
 let modoFormularioProducto = 'nuevo';
 let codigoOriginalProducto = null;
 let imagenOriginalProducto = null;
+let imagenGuardadaProducto = null;
+let imagenNuevaBuscadaProducto = false;
+let codigoBarraImagenBuscadaProducto = null;
+let busquedaImagenProductoSecuencia = 0;
+let buscandoImagenProducto = false;
 let guardandoProducto = false;
 let listaProveedoresProducto = null;
 
@@ -41,6 +46,7 @@ let productosFiltradosActuales = [];
         modoFormularioProducto = 'nuevo';
         codigoOriginalProducto = null;
         imagenOriginalProducto = null;
+        imagenGuardadaProducto = null;
 
         configurarEstadoFormularioProducto();
 
@@ -60,6 +66,10 @@ let productosFiltradosActuales = [];
 
     // función para ocultar el formulario de producto
     function cerrarFormularioProducto() {
+
+        // ignora respuestas de busquedas pendientes al cerrar el formulario
+        busquedaImagenProductoSecuencia++;
+        buscandoImagenProducto = false;
 
         const contenedorFormularioProducto = document.getElementById(
             'contenedor_formulario_producto'
@@ -130,6 +140,16 @@ let productosFiltradosActuales = [];
         if (selectProveedorProducto) {
             selectProveedorProducto.value = '';
         }
+
+        // restablece la fotografia cada vez que se abre un producto
+        busquedaImagenProductoSecuencia++;
+        buscandoImagenProducto = false;
+        imagenOriginalProducto = null;
+        imagenGuardadaProducto = null;
+        imagenNuevaBuscadaProducto = false;
+        codigoBarraImagenBuscadaProducto = null;
+        mostrarVistaPreviaImagenProducto(null,
+            'Puedes buscar una fotografía usando el código de barras.');
 
     }
 
@@ -1402,6 +1422,8 @@ function configurarEstadoFormularioProducto() {
             ? 'Guardar cambios'
             : 'Guardar producto';
     }
+
+    actualizarBotonesImagenProducto();
 }
 
 
@@ -1422,6 +1444,14 @@ async function abrirDetalleProducto(codigo, modo) {
     modoFormularioProducto = modo;
     codigoOriginalProducto = producto.codigo;
     imagenOriginalProducto = producto.imagen ?? null;
+    imagenGuardadaProducto = imagenOriginalProducto;
+
+    mostrarVistaPreviaImagenProducto(
+        imagenOriginalProducto,
+        imagenOriginalProducto
+            ? 'Fotografía asociada al producto.'
+            : 'Este producto todavía no tiene fotografía.'
+    );
 
     document.getElementById(
         'titulo_formulario_producto'
@@ -1478,7 +1508,8 @@ async function guardarCambiosProducto() {
 
     if (
         modoFormularioProducto === 'ver' ||
-        guardandoProducto
+        guardandoProducto ||
+        buscandoImagenProducto
     ) {
         return;
     }
@@ -1531,6 +1562,7 @@ async function guardarCambiosProducto() {
         : 'http://127.0.0.1:3000/api/productos';
 
     guardandoProducto = true;
+    actualizarBotonesImagenProducto();
 
     try {
 
@@ -1550,7 +1582,7 @@ async function guardarCambiosProducto() {
                 descripcion,
                 familia,
                 precio_publico: precio,
-                imagen: esEdicion ? imagenOriginalProducto : null,
+                imagen: imagenOriginalProducto,
                 proveedor: proveedor || null
             })
         });
@@ -1581,6 +1613,7 @@ async function guardarCambiosProducto() {
     } finally {
 
         guardandoProducto = false;
+        actualizarBotonesImagenProducto();
     }
 }
 
@@ -1686,4 +1719,244 @@ function configurarAccionesProductos() {
             guardarCambiosProducto
         );
     }
+
+    // permite buscar y quitar fotografias desde el formulario
+    const botonBuscarImagen = document.getElementById('boton_buscar_imagen_producto');
+    const botonQuitarImagen = document.getElementById('boton_quitar_imagen_producto');
+    const campoCodigoBarra = document.getElementById('input_codigo_barra_producto');
+    const vistaPrevia = document.getElementById('imagen_vista_previa_producto');
+
+    if (botonBuscarImagen) {
+        botonBuscarImagen.addEventListener('click', buscarImagenProductoFormulario);
+    }
+
+    if (botonQuitarImagen) {
+        botonQuitarImagen.addEventListener('click', quitarImagenProductoFormulario);
+    }
+
+    if (campoCodigoBarra) {
+        campoCodigoBarra.addEventListener('input', function() {
+            const codigoActual = campoCodigoBarra.value.trim();
+
+            // cancela la aplicacion de una busqueda pendiente para otro codigo
+            if (buscandoImagenProducto) {
+                busquedaImagenProductoSecuencia++;
+                buscandoImagenProducto = false;
+                actualizarBotonesImagenProducto();
+            }
+
+            // una imagen encontrada para otro codigo de barras no debe guardarse
+            if (
+                imagenNuevaBuscadaProducto &&
+                codigoBarraImagenBuscadaProducto !== codigoActual
+            ) {
+                busquedaImagenProductoSecuencia++;
+                buscandoImagenProducto = false;
+                imagenOriginalProducto = imagenGuardadaProducto;
+                imagenNuevaBuscadaProducto = false;
+                codigoBarraImagenBuscadaProducto = null;
+
+                mostrarVistaPreviaImagenProducto(imagenOriginalProducto,
+                    'Cambió el código de barras. Busca nuevamente la fotografía.');
+            }
+        });
+    }
+
+    if (vistaPrevia) {
+        vistaPrevia.addEventListener('error', function() {
+            vistaPrevia.hidden = true;
+
+            const mensaje = document.getElementById('mensaje_sin_imagen_producto');
+            if (mensaje) {
+                mensaje.textContent = 'Imagen no disponible';
+                mensaje.hidden = false;
+            }
+
+            // no permite guardar una fotografia nueva que el navegador no pudo abrir
+            if (imagenNuevaBuscadaProducto) {
+                imagenOriginalProducto = imagenGuardadaProducto;
+                imagenNuevaBuscadaProducto = false;
+                codigoBarraImagenBuscadaProducto = null;
+            }
+
+            const estado = document.getElementById('texto_estado_imagen_producto');
+            if (estado) {
+                estado.textContent = 'No se pudo cargar la fotografía. Prueba otra vez.';
+            }
+            const fuente = document.getElementById('enlace_fuente_imagen_producto');
+            if (fuente) fuente.hidden = true;
+            actualizarBotonesImagenProducto();
+        });
+    }
+}
+
+
+// TITULO 15 BUSCAR Y PREVISUALIZAR IMAGENES DE PRODUCTOS
+
+// verifica que la ruta sea una URL web o una ruta local valida
+function esRutaImagenProductoValida(ruta) {
+    return typeof ruta === 'string' &&
+        (/^https?:\/\//i.test(ruta) || /^\/(?!\/)/.test(ruta));
+}
+
+// muestra la imagen asociada o la fotografia obtenida desde Open Food Facts
+function mostrarVistaPreviaImagenProducto(ruta, mensaje) {
+
+    const imagen = document.getElementById('imagen_vista_previa_producto');
+    const sinImagen = document.getElementById('mensaje_sin_imagen_producto');
+    const estado = document.getElementById('texto_estado_imagen_producto');
+    const fuente = document.getElementById('enlace_fuente_imagen_producto');
+
+    if (imagen && sinImagen) {
+        if (esRutaImagenProductoValida(ruta)) {
+            imagen.src = ruta;
+            imagen.hidden = false;
+            sinImagen.hidden = true;
+        } else {
+            imagen.removeAttribute('src');
+            imagen.hidden = true;
+            sinImagen.textContent = 'Sin imagen';
+            sinImagen.hidden = false;
+        }
+    }
+
+    if (estado) {
+        estado.textContent = mensaje || '';
+    }
+
+    if (fuente) {
+        let esOpenFoodFacts = false;
+        try {
+            const url = new URL(ruta);
+            esOpenFoodFacts = url.protocol === 'https:' &&
+                ['images.openfoodfacts.org', 'static.openfoodfacts.org'].includes(url.hostname);
+        } catch (error) {
+            // una ruta local no proviene de Open Food Facts
+        }
+
+        const codigoBarra = document.getElementById('input_codigo_barra_producto')?.value.trim();
+        fuente.hidden = !esOpenFoodFacts;
+        if (esOpenFoodFacts && codigoBarra) {
+            fuente.href = 'https://world.openfoodfacts.org/product/' +
+                encodeURIComponent(codigoBarra);
+        }
+    }
+
+    actualizarBotonesImagenProducto();
+}
+
+// habilita los controles segun el modo actual
+function actualizarBotonesImagenProducto() {
+
+    const buscar = document.getElementById('boton_buscar_imagen_producto');
+    const quitar = document.getElementById('boton_quitar_imagen_producto');
+    const soloLectura = modoFormularioProducto === 'ver';
+
+    if (buscar) {
+        buscar.hidden = soloLectura;
+        buscar.disabled = buscandoImagenProducto || guardandoProducto;
+        buscar.textContent = buscandoImagenProducto ? 'Buscando...' : 'Buscar imagen';
+    }
+
+    if (quitar) {
+        quitar.hidden = soloLectura;
+        quitar.disabled = buscandoImagenProducto || guardandoProducto || !imagenOriginalProducto;
+    }
+}
+
+// consulta la API y permite revisar la foto antes de guardarla
+async function buscarImagenProductoFormulario() {
+
+    if (modoFormularioProducto === 'ver' || buscandoImagenProducto || guardandoProducto) {
+        return;
+    }
+
+    const codigoBarra = document.getElementById('input_codigo_barra_producto')?.value.trim() || '';
+    const estado = document.getElementById('texto_estado_imagen_producto');
+
+    if (!/^\d{8,14}$/.test(codigoBarra)) {
+        if (estado) {
+            estado.textContent = 'Ingresa un código de barras de 8 a 14 dígitos numéricos.';
+        }
+        return;
+    }
+
+    const solicitud = ++busquedaImagenProductoSecuencia;
+    buscandoImagenProducto = true;
+    actualizarBotonesImagenProducto();
+
+    if (estado) {
+        estado.textContent = 'Buscando fotografía en Open Food Facts...';
+    }
+
+    try {
+        const respuesta = await fetch(
+            'http://127.0.0.1:3000/api/productos/buscar-imagen/' +
+                encodeURIComponent(codigoBarra),
+            { method: 'GET', credentials: 'include' }
+        );
+
+        const datos = await respuesta.json();
+
+        // evita que una respuesta antigua cambie el producto abierto actualmente
+        if (solicitud !== busquedaImagenProductoSecuencia) {
+            return;
+        }
+
+        if (!respuesta.ok) {
+            throw new Error(datos.mensaje || 'No se pudo buscar la fotografía.');
+        }
+
+        if (!datos.encontrado || !esRutaImagenProductoValida(datos.imagen_url)) {
+            if (estado) {
+                estado.textContent = datos.mensaje || 'No se encontró una fotografía para ese código.';
+            }
+            return;
+        }
+
+        // verifica que la URL de la foto provenga de Open Food Facts
+        const urlImagen = new URL(datos.imagen_url);
+        if (
+            urlImagen.protocol !== 'https:' ||
+            !['images.openfoodfacts.org', 'static.openfoodfacts.org'].includes(urlImagen.hostname)
+        ) {
+            throw new Error('La fuente de la imagen no es válida.');
+        }
+
+        imagenOriginalProducto = urlImagen.href;
+        imagenNuevaBuscadaProducto = true;
+        codigoBarraImagenBuscadaProducto = codigoBarra;
+
+        const nombre = datos.nombre ? ' (' + datos.nombre + ')' : '';
+        mostrarVistaPreviaImagenProducto(
+            imagenOriginalProducto,
+            'Imagen encontrada' + nombre + '. Verifica que corresponda al producto y presiona Guardar.'
+        );
+
+    } catch (error) {
+        if (solicitud === busquedaImagenProductoSecuencia && estado) {
+            estado.textContent = error.message || 'No fue posible buscar la fotografía.';
+        }
+    } finally {
+        if (solicitud === busquedaImagenProductoSecuencia) {
+            buscandoImagenProducto = false;
+            actualizarBotonesImagenProducto();
+        }
+    }
+}
+
+// quita la fotografia en el formulario sin modificar todavia PostgreSQL
+function quitarImagenProductoFormulario() {
+
+    if (modoFormularioProducto === 'ver' || guardandoProducto || buscandoImagenProducto) {
+        return;
+    }
+
+    busquedaImagenProductoSecuencia++;
+    imagenOriginalProducto = null;
+    imagenNuevaBuscadaProducto = false;
+    codigoBarraImagenBuscadaProducto = null;
+
+    mostrarVistaPreviaImagenProducto(null,
+        'La imagen se quitará del producto al guardar los cambios.');
 }

@@ -249,6 +249,29 @@ const obtenerFamilias = async (req, res) => {
 
 };
 
+
+
+// FUNCION 8 BUSCAR IMAGEN DE PRODUCTO
+const buscarImagenProducto = async (req, res) => {
+
+    try {
+        const { codigoBarra } = req.params;
+
+        const resultado = await productosServicio.buscarImagenProducto(
+            codigoBarra
+        );
+
+        res.json(resultado);
+
+    } catch (error) {
+        console.error('Error al buscar imagen del producto:', error);
+
+        res.status(error.statusCode || 500).json({
+            mensaje: error.message || 'Error al buscar la imagen del producto.'
+        });
+    }
+};
+
 // exporta las funciones
 module.exports = {
     crearProducto,
@@ -257,5 +280,6 @@ module.exports = {
     actualizarProducto,
     eliminarProducto,
     importarProductos,
-    obtenerFamilias
+    obtenerFamilias,
+    buscarImagenProducto
 };

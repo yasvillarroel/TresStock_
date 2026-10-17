@@ -27,6 +27,10 @@ router.get('/familias', productosControlador.obtenerFamilias);
 // ruta para importar
 router.post('/importar', cargarArchivo.single('archivo'), productosControlador.importarProductos);
 
+// ruta para buscar una imagen por codigo de barras en Open Food Facts
+// debe ir ANTES de /:id para no confundir la ruta
+router.get('/buscar-imagen/:codigoBarra', productosControlador.buscarImagenProducto);
+
 // ruta para obtener un producto por codigo
 router.get('/:id', productosControlador.obtenerProducto);
 

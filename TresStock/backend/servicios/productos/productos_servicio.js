@@ -737,6 +737,179 @@ const obtenerFamilias = async () => {
     return resultado.rows;
 };  
 
+
+
+// FUNCION 8 BUSCAR IMAGEN DE PRODUCTO EN OPEN FOOD FACTS
+
+// evita consultas repetidas y protege el limite publico de la API
+const cacheImagenesProductos = new Map();
+const historialConsultasImagenes = [];
+
+const buscarImagenProducto = async (codigoBarra) => {
+
+    // solo se aceptan codigos de barras numericos (EAN/UPC, entre 8 y 14 digitos)
+    const codigo = String(codigoBarra ?? '').trim();
+
+    if (!/^\d{8,14}$/.test(codigo)) {
+        const error = new Error('El codigo de barras debe tener entre 8 y 14 digitos numericos.');
+        error.statusCode = 400;
+        throw error;
+    }
+
+    // Open Food Facts solicita identificar la aplicacion con un contacto real
+    const contacto = String(process.env.OPENFOODFACTS_CONTACTO ?? '').trim();
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contacto)) {
+        const error = new Error('Configura OPENFOODFACTS_CONTACTO con un correo real antes de consultar la API.');
+        error.statusCode = 503;
+        throw error;
+    }
+
+    // reutiliza resultados recientes para no repetir la consulta
+    const ahora = Date.now();
+    const guardado = cacheImagenesProductos.get(codigo);
+
+    if (guardado && ahora - guardado.fecha < 15 * 60 * 1000) {
+        return guardado.datos;
+    }
+
+    // limita a 12 consultas por minuto desde este proceso (la API permite 15)
+    while (
+        historialConsultasImagenes.length > 0 &&
+        ahora - historialConsultasImagenes[0] >= 60 * 1000
+    ) {
+        historialConsultasImagenes.shift();
+    }
+
+    if (historialConsultasImagenes.length >= 12) {
+        const error = new Error('Se alcanzo el limite temporal de busquedas. Espera un minuto e intenta nuevamente.');
+        error.statusCode = 429;
+        throw error;
+    }
+
+    historialConsultasImagenes.push(ahora);
+
+    // consulta la fotografia frontal del producto, sin descargarla ni guardarla
+    const url =
+        'https://world.openfoodfacts.org/api/v2/product/' +
+        codigo +
+        '?fields=code,product_name,brands,image_front_url';
+
+    let respuesta;
+
+    try {
+        respuesta = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'User-Agent': `TresStock/1.0 (${contacto})`
+            },
+            signal: AbortSignal.timeout(10000)
+        });
+    } catch (error) {
+        const fallo = new Error(
+            error.name === 'TimeoutError'
+                ? 'Open Food Facts demoro demasiado en responder.'
+                : 'No fue posible conectar con Open Food Facts.'
+        );
+        fallo.statusCode = error.name === 'TimeoutError' ? 504 : 502;
+        throw fallo;
+    }
+
+
+    // verifica la respuesta de Open Food Facts
+    if (!respuesta.ok) {
+
+        // muestra el codigo HTTP real en la consola del backend
+        console.error(
+            'Open Food Facts HTTP:',
+            respuesta.status,
+            'Codigo de barras:',
+            codigo
+        );
+
+        // producto no registrado en Open Food Facts
+        if (respuesta.status === 404) {
+
+            return {
+                encontrado: false,
+                codigo_barra: codigo,
+                nombre: null,
+                marca: null,
+                imagen_url: null,
+                mensaje: 'El producto no está registrado en Open Food Facts.'
+            };
+
+        }
+
+        // identifica cuando el servicio esta temporalmente ocupado
+        const errorTemporal = [
+            429, 500, 502, 503, 504
+        ].includes(respuesta.status);
+
+        const error = new Error(
+            errorTemporal
+                ? 'Open Food Facts está temporalmente ocupado. ' +
+                  'Intenta nuevamente más tarde. HTTP ' + respuesta.status
+                : 'No se pudo completar la consulta. HTTP ' +
+                  respuesta.status
+        );
+
+        error.statusCode = respuesta.status === 429 ? 429 : 502;
+
+        throw error;
+    }
+
+
+    const datos = await respuesta.json();
+    const producto = datos.status === 1 ? datos.product : null;
+
+    // comprueba que la fotografia venga de la fuente esperada
+    let imagenUrl = null;
+
+    if (producto?.image_front_url) {
+        try {
+            const urlImagen = new URL(producto.image_front_url);
+
+            if (
+                urlImagen.protocol === 'https:' &&
+                ['images.openfoodfacts.org', 'static.openfoodfacts.org'].includes(urlImagen.hostname)
+            ) {
+                imagenUrl = urlImagen.href;
+            }
+        } catch (error) {
+            // ignora fotografias con enlaces invalidos
+        }
+    }
+
+    const resultado = {
+        encontrado: Boolean(imagenUrl),
+        codigo_barra: codigo,
+        nombre: producto?.product_name || null,
+        marca: producto?.brands || null,
+        imagen_url: imagenUrl,
+        fuente: 'Open Food Facts',
+        pagina_producto: 'https://world.openfoodfacts.org/product/' + codigo,
+        mensaje: !producto
+            ? 'El codigo no esta registrado en Open Food Facts.'
+            : imagenUrl
+                ? 'Imagen encontrada. Verifica que corresponda al producto.'
+                : 'El producto esta registrado, pero no tiene una imagen frontal disponible.'
+    };
+
+    // guarda temporalmente el resultado en memoria, no en PostgreSQL
+    if (cacheImagenesProductos.size >= 300) {
+        cacheImagenesProductos.delete(cacheImagenesProductos.keys().next().value);
+    }
+
+    cacheImagenesProductos.set(codigo, {
+        fecha: Date.now(),
+        datos: resultado
+    });
+
+    return resultado;
+};
+
 // exporta las funciones
 module.exports = {
     crearProducto,
@@ -745,5 +918,6 @@ module.exports = {
     actualizarProducto,
     eliminarProducto,
     importarProductos,
-    obtenerFamilias
+    obtenerFamilias,
+    buscarImagenProducto
 };
