@@ -14,7 +14,8 @@ const crearProducto = async (req, res) => {
             descripcion,
             familia,
             precio_publico,
-            imagen
+            imagen,
+            proveedor
         } = req.body;
 
         // crea el producto
@@ -24,7 +25,8 @@ const crearProducto = async (req, res) => {
             descripcion,
             familia,
             precio_publico,
-            imagen
+            imagen,
+            proveedor
         );
 
         // envia el producto creado
@@ -35,9 +37,10 @@ const crearProducto = async (req, res) => {
         // muestra el error en la consola
         console.error('Error al crear producto:', error);
 
-        // envia el error
-        res.status(500).json({
-            mensaje: 'Error al crear producto'
+        res.status(error.code === '23505' ? 409 : 400).json({
+            mensaje: error.code === '23505'
+                ? 'Ya existe un producto con ese código.'
+                : (error.message || 'Error al crear producto')
         });
 
     }
@@ -115,7 +118,8 @@ const actualizarProducto = async (req, res) => {
             descripcion,
             familia,
             precio_publico,
-            imagen
+            imagen,
+            proveedor
         } = req.body;
 
         // actualiza el producto
@@ -126,7 +130,8 @@ const actualizarProducto = async (req, res) => {
             descripcion,
             familia,
             precio_publico,
-            imagen
+            imagen,
+            proveedor
         );
 
         // envia el producto actualizado
@@ -138,13 +143,14 @@ const actualizarProducto = async (req, res) => {
         console.error('Error al actualizar producto:', error);
 
         // envia el error
-        res.status(500).json({
-            mensaje: 'Error al actualizar producto'
+        res.status(400).json({
+            mensaje: error.message || 'Error al actualizar producto'
         });
 
     }
 
 };
+
 
 
 // FUNCION 5 ELIMINAR PRODUCTO
@@ -152,28 +158,45 @@ const eliminarProducto = async (req, res) => {
 
     try {
 
-        // obtiene el id del producto
         const { id } = req.params;
 
-        // elimina el producto
         const producto = await productosServicio.eliminarProducto(id);
 
-        // envia el producto eliminado
-        res.json(producto);
+        // verifica si el producto puede eliminarse
+        if (!producto) {
+
+            return res.status(409).json({
+                mensaje:
+                    'No se puede eliminar el producto porque ' +
+                    'tiene stock, ventas, movimientos registrados ' +
+                    'o no existe.'
+            });
+        }
+
+        res.json({
+            mensaje: 'Producto eliminado correctamente',
+            producto
+        });
 
     } catch (error) {
 
-        // muestra el error en la consola
         console.error('Error al eliminar producto:', error);
 
-        // envia el error
+        if (error.code === '23503') {
+
+            return res.status(409).json({
+                mensaje:
+                    'No se puede eliminar porque el producto ' +
+                    'tiene registros relacionados.'
+            });
+        }
+
         res.status(500).json({
             mensaje: 'Error al eliminar producto'
         });
-
     }
-
 };
+
 
 // FUNCION 6 IMPORTAR PRODUCTOS
 const importarProductos = async (req, res) => {

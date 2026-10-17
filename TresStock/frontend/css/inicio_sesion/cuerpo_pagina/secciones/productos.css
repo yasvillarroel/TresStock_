@@ -454,7 +454,7 @@
 
     /* clase para establecer la cabecera visual del contenedor de la tabla */
     .cabecera_contenedor_tabla_productos {
-        min-width: 1250px;
+        min-width: 0;
         padding: 17px 18px;
         border-bottom: 1px solid #e2e8eb;
         box-sizing: border-box;
@@ -471,9 +471,48 @@
     /* clase para establecer la estructura general de la tabla */
     .tabla_productos {
         width: 100%;
-        min-width: 1250px;
+        min-width: 0;
+        table-layout: fixed;
         border-collapse: collapse;
     }
+
+    /* ancho de la columna codigo */
+    .columna_codigo_productos {
+        width: 10%;
+    }
+
+    /* ancho de la columna codigo de barras */
+    .columna_codigo_barra_productos {
+        width: 14%;
+    }
+
+    /* ancho de la columna descripcion */
+    .columna_descripcion_productos {
+        width: 27%;
+        min-width: 0;
+    }
+
+    /* ancho de la columna familia */
+    .columna_familia_productos {
+        width: 12%;
+    }
+
+    /* ancho de la columna precio publico */
+    .columna_precio_productos {
+        width: 9%;
+    }
+
+    /* ancho de la columna proveedor */
+    .columna_proveedor_productos {
+        width: 14%;
+        max-width: none;
+    }
+
+    /* ancho de la columna acciones */
+    .columna_acciones_productos {
+        width: 14%;
+    }
+
 
     /* clase para establecer el fondo del encabezado */
     .encabezado_tabla_productos {
@@ -557,6 +596,8 @@
 
     /* clase para establecer la columna proveedor */
     .columna_proveedor_productos {
+        width: 140px;
+        max-width: 140px;
         padding: 13px 12px;
         text-align: left;
         color: #667881;
@@ -564,6 +605,7 @@
         font-size: 11px;
         white-space: nowrap;
     }
+
 
     /* clase para establecer la columna acciones */
     .columna_acciones_productos {
@@ -575,144 +617,161 @@
         white-space: nowrap;
     }
 
-    /* SUBTITULO 1 CONTENEDOR BOTONES PAGINACION */
 
-        /* estilos del contenedor inferior que tiene los botones de paginacion */
-        .contenedor_paginacion_productos{
-            width: 100%;
+/* SUBTITULO 1 PAGINACION PRODUCTOS */
+
+    /* contenedor principal de la paginacion */
+    .contenedor_paginacion_productos {
+        width: 100%;
+        min-height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 15px 20px;
+        border-top: 1px solid #edf1f3;
+        box-sizing: border-box;
+    }
+
+    /* informacion de los productos mostrados */
+    .informacion_paginacion_productos {
+        color: #536873;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        white-space: nowrap;
+    }
+
+    /* contenedor de los controles de paginacion */
+    .controles_paginacion_productos {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 6px;
+    }
+
+    /* contenedor de los numeros de pagina */
+    .numeros_paginas_productos {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    /* diseño general de los botones de paginacion */
+    .boton_numero_pagina_productos,
+    .boton_pagina_anterior_productos,
+    .boton_pagina_siguiente_productos {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        background-color: #ffffff;
+        border: 1px solid #dce4e8;
+        border-radius: 6px;
+        color: #536873;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        cursor: pointer;
+        padding: 0;
+        box-sizing: border-box;
+        transition: background-color 0.2s, border-color 0.2s;
+    }
+
+    /* pagina seleccionada actualmente */
+    .pagina_actual_productos {
+        background-color: #159BA3;
+        border-color: #159BA3;
+        color: #ffffff;
+        font-weight: bold;
+    }
+
+    /* efecto al pasar el cursor sobre los botones */
+    .boton_numero_pagina_productos:hover,
+    .boton_pagina_anterior_productos:hover,
+    .boton_pagina_siguiente_productos:hover {
+        background-color: #e4f6f6;
+        border-color: #159BA3;
+    }
+
+    /* mantiene el color de la pagina seleccionada */
+    .pagina_actual_productos:hover {
+        background-color: #0D6970;
+        border-color: #0D6970;
+        color: #ffffff;
+    }
+
+    /* botones de navegacion deshabilitados */
+    .boton_pagina_anterior_productos:disabled,
+    .boton_pagina_siguiente_productos:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+        background-color: #ffffff;
+        border-color: #dce4e8;
+    }
+
+    /* contenedor de los puntos suspensivos */
+    .puntos_paginacion_productos {
+        width: 30px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        color: #64748b;
+    }
+
+    /* diseño de los puntos suspensivos */
+    .punto_paginacion {
+        width: 4px;
+        height: 4px;
+        background-color: currentColor;
+        border-radius: 50%;
+    }
+
+
+/* SUBTITULO 2 RESPONSIVE PAGINACION */
+
+    /* adapta la paginacion para tablets */
+    @media (max-width: 900px) {
+
+        .contenedor_paginacion_productos {
+            flex-direction: column;
             justify-content: center;
-            display: flex;
-            flex-direction: row;
-            max-height: 50px;
-            gap: 10px;
-            margin: 15px 0px;
+            gap: 15px;
         }
 
-        /* estilos para contenedor de los numeros de pagina */
+        .controles_paginacion_productos {
+            justify-content: center;
+        }
+
+    }
+
+    /* adapta la paginacion para dispositivos moviles */
+    @media (max-width: 600px) {
+
+        .boton_numero_pagina_productos,
+        .boton_pagina_anterior_productos,
+        .boton_pagina_siguiente_productos {
+            width: 34px;
+            height: 34px;
+            font-size: 12px;
+        }
+
         .numeros_paginas_productos {
-            display: flex;
-            align-items: center;
-            justify-content: center;
             gap: 4px;
-            min-width: 390px;
         }
 
-        /* estilos para los botones numeros de pagina dentro de numeros_paginas_productos */
-        .boton_numero_pagina_productos {
-            font-size: 25px;
-            border: none;
-            background: #159BA3;
-            color: white;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            padding: 0;
-            box-sizing: border-box;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.3s ease-in-out, background-color 0.2s ease-in-out;
-        }
-
-        /* estilos de la pagina actual resaltada */
-        .pagina_actual_productos {
-            background-color: #0D6970;
-            color: white;
-            font-weight: bold;
-            border: 2px solid #159BA3;
-            transform: scale(1.1);
-        }
-
-        /* estilos del boton numero al pasar mouse por encima */
-        .boton_numero_pagina_productos:hover {
-            transform: translatey(-3px);
-            background-color: #0D6970;
-        }
-
-        /* estilos para contenedor de los tres puntos de paginacion (creado dinamicamente con js) */
-        .puntos_paginacion_productos {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .controles_paginacion_productos {
             gap: 4px;
-            width: 36px;
-            height: 36px;
         }
 
-        /* estilos para los puntitos en paginacion (creado dinamicamente con js) */
-        .punto_paginacion {
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: currentColor;
+        .informacion_paginacion_productos {
+            font-size: 12px;
         }
 
-        /* estilos para el boton pagina anterior */
-        .boton_pagina_anterior_productos{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0;
-            margin: 0;
-            border: none;
-            background: none;
-            cursor: pointer;
-            transition: filter 1.2s ease;
-            user-select: none;
-        }
+    }
 
-        .boton_pagina_anterior_productos:disabled{
-            opacity: 0.5;
-            cursor: not-allowed;
-            filter: grayscale(100%);
-        }
-
-        /* estilos del icono paginacion izquierda */
-        .icono_paginacion_flecha_izquierda{
-            display: block;
-            width: 50px;
-            height: auto;
-            object-fit: contain;
-            transition: transform 0.2s ease-in-out;
-        }
-
-        .icono_paginacion_flecha_izquierda:hover{
-            transform: translateX(-5px);
-        }
-
-        /* estilos para el boton pagina siguiente */
-        .boton_pagina_siguiente_productos{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0;
-            margin: 0;
-            border: none;
-            background: none;
-            cursor: pointer;
-            transition: filter 1.2s ease;    
-            user-select: none;
-        }   
-
-        .boton_pagina_siguiente_productos:disabled{
-            opacity: 0.5;
-            cursor: not-allowed;
-            filter: grayscale(100%);
-        }
-
-        /* estilos del icono paginacion derecha */
-        .icono_paginacion_flecha_derecha{
-            display: block;
-            width: 50px;
-            height: auto;
-            object-fit: contain;
-            transition: transform 0.2s ease-in-out;
-        }
-
-        .icono_paginacion_flecha_derecha:hover{
-            transform: translateX(5px);
-        }
 
 
 /* TITULO 6 DATOS TABLA PRODUCTOS */
@@ -802,12 +861,16 @@
 
     /* clase para establecer el dato proveedor */
     .dato_proveedor_productos {
+        width: 140px;
+        max-width: 140px;
         padding: 14px 12px;
         color: #536873;
         font-family: Arial, sans-serif;
         font-size: 12px;
         text-align: left;
         white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     /* clase para establecer el dato acciones */
@@ -819,6 +882,73 @@
         text-align: center;
         white-space: nowrap;
     }
+    
+    /* contenedor para organizar las acciones de cada producto */
+    .contenedor_acciones_producto {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        white-space: nowrap;
+    }
+
+    /* diseño general de los botones de acciones */
+    .boton_accion_producto {
+        width: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        background-color: #ffffff;
+        border: 1px solid #dce4e8;
+        border-radius: 7px;
+        cursor: pointer;
+        padding: 8px;
+        box-sizing: border-box;
+        transition: background-color 0.2s, border-color 0.2s;
+    }
+
+    /* tamaño de los iconos de acciones */
+    .boton_accion_producto svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    /* color del boton ver */
+    .boton_ver_producto {
+        color: #159ba3;
+    }
+
+    /* efecto al pasar el cursor sobre ver */
+    .boton_ver_producto:hover {
+        background-color: #e4f6f6;
+        border-color: #159ba3;
+    }
+
+    /* color del boton editar */
+    .boton_editar_producto {
+        color: #159ba3;
+    }
+
+    /* efecto al pasar el cursor sobre editar */
+    .boton_editar_producto:hover {
+        background-color: #e4f6f6;
+        border-color: #159ba3;
+    }
+
+    /* color del boton eliminar */
+    .boton_eliminar_producto {
+        color: #ef4444;
+        border-color: #ffdddd;
+    }
+
+    /* efecto al pasar el cursor sobre eliminar */
+    .boton_eliminar_producto:hover {
+        background-color: #fff0f0;
+        border-color: #ef4444;
+    }
+
 
     /* clase para establecer la fila temporal sin productos */
     .fila_sin_productos {
@@ -1015,18 +1145,23 @@
         margin-bottom: 6px;
     }
 
-    /* clase para establecer el campo familia */
+
+    /* clase para establecer el selector de familia */
     .input_familia_producto {
+        width: 100%;
         height: 40px;
         border: 1px solid #ced9de;
         border-radius: 6px;
         padding: 0 10px;
+        background-color: #ffffff;
         color: #37434b;
         font-family: Arial, sans-serif;
         font-size: 13px;
         outline: none;
         box-sizing: border-box;
+        cursor: pointer;
     }
+
 
     /* clase para organizar el campo precio */
     .campo_precio_producto {
@@ -1436,3 +1571,39 @@
         }
 
     }
+
+    
+/* evita que los datos obliguen a ensanchar la tabla */
+.tabla_productos th,
+.tabla_productos td {
+    box-sizing: border-box;
+}
+
+/* permite ajustar descripciones largas */
+.dato_descripcion_productos {
+    min-width: 0;
+    max-width: none;
+    overflow-wrap: anywhere;
+}
+
+/* ajusta los nombres de proveedores */
+.dato_proveedor_productos {
+    width: auto;
+    max-width: none;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+/* mantiene los botones de acciones ordenados */
+.contenedor_acciones_producto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+/* ajusta ligeramente el tamaño de los botones */
+.boton_accion_producto {
+    width: 36px;
+    height: 36px;
+}

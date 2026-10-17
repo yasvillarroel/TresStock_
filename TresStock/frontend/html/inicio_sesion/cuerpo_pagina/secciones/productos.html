@@ -97,9 +97,9 @@
 
                     <div class="contenido_proveedores_productos">
 
-                        <div class="texto_proveedores_productos"> Proveedores </div>
+                        <div class="texto_proveedores_productos"> Productos con proveedor </div>
 
-                        <div class="valor_proveedores_productos" id="valor_proveedores_productos" > 0 </div>
+                        <div class="valor_proveedores_productos" id="valor_productos_con_proveedor"> 0% </div>
 
                     </div>
 
@@ -116,9 +116,9 @@
 
                     <div class="contenido_stock_bajo_productos">
 
-                        <div class="texto_stock_bajo_productos"> Productos con bajo stock </div>
+                        <div class="texto_stock_bajo_productos"> Productos sin proveedor </div>
 
-                        <div class="valor_stock_bajo_productos" id="valor_stock_bajo_productos" > 0 </div>
+                        <div class="valor_stock_bajo_productos" id="valor_productos_sin_proveedor"> 0 </div>
 
                     </div>
 
@@ -190,9 +190,6 @@
 
                             <th class="columna_precio_productos">Precio público</th>
 
-                            <th class="columna_stock_actual_productos">Stock actual</th>
-
-                            <th class="columna_stock_minimo_productos">Stock mínimo</th>
 
                             <th class="columna_proveedor_productos">Proveedor</th>
 
@@ -208,7 +205,7 @@
                         <!-- fila temporal mientras no existan datos cargados -->
                         <tr class="fila_sin_productos">
 
-                            <td class="dato_sin_productos" colspan="9" > No hay productos cargados para mostrar. </td>
+                            <td class="dato_sin_productos" colspan="7" > No hay productos cargados para mostrar. </td>
 
                         </tr>
 
@@ -216,31 +213,37 @@
 
                 </table>
 
-                <!-- SUBTITULO 1 CONTENEDOR BOTONES PAGINACION -->
 
-                    <!-- paginacion de productos -->
+                <!-- SUBTITULO 1 CONTENEDOR PAGINACION -->
+
+                    <!-- contenedor principal de la paginacion -->
                     <div class="contenedor_paginacion_productos" id="contenedor_paginacion_productos">
 
-                        <!-- boton pagina anterior -->
-                        <button class="boton_pagina_anterior_productos" id="boton_pagina_anterior_productos" type="button">
-                            <img class="icono_paginacion_flecha_izquierda" 
-                            src="imagenes/inicio_sesion/cuerpo_pagina/secciones/productos/productos_paginacion_izq_img1.png" 
-                            alt="Página anterior"
-                            draggable="false">
-                        </button>
+                        <!-- informacion de productos mostrados -->
+                        <div class="informacion_paginacion_productos" id="informacion_paginacion_productos">
+                            Mostrando 0 a 0 de 0 productos
+                        </div>
 
-                        <!-- paginas -->
-                        <div class="numeros_paginas_productos" id="numeros_paginas_productos"></div>
+                        <!-- contenedor de los controles de paginacion -->
+                        <div class="controles_paginacion_productos" id="controles_paginacion_productos">
 
-                        <!-- boton pagina siguiente -->
-                        <button class="boton_pagina_siguiente_productos" id="boton_pagina_siguiente_productos" type="button">
-                            <img  class="icono_paginacion_flecha_derecha" 
-                            src="imagenes/inicio_sesion/cuerpo_pagina/secciones/productos/productos_paginacion_der_img2.png"
-                            alt="Página siguiente"
-                            draggable="false">   
-                        </button>
+                            <!-- boton pagina anterior -->
+                            <button class="boton_pagina_anterior_productos" id="boton_pagina_anterior_productos" type="button">
+                                ‹
+                            </button>
+
+                            <!-- numeros de pagina -->
+                            <div class="numeros_paginas_productos" id="numeros_paginas_productos"></div>
+
+                            <!-- boton pagina siguiente -->
+                            <button class="boton_pagina_siguiente_productos" id="boton_pagina_siguiente_productos" type="button">
+                                ›
+                            </button>
+
+                        </div>
 
                     </div>
+
 
             </div>
 
@@ -297,14 +300,20 @@
 
                             </div>
 
+
                             <!-- campo familia -->
                             <div class="campo_familia_producto">
 
                                 <div class="texto_campo_familia_producto">Familia</div>
 
-                                <input class="input_familia_producto" id="input_familia_producto" type="text" >
+                                <select class="input_familia_producto" id="input_familia_producto">
+
+                                    <option value="">Seleccionar familia</option>
+
+                                </select>
 
                             </div>
+
 
                             <!-- campo precio público -->
                             <div class="campo_precio_producto">
