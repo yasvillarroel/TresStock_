@@ -68,15 +68,17 @@
         max-height: none;
         flex-shrink: 0;
         border-radius: 12px;
-        overflow: hidden;
         animation: entrada_escaner_producto 1.0s ease;
     }
 
+    /* video del escaner de productos */
     .contenedor_escaner_producto video {
         display: block;
-        width: 640px;
-        max-width: none;
+        width: 100%;
+        max-width: 100%;
         height: auto;
+        object-fit: contain;
+        box-sizing: border-box;
     }
 
     /* contenido del escaner */
@@ -319,7 +321,6 @@
 
 
 /* esto es para el menu ajustar */
-
 /* contenedor del ajuste de producto */
 .contenedor_ajuste_producto {
     position: relative;
@@ -327,7 +328,7 @@
 }
 
 /* menu para ajustar el inventario */
-#menu_ajustar_producto {
+.contenedor_ajuste_producto #menu_ajustar_producto {
     position: absolute;
     bottom: calc(100% + 8px);
     left: 50%;
@@ -344,42 +345,82 @@
 }
 
 /* mantiene oculto el menu de ajuste */
-#menu_ajustar_producto[hidden] {
+.contenedor_ajuste_producto #menu_ajustar_producto[hidden] {
     display: none !important;
 }
 
 /* titulo del ajuste */
-#menu_ajustar_producto h3 {
+.contenedor_ajuste_producto #menu_ajustar_producto h3 {
     margin: 0 0 18px;
     font-size: 20px;
     text-align: center;
 }
 
+/* opciones de operacion del inventario */
+.contenedor_ajuste_producto .opciones_operacion_ajuste {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+/* etiquetas de las operaciones */
+.contenedor_ajuste_producto .opciones_operacion_ajuste label {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 10px 6px;
+    border: 1px solid #ced4da;
+    border-radius: 7px;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* resalta la operacion seleccionada */
+.contenedor_ajuste_producto .opciones_operacion_ajuste label:has(input:checked) {
+    background-color: #e5f5f5;
+    border-color: #159ba3;
+}
+
+/* botones de seleccion de operacion */
+.contenedor_ajuste_producto .opciones_operacion_ajuste input[type="radio"] {
+    margin: 0;
+    accent-color: #159ba3;
+    cursor: pointer;
+}
+
 /* opciones de tipo de cantidad */
-.opciones_tipo_cantidad {
+.contenedor_ajuste_producto .opciones_tipo_cantidad {
     display: flex;
     flex-direction: column;
     gap: 10px;
     margin-bottom: 18px;
 }
 
-/* etiqueta de cada opcion */
-.opciones_tipo_cantidad label {
+/* etiqueta de cada opcion de cantidad */
+.contenedor_ajuste_producto .opciones_tipo_cantidad label {
     display: flex;
     align-items: center;
     gap: 8px;
+    font-size: 14px;
     cursor: pointer;
 }
 
-/* botones de seleccion */
-.opciones_tipo_cantidad input[type="radio"] {
+/* botones de seleccion de cantidad */
+.contenedor_ajuste_producto .opciones_tipo_cantidad input[type="radio"] {
     margin: 0;
     accent-color: #159ba3;
+    cursor: pointer;
 }
 
 /* campos de cantidad */
-.campo_cantidad_ajuste,
-.campo_unidades_codigo {
+.contenedor_ajuste_producto .campo_cantidad_ajuste,
+.contenedor_ajuste_producto .campo_unidades_codigo {
     display: flex;
     flex-direction: column;
     gap: 6px;
@@ -387,15 +428,15 @@
 }
 
 /* etiquetas de los campos */
-.campo_cantidad_ajuste label,
-.campo_unidades_codigo label {
+.contenedor_ajuste_producto .campo_cantidad_ajuste label,
+.contenedor_ajuste_producto .campo_unidades_codigo label {
     font-size: 14px;
     font-weight: 600;
 }
 
 /* entradas numericas */
-#cantidad_ingresada_ajuste,
-#unidades_por_codigo_ajuste {
+.contenedor_ajuste_producto #cantidad_ingresada_ajuste,
+.contenedor_ajuste_producto #unidades_por_codigo_ajuste {
     width: 100%;
     padding: 9px 10px;
     border: 1px solid #cbd3dc;
@@ -405,25 +446,27 @@
 }
 
 /* campo de unidades por codigo */
-#unidades_por_codigo_ajuste {
+.contenedor_ajuste_producto #unidades_por_codigo_ajuste {
     background-color: #f1f4f7;
     color: #555555;
+    cursor: not-allowed;
 }
 
 /* resultados del ajuste */
-.resultado_cantidad_ajuste,
-.inventario_actual_ajuste,
-.inventario_resultante_ajuste {
+.contenedor_ajuste_producto .resultado_cantidad_ajuste,
+.contenedor_ajuste_producto .inventario_actual_ajuste,
+.contenedor_ajuste_producto .inventario_resultante_ajuste {
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 6px;
     background-color: #f1f5f8;
+    box-sizing: border-box;
 }
 
 /* texto de los resultados */
-.resultado_cantidad_ajuste p,
-.inventario_actual_ajuste p,
-.inventario_resultante_ajuste p {
+.contenedor_ajuste_producto .resultado_cantidad_ajuste p,
+.contenedor_ajuste_producto .inventario_actual_ajuste p,
+.contenedor_ajuste_producto .inventario_resultante_ajuste p {
     display: flex;
     flex-wrap: wrap;
     gap: 4px;
@@ -432,19 +475,19 @@
     line-height: 1.5;
 }
 
-/* resalta la cantidad a añadir */
-.resultado_cantidad_ajuste strong {
+/* resalta la cantidad del ajuste */
+.contenedor_ajuste_producto .resultado_cantidad_ajuste strong {
     color: #159ba3;
 }
 
 /* resalta el inventario resultante */
-.inventario_resultante_ajuste {
+.contenedor_ajuste_producto .inventario_resultante_ajuste {
     background-color: #e5f5f5;
     border: 1px solid #b8e2e3;
 }
 
 /* boton para confirmar el ajuste */
-#boton_aceptar_ajuste {
+.contenedor_ajuste_producto #boton_aceptar_ajuste {
     width: 100%;
     padding: 10px;
     border: none;
@@ -458,11 +501,17 @@
 }
 
 /* efecto al pasar el cursor */
-#boton_aceptar_ajuste:hover {
+.contenedor_ajuste_producto #boton_aceptar_ajuste:hover {
     background-color: #23adb4;
 }
 
 /* efecto al presionar el boton */
-#boton_aceptar_ajuste:active {
+.contenedor_ajuste_producto #boton_aceptar_ajuste:active {
     background-color: #117f85;
+}
+
+/* efecto al desactivar el boton */
+.contenedor_ajuste_producto #boton_aceptar_ajuste:disabled {
+    background-color: #aeb8c0;
+    cursor: not-allowed;
 }

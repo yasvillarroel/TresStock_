@@ -54,6 +54,7 @@
                 Asociar código
             </button>
 
+        
         <!-- contenedor del ajuste de producto -->
         <div class="contenedor_ajuste_producto">
 
@@ -62,6 +63,34 @@
 
                 <!-- titulo del ajuste -->
                 <h3>Ajustar inventario</h3>
+
+                <!-- seleccionar operacion del inventario -->
+                <div class="opciones_operacion_ajuste">
+
+                    <!-- sumar unidades al inventario -->
+                    <label>
+                        <input
+                            type="radio"
+                            name="operacion_ajuste"
+                            id="operacion_sumar"
+                            value="sumar"
+                            checked
+                        >
+                        Sumar
+                    </label>
+
+                    <!-- restar unidades del inventario -->
+                    <label>
+                        <input
+                            type="radio"
+                            name="operacion_ajuste"
+                            id="operacion_restar"
+                            value="restar"
+                        >
+                        Restar
+                    </label>
+
+                </div>
 
                 <!-- seleccionar tipo de cantidad -->
                 <div class="opciones_tipo_cantidad">
@@ -95,7 +124,9 @@
                 <div class="campo_cantidad_ajuste">
 
                     <label for="cantidad_ingresada_ajuste">
-                        Cantidad a ingresar
+                        <span id="texto_cantidad_ajuste">
+                            Cantidad a sumar
+                        </span>
                     </label>
 
                     <input
@@ -109,7 +140,10 @@
                 </div>
 
                 <!-- mostrar unidades por codigo -->
-                <div class="campo_unidades_codigo">
+                <div
+                    class="campo_unidades_codigo"
+                    id="contenedor_unidades_codigo"
+                >
 
                     <label for="unidades_por_codigo_ajuste">
                         Unidades por codigo
@@ -126,11 +160,11 @@
 
                 </div>
 
-                <!-- mostrar cantidad a añadir -->
+                <!-- mostrar cantidad del ajuste -->
                 <div class="resultado_cantidad_ajuste">
 
                     <p>
-                        Cantidad a añadir:
+                        <span id="texto_unidades_ajuste">Unidades a sumar:</span>
                         <strong id="cantidad_anadir_inventario">1</strong>
                         unidades
                     </p>
@@ -165,12 +199,12 @@
                     id="boton_aceptar_ajuste"
                     onclick="aceptarAjusteProducto()"
                 >
-                    Aceptar
+                    Confirmar ajuste
                 </button>
 
             </div>
 
-            <!-- ajustar producto -->
+            <!-- abrir el menu de ajuste -->
             <button
                 type="button"
                 id="boton_ajustar_producto"
@@ -180,6 +214,7 @@
             </button>
 
         </div>
+
 
             <!-- escanear otro codigo -->
             <button type="button"

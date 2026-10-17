@@ -271,11 +271,42 @@ const recalcularStockMinimo = async () => {
 
 };
 
-// FUNCION AJUSTAR INVENTARIO
+
+/* FUNCION AJUSTAR INVENTARIO */
 const ajustarInventario = async (
     codigo,
-    cantidad
+    cantidad,
+    operacion
 ) => {
+
+    // valida la operacion solicitada
+    if (!['sumar', 'restar'].includes(operacion)) {
+
+        const error = new Error(
+            'La operacion debe ser sumar o restar'
+        );
+
+        error.status = 400;
+
+        throw error;
+
+    }
+
+    // valida la cantidad del ajuste
+    if (
+        !Number.isSafeInteger(cantidad) ||
+        cantidad <= 0
+    ) {
+
+        const error = new Error(
+            'La cantidad debe ser un entero positivo'
+        );
+
+        error.status = 400;
+
+        throw error;
+
+    }
 
     // inicia una transaccion
     const cliente = await pool.connect();
@@ -333,8 +364,23 @@ const ajustarInventario = async (
             inventario.rows[0].stock_actual
         );
 
-        // calcula el nuevo stock
-        const stockNuevo = stockAnterior + cantidad;
+        // calcula el nuevo stock segun la operacion
+        const stockNuevo = operacion === 'restar'
+            ? stockAnterior - cantidad
+            : stockAnterior + cantidad;
+
+        // impide que el inventario quede negativo
+        if (stockNuevo < 0) {
+
+            const error = new Error(
+                'No hay suficiente inventario para realizar la resta'
+            );
+
+            error.status = 400;
+
+            throw error;
+
+        }
 
         // actualiza el stock
         const resultado = await cliente.query(
@@ -358,7 +404,8 @@ const ajustarInventario = async (
         return {
             codigo: resultado.rows[0].codigo,
             stock_anterior: stockAnterior,
-            cantidad_anadida: cantidad,
+            cantidad_ajustada: cantidad,
+            operacion: operacion,
             stock_actual: Number(
                 resultado.rows[0].stock_actual
             ),
@@ -382,7 +429,6 @@ const ajustarInventario = async (
     }
 
 };
-
 
 // exporta las funciones
 module.exports = {

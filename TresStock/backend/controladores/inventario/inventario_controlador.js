@@ -209,16 +209,15 @@ const recalcularStockMinimo = async (req, res) => {
     }
 
 };
-
 // FUNCION AJUSTAR INVENTARIO
 const ajustarInventario = async (req, res) => {
 
     try {
 
         // obtiene el codigo del producto
-        const { codigo } = req.body;
+        const { codigo, operacion } = req.body;
 
-        // obtiene la cantidad a añadir
+        // obtiene la cantidad a ajustar
         const cantidad = Number(
             req.body.cantidad
         );
@@ -235,7 +234,7 @@ const ajustarInventario = async (req, res) => {
 
         }
 
-        // verifica la cantidad a añadir
+        // verifica la cantidad a ajustar
         if (
             !Number.isSafeInteger(cantidad) ||
             cantidad < 1
@@ -247,11 +246,23 @@ const ajustarInventario = async (req, res) => {
 
         }
 
-        // ajusta el inventario
+        // verifica la operacion del ajuste
+        if (
+            !['sumar', 'restar'].includes(operacion)
+        ) {
+
+            return res.status(400).json({
+                mensaje: 'La operación debe ser sumar o restar'
+            });
+
+        }
+
+        // ajusta el inventario segun la operacion seleccionada
         const inventario =
             await inventarioServicio.ajustarInventario(
                 codigo.trim(),
-                cantidad
+                cantidad,
+                operacion
             );
 
         // envia el resultado del ajuste
@@ -262,12 +273,6 @@ const ajustarInventario = async (req, res) => {
 
     } catch (error) {
 
-        // muestra el error en la consola
-        console.error(
-            'Error al ajustar inventario:',
-            error
-        );
-
         // verifica si el producto no existe
         if (error.status === 404) {
 
@@ -276,6 +281,21 @@ const ajustarInventario = async (req, res) => {
             });
 
         }
+
+        // verifica si no existe inventario suficiente para restar
+        if (error.status === 400) {
+
+            return res.status(400).json({
+                mensaje: error.message
+            });
+
+        }
+
+        // muestra el error en la consola
+        console.error(
+            'Error al ajustar inventario:',
+            error
+        );
 
         // envia el error
         return res.status(500).json({
