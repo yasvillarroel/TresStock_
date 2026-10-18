@@ -1,24 +1,66 @@
 // importa el servicio de usuarios
 const usuariosServicio = require('../../servicios/usuarios/usuarios_servicio');
 
+
+// largo minimo permitido para la contraseña
+const LARGO_MINIMO_PASSWORD = 8;
+
+// formato basico de correo electronico
+const EXPRESION_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
 // =======================
 // FUNCIONES DE USUARIO =
 // =======================
 
-    //FUNCION 1 CREAR USUARIO
-    const crearUsuario = async (req, res) => {
+    // funcion 1 crear usuario
+    const crearUsuario = async (peticion, respuesta) => {
 
         try {
 
-            // obtiene los datos enviados desde la peticion
-            const { nombre, email, password, id_rol } = req.body;
+            // limpia los datos enviados desde el formulario
+            const nombre = String(peticion.body.nombre || '').trim();
+            const email = String(peticion.body.email || '').trim().toLowerCase();
+            const password = String(peticion.body.password || '');
+            const confirmar_password = String(peticion.body.confirmar_password || '');
+            const rol = String(peticion.body.rol || '').trim();
 
-            // muestra los datos recibidos
-            console.log('datos para crear usuario:', {
-                nombre,
-                email,
-                id_rol
-            });
+            // valida el nombre
+            if (nombre.length < 2 || nombre.length > 100) {
+                return respuesta.status(400).json({
+                    mensaje: 'El nombre debe tener entre 2 y 100 caracteres'
+                });
+            }
+
+            // valida el correo
+            if (email.length > 150 || !EXPRESION_EMAIL.test(email)) {
+                return respuesta.status(400).json({
+                    mensaje: 'El correo electrónico no es válido'
+                });
+            }
+
+            // valida el largo de la contraseña
+            if (password.length < LARGO_MINIMO_PASSWORD) {
+                return respuesta.status(400).json({
+                    mensaje: `La contraseña debe tener al menos ${LARGO_MINIMO_PASSWORD} caracteres`
+                });
+            }
+
+            // valida que ambas contraseñas coincidan
+            if (password !== confirmar_password) {
+                return respuesta.status(400).json({
+                    mensaje: 'Las contraseñas no coinciden'
+                });
+            }
+
+            // traduce el nombre del rol a su id
+            const id_rol = await usuariosServicio.obtenerIdRol(rol);
+
+            if (!id_rol) {
+                return respuesta.status(400).json({
+                    mensaje: 'El rol seleccionado no es válido'
+                });
+            }
 
             // crea el usuario mediante el servicio
             const usuario = await usuariosServicio.crearUsuario(
@@ -29,19 +71,26 @@ const usuariosServicio = require('../../servicios/usuarios/usuarios_servicio');
             );
 
             // envia el usuario creado
-            res.status(201).json(usuario);
+            respuesta.status(201).json(usuario);
 
-        } catch (error) {
+        } catch (fallo) {
+
+            // 23505 es violacion de unicidad en postgres
+            if (fallo.code === '23505') {
+                return respuesta.status(409).json({
+                    mensaje: 'Ya existe un usuario con ese correo electrónico'
+                });
+            }
 
             // muestra el error en la consola
-            console.error('Error al crear usuario:', error);
+            console.error('Error al crear usuario:', fallo);
 
             // envia una respuesta de error
-            res.status(500).json({
+            respuesta.status(500).json({
                 mensaje: 'Error al crear usuario'
             });
         }
-    };  
+    };
 
     //FUNCION 2 OBTENER TODOS LOS USUARIOS
     const obtenerUsuarios = async (req, res) => {

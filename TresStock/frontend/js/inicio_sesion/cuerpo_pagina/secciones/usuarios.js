@@ -1,10 +1,16 @@
+// direccion base de la api de usuarios
+const URL_API_USUARIOS = 'http://127.0.0.1:3000/api/usuarios';
+
 // variable para almacenar los usuarios obtenidos desde el backend
 let usuariosCargados = [];
+
+// evita enviar el formulario dos veces seguidas
+let guardandoUsuario = false;
 
 
 // TITULO 1 FORMULARIO USUARIO
 
-    // función para mostrar el formulario de registro de un nuevo usuario
+    // muestra el formulario de registro de un nuevo usuario
     function abrirFormularioUsuario() {
 
         const contenedorFormularioUsuario = document.getElementById(
@@ -38,7 +44,7 @@ let usuariosCargados = [];
     }
 
 
-    // función para ocultar el formulario de usuario
+    // oculta el formulario de usuario
     function cerrarFormularioUsuario() {
 
         const contenedorFormularioUsuario = document.getElementById(
@@ -59,7 +65,7 @@ let usuariosCargados = [];
 
 // TITULO 2 LIMPIEZA FORMULARIO USUARIO
 
-    // función para limpiar los campos del formulario de usuario
+    // limpia los campos del formulario de usuario
     function limpiarFormularioUsuario() {
 
         const inputNombreUsuario = document.getElementById(
@@ -122,13 +128,13 @@ let usuariosCargados = [];
 
 // TITULO 3 CARGAR USUARIOS
 
-    // función para obtener los usuarios registrados desde el backend
+    // obtiene los usuarios registrados desde el backend
     async function cargarUsuarios() {
 
         try {
 
             const respuesta = await fetch(
-                'http://127.0.0.1:3000/api/usuarios',
+                URL_API_USUARIOS,
                 {
                     method: 'GET',
                     credentials: 'include'
@@ -151,21 +157,7 @@ let usuariosCargados = [];
             }
 
 
-            /*
-             * permite trabajar si el backend devuelve:
-             *
-             * [
-             *     {...},
-             *     {...}
-             * ]
-             *
-             * o:
-             *
-             * {
-             *     usuarios: [...]
-             * }
-             */
-
+            // permite trabajar si el backend devuelve un arreglo o un objeto con usuarios
             if (Array.isArray(resultado)) {
 
                 usuariosCargados = resultado;
@@ -185,9 +177,8 @@ let usuariosCargados = [];
             }
 
 
-            mostrarUsuarios(
-                usuariosCargados
-            );
+            // vuelve a aplicar los filtros activos sobre la lista nueva
+            filtrarUsuarios();
 
 
             actualizarIndicadoresUsuarios(
@@ -209,7 +200,22 @@ let usuariosCargados = [];
 
 // TITULO 4 MOSTRAR USUARIOS
 
-    // función para mostrar los usuarios dentro de la tabla
+    // escapa texto para que no se interprete como html
+    function escaparTextoUsuario(texto) {
+
+        const elemento = document.createElement(
+            'div'
+        );
+
+        elemento.textContent =
+            texto;
+
+        return elemento.innerHTML;
+
+    }
+
+
+    // muestra los usuarios dentro de la tabla
     function mostrarUsuarios(usuarios) {
 
         const cuerpoTabla = document.getElementById(
@@ -267,7 +273,7 @@ let usuariosCargados = [];
                 );
 
 
-            // determina si el usuario está activo
+            // determina si el usuario esta activo
             const usuarioActivo =
                 obtenerEstadoUsuario(
                     usuario
@@ -288,7 +294,14 @@ let usuariosCargados = [];
                     : 'estado_usuario_inactivo';
 
 
-            // formatea la fecha de creación
+            // establece el texto de la accion
+            const textoAccion =
+                usuarioActivo
+                    ? 'Desactivar'
+                    : 'Activar';
+
+
+            // formatea la fecha de creacion
             const fechaCreacion =
                 formatearFechaUsuario(
                     usuario.fecha_creacion
@@ -298,15 +311,15 @@ let usuariosCargados = [];
             fila.innerHTML = `
 
                 <td class="dato_nombre_usuarios">
-                    ${usuario.nombre || '-'}
+                    ${escaparTextoUsuario(usuario.nombre || '-')}
                 </td>
 
                 <td class="dato_email_usuarios">
-                    ${usuario.email || '-'}
+                    ${escaparTextoUsuario(usuario.email || '-')}
                 </td>
 
                 <td class="dato_rol_usuarios">
-                    ${nombreRol}
+                    ${escaparTextoUsuario(nombreRol)}
                 </td>
 
                 <td class="dato_estado_usuarios">
@@ -322,7 +335,15 @@ let usuariosCargados = [];
                 </td>
 
                 <td class="dato_acciones_usuarios">
-                    -
+
+                    <div
+                        class="boton_cambiar_estado_usuario"
+                        data-id-usuario="${Number(usuario.id_usuario)}"
+                        data-activo-nuevo="${!usuarioActivo}"
+                    >
+                        ${textoAccion}
+                    </div>
+
                 </td>
 
             `;
@@ -339,7 +360,7 @@ let usuariosCargados = [];
 
 // TITULO 5 OBTENER ROL USUARIO
 
-    // función para obtener el nombre del rol de un usuario
+    // obtiene el nombre del rol de un usuario
     function obtenerNombreRolUsuario(usuario) {
 
         // utiliza el nombre del rol si el backend ya lo entrega
@@ -379,7 +400,7 @@ let usuariosCargados = [];
 
 // TITULO 6 OBTENER ESTADO USUARIO
 
-    // función para determinar si un usuario está activo
+    // determina si un usuario esta activo
     function obtenerEstadoUsuario(usuario) {
 
         return (
@@ -394,7 +415,7 @@ let usuariosCargados = [];
 
 // TITULO 7 FORMATEAR FECHA USUARIO
 
-    // función para mostrar la fecha de creación en formato chileno
+    // muestra la fecha de creacion en formato chileno
     function formatearFechaUsuario(fecha) {
 
         if (!fecha) {
@@ -433,7 +454,7 @@ let usuariosCargados = [];
 
 // TITULO 8 INDICADORES USUARIOS
 
-    // función para actualizar los indicadores principales de usuarios
+    // actualiza los indicadores principales de usuarios
     function actualizarIndicadoresUsuarios(usuarios) {
 
         const valorTotalUsuarios = document.getElementById(
@@ -453,7 +474,7 @@ let usuariosCargados = [];
         );
 
 
-        // obtiene la cantidad de usuarios activos
+        // obtiene los usuarios activos
         const usuariosActivos = usuarios.filter(
             function(usuario) {
 
@@ -465,7 +486,7 @@ let usuariosCargados = [];
         );
 
 
-        // obtiene la cantidad de usuarios inactivos
+        // obtiene los usuarios inactivos
         const usuariosInactivos = usuarios.filter(
             function(usuario) {
 
@@ -477,7 +498,7 @@ let usuariosCargados = [];
         );
 
 
-        // obtiene la cantidad de administradores
+        // obtiene los administradores
         const administradores = usuarios.filter(
             function(usuario) {
 
@@ -531,7 +552,7 @@ let usuariosCargados = [];
 
 // TITULO 9 CONFIGURACION FILTROS USUARIOS
 
-    // función para activar los filtros de usuarios
+    // activa los filtros de usuarios
     function configurarFiltrosUsuarios() {
 
         const inputBusqueda = document.getElementById(
@@ -547,7 +568,7 @@ let usuariosCargados = [];
         );
 
 
-        // activa la búsqueda por nombre o correo
+        // activa la busqueda por nombre o correo
         if (inputBusqueda) {
 
             inputBusqueda.addEventListener(
@@ -584,7 +605,7 @@ let usuariosCargados = [];
 
 // TITULO 10 FILTRAR USUARIOS
 
-    // función para filtrar usuarios por búsqueda, rol y estado
+    // filtra usuarios por busqueda rol y estado
     function filtrarUsuarios() {
 
         const inputBusqueda = document.getElementById(
@@ -654,7 +675,7 @@ let usuariosCargados = [];
                             : 'inactivo';
 
 
-                    // comprueba búsqueda
+                    // comprueba busqueda
                     const coincideBusqueda =
                         !textoBusqueda ||
                         nombre.includes(
@@ -694,12 +715,244 @@ let usuariosCargados = [];
     }
 
 
-// TITULO 11 INICIALIZACION USUARIOS
+// TITULO 11 GUARDAR USUARIO
 
-    // función para inicializar el funcionamiento de la vista usuarios
+    // envia los datos del formulario para registrar un usuario nuevo
+    async function guardarUsuario() {
+
+        // evita envios repetidos mientras se espera la respuesta
+        if (guardandoUsuario) {
+
+            return;
+
+        }
+
+
+        const nombre = document.getElementById(
+            'input_nombre_usuario'
+        ).value.trim();
+
+        const email = document.getElementById(
+            'input_email_usuario'
+        ).value.trim();
+
+        const password = document.getElementById(
+            'input_password_usuario'
+        ).value;
+
+        const confirmar_password = document.getElementById(
+            'input_confirmar_password_usuario'
+        ).value;
+
+        const rol = document.getElementById(
+            'select_rol_usuario'
+        ).value;
+
+
+        // valida que no falten campos
+        if (
+            !nombre ||
+            !email ||
+            !password ||
+            !confirmar_password ||
+            !rol
+        ) {
+
+            alert('Completa todos los campos');
+
+            return;
+
+        }
+
+
+        // valida que ambas contraseñas coincidan
+        if (password !== confirmar_password) {
+
+            alert('Las contraseñas no coinciden');
+
+            return;
+
+        }
+
+
+        guardandoUsuario = true;
+
+
+        try {
+
+            const respuesta = await fetch(
+                URL_API_USUARIOS,
+                {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        nombre,
+                        email,
+                        password,
+                        confirmar_password,
+                        rol
+                    })
+                }
+            );
+
+
+            const resultado = await respuesta.json();
+
+
+            // muestra el mensaje que envio el backend si fallo
+            if (!respuesta.ok) {
+
+                alert(
+                    resultado.mensaje ||
+                    'No se pudo crear el usuario'
+                );
+
+                return;
+
+            }
+
+
+            cerrarFormularioUsuario();
+
+
+            await cargarUsuarios();
+
+
+        } catch (error) {
+
+            console.error(
+                'Error al guardar usuario:',
+                error
+            );
+
+            alert('No se pudo crear el usuario');
+
+        } finally {
+
+            guardandoUsuario = false;
+
+        }
+
+    }
+
+
+// TITULO 12 CAMBIAR ESTADO USUARIO
+
+    // activa o desactiva un usuario
+    async function cambiarEstadoUsuario(idUsuario, activo) {
+
+        try {
+
+            const respuesta = await fetch(
+                `${URL_API_USUARIOS}/${idUsuario}/estado`,
+                {
+                    method: 'PUT',
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        activo
+                    })
+                }
+            );
+
+
+            if (!respuesta.ok) {
+
+                alert('No se pudo cambiar el estado del usuario');
+
+                return;
+
+            }
+
+
+            await cargarUsuarios();
+
+
+        } catch (error) {
+
+            console.error(
+                'Error al cambiar estado del usuario:',
+                error
+            );
+
+            alert('No se pudo cambiar el estado del usuario');
+
+        }
+
+    }
+
+
+    // detecta los clics sobre los botones de la tabla
+    function configurarAccionesTablaUsuarios() {
+
+        const cuerpoTabla = document.getElementById(
+            'cuerpo_tabla_usuarios'
+        );
+
+
+        if (!cuerpoTabla) {
+
+            return;
+
+        }
+
+
+        cuerpoTabla.addEventListener(
+            'click',
+            function(evento) {
+
+                const botonEstado = evento.target.closest(
+                    '.boton_cambiar_estado_usuario'
+                );
+
+
+                if (!botonEstado) {
+
+                    return;
+
+                }
+
+
+                cambiarEstadoUsuario(
+                    Number(botonEstado.dataset.idUsuario),
+                    botonEstado.dataset.activoNuevo === 'true'
+                );
+
+            }
+        );
+
+    }
+
+
+// TITULO 13 INICIALIZACION USUARIOS
+
+    // inicializa el funcionamiento de la vista usuarios
     async function inicializarUsuarios() {
 
+        const botonGuardarUsuario = document.getElementById(
+            'boton_guardar_usuario'
+        );
+
+
+        if (botonGuardarUsuario) {
+
+            botonGuardarUsuario.addEventListener(
+                'click',
+                guardarUsuario
+            );
+
+        }
+
+
         configurarFiltrosUsuarios();
+
+
+        configurarAccionesTablaUsuarios();
 
 
         await cargarUsuarios();

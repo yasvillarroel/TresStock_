@@ -185,6 +185,21 @@ const bcrypt = require('bcrypt');
         return resultado.rows[0];
     };
 
+    // funcion 9 obtener id de rol por nombre
+    const obtenerIdRol = async (nombre) => {
+
+        // busca el rol por su nombre
+        const resultado = await pool.query(
+            `SELECT id_rol
+            FROM base_datos.roles
+            WHERE nombre = $1`,
+            [nombre]
+        );
+
+        // devuelve el id o undefined si no existe
+        return resultado.rows[0]?.id_rol;
+    };
+
 // EXPORTAR FUNCIONES
 module.exports = {
     crearUsuario,
@@ -194,5 +209,6 @@ module.exports = {
     eliminarUsuario,
     cambiarContrasena,
     cambiarEstadoUsuario,
-    cambiarRolUsuario
+    cambiarRolUsuario,
+    obtenerIdRol
 };
