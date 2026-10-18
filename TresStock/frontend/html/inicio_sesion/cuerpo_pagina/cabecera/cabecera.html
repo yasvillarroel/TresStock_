@@ -81,29 +81,47 @@
                 </div>
 
 
-                <!-- icono visual del usuario conectado -->
-                <div class="icono_usuario_cabecera" id="icono_usuario_cabecera">
+                <!-- contenedor de perfil y opciones desplegables -->
+                <div class="contenedor_perfil_usuario_cabecera" id="contenedor_perfil_usuario_cabecera">
 
-                    <img class="imagen_usuario_cabecera" src="./imagenes/inicio_sesion/cuerpo_pagina/cabecera/user.svg" alt="Usuario">
+                    <!-- boton para abrir el menu desde cualquier parte del perfil -->
+                    <button class="boton_perfil_usuario_cabecera" id="boton_perfil_usuario_cabecera"
+                        type="button" aria-label="Opciones de cuenta" aria-expanded="false"
+                        aria-controls="menu_desplegable_usuario_cabecera">
+
+                        <!-- icono visual del usuario conectado -->
+                        <div class="icono_usuario_cabecera" id="icono_usuario_cabecera">
+                            <img class="imagen_usuario_cabecera"
+                                src="./imagenes/inicio_sesion/cuerpo_pagina/cabecera/user.svg" alt="">
+                        </div>
+
+                        <!-- nombre y correo del usuario conectado -->
+                        <div class="contenedor_datos_usuario_cabecera">
+                            <div class="nombre_usuario_cabecera" id="nombre_usuario_cabecera">Usuario</div>
+                            <div class="email_usuario_cabecera" id="email_usuario_cabecera"></div>
+                        </div>
+
+                        <!-- indicador de menu -->
+                        <div class="boton_usuario_cabecera" id="boton_usuario_cabecera" aria-hidden="true">▾</div>
+
+                    </button>
+
+                    <!-- opciones de la cuenta; oculto hasta presionar perfil -->
+                    <div class="menu_desplegable_usuario_cabecera" id="menu_desplegable_usuario_cabecera" hidden>
+
+                        <button class="boton_cerrar_sesion_cabecera" id="boton_cerrar_sesion_cabecera" type="button">
+
+                            <img
+                                class="imagen_cerrar_sesion_cabecera"
+                                src="./imagenes/inicio_sesion/cuerpo_pagina/cabecera/log-out.svg"
+                                alt="Cerrar sesión"
+                            >
+                            Cerrar sesión
+                        </button>
+
+                    </div>
 
                 </div>
-
-
-                <!-- contenedor de los datos del usuario conectado -->
-                <div class="contenedor_datos_usuario_cabecera">
-
-                    <!-- nombre del usuario conectado -->
-                    <div class="nombre_usuario_cabecera" id="nombre_usuario_cabecera">Usuario</div>
-
-                    <!-- correo electrónico del usuario conectado -->
-                    <div class="email_usuario_cabecera" id="email_usuario_cabecera">usuario@tresstock.cl</div>
-
-                </div>
-
-
-                <!-- opción para desplegar acciones de la cuenta -->
-                <div class="boton_usuario_cabecera" id="boton_usuario_cabecera">▾</div>
-
 
             </div>
 

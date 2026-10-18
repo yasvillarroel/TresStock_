@@ -45,7 +45,7 @@
 // TITULO 3 CARGA INICIAL DEL SISTEMA
 
     // función para cargar los componentes principales de TresStock
-    async function cargarSistema() {
+    async function cargarSistema(usuario) {
 
         await cargarComponente(
             './html/inicio_sesion/cuerpo_pagina/menu_lateral/menu_lateral.html',
@@ -56,6 +56,12 @@
             './html/inicio_sesion/cuerpo_pagina/cabecera/cabecera.html',
             'contenedor_cabecera'
         );
+
+        // muestra el nombre y correo de la sesion en la cabecera ya cargada
+        mostrarUsuarioCabecera(usuario);
+
+        // configura el menu desplegable despues de insertar cabecera.html
+        inicializarMenuUsuarioCabecera();
 
         const vistaGuardada = sessionStorage.getItem(
             'vista_actual'
@@ -149,7 +155,7 @@
 
         console.log('Usuario autenticado:', usuario);
 
-        await cargarSistema();
+        await cargarSistema(usuario);
     }
 
     // llama a la función principal al cargar el index

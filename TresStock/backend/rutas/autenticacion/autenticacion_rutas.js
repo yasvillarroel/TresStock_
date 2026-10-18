@@ -21,5 +21,8 @@ router.post('/login', autenticacionControlador.iniciarSesion);
 // y ni siquiera llega a ejecutarse el controlador
 router.get('/sesion', verificarSesionMiddleware, autenticacionControlador.verificarSesion);
 
+// ruta para cerrar sesion y borrar la cookie (incluso si el JWT expiro)
+router.post('/logout', autenticacionControlador.cerrarSesion);
+
 // exporta el router
 module.exports = router;

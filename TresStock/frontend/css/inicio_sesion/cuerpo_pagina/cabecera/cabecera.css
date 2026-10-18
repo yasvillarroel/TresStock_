@@ -197,6 +197,110 @@
     }
 
 
+/* SUBTITULO 1 PERFIL Y MENU DESPLEGABLE */
+
+    /* posiciona el menu debajo del perfil */
+    .contenedor_perfil_usuario_cabecera {
+        position: relative;
+        min-width: 0;
+    }
+
+    /* permite abrir el menu desde el icono, nombre, correo o flecha */
+    .boton_perfil_usuario_cabecera {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        border: none;
+        border-radius: 8px;
+        background-color: transparent;
+        padding: 5px 7px;
+        cursor: pointer;
+        text-align: left;
+        font-family: Arial, sans-serif;
+    }
+
+    .boton_perfil_usuario_cabecera:hover {
+        background-color: #f1f7f8;
+    }
+
+    /* mantiene el icono redondo sin encogerse */
+    .boton_perfil_usuario_cabecera .icono_usuario_cabecera {
+        flex-shrink: 0;
+    }
+
+    /* evita que correos largos ensanchen la cabecera */
+    .boton_perfil_usuario_cabecera .contenedor_datos_usuario_cabecera {
+        max-width: 190px;
+        min-width: 0;
+    }
+
+    .boton_perfil_usuario_cabecera .nombre_usuario_cabecera,
+    .boton_perfil_usuario_cabecera .email_usuario_cabecera {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    /* menu desplegado debajo del perfil */
+    .menu_desplegable_usuario_cabecera {
+        position: absolute;
+        top: calc(100% + 7px);
+        right: 0;
+        width: 194px;
+        max-width: calc(100vw - 24px);
+        padding: 6px;
+        background-color: #ffffff;
+        border: 1px solid #dce4e8;
+        border-radius: 8px;
+        box-shadow: 0 10px 28px rgba(5, 31, 45, 0.13);
+        box-sizing: border-box;
+        z-index: 1200;
+    }
+
+    /* respeta el atributo hidden cuando el menu se cierra */
+    .menu_desplegable_usuario_cabecera[hidden] {
+        display: none;
+    }
+
+    /* boton de cierre de sesion */
+    .boton_cerrar_sesion_cabecera {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        min-height: 39px;
+        padding: 0 12px;
+        border: none;
+        border-radius: 5px;
+        color: #dc2626;
+        background-color: #ffffff;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        text-align: left;
+        cursor: pointer;
+        justify-content: flex-start;
+        gap: 10px;
+
+    }
+
+    .boton_cerrar_sesion_cabecera:hover {
+        background-color: #fff0f0;
+    }
+
+    .boton_cerrar_sesion_cabecera:disabled {
+        opacity: 0.65;
+        cursor: not-allowed;
+    }
+
+
+    /* imagen del boton cerrar sesion */
+    .imagen_cerrar_sesion_cabecera {
+        width: 18px;
+        height: 18px;
+        flex-shrink: 0;
+    }
+
+
 /* TITULO 5 RESPONSIVE CABECERA */
 
     /* adapta la cabecera para tablets */

@@ -58,16 +58,63 @@ const iniciarSesion = async (req, res) => {
 };
 
 // controlador para verificar si la sesion sigue siendo valida
-function verificarSesion(req, res) {
+const verificarSesion = async (req, res) => {
 
-    // si llegamos aca, el middleware ya valido el token y dejo los datos en req.usuario
-    res.status(200).json({
-        usuario: req.usuario
+    try {
+
+        // el middleware ya valido la cookie JWT y guardo sus datos en req.usuario
+        const idUsuario = Number(req.usuario?.id);
+
+        if (!Number.isSafeInteger(idUsuario) || idUsuario <= 0) {
+            return res.status(401).json({
+                mensaje: 'Sesion invalida'
+            });
+        }
+
+        // obtiene el nombre y correo vigentes desde PostgreSQL
+        const usuario = await autenticacionServicio.obtenerUsuarioPorId(idUsuario);
+
+        // rechaza sesiones de usuarios eliminados o desactivados
+        if (!usuario) {
+            return res.status(401).json({
+                mensaje: 'La sesion ya no es valida'
+            });
+        }
+
+        return res.status(200).json({ usuario });
+
+    } catch (error) {
+
+        console.error('Error al verificar la sesion:', error);
+
+        return res.status(500).json({
+            mensaje: 'Error al verificar la sesion'
+        });
+    }
+};
+
+// TITULO 3 CERRAR SESION
+
+// elimina la cookie JWT para finalizar la sesion en el navegador
+const cerrarSesion = (req, res) => {
+
+    // utiliza los mismos atributos de la cookie original, sin maxAge
+    // path '/' corresponde a la ruta predeterminada de res.cookie
+    res.clearCookie('sesion', {
+        httpOnly: OPCIONES_COOKIE_SESION.httpOnly,
+        secure: OPCIONES_COOKIE_SESION.secure,
+        sameSite: OPCIONES_COOKIE_SESION.sameSite,
+        path: '/'
     });
-}
+
+    return res.status(200).json({
+        mensaje: 'Sesion cerrada correctamente'
+    });
+};
 
 // exporta el controlador
 module.exports = {
     iniciarSesion,
-    verificarSesion
+    verificarSesion,
+    cerrarSesion
 };

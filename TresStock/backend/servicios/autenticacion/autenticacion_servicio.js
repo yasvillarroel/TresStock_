@@ -53,7 +53,42 @@ const iniciarSesion = async (email, password) => {
     return usuario;
 };
 
+
+
+// FUNCION 2 OBTENER USUARIO AUTENTICADO
+// busca los datos publicos del usuario usando el ID del JWT ya validado
+const obtenerUsuarioPorId = async (idUsuario) => {
+
+    const resultado = await pool.query(
+        `SELECT
+            id_usuario,
+            nombre,
+            email,
+            id_rol
+         FROM base_datos.usuarios
+         WHERE id_usuario = $1
+           AND activo = TRUE`,
+        [idUsuario]
+    );
+
+    const usuario = resultado.rows[0];
+
+    // si ya no existe o fue desactivado, la sesion no debe continuar
+    if (!usuario) {
+        return null;
+    }
+
+    // devuelve solamente los datos necesarios para la cabecera
+    return {
+        id: usuario.id_usuario,
+        rol: usuario.id_rol,
+        nombre: usuario.nombre,
+        email: usuario.email
+    };
+};
+
 // exporta el servicio
 module.exports = {
-    iniciarSesion
+    iniciarSesion,
+    obtenerUsuarioPorId
 };
