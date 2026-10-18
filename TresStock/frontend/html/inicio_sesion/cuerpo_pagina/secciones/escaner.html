@@ -1,328 +1,224 @@
-<!-- TITULO 1 CONTENEDOR MODAL DE ESCANEO Y GESTION -->
-
-<!-- contenedor principal -->
+<!-- TITULO 1 CONTENEDOR PRINCIPAL DEL ESCANER -->
 <div class="contenedor_escaner_producto contenedor_escaner_producto_oculto"
      id="contenedor_escaner_producto">
 
-    <!-- contenido principal -->
     <div class="contenido_escaner_producto">
 
-        <!-- VISTA 1 ESCANER -->
+        <!-- TITULO 2 VISTA DE LECTURA -->
+        <div class="tarjeta_escaner_producto" id="vista_lector_producto">
 
-        <div id="vista_lector_producto">
-
-            <!-- titulo del escaner -->
-            <div class="titulo_escaner_producto">
-                Escanear producto
+            <div class="cabecera_tarjeta_escaner">
+                <div>
+                    <div class="titulo_escaner_producto">Escanear producto</div>
+                    <div class="descripcion_escaner_producto">
+                        Apunta la cámara al código de barras para identificar el producto.
+                    </div>
+                </div>
             </div>
 
-            <!-- lector de codigos de barras -->
-            <video class="lector_codigo_barras"
-                   id="lector_codigo_barras"
-                   playsinline
-                   muted></video>
+            <div class="marco_camara_escaner">
+                <video class="lector_codigo_barras"
+                       id="lector_codigo_barras"
+                       autoplay playsinline muted></video>
+                <div class="guia_lectura_escaner" aria-hidden="true"></div>
+            </div>
 
-            <!-- boton para cerrar -->
-            <button type="button"
-                    class="boton_cerrar_escaner_producto"
-                    onclick="cerrarEscanerProducto(); cargarVista('inventario')">
-                Cerrar
-            </button>
-
+            <div class="pie_lector_escaner">
+                <div class="indicador_camara_escaner">
+                    <span class="punto_camara_escaner"></span>
+                    Cámara para leer códigos de barras
+                </div>
+                <button type="button"
+                        class="boton_secundario_escaner"
+                        onclick="cerrarEscanerProducto(); cargarVista('inventario')">
+                    Cerrar escáner
+                </button>
+            </div>
         </div>
 
+        <!-- TITULO 3 VISTA DE PRODUCTO ESCANEADO -->
+        <div class="tarjeta_escaner_producto" id="vista_gestion_producto" hidden>
 
-        <!-- VISTA 2 GESTION DEL PRODUCTO -->
-
-        <div id="vista_gestion_producto" hidden>
-
-            <!-- titulo de gestion -->
-            <div class="titulo_escaner_producto">
-                Gestionar producto
+            <div class="cabecera_tarjeta_escaner">
+                <div>
+                    <div class="titulo_escaner_producto">Gestionar producto</div>
+                    <div class="descripcion_escaner_producto">
+                        Revisa la información del producto y actualiza su inventario.
+                    </div>
+                </div>
             </div>
 
-            <!-- codigo escaneado -->
-            <div id="codigo_producto_escaneado"></div>
+            <div id="codigo_producto_escaneado" class="codigo_estado_escaner"></div>
 
-            <!-- datos del producto -->
-            <div id="datos_producto_escaneado"></div>
+            <div id="datos_producto_escaneado" class="datos_producto_escaneado"></div>
 
-            <!-- asociar codigo -->
-            <button type="button"
-                    id="boton_asociar_codigo"
-                    onclick="mostrarProductosParaAsociar()">
-                Asociar código
-            </button>
-
-        
-        <!-- contenedor del ajuste de producto -->
-        <div class="contenedor_ajuste_producto">
-
-            <!-- menu para ajustar el inventario -->
-            <div id="menu_ajustar_producto" hidden>
-
-                <!-- titulo del ajuste -->
-                <h3>Ajustar inventario</h3>
-
-                <!-- seleccionar operacion del inventario -->
-                <div class="opciones_operacion_ajuste">
-
-                    <!-- sumar unidades al inventario -->
-                    <label>
-                        <input
-                            type="radio"
-                            name="operacion_ajuste"
-                            id="operacion_sumar"
-                            value="sumar"
-                            checked
-                        >
-                        Sumar
-                    </label>
-
-                    <!-- restar unidades del inventario -->
-                    <label>
-                        <input
-                            type="radio"
-                            name="operacion_ajuste"
-                            id="operacion_restar"
-                            value="restar"
-                        >
-                        Restar
-                    </label>
-
-                </div>
-
-                <!-- seleccionar tipo de cantidad -->
-                <div class="opciones_tipo_cantidad">
-
-                    <!-- cantidad segun el codigo actual -->
-                    <label>
-                        <input
-                            type="radio"
-                            name="tipo_cantidad_ajuste"
-                            id="cantidad_codigo_actual"
-                            value="codigo_actual"
-                            checked
-                        >
-                        Codigo actual
-                    </label>
-
-                    <!-- cantidad segun el codigo singular -->
-                    <label>
-                        <input
-                            type="radio"
-                            name="tipo_cantidad_ajuste"
-                            id="cantidad_codigo_singular"
-                            value="codigo_singular"
-                        >
-                        Codigo singular
-                    </label>
-
-                </div>
-
-                <!-- ingresar cantidad -->
-                <div class="campo_cantidad_ajuste">
-
-                    <label for="cantidad_ingresada_ajuste">
-                        <span id="texto_cantidad_ajuste">
-                            Cantidad a sumar
-                        </span>
-                    </label>
-
-                    <input
-                        type="number"
-                        id="cantidad_ingresada_ajuste"
-                        min="1"
-                        step="1"
-                        value="1"
-                    >
-
-                </div>
-
-                <!-- mostrar unidades por codigo -->
-                <div
-                    class="campo_unidades_codigo"
-                    id="contenedor_unidades_codigo"
-                >
-
-                    <label for="unidades_por_codigo_ajuste">
-                        Unidades por codigo
-                    </label>
-
-                    <input
-                        type="number"
-                        id="unidades_por_codigo_ajuste"
-                        min="1"
-                        step="1"
-                        value="1"
-                        readonly
-                    >
-
-                </div>
-
-                <!-- mostrar cantidad del ajuste -->
-                <div class="resultado_cantidad_ajuste">
-
-                    <p>
-                        <span id="texto_unidades_ajuste">Unidades a sumar:</span>
-                        <strong id="cantidad_anadir_inventario">1</strong>
-                        unidades
-                    </p>
-
-                </div>
-
-                <!-- mostrar inventario actual -->
-                <div class="inventario_actual_ajuste">
-
-                    <p>
-                        Inventario actual:
-                        <strong id="inventario_actual_producto">0</strong>
-                        unidades
-                    </p>
-
-                </div>
-
-                <!-- mostrar inventario resultante -->
-                <div class="inventario_resultante_ajuste">
-
-                    <p>
-                        Inventario resultante:
-                        <strong id="inventario_resultante_producto">1</strong>
-                        unidades
-                    </p>
-
-                </div>
-
-                <!-- confirmar ajuste -->
-                <button
-                    type="button"
-                    id="boton_aceptar_ajuste"
-                    onclick="aceptarAjusteProducto()"
-                >
-                    Confirmar ajuste
+            <div class="acciones_gestion_escaner">
+                <button type="button"
+                        class="boton_principal_escaner"
+                        id="boton_ajustar_producto"
+                        onclick="ajustarProductoEscaneado()">
+                    Ajustar inventario
                 </button>
 
+                <button type="button"
+                        class="boton_principal_escaner"
+                        id="boton_asociar_codigo"
+                        onclick="mostrarProductosParaAsociar()" hidden>
+                    Asociar código a un producto
+                </button>
+
+                <button type="button"
+                        class="boton_secundario_escaner"
+                        onclick="volverAlEscanerProducto()">
+                    Escanear otro código
+                </button>
+
+                <button type="button"
+                        class="boton_peligro_escaner"
+                        id="boton_eliminar_codigo_asociado"
+                        onclick="eliminarCodigoAsociado()" hidden>
+                    Eliminar código asociado
+                </button>
+
+                <button type="button"
+                        class="boton_texto_escaner"
+                        onclick="cerrarEscanerProducto(); cargarVista('inventario')">
+                    Cerrar
+                </button>
             </div>
-
-            <!-- abrir el menu de ajuste -->
-            <button
-                type="button"
-                id="boton_ajustar_producto"
-                onclick="ajustarProductoEscaneado()"
-            >
-                Ajustar
-            </button>
-
         </div>
 
+        <!-- TITULO 4 VISTA PARA ASOCIAR UN CODIGO -->
+        <div class="tarjeta_escaner_producto" id="vista_asociar_producto" hidden>
 
-            <!-- escanear otro codigo -->
-            <button type="button"
-                    onclick="volverAlEscanerProducto()">
-                Escanear otro código
-            </button>
+            <div class="cabecera_tarjeta_escaner">
+                <div>
+                    <div class="titulo_escaner_producto">Asociar código a un producto</div>
+                    <div class="descripcion_escaner_producto">
+                        Selecciona un producto existente para asociarle el código escaneado.
+                    </div>
+                </div>
+            </div>
 
-            <!-- eliminar el codigo asociado -->
-            <button
-                type="button"
-                id="boton_eliminar_codigo_asociado"
-                onclick="eliminarCodigoAsociado()"
-                hidden
-            >
-                Eliminar código asociado
-            </button>
+            <div id="codigo_producto_asociar" class="codigo_estado_escaner"></div>
 
-            <!-- cerrar ventana -->
-            <button type="button"
-                    onclick="cerrarEscanerProducto(); cargarVista('inventario')">
-                Cerrar
-            </button>
+            <div class="campo_asociar_escaner">
+                <label for="busqueda_producto_asociar">Buscar producto</label>
+                <input type="text"
+                       id="busqueda_producto_asociar"
+                       placeholder="Código, código de barras o descripción"
+                       autocomplete="off">
+            </div>
 
+            <div id="resultados_productos_asociar" class="resultados_productos_asociar"></div>
+
+            <div id="producto_seleccionado_asociar" class="producto_seleccionado_escaner" hidden>
+                <div class="subtitulo_escaner_producto">Producto seleccionado</div>
+                <p><strong>Descripción:</strong> <span id="descripcion_producto_seleccionado"></span></p>
+                <p><strong>Código:</strong> <span id="codigo_producto_seleccionado"></span></p>
+                <p><strong>Código de barras:</strong> <span id="barra_producto_seleccionado"></span></p>
+            </div>
+
+            <div class="campo_asociar_escaner">
+                <label for="cantidad_unidades_asociar">Cantidad de unidades que representa el código</label>
+                <input type="number"
+                       id="cantidad_unidades_asociar"
+                       min="0.0001" step="any" value="1" required>
+            </div>
+
+            <div class="acciones_gestion_escaner">
+                <button type="button"
+                        class="boton_principal_escaner"
+                        id="boton_confirmar_asociacion" disabled>
+                    Asociar al producto seleccionado
+                </button>
+                <button type="button" class="boton_secundario_escaner"
+                        onclick="volverGestionProducto()">Volver</button>
+                <button type="button" class="boton_texto_escaner"
+                        onclick="cerrarEscanerProducto(); cargarVista('inventario')">Cerrar</button>
+            </div>
         </div>
-
-
-        <!-- VISTA 3 ASOCIAR CODIGO -->
-
-        <div id="vista_asociar_producto" hidden>
-
-            <!-- titulo de asociacion -->
-            <div class="titulo_escaner_producto">
-                Asociar código a un producto
-            </div>
-
-            <!-- codigo que se asociara -->
-            <div id="codigo_producto_asociar"></div>
-
-            <!-- buscador de productos -->
-            <input type="text"
-                   id="busqueda_producto_asociar"
-                   placeholder="Buscar producto..."
-                   autocomplete="off">
-
-            <!-- resultados de busqueda -->
-            <div id="resultados_productos_asociar"></div>
-
-            <!-- muestra el producto seleccionado para asociar -->
-            <div id="producto_seleccionado_asociar" hidden>
-
-                <h4>Producto seleccionado</h4>
-
-                <p>
-                    <strong>Descripcion:</strong>
-                    <span id="descripcion_producto_seleccionado"></span>
-                </p>
-
-                <p>
-                    <strong>Codigo:</strong>
-                    <span id="codigo_producto_seleccionado"></span>
-                </p>
-
-                <p>
-                    <strong>Codigo de barras principal:</strong>
-                    <span id="barra_producto_seleccionado"></span>
-                </p>
-
-            </div>
-
-            <!-- cantidad de unidades que representa el codigo -->
-            <div class="campo_cantidad_unidades">
-                <label for="cantidad_unidades_asociar">
-                    Cantidad de unidades
-                </label>
-
-                <input
-                    type="number"
-                    id="cantidad_unidades_asociar"
-                    min="0.0001"
-                    step="any"
-                    value="1"
-                    required
-                >
-            </div>
-
-
-            <!-- confirmar asociacion -->
-            <button type="button"
-                    id="boton_confirmar_asociacion"
-                    disabled>
-                Asociar al producto seleccionado
-            </button>
-
-            <!-- volver al menu -->
-            <button type="button"
-                    onclick="volverGestionProducto()">
-                Volver
-            </button>
-
-            <!-- cerrar ventana -->
-            <button type="button"
-                    onclick="cerrarEscanerProducto(); cargarVista('inventario')">
-                Cerrar
-            </button>
-
-        </div>
-
-
     </div>
 
+    <!-- TITULO 5 MODAL CENTRADO PARA AJUSTAR INVENTARIO -->
+    <!-- se mantiene el id utilizado por escaner.js para controlar su visibilidad -->
+    <div class="superposicion_ajuste_escaner" id="menu_ajustar_producto" hidden>
+        <div class="modal_ajuste_escaner" role="dialog" aria-modal="true"
+             aria-labelledby="titulo_ajuste_producto">
+
+            <div class="cabecera_modal_ajuste_escaner">
+                <div>
+                    <div class="titulo_modal_ajuste_escaner" id="titulo_ajuste_producto">
+                        Ajustar inventario
+                    </div>
+                    <div class="descripcion_escaner_producto">
+                        Indica cómo cambiar las unidades disponibles.
+                    </div>
+                </div>
+                <button type="button" class="boton_cerrar_modal_ajuste_escaner"
+                        aria-label="Cerrar ajuste" onclick="cerrarModalAjusteEscaner()">×</button>
+            </div>
+
+            <div class="cuerpo_modal_ajuste_escaner">
+                <div class="etiqueta_opciones_escaner">Tipo de ajuste</div>
+                <div class="opciones_operacion_ajuste">
+                    <label><input type="radio" name="operacion_ajuste" id="operacion_sumar"
+                                  value="sumar" checked> Sumar</label>
+                    <label><input type="radio" name="operacion_ajuste" id="operacion_restar"
+                                  value="restar"> Restar</label>
+                </div>
+
+                <div class="etiqueta_opciones_escaner">Modalidad</div>
+                <div class="opciones_tipo_cantidad">
+                    <label><input type="radio" name="tipo_cantidad_ajuste"
+                                  id="cantidad_codigo_actual" value="codigo_actual" checked>
+                        Código actual
+                    </label>
+                    <label><input type="radio" name="tipo_cantidad_ajuste"
+                                  id="cantidad_codigo_singular" value="codigo_singular">
+                        Código singular
+                    </label>
+                </div>
+
+                <div class="campos_ajuste_escaner">
+                    <div class="campo_cantidad_ajuste">
+                        <label for="cantidad_ingresada_ajuste" id="texto_cantidad_ajuste">
+                            Cantidad a sumar
+                        </label>
+                        <input type="number" id="cantidad_ingresada_ajuste"
+                               min="1" step="1" value="1">
+                    </div>
+                    <div class="campo_unidades_codigo" id="contenedor_unidades_codigo">
+                        <label for="unidades_por_codigo_ajuste">Unidades por código</label>
+                        <input type="number" id="unidades_por_codigo_ajuste"
+                               min="1" step="1" value="1" readonly>
+                    </div>
+                </div>
+
+                <div class="resumen_ajuste_escaner">
+                    <div class="resultado_cantidad_ajuste">
+                        <span id="texto_unidades_ajuste">Unidades a sumar:</span>
+                        <strong id="cantidad_anadir_inventario">1</strong>
+                    </div>
+                    <div class="inventario_actual_ajuste">
+                        <span>Inventario actual:</span>
+                        <strong id="inventario_actual_producto">0</strong>
+                    </div>
+                    <div class="inventario_resultante_ajuste">
+                        <span>Inventario resultante:</span>
+                        <strong id="inventario_resultante_producto">1</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pie_modal_ajuste_escaner">
+                <button type="button" class="boton_secundario_escaner"
+                        onclick="cerrarModalAjusteEscaner()">Cancelar</button>
+                <button type="button" class="boton_principal_escaner"
+                        id="boton_aceptar_ajuste" onclick="aceptarAjusteProducto()">
+                    Confirmar ajuste
+                </button>
+            </div>
+        </div>
+    </div>
 </div>

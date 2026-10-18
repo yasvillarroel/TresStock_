@@ -204,8 +204,9 @@ async function inicializarEscaner() {
         video.style.display = 'block';
         video.style.width = '100%';
         video.style.maxWidth = '100%';
-        video.style.height = 'auto';
+        video.style.height = '100%';
         video.style.boxSizing = 'border-box';
+        video.style.objectFit = 'cover';
 
         await video.play();
 
@@ -359,9 +360,9 @@ function abrirMenuProducto(codigo, producto = null) {
 
     } else {
 
-        // sin producto no se muestra el codigo ni su formato
-        elementoCodigo.textContent = '';
-        elementoCodigo.hidden = true;
+        // mantiene visible el codigo que aun no esta asociado
+        elementoCodigo.textContent = 'Código escaneado: ' + codigo + ' · No registrado';
+        elementoCodigo.hidden = false;
 
     }
 
@@ -394,49 +395,136 @@ function abrirMenuProducto(codigo, producto = null) {
 }
 
 
-// muestra los datos recibidos del backend
+// muestra los datos del producto con las etiquetas de TresStock
 function mostrarProductoEscaneado(producto) {
-    const contenedorDatos = document.getElementById(
-        'datos_producto_escaneado'
-    );
+    const contenedorDatos = document.getElementById('datos_producto_escaneado');
+    if (!contenedorDatos) return;
 
-    if (!contenedorDatos) {
-        return;
-    }
-
-    // limpia los datos de una consulta anterior
     contenedorDatos.replaceChildren();
 
     if (!producto) {
-        const mensaje = document.createElement('p');
-
-        mensaje.textContent =
-            'Este codigo no esta asociado a ningun producto.';
-
+        const mensaje = document.createElement('div');
+        mensaje.className = 'mensaje_sin_producto_escaner';
+        mensaje.textContent = 'Este código no está registrado. Puedes asociarlo a un producto existente.';
         contenedorDatos.appendChild(mensaje);
-
         return;
     }
 
-    // crea una fila por cada dato sencillo del producto
-    Object.entries(producto).forEach(function([campo, valor]) {
-        if (valor !== null && typeof valor === 'object') {
-            return;
+    // estructura principal con imagen y datos del producto
+    const ficha = document.createElement('div');
+    ficha.className = 'ficha_producto_escaner';
+
+    const contenedorImagen = document.createElement('div');
+    contenedorImagen.className = 'imagen_ficha_escaner';
+
+    const mostrarSinImagen = function() {
+        contenedorImagen.replaceChildren();
+        const texto = document.createElement('div');
+        texto.className = 'sin_imagen_ficha_escaner';
+        texto.textContent = 'Sin imagen';
+        contenedorImagen.appendChild(texto);
+    };
+
+    const rutaImagen = String(producto.imagen || '').trim();
+    if (rutaImagen) {
+        const imagen = document.createElement('img');
+        imagen.alt = 'Fotografía de ' + (producto.descripcion || 'producto');
+        imagen.loading = 'lazy';
+        imagen.onerror = mostrarSinImagen;
+
+        // admite URL de Open Food Facts y rutas locales servidas por el backend
+        if (/^https?:\/\//i.test(rutaImagen)) {
+            imagen.src = rutaImagen;
+        } else if (rutaImagen.startsWith('/')) {
+            imagen.src = URL_API + rutaImagen;
+        } else {
+            imagen.src = URL_API + '/' + rutaImagen;
         }
+        contenedorImagen.appendChild(imagen);
+    } else {
+        mostrarSinImagen();
+    }
 
-        const fila = document.createElement('p');
-        const etiqueta = document.createElement('strong');
+    const detalles = document.createElement('div');
+    detalles.className = 'detalles_ficha_escaner';
 
-        etiqueta.textContent = campo + ': ';
+    const nombre = document.createElement('div');
+    nombre.className = 'nombre_ficha_escaner';
+    nombre.textContent = producto.descripcion || 'Producto sin descripción';
+    detalles.appendChild(nombre);
 
-        fila.appendChild(etiqueta);
-        fila.appendChild(
-            document.createTextNode(
-                valor === null ? '' : String(valor)
-            )
-        );
+    function agregarDato(etiqueta, valor) {
+        const linea = document.createElement('div');
+        linea.className = 'dato_ficha_escaner';
+        const texto = document.createElement('strong');
+        texto.textContent = etiqueta + ': ';
+        linea.appendChild(texto);
+        linea.appendChild(document.createTextNode(String(valor ?? '—')));
+        detalles.appendChild(linea);
+    }
 
-        contenedorDatos.appendChild(fila);
+    agregarDato('Código', producto.codigo);
+    agregarDato('Código de barras', producto.cod_barra || 'Sin registrar');
+    agregarDato('Familia', producto.familia || 'Sin familia');
+
+    const precio = document.createElement('div');
+    precio.className = 'precio_ficha_escaner';
+    const monto = Number(producto.precio_publico);
+    precio.textContent = Number.isFinite(monto)
+        ? monto.toLocaleString('es-CL', {style: 'currency', currency: 'CLP', maximumFractionDigits: 0})
+        : 'Precio no disponible';
+    detalles.appendChild(precio);
+
+    // atribución cuando la imagen proviene de Open Food Facts
+    if (/^https?:\/\/images\.openfoodfacts\.org\//i.test(rutaImagen)) {
+        const atribucion = document.createElement('div');
+        atribucion.className = 'atribucion_ficha_escaner';
+        atribucion.textContent = 'Fotografía: Open Food Facts (CC BY-SA)';
+        detalles.appendChild(atribucion);
+    }
+
+    ficha.appendChild(contenedorImagen);
+    ficha.appendChild(detalles);
+    contenedorDatos.appendChild(ficha);
+
+    // indicadores del inventario y del formato de código leído
+    const indicadores = document.createElement('div');
+    indicadores.className = 'indicadores_ficha_escaner';
+
+    const agregarIndicador = function(etiqueta, valor) {
+        const cuadro = document.createElement('div');
+        cuadro.className = 'indicador_ficha_escaner';
+        const leyenda = document.createElement('div');
+        leyenda.className = 'etiqueta_indicador_ficha';
+        leyenda.textContent = etiqueta;
+        const cifra = document.createElement('div');
+        cifra.className = 'valor_indicador_ficha';
+        cifra.textContent = String(valor ?? 0);
+        cuadro.appendChild(leyenda);
+        cuadro.appendChild(cifra);
+        indicadores.appendChild(cuadro);
+    };
+
+    agregarIndicador('Stock actual', producto.stock_actual ?? 0);
+    agregarIndicador('Stock mínimo', producto.stock_minimo ?? 0);
+    agregarIndicador('Unidades por código', producto.factor ?? 1);
+    contenedorDatos.appendChild(indicadores);
+}
+
+
+// cierra el modal de ajuste sin cancelar la ficha del producto
+function cerrarModalAjusteEscaner() {
+    const menu = document.getElementById('menu_ajustar_producto');
+    if (menu) menu.hidden = true;
+}
+
+// cierra el modal al presionar Escape
+if (typeof document !== 'undefined') {
+    document.addEventListener('keydown', function(evento) {
+        if (evento.key === 'Escape') {
+            const menu = document.getElementById('menu_ajustar_producto');
+            if (menu && !menu.hidden) cerrarModalAjusteEscaner();
+        }
     });
 }
 
@@ -971,6 +1059,15 @@ function ajustarProductoEscaneado() {
     actualizarCalculoAjuste();
 
     menu.hidden = false;
+
+    // permite salir del modal al hacer clic en el fondo oscuro
+    menu.onclick = function(evento) {
+        if (evento.target === menu) {
+            cerrarModalAjusteEscaner();
+        }
+    };
+
+    campoCantidad.focus();
 }
 
 
@@ -1324,6 +1421,9 @@ function volverAlEscanerProducto() {
 
 // cierra el contenedor completo del escaner y sus vistas
 function cerrarEscanerProducto() {
+    // evita dejar abierto un ajuste al salir de la vista
+    cerrarModalAjusteEscaner();
+
     // invalida cualquier apertura o lectura pendiente
     idInicioEscaner++;
 

@@ -1,539 +1,252 @@
-/* fondo del contenedor al mostrar el escaner */
-.contenedor_contenido.contenedor_contenido_escaner {
-    background-color: #1e7c88;
-}
-/* BOTON ESCANEAR PRODUCTOS */
+/* TITULO 1 ESTILOS GENERALES DEL ESCANER */
 
-.boton_escanear_producto{
-    background: #159ba3;
+/* mantiene la paleta utilizada por las otras vistas de TresStock */
+.contenedor_contenido.contenedor_contenido_escaner {
+    background-color: #f4f7f8;
+}
+
+/* boton de acceso al escaner desde Inventario (se conserva su clase) */
+.boton_escanear_producto {
+    background-color: #159ba3;
     margin: 20px;
     text-align: center;
     padding: 15px;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: 0.3s;
-    user-select: none;
-}
-.icono_escanear_producto{
-    background: white;
-    display: inline;
-    font-size: 30px;
-    font-weight: 400;
-    padding: 0 5px;
-}
-.texto_escanear_producto{
-    color: white;
-    margin-top: 15px;
-    font-size: 15px;
-    font-weight: 700;
-}
-.boton_escanear_producto:hover{
-    background: #23adb4;
-    transform: scale(1.1);
-}
-
-
-/* CONTENEDOR CAMARA ESCANER */
-
-    /* movimiento hacia la derecha */
-    @keyframes entrada_escaner_producto {
-        from {
-            opacity: 0;
-            transform: translate(-60%, -50%);
-        }
-
-        to {
-            opacity: 1;
-            transform: translate(-50%, -50%);
-        }
-    }
-
-    /* contenedor principal del escaner */
-    .contenedor_escaner_producto {
-        position: fixed;
-        top: 50%;
-        left: 55%;
-        transform: translate(-50%, -50%);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        z-index: 1000;
-        background-color: #01bec5;
-        text-align: center;
-        padding: 30px;
-        width: max-content;
-        height: max-content;
-        max-width: none;
-        max-height: none;
-        flex-shrink: 0;
-        border-radius: 12px;
-        animation: entrada_escaner_producto 1.0s ease;
-    }
-
-    /* video del escaner de productos */
-    .contenedor_escaner_producto video {
-        display: block;
-        width: 100%;
-        max-width: 100%;
-        height: auto;
-        object-fit: contain;
-        box-sizing: border-box;
-    }
-
-    /* contenido del escaner */
-    .contenido_escaner_producto {
-        width: 90%;
-        max-width: 500px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    /* contenedor oculto del escaner */
-    .contenedor_escaner_producto.contenedor_escaner_producto_oculto {
-        display: none;
-    }
-
-    .lector_codigo_barras {
-        width: 100%;
-        max-width: 400px;
-        aspect-ratio: 4 / 3;
-        object-fit: cover;
-        background: #000;
-    }
-
-    .titulo_escaner_producto{
-        color: white;
-        margin-bottom: 30px;
-        font-weight: 700;
-        font-size: 30px;
-    }
-
-    .boton_cerrar_escaner_producto{
-        background: none;
-        border: none;
-        padding: 0;
-        margin: 0;
-        cursor: pointer;
-        margin-top: 30px;
-        padding: 15px 50px;
-        color: white;
-        font-weight: 700;
-        font-size: 15px;
-        background-color: #265d7d;
-        border-radius: 10px;
-        transition: background-color 1.0s ease;
-    }
-
-    .boton_cerrar_escaner_producto:hover{
-        background-color: #062d44;
-    }
-
-    /* pantallas grandes (monitores Full HD+, iMac, monitores gaming QHD/4K) */
-    @media (min-width: 1441px) {
-        /* Sin media */
-    }
-
-    /* notebooks grandes (1600x900, 1920x1080) */
-    @media (max-width: 1440px) {
-        /* contenedor principal del escaner */
-        .contenedor_escaner_producto {
-            left: 60%;
-        }
-    }
-
-    /* notebooks comunes (1366x768, MacBook Air/Pro) */
-    @media (max-width: 1200px) {
-
-        /* contenedor principal del escaner */
-        .contenedor_escaner_producto {
-            left: 50%;
-        }
-
-    }
-
-    /* tablets horizontales / pantallas medianas (iPad Pro en horizontal, notebooks pequeños) */
-    @media (max-width: 992px) {
-        /* Sin media */
-    }
-
-    /* tablets verticales (iPad clásico, tablets Android estándar) */
-    @media (max-width: 768px) {
-
-        .contenedor_escaner_producto video {
-            width: 350px;
-        }
-
-    }
-
-    /* móviles grandes (iPhone 11, iPhone Plus/Max, Android grandes) */
-    @media (max-width: 414px) {
-        /* Sin media */
-    }
-
-    /* móviles medianos (iPhone 12/13/14, Android gama media) */
-    @media (max-width: 390px) {
-        /* Sin media */
-    }
-
-    /* móviles pequeños (Android estándar, iPhone SE) */
-    @media (max-width: 360px) {
-        /* Sin media */
-    }
-
-
-    /* VISTA 2 GESTION DEL PRODUCTO */
-/* codigo escaneado */
-#codigo_producto_escaneado {
-    margin-bottom: 15px;
-    padding: 12px;
-    background: rgba(255, 255, 255, 0.85);
-    color: #263238;
-    border-radius: 8px;
-    overflow-wrap: anywhere;
-    font-weight: 700;
-}
-
-/* datos del producto */
-#datos_producto_escaneado {
-    width: 100%;
-    margin-bottom: 15px;
-    padding: 15px;
-    box-sizing: border-box;
-    background: white;
-    color: #333333;
-    border-radius: 8px;
-    text-align: left;
-}
-
-/* separacion de los datos */
-#datos_producto_escaneado p {
-    margin: 8px 0;
-    overflow-wrap: anywhere;
-}
-
-
-/* VISTA 3 ASOCIAR CODIGO */
-
-/* codigo que se asociara */
-#codigo_producto_asociar {
-    margin-bottom: 15px;
-    padding: 12px;
-    background: rgba(255, 255, 255, 0.85);
-    color: #263238;
-    border-radius: 8px;
-    overflow-wrap: anywhere;
-    font-weight: 700;
-}
-
-/* buscador de productos */
-#busqueda_producto_asociar {
-    width: 100%;
-    margin-bottom: 12px;
-    padding: 12px;
-    box-sizing: border-box;
-    border: 1px solid #b0bec5;
-    border-radius: 8px;
-    outline: none;
-    font-size: 15px;
-}
-
-/* efecto del buscador */
-#busqueda_producto_asociar:focus {
-    border-color: #265d7d;
-}
-
-/* resultados de busqueda */
-#resultados_productos_asociar {
-    width: 100%;
-    max-height: 220px;
-    margin-bottom: 15px;
-    overflow-y: auto;
-    text-align: left;
-}
-
-
-/* BOTONES DE LAS VISTAS NUEVAS */
-
-/* estilos de los botones */
-#vista_gestion_producto button,
-#vista_asociar_producto button {
-    width: 100%;
-    margin-top: 10px;
-    padding: 12px 15px;
-    border: none;
-    border-radius: 8px;
-    background-color: #265d7d;
-    color: white;
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-/* efecto al pasar el cursor */
-#vista_gestion_producto button:hover,
-#vista_asociar_producto button:hover {
-    background-color: #062d44;
-}
-
-/* boton deshabilitado */
-#vista_asociar_producto button:disabled {
-    background-color: #78909c;
-    cursor: not-allowed;
-}
-
-/* boton para eliminar codigo asociado */
-#vista_gestion_producto #boton_eliminar_codigo_asociado {
-    background-color: #dc3545;
-}
-
-/* efecto al pasar el cursor del boton de eliminar */
-#vista_gestion_producto #boton_eliminar_codigo_asociado:hover {
-    background-color: #bb2d3b;
-    transform: scale(1.02);
-}
-
-/* efecto al presionar el boton de eliminar */
-#vista_gestion_producto #boton_eliminar_codigo_asociado:active {
-    transform: scale(0.98);
-}
-
-/* mantiene oculto el boton cuando no corresponde */
-#vista_gestion_producto #boton_eliminar_codigo_asociado[hidden] {
-    display: none !important;
-}
-
-
-/* ADAPTACION A PANTALLAS PEQUENAS */
-
-@media (max-width: 768px) {
-    #vista_gestion_producto,
-    #vista_asociar_producto {
-        width: 100%;
-    }
-
-    #vista_gestion_producto .titulo_escaner_producto,
-    #vista_asociar_producto .titulo_escaner_producto {
-        font-size: 22px;
-    }
-}
-
-
-/* resalta el producto seleccionado */
-#resultados_productos_asociar button[aria-pressed="true"] {
-    border: 2px solid #159ba3;
-    background-color: #e5f7f7;
-}
-
-/* destaca los datos del producto seleccionado */
-#producto_seleccionado_asociar {
-    padding: 12px;
-    margin-top: 12px;
-    border: 1px solid #159ba3;
-    border-radius: 8px;
-}
-
-/* titulo del producto seleccionado */
-#producto_seleccionado_asociar h4 {
-    margin-top: 0;
-}
-
-
-/* MENU AJUSTAR INVENTARIO */
-
-/* contenedor del ajuste de producto */
-.contenedor_ajuste_producto {
-    position: relative;
-    display: inline-block;
-}
-
-/* menu para ajustar el inventario */
-.contenedor_ajuste_producto #menu_ajustar_producto {
-    position: absolute;
-    bottom: calc(100% + 8px);
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1001;
-    width: 300px;
-    padding: 20px;
-    background-color: #ffffff;
-    border: 1px solid #d5dce3;
     border-radius: 10px;
-    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.18);
+    cursor: pointer;
+    user-select: none;
+    transition: background-color .2s ease;
+}
+.boton_escanear_producto:hover { background-color: #117f85; }
+.icono_escanear_producto {
+    display: inline-block;
+    font-size: 28px;
+    font-weight: 400;
+}
+.texto_escanear_producto {
+    color: #ffffff;
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.contenedor_escaner_producto {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
     box-sizing: border-box;
-    color: #333333;
+    padding: 26px 22px 38px;
+    font-family: Arial, sans-serif;
+    color: #0b3650;
 }
-
-/* mantiene oculto el menu de ajuste */
-.contenedor_ajuste_producto #menu_ajustar_producto[hidden] {
-    display: none !important;
+.contenedor_escaner_producto.contenedor_escaner_producto_oculto { display: none !important; }
+.contenedor_escaner_producto [hidden] { display: none !important; }
+.contenido_escaner_producto { width: min(100%, 790px); min-width: 0; }
+.tarjeta_escaner_producto {
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #dce4e8;
+    border-radius: 12px;
+    box-sizing: border-box;
+    padding: 28px 30px;
+    box-shadow: 0 4px 16px rgba(11, 54, 80, .045);
 }
+.cabecera_tarjeta_escaner { display: flex; justify-content: space-between; align-items: flex-start; gap: 15px; margin-bottom: 22px; }
+.titulo_escaner_producto { color: #0b3650; font-size: 25px; font-weight: 700; margin-bottom: 6px; }
+.descripcion_escaner_producto { color: #6b7d88; font-size: 13px; line-height: 1.5; }
+.subtitulo_escaner_producto { color: #0b3650; font-size: 15px; font-weight: 700; margin-bottom: 12px; }
 
-/* titulo del ajuste */
-.contenedor_ajuste_producto #menu_ajustar_producto h3 {
-    margin: 0 0 18px;
-    font-size: 20px;
-    text-align: center;
-}
-
-/* opciones de operacion del inventario */
-.contenedor_ajuste_producto .opciones_operacion_ajuste {
+/* TITULO 2 LECTOR Y CAMARA */
+.marco_camara_escaner {
+    position: relative;
     display: flex;
-    flex-direction: row;
-    gap: 10px;
-    margin-bottom: 18px;
-}
-
-/* etiquetas de las operaciones */
-.contenedor_ajuste_producto .opciones_operacion_ajuste label {
-    display: flex;
-    flex: 1;
     align-items: center;
     justify-content: center;
-    gap: 7px;
-    padding: 10px 6px;
-    border: 1px solid #ced4da;
-    border-radius: 7px;
-    background-color: #ffffff;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #142b36;
+    border-radius: 10px;
+    overflow: hidden;
+    isolation: isolate;
+}
+.lector_codigo_barras,
+.contenedor_escaner_producto video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+    background-color: #142b36;
     box-sizing: border-box;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
 }
-
-/* resalta la operacion seleccionada */
-.contenedor_ajuste_producto .opciones_operacion_ajuste label:has(input:checked) {
-    background-color: #e5f5f5;
-    border-color: #159ba3;
+.guia_lectura_escaner {
+    position: absolute;
+    inset: 21% 15%;
+    border: 2px solid rgba(117, 238, 232, .85);
+    border-radius: 12px;
+    pointer-events: none;
+    box-shadow: 0 0 0 400px rgba(10, 29, 40, .10);
 }
+.pie_lector_escaner { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 20px; }
+.indicador_camara_escaner { display: flex; align-items: center; gap: 8px; color: #647987; font-size: 13px; }
+.punto_camara_escaner { flex: 0 0 8px; height: 8px; border-radius: 50%; background: #159ba3; }
 
-/* botones de seleccion de operacion */
-.contenedor_ajuste_producto .opciones_operacion_ajuste input[type="radio"] {
-    margin: 0;
-    accent-color: #159ba3;
-    cursor: pointer;
-}
-
-/* opciones de tipo de cantidad */
-.contenedor_ajuste_producto .opciones_tipo_cantidad {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 18px;
-}
-
-/* etiqueta de cada opcion de cantidad */
-.contenedor_ajuste_producto .opciones_tipo_cantidad label {
-    display: flex;
+/* TITULO 3 BOTONES Y ESTADOS */
+.contenedor_escaner_producto button { font-family: inherit; }
+.contenedor_escaner_producto .boton_principal_escaner,
+.contenedor_escaner_producto .boton_secundario_escaner,
+.contenedor_escaner_producto .boton_peligro_escaner,
+.contenedor_escaner_producto .boton_texto_escaner {
+    display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
-    font-size: 14px;
-    cursor: pointer;
-}
-
-/* botones de seleccion de cantidad */
-.contenedor_ajuste_producto .opciones_tipo_cantidad input[type="radio"] {
-    margin: 0;
-    accent-color: #159ba3;
-    cursor: pointer;
-}
-
-/* campos de cantidad */
-.contenedor_ajuste_producto .campo_cantidad_ajuste,
-.contenedor_ajuste_producto .campo_unidades_codigo {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-bottom: 14px;
-}
-
-/* etiquetas de los campos */
-.contenedor_ajuste_producto .campo_cantidad_ajuste label,
-.contenedor_ajuste_producto .campo_unidades_codigo label {
-    font-size: 14px;
-    font-weight: 600;
-}
-
-/* entradas numericas */
-.contenedor_ajuste_producto #cantidad_ingresada_ajuste,
-.contenedor_ajuste_producto #unidades_por_codigo_ajuste {
-    width: 100%;
-    padding: 9px 10px;
-    border: 1px solid #cbd3dc;
-    border-radius: 6px;
-    box-sizing: border-box;
-    font-size: 15px;
-}
-
-/* campo de unidades por codigo */
-.contenedor_ajuste_producto #unidades_por_codigo_ajuste {
-    background-color: #f1f4f7;
-    color: #555555;
-    cursor: not-allowed;
-}
-
-/* resultados del ajuste */
-.contenedor_ajuste_producto .resultado_cantidad_ajuste,
-.contenedor_ajuste_producto .inventario_actual_ajuste,
-.contenedor_ajuste_producto .inventario_resultante_ajuste {
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 6px;
-    background-color: #f1f5f8;
-    box-sizing: border-box;
-}
-
-/* texto de los resultados */
-.contenedor_ajuste_producto .resultado_cantidad_ajuste p,
-.contenedor_ajuste_producto .inventario_actual_ajuste p,
-.contenedor_ajuste_producto .inventario_resultante_ajuste p {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    margin: 0;
+    padding: 12px 17px;
+    min-height: 43px;
     font-size: 13px;
-    line-height: 1.5;
-}
-
-/* resalta la cantidad del ajuste */
-.contenedor_ajuste_producto .resultado_cantidad_ajuste strong {
-    color: #159ba3;
-}
-
-/* resalta el inventario resultante */
-.contenedor_ajuste_producto .inventario_resultante_ajuste {
-    background-color: #e5f5f5;
-    border: 1px solid #b8e2e3;
-}
-
-/* boton para confirmar el ajuste */
-.contenedor_ajuste_producto #boton_aceptar_ajuste {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 6px;
-    background-color: #159ba3;
-    color: #ffffff;
-    font-size: 15px;
-    font-weight: 600;
+    font-weight: 700;
+    border-radius: 7px;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    box-sizing: border-box;
+    transition: background-color .2s ease, border-color .2s ease;
 }
-
-/* efecto al pasar el cursor */
-.contenedor_ajuste_producto #boton_aceptar_ajuste:hover {
-    background-color: #23adb4;
+.contenedor_escaner_producto .boton_principal_escaner { color: #fff; background: #159ba3; border: 1px solid #159ba3; }
+.contenedor_escaner_producto .boton_principal_escaner:hover { background-color: #117f85; border-color: #117f85; }
+.contenedor_escaner_producto .boton_secundario_escaner { color: #536873; background: #fff; border: 1px solid #d3dfe5; }
+.contenedor_escaner_producto .boton_secundario_escaner:hover { background: #edf6f7; border-color: #159ba3; }
+.contenedor_escaner_producto .boton_peligro_escaner { color: #dc2626; background: #fff; border: 1px solid #f4c6c6; }
+.contenedor_escaner_producto .boton_peligro_escaner:hover { background: #fff0f0; }
+.contenedor_escaner_producto .boton_texto_escaner { color: #526672; background: transparent; border: 1px solid transparent; }
+.contenedor_escaner_producto .boton_texto_escaner:hover { background: #f1f5f7; }
+.contenedor_escaner_producto button:disabled { opacity: .5; cursor: not-allowed; }
+.codigo_estado_escaner {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    background: #e5f6f6;
+    border: 1px solid #c6e8e9;
+    border-radius: 8px;
+    box-sizing: border-box;
+    color: #0e6970;
+    font-size: 13px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
 }
+.acciones_gestion_escaner { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: flex-end; margin-top: 22px; padding-top: 20px; border-top: 1px solid #e4ecef; }
+.acciones_gestion_escaner .boton_principal_escaner { margin-right: auto; }
 
-/* efecto al presionar el boton */
-.contenedor_ajuste_producto #boton_aceptar_ajuste:active {
-    background-color: #117f85;
+/* TITULO 4 FICHA DEL PRODUCTO ENCONTRADO */
+.datos_producto_escaneado { width: 100%; }
+.ficha_producto_escaner { display: grid; grid-template-columns: 138px minmax(0, 1fr); gap: 20px; align-items: center; }
+.imagen_ficha_escaner { width: 138px; height: 140px; border-radius: 9px; border: 1px solid #dce4e8; background: #f7f9fa; overflow: hidden; box-sizing: border-box; display: flex; justify-content: center; align-items: center; }
+.imagen_ficha_escaner img { width: 100%; height: 100%; object-fit: contain; }
+.imagen_ficha_escaner .sin_imagen_ficha_escaner { color: #8a989f; font-size: 12px; text-align: center; }
+.detalles_ficha_escaner { min-width: 0; }
+.nombre_ficha_escaner { font-size: 17px; line-height: 1.4; color: #0b3650; font-weight: 700; margin: 0 0 9px; overflow-wrap: anywhere; }
+.dato_ficha_escaner { color: #5a6d79; font-size: 13px; margin: 5px 0; overflow-wrap: anywhere; }
+.dato_ficha_escaner strong { color: #29495a; }
+.precio_ficha_escaner { font-size: 20px; font-weight: 700; margin-top: 10px; color: #0b3650; }
+.atribucion_ficha_escaner { font-size: 11px; color: #6b7d88; margin-top: 9px; }
+.atribucion_ficha_escaner a { color: #0d858b; }
+.indicadores_ficha_escaner { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 20px; }
+.indicador_ficha_escaner { border-radius: 9px; background: #f4f7f8; border: 1px solid #e3e9ed; padding: 14px 12px; box-sizing: border-box; }
+.etiqueta_indicador_ficha { color: #687a86; font-size: 12px; line-height: 1.3; margin-bottom: 8px; }
+.valor_indicador_ficha { color: #0b3650; font-size: 21px; font-weight: 700; }
+.mensaje_sin_producto_escaner { padding: 20px; border-radius: 8px; color: #657985; background: #f4f7f8; line-height: 1.5; }
+
+/* TITULO 5 ASOCIAR CODIGOS */
+.campo_asociar_escaner { display: flex; flex-direction: column; gap: 7px; margin-bottom: 16px; }
+.campo_asociar_escaner label { font-size: 13px; color: #3d5868; font-weight: 700; }
+.campo_asociar_escaner input { width: 100%; min-height: 44px; padding: 10px 12px; box-sizing: border-box; border: 1px solid #cfdce2; border-radius: 7px; font-size: 14px; color: #2d4654; background: white; }
+.campo_asociar_escaner input:focus { outline: 2px solid #a6e0e2; border-color: #159ba3; }
+.resultados_productos_asociar { max-height: 235px; overflow: auto; display: flex; flex-direction: column; gap: 7px; margin-bottom: 15px; }
+.resultados_productos_asociar button { display: block; width: 100%; text-align: left; padding: 12px; font-size: 13px; color: #405968; background: #fff; border: 1px solid #d9e4e9; border-radius: 7px; cursor: pointer; }
+.resultados_productos_asociar button:hover { background: #eff9f9; }
+.resultados_productos_asociar button[aria-pressed="true"] { background: #e6f6f7; border: 1px solid #159ba3; }
+.producto_seleccionado_escaner { padding: 17px; background: #f5f9fa; border: 1px solid #d8e9eb; border-radius: 8px; margin: 8px 0 18px; }
+.producto_seleccionado_escaner p { font-size: 13px; color: #566b77; margin: 8px 0; overflow-wrap: anywhere; }
+.producto_seleccionado_escaner p strong { color: #29495a; }
+
+/* TITULO 6 MODAL DE AJUSTE CENTRADO EN PANTALLA */
+.superposicion_ajuste_escaner {
+    position: fixed;
+    inset: 0;
+    z-index: 5000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(10, 35, 49, .56);
+    padding: 20px;
+    box-sizing: border-box;
 }
+.modal_ajuste_escaner {
+    width: min(100%, 500px);
+    max-height: calc(100dvh - 40px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #dce4e8;
+    box-shadow: 0 18px 48px rgba(0,0,0,.22);
+    color: #0b3650;
+    box-sizing: border-box;
+}
+.cabecera_modal_ajuste_escaner { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; padding: 23px 25px 16px; }
+.titulo_modal_ajuste_escaner { color: #0b3650; font-size: 21px; font-weight: 700; margin-bottom: 5px; }
+.boton_cerrar_modal_ajuste_escaner { width: 32px; height: 32px; color: #637682; font-size: 25px; border: none; background: transparent; border-radius: 5px; cursor: pointer; line-height: 1; }
+.boton_cerrar_modal_ajuste_escaner:hover { background: #f1f5f7; }
+.cuerpo_modal_ajuste_escaner { padding: 0 25px 20px; }
+.etiqueta_opciones_escaner { font-size: 13px; font-weight: 700; color: #3d5868; margin: 15px 0 10px; }
+.opciones_operacion_ajuste { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.opciones_operacion_ajuste label { display: flex; align-items: center; justify-content: center; gap: 9px; min-height: 43px; border: 1px solid #cbd9e0; border-radius: 7px; background: #ffffff; color: #385365; font-size: 13px; cursor: pointer; box-sizing: border-box; }
+.opciones_operacion_ajuste label:has(input:checked) { background: #e7f7f7; border-color: #159ba3; color: #0e6970; }
+.opciones_tipo_cantidad { display: flex; flex-direction: column; gap: 13px; margin: 3px 0 16px; }
+.opciones_tipo_cantidad label { color: #3d5868; font-size: 13px; display: flex; align-items: center; gap: 9px; cursor: pointer; }
+.opciones_operacion_ajuste input, .opciones_tipo_cantidad input { accent-color: #159ba3; cursor: pointer; }
+.campos_ajuste_escaner { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 13px; }
+.campo_cantidad_ajuste, .campo_unidades_codigo { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+.campo_cantidad_ajuste label, .campo_unidades_codigo label { color: #3d5868; font-size: 12px; font-weight: 700; }
+.campo_cantidad_ajuste input, .campo_unidades_codigo input { width: 100%; height: 42px; border: 1px solid #cbd9e0; border-radius: 7px; box-sizing: border-box; padding: 9px 12px; font-size: 14px; color: #1d3f50; }
+.campo_cantidad_ajuste input:focus { outline: 2px solid #a6e0e2; border-color: #159ba3; }
+.campo_unidades_codigo input { background: #f1f4f6; color: #647782; }
+.resumen_ajuste_escaner { background: #f4f7f8; border: 1px solid #e3e9ed; border-radius: 8px; margin-top: 20px; padding: 4px 14px; }
+.resultado_cantidad_ajuste, .inventario_actual_ajuste, .inventario_resultante_ajuste { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 1px; font-size: 13px; color: #536873; }
+.resultado_cantidad_ajuste, .inventario_actual_ajuste { border-bottom: 1px solid #e0e7ea; }
+.resumen_ajuste_escaner strong { color: #173d53; font-size: 16px; }
+.inventario_resultante_ajuste { color: #0d767d; font-weight: 700; }
+.inventario_resultante_ajuste strong { color: #0d767d; font-size: 20px; }
+.pie_modal_ajuste_escaner { display: flex; justify-content: flex-end; gap: 10px; padding: 16px 25px 23px; border-top: 1px solid #e7ecef; }
 
-/* efecto al desactivar el boton */
-.contenedor_ajuste_producto #boton_aceptar_ajuste:disabled {
-    background-color: #aeb8c0;
-    cursor: not-allowed;
+/* TITULO 7 RESPONSIVE */
+@media (max-width: 768px) {
+    .contenedor_escaner_producto { padding: 18px 10px 28px; }
+    .tarjeta_escaner_producto { padding: 22px 18px; }
+    .titulo_escaner_producto { font-size: 22px; }
+    .ficha_producto_escaner { grid-template-columns: 112px minmax(0,1fr); gap: 14px; }
+    .imagen_ficha_escaner { width: 112px; height: 124px; }
+}
+@media (max-width: 576px) {
+    .pie_lector_escaner { flex-direction: column; align-items: stretch; }
+    .pie_lector_escaner .boton_secundario_escaner { width: 100%; }
+    .marco_camara_escaner { aspect-ratio: 4 / 3; }
+    .guia_lectura_escaner { inset: 25% 11%; }
+    .ficha_producto_escaner { grid-template-columns: 92px minmax(0,1fr); }
+    .imagen_ficha_escaner { width: 92px; height: 110px; }
+    .nombre_ficha_escaner { font-size: 15px; }
+    .indicadores_ficha_escaner { gap: 7px; }
+    .indicador_ficha_escaner { padding: 12px 9px; }
+    .etiqueta_indicador_ficha { font-size: 11px; }
+    .valor_indicador_ficha { font-size: 18px; }
+    .acciones_gestion_escaner { flex-direction: column; align-items: stretch; }
+    .acciones_gestion_escaner button, .acciones_gestion_escaner .boton_principal_escaner { width: 100%; }
+    .superposicion_ajuste_escaner { padding: 12px; }
+    .modal_ajuste_escaner { max-height: calc(100dvh - 24px); }
+    .cabecera_modal_ajuste_escaner { padding: 20px 18px 14px; }
+    .cuerpo_modal_ajuste_escaner { padding: 0 18px 18px; }
+    .pie_modal_ajuste_escaner { padding: 15px 18px 20px; }
+}
+@media (max-width: 390px) {
+    .campos_ajuste_escaner { grid-template-columns: 1fr; }
+    .titulo_escaner_producto { font-size: 20px; }
+    .indicadores_ficha_escaner { grid-template-columns: 1fr 1fr; }
 }
