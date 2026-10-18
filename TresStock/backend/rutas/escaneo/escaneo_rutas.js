@@ -29,6 +29,12 @@ router.post(
     escaneoControlador.asociarCodigoProducto
 );
 
+// elimina un codigo asociado
+router.delete(
+    '/codigo-asociado/:codigoBarras',
+    escaneoControlador.eliminarCodigoAsociado
+);
+
 
 // exporta el router
 module.exports = router;

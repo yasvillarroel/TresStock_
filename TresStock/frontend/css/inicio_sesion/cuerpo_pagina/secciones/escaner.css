@@ -184,7 +184,6 @@
 
 
     /* VISTA 2 GESTION DEL PRODUCTO */
-
 /* codigo escaneado */
 #codigo_producto_escaneado {
     margin-bottom: 15px;
@@ -270,10 +269,10 @@
     font-size: 15px;
     font-weight: 700;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-/* efecto de los botones */
+/* efecto al pasar el cursor */
 #vista_gestion_producto button:hover,
 #vista_asociar_producto button:hover {
     background-color: #062d44;
@@ -283,6 +282,27 @@
 #vista_asociar_producto button:disabled {
     background-color: #78909c;
     cursor: not-allowed;
+}
+
+/* boton para eliminar codigo asociado */
+#vista_gestion_producto #boton_eliminar_codigo_asociado {
+    background-color: #dc3545;
+}
+
+/* efecto al pasar el cursor del boton de eliminar */
+#vista_gestion_producto #boton_eliminar_codigo_asociado:hover {
+    background-color: #bb2d3b;
+    transform: scale(1.02);
+}
+
+/* efecto al presionar el boton de eliminar */
+#vista_gestion_producto #boton_eliminar_codigo_asociado:active {
+    transform: scale(0.98);
+}
+
+/* mantiene oculto el boton cuando no corresponde */
+#vista_gestion_producto #boton_eliminar_codigo_asociado[hidden] {
+    display: none !important;
 }
 
 
@@ -315,12 +335,14 @@
     border-radius: 8px;
 }
 
+/* titulo del producto seleccionado */
 #producto_seleccionado_asociar h4 {
     margin-top: 0;
 }
 
 
-/* esto es para el menu ajustar */
+/* MENU AJUSTAR INVENTARIO */
+
 /* contenedor del ajuste de producto */
 .contenedor_ajuste_producto {
     position: relative;

@@ -1,5 +1,4 @@
-
- // indica a la libreria donde esta el archivo .wasm
+// indica a la libreria donde esta el archivo .wasm
 BarcodeDetectionAPI.prepareZXingModule({
     overrides: {
         locateFile: function(ruta, prefijo) {
@@ -60,6 +59,41 @@ function mostrarVistaProducto(idVista) {
 }
 
 
+// oculta el boton de eliminar codigo asociado
+function ocultarBotonEliminarCodigoAsociado() {
+    const botonEliminarCodigoAsociado = document.getElementById(
+        'boton_eliminar_codigo_asociado'
+    );
+
+    if (botonEliminarCodigoAsociado) {
+        botonEliminarCodigoAsociado.hidden = true;
+        botonEliminarCodigoAsociado.disabled = false;
+    }
+}
+
+
+// determina si el codigo escaneado es un codigo asociado
+function esCodigoAsociado(codigo, producto) {
+    // sin producto el codigo no esta registrado
+    if (!producto || !codigo) {
+        return false;
+    }
+
+    // si el backend informa el tipo de codigo se utiliza ese dato
+    if (typeof producto.es_codigo_asociado === 'boolean') {
+        return producto.es_codigo_asociado;
+    }
+
+    // si no se compara con el codigo y el codigo de barras principal
+    const codigoEscaneado = String(codigo).trim();
+    const codigoPrincipal = String(producto.codigo ?? '').trim();
+    const codigoBarrasPrincipal = String(producto.cod_barra ?? '').trim();
+
+    return codigoEscaneado !== codigoPrincipal &&
+        codigoEscaneado !== codigoBarrasPrincipal;
+}
+
+
 // apaga todo stream de camara que este activo
 function detenerCamara() {
     escaneandoProducto = false;
@@ -91,6 +125,9 @@ function detenerCamara() {
 // inicia el escaner de productos
 async function inicializarEscaner() {
     detenerCamara();
+
+    // oculta el boton de eliminar al volver a escanear
+    ocultarBotonEliminarCodigoAsociado();
 
     const contenedorContenido = document.querySelector(
         '.contenedor_contenido'
@@ -288,6 +325,13 @@ function abrirMenuProducto(codigo, producto = null) {
         'menu_ajustar_producto'
     );
 
+    const botonEliminarCodigoAsociado = document.getElementById(
+        'boton_eliminar_codigo_asociado'
+    );
+
+    // oculta el boton mientras no se determine el tipo de codigo
+    ocultarBotonEliminarCodigoAsociado();
+
     if (!elementoCodigo) {
         console.error('No se encontro el elemento del codigo escaneado');
         return;
@@ -297,19 +341,29 @@ function abrirMenuProducto(codigo, producto = null) {
     codigoProductoEscaneado = codigo;
     productoEscaneado = producto;
 
-    // obtiene las unidades que representa el codigo
-    const cantidadUnidades = producto
-        ? Number(producto.factor ?? 1)
-        : 1;
+    if (producto) {
 
-    // determina el formato del codigo
-    const tipoCodigo = cantidadUnidades === 1
-        ? 'Unidad x1'
-        : 'Caja x' + cantidadUnidades;
+        // obtiene las unidades que representa el codigo
+        const cantidadUnidades = Number(producto.factor ?? 1);
 
-    // muestra el codigo escaneado y su formato
-    elementoCodigo.textContent =
-        'Codigo escaneado: ' + codigo + ' - ' + tipoCodigo;
+        // determina el formato del codigo
+        const tipoCodigo = cantidadUnidades === 1
+            ? 'Unidad x1'
+            : 'Caja x' + cantidadUnidades;
+
+        // muestra el codigo escaneado y su formato
+        elementoCodigo.textContent =
+            'Codigo escaneado: ' + codigo + ' - ' + tipoCodigo;
+
+        elementoCodigo.hidden = false;
+
+    } else {
+
+        // sin producto no se muestra el codigo ni su formato
+        elementoCodigo.textContent = '';
+        elementoCodigo.hidden = true;
+
+    }
 
     // muestra los datos del producto o el mensaje correspondiente
     mostrarProductoEscaneado(producto);
@@ -322,6 +376,12 @@ function abrirMenuProducto(codigo, producto = null) {
     // permite ajustar solamente si se encontro un producto
     if (botonAjustar) {
         botonAjustar.hidden = producto === null;
+    }
+
+    // permite eliminar solamente cuando el codigo es asociado
+    if (botonEliminarCodigoAsociado) {
+        botonEliminarCodigoAsociado.hidden =
+            !esCodigoAsociado(codigo, producto);
     }
 
     // oculta el menu de ajuste al mostrar otro producto
@@ -378,6 +438,75 @@ function mostrarProductoEscaneado(producto) {
 
         contenedorDatos.appendChild(fila);
     });
+}
+
+
+// elimina el codigo asociado que se esta mostrando
+async function eliminarCodigoAsociado() {
+    // verifica que exista un codigo escaneado
+    if (!codigoProductoEscaneado) {
+        alert('No hay un codigo escaneado para eliminar');
+        return;
+    }
+
+    // verifica que el codigo sea realmente un codigo asociado
+    if (!esCodigoAsociado(codigoProductoEscaneado, productoEscaneado)) {
+        alert('Este codigo no es un codigo asociado');
+        return;
+    }
+
+    const botonEliminarCodigoAsociado = document.getElementById(
+        'boton_eliminar_codigo_asociado'
+    );
+
+    // guarda el codigo para usarlo aunque cambie la variable global
+    const codigoEliminar = codigoProductoEscaneado;
+
+    // solicita confirmacion antes de eliminar
+    if (!confirm(
+        '¿Eliminar el codigo asociado ' + codigoEliminar +
+        ' y sus datos?'
+    )) {
+        return;
+    }
+
+    // evita enviar varias solicitudes al mismo tiempo
+    if (botonEliminarCodigoAsociado) {
+        botonEliminarCodigoAsociado.disabled = true;
+    }
+
+    try {
+        const respuesta = await fetch(
+            `${URL_API}/api/escaneo/codigo-asociado/${encodeURIComponent(codigoEliminar)}`,
+            {
+                method: 'DELETE',
+                credentials: 'include'
+            }
+        );
+
+        const datos = await respuesta.json();
+
+        if (!respuesta.ok) {
+            throw new Error(
+                datos.mensaje || 'No se pudo eliminar el codigo asociado'
+            );
+        }
+
+        alert(datos.mensaje || 'Codigo asociado eliminado correctamente');
+
+        // vuelve a consultar el codigo para mostrar que ya no esta registrado
+        await consultarProductoEscaneado(codigoEliminar);
+
+    } catch (error) {
+        console.error('Error al eliminar el codigo asociado:', error);
+
+        alert(error.message || 'No se pudo eliminar el codigo asociado');
+
+        // vuelve a habilitar el boton para reintentar
+        if (botonEliminarCodigoAsociado) {
+            botonEliminarCodigoAsociado.disabled = false;
+        }
+    }
 }
 
 
@@ -1205,6 +1334,9 @@ function cerrarEscanerProducto() {
 
     // limpia la seleccion actual
     productoSeleccionadoAsociar = null;
+
+    // oculta el boton de eliminar codigo asociado
+    ocultarBotonEliminarCodigoAsociado();
 
     const contenedorContenido = document.querySelector(
         '.contenedor_contenido'

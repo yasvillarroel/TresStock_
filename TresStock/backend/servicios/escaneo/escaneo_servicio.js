@@ -152,10 +152,63 @@ const asociarCodigoProducto = async (
 
 };
 
+// FUNCION ELIMINAR CODIGO ASOCIADO
+const eliminarCodigoAsociado = async (codigoBarras) => {
+
+    // verifica que el codigo no pertenezca a un producto principal
+    const producto = await pool.query(
+        `SELECT codigo
+         FROM base_datos.productos
+         WHERE codigo = $1
+            OR cod_barra = $1`,
+        [codigoBarras]
+    );
+
+    // impide eliminar codigos principales
+    if (producto.rowCount > 0) {
+        const error = new Error(
+            'No se pueden eliminar códigos de productos principales'
+        );
+
+        error.status = 400;
+
+        throw error;
+    }
+
+    // elimina exclusivamente el registro del codigo asociado
+    const resultado = await pool.query(
+        `DELETE FROM base_datos.codigos_asociados
+         WHERE codigo_barras = $1
+         RETURNING
+             id_codigo,
+             codigo_producto,
+             codigo_barras,
+             tipo_formato,
+             cantidad_unidades`,
+        [codigoBarras]
+    );
+
+    // verifica que el codigo asociado exista
+    if (resultado.rowCount === 0) {
+        const error = new Error(
+            'El código asociado no existe'
+        );
+
+        error.status = 404;
+
+        throw error;
+    }
+
+    // devuelve los datos del registro eliminado
+    return resultado.rows[0];
+
+};
+
 
 // exporta las funciones
 module.exports = {
     buscarProductoPorCodigo,
     buscarProductosParaAsociar,
-    asociarCodigoProducto
+    asociarCodigoProducto,
+    eliminarCodigoAsociado
 };

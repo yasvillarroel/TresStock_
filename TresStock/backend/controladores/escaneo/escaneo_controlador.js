@@ -165,10 +165,68 @@ const asociarCodigoProducto = async (req, res) => {
     }
 
 };
+
+// FUNCION ELIMINAR CODIGO ASOCIADO
+const eliminarCodigoAsociado = async (req, res) => {
+
+    try {
+
+        // obtiene el codigo de barras desde la ruta
+        const codigoBarras = req.params.codigoBarras;
+
+        // verifica que el codigo sea valido
+        if (
+            typeof codigoBarras !== 'string' ||
+            codigoBarras.trim() === '' ||
+            codigoBarras.length > 50
+        ) {
+
+            return res.status(400).json({
+                mensaje: 'El código de barras no es válido'
+            });
+
+        }
+
+        // elimina el codigo asociado mediante el servicio
+        const codigoEliminado =
+            await servicioEscaner.eliminarCodigoAsociado(codigoBarras.trim());
+
+        // envia la confirmacion de eliminacion
+        return res.json({
+            mensaje: 'Código asociado eliminado correctamente',
+            codigo_eliminado: codigoEliminado
+        });
+
+    } catch (error) {
+
+        // verifica si el codigo no existe o no puede eliminarse
+        if (error.status === 400 || error.status === 404) {
+
+            return res.status(error.status).json({
+                mensaje: error.message
+            });
+
+        }
+
+        // muestra el error en la consola
+        console.error(
+            'Error al eliminar código asociado:',
+            error
+        );
+
+        // envia el error al cliente
+        return res.status(500).json({
+            mensaje: 'Error al eliminar el código asociado'
+        });
+
+    }
+
+};
  
 // exporta las funciones
 module.exports = {
     buscarProducto,
     buscarProductosParaAsociar,
-    asociarCodigoProducto
+    asociarCodigoProducto,
+    eliminarCodigoAsociado
 };
