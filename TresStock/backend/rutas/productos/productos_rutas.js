@@ -1,5 +1,6 @@
 // importa express
 const express = require('express');
+const path = require('path');
 
 // importa el controlador de productos
 const productosControlador = require('../../controladores/productos/productos_controlador');
@@ -12,11 +13,45 @@ const cargarArchivo = multer({
     storage: multer.memoryStorage()
 });
 
+// permite subir solamente fotografias PNG, JPG o WebP de hasta 5 MB
+const cargarImagen = multer({
+    storage: multer.memoryStorage(),
+    limits: { fileSize: 5 * 1024 * 1024 },
+    fileFilter: (req, archivo, callback) => {
+        if (!['image/jpeg', 'image/png', 'image/webp'].includes(archivo.mimetype)) {
+            return callback(new Error('Solo se permiten imágenes JPG, PNG o WebP.'));
+        }
+        callback(null, true);
+    }
+}).single('imagen_archivo');
+
+// entrega errores de Multer como JSON, sin bloquear otras rutas
+const recibirImagenProducto = (req, res, next) => {
+    cargarImagen(req, res, (error) => {
+        if (error) {
+            return res.status(400).json({
+                mensaje: error.code === 'LIMIT_FILE_SIZE'
+                    ? 'La fotografía no puede superar 5 MB.'
+                    : error.message
+            });
+        }
+        next();
+    });
+};
+
 // crea el router de productos
 const router = express.Router();
 
-// ruta para crear un producto
-router.post('/', productosControlador.crearProducto);
+// sirve los archivos guardados sin exponer otras carpetas del servidor
+const carpetaImagenes = path.join(__dirname, '../../imagenes/productos');
+router.use('/imagenes', express.static(carpetaImagenes, {
+    fallthrough: false,
+    maxAge: '7d',
+    setHeaders: (res) => res.setHeader('X-Content-Type-Options', 'nosniff')
+}));
+
+// ruta para crear un producto, con fotografia opcional
+router.post('/', recibirImagenProducto, productosControlador.crearProducto);
 
 // ruta para obtener todos los productos
 router.get('/', productosControlador.obtenerProductos);
@@ -35,7 +70,7 @@ router.get('/buscar-imagen/:codigoBarra', productosControlador.buscarImagenProdu
 router.get('/:id', productosControlador.obtenerProducto);
 
 // ruta para actualizar un producto
-router.put('/:id', productosControlador.actualizarProducto);
+router.put('/:id', recibirImagenProducto, productosControlador.actualizarProducto);
 
 // ruta para eliminar un producto
 router.delete('/:id', productosControlador.eliminarProducto);

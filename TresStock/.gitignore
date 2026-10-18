@@ -17,3 +17,6 @@ __pycache__
 # Sistema
 .DS_Store
 Thumbs.db
+
+# Imagenes de productos
+backend/imagenes/productos/

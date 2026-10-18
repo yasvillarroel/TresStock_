@@ -372,14 +372,22 @@
                                             Buscar imagen
                                         </button>
 
+                                        <button class="boton_subir_imagen_producto" id="boton_subir_imagen_producto" type="button">
+                                            Subir imagen
+                                        </button>
+
                                         <button class="boton_quitar_imagen_producto" id="boton_quitar_imagen_producto" type="button">
                                             Quitar imagen
                                         </button>
 
+                                        <!-- selector oculto: no envia la foto hasta guardar el producto -->
+                                        <input type="file" id="input_archivo_imagen_producto"
+                                            accept="image/jpeg,image/png,image/webp" hidden>
+
                                     </div>
 
                                     <div class="texto_estado_imagen_producto" id="texto_estado_imagen_producto" role="status" aria-live="polite">
-                                        Puedes buscar una fotografía usando el código de barras.
+                                        Puedes buscar una foto o subir una imagen desde tu dispositivo.
                                     </div>
 
                                     <!-- atribucion para fotografias de Open Food Facts -->

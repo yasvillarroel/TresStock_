@@ -6,6 +6,8 @@ let modoFormularioProducto = 'nuevo';
 let codigoOriginalProducto = null;
 let imagenOriginalProducto = null;
 let imagenGuardadaProducto = null;
+let archivoImagenManualProducto = null;
+let urlVistaPreviaManualProducto = null;
 let imagenNuevaBuscadaProducto = false;
 let codigoBarraImagenBuscadaProducto = null;
 let busquedaImagenProductoSecuencia = 0;
@@ -66,6 +68,9 @@ let productosFiltradosActuales = [];
 
     // función para ocultar el formulario de producto
     function cerrarFormularioProducto() {
+
+        // libera la fotografía seleccionada si se cancela/cierra el formulario
+        limpiarArchivoImagenManualProducto();
 
         // ignora respuestas de busquedas pendientes al cerrar el formulario
         busquedaImagenProductoSecuencia++;
@@ -141,6 +146,9 @@ let productosFiltradosActuales = [];
             selectProveedorProducto.value = '';
         }
 
+        // descarta archivos seleccionados en un producto anterior
+        limpiarArchivoImagenManualProducto();
+
         // restablece la fotografia cada vez que se abre un producto
         busquedaImagenProductoSecuencia++;
         buscandoImagenProducto = false;
@@ -149,7 +157,7 @@ let productosFiltradosActuales = [];
         imagenNuevaBuscadaProducto = false;
         codigoBarraImagenBuscadaProducto = null;
         mostrarVistaPreviaImagenProducto(null,
-            'Puedes buscar una fotografía usando el código de barras.');
+            'Puedes buscar una imagen o subir una foto desde tu dispositivo.');
 
     }
 
@@ -650,7 +658,9 @@ let productosFiltradosActuales = [];
                 './imagenes/inicio_sesion/cuerpo_pagina/secciones/package.svg';
 
             // si no tiene fotografia, muestra el icono predeterminado
-            miniatura.src = imagenGuardada || imagenPredeterminada;
+            miniatura.src = imagenGuardada
+                ? resolverRutaImagenProducto(imagenGuardada)
+                : imagenPredeterminada;
             miniatura.alt = imagenGuardada
                 ? 'Fotografía de ' + (producto.descripcion || 'producto')
                 : 'Producto sin fotografía';
@@ -1614,26 +1624,40 @@ async function guardarCambiosProducto() {
 
     try {
 
-        const respuesta = await fetch(url, {
+        const datosProducto = {
+            codigo,
+            codigo_barra: codigoBarra,
+            descripcion,
+            familia,
+            precio_publico: precio,
+            imagen: imagenOriginalProducto,
+            proveedor: proveedor || null
+        };
 
+        const opciones = {
             method: esEdicion ? 'PUT' : 'POST',
+            credentials: 'include'
+        };
 
-            credentials: 'include',
+        if (archivoImagenManualProducto) {
+            // solo al guardar se sube la fotografia a nuestro backend
+            const datosFormulario = new FormData();
+            Object.entries(datosProducto).forEach(([campo, valor]) => {
+                datosFormulario.append(campo, valor == null ? '' : String(valor));
+            });
+            datosFormulario.append(
+                'imagen_archivo',
+                archivoImagenManualProducto,
+                archivoImagenManualProducto.name
+            );
+            opciones.body = datosFormulario;
+            // no agregar Content-Type: fetch define el boundary multipart
+        } else {
+            opciones.headers = { 'Content-Type': 'application/json' };
+            opciones.body = JSON.stringify(datosProducto);
+        }
 
-            headers: {
-                'Content-Type': 'application/json'
-            },
-
-            body: JSON.stringify({
-                codigo,
-                codigo_barra: codigoBarra,
-                descripcion,
-                familia,
-                precio_publico: precio,
-                imagen: imagenOriginalProducto,
-                proveedor: proveedor || null
-            })
-        });
+        const respuesta = await fetch(url, opciones);
 
         const resultado = await respuesta.json();
 
@@ -1771,6 +1795,8 @@ function configurarAccionesProductos() {
     // permite buscar y quitar fotografias desde el formulario
     const botonBuscarImagen = document.getElementById('boton_buscar_imagen_producto');
     const botonQuitarImagen = document.getElementById('boton_quitar_imagen_producto');
+    const botonSubirImagen = document.getElementById('boton_subir_imagen_producto');
+    const inputArchivoImagen = document.getElementById('input_archivo_imagen_producto');
     const campoCodigoBarra = document.getElementById('input_codigo_barra_producto');
     const vistaPrevia = document.getElementById('imagen_vista_previa_producto');
 
@@ -1780,6 +1806,11 @@ function configurarAccionesProductos() {
 
     if (botonQuitarImagen) {
         botonQuitarImagen.addEventListener('click', quitarImagenProductoFormulario);
+    }
+
+    if (botonSubirImagen && inputArchivoImagen) {
+        botonSubirImagen.addEventListener('click', () => inputArchivoImagen.click());
+        inputArchivoImagen.addEventListener('change', seleccionarArchivoImagenManualProducto);
     }
 
     if (campoCodigoBarra) {
@@ -1820,6 +1851,12 @@ function configurarAccionesProductos() {
                 mensaje.hidden = false;
             }
 
+            // si falla una foto local, descartar su vista previa
+            if (archivoImagenManualProducto) {
+                limpiarArchivoImagenManualProducto();
+                imagenOriginalProducto = imagenGuardadaProducto;
+            }
+
             // no permite guardar una fotografia nueva que el navegador no pudo abrir
             if (imagenNuevaBuscadaProducto) {
                 imagenOriginalProducto = imagenGuardadaProducto;
@@ -1841,10 +1878,61 @@ function configurarAccionesProductos() {
 
 // TITULO 15 BUSCAR Y PREVISUALIZAR IMAGENES DE PRODUCTOS
 
+// convierte rutas locales de Node.js en direcciones completas para Live Server (:5500)
+function resolverRutaImagenProducto(ruta) {
+    if (typeof ruta === 'string' && ruta.startsWith('/api/productos/imagenes/')) {
+        return 'http://127.0.0.1:3000' + ruta;
+    }
+    return ruta;
+}
+
+// libera archivos temporales de vista previa, sin subirlos ni borrarlos del servidor
+function limpiarArchivoImagenManualProducto() {
+    archivoImagenManualProducto = null;
+    if (urlVistaPreviaManualProducto) {
+        URL.revokeObjectURL(urlVistaPreviaManualProducto);
+        urlVistaPreviaManualProducto = null;
+    }
+    const input = document.getElementById('input_archivo_imagen_producto');
+    if (input) input.value = '';
+}
+
+// permite escoger una fotografia desde el computador o telefono
+function seleccionarArchivoImagenManualProducto(evento) {
+    if (modoFormularioProducto === 'ver' || guardandoProducto || buscandoImagenProducto) {
+        return;
+    }
+
+    const archivo = evento.target.files?.[0];
+    if (!archivo) return;
+
+    const tipos = ['image/jpeg', 'image/png', 'image/webp'];
+    const estado = document.getElementById('texto_estado_imagen_producto');
+
+    if (!tipos.includes(archivo.type) || archivo.size > 5 * 1024 * 1024 || !archivo.size) {
+        evento.target.value = '';
+        if (estado) estado.textContent =
+            'Selecciona una foto JPG, PNG o WebP de hasta 5 MB.';
+        return;
+    }
+
+    busquedaImagenProductoSecuencia++;
+    buscandoImagenProducto = false;
+    limpiarArchivoImagenManualProducto();
+    archivoImagenManualProducto = archivo;
+    urlVistaPreviaManualProducto = URL.createObjectURL(archivo);
+    imagenOriginalProducto = imagenGuardadaProducto;
+    imagenNuevaBuscadaProducto = false;
+    codigoBarraImagenBuscadaProducto = null;
+
+    mostrarVistaPreviaImagenProducto(urlVistaPreviaManualProducto,
+        'Fotografía seleccionada: ' + archivo.name + '. Se subirá al presionar Guardar.');
+}
+
 // verifica que la ruta sea una URL web o una ruta local valida
 function esRutaImagenProductoValida(ruta) {
     return typeof ruta === 'string' &&
-        (/^https?:\/\//i.test(ruta) || /^\/(?!\/)/.test(ruta));
+        (/^https?:\/\//i.test(ruta) || /^\/(?!\/)/.test(ruta) || /^blob:/i.test(ruta));
 }
 
 // muestra la imagen asociada o la fotografia obtenida desde Open Food Facts
@@ -1857,7 +1945,7 @@ function mostrarVistaPreviaImagenProducto(ruta, mensaje) {
 
     if (imagen && sinImagen) {
         if (esRutaImagenProductoValida(ruta)) {
-            imagen.src = ruta;
+            imagen.src = resolverRutaImagenProducto(ruta);
             imagen.hidden = false;
             sinImagen.hidden = true;
         } else {
@@ -1898,6 +1986,7 @@ function actualizarBotonesImagenProducto() {
 
     const buscar = document.getElementById('boton_buscar_imagen_producto');
     const quitar = document.getElementById('boton_quitar_imagen_producto');
+    const subir = document.getElementById('boton_subir_imagen_producto');
     const soloLectura = modoFormularioProducto === 'ver';
 
     if (buscar) {
@@ -1906,9 +1995,15 @@ function actualizarBotonesImagenProducto() {
         buscar.textContent = buscandoImagenProducto ? 'Buscando...' : 'Buscar imagen';
     }
 
+    if (subir) {
+        subir.hidden = soloLectura;
+        subir.disabled = buscandoImagenProducto || guardandoProducto;
+    }
+
     if (quitar) {
         quitar.hidden = soloLectura;
-        quitar.disabled = buscandoImagenProducto || guardandoProducto || !imagenOriginalProducto;
+        quitar.disabled = buscandoImagenProducto || guardandoProducto ||
+            (!imagenOriginalProducto && !archivoImagenManualProducto);
     }
 }
 
@@ -1971,6 +2066,8 @@ async function buscarImagenProductoFormulario() {
             throw new Error('La fuente de la imagen no es válida.');
         }
 
+        // una fotografia encontrada reemplaza la foto manual pendiente, si existe
+        limpiarArchivoImagenManualProducto();
         imagenOriginalProducto = urlImagen.href;
         imagenNuevaBuscadaProducto = true;
         codigoBarraImagenBuscadaProducto = codigoBarra;
@@ -2001,6 +2098,7 @@ function quitarImagenProductoFormulario() {
     }
 
     busquedaImagenProductoSecuencia++;
+    limpiarArchivoImagenManualProducto();
     imagenOriginalProducto = null;
     imagenNuevaBuscadaProducto = false;
     codigoBarraImagenBuscadaProducto = null;

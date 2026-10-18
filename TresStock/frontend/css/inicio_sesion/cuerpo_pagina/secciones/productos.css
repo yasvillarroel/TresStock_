@@ -1713,6 +1713,24 @@
         border-color: #0f858d;
     }
 
+    /* diseño de subir imagen */
+    .boton_subir_imagen_producto {
+        min-height: 39px;
+        background-color: #ffffff;
+        color: #0f858d;
+        border: 1px solid #159ba3;
+        border-radius: 6px;
+        padding: 0 13px;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .boton_subir_imagen_producto:hover {
+        background-color: #e4f6f6;
+    }
+
     /* diseño de quitar imagen */
     .boton_quitar_imagen_producto {
         min-height: 39px;
@@ -1732,6 +1750,7 @@
 
     /* controles inactivos */
     .boton_buscar_imagen_producto:disabled,
+    .boton_subir_imagen_producto:disabled,
     .boton_quitar_imagen_producto:disabled {
         opacity: 0.55;
         cursor: not-allowed;

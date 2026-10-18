@@ -1,9 +1,58 @@
 // importa el servicio de productos
 const productosServicio = require('../../servicios/productos/productos_servicio');
+const fs = require('fs/promises');
+const path = require('path');
+const { randomUUID } = require('crypto');
+const sharp = require('sharp');
+
+// guarda fotografias propias comprimidas en WebP (no se guarda el binario en PostgreSQL)
+const carpetaImagenesProductos = path.join(__dirname, '../../imagenes/productos');
+
+const guardarImagenManualProducto = async (archivo) => {
+    if (!archivo) return null;
+
+    let procesada;
+    try {
+        const entrada = sharp(archivo.buffer, { limitInputPixels: 20000000, failOn: 'error' });
+        const informacion = await entrada.metadata();
+        if (!['jpeg', 'png', 'webp'].includes(informacion.format)) {
+            throw new Error('Formato no válido');
+        }
+        procesada = await entrada
+            .rotate()
+            .resize({ width: 640, height: 640, fit: 'inside', withoutEnlargement: true })
+            .webp({ quality: 80 })
+            .toBuffer();
+    } catch (error) {
+        const fallo = new Error('La fotografía no es válida o está dañada. Usa JPG, PNG o WebP.');
+        fallo.statusCode = 400;
+        throw fallo;
+    }
+
+    await fs.mkdir(carpetaImagenesProductos, { recursive: true });
+    const nombre = randomUUID() + '.webp';
+    const archivoGuardado = path.join(carpetaImagenesProductos, nombre);
+    await fs.writeFile(archivoGuardado, procesada, { flag: 'wx' });
+    return {
+        archivoGuardado,
+        rutaPublica: '/api/productos/imagenes/' + nombre
+    };
+};
+
+const limpiarArchivoFallido = async (archivoGuardado) => {
+    if (!archivoGuardado) return;
+    try {
+        await fs.unlink(archivoGuardado);
+    } catch (error) {
+        console.error('No se pudo limpiar la fotografía fallida:', error);
+    }
+};
 
 
 // FUNCION 1 CREAR PRODUCTO
 const crearProducto = async (req, res) => {
+
+    let fotografiaSubida = null;
 
     try {
 
@@ -18,6 +67,10 @@ const crearProducto = async (req, res) => {
             proveedor
         } = req.body;
 
+        // una fotografia nueva tiene prioridad sobre una URL existente
+        fotografiaSubida = await guardarImagenManualProducto(req.file);
+        const imagenFinal = fotografiaSubida ? fotografiaSubida.rutaPublica : (imagen || null);
+
         // crea el producto
         const producto = await productosServicio.crearProducto(
             codigo,
@@ -25,7 +78,7 @@ const crearProducto = async (req, res) => {
             descripcion,
             familia,
             precio_publico,
-            imagen,
+            imagenFinal,
             proveedor
         );
 
@@ -34,10 +87,11 @@ const crearProducto = async (req, res) => {
 
     } catch (error) {
 
+        await limpiarArchivoFallido(fotografiaSubida?.archivoGuardado);
         // muestra el error en la consola
         console.error('Error al crear producto:', error);
 
-        res.status(error.code === '23505' ? 409 : 400).json({
+        res.status(error.code === '23505' ? 409 : (error.statusCode || 400)).json({
             mensaje: error.code === '23505'
                 ? 'Ya existe un producto con ese código.'
                 : (error.message || 'Error al crear producto')
@@ -106,6 +160,8 @@ const obtenerProducto = async (req, res) => {
 // FUNCION 4 ACTUALIZAR PRODUCTO
 const actualizarProducto = async (req, res) => {
 
+    let fotografiaSubida = null;
+
     try {
 
         // obtiene el id del producto
@@ -122,6 +178,10 @@ const actualizarProducto = async (req, res) => {
             proveedor
         } = req.body;
 
+        // si se adjunto un archivo, usar su ruta en lugar de la URL anterior
+        fotografiaSubida = await guardarImagenManualProducto(req.file);
+        const imagenFinal = fotografiaSubida ? fotografiaSubida.rutaPublica : (imagen || null);
+
         // actualiza el producto
         const producto = await productosServicio.actualizarProducto(
             id,
@@ -130,7 +190,7 @@ const actualizarProducto = async (req, res) => {
             descripcion,
             familia,
             precio_publico,
-            imagen,
+            imagenFinal,
             proveedor
         );
 
@@ -139,11 +199,12 @@ const actualizarProducto = async (req, res) => {
 
     } catch (error) {
 
+        await limpiarArchivoFallido(fotografiaSubida?.archivoGuardado);
         // muestra el error en la consola
         console.error('Error al actualizar producto:', error);
 
         // envia el error
-        res.status(400).json({
+        res.status(error.statusCode || 400).json({
             mensaje: error.message || 'Error al actualizar producto'
         });
 
