@@ -14,6 +14,7 @@ let busquedaImagenProductoSecuencia = 0;
 let buscandoImagenProducto = false;
 let guardandoProducto = false;
 let listaProveedoresProducto = null;
+let importandoArchivoProductos = false;
 
 
 // variables de paginacion
@@ -289,7 +290,7 @@ let productosFiltradosActuales = [];
             'informacion_archivo_productos'
         );
 
-        if (!inputArchivo || !informacionArchivo) {
+        if (!inputArchivo || !informacionArchivo || importandoArchivoProductos) {
             return;
         }
 
@@ -304,9 +305,22 @@ let productosFiltradosActuales = [];
 
         }
 
-        informacionArchivo.textContent =
-            'Enviando archivo...';
+        // aviso visible antes de reemplazar saldos modificados con el escaner
+        const confirmado = confirm(
+            'El Excel debe incluir la columna STOCK ACTUAL.\n\n' +
+            'La importacion reemplazara el stock actual de TODOS los productos ' +
+            'incluidos en el archivo, incluso si ya existen.\n\n' +
+            'Esto puede sobrescribir ajustes realizados con el escaner.\n\n' +
+            '¿Deseas continuar?'
+        );
 
+        if (!confirmado) {
+            informacionArchivo.textContent = 'Importacion cancelada.';
+            return;
+        }
+
+        importandoArchivoProductos = true;
+        informacionArchivo.textContent = 'Importando productos y existencias...';
 
         const datos = new FormData();
 
@@ -314,7 +328,7 @@ let productosFiltradosActuales = [];
             'archivo',
             archivo
         );
-
+        datos.append('confirmar_reemplazo_stock', 'SI');
 
         try {
 
@@ -356,8 +370,10 @@ let productosFiltradosActuales = [];
                 'Productos importados: ' +
                 resumen.productos_importados +
                 '\n' +
-                'Productos no importados porque ya existen: ' +
+                'Productos existentes (sin duplicar): ' +
                 resumen.productos_existentes +
+                '\nStock actual cargado o actualizado: ' +
+                resumen.stock_actual_actualizados +
                 (resumen.proveedores_procesados
                     ? '\nProductos con proveedor asignado: ' +
                         resumen.productos_con_proveedor +
@@ -380,6 +396,8 @@ let productosFiltradosActuales = [];
 
             informacionArchivo.textContent =
                 'No se pudo conectar con el servidor.';
+        } finally {
+            importandoArchivoProductos = false;
         }
 
     }

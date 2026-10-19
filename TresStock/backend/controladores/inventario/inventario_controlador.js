@@ -102,80 +102,7 @@ const obtenerFamilias = async (req, res) => {
 };
 
 
-// FUNCION 4 ACTUALIZAR STOCK MINIMO
-const actualizarStockMinimo = async (req, res) => {
-
-    try {
-
-        // obtiene el codigo del producto
-        const { codigo } = req.params;
-
-
-        // obtiene el stock minimo
-        const {
-            stock_minimo
-        } = req.body;
-
-
-        const stockMinimo =
-            Number(stock_minimo);
-
-
-        // verifica el stock minimo
-        if (
-            Number.isNaN(stockMinimo) ||
-            stockMinimo < 0
-        ) {
-
-            return res.status(400).json({
-                mensaje:
-                    'El stock mínimo debe ser un valor igual o mayor a 0'
-            });
-
-        }
-
-
-        // actualiza el stock minimo
-        const inventario =
-            await inventarioServicio.actualizarStockMinimo(
-                codigo,
-                stockMinimo
-            );
-
-
-        // envia el inventario actualizado
-        res.json(inventario);
-
-
-    } catch (error) {
-
-        // muestra el error en la consola
-        console.error(
-            'Error al actualizar stock mínimo:',
-            error
-        );
-
-
-        // verifica si el producto no existe
-        if (error.code === '23503') {
-
-            return res.status(404).json({
-                mensaje: 'Producto no encontrado'
-            });
-
-        }
-
-
-        // envia el error
-        res.status(500).json({
-            mensaje: 'Error al actualizar stock mínimo'
-        });
-
-    }
-
-};
-
-// FUNCION RECALCULAR STOCK MINIMO
+// FUNCION 4 RECALCULAR STOCK MINIMO
 
 const recalcularStockMinimo = async (req, res) => {
 
@@ -209,7 +136,7 @@ const recalcularStockMinimo = async (req, res) => {
     }
 
 };
-// FUNCION AJUSTAR INVENTARIO
+// FUNCION 5 AJUSTAR INVENTARIO
 const ajustarInventario = async (req, res) => {
 
     try {
@@ -312,7 +239,6 @@ module.exports = {
     obtenerInventario,
     obtenerResumenInventario,
     obtenerFamilias,
-    actualizarStockMinimo,
     recalcularStockMinimo,
     ajustarInventario
 };

@@ -14,7 +14,8 @@ const crearProveedor = async (req, res) => {
             rut,
             telefono,
             email,
-            direccion
+            direccion,
+            tiempo_entrega_dias
         } = req.body;
 
 
@@ -28,6 +29,21 @@ const crearProveedor = async (req, res) => {
         }
 
 
+        // verifica el tiempo de entrega
+        const tiempoEntregaDias =
+            tiempo_entrega_dias === undefined
+                ? 7
+                : Number(tiempo_entrega_dias);
+
+        if (!Number.isInteger(tiempoEntregaDias) || tiempoEntregaDias < 7) {
+
+            return res.status(400).json({
+                mensaje: 'El tiempo de entrega debe ser un número entero de al menos 7 días'
+            });
+
+        }
+
+
         // crea el proveedor
         const proveedor = await proveedoresServicio.crearProveedor(
             nombre_comercial,
@@ -35,7 +51,8 @@ const crearProveedor = async (req, res) => {
             rut,
             telefono,
             email,
-            direccion
+            direccion,
+            tiempoEntregaDias
         );
 
 
@@ -166,7 +183,8 @@ const actualizarProveedor = async (req, res) => {
             rut,
             telefono,
             email,
-            direccion
+            direccion,
+            tiempo_entrega_dias
         } = req.body;
 
 
@@ -180,6 +198,24 @@ const actualizarProveedor = async (req, res) => {
         }
 
 
+        // verifica el tiempo de entrega si fue enviado
+        const tiempoEntregaDias =
+            tiempo_entrega_dias === undefined
+                ? null
+                : Number(tiempo_entrega_dias);
+
+        if (
+            tiempo_entrega_dias !== undefined &&
+            (!Number.isInteger(tiempoEntregaDias) || tiempoEntregaDias < 7)
+        ) {
+
+            return res.status(400).json({
+                mensaje: 'El tiempo de entrega debe ser un número entero de al menos 7 días'
+            });
+
+        }
+
+
         // actualiza el proveedor
         const proveedor = await proveedoresServicio.actualizarProveedor(
             id,
@@ -188,7 +224,8 @@ const actualizarProveedor = async (req, res) => {
             rut,
             telefono,
             email,
-            direccion
+            direccion,
+            tiempoEntregaDias
         );
 
 

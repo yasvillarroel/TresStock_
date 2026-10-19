@@ -247,6 +247,13 @@
                             Sin stock
                         </option>
 
+                        <option
+                            class="opcion_estado_inventario"
+                            value="PENDIENTE"
+                        >
+                            Pendiente
+                        </option>
+
                     </select>
 
                 </div>
@@ -296,12 +303,7 @@
                             <th class="columna_estado_inventario">
                                 Estado
                             </th>
-
-                            <th class="columna_acciones_inventario">
-                                Acciones
-                            </th>
-
-                        </tr>
+</tr>
 
                     </thead>
 
@@ -315,7 +317,7 @@
 
                             <td
                                 class="dato_sin_inventario"
-                                colspan="6"
+                                colspan="5"
                             >
                                 No hay productos cargados para mostrar.
                             </td>
@@ -350,98 +352,7 @@
             </div>
 
 
-        <!-- TITULO 8 FORMULARIO STOCK MINIMO -->
-
-            <!-- fondo superpuesto para configurar stock mínimo -->
-            <div
-                class="contenedor_formulario_stock_minimo_inventario contenedor_formulario_stock_minimo_inventario_oculto"
-                id="contenedor_formulario_stock_minimo_inventario"
-            >
-
-                <div class="formulario_stock_minimo_inventario">
-
-
-                    <!-- TITULO 9 CABECERA FORMULARIO STOCK MINIMO -->
-
-                        <div class="cabecera_formulario_stock_minimo_inventario">
-
-                            <div class="titulo_formulario_stock_minimo_inventario">
-                                Configurar stock mínimo
-                            </div>
-
-                            <div
-                                class="boton_cerrar_stock_minimo_inventario"
-                                id="boton_cerrar_stock_minimo_inventario"
-                            >
-                                ×
-                            </div>
-
-                        </div>
-
-
-                        <div class="contenido_formulario_stock_minimo_inventario">
-
-                            <div class="campo_producto_stock_minimo_inventario">
-
-                                <div class="texto_producto_stock_minimo_inventario">
-                                    Producto
-                                </div>
-
-                                <div
-                                    class="valor_producto_stock_minimo_inventario"
-                                    id="valor_producto_stock_minimo_inventario"
-                                >
-                                    -
-                                </div>
-
-                            </div>
-
-
-                            <div class="campo_valor_stock_minimo_inventario">
-
-                                <div class="texto_valor_stock_minimo_inventario">
-                                    Stock mínimo
-                                </div>
-
-                                <input
-                                    class="input_stock_minimo_inventario"
-                                    id="input_stock_minimo_inventario"
-                                    type="number"
-                                    min="0"
-                                    step="0.001"
-                                >
-
-                            </div>
-
-                        </div>
-
-
-                    <!-- TITULO 10 ACCIONES FORMULARIO STOCK MINIMO -->
-
-                        <div class="contenedor_acciones_stock_minimo_inventario">
-
-                            <div
-                                class="boton_cancelar_stock_minimo_inventario"
-                                id="boton_cancelar_stock_minimo_inventario"
-                            >
-                                Cancelar
-                            </div>
-
-                            <div
-                                class="boton_guardar_stock_minimo_inventario"
-                                id="boton_guardar_stock_minimo_inventario"
-                            >
-                                Guardar
-                            </div>
-
-                        </div>
-
-                </div>
-
-            </div>
-
-
-        <!-- TITULO 11 INICIALIZACION INVENTARIO -->
+        <!-- TITULO 8 INICIALIZACION INVENTARIO -->
 
             <!-- sin estructura -->
 

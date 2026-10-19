@@ -12,10 +12,6 @@
     // cantidad de productos mostrados por página
     const productosPorPaginaInventario = 20;
 
-    // almacena el código del producto cuyo stock mínimo se editará
-    let codigoProductoStockMinimo = null;
-
-
 // TITULO 2 ENCABEZADO INVENTARIO
 
     // sin función
@@ -498,7 +494,7 @@
             dato.className =
                 'dato_sin_inventario';
 
-            dato.colSpan = 6;
+            dato.colSpan = 5;
 
             dato.textContent =
                 'No se encontraron productos para mostrar.';
@@ -605,9 +601,11 @@
                     'dato_stock_minimo_inventario';
 
                 datoStockMinimo.textContent =
-                    formatearCantidadInventario(
-                        producto.stock_minimo
-                    );
+                    producto.stock_minimo_calculable
+                        ? formatearCantidadInventario(
+                            producto.stock_minimo
+                        )
+                        : '—';
 
 
                 // estado
@@ -637,45 +635,6 @@
                 );
 
 
-                // acciones
-                const datoAcciones =
-                    document.createElement(
-                        'td'
-                    );
-
-                datoAcciones.className =
-                    'dato_acciones_inventario';
-
-
-                const botonStockMinimo =
-                    document.createElement(
-                        'div'
-                    );
-
-                botonStockMinimo.className =
-                    'boton_stock_minimo_inventario';
-
-                botonStockMinimo.textContent =
-                    'Stock mínimo';
-
-
-                botonStockMinimo.addEventListener(
-                    'click',
-                    () => {
-
-                        abrirFormularioStockMinimoInventario(
-                            producto
-                        );
-
-                    }
-                );
-
-
-                datoAcciones.appendChild(
-                    botonStockMinimo
-                );
-
-
                 fila.appendChild(
                     datoProducto
                 );
@@ -695,11 +654,6 @@
                 fila.appendChild(
                     datoEstado
                 );
-
-                fila.appendChild(
-                    datoAcciones
-                );
-
 
                 cuerpoTabla.appendChild(
                     fila
@@ -740,6 +694,19 @@
 
             elemento.textContent =
                 'Stock bajo';
+
+            return;
+
+        }
+
+
+        if (estado === 'PENDIENTE') {
+
+            elemento.className =
+                'estado_pendiente_inventario';
+
+            elemento.textContent =
+                'Pendiente';
 
             return;
 
@@ -1091,198 +1058,7 @@
     }
 
 
-// TITULO 8 FORMULARIO STOCK MINIMO
-
-    // función para abrir el formulario
-    function abrirFormularioStockMinimoInventario(
-        producto
-    ) {
-
-        codigoProductoStockMinimo =
-            producto.codigo;
-
-
-        const contenedor =
-            document.getElementById(
-                'contenedor_formulario_stock_minimo_inventario'
-            );
-
-        const valorProducto =
-            document.getElementById(
-                'valor_producto_stock_minimo_inventario'
-            );
-
-        const inputStockMinimo =
-            document.getElementById(
-                'input_stock_minimo_inventario'
-            );
-
-
-        if (valorProducto) {
-
-            valorProducto.textContent =
-                producto.descripcion ||
-                '-';
-
-        }
-
-
-        if (inputStockMinimo) {
-
-            inputStockMinimo.value =
-                producto.stock_minimo ||
-                0;
-
-        }
-
-
-        if (contenedor) {
-
-            contenedor.classList.remove(
-                'contenedor_formulario_stock_minimo_inventario_oculto'
-            );
-
-        }
-
-    }
-
-
-    // función para cerrar el formulario
-    function cerrarFormularioStockMinimoInventario() {
-
-        const contenedor =
-            document.getElementById(
-                'contenedor_formulario_stock_minimo_inventario'
-            );
-
-
-        if (contenedor) {
-
-            contenedor.classList.add(
-                'contenedor_formulario_stock_minimo_inventario_oculto'
-            );
-
-        }
-
-
-        codigoProductoStockMinimo =
-            null;
-
-    }
-
-
-// TITULO 9 CABECERA FORMULARIO STOCK MINIMO
-
-    // sin función
-
-
-// TITULO 10 ACCIONES FORMULARIO STOCK MINIMO
-
-    // función para guardar el stock mínimo
-    async function guardarStockMinimoInventario() {
-
-        if (
-            !codigoProductoStockMinimo
-        ) {
-            return;
-        }
-
-
-        const inputStockMinimo =
-            document.getElementById(
-                'input_stock_minimo_inventario'
-            );
-
-
-        if (!inputStockMinimo) {
-            return;
-        }
-
-
-        const stockMinimo =
-            Number(
-                inputStockMinimo.value
-            );
-
-
-        if (
-            Number.isNaN(stockMinimo) ||
-            stockMinimo < 0
-        ) {
-
-            alert(
-                'El stock mínimo debe ser igual o mayor a 0.'
-            );
-
-            return;
-
-        }
-
-
-        try {
-
-            const respuesta = await fetch(
-                `http://127.0.0.1:3000/api/inventario/${encodeURIComponent(codigoProductoStockMinimo)}/stock-minimo`,
-                {
-                    method: 'PUT',
-
-                    headers: {
-                        'Content-Type':
-                            'application/json'
-                    },
-
-                    credentials:
-                        'include',
-
-                    body: JSON.stringify({
-                        stock_minimo:
-                            stockMinimo
-                    })
-                }
-            );
-
-
-            const resultado =
-                await respuesta.json();
-
-
-            if (!respuesta.ok) {
-
-                alert(
-                    resultado.mensaje ||
-                    'No se pudo actualizar el stock mínimo.'
-                );
-
-                return;
-
-            }
-
-
-            cerrarFormularioStockMinimoInventario();
-
-
-            await Promise.all([
-                cargarInventario(),
-                cargarResumenInventario()
-            ]);
-
-
-        } catch (error) {
-
-            console.error(
-                'Error al actualizar stock mínimo:',
-                error
-            );
-
-
-            alert(
-                'No se pudo conectar con el servidor.'
-            );
-
-        }
-
-    }
-
+// TITULO 8 RECALCULO AUTOMATICO DEL STOCK MINIMO
 
 // recalcula el stock minimo utilizando las ventas y proveedores
 async function recalcularStockMinimoInventario() {
@@ -1332,58 +1108,13 @@ async function recalcularStockMinimoInventario() {
 }
 
 
-// TITULO 11 INICIALIZACION INVENTARIO
+// TITULO 9 INICIALIZACION INVENTARIO
 
     // función para inicializar la vista de inventario
     async function inicializarInventario() {
 
         configurarFiltrosInventario();
 
-
-        const botonCerrar =
-            document.getElementById(
-                'boton_cerrar_stock_minimo_inventario'
-            );
-
-        const botonCancelar =
-            document.getElementById(
-                'boton_cancelar_stock_minimo_inventario'
-            );
-
-        const botonGuardar =
-            document.getElementById(
-                'boton_guardar_stock_minimo_inventario'
-            );
-
-
-        if (botonCerrar) {
-
-            botonCerrar.addEventListener(
-                'click',
-                cerrarFormularioStockMinimoInventario
-            );
-
-        }
-
-
-        if (botonCancelar) {
-
-            botonCancelar.addEventListener(
-                'click',
-                cerrarFormularioStockMinimoInventario
-            );
-
-        }
-
-
-        if (botonGuardar) {
-
-            botonGuardar.addEventListener(
-                'click',
-                guardarStockMinimoInventario
-            );
-
-        }
 
         // recalcula el stock minimo antes de cargar los datos
         await recalcularStockMinimoInventario();

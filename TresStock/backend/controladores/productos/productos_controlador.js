@@ -269,8 +269,17 @@ const importarProductos = async (req, res) => {
             });
         }
 
+        // el Excel reemplaza los saldos incluso si el producto ya existe
+        // se requiere confirmacion explicita en cada importacion
+        if (req.body.confirmar_reemplazo_stock !== 'SI') {
+            return res.status(400).json({
+                mensaje: 'Confirma el reemplazo del STOCK ACTUAL para continuar.'
+            });
+        }
+
         const resultado = await productosServicio.importarProductos(
-            req.file
+            req.file,
+            true
         );
 
         res.json(resultado);

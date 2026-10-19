@@ -237,6 +237,10 @@
                                 Dirección
                             </th>
 
+                            <th class="columna_tiempo_entrega_proveedores">
+                                Entrega (días)
+                            </th>
+
                             <th class="columna_acciones_proveedores">
                                 Acciones
                             </th>
@@ -255,7 +259,7 @@
 
                             <td
                                 class="dato_sin_proveedores"
-                                colspan="7"
+                                colspan="8"
                             >
                                 No hay proveedores cargados para mostrar.
                             </td>
@@ -398,6 +402,25 @@
                                     class="input_direccion_proveedor"
                                     id="input_direccion_proveedor"
                                     type="text"
+                                >
+
+                            </div>
+
+
+                            <!-- campo tiempo de entrega -->
+                            <div class="campo_tiempo_entrega_proveedor">
+
+                                <div class="texto_campo_tiempo_entrega_proveedor">
+                                    Tiempo de entrega (días)
+                                </div>
+
+                                <input
+                                    class="input_tiempo_entrega_proveedor"
+                                    id="input_tiempo_entrega_proveedor"
+                                    type="number"
+                                    min="7"
+                                    step="1"
+                                    value="7"
                                 >
 
                             </div>

@@ -505,7 +505,7 @@
 
     /* clase para establecer columna producto */
     .columna_producto_inventario {
-        width: 29%;
+        width: 36%;
         padding: 13px 12px;
         text-align: left;
         color: #667881;
@@ -516,7 +516,7 @@
 
     /* clase para establecer columna familia */
     .columna_familia_inventario {
-        width: 18%;
+        width: 24%;
         padding: 13px 12px;
         text-align: left;
         color: #667881;
@@ -527,7 +527,7 @@
 
     /* clase para establecer columna stock actual */
     .columna_stock_actual_inventario {
-        width: 13%;
+        width: 14%;
         padding: 13px 12px;
         text-align: center;
         color: #667881;
@@ -538,7 +538,7 @@
 
     /* clase para establecer columna stock mínimo */
     .columna_stock_minimo_inventario {
-        width: 13%;
+        width: 14%;
         padding: 13px 12px;
         text-align: center;
         color: #667881;
@@ -549,18 +549,7 @@
 
     /* clase para establecer columna estado */
     .columna_estado_inventario {
-        width: 14%;
-        padding: 13px 12px;
-        text-align: center;
-        color: #667881;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        box-sizing: border-box;
-    }
-
-    /* clase para establecer columna acciones */
-    .columna_acciones_inventario {
-        width: 13%;
+        width: 12%;
         padding: 13px 12px;
         text-align: center;
         color: #667881;
@@ -636,14 +625,6 @@
         box-sizing: border-box;
     }
 
-    /* clase para establecer las acciones */
-    .dato_acciones_inventario {
-        padding: 10px 8px;
-        text-align: center;
-        vertical-align: middle;
-        box-sizing: border-box;
-    }
-
 
     /* clase para estado óptimo */
     .estado_optimo_inventario {
@@ -673,6 +654,21 @@
         font-weight: bold;
     }
 
+    /* clase para estado pendiente de cálculo */
+    .estado_pendiente_inventario {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px 10px;
+        background-color: #edf1f3;
+        color: #667881;
+        border-radius: 15px;
+        font-family: Arial, sans-serif;
+        font-size: 11px;
+        font-weight: bold;
+    }
+
+
     /* clase para estado sin stock */
     .estado_sin_stock_inventario {
         display: inline-flex;
@@ -685,28 +681,6 @@
         font-family: Arial, sans-serif;
         font-size: 11px;
         font-weight: bold;
-    }
-
-
-    /* clase para opción configurar mínimo */
-    .boton_stock_minimo_inventario {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 7px 10px;
-        background-color: #e4f6f6;
-        color: #117d84;
-        border-radius: 5px;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        font-weight: bold;
-        cursor: pointer;
-        box-sizing: border-box;
-    }
-
-    /* cambia el fondo al posicionar cursor */
-    .boton_stock_minimo_inventario:hover {
-        background-color: #cceced;
     }
 
 
@@ -780,199 +754,7 @@
     }
 
 
-/* TITULO 8 FORMULARIO STOCK MINIMO */
-
-    /* clase para establecer el fondo superpuesto */
-    .contenedor_formulario_stock_minimo_inventario {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: fixed;
-        top: 0;
-        left: 0;
-        background-color: rgba(5, 31, 45, 0.55);
-        z-index: 1100;
-    }
-
-    /* clase para ocultar el formulario */
-    .contenedor_formulario_stock_minimo_inventario_oculto {
-        display: none;
-    }
-
-    /* clase para establecer el formulario */
-    .formulario_stock_minimo_inventario {
-        width: 470px;
-        max-width: calc(100% - 40px);
-        background-color: #ffffff;
-        border-radius: 8px;
-        padding: 23px;
-        box-sizing: border-box;
-    }
-
-    /* clase para organizar contenido del formulario */
-    .contenido_formulario_stock_minimo_inventario {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 18px;
-    }
-
-    /* clase para organizar campo producto */
-    .campo_producto_stock_minimo_inventario {
-        display: flex;
-        flex-direction: column;
-    }
-
-    /* clase para establecer texto producto */
-    .texto_producto_stock_minimo_inventario {
-        color: #425966;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 7px;
-    }
-
-    /* clase para establecer valor producto */
-    .valor_producto_stock_minimo_inventario {
-        min-height: 40px;
-        display: flex;
-        align-items: center;
-        background-color: #f5f8f9;
-        border: 1px solid #dce4e8;
-        border-radius: 6px;
-        padding: 0 11px;
-        color: #536873;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        box-sizing: border-box;
-    }
-
-    /* clase para organizar campo stock mínimo */
-    .campo_valor_stock_minimo_inventario {
-        display: flex;
-        flex-direction: column;
-    }
-
-    /* clase para establecer texto stock mínimo */
-    .texto_valor_stock_minimo_inventario {
-        color: #425966;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 7px;
-    }
-
-    /* clase para establecer input stock mínimo */
-    .input_stock_minimo_inventario {
-        width: 100%;
-        height: 40px;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        padding: 0 10px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        outline: none;
-        box-sizing: border-box;
-    }
-
-
-/* TITULO 9 CABECERA FORMULARIO STOCK MINIMO */
-
-    /* clase para organizar la cabecera del formulario */
-    .cabecera_formulario_stock_minimo_inventario {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 22px;
-    }
-
-    /* clase para establecer título del formulario */
-    .titulo_formulario_stock_minimo_inventario {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 20px;
-        font-weight: bold;
-    }
-
-    /* clase para establecer el cierre */
-    .boton_cerrar_stock_minimo_inventario {
-        width: 32px;
-        height: 32px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #64727a;
-        font-family: Arial, sans-serif;
-        font-size: 25px;
-        cursor: pointer;
-        border-radius: 5px;
-    }
-
-    /* cambia el fondo del cierre */
-    .boton_cerrar_stock_minimo_inventario:hover {
-        background-color: #edf1f3;
-    }
-
-
-/* TITULO 10 ACCIONES FORMULARIO STOCK MINIMO */
-
-    /* clase para organizar acciones */
-    .contenedor_acciones_stock_minimo_inventario {
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;
-        gap: 10px;
-        margin-top: 24px;
-    }
-
-    /* clase para establecer cancelar */
-    .boton_cancelar_stock_minimo_inventario {
-        height: 40px;
-        display: flex;
-        align-items: center;
-        padding: 0 16px;
-        background-color: #edf1f3;
-        color: #44515a;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        font-weight: bold;
-        border-radius: 5px;
-        cursor: pointer;
-        box-sizing: border-box;
-    }
-
-    /* cambia el fondo de cancelar */
-    .boton_cancelar_stock_minimo_inventario:hover {
-        background-color: #dfe6e9;
-    }
-
-    /* clase para establecer guardar */
-    .boton_guardar_stock_minimo_inventario {
-        height: 40px;
-        display: flex;
-        align-items: center;
-        padding: 0 16px;
-        background-color: #159ba3;
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        font-weight: bold;
-        border-radius: 5px;
-        cursor: pointer;
-        box-sizing: border-box;
-    }
-
-    /* cambia el fondo de guardar */
-    .boton_guardar_stock_minimo_inventario:hover {
-        background-color: #0f858d;
-    }
-
-
-/* TITULO 11 INICIALIZACION INVENTARIO */
+/* TITULO 8 INICIALIZACION INVENTARIO */
 
     /* sin estilos */
 

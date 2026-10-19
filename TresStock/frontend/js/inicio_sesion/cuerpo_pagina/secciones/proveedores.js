@@ -87,6 +87,9 @@ let idProveedorEditando = null;
         const inputDireccionProveedor =
             document.getElementById('input_direccion_proveedor');
 
+        const inputTiempoEntregaProveedor =
+            document.getElementById('input_tiempo_entrega_proveedor');
+
 
         if (inputNombreProveedor) {
             inputNombreProveedor.value = '';
@@ -110,6 +113,10 @@ let idProveedorEditando = null;
 
         if (inputDireccionProveedor) {
             inputDireccionProveedor.value = '';
+        }
+
+        if (inputTiempoEntregaProveedor) {
+            inputTiempoEntregaProveedor.value = '7';
         }
 
     }
@@ -209,7 +216,7 @@ let idProveedorEditando = null;
             dato.className =
                 'dato_sin_proveedores';
 
-            dato.colSpan = 7;
+            dato.colSpan = 8;
 
             dato.textContent =
                 'No hay proveedores cargados para mostrar.';
@@ -301,6 +308,19 @@ let idProveedorEditando = null;
                     proveedor.direccion || '-';
 
 
+                // tiempo de entrega
+                const datoTiempoEntrega =
+                    document.createElement('td');
+
+                datoTiempoEntrega.className =
+                    'dato_tiempo_entrega_proveedores';
+
+                datoTiempoEntrega.textContent =
+                    proveedor.tiempo_entrega_dias == null
+                        ? 'Sin configurar'
+                        : `${proveedor.tiempo_entrega_dias} días`;
+
+
                 // acciones
                 const datoAcciones =
                     document.createElement('td');
@@ -380,6 +400,10 @@ let idProveedorEditando = null;
 
                 fila.appendChild(
                     datoDireccion
+                );
+
+                fila.appendChild(
+                    datoTiempoEntrega
                 );
 
                 fila.appendChild(
@@ -622,6 +646,11 @@ let idProveedorEditando = null;
                 'input_direccion_proveedor'
             );
 
+        const inputTiempoEntrega =
+            document.getElementById(
+                'input_tiempo_entrega_proveedor'
+            );
+
 
         const nombreComercial =
             inputNombre.value.trim();
@@ -641,12 +670,34 @@ let idProveedorEditando = null;
         const direccion =
             inputDireccion.value.trim();
 
+        const tiempoEntregaTexto =
+            inputTiempoEntrega.value.trim();
+
+        const tiempoEntregaDias =
+            Number(tiempoEntregaTexto);
+
 
         // valida nombre comercial
         if (!nombreComercial) {
 
             alert(
                 'Debe ingresar el nombre comercial del proveedor.'
+            );
+
+            return;
+
+        }
+
+
+        // valida los días de entrega
+        if (
+            tiempoEntregaTexto === '' ||
+            !Number.isInteger(tiempoEntregaDias) ||
+            tiempoEntregaDias < 7
+        ) {
+
+            alert(
+                'El tiempo de entrega debe ser un número entero de al menos 7 días.'
             );
 
             return;
@@ -672,7 +723,10 @@ let idProveedorEditando = null;
                 email || null,
 
             direccion:
-                direccion || null
+                direccion || null,
+
+            tiempo_entrega_dias:
+                tiempoEntregaDias
 
         };
 
@@ -832,6 +886,12 @@ let idProveedorEditando = null;
             'input_direccion_proveedor'
         ).value =
             proveedor.direccion || '';
+
+
+        document.getElementById(
+            'input_tiempo_entrega_proveedor'
+        ).value =
+            proveedor.tiempo_entrega_dias ?? 7;
 
 
         const contenedorFormulario =

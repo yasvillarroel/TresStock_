@@ -37,12 +37,6 @@ router.put(
     inventarioControlador.recalcularStockMinimo
 );
 
-// ruta para actualizar el stock minimo
-router.put(
-    '/:codigo/stock-minimo',
-    inventarioControlador.actualizarStockMinimo
-);
-
 // ruta para ajustar el inventario
 router.post(
     '/ajustar',

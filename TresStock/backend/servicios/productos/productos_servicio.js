@@ -291,7 +291,14 @@ const eliminarProducto = async (id) => {
 
 
  // FUNCION 6 IMPORTAR PRODUCTOS
-const importarProductos = async (archivo) => {
+const importarProductos = async (archivo, confirmarReemplazoStock = false) => {
+
+    // protege los ajustes de inventario ante reimportaciones accidentales
+    if (!confirmarReemplazoStock) {
+        throw new Error(
+            'Debes confirmar expresamente el reemplazo del STOCK ACTUAL antes de importar.'
+        );
+    }
 
     // lee el archivo Excel desde memoria
     const libro = XLSX.read(archivo.buffer, {
@@ -324,7 +331,8 @@ const importarProductos = async (archivo) => {
         'COD. BARRA',
         'DESCRIPCION',
         'FAMILIA',
-        'P.Publico'
+        'P.Publico',
+        'STOCK ACTUAL'
     ];
 
     // obtiene las columnas del Excel
@@ -362,6 +370,7 @@ const importarProductos = async (archivo) => {
     const codigosBarraNulos = [];
     const codigosExtranos = [];
     const preciosInvalidos = [];
+    const stocksInvalidos = [];
     const codigosDuplicados = [];
 
     const codigosVistos = new Set();
@@ -404,6 +413,10 @@ const importarProductos = async (archivo) => {
 
         // obtiene precio
         const precio = producto['P.Publico'];
+
+        // el stock solo se utiliza en Inventario, no en la tabla Productos
+        const stockActualBruto = producto['STOCK ACTUAL'];
+        const stockActualNumero = Number(stockActualBruto);
 
         // verifica codigo vacio
         if (!codigo) {
@@ -462,6 +475,24 @@ const importarProductos = async (archivo) => {
             continue;
         }
 
+        // valida el stock simulado: solo enteros, cero permitido
+        // limite de INTEGER en PostgreSQL; evita errores por valores enormes
+        if (
+            stockActualBruto === undefined ||
+            stockActualBruto === null ||
+            typeof stockActualBruto === 'boolean' ||
+            String(stockActualBruto).trim() === '' ||
+            !Number.isSafeInteger(stockActualNumero) ||
+            stockActualNumero < 0 ||
+            stockActualNumero > 2147483647
+        ) {
+            stocksInvalidos.push({
+                fila,
+                valor: stockActualBruto
+            });
+            continue;
+        }
+
         // evita codigos duplicados dentro del Excel
         if (codigosVistos.has(codigo)) {
 
@@ -483,6 +514,7 @@ const importarProductos = async (archivo) => {
             familia: familia || null,
             precio: precioNumero,
             proveedor,
+            stockActual: stockActualNumero,
             fila
         });
 
@@ -494,6 +526,7 @@ const importarProductos = async (archivo) => {
         codigosBarraNulos.length > 0 ||
         codigosExtranos.length > 0 ||
         preciosInvalidos.length > 0 ||
+        stocksInvalidos.length > 0 ||
         codigosDuplicados.length > 0
     ) {
 
@@ -502,7 +535,9 @@ const importarProductos = async (archivo) => {
             `${codigosNulos.length} codigos vacios, ` +
             `${codigosBarraNulos.length} codigos de barra vacios, ` +
             `${codigosExtranos.length} codigos invalidos, ` +
-            `${preciosInvalidos.length} precios invalidos y ` +
+            `${preciosInvalidos.length} precios invalidos, ` +
+            `${stocksInvalidos.length} valores de STOCK ACTUAL invalidos ` +
+            `(filas: ${stocksInvalidos.slice(0, 8).map(error => error.fila).join(', ') || 'ninguna'}) y ` +
             `${codigosDuplicados.length} codigos duplicados.`
         );
 
@@ -514,6 +549,7 @@ const importarProductos = async (archivo) => {
     // contadores de importacion
     let productosImportados = 0;
     let productosExistentes = 0;
+    let stocksActualizados = 0;
     let productosConProveedor = 0;
     let productosSinProveedor = 0;
 
@@ -688,6 +724,29 @@ const importarProductos = async (archivo) => {
 
             }
 
+            // registra existencias de productos nuevos y actualiza los existentes
+            // nunca reemplaza stock_minimo: este se calcula en Inventario
+            const resultadoStock = await cliente.query(
+                `INSERT INTO base_datos.inventario (
+                    codigo,
+                    stock_actual,
+                    stock_minimo
+                 )
+                 SELECT
+                    datos.codigo,
+                    datos."stockActual",
+                    0
+                 FROM jsonb_to_recordset($1::jsonb) AS datos(
+                    codigo TEXT,
+                    "stockActual" INTEGER
+                 )
+                 ON CONFLICT (codigo) DO UPDATE SET
+                    stock_actual = EXCLUDED.stock_actual`,
+                [JSON.stringify(lote)]
+            );
+
+            stocksActualizados += resultadoStock.rowCount;
+
         }
 
         // confirma todos los cambios
@@ -700,6 +759,7 @@ const importarProductos = async (archivo) => {
                 total_filas: productos.length,
                 productos_importados: productosImportados,
                 productos_existentes: productosExistentes,
+                stock_actual_actualizados: stocksActualizados,
                 proveedores_procesados: tieneColumnaProveedor,
                 productos_con_proveedor: productosConProveedor,
                 productos_sin_proveedor: productosSinProveedor

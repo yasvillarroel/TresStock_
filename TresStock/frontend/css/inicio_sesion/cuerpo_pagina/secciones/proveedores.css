@@ -385,7 +385,7 @@
 
     /* clase para establecer la columna razón social */
     .columna_razon_social_proveedores {
-        width: 20%;
+        width: 18%;
         padding: 13px 12px;
         text-align: left;
         color: #667881;
@@ -397,7 +397,7 @@
 
     /* clase para establecer la columna RUT */
     .columna_rut_proveedores {
-        width: 7%;
+        width: 9%;
         padding: 13px 12px;
         text-align: center;
         color: #667881;
@@ -409,7 +409,7 @@
 
     /* clase para establecer la columna teléfono */
     .columna_telefono_proveedores {
-        width: 10%;
+        width: 9%;
         padding: 13px 12px;
         text-align: center;
         color: #667881;
@@ -421,7 +421,7 @@
 
     /* clase para establecer la columna email */
     .columna_email_proveedores {
-        width: 15%;
+        width: 14%;
         padding: 13px 12px;
         text-align: left;
         color: #667881;
@@ -433,9 +433,21 @@
 
     /* clase para establecer la columna dirección */
     .columna_direccion_proveedores {
-        width: 20%;
+        width: 16%;
         padding: 13px 12px;
         text-align: left;
+        color: #667881;
+        font-family: Arial, sans-serif;
+        font-size: 11px;
+        box-sizing: border-box;
+    }
+
+
+    /* clase para establecer la columna tiempo de entrega */
+    .columna_tiempo_entrega_proveedores {
+        width: 11%;
+        padding: 13px 8px;
+        text-align: center;
         color: #667881;
         font-family: Arial, sans-serif;
         font-size: 11px;
@@ -546,6 +558,19 @@
     }
 
 
+    /* clase para establecer el tiempo de entrega */
+    .dato_tiempo_entrega_proveedores {
+        padding: 14px 8px;
+        color: #536873;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        text-align: center;
+        vertical-align: middle;
+        white-space: nowrap;
+        box-sizing: border-box;
+    }
+
+
     /* clase para organizar las acciones */
     .dato_acciones_proveedores {
         padding: 10px 8px;
@@ -642,6 +667,8 @@
     .formulario_proveedor {
         width: 620px;
         max-width: calc(100% - 40px);
+        max-height: calc(100vh - 40px);
+        overflow-y: auto;
         background-color: #ffffff;
         border-radius: 8px;
         padding: 23px;
@@ -860,6 +887,35 @@
 
     /* clase para establecer el campo RUT */
     .input_rut_proveedor {
+        height: 40px;
+        border: 1px solid #ced9de;
+        border-radius: 6px;
+        padding: 0 10px;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        outline: none;
+        box-sizing: border-box;
+    }
+
+
+    /* clase para organizar el campo tiempo de entrega */
+    .campo_tiempo_entrega_proveedor {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* clase para establecer el texto del campo tiempo de entrega */
+    .texto_campo_tiempo_entrega_proveedor {
+        color: #425966;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        margin-bottom: 6px;
+    }
+
+    /* clase para establecer el campo tiempo de entrega */
+    .input_tiempo_entrega_proveedor {
         height: 40px;
         border: 1px solid #ced9de;
         border-radius: 6px;

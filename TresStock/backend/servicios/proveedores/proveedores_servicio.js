@@ -9,7 +9,8 @@ const crearProveedor = async (
     rut,
     telefono,
     email,
-    direccion
+    direccion,
+    tiempo_entrega_dias
 ) => {
 
     const resultado = await pool.query(
@@ -20,9 +21,10 @@ const crearProveedor = async (
             rut,
             telefono,
             email,
-            direccion
+            direccion,
+            tiempo_entrega_dias
         )
-        VALUES ($1, $2, $3, $4, $5, $6)
+        VALUES ($1, $2, $3, $4, $5, $6, $7)
         RETURNING
             id_proveedor,
             nombre_comercial,
@@ -30,14 +32,16 @@ const crearProveedor = async (
             rut,
             telefono,
             email,
-            direccion`,
+            direccion,
+            tiempo_entrega_dias`,
         [
             nombre_comercial,
             razon_social || null,
             rut || null,
             telefono || null,
             email || null,
-            direccion || null
+            direccion || null,
+            tiempo_entrega_dias
         ]
     );
 
@@ -56,7 +60,8 @@ const obtenerProveedores = async () => {
             rut,
             telefono,
             email,
-            direccion
+            direccion,
+            tiempo_entrega_dias
         FROM base_datos.proveedores
         ORDER BY nombre_comercial`
     );
@@ -76,7 +81,8 @@ const obtenerProveedor = async (id) => {
             rut,
             telefono,
             email,
-            direccion
+            direccion,
+            tiempo_entrega_dias
         FROM base_datos.proveedores
         WHERE id_proveedor = $1`,
         [id]
@@ -94,7 +100,8 @@ const actualizarProveedor = async (
     rut,
     telefono,
     email,
-    direccion
+    direccion,
+    tiempo_entrega_dias
 ) => {
 
     const resultado = await pool.query(
@@ -105,8 +112,9 @@ const actualizarProveedor = async (
             rut = $3,
             telefono = $4,
             email = $5,
-            direccion = $6
-        WHERE id_proveedor = $7
+            direccion = $6,
+            tiempo_entrega_dias = COALESCE($7, tiempo_entrega_dias)
+        WHERE id_proveedor = $8
         RETURNING
             id_proveedor,
             nombre_comercial,
@@ -114,7 +122,8 @@ const actualizarProveedor = async (
             rut,
             telefono,
             email,
-            direccion`,
+            direccion,
+            tiempo_entrega_dias`,
         [
             nombre_comercial,
             razon_social || null,
@@ -122,6 +131,7 @@ const actualizarProveedor = async (
             telefono || null,
             email || null,
             direccion || null,
+            tiempo_entrega_dias,
             id
         ]
     );
@@ -143,7 +153,8 @@ const eliminarProveedor = async (id) => {
             rut,
             telefono,
             email,
-            direccion`,
+            direccion,
+            tiempo_entrega_dias`,
         [id]
     );
 

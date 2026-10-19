@@ -6,40 +6,64 @@ const pool = require('../../configuracion/base_datos');
 const obtenerInventario = async () => {
 
     const resultado = await pool.query(
-        `SELECT
+        `WITH periodo AS (
+            SELECT
+                MAX(fecha_hora)::date AS fecha_fin,
+                (MAX(fecha_hora)::date - INTERVAL '6 months')::date AS fecha_inicio
+            FROM base_datos.ventas
+        ),
+
+        productos_con_ventas AS (
+            SELECT DISTINCT dv.codigo
+            FROM base_datos.detalle_venta dv
+            INNER JOIN base_datos.ventas v
+                ON v.id_venta = dv.id_venta
+            CROSS JOIN periodo p
+            WHERE v.fecha_hora::date > p.fecha_inicio
+                AND v.fecha_hora::date <= p.fecha_fin
+        ),
+
+        productos_con_plazo AS (
+            SELECT DISTINCT pp.codigo
+            FROM base_datos.producto_proveedor pp
+            INNER JOIN base_datos.proveedores prov
+                ON prov.id_proveedor = pp.id_proveedor
+            WHERE prov.tiempo_entrega_dias IS NOT NULL
+        )
+
+        SELECT
             p.codigo,
             p.cod_barra,
             p.descripcion,
             p.familia,
 
-            COALESCE(
-                i.stock_actual,
-                0
-            ) AS stock_actual,
+            COALESCE(i.stock_actual, 0) AS stock_actual,
+            COALESCE(i.stock_minimo, 0) AS stock_minimo,
 
-            COALESCE(
-                i.stock_minimo,
-                0
-            ) AS stock_minimo,
+            (pv.codigo IS NOT NULL AND pp.codigo IS NOT NULL)
+                AS stock_minimo_calculable,
 
             CASE
-
                 WHEN COALESCE(i.stock_actual, 0) = 0
                     THEN 'SIN STOCK'
 
-                WHEN COALESCE(i.stock_actual, 0)
-                     <= COALESCE(i.stock_minimo, 0)
-                     AND COALESCE(i.stock_minimo, 0) > 0
+                WHEN pv.codigo IS NULL OR pp.codigo IS NULL
+                    THEN 'PENDIENTE'
+
+                WHEN COALESCE(i.stock_minimo, 0) > 0
+                    AND COALESCE(i.stock_actual, 0) <= i.stock_minimo
                     THEN 'STOCK BAJO'
 
                 ELSE 'OPTIMO'
-
             END AS estado
 
         FROM base_datos.productos p
-
         LEFT JOIN base_datos.inventario i
             ON p.codigo = i.codigo
+        LEFT JOIN productos_con_ventas pv
+            ON p.codigo = pv.codigo
+        LEFT JOIN productos_con_plazo pp
+            ON p.codigo = pp.codigo
 
         ORDER BY p.descripcion`
     );
@@ -113,42 +137,7 @@ const obtenerFamilias = async () => {
 };
 
 
-// FUNCION 4 ACTUALIZAR STOCK MINIMO
-const actualizarStockMinimo = async (
-    codigo,
-    stockMinimo
-) => {
-
-    const resultado = await pool.query(
-        `INSERT INTO base_datos.inventario
-        (
-            codigo,
-            stock_actual,
-            stock_minimo
-        )
-
-        VALUES ($1, 0, $2)
-
-        ON CONFLICT (codigo)
-
-        DO UPDATE SET
-            stock_minimo = EXCLUDED.stock_minimo
-
-        RETURNING
-            codigo,
-            stock_actual,
-            stock_minimo`,
-        [
-            codigo,
-            stockMinimo
-        ]
-    );
-
-
-    return resultado.rows[0];
-};
-
-// FUNCION RECALCULAR STOCK MINIMO
+// FUNCION 4 RECALCULAR STOCK MINIMO
 
 const recalcularStockMinimo = async () => {
 
@@ -249,13 +238,16 @@ const recalcularStockMinimo = async () => {
         UPDATE base_datos.inventario i
 
         SET stock_minimo =
-            cs.stock_minimo
+            COALESCE(cs.stock_minimo, 0)
 
-        FROM calculo_stock cs
+        FROM base_datos.productos p
 
-        WHERE
-            i.codigo =
-            cs.codigo
+        LEFT JOIN calculo_stock cs
+            ON cs.codigo = p.codigo
+
+        WHERE i.codigo = p.codigo
+            AND i.stock_minimo IS DISTINCT FROM
+                COALESCE(cs.stock_minimo, 0)
 
         RETURNING
             i.codigo,
@@ -272,7 +264,7 @@ const recalcularStockMinimo = async () => {
 };
 
 
-/* FUNCION AJUSTAR INVENTARIO */
+// FUNCION 5 AJUSTAR INVENTARIO
 const ajustarInventario = async (
     codigo,
     cantidad,
@@ -435,7 +427,6 @@ module.exports = {
     obtenerInventario,
     obtenerResumenInventario,
     obtenerFamilias,
-    actualizarStockMinimo,
     recalcularStockMinimo,
     ajustarInventario
 };
