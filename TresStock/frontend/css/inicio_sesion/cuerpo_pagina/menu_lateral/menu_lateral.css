@@ -445,6 +445,12 @@
         border-color: #1299a3;
     }
 
+
+    .icono_escanear_producto{
+        background-color: #ffffff;
+        padding: 0 10px;
+    }
+
 /* TITULO 14 RESPONSIVE MENU LATERAL */
 
     /* adapta el menú lateral para tablets y dispositivos móviles */
