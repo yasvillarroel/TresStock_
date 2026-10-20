@@ -449,72 +449,173 @@
 
 /* TITULO 7 PAGINACION VENTAS */
 
+    /* contenedor principal de la paginacion */
     .contenedor_paginacion_ventas {
         width: 100%;
+        min-height: 70px;
         display: flex;
-        justify-content: center;
         align-items: center;
-        gap: 8px;
-        padding: 15px;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 15px 20px;
+        border-top: 1px solid #edf1f3;
         box-sizing: border-box;
     }
 
+    /* informacion de los ventas mostrados */
+    .informacion_paginacion_ventas {
+        color: #536873;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        white-space: nowrap;
+    }
+
+    /* contenedor de los controles de paginacion */
+    .controles_paginacion_ventas {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 6px;
+    }
+
+    /* contenedor de los numeros de pagina */
     .numeros_paginas_ventas {
         display: flex;
         align-items: center;
-        justify-content: center;
-        gap: 5px;
+        gap: 6px;
     }
 
-    .boton_numero_pagina_ventas {
-        width: 36px;
-        height: 36px;
-        border: none;
-        border-radius: 50%;
-        background-color: #159ba3;
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        cursor: pointer;
-    }
-
-    .boton_numero_pagina_ventas:hover {
-        background-color: #0d6970;
-    }
-
-    .pagina_actual_ventas {
-        background-color: #0d6970;
-        font-weight: bold;
-    }
-
+    /* diseño general de los botones de paginacion */
+    .boton_numero_pagina_ventas,
     .boton_pagina_anterior_ventas,
     .boton_pagina_siguiente_ventas {
         width: 40px;
         height: 40px;
-        border: none;
-        background-color: transparent;
-        color: #159ba3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        background-color: #ffffff;
+        border: 1px solid #dce4e8;
+        border-radius: 6px;
+        color: #536873;
         font-family: Arial, sans-serif;
-        font-size: 32px;
+        font-size: 13px;
         cursor: pointer;
+        padding: 0;
+        box-sizing: border-box;
+        transition: background-color 0.2s, border-color 0.2s;
     }
 
+    /* pagina seleccionada actualmente */
+    .pagina_actual_ventas {
+        background-color: #159BA3;
+        border-color: #159BA3;
+        color: #ffffff;
+        font-weight: bold;
+    }
+
+    /* efecto al pasar el cursor sobre los botones */
+    .boton_numero_pagina_ventas:hover,
     .boton_pagina_anterior_ventas:hover,
     .boton_pagina_siguiente_ventas:hover {
-        color: #0d6970;
+        background-color: #e4f6f6;
+        border-color: #159BA3;
     }
 
+    /* mantiene el color de la pagina seleccionada */
+    .pagina_actual_ventas:hover {
+        background-color: #0D6970;
+        border-color: #0D6970;
+        color: #ffffff;
+    }
+
+    /* botones de navegacion deshabilitados */
     .boton_pagina_anterior_ventas:disabled,
     .boton_pagina_siguiente_ventas:disabled {
-        opacity: 0.35;
+        opacity: 0.45;
         cursor: not-allowed;
+        background-color: #ffffff;
+        border-color: #dce4e8;
     }
 
+    /* contenedor de los puntos suspensivos */
     .puntos_paginacion_ventas {
-        color: #71818a;
-        font-family: Arial, sans-serif;
-        font-size: 15px;
-        padding: 0 4px;
+        width: 30px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        color: #64748b;
+    }
+
+    /* diseño de los puntos suspensivos */
+    .punto_paginacion_ventas {
+        width: 4px;
+        height: 4px;
+        background-color: currentColor;
+        border-radius: 50%;
+    }
+
+
+/* SUBTITULO 2 RESPONSIVE PAGINACION */
+
+    /* adapta la paginacion para tablets */
+    @media (max-width: 900px) {
+
+        .contenedor_paginacion_ventas {
+            flex-direction: column;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .controles_paginacion_ventas {
+            justify-content: center;
+        }
+
+    }
+
+    /* adapta la paginacion para dispositivos moviles */
+    @media (max-width: 600px) {
+
+        .boton_numero_pagina_ventas,
+        .boton_pagina_anterior_ventas,
+        .boton_pagina_siguiente_ventas {
+            width: 34px;
+            height: 34px;
+            font-size: 12px;
+        }
+
+        .numeros_paginas_ventas {
+            gap: 4px;
+        }
+
+        .controles_paginacion_ventas {
+            gap: 4px;
+        }
+
+        .informacion_paginacion_ventas {
+            font-size: 12px;
+        }
+
+    }
+
+
+
+    /* evita que la paginacion sobresalga en celulares pequeños */
+    @media (max-width: 420px) {
+
+        .contenedor_paginacion_ventas {
+            padding: 12px 8px;
+        }
+
+        .controles_paginacion_ventas,
+        .numeros_paginas_ventas {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
     }
 
 

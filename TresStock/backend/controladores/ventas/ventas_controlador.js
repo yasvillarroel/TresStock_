@@ -19,7 +19,7 @@ const obtenerVentas =
 
             let limite =
                 Number(
-                    req.query.limite || 20
+                    req.query.limite || 120
                 );
 
 
@@ -36,10 +36,10 @@ const obtenerVentas =
             if (
                 !Number.isInteger(limite) ||
                 limite < 1 ||
-                limite > 100
+                limite > 120
             ) {
 
-                limite = 20;
+                limite = 120;
 
             }
 

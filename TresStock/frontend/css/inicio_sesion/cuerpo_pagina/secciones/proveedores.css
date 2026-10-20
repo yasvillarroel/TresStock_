@@ -281,6 +281,34 @@
     }
 
 
+/* SUBTITULO 1 INDICADORES DE ABASTECIMIENTO */
+
+    /* evita que nombres largos ensanchen las tarjetas */
+    .contenido_proveedores_asociados {
+        min-width: 0;
+    }
+
+    /* nombre del proveedor que abastece más productos */
+    .detalle_proveedor_mas_productos {
+        color: #697a83;
+        font-family: Arial, sans-serif;
+        font-size: 11px;
+        line-height: 15px;
+        margin-top: 4px;
+        overflow-wrap: anywhere;
+    }
+
+    /* distingue visualmente los proveedores con información incompleta */
+    .valor_productos_asociados_proveedores {
+        color: #d58226;
+    }
+
+    /* alerta de proveedores con productos agotados */
+    .valor_productos_sin_proveedor {
+        color: #d94b4b;
+    }
+
+
 /* TITULO 4 BUSQUEDA PROVEEDORES */
 
     /* clase para establecer el contenedor del buscador */
@@ -339,7 +367,7 @@
 
     /* clase para establecer la cabecera visual de la tabla */
     .cabecera_contenedor_tabla_proveedores {
-        min-width: 1250px;
+        min-width: 0;
         padding: 17px 18px;
         border-bottom: 1px solid #e2e8eb;
         box-sizing: border-box;
@@ -356,7 +384,7 @@
     /* clase para establecer la estructura general de la tabla */
     .tabla_proveedores {
         width: 100%;
-        min-width: 1250px;
+        min-width: 0;
         border-collapse: collapse;
         table-layout: fixed;
     }
@@ -433,7 +461,7 @@
 
     /* clase para establecer la columna dirección */
     .columna_direccion_proveedores {
-        width: 16%;
+        width: 14%;
         padding: 13px 12px;
         text-align: left;
         color: #667881;
@@ -457,7 +485,7 @@
 
     /* clase para establecer la columna acciones */
     .columna_acciones_proveedores {
-        width: 10%;
+        width: 12%;
         padding: 13px 12px;
         text-align: center;
         color: #667881;
@@ -580,51 +608,67 @@
     }
 
 
-    /* clase para establecer la opción editar */
-    .boton_editar_proveedor {
-        display: inline-flex;
+    /* mantiene los botones de acciones ordenados en una sola fila */
+    .contenedor_acciones_proveedores {
+        display: flex;
         align-items: center;
         justify-content: center;
-        padding: 6px 9px;
-        margin: 2px;
-        background-color: #e4f6f6;
-        color: #117d84;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        font-weight: bold;
-        border-radius: 5px;
+        gap: 6px;
+        white-space: nowrap;
+    }
+
+
+    /* mismo tamaño y apariencia de los botones de productos */
+    .boton_editar_proveedor,
+    .boton_eliminar_proveedor {
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        background-color: #ffffff;
+        border: 1px solid #dce4e8;
+        border-radius: 7px;
+        padding: 7px;
         cursor: pointer;
         box-sizing: border-box;
+        transition: background-color 0.2s, border-color 0.2s;
+    }
+
+
+    /* establece el tamaño de los iconos */
+    .boton_editar_proveedor svg,
+    .boton_eliminar_proveedor svg {
+        width: 20px;
+        height: 20px;
+    }
+
+
+    /* color del botón editar */
+    .boton_editar_proveedor {
+        color: #159ba3;
     }
 
 
     /* cambia el fondo de editar al posicionar el cursor */
     .boton_editar_proveedor:hover {
-        background-color: #cceced;
+        background-color: #e4f6f6;
+        border-color: #159ba3;
     }
 
 
-    /* clase para establecer la opción eliminar */
+    /* color del botón eliminar */
     .boton_eliminar_proveedor {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 6px 9px;
-        margin: 2px;
-        background-color: #fceaea;
-        color: #c75b5b;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        font-weight: bold;
-        border-radius: 5px;
-        cursor: pointer;
-        box-sizing: border-box;
+        color: #ef4444;
+        border-color: #ffdddd;
     }
 
 
     /* cambia el fondo de eliminar al posicionar el cursor */
     .boton_eliminar_proveedor:hover {
-        background-color: #f5d6d6;
+        background-color: #fff0f0;
+        border-color: #ef4444;
     }
 
     /* clase para establecer la fila temporal sin proveedores */

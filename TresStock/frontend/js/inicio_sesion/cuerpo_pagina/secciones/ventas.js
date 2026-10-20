@@ -2,7 +2,7 @@
 let paginaActualVentas = 1;
 let totalPaginasVentas = 1;
 
-const ventasPorPagina = 20;
+const ventasPorPagina = 120;
 
 // temporizador utilizado para la búsqueda
 let temporizadorBusquedaVentas = null;
@@ -400,19 +400,29 @@ let temporizadorBusquedaVentas = null;
             }
 
 
-            mostrarVentas(
-                resultado.ventas || []
+            const ventasPagina = Array.isArray(resultado.ventas)
+                ? resultado.ventas
+                : [];
+
+            mostrarVentas(ventasPagina);
+
+            totalPaginasVentas = Number(
+                resultado.paginacion?.total_paginas || 1
             );
 
-
-            totalPaginasVentas =
-                Number(
-                    resultado.paginacion?.total_paginas || 1
-                );
-
+            // utiliza el total de registros filtrados informado por la API
+            const paginacion = resultado.paginacion || {};
+            const totalRegistros =
+                paginacion.total_registros ??
+                paginacion.total_ventas ??
+                paginacion.total_resultados ??
+                paginacion.total ??
+                null;
 
             mostrarPaginacionVentas(
-                totalPaginasVentas
+                totalPaginasVentas,
+                totalRegistros,
+                ventasPagina.length
             );
 
 
@@ -878,37 +888,32 @@ let temporizadorBusquedaVentas = null;
 
 // TITULO 7 PAGINACION VENTAS
 
-    // cambia la página
+    // función para cambiar de página sin modificar los filtros
     function cambiarPaginaVentas(pagina) {
 
-        if (
-            pagina < 1 ||
-            pagina > totalPaginasVentas
-        ) {
-
+        if (pagina < 1 || pagina > totalPaginasVentas) {
             return;
-
         }
 
-
-        paginaActualVentas =
-            pagina;
-
-
+        paginaActualVentas = pagina;
         cargarVentas();
 
     }
 
 
-    // muestra los controles de paginación
-    function mostrarPaginacionVentas(totalPaginas) {
+    // función para mostrar el contador y los controles de paginación
+    function mostrarPaginacionVentas(totalPaginas, totalRegistros, cantidadPagina) {
 
         const contenedor = document.getElementById(
             'contenedor_paginacion_ventas'
         );
 
-        const numeros = document.getElementById(
-            'numeros_paginas_ventas'
+        const informacion = document.getElementById(
+            'informacion_paginacion_ventas'
+        );
+
+        const controles = document.getElementById(
+            'controles_paginacion_ventas'
         );
 
         const anterior = document.getElementById(
@@ -919,217 +924,148 @@ let temporizadorBusquedaVentas = null;
             'boton_pagina_siguiente_ventas'
         );
 
-
-        if (
-            !contenedor ||
-            !numeros ||
-            !anterior ||
-            !siguiente
-        ) {
-
+        if (!contenedor || !informacion || !controles || !anterior || !siguiente) {
             return;
-
         }
 
+        // el total debe corresponder a los filtros aplicados en la API
+        const totalConocido = totalRegistros !== null &&
+            Number.isFinite(Number(totalRegistros)) && Number(totalRegistros) >= 0;
+
+        const total = totalConocido ? Number(totalRegistros) : null;
+        const cantidad = Number(cantidadPagina) || 0;
+
+        const inicio = cantidad === 0
+            ? 0
+            : (paginaActualVentas - 1) * ventasPorPagina + 1;
+
+        const fin = cantidad === 0
+            ? 0
+            : (paginaActualVentas - 1) * ventasPorPagina + cantidad;
+
+        // si el backend no indica el total, solamente se infiere en la última página
+        const totalReal = total !== null
+            ? total
+            : (totalPaginas <= 1 || paginaActualVentas === totalPaginas)
+                ? fin
+                : null;
+
+        if (totalReal !== null) {
+            informacion.textContent =
+                'Mostrando ' + inicio.toLocaleString('es-CL') +
+                ' a ' + fin.toLocaleString('es-CL') +
+                ' de ' + totalReal.toLocaleString('es-CL') + ' ventas';
+        } else {
+            informacion.textContent =
+                'Mostrando ' + inicio.toLocaleString('es-CL') +
+                ' a ' + fin.toLocaleString('es-CL') +
+                ' ventas (página ' + paginaActualVentas +
+                ' de ' + totalPaginas.toLocaleString('es-CL') + ')';
+        }
+
+        contenedor.style.display = 'flex';
+        controles.style.display = totalPaginas <= 1 ? 'none' : 'flex';
 
         if (totalPaginas <= 1) {
-
-            contenedor.style.display =
-                'none';
-
             return;
-
         }
 
+        anterior.disabled = paginaActualVentas === 1;
+        siguiente.disabled = paginaActualVentas === totalPaginas;
 
-        contenedor.style.display =
-            'flex';
+        anterior.onclick = function() {
+            cambiarPaginaVentas(paginaActualVentas - 1);
+        };
 
+        siguiente.onclick = function() {
+            cambiarPaginaVentas(paginaActualVentas + 1);
+        };
 
-        anterior.disabled =
-            paginaActualVentas === 1;
+        mostrarNumerosPaginasVentas(totalPaginas);
 
-
-        siguiente.disabled =
-            paginaActualVentas === totalPaginas;
-
-
-        anterior.onclick =
-            function() {
-
-                cambiarPaginaVentas(
-                    paginaActualVentas - 1
-                );
-
-            };
+    }
 
 
-        siguiente.onclick =
-            function() {
+    // función para mostrar los números y los puntos suspensivos
+    function mostrarNumerosPaginasVentas(totalPaginas) {
 
-                cambiarPaginaVentas(
-                    paginaActualVentas + 1
-                );
+        const numeros = document.getElementById(
+            'numeros_paginas_ventas'
+        );
 
-            };
-
+        if (!numeros) {
+            return;
+        }
 
         numeros.innerHTML = '';
 
-
         const paginasMostrar = [];
-
 
         if (totalPaginas <= 7) {
 
-            for (
-                let pagina = 1;
-                pagina <= totalPaginas;
-                pagina++
-            ) {
-
-                paginasMostrar.push(
-                    pagina
-                );
-
+            for (let pagina = 1; pagina <= totalPaginas; pagina++) {
+                paginasMostrar.push(pagina);
             }
 
         } else {
 
             paginasMostrar.push(1);
 
-
-            if (
-                paginaActualVentas > 4
-            ) {
-
-                paginasMostrar.push(
-                    '...'
-                );
-
+            if (paginaActualVentas > 4) {
+                paginasMostrar.push('...');
             }
 
+            const inicio = Math.max(2, paginaActualVentas - 2);
+            const fin = Math.min(totalPaginas - 1, paginaActualVentas + 2);
 
-            const inicio =
-                Math.max(
-                    2,
-                    paginaActualVentas - 2
-                );
-
-
-            const fin =
-                Math.min(
-                    totalPaginas - 1,
-                    paginaActualVentas + 2
-                );
-
-
-            for (
-                let pagina = inicio;
-                pagina <= fin;
-                pagina++
-            ) {
-
-                paginasMostrar.push(
-                    pagina
-                );
-
+            for (let pagina = inicio; pagina <= fin; pagina++) {
+                paginasMostrar.push(pagina);
             }
 
-
-            if (
-                paginaActualVentas <
-                totalPaginas - 3
-            ) {
-
-                paginasMostrar.push(
-                    '...'
-                );
-
+            if (paginaActualVentas < totalPaginas - 3) {
+                paginasMostrar.push('...');
             }
 
-
-            paginasMostrar.push(
-                totalPaginas
-            );
+            paginasMostrar.push(totalPaginas);
 
         }
 
+        paginasMostrar.forEach(function(pagina) {
 
-        paginasMostrar.forEach(
-            function(pagina) {
+            if (pagina === '...') {
 
-                if (pagina === '...') {
+                const puntos = document.createElement('span');
+                puntos.className = 'puntos_paginacion_ventas';
+                puntos.setAttribute('aria-hidden', 'true');
 
-                    const puntos =
-                        document.createElement(
-                            'span'
-                        );
-
-
-                    puntos.className =
-                        'puntos_paginacion_ventas';
-
-
-                    puntos.textContent =
-                        '...';
-
-
-                    numeros.appendChild(
-                        puntos
-                    );
-
-                    return;
-
+                for (let numero = 0; numero < 3; numero++) {
+                    const punto = document.createElement('div');
+                    punto.className = 'punto_paginacion_ventas';
+                    puntos.appendChild(punto);
                 }
 
-
-                const boton =
-                    document.createElement(
-                        'button'
-                    );
-
-
-                boton.type =
-                    'button';
-
-
-                boton.className =
-                    'boton_numero_pagina_ventas';
-
-
-                boton.textContent =
-                    pagina;
-
-
-                if (
-                    pagina ===
-                    paginaActualVentas
-                ) {
-
-                    boton.classList.add(
-                        'pagina_actual_ventas'
-                    );
-
-                }
-
-
-                boton.onclick =
-                    function() {
-
-                        cambiarPaginaVentas(
-                            pagina
-                        );
-
-                    };
-
-
-                numeros.appendChild(
-                    boton
-                );
+                numeros.appendChild(puntos);
+                return;
 
             }
-        );
+
+            const boton = document.createElement('button');
+            boton.type = 'button';
+            boton.className = 'boton_numero_pagina_ventas';
+            boton.textContent = pagina;
+
+            if (pagina === paginaActualVentas) {
+                boton.classList.add('pagina_actual_ventas');
+                boton.setAttribute('aria-current', 'page');
+            }
+
+            boton.addEventListener('click', function() {
+                cambiarPaginaVentas(pagina);
+            });
+
+            numeros.appendChild(boton);
+
+        });
 
     }
 

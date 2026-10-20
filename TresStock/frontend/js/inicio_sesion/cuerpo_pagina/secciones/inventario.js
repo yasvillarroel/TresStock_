@@ -10,7 +10,7 @@
     let paginaActualInventario = 1;
 
     // cantidad de productos mostrados por página
-    const productosPorPaginaInventario = 20;
+    const productosPorPaginaInventario = 120;
 
 // TITULO 2 ENCABEZADO INVENTARIO
 
@@ -746,314 +746,192 @@
 
 // TITULO 7 PAGINACION INVENTARIO
 
-    // función para actualizar la paginación
-    function actualizarPaginacionInventario() {
+    // función para cambiar de página
+    function cambiarPaginaInventario(pagina) {
 
-        const textoPaginacion =
-            document.getElementById(
-                'texto_paginacion_inventario'
-            );
+        const totalPaginas = Math.ceil(
+            inventarioFiltrado.length / productosPorPaginaInventario
+        );
 
-        const controles =
-            document.getElementById(
-                'controles_paginacion_inventario'
-            );
-
-
-        if (
-            !textoPaginacion ||
-            !controles
-        ) {
+        if (pagina < 1 || pagina > totalPaginas) {
             return;
         }
 
-
-        controles.innerHTML = '';
-
-
-        const totalProductos =
-            inventarioFiltrado.length;
-
-
-        const totalPaginas =
-            Math.max(
-                1,
-                Math.ceil(
-                    totalProductos /
-                    productosPorPaginaInventario
-                )
-            );
-
-
-        if (
-            paginaActualInventario >
-            totalPaginas
-        ) {
-
-            paginaActualInventario =
-                totalPaginas;
-
-        }
-
-
-        if (totalProductos === 0) {
-
-            textoPaginacion.textContent =
-                'Mostrando 0 productos';
-
-            return;
-
-        }
-
-
-        const inicio =
-            (
-                paginaActualInventario -
-                1
-            ) *
-            productosPorPaginaInventario +
-            1;
-
-
-        const fin =
-            Math.min(
-                paginaActualInventario *
-                    productosPorPaginaInventario,
-                totalProductos
-            );
-
-
-        textoPaginacion.textContent =
-            `Mostrando ${inicio} a ${fin} de ${formatearNumeroInventario(totalProductos)} productos`;
-
-
-        // botón anterior
-        const botonAnterior =
-            document.createElement(
-                'div'
-            );
-
-        botonAnterior.className =
-            'boton_pagina_inventario';
-
-        botonAnterior.textContent =
-            '‹';
-
-
-        botonAnterior.addEventListener(
-            'click',
-            () => {
-
-                if (
-                    paginaActualInventario >
-                    1
-                ) {
-
-                    paginaActualInventario--;
-
-                    mostrarInventario();
-
-                }
-
-            }
-        );
-
-
-        controles.appendChild(
-            botonAnterior
-        );
-
-
-        const paginasMostrar =
-            obtenerPaginasInventario(
-                totalPaginas
-            );
-
-
-        paginasMostrar.forEach(
-            pagina => {
-
-                if (pagina === '...') {
-
-                    const separador =
-                        document.createElement(
-                            'div'
-                        );
-
-                    separador.className =
-                        'boton_pagina_inventario';
-
-                    separador.textContent =
-                        '...';
-
-
-                    controles.appendChild(
-                        separador
-                    );
-
-                    return;
-
-                }
-
-
-                const botonPagina =
-                    document.createElement(
-                        'div'
-                    );
-
-                botonPagina.className =
-                    'boton_pagina_inventario';
-
-
-                if (
-                    pagina ===
-                    paginaActualInventario
-                ) {
-
-                    botonPagina.classList.add(
-                        'boton_pagina_activa_inventario'
-                    );
-
-                }
-
-
-                botonPagina.textContent =
-                    pagina;
-
-
-                botonPagina.addEventListener(
-                    'click',
-                    () => {
-
-                        paginaActualInventario =
-                            pagina;
-
-                        mostrarInventario();
-
-                    }
-                );
-
-
-                controles.appendChild(
-                    botonPagina
-                );
-
-            }
-        );
-
-
-        // botón siguiente
-        const botonSiguiente =
-            document.createElement(
-                'div'
-            );
-
-        botonSiguiente.className =
-            'boton_pagina_inventario';
-
-        botonSiguiente.textContent =
-            '›';
-
-
-        botonSiguiente.addEventListener(
-            'click',
-            () => {
-
-                if (
-                    paginaActualInventario <
-                    totalPaginas
-                ) {
-
-                    paginaActualInventario++;
-
-                    mostrarInventario();
-
-                }
-
-            }
-        );
-
-
-        controles.appendChild(
-            botonSiguiente
-        );
+        paginaActualInventario = pagina;
+        mostrarInventario();
 
     }
 
 
-    // función para determinar las páginas visibles
-    function obtenerPaginasInventario(
-        totalPaginas
-    ) {
+    // función para configurar los botones anterior y siguiente
+    function configurarPaginacionInventario() {
+
+        const botonAnterior = document.getElementById(
+            'boton_pagina_anterior_inventario'
+        );
+
+        const botonSiguiente = document.getElementById(
+            'boton_pagina_siguiente_inventario'
+        );
+
+        if (botonAnterior) {
+            botonAnterior.addEventListener('click', function() {
+                cambiarPaginaInventario(paginaActualInventario - 1);
+            });
+        }
+
+        if (botonSiguiente) {
+            botonSiguiente.addEventListener('click', function() {
+                cambiarPaginaInventario(paginaActualInventario + 1);
+            });
+        }
+
+    }
+
+
+    // función para mostrar el contador y los controles de paginación
+    function actualizarPaginacionInventario() {
+
+        const contenedor = document.getElementById(
+            'contenedor_paginacion_inventario'
+        );
+
+        const informacion = document.getElementById(
+            'informacion_paginacion_inventario'
+        );
+
+        const controles = document.getElementById(
+            'controles_paginacion_inventario'
+        );
+
+        const anterior = document.getElementById(
+            'boton_pagina_anterior_inventario'
+        );
+
+        const siguiente = document.getElementById(
+            'boton_pagina_siguiente_inventario'
+        );
+
+        if (!contenedor || !informacion || !controles || !anterior || !siguiente) {
+            return;
+        }
+
+        const totalProductos = inventarioFiltrado.length;
+        const totalPaginas = Math.ceil(totalProductos / productosPorPaginaInventario);
+
+        if (totalPaginas > 0 && paginaActualInventario > totalPaginas) {
+            paginaActualInventario = totalPaginas;
+        }
+
+        const inicio = totalProductos === 0
+            ? 0
+            : (paginaActualInventario - 1) * productosPorPaginaInventario + 1;
+
+        const fin = Math.min(
+            paginaActualInventario * productosPorPaginaInventario,
+            totalProductos
+        );
+
+        informacion.textContent =
+            'Mostrando ' + inicio.toLocaleString('es-CL') +
+            ' a ' + fin.toLocaleString('es-CL') +
+            ' de ' + totalProductos.toLocaleString('es-CL') + ' productos';
+
+        contenedor.style.display = 'flex';
+        controles.style.display = totalPaginas <= 1 ? 'none' : 'flex';
+
+        if (totalPaginas <= 1) {
+            return;
+        }
+
+        anterior.disabled = paginaActualInventario === 1;
+        siguiente.disabled = paginaActualInventario === totalPaginas;
+
+        mostrarNumerosPaginasInventario(totalPaginas);
+
+    }
+
+
+    // función para mostrar los números de página y los puntos suspensivos
+    function mostrarNumerosPaginasInventario(totalPaginas) {
+
+        const numeros = document.getElementById(
+            'numeros_paginas_inventario'
+        );
+
+        if (!numeros) {
+            return;
+        }
+
+        numeros.innerHTML = '';
+
+        const paginasMostrar = [];
 
         if (totalPaginas <= 7) {
 
-            const paginas = [];
+            for (let pagina = 1; pagina <= totalPaginas; pagina++) {
+                paginasMostrar.push(pagina);
+            }
 
+        } else {
 
-            for (
-                let pagina = 1;
-                pagina <= totalPaginas;
-                pagina++
-            ) {
+            paginasMostrar.push(1);
 
-                paginas.push(
-                    pagina
-                );
+            if (paginaActualInventario > 4) {
+                paginasMostrar.push('...');
+            }
+
+            const inicio = Math.max(2, paginaActualInventario - 2);
+            const fin = Math.min(totalPaginas - 1, paginaActualInventario + 2);
+
+            for (let pagina = inicio; pagina <= fin; pagina++) {
+                paginasMostrar.push(pagina);
+            }
+
+            if (paginaActualInventario < totalPaginas - 3) {
+                paginasMostrar.push('...');
+            }
+
+            paginasMostrar.push(totalPaginas);
+
+        }
+
+        paginasMostrar.forEach(function(pagina) {
+
+            if (pagina === '...') {
+
+                const puntos = document.createElement('span');
+                puntos.className = 'puntos_paginacion_inventario';
+                puntos.setAttribute('aria-hidden', 'true');
+
+                for (let numero = 0; numero < 3; numero++) {
+                    const punto = document.createElement('div');
+                    punto.className = 'punto_paginacion_inventario';
+                    puntos.appendChild(punto);
+                }
+
+                numeros.appendChild(puntos);
+                return;
 
             }
 
+            const boton = document.createElement('button');
+            boton.type = 'button';
+            boton.className = 'boton_numero_pagina_inventario';
+            boton.textContent = pagina;
 
-            return paginas;
+            if (pagina === paginaActualInventario) {
+                boton.classList.add('pagina_actual_inventario');
+                boton.setAttribute('aria-current', 'page');
+            }
 
-        }
+            boton.addEventListener('click', function() {
+                cambiarPaginaInventario(pagina);
+            });
 
+            numeros.appendChild(boton);
 
-        if (
-            paginaActualInventario <=
-            4
-        ) {
-
-            return [
-                1,
-                2,
-                3,
-                4,
-                5,
-                '...',
-                totalPaginas
-            ];
-
-        }
-
-
-        if (
-            paginaActualInventario >=
-            totalPaginas - 3
-        ) {
-
-            return [
-                1,
-                '...',
-                totalPaginas - 4,
-                totalPaginas - 3,
-                totalPaginas - 2,
-                totalPaginas - 1,
-                totalPaginas
-            ];
-
-        }
-
-
-        return [
-            1,
-            '...',
-            paginaActualInventario - 1,
-            paginaActualInventario,
-            paginaActualInventario + 1,
-            '...',
-            totalPaginas
-        ];
+        });
 
     }
 
@@ -1114,6 +992,8 @@ async function recalcularStockMinimoInventario() {
     async function inicializarInventario() {
 
         configurarFiltrosInventario();
+
+        configurarPaginacionInventario();
 
 
         // recalcula el stock minimo antes de cargar los datos

@@ -318,11 +318,38 @@ const eliminarProveedor = async (req, res) => {
 };
 
 
+// FUNCION 6 OBTENER INDICADORES DE PROVEEDORES
+const obtenerResumenProveedores = async (req, res) => {
+
+    try {
+
+        const resumen =
+            await proveedoresServicio.obtenerResumenProveedores();
+
+        res.json(resumen);
+
+    } catch (error) {
+
+        console.error(
+            'Error al obtener resumen de proveedores:',
+            error
+        );
+
+        res.status(500).json({
+            mensaje: 'Error al obtener resumen de proveedores'
+        });
+
+    }
+
+};
+
+
 // exporta las funciones
 module.exports = {
     crearProveedor,
     obtenerProveedores,
     obtenerProveedor,
     actualizarProveedor,
-    eliminarProveedor
+    eliminarProveedor,
+    obtenerResumenProveedores
 };

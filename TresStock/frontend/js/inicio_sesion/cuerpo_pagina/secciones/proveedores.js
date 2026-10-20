@@ -164,9 +164,7 @@ let idProveedorEditando = null;
             );
 
 
-            actualizarIndicadoresProveedores(
-                proveedoresCargados
-            );
+
 
 
         } catch (error) {
@@ -329,15 +327,36 @@ let idProveedorEditando = null;
                     'dato_acciones_proveedores';
 
 
-                // opción editar
-                const botonEditar =
+                // contenedor para mostrar las acciones en una fila
+                const contenedorAcciones =
                     document.createElement('div');
 
+                contenedorAcciones.className =
+                    'contenedor_acciones_proveedores';
+
+
+                // opción editar, con el mismo icono de productos
+                const botonEditar =
+                    document.createElement('button');
+
+                botonEditar.type = 'button';
                 botonEditar.className =
                     'boton_editar_proveedor';
+                botonEditar.title = 'Editar proveedor';
+                botonEditar.setAttribute(
+                    'aria-label',
+                    'Editar proveedor'
+                );
 
-                botonEditar.textContent =
-                    'Editar';
+                botonEditar.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round"
+                        aria-hidden="true">
+                        <path d="M12 20h9"/>
+                        <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L9 17l-4 1 1-4Z"/>
+                    </svg>
+                `;
 
                 botonEditar.addEventListener(
                     'click',
@@ -349,15 +368,31 @@ let idProveedorEditando = null;
                 );
 
 
-                // opción eliminar
+                // opción eliminar, con el mismo icono de productos
                 const botonEliminar =
-                    document.createElement('div');
+                    document.createElement('button');
 
+                botonEliminar.type = 'button';
                 botonEliminar.className =
                     'boton_eliminar_proveedor';
+                botonEliminar.title = 'Eliminar proveedor';
+                botonEliminar.setAttribute(
+                    'aria-label',
+                    'Eliminar proveedor'
+                );
 
-                botonEliminar.textContent =
-                    'Eliminar';
+                botonEliminar.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round"
+                        aria-hidden="true">
+                        <path d="M3 6h18"/>
+                        <path d="M8 6V4h8v2"/>
+                        <path d="M5 6l1 14h12l1-14"/>
+                        <path d="M10 10v7"/>
+                        <path d="M14 10v7"/>
+                    </svg>
+                `;
 
                 botonEliminar.addEventListener(
                     'click',
@@ -369,12 +404,16 @@ let idProveedorEditando = null;
                 );
 
 
-                datoAcciones.appendChild(
+                contenedorAcciones.appendChild(
                     botonEditar
                 );
 
-                datoAcciones.appendChild(
+                contenedorAcciones.appendChild(
                     botonEliminar
+                );
+
+                datoAcciones.appendChild(
+                    contenedorAcciones
                 );
 
 
@@ -423,84 +462,85 @@ let idProveedorEditando = null;
 
 // TITULO 5 INDICADORES PROVEEDORES
 
-    // función para actualizar los indicadores
-    function actualizarIndicadoresProveedores(
-        proveedores
-    ) {
+    // función para obtener los indicadores de abastecimiento
+    async function cargarResumenProveedores() {
 
-        const totalProveedores =
-            proveedores.length;
+        try {
 
-
-        const proveedoresConRut =
-            proveedores.filter(
-                proveedor =>
-                    proveedor.rut &&
-                    proveedor.rut.trim() !== ''
-            ).length;
-
-
-        const proveedoresConContacto =
-            proveedores.filter(
-                proveedor =>
-                    (
-                        proveedor.telefono &&
-                        proveedor.telefono.trim() !== ''
-                    ) ||
-                    (
-                        proveedor.email &&
-                        proveedor.email.trim() !== ''
-                    )
-            ).length;
-
-
-        const proveedoresSinContacto =
-            totalProveedores -
-            proveedoresConContacto;
-
-
-        const valorTotal =
-            document.getElementById(
-                'valor_total_proveedores'
+            const respuesta = await fetch(
+                'http://127.0.0.1:3000/api/proveedores/resumen',
+                {
+                    method: 'GET',
+                    credentials: 'include'
+                }
             );
 
-        const valorConRut =
-            document.getElementById(
-                'valor_proveedores_con_rut'
+            const resumen = await respuesta.json();
+
+            if (!respuesta.ok) {
+
+                console.error(
+                    'Error al obtener indicadores de proveedores:',
+                    resumen
+                );
+
+                return;
+
+            }
+
+
+            const totalProveedores =
+                document.getElementById('valor_total_proveedores');
+
+            const valorMasProductos =
+                document.getElementById('valor_proveedor_mas_productos');
+
+            const nombreMasProductos =
+                document.getElementById('nombre_proveedor_mas_productos');
+
+            const valorIncompletos =
+                document.getElementById('valor_proveedores_incompletos');
+
+            const valorSinStock =
+                document.getElementById('valor_proveedores_sin_stock');
+
+
+            if (totalProveedores) {
+                totalProveedores.textContent =
+                    Number(resumen.total_proveedores || 0).toLocaleString('es-CL');
+            }
+
+            if (valorMasProductos) {
+                valorMasProductos.textContent =
+                    Number(resumen.cantidad_productos_proveedor || 0)
+                        .toLocaleString('es-CL');
+            }
+
+            if (nombreMasProductos) {
+                nombreMasProductos.textContent =
+                    resumen.nombre_proveedor_mas_productos ||
+                    'Sin productos asociados';
+            }
+
+            if (valorIncompletos) {
+                valorIncompletos.textContent =
+                    Number(resumen.proveedores_info_incompleta || 0)
+                        .toLocaleString('es-CL');
+            }
+
+            if (valorSinStock) {
+                valorSinStock.textContent =
+                    Number(resumen.proveedores_con_productos_sin_stock || 0)
+                        .toLocaleString('es-CL');
+            }
+
+        } catch (error) {
+
+            console.error(
+                'Error de conexión al obtener indicadores de proveedores:',
+                error
             );
 
-        const valorConContacto =
-            document.getElementById(
-                'valor_proveedores_con_contacto'
-            );
-
-        const valorSinContacto =
-            document.getElementById(
-                'valor_proveedores_sin_contacto'
-            );
-
-
-        if (valorTotal) {
-            valorTotal.textContent =
-                totalProveedores;
-        }
-
-
-        if (valorConRut) {
-            valorConRut.textContent =
-                proveedoresConRut;
-        }
-
-
-        if (valorConContacto) {
-            valorConContacto.textContent =
-                proveedoresConContacto;
-        }
-
-
-        if (valorSinContacto) {
-            valorSinContacto.textContent =
-                proveedoresSinContacto;
         }
 
     }
@@ -790,7 +830,10 @@ let idProveedorEditando = null;
             cerrarFormularioProveedor();
 
 
-            await cargarProveedores();
+            await Promise.all([
+                cargarProveedores(),
+                cargarResumenProveedores()
+            ]);
 
 
         } catch (error) {
@@ -957,7 +1000,10 @@ let idProveedorEditando = null;
             }
 
 
-            await cargarProveedores();
+            await Promise.all([
+                cargarProveedores(),
+                cargarResumenProveedores()
+            ]);
 
 
         } catch (error) {
@@ -1001,6 +1047,9 @@ let idProveedorEditando = null;
         }
 
 
-        await cargarProveedores();
+        await Promise.all([
+                cargarProveedores(),
+                cargarResumenProveedores()
+            ]);
 
     }

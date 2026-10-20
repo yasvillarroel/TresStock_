@@ -24,6 +24,13 @@ router.get(
 );
 
 
+// ruta para obtener los indicadores de proveedores
+router.get(
+    '/resumen',
+    proveedoresControlador.obtenerResumenProveedores
+);
+
+
 // ruta para obtener un proveedor por id
 router.get(
     '/:id',

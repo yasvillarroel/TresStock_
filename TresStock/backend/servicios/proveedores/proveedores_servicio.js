@@ -162,11 +162,93 @@ const eliminarProveedor = async (id) => {
 };
 
 
+// FUNCION 6 OBTENER INDICADORES DE PROVEEDORES
+const obtenerResumenProveedores = async () => {
+
+    const resultado = await pool.query(
+        `WITH asociaciones AS
+        (
+            SELECT
+                pp.id_proveedor,
+                COUNT(DISTINCT pp.codigo) AS productos_asociados,
+                COUNT(DISTINCT pp.codigo) FILTER (
+                    WHERE COALESCE(i.stock_actual, 0) = 0
+                ) AS productos_sin_stock
+
+            FROM base_datos.producto_proveedor pp
+
+            LEFT JOIN base_datos.inventario i
+                ON i.codigo = pp.codigo
+
+            GROUP BY pp.id_proveedor
+        ),
+
+        proveedor_mayor AS
+        (
+            SELECT
+                p.nombre_comercial,
+                a.productos_asociados
+
+            FROM asociaciones a
+
+            INNER JOIN base_datos.proveedores p
+                ON p.id_proveedor = a.id_proveedor
+
+            ORDER BY
+                a.productos_asociados DESC,
+                p.nombre_comercial ASC
+
+            LIMIT 1
+        )
+
+        SELECT
+            (
+                SELECT COUNT(*)
+                FROM base_datos.proveedores
+            ) AS total_proveedores,
+
+            (
+                SELECT nombre_comercial
+                FROM proveedor_mayor
+            ) AS nombre_proveedor_mas_productos,
+
+            COALESCE(
+                (
+                    SELECT productos_asociados
+                    FROM proveedor_mayor
+                ),
+                0
+            ) AS cantidad_productos_proveedor,
+
+            (
+                SELECT COUNT(*)
+                FROM base_datos.proveedores p
+                WHERE
+                    COALESCE(BTRIM(p.rut), '') = ''
+                    OR COALESCE(BTRIM(p.direccion), '') = ''
+                    OR (
+                        COALESCE(BTRIM(p.telefono), '') = ''
+                        AND COALESCE(BTRIM(p.email), '') = ''
+                    )
+            ) AS proveedores_info_incompleta,
+
+            (
+                SELECT COUNT(*)
+                FROM asociaciones a
+                WHERE a.productos_sin_stock > 0
+            ) AS proveedores_con_productos_sin_stock`
+    );
+
+    return resultado.rows[0];
+};
+
+
 // exporta las funciones
 module.exports = {
     crearProveedor,
     obtenerProveedores,
     obtenerProveedor,
     actualizarProveedor,
-    eliminarProveedor
+    eliminarProveedor,
+    obtenerResumenProveedores
 };

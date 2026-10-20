@@ -701,56 +701,173 @@
 
 /* TITULO 7 PAGINACION INVENTARIO */
 
-    /* clase para organizar la paginación */
+    /* contenedor principal de la paginacion */
     .contenedor_paginacion_inventario {
         width: 100%;
+        min-height: 70px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-top: 18px;
+        gap: 20px;
+        padding: 15px 20px;
+        border-top: 1px solid #edf1f3;
+        box-sizing: border-box;
     }
 
-    /* clase para establecer el texto de paginación */
-    .texto_paginacion_inventario {
+    /* informacion de los inventario mostrados */
+    .informacion_paginacion_inventario {
         color: #536873;
         font-family: Arial, sans-serif;
-        font-size: 12px;
+        font-size: 13px;
+        white-space: nowrap;
     }
 
-    /* clase para organizar controles de paginación */
+    /* contenedor de los controles de paginacion */
     .controles_paginacion_inventario {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 6px;
+    }
+
+    /* contenedor de los numeros de pagina */
+    .numeros_paginas_inventario {
         display: flex;
         align-items: center;
         gap: 6px;
     }
 
-    /* clase para establecer los botones de página */
-    .boton_pagina_inventario {
-        min-width: 36px;
-        height: 36px;
+    /* diseño general de los botones de paginacion */
+    .boton_numero_pagina_inventario,
+    .boton_pagina_anterior_inventario,
+    .boton_pagina_siguiente_inventario {
+        width: 40px;
+        height: 40px;
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-shrink: 0;
         background-color: #ffffff;
         border: 1px solid #dce4e8;
-        border-radius: 5px;
+        border-radius: 6px;
         color: #536873;
         font-family: Arial, sans-serif;
-        font-size: 12px;
+        font-size: 13px;
         cursor: pointer;
+        padding: 0;
         box-sizing: border-box;
+        transition: background-color 0.2s, border-color 0.2s;
     }
 
-    /* cambia el fondo de página */
-    .boton_pagina_inventario:hover {
-        background-color: #edf7f7;
-    }
-
-    /* clase para establecer página activa */
-    .boton_pagina_activa_inventario {
-        background-color: #159ba3;
-        border-color: #159ba3;
+    /* pagina seleccionada actualmente */
+    .pagina_actual_inventario {
+        background-color: #159BA3;
+        border-color: #159BA3;
         color: #ffffff;
+        font-weight: bold;
+    }
+
+    /* efecto al pasar el cursor sobre los botones */
+    .boton_numero_pagina_inventario:hover,
+    .boton_pagina_anterior_inventario:hover,
+    .boton_pagina_siguiente_inventario:hover {
+        background-color: #e4f6f6;
+        border-color: #159BA3;
+    }
+
+    /* mantiene el color de la pagina seleccionada */
+    .pagina_actual_inventario:hover {
+        background-color: #0D6970;
+        border-color: #0D6970;
+        color: #ffffff;
+    }
+
+    /* botones de navegacion deshabilitados */
+    .boton_pagina_anterior_inventario:disabled,
+    .boton_pagina_siguiente_inventario:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+        background-color: #ffffff;
+        border-color: #dce4e8;
+    }
+
+    /* contenedor de los puntos suspensivos */
+    .puntos_paginacion_inventario {
+        width: 30px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        color: #64748b;
+    }
+
+    /* diseño de los puntos suspensivos */
+    .punto_paginacion_inventario {
+        width: 4px;
+        height: 4px;
+        background-color: currentColor;
+        border-radius: 50%;
+    }
+
+
+/* SUBTITULO 2 RESPONSIVE PAGINACION */
+
+    /* adapta la paginacion para tablets */
+    @media (max-width: 900px) {
+
+        .contenedor_paginacion_inventario {
+            flex-direction: column;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .controles_paginacion_inventario {
+            justify-content: center;
+        }
+
+    }
+
+    /* adapta la paginacion para dispositivos moviles */
+    @media (max-width: 600px) {
+
+        .boton_numero_pagina_inventario,
+        .boton_pagina_anterior_inventario,
+        .boton_pagina_siguiente_inventario {
+            width: 34px;
+            height: 34px;
+            font-size: 12px;
+        }
+
+        .numeros_paginas_inventario {
+            gap: 4px;
+        }
+
+        .controles_paginacion_inventario {
+            gap: 4px;
+        }
+
+        .informacion_paginacion_inventario {
+            font-size: 12px;
+        }
+
+    }
+
+
+
+    /* evita que la paginacion sobresalga en celulares pequeños */
+    @media (max-width: 420px) {
+
+        .contenedor_paginacion_inventario {
+            padding: 12px 8px;
+        }
+
+        .controles_paginacion_inventario,
+        .numeros_paginas_inventario {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
     }
 
 
@@ -798,12 +915,6 @@
         .contenedor_pestanas_inventario {
             overflow-x: auto;
             gap: 22px;
-        }
-
-        .contenedor_paginacion_inventario {
-            align-items: flex-start;
-            flex-direction: column;
-            gap: 12px;
         }
 
     }
