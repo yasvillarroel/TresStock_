@@ -21,6 +21,7 @@ SET search_path TO base_datos;
 -- familia
 -- precio_publico
 -- imagen
+-- activo: TRUE = activo, FALSE = desactivado
 -- ============================================================
 
 CREATE TABLE productos (
@@ -30,6 +31,7 @@ CREATE TABLE productos (
     familia         VARCHAR(100),
     precio_publico  DECIMAL(12,2) NOT NULL DEFAULT 0,
     imagen          VARCHAR(255),
+    activo          BOOLEAN NOT NULL DEFAULT TRUE,
 
     CONSTRAINT chk_precio_publico
         CHECK (precio_publico >= 0)

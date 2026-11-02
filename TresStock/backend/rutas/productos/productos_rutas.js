@@ -72,8 +72,8 @@ router.get('/:id', productosControlador.obtenerProducto);
 // ruta para actualizar un producto
 router.put('/:id', recibirImagenProducto, productosControlador.actualizarProducto);
 
-// ruta para eliminar un producto
-router.delete('/:id', productosControlador.eliminarProducto);
+// cambia el estado del producto sin eliminar registros de PostgreSQL
+router.patch('/:id/estado', productosControlador.cambiarEstadoProducto);
 
 
 

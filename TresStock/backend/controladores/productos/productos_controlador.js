@@ -214,46 +214,37 @@ const actualizarProducto = async (req, res) => {
 
 
 
-// FUNCION 5 ELIMINAR PRODUCTO
-const eliminarProducto = async (req, res) => {
-
+// FUNCION 5 CAMBIAR ESTADO DEL PRODUCTO
+// Alterna entre activo e inactivo sin eliminar registros asociados.
+const cambiarEstadoProducto = async (req, res) => {
     try {
-
         const { id } = req.params;
+        const { activo } = req.body || {};
 
-        const producto = await productosServicio.eliminarProducto(id);
+        if (typeof activo !== 'boolean') {
+            return res.status(400).json({
+                mensaje: 'El campo activo debe ser true o false.'
+            });
+        }
 
-        // verifica si el producto puede eliminarse
+        const producto = await productosServicio.cambiarEstadoProducto(id, activo);
+
         if (!producto) {
-
-            return res.status(409).json({
-                mensaje:
-                    'No se puede eliminar el producto porque ' +
-                    'tiene stock, ventas, movimientos registrados ' +
-                    'o no existe.'
+            return res.status(404).json({
+                mensaje: 'No se encontró el producto indicado.'
             });
         }
 
         res.json({
-            mensaje: 'Producto eliminado correctamente',
+            mensaje: activo
+                ? 'Producto activado correctamente'
+                : 'Producto desactivado correctamente',
             producto
         });
-
     } catch (error) {
-
-        console.error('Error al eliminar producto:', error);
-
-        if (error.code === '23503') {
-
-            return res.status(409).json({
-                mensaje:
-                    'No se puede eliminar porque el producto ' +
-                    'tiene registros relacionados.'
-            });
-        }
-
+        console.error('Error al cambiar el estado del producto:', error);
         res.status(500).json({
-            mensaje: 'Error al eliminar producto'
+            mensaje: 'Error al cambiar el estado del producto.'
         });
     }
 };
@@ -348,7 +339,7 @@ module.exports = {
     obtenerProductos,
     obtenerProducto,
     actualizarProducto,
-    eliminarProducto,
+    cambiarEstadoProducto,
     importarProductos,
     obtenerFamilias,
     buscarImagenProducto

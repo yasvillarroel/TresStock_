@@ -122,6 +122,7 @@ const obtenerProductos = async () => {
             p.familia,
             p.precio_publico,
             p.imagen,
+            p.activo,
             i.stock_actual,
             i.stock_minimo,
             proveedores_producto.proveedor
@@ -167,7 +168,8 @@ const obtenerProducto = async (id) => {
             descripcion,
             familia,
             precio_publico,
-            imagen
+            imagen,
+            activo
         FROM base_datos.productos
         WHERE codigo = $1`,
         [id]
@@ -248,49 +250,23 @@ const actualizarProducto = async (
 
 
 
-// FUNCION 5 ELIMINAR PRODUCTO
-const eliminarProducto = async (id) => {
+// FUNCION 5 ACTIVAR O DESACTIVAR PRODUCTO
+// actualiza el estado sin eliminar el producto ni sus relaciones historicas
+const cambiarEstadoProducto = async (id, activo) => {
 
-    // elimina solamente productos sin stock ni historial
     const resultado = await pool.query(
-        `DELETE FROM base_datos.productos AS p
-
-         WHERE p.codigo = $1
-
-         AND NOT EXISTS (
-             SELECT 1
-             FROM base_datos.inventario AS i
-             WHERE i.codigo = p.codigo
-             AND i.stock_actual > 0
-         )
-
-         AND NOT EXISTS (
-             SELECT 1
-             FROM base_datos.detalle_venta AS dv
-             WHERE dv.codigo = p.codigo
-         )
-
-         AND NOT EXISTS (
-             SELECT 1
-             FROM base_datos.movimientos_inventario AS mi
-             WHERE mi.codigo = p.codigo
-         )
-
-         AND NOT EXISTS (
-             SELECT 1
-             FROM base_datos.lotes_vencimiento AS lv
-             WHERE lv.codigo = p.codigo
-         )
-
-         RETURNING p.codigo`,
-        [id]
+        `UPDATE base_datos.productos
+         SET activo = $2
+         WHERE codigo = $1
+         RETURNING codigo, activo`,
+        [id, activo]
     );
 
     return resultado.rows[0] || null;
 };
 
 
- // FUNCION 6 IMPORTAR PRODUCTOS
+// FUNCION 6 IMPORTAR PRODUCTOS
 const importarProductos = async (archivo, confirmarReemplazoStock = false) => {
 
     // protege los ajustes de inventario ante reimportaciones accidentales
@@ -648,6 +624,8 @@ const importarProductos = async (archivo, confirmarReemplazoStock = false) => {
             );
 
             // inserta solamente los productos nuevos
+            // el campo activo utiliza DEFAULT TRUE en nuevos registros;
+            // productos existentes conservan su estado aunque vengan en Excel
             const resultado = await cliente.query(
                 `INSERT INTO base_datos.productos
                     (
@@ -976,7 +954,7 @@ module.exports = {
     obtenerProductos,
     obtenerProducto,
     actualizarProducto,
-    eliminarProducto,
+    cambiarEstadoProducto,
     importarProductos,
     obtenerFamilias,
     buscarImagenProducto

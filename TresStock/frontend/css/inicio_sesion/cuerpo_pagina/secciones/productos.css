@@ -363,7 +363,7 @@
     .contenedor_filtros_productos {
         width: 100%;
         display: grid;
-        grid-template-columns: 2fr 1fr;
+        grid-template-columns: 2fr 1fr 1fr;
         gap: 18px;
         background-color: #ffffff;
         border: 1px solid #dce4e8;
@@ -431,6 +431,37 @@
         box-sizing: border-box;
         outline: none;
     }
+
+    /* contenedor del filtro por estado */
+    .contenedor_estado_productos {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* texto del filtro de estado */
+    .texto_estado_productos {
+        color: #536873;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        margin-bottom: 7px;
+    }
+
+    /* selector de activos, inactivos o todos */
+    .select_estado_productos {
+        width: 100%;
+        height: 40px;
+        border: 1px solid #ced9de;
+        border-radius: 6px;
+        padding: 0 10px;
+        background-color: #ffffff;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        box-sizing: border-box;
+        outline: none;
+    }
+
 
     /* clase para establecer las opciones de familia */
     .opcion_familia_productos {
@@ -937,16 +968,56 @@
         border-color: #159ba3;
     }
 
-    /* color del boton eliminar */
-    .boton_eliminar_producto {
-        color: #ef4444;
-        border-color: #ffdddd;
+    /* desactivar un producto: mantiene la acción visible sin eliminar registros */
+    .boton_desactivar_producto {
+        color: #d97706;
+        border-color: #f5d6a2;
     }
 
-    /* efecto al pasar el cursor sobre eliminar */
-    .boton_eliminar_producto:hover {
-        background-color: #fff0f0;
-        border-color: #ef4444;
+    .boton_desactivar_producto:hover {
+        background-color: #fff7ed;
+        border-color: #d97706;
+    }
+
+    /* reactivar un producto que estaba inactivo */
+    .boton_activar_producto {
+        color: #168451;
+        border-color: #bee6d0;
+    }
+
+    .boton_activar_producto:hover {
+        background-color: #e9f8ef;
+        border-color: #168451;
+    }
+
+    /* distingue visualmente un producto inactivo sin ocultar sus datos */
+    .fila_producto_inactivo {
+        background-color: #f8fafb;
+    }
+
+    .fila_producto_inactivo .dato_descripcion_productos {
+        color: #64727a;
+    }
+
+    /* la etiqueta se ubica dentro de la descripción para no agregar columnas */
+    .etiqueta_estado_producto {
+        display: inline-block;
+        padding: 3px 6px;
+        margin-top: 4px;
+        border-radius: 4px;
+        font-family: Arial, sans-serif;
+        font-size: 10px;
+        font-weight: bold;
+    }
+
+    .etiqueta_producto_activo {
+        background-color: #e7f6ef;
+        color: #147746;
+    }
+
+    .etiqueta_producto_inactivo {
+        background-color: #edf1f3;
+        color: #65737a;
     }
 
 

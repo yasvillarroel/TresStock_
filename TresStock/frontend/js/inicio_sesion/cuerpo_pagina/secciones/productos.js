@@ -15,6 +15,7 @@ let buscandoImagenProducto = false;
 let guardandoProducto = false;
 let listaProveedoresProducto = null;
 let importandoArchivoProductos = false;
+let cambiandoEstadoProducto = false;
 
 
 // variables de paginacion
@@ -433,9 +434,8 @@ let productosFiltradosActuales = [];
 
             productosCargados = productos;
 
-            mostrarProductos(
-                productosCargados
-            );
+            // conserva la búsqueda, la familia y el estado seleccionados
+            filtrarProductos(false);
 
             actualizarIndicadoresProductos(
                 productosCargados
@@ -542,8 +542,11 @@ let productosFiltradosActuales = [];
         );
 
 
-        fila.className =
-            'fila_producto';
+        const estaActivo = producto.activo !== false;
+
+        fila.className = estaActivo
+            ? 'fila_producto'
+            : 'fila_producto fila_producto_inactivo';
 
         fila.dataset.codigo = producto.codigo;
 
@@ -581,19 +584,24 @@ let productosFiltradosActuales = [];
             </td>
 
             <td class="dato_codigo_productos">
-                ${producto.codigo || '-'}
+                ${escaparTextoProducto(producto.codigo || '-')}
             </td>
 
             <td class="dato_codigo_barra_productos">
-                ${producto.cod_barra || '-'}
+                ${escaparTextoProducto(producto.cod_barra || '-')}
             </td>
 
             <td class="dato_descripcion_productos">
-                ${producto.descripcion || '-'}
+                ${escaparTextoProducto(producto.descripcion || '-')}
+                <div>
+                    <span class="etiqueta_estado_producto ${estaActivo ? 'etiqueta_producto_activo' : 'etiqueta_producto_inactivo'}">
+                        ${estaActivo ? 'Activo' : 'Inactivo'}
+                    </span>
+                </div>
             </td>
 
             <td class="dato_familia_productos">
-                ${producto.familia || '-'}
+                ${escaparTextoProducto(producto.familia || '-')}
             </td>
 
             <td class="dato_precio_productos">
@@ -601,7 +609,7 @@ let productosFiltradosActuales = [];
             </td>
 
             <td class="dato_proveedor_productos">
-                ${producto.proveedor || '-'}
+                ${escaparTextoProducto(producto.proveedor || '-')}
             </td>
 
 
@@ -639,22 +647,26 @@ let productosFiltradosActuales = [];
                         </svg>
                     </button>
 
-                    <!-- boton para eliminar producto -->
+                    <!-- permite desactivar o volver a activar el producto -->
                     <button
-                        class="boton_accion_producto boton_eliminar_producto"
+                        class="boton_accion_producto ${estaActivo ? 'boton_desactivar_producto' : 'boton_activar_producto'}"
                         type="button"
-                        title="Eliminar producto"
-                        aria-label="Eliminar producto"
+                        title="${estaActivo ? 'Desactivar producto' : 'Activar producto'}"
+                        aria-label="${estaActivo ? 'Desactivar producto' : 'Activar producto'}"
                     >
-                        <svg viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M3 6h18"/>
-                            <path d="M8 6V4h8v2"/>
-                            <path d="M5 6l1 14h12l1-14"/>
-                            <path d="M10 10v7"/>
-                            <path d="M14 10v7"/>
-                        </svg>
+                        ${estaActivo
+                            ? `<svg viewBox="0 0 24 24" fill="none"
+                                  stroke="currentColor" stroke-width="2"
+                                  stroke-linecap="round" stroke-linejoin="round">
+                                  <circle cx="12" cy="12" r="9"/>
+                                  <path d="M5.6 5.6 18.4 18.4"/>
+                               </svg>`
+                            : `<svg viewBox="0 0 24 24" fill="none"
+                                  stroke="currentColor" stroke-width="2"
+                                  stroke-linecap="round" stroke-linejoin="round">
+                                  <circle cx="12" cy="12" r="9"/>
+                                  <path d="m7.5 12 3.2 3.2 6-6.4"/>
+                               </svg>`}
                     </button>
 
                 </div>
@@ -711,6 +723,20 @@ let productosFiltradosActuales = [];
     );
 }
 
+
+
+// convierte los datos de texto del catálogo en contenido HTML seguro
+function escaparTextoProducto(valor) {
+    return String(valor ?? '').replace(/[&<>"']/g, function(caracter) {
+        return {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;'
+        }[caracter];
+    });
+}
 
 
 // TITULO 6 INDICADORES PRODUCTOS
@@ -933,10 +959,9 @@ let productosFiltradosActuales = [];
             return;
         }
 
-        selectFamilia.addEventListener(
-            'change',
-            filtrarProductos
-        );
+        selectFamilia.addEventListener('change', function() {
+            filtrarProductos(true);
+        });
     }
 
 
@@ -953,17 +978,16 @@ let productosFiltradosActuales = [];
             return;
         }
 
-        inputBusqueda.addEventListener(
-            'input',
-            filtrarProductos
-        );
+        inputBusqueda.addEventListener('input', function() {
+            filtrarProductos(true);
+        });
     }
 
 
 // TITULO 11 FILTRAR PRODUCTOS
 
-    // función para filtrar los productos por familia y búsqueda
-    function filtrarProductos() {
+    // filtra por familia, búsqueda y estado, conservando paginación al recargar
+    function filtrarProductos(reiniciarPagina = true) {
 
         const selectFamilia = document.getElementById(
             'select_familia_productos'
@@ -973,15 +997,20 @@ let productosFiltradosActuales = [];
             'input_busqueda_productos'
         );
 
+        const selectEstado = document.getElementById('select_estado_productos');
+
         if (
             !selectFamilia ||
-            !inputBusqueda
+            !inputBusqueda ||
+            !selectEstado
         ) {
             return;
         }
 
         const familiaSeleccionada =
             selectFamilia.value;
+
+        const estadoSeleccionado = selectEstado.value;
 
         const textoBusqueda =
             inputBusqueda.value
@@ -1032,21 +1061,40 @@ let productosFiltradosActuales = [];
                             textoBusqueda
                         );
 
+                    const estaActivo = producto.activo !== false;
+
+                    const coincideEstado =
+                        estadoSeleccionado === 'todos' ||
+                        (estadoSeleccionado === 'activos' && estaActivo) ||
+                        (estadoSeleccionado === 'inactivos' && !estaActivo);
+
                     return (
                         coincideFamilia &&
-                        coincideBusqueda
+                        coincideBusqueda &&
+                        coincideEstado
                     );
 
                 }
             );
 
-        paginaActualProductos = 1;
+        if (reiniciarPagina) {
+            paginaActualProductos = 1;
+        }
 
-        mostrarProductos(
-            productosFiltrados
-        );
+        mostrarProductos(productosFiltrados);
 
     }
+
+
+// habilita el selector de productos activos, inactivos y todos
+function configurarFiltroEstadoProductos() {
+    const selector = document.getElementById('select_estado_productos');
+    if (!selector) return;
+
+    selector.addEventListener('change', function() {
+        filtrarProductos(true);
+    });
+}
 
 
 // TITULO 12 INICIALIZACION PRODUCTOS
@@ -1057,6 +1105,7 @@ let productosFiltradosActuales = [];
         configurarImportacionProductos();
         configurarFiltroFamilias();
         configurarBusquedaProductos();
+        configurarFiltroEstadoProductos();
         configurarPaginacionProductos();
         configurarAccionesProductos();
 
@@ -1708,8 +1757,9 @@ async function guardarCambiosProducto() {
 }
 
 
-// confirma y solicita eliminar un producto
-async function confirmarEliminacionProducto(codigo) {
+// cambia el estado del producto sin eliminar información histórica
+async function confirmarCambioEstadoProducto(codigo) {
+    if (cambiandoEstadoProducto) return;
 
     const producto = productosCargados.find(
         p => String(p.codigo) === String(codigo)
@@ -1717,21 +1767,29 @@ async function confirmarEliminacionProducto(codigo) {
 
     if (!producto) return;
 
+    const estaActivo = producto.activo !== false;
+    const nuevoEstado = !estaActivo;
+    const accion = nuevoEstado ? 'activar' : 'desactivar';
+
     const confirmar = confirm(
-        '¿Estás seguro de eliminar el producto ' +
-        producto.descripcion + '?'
+        '¿Estás seguro de ' + accion + ' el producto ' +
+        producto.descripcion + '?\n\n' +
+        'El producto y su historial se conservarán en la base de datos.'
     );
 
     if (!confirmar) return;
 
-    try {
+    cambiandoEstadoProducto = true;
 
+    try {
         const respuesta = await fetch(
             'http://127.0.0.1:3000/api/productos/' +
-                encodeURIComponent(codigo),
+                encodeURIComponent(codigo) + '/estado',
             {
-                method: 'DELETE',
-                credentials: 'include'
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+                body: JSON.stringify({ activo: nuevoEstado })
             }
         );
 
@@ -1739,18 +1797,18 @@ async function confirmarEliminacionProducto(codigo) {
 
         if (!respuesta.ok) {
             throw new Error(
-                resultado.mensaje || 'No se pudo eliminar el producto'
+                resultado.mensaje || 'No se pudo cambiar el estado del producto'
             );
         }
 
         await cargarProductos();
-        await cargarFamilias();
 
-        alert('Producto eliminado correctamente');
-
+        alert('Producto ' + (nuevoEstado ? 'activado' : 'desactivado') +
+              ' correctamente');
     } catch (error) {
-
         alert(error.message);
+    } finally {
+        cambiandoEstadoProducto = false;
     }
 }
 
@@ -1790,10 +1848,11 @@ function configurarAccionesProductos() {
             abrirDetalleProducto(codigo, 'editar');
 
         } else if (
-            boton.classList.contains('boton_eliminar_producto')
+            boton.classList.contains('boton_desactivar_producto') ||
+            boton.classList.contains('boton_activar_producto')
         ) {
 
-            confirmarEliminacionProducto(codigo);
+            confirmarCambioEstadoProducto(codigo);
         }
 
     });
