@@ -5,7 +5,7 @@
         width: 100%;
         height: 72px;
         display: grid;
-        grid-template-columns: 1fr minmax(300px, 420px) 1fr;
+        grid-template-columns: 1fr auto;
         align-items: center;
         background-color: #ffffff;
         border-bottom: 1px solid #d9e1e5;
@@ -52,51 +52,6 @@
         font-size: 22px;
         font-weight: bold;
         white-space: nowrap;
-    }
-
-
-/* TITULO 3 BUSCADOR CABECERA */
-
-    /* clase para organizar el buscador general del sistema */
-    .contenedor_busqueda_cabecera {
-        width: 100%;
-        height: 42px;
-        display: flex;
-        align-items: center;
-        background-color: #ffffff;
-        border: 1px solid #ced9de;
-        border-radius: 7px;
-        box-sizing: border-box;
-        padding: 0 12px;
-    }
-
-    /* clase para establecer el diseño del icono del buscador */
-    .icono_busqueda_cabecera {
-        width: 20px;
-        height: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 9px;
-    }
-
-    /* clase para establecer el tamaño del icono de búsqueda */
-    .imagen_busqueda_cabecera {
-        width: 17px;
-        height: 17px;
-    }
-
-    /* clase para establecer el diseño del campo de búsqueda */
-    .input_busqueda_cabecera {
-        width: 100%;
-        height: 100%;
-        border: none;
-        outline: none;
-        background-color: transparent;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        box-sizing: border-box;
     }
 
 
@@ -306,16 +261,8 @@
     /* adapta la cabecera para tablets */
     @media (max-width: 1024px) {
 
-        .contenedor_principal_cabecera {
-            grid-template-columns: 1fr auto;
-        }
-
         .boton_menu_cabecera {
             display: flex;
-        }
-
-        .contenedor_busqueda_cabecera {
-            display: none;
         }
 
     }
