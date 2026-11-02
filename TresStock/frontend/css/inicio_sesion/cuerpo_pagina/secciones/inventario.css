@@ -81,6 +81,7 @@
         font-size: 24px;
         font-weight: bold;
     }
+    
 
     /* clase para organizar el contenido total productos */
     .contenido_total_productos_inventario {
@@ -133,6 +134,13 @@
         font-weight: bold;
     }
 
+    /* clase para establecer la imagen del icono total productos */
+    .imagen_icono_stock_bajo {
+        width: 24px;
+        height: 24px;
+    }
+
+
     /* clase para organizar el contenido stock bajo */
     .contenido_stock_bajo_inventario {
         display: flex;
@@ -184,6 +192,12 @@
         font-weight: bold;
     }
 
+    /* clase para establecer la imagen del icono total productos */
+    .imagen_icono_sin_stock {
+        width: 24px;
+        height: 24px;
+    }
+
     /* clase para organizar el contenido sin stock */
     .contenido_sin_stock_inventario {
         display: flex;
@@ -233,6 +247,12 @@
         font-family: Arial, sans-serif;
         font-size: 24px;
         font-weight: bold;
+    }
+
+    /* clase para establecer la imagen del icono total productos */
+    .imagen_icono_proximos_vencer {
+        width: 28px;
+        height: 28px;
     }
 
     /* clase para organizar el contenido próximos a vencer */
