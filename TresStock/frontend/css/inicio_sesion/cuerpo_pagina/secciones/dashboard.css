@@ -1,627 +1,408 @@
-/* TITULO 1 CONTENEDOR DASHBOARD */
+/* ============================================================
+   TRESSTOCK - DASHBOARD
+   Mejora visual: tarjetas, acciones, tablas y responsive.
+   Conserva las clases e ID usados por el JavaScript.
+   ============================================================ */
 
-    /* clase para establecer el espacio general de la vista Dashboard */
-    .contenedor_dashboard {
-        width: 100%;
-        padding: 30px;
-        box-sizing: border-box;
-    }
+/* TITULO 1 CONTENEDOR DASHBOARD */
+.contenedor_dashboard {
+    width: 100%;
+    min-width: 0;
+    padding: 28px;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    color: #0b3650;
+}
+
+.contenedor_dashboard * { box-sizing: border-box; }
+
+/* TITULO 1.1 ENCABEZADO */
+.contenedor_encabezado_dashboard { margin-bottom: 24px; }
+.titulo_dashboard { color: #0b3650; font-size: 24px; font-weight: 700; margin-bottom: 6px; }
+.descripcion_dashboard { color: #71818a; font-size: 13px; line-height: 1.5; }
 
 /* TITULO 2 INDICADORES PRINCIPALES */
+.contenedor_indicadores_dashboard {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 28px;
+}
 
-    /* clase para distribuir los indicadores principales en cuatro columnas */
-    .contenedor_indicadores_dashboard {
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 16px;
-        margin-bottom: 22px;
-    }
+.tarjeta_stock_actual_dashboard,
+.tarjeta_stock_bajo_dashboard,
+.tarjeta_productos_agotados_dashboard,
+.tarjeta_ventas_mes_dashboard {
+    min-width: 0;
+    min-height: 122px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #ffffff;
+    border: 1px solid #dce4e8;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(11, 54, 80, 0.025);
+}
 
-    /* clase para establecer el diseño del indicador de stock actual */
-    .tarjeta_stock_actual_dashboard {
-        min-height: 115px;
-        display: flex;
-        align-items: center;
-        background-color: #ffffff;
-        border: 1px solid #d9e1e5;
-        border-radius: 6px;
-        padding: 18px;
-        box-sizing: border-box;
-    }
+.icono_stock_actual_dashboard,
+.icono_stock_bajo_dashboard,
+.icono_productos_agotados_dashboard,
+.icono_ventas_mes_dashboard {
+    width: 54px;
+    height: 54px;
+    min-width: 54px;
+    border-radius: 11px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-    /* clase para establecer el diseño del icono de stock actual */
-    .icono_stock_actual_dashboard {
-        width: 52px;
-        height: 52px;
-        background-color: #e8f7f8;
-        margin-right: 16px;
-        border-radius: 5px;
-    }
+.icono_stock_actual_dashboard { background: #e4f5f4; color: #107f85; }
+.icono_stock_bajo_dashboard { background: #fff3dc; color: #b87913; }
+.icono_productos_agotados_dashboard { background: #ffebeb; color: #d44848; }
+.icono_ventas_mes_dashboard { background: #e8f2fc; color: #236aab; }
 
-    /* clase para organizar el contenido del indicador de stock actual */
-    .contenido_stock_actual_dashboard {
-        display: flex;
-        flex-direction: column;
-    }
+.icono_stock_actual_dashboard::before,
+.icono_stock_bajo_dashboard::before,
+.icono_productos_agotados_dashboard::before,
+.icono_ventas_mes_dashboard::before,
+.icono_importar_dashboard::before,
+.icono_entrada_dashboard::before,
+.icono_salida_dashboard::before {
+    content: "";
+    display: block;
+    width: 27px;
+    height: 27px;
+    background-color: currentColor;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+}
 
-    /* clase para establecer el texto del indicador de stock actual */
-    .texto_stock_actual_dashboard {
-        color: #44515a;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        font-weight: bold;
-        margin-bottom: 8px;
-    }
+.contenido_stock_actual_dashboard,
+.contenido_stock_bajo_dashboard,
+.contenido_productos_agotados_dashboard,
+.contenido_ventas_mes_dashboard {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    gap: 8px;
+}
 
-    /* clase para establecer el valor del stock actual */
-    .valor_stock_actual_dashboard {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 25px;
-        font-weight: bold;
-    }
+.texto_stock_actual_dashboard,
+.texto_stock_bajo_dashboard,
+.texto_productos_agotados_dashboard,
+.texto_ventas_mes_dashboard {
+    color: #647781;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.35;
+}
 
+.valor_stock_actual_dashboard,
+.valor_stock_bajo_dashboard,
+.valor_productos_agotados_dashboard,
+.valor_ventas_mes_dashboard {
+    color: #0b3650;
+    font-size: clamp(23px, 2vw, 29px);
+    font-weight: 700;
+    line-height: 1.1;
+    overflow-wrap: anywhere;
+    font-variant-numeric: tabular-nums;
+}
+.valor_stock_bajo_dashboard { color: #bd7d17; }
+.valor_productos_agotados_dashboard { color: #d44848; }
 
-    /* clase para establecer el diseño del indicador de stock bajo */
-    .tarjeta_stock_bajo_dashboard {
-        min-height: 115px;
-        display: flex;
-        align-items: center;
-        background-color: #ffffff;
-        border: 1px solid #d9e1e5;
-        border-radius: 6px;
-        padding: 18px;
-        box-sizing: border-box;
-    }
+/* TITULO 3 ENCABEZADOS Y ACCIONES RAPIDAS */
+.encabezado_seccion_dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    column-gap: 15px;
+    row-gap: 5px;
+    margin-bottom: 13px;
+}
+.titulo_seccion_dashboard { color: #0b3650; font-size: 17px; font-weight: 700; }
+.descripcion_seccion_dashboard { color: #829098; font-size: 12px; }
 
-    /* clase para establecer el diseño del icono de stock bajo */
-    .icono_stock_bajo_dashboard {
-        width: 52px;
-        height: 52px;
-        background-color: #fff4dc;
-        margin-right: 16px;
-        border-radius: 5px;
-    }
+.contenedor_acciones_dashboard {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 28px;
+}
 
-    /* clase para organizar el contenido del indicador de stock bajo */
-    .contenido_stock_bajo_dashboard {
-        display: flex;
-        flex-direction: column;
-    }
+.boton_importar_dashboard,
+.boton_entrada_dashboard,
+.boton_salida_dashboard {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    height: 68px;
+    padding: 12px 18px;
+    background: #ffffff;
+    border: 1px solid #dce4e8;
+    border-radius: 9px;
+    cursor: pointer;
+    transition: background-color .18s ease, border-color .18s ease, transform .18s ease;
+}
 
-    /* clase para establecer el texto del indicador de stock bajo */
-    .texto_stock_bajo_dashboard {
-        color: #44515a;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        font-weight: bold;
-        margin-bottom: 8px;
-    }
+.boton_importar_dashboard:hover,
+.boton_entrada_dashboard:hover,
+.boton_salida_dashboard:hover {
+    background: #f0fafa;
+    border-color: #8ccbd0;
+    transform: translateY(-2px);
+}
 
-    /* clase para establecer el valor de productos con stock bajo */
-    .valor_stock_bajo_dashboard {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 25px;
-        font-weight: bold;
-    }
+.icono_importar_dashboard,
+.icono_entrada_dashboard,
+.icono_salida_dashboard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 39px;
+    width: 39px;
+    height: 39px;
+    border-radius: 9px;
+    background: #e6f6f6;
+    color: #159ba3;
+    margin-right: 13px;
+}
 
+.icono_importar_dashboard::before,
+.icono_entrada_dashboard::before,
+.icono_salida_dashboard::before { width: 22px; height: 22px; }
 
-    /* clase para establecer el diseño del indicador de productos agotados */
-    .tarjeta_productos_agotados_dashboard {
-        min-height: 115px;
-        display: flex;
-        align-items: center;
-        background-color: #ffffff;
-        border: 1px solid #d9e1e5;
-        border-radius: 6px;
-        padding: 18px;
-        box-sizing: border-box;
-    }
-
-    /* clase para establecer el diseño del icono de productos agotados */
-    .icono_productos_agotados_dashboard {
-        width: 52px;
-        height: 52px;
-        background-color: #fde7e7;
-        margin-right: 16px;
-        border-radius: 5px;
-    }
-
-    /* clase para organizar el contenido del indicador de productos agotados */
-    .contenido_productos_agotados_dashboard {
-        display: flex;
-        flex-direction: column;
-    }
-
-    /* clase para establecer el texto del indicador de productos agotados */
-    .texto_productos_agotados_dashboard {
-        color: #44515a;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        font-weight: bold;
-        margin-bottom: 8px;
-    }
-
-    /* clase para establecer el valor de productos agotados */
-    .valor_productos_agotados_dashboard {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 25px;
-        font-weight: bold;
-    }
-
-
-    /* clase para establecer el diseño del indicador de ventas del mes */
-    .tarjeta_ventas_mes_dashboard {
-        min-height: 115px;
-        display: flex;
-        align-items: center;
-        background-color: #ffffff;
-        border: 1px solid #d9e1e5;
-        border-radius: 6px;
-        padding: 18px;
-        box-sizing: border-box;
-    }
-
-    /* clase para establecer el diseño del icono de ventas del mes */
-    .icono_ventas_mes_dashboard {
-        width: 52px;
-        height: 52px;
-        background-color: #e8f7f8;
-        margin-right: 16px;
-        border-radius: 5px;
-    }
-
-    /* clase para organizar el contenido del indicador de ventas del mes */
-    .contenido_ventas_mes_dashboard {
-        display: flex;
-        flex-direction: column;
-    }
-
-    /* clase para establecer el texto del indicador de ventas del mes */
-    .texto_ventas_mes_dashboard {
-        color: #44515a;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        font-weight: bold;
-        margin-bottom: 8px;
-    }
-
-    /* clase para establecer el valor de ventas del mes */
-    .valor_ventas_mes_dashboard {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 25px;
-        font-weight: bold;
-    }
-
-/* TITULO 3 ACCIONES RAPIDAS */
-
-    /* clase para distribuir las acciones rápidas del Dashboard */
-    .contenedor_acciones_dashboard {
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
-        margin-bottom: 22px;
-    }
-
-    /* clase para establecer el diseño de la opción importar Excel */
-    .boton_importar_dashboard {
-        height: 62px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #ffffff;
-        border: 1px solid #d9e1e5;
-        border-radius: 6px;
-        cursor: pointer;
-    }
-
-    /* cambia el fondo de importar Excel al posicionar el cursor */
-    .boton_importar_dashboard:hover {
-        background-color: #eef8f8;
-    }
-
-    /* clase para representar el icono de importación */
-    .icono_importar_dashboard {
-        width: 30px;
-        height: 30px;
-        background-color: #159ba3;
-        margin-right: 12px;
-        border-radius: 4px;
-    }
-
-    /* clase para establecer el texto de importación */
-    .texto_importar_dashboard {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        font-weight: bold;
-    }
-
-
-    /* clase para establecer el diseño de la opción registrar entrada */
-    .boton_entrada_dashboard {
-        height: 62px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #ffffff;
-        border: 1px solid #d9e1e5;
-        border-radius: 6px;
-        cursor: pointer;
-    }
-
-    /* cambia el fondo de registrar entrada al posicionar el cursor */
-    .boton_entrada_dashboard:hover {
-        background-color: #eef8f8;
-    }
-
-    /* clase para representar el icono de entrada */
-    .icono_entrada_dashboard {
-        width: 30px;
-        height: 30px;
-        background-color: #159ba3;
-        margin-right: 12px;
-        border-radius: 4px;
-    }
-
-    /* clase para establecer el texto de registrar entrada */
-    .texto_entrada_dashboard {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        font-weight: bold;
-    }
-
-
-    /* clase para establecer el diseño de la opción registrar salida */
-    .boton_salida_dashboard {
-        height: 62px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #ffffff;
-        border: 1px solid #d9e1e5;
-        border-radius: 6px;
-        cursor: pointer;
-    }
-
-    /* cambia el fondo de registrar salida al posicionar el cursor */
-    .boton_salida_dashboard:hover {
-        background-color: #eef8f8;
-    }
-
-    /* clase para representar el icono de salida */
-    .icono_salida_dashboard {
-        width: 30px;
-        height: 30px;
-        background-color: #159ba3;
-        margin-right: 12px;
-        border-radius: 4px;
-    }
-
-    /* clase para establecer el texto de registrar salida */
-    .texto_salida_dashboard {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        font-weight: bold;
-    }
+.texto_importar_dashboard,
+.texto_entrada_dashboard,
+.texto_salida_dashboard { color: #0b3650; font-weight: 700; font-size: 13px; line-height: 1.4; }
 
 /* TITULO 4 GRAFICOS */
+.contenedor_graficos_dashboard {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 28px;
+}
 
-    /* clase para distribuir los gráficos del Dashboard */
-    .contenedor_graficos_dashboard {
-        width: 100%;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 16px;
-        margin-bottom: 22px;
-    }
+.tarjeta_ventas_seis_meses_dashboard,
+.tarjeta_inventario_familia_dashboard,
+.tarjeta_productos_stock_bajo_dashboard,
+.tarjeta_alertas_actuales_dashboard,
+.tarjeta_recomendaciones_dashboard {
+    min-width: 0;
+    background: #ffffff;
+    border: 1px solid #dce4e8;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(11,54,80,.025);
+}
 
-    /* clase para establecer el diseño de la tarjeta de ventas */
-    .tarjeta_ventas_seis_meses_dashboard {
-        min-height: 290px;
-        background-color: #ffffff;
-        border: 1px solid #d9e1e5;
-        border-radius: 6px;
-        padding: 18px;
-        box-sizing: border-box;
-    }
+.titulo_ventas_seis_meses_dashboard,
+.titulo_inventario_familia_dashboard,
+.titulo_productos_stock_bajo_dashboard,
+.titulo_alertas_actuales_dashboard,
+.titulo_recomendaciones_dashboard {
+    color: #0b3650;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 16px;
+}
 
-    /* clase para establecer el título del gráfico de ventas */
-    .titulo_ventas_seis_meses_dashboard {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 15px;
-        font-weight: bold;
-        margin-bottom: 18px;
-    }
+.grafico_ventas_dashboard,
+.grafico_inventario_dashboard {
+    min-width: 0;
+    width: 100%;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    border-radius: 8px;
+    border: 1px dashed #d6e3e8;
+    background-color: #f8fafb;
+    padding: 20px;
+}
 
-    /* clase para reservar el espacio del gráfico de ventas */
-    .grafico_ventas_dashboard {
-        width: 100%;
-        height: 220px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #f5f7f9;
-        border-radius: 5px;
-    }
+.grafico_ventas_dashboard::before,
+.grafico_inventario_dashboard::before {
+    content: "";
+    display: block;
+    width: 43px;
+    height: 43px;
+    opacity: .42;
+    background: currentColor;
+    color: #7b9da8;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+}
 
-    /* clase para mostrar temporalmente el texto del gráfico de ventas */
-    .texto_grafico_pendiente_dashboard {
-        color: #7a8790;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-    }
-
-
-    /* clase para establecer el diseño de la tarjeta de inventario */
-    .tarjeta_inventario_familia_dashboard {
-        min-height: 290px;
-        background-color: #ffffff;
-        border: 1px solid #d9e1e5;
-        border-radius: 6px;
-        padding: 18px;
-        box-sizing: border-box;
-    }
-
-    /* clase para establecer el título del gráfico de inventario */
-    .titulo_inventario_familia_dashboard {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 15px;
-        font-weight: bold;
-        margin-bottom: 18px;
-    }
-
-    /* clase para reservar el espacio del gráfico de inventario */
-    .grafico_inventario_dashboard {
-        width: 100%;
-        height: 220px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #f5f7f9;
-        border-radius: 5px;
-    }
-
-    /* clase para mostrar temporalmente el texto del gráfico de inventario */
-    .texto_grafico_inventario_dashboard {
-        color: #7a8790;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-    }
+.texto_grafico_pendiente_dashboard,
+.texto_grafico_inventario_dashboard {
+    color: #7c8c95;
+    font-size: 13px;
+    text-align: center;
+    line-height: 1.5;
+}
 
 /* TITULO 5 INFORMACION INFERIOR */
+.contenedor_informacion_dashboard {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: 16px;
+    align-items: start;
+}
 
-    /* clase para distribuir la tabla y la información lateral */
-    .contenedor_informacion_dashboard {
-        width: 100%;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 16px;
-    }
+.tarjeta_productos_stock_bajo_dashboard { min-height: 318px; }
+.contenedor_tabla_stock_bajo_dashboard { width: 100%; overflow-x: auto; }
+.cuerpo_tabla_stock_bajo_dashboard { background: #ffffff; }
+.tabla_stock_bajo_dashboard { width: 100%; min-width: 530px; border-collapse: collapse; font-size: 12px; }
+.encabezado_tabla_stock_bajo_dashboard { background: #f4f7f9; }
+.fila_encabezado_stock_bajo_dashboard { border-bottom: 1px solid #e1e8ec; }
+.fila_stock_bajo_dashboard { border-bottom: 1px solid #ecf0f3; }
+.fila_stock_bajo_dashboard:last-child { border-bottom: 0; }
 
-/* TITULO 6 PRODUCTOS CON BAJO STOCK */
+.columna_producto_stock_bajo_dashboard,
+.columna_familia_stock_bajo_dashboard,
+.columna_stock_actual_dashboard,
+.columna_stock_minimo_dashboard,
+.columna_estado_stock_dashboard {
+    padding: 13px 10px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 700;
+    color: #5b6e79;
+    white-space: nowrap;
+}
 
-    /* clase para establecer el diseño de la tarjeta de productos con bajo stock */
-    .tarjeta_productos_stock_bajo_dashboard {
-        min-height: 300px;
-        background-color: #ffffff;
-        border: 1px solid #d9e1e5;
-        border-radius: 6px;
-        padding: 18px;
-        box-sizing: border-box;
-    }
+.dato_producto_stock_bajo_dashboard,
+.dato_familia_stock_bajo_dashboard,
+.dato_stock_actual_dashboard,
+.dato_stock_minimo_dashboard,
+.dato_estado_stock_dashboard {
+    padding: 13px 10px;
+    color: #415563;
+    line-height: 1.45;
+    vertical-align: middle;
+}
 
-    /* clase para establecer el título de productos con bajo stock */
-    .titulo_productos_stock_bajo_dashboard {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 15px;
-        font-weight: bold;
-        margin-bottom: 16px;
-    }
+.columna_stock_actual_dashboard,
+.columna_stock_minimo_dashboard,
+.columna_estado_stock_dashboard,
+.dato_stock_actual_dashboard,
+.dato_stock_minimo_dashboard,
+.dato_estado_stock_dashboard { text-align: center; }
 
-    /* clase para permitir desplazamiento horizontal en la tabla si es necesario */
-    .contenedor_tabla_stock_bajo_dashboard {
-        width: 100%;
-        overflow-x: auto;
-    }
+/* TITULO 6 ALERTAS Y RECOMENDACIONES */
+.contenedor_lateral_dashboard { display: flex; flex-direction: column; min-width: 0; gap: 16px; }
+.tarjeta_alertas_actuales_dashboard,
+.tarjeta_recomendaciones_dashboard { min-height: 151px; }
+.lista_alertas_dashboard,
+.lista_recomendaciones_dashboard { display: flex; flex-direction: column; gap: 9px; }
+.alerta_dashboard,
+.recomendacion_dashboard {
+    border-radius: 7px;
+    padding: 12px 14px;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #70818b;
+    background: #f6f9fa;
+    border-left: 3px solid #d9e6eb;
+}
+.alerta_dashboard { border-left-color: #e3ab4f; }
+.recomendacion_dashboard { border-left-color: #159ba3; }
 
-    /* clase para establecer la estructura general de la tabla */
-    .tabla_stock_bajo_dashboard {
-        width: 100%;
-        border-collapse: collapse;
-    }
+/* TITULO 7 RESPONSIVE */
+@media (max-width: 1350px) {
+    .contenedor_indicadores_dashboard { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 1100px) {
+    .contenedor_informacion_dashboard { grid-template-columns: minmax(0, 1fr); }
+    .contenedor_lateral_dashboard { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 900px) {
+    .contenedor_dashboard { padding: 22px; }
+    .contenedor_graficos_dashboard { grid-template-columns: minmax(0, 1fr); }
+    .contenedor_acciones_dashboard { gap: 10px; }
+    .boton_importar_dashboard,
+    .boton_entrada_dashboard,
+    .boton_salida_dashboard { padding: 12px; }
+}
+@media (max-width: 680px) {
+    .contenedor_dashboard { padding: 18px; }
+    .contenedor_acciones_dashboard { grid-template-columns: 1fr; gap: 10px; }
+    .contenedor_lateral_dashboard { grid-template-columns: 1fr; }
+    .descripcion_seccion_dashboard { display: none; }
+}
+@media (max-width: 480px) {
+    .contenedor_dashboard { padding: 14px; }
+    .contenedor_indicadores_dashboard { grid-template-columns: minmax(0, 1fr); gap: 11px; }
+    .tarjeta_stock_actual_dashboard,
+    .tarjeta_stock_bajo_dashboard,
+    .tarjeta_productos_agotados_dashboard,
+    .tarjeta_ventas_mes_dashboard { min-height: 97px; padding: 15px; }
+    .titulo_dashboard { font-size: 21px; }
+    .tarjeta_ventas_seis_meses_dashboard,
+    .tarjeta_inventario_familia_dashboard,
+    .tarjeta_productos_stock_bajo_dashboard,
+    .tarjeta_alertas_actuales_dashboard,
+    .tarjeta_recomendaciones_dashboard { padding: 15px; }
+}
 
-    /* clase para establecer el fondo del encabezado de la tabla */
-    .encabezado_tabla_stock_bajo_dashboard {
-        background-color: #f5f7f9;
-    }
+.icono_stock_actual_dashboard::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%223%22%20y%3D%227%22%20width%3D%227%22%20height%3D%2213%22%20rx%3D%221%22%2F%3E%3Crect%20x%3D%2214%22%20y%3D%224%22%20width%3D%227%22%20height%3D%2216%22%20rx%3D%221%22%2F%3E%3Cpath%20d%3D%22M3%2011h7M14%209h7M1%2020h22%22%2F%3E%3C%2Fsvg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%223%22%20y%3D%227%22%20width%3D%227%22%20height%3D%2213%22%20rx%3D%221%22%2F%3E%3Crect%20x%3D%2214%22%20y%3D%224%22%20width%3D%227%22%20height%3D%2216%22%20rx%3D%221%22%2F%3E%3Cpath%20d%3D%22M3%2011h7M14%209h7M1%2020h22%22%2F%3E%3C%2Fsvg%3E");
+}
 
-    /* clase para establecer la fila del encabezado */
-    .fila_encabezado_stock_bajo_dashboard {
-        border-bottom: 1px solid #d9e1e5;
-    }
+.icono_stock_bajo_dashboard::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M3%204h18v12H3zM3%2010h18M8%2019h8M12%2016v3%22%2F%3E%3Cpath%20d%3D%22m9%207%203%203%203-3%22%2F%3E%3C%2Fsvg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M3%204h18v12H3zM3%2010h18M8%2019h8M12%2016v3%22%2F%3E%3Cpath%20d%3D%22m9%207%203%203%203-3%22%2F%3E%3C%2Fsvg%3E");
+}
 
-    /* clase para establecer la columna Producto */
-    .columna_producto_stock_bajo_dashboard {
-        padding: 11px 8px;
-        text-align: left;
-        color: #5f6c74;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-    }
+.icono_productos_agotados_dashboard::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m12%203%2010%2018H2L12%203Z%22%2F%3E%3Cpath%20d%3D%22M12%209v5M12%2017h.01%22%2F%3E%3C%2Fsvg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m12%203%2010%2018H2L12%203Z%22%2F%3E%3Cpath%20d%3D%22M12%209v5M12%2017h.01%22%2F%3E%3C%2Fsvg%3E");
+}
 
-    /* clase para establecer la columna Familia */
-    .columna_familia_stock_bajo_dashboard {
-        padding: 11px 8px;
-        text-align: left;
-        color: #5f6c74;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-    }
+.icono_ventas_mes_dashboard::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%223%22%20y%3D%224%22%20width%3D%2218%22%20height%3D%2216%22%20rx%3D%222%22%2F%3E%3Cpath%20d%3D%22M7%2016V12M12%2016V8M17%2016v-5%22%2F%3E%3C%2Fsvg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%223%22%20y%3D%224%22%20width%3D%2218%22%20height%3D%2216%22%20rx%3D%222%22%2F%3E%3Cpath%20d%3D%22M7%2016V12M12%2016V8M17%2016v-5%22%2F%3E%3C%2Fsvg%3E");
+}
 
-    /* clase para establecer la columna Stock actual */
-    .columna_stock_actual_dashboard {
-        padding: 11px 8px;
-        text-align: center;
-        color: #5f6c74;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-    }
+.icono_importar_dashboard::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%203v13m0%200-4-4m4%204%204-4%22%2F%3E%3Cpath%20d%3D%22M4%2016v4h16v-4%22%2F%3E%3C%2Fsvg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%203v13m0%200-4-4m4%204%204-4%22%2F%3E%3Cpath%20d%3D%22M4%2016v4h16v-4%22%2F%3E%3C%2Fsvg%3E");
+}
 
-    /* clase para establecer la columna Stock mínimo */
-    .columna_stock_minimo_dashboard {
-        padding: 11px 8px;
-        text-align: center;
-        color: #5f6c74;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-    }
+.icono_entrada_dashboard::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M3%208%2012%203l9%205v10l-9%205-9-5V8Z%22%2F%3E%3Cpath%20d%3D%22M3%208l9%205%209-5M12%2013v10M17%2015h5m-2.5-2.5v5%22%2F%3E%3C%2Fsvg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M3%208%2012%203l9%205v10l-9%205-9-5V8Z%22%2F%3E%3Cpath%20d%3D%22M3%208l9%205%209-5M12%2013v10M17%2015h5m-2.5-2.5v5%22%2F%3E%3C%2Fsvg%3E");
+}
 
-    /* clase para establecer la columna Estado */
-    .columna_estado_stock_dashboard {
-        padding: 11px 8px;
-        text-align: center;
-        color: #5f6c74;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-    }
+.icono_salida_dashboard::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M3%208%2012%203l9%205v10l-9%205-9-5V8Z%22%2F%3E%3Cpath%20d%3D%22M3%208l9%205%209-5M12%2013v10M17%2015h5%22%2F%3E%3C%2Fsvg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M3%208%2012%203l9%205v10l-9%205-9-5V8Z%22%2F%3E%3Cpath%20d%3D%22M3%208l9%205%209-5M12%2013v10M17%2015h5%22%2F%3E%3C%2Fsvg%3E");
+}
 
-    /* clase para establecer la fila de información de stock bajo */
-    .fila_stock_bajo_dashboard {
-        border-bottom: 1px solid #edf0f2;
-    }
+.grafico_ventas_dashboard::before,
+.grafico_inventario_dashboard::before {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%2020V5m0%2015h16M7%2015l4-5%203%203%206-7%22%2F%3E%3C%2Fsvg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%2020V5m0%2015h16M7%2015l4-5%203%203%206-7%22%2F%3E%3C%2Fsvg%3E");
+}
 
-    /* clase para establecer el dato Producto */
-    .dato_producto_stock_bajo_dashboard {
-        padding: 11px 8px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-    }
-
-    /* clase para establecer el dato Familia */
-    .dato_familia_stock_bajo_dashboard {
-        padding: 11px 8px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-    }
-
-    /* clase para establecer el dato Stock actual */
-    .dato_stock_actual_dashboard {
-        padding: 11px 8px;
-        text-align: center;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-    }
-
-    /* clase para establecer el dato Stock mínimo */
-    .dato_stock_minimo_dashboard {
-        padding: 11px 8px;
-        text-align: center;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-    }
-
-    /* clase para establecer el dato Estado */
-    .dato_estado_stock_dashboard {
-        padding: 11px 8px;
-        text-align: center;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-    }
-
-/* TITULO 7 INFORMACION LATERAL */
-
-    /* clase para organizar alertas y recomendaciones verticalmente */
-    .contenedor_lateral_dashboard {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-    }
-
-    /* clase para establecer el diseño de la tarjeta de alertas actuales */
-    .tarjeta_alertas_actuales_dashboard {
-        min-height: 140px;
-        background-color: #ffffff;
-        border: 1px solid #d9e1e5;
-        border-radius: 6px;
-        padding: 18px;
-        box-sizing: border-box;
-    }
-
-    /* clase para establecer el título de alertas actuales */
-    .titulo_alertas_actuales_dashboard {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 15px;
-        font-weight: bold;
-        margin-bottom: 14px;
-    }
-
-    /* clase para organizar las alertas mostradas */
-    .lista_alertas_dashboard {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    /* clase para establecer el diseño de una alerta */
-    .alerta_dashboard {
-        background-color: #f5f7f9;
-        color: #44515a;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        padding: 10px;
-        border-radius: 4px;
-    }
-
-
-    /* clase para establecer el diseño de la tarjeta de recomendaciones */
-    .tarjeta_recomendaciones_dashboard {
-        min-height: 140px;
-        background-color: #ffffff;
-        border: 1px solid #d9e1e5;
-        border-radius: 6px;
-        padding: 18px;
-        box-sizing: border-box;
-    }
-
-    /* clase para establecer el título de recomendaciones */
-    .titulo_recomendaciones_dashboard {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 15px;
-        font-weight: bold;
-        margin-bottom: 14px;
-    }
-
-    /* clase para organizar las recomendaciones mostradas */
-    .lista_recomendaciones_dashboard {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    /* clase para establecer el diseño de una recomendación */
-    .recomendacion_dashboard {
-        background-color: #f5f7f9;
-        color: #44515a;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        padding: 10px;
-        border-radius: 4px;
-    }
+/* Oculta el icono de estado vacío cuando el JavaScript inyecta un gráfico */
+.grafico_ventas_dashboard:not(:has(.texto_grafico_pendiente_dashboard))::before,
+.grafico_inventario_dashboard:not(:has(.texto_grafico_inventario_dashboard))::before { display: none; }
