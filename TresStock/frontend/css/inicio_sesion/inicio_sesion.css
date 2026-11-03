@@ -547,12 +547,16 @@
         background-color: #009F3F;
     }
 
+    .campo_codigo_verificacion[hidden] {
+        display: none;
+    }
+
     @media (max-width: 500px) {
         .contenido_modal_registro {
             padding: 28px 20px;
         }
     }
-    
+
 /* TITULO 12 PIE INICIO SESION */
 
     /* clase para establecer el pie inferior */

@@ -173,6 +173,13 @@
     const cerrarModalRegistro = document.getElementById('cerrar_modal_registro');
     const formularioRegistro = document.getElementById('formulario_registro');
     const mensajeRegistro = document.getElementById('mensaje_registro');
+    const campoCodigo = document.getElementById('contenedor_codigo_verificacion');
+    const inputCodigo = document.getElementById('registro_codigo');
+    const botonReenviarCodigo = document.getElementById('boton_reenviar_codigo');
+    const botonEnviar = formularioRegistro.querySelector('button[type="submit"]');
+
+    let codigoEnviado = false;
+    let temporizadorReenvio = null;
 
     function abrirModalRegistro() {
         modalRegistro.classList.add('activo');
@@ -183,6 +190,26 @@
     function cerrarRegistro() {
         modalRegistro.classList.remove('activo');
         modalRegistro.setAttribute('aria-hidden', 'true');
+    }
+
+    function iniciarCuentaAtrasReenvio() {
+        let segundos = 60;
+        botonReenviarCodigo.disabled = true;
+        botonReenviarCodigo.textContent = `Reenviar código en ${segundos} s`;
+
+        clearInterval(temporizadorReenvio);
+
+        temporizadorReenvio = setInterval(() => {
+            segundos--;
+            botonReenviarCodigo.textContent = `Reenviar código en ${segundos} s`;
+
+            if (segundos <= 0) {
+                clearInterval(temporizadorReenvio);
+                temporizadorReenvio = null;
+                botonReenviarCodigo.disabled = false;
+                botonReenviarCodigo.textContent = 'Reenviar código';
+            }
+        }, 1000);
     }
 
     botonRegistro.addEventListener('click', abrirModalRegistro);
@@ -212,37 +239,112 @@
         const email = document.getElementById('registro_email').value.trim();
         const password = document.getElementById('registro_password').value;
         const confirmarPassword = document.getElementById('registro_confirmar_password').value;
+        const codigo = inputCodigo.value.trim();
 
         if (password !== confirmarPassword) {
             mensajeRegistro.textContent = 'Las contraseñas no coinciden.';
             return;
         }
 
+        if (codigoEnviado && !/^\d{6}$/.test(codigo)) {
+            mensajeRegistro.textContent = 'Ingresa el código de 6 dígitos.';
+            return;
+        }
+
+        const ruta = codigoEnviado
+            ? '/api/autenticacion/registro/verificar'
+            : '/api/autenticacion/registro/iniciar';
+
+        const datosRegistro = { nombre, email, password, confirmar_password: confirmarPassword };
+        if (codigoEnviado) datosRegistro.codigo = codigo;
+
+        botonEnviar.disabled = true;
+
         try {
-            const respuesta = await fetch(`${URL_API}/api/autenticacion/registro`, {
+            const respuesta = await fetch(`${URL_API}${ruta}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    nombre,
-                    email,
-                    password,
-                    confirmar_password: confirmarPassword
-                })
+                body: JSON.stringify(datosRegistro)
             });
 
             const datos = await respuesta.json();
 
             if (!respuesta.ok) {
-                mensajeRegistro.textContent = datos.mensaje || 'No se pudo crear la cuenta.';
+                mensajeRegistro.textContent = datos.mensaje || 'No se pudo procesar el registro.';
+                return;
+            }
+
+            if (!codigoEnviado) {
+                codigoEnviado = true;
+                campoCodigo.hidden = false;
+                inputCodigo.required = true;
+                botonEnviar.textContent = 'Verificar código';
+                mensajeRegistro.textContent = datos.mensaje || 'Te enviamos un código a tu correo.';
+                inputCodigo.focus();
+                iniciarCuentaAtrasReenvio();
                 return;
             }
 
             formularioRegistro.reset();
+            campoCodigo.hidden = true;
+            inputCodigo.required = false;
+            codigoEnviado = false;
+            botonEnviar.textContent = 'Registrarme';
+            clearInterval(temporizadorReenvio);
+            temporizadorReenvio = null;
+            botonReenviarCodigo.disabled = true;
+            botonReenviarCodigo.textContent = 'Reenviar código';
             cerrarRegistro();
+
             document.getElementById('email').value = email;
             document.getElementById('mensaje_login').textContent = 'Cuenta creada. Ya puedes iniciar sesión.';
         } catch (error) {
             mensajeRegistro.textContent = 'No se pudo conectar con el servidor.';
+        } finally {
+            botonEnviar.disabled = false;
+        }
+    });
+
+    botonReenviarCodigo.addEventListener('click', async () => {
+        if (!codigoEnviado) return;
+
+        botonReenviarCodigo.disabled = true;
+        mensajeRegistro.textContent = '';
+
+        const datosRegistro = {
+            nombre: document.getElementById('registro_nombre').value.trim(),
+            email: document.getElementById('registro_email').value.trim(),
+            password: document.getElementById('registro_password').value,
+            confirmar_password: document.getElementById('registro_confirmar_password').value
+        };
+
+        try {
+            const respuesta = await fetch(`${URL_API}/api/autenticacion/registro/iniciar`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(datosRegistro)
+            });
+
+            const datos = await respuesta.json();
+
+            if (!respuesta.ok) {
+                mensajeRegistro.textContent = datos.mensaje || 'No se pudo reenviar el código.';
+
+                if (respuesta.status === 429) {
+                    iniciarCuentaAtrasReenvio();
+                } else {
+                    botonReenviarCodigo.disabled = false;
+                }
+
+                return;
+            }
+
+            inputCodigo.value = '';
+            mensajeRegistro.textContent = datos.mensaje || 'Te enviamos otro código.';
+            iniciarCuentaAtrasReenvio();
+        } catch (error) {
+            mensajeRegistro.textContent = 'No se pudo conectar con el servidor.';
+            botonReenviarCodigo.disabled = false;
         }
     });
 

@@ -175,23 +175,30 @@
                                     <form id="formulario_registro">
                                         <div class="campo_registro">
                                             <div class="texto_campo_registro" data-for="registro_nombre">Nombre</div>
-                                            <input id="registro_nombre" name="nombre" type="text" minlength="2" maxlength="100" required>
+                                            <input id="registro_nombre" name="nombre" type="text" minlength="2" maxlength="50" required>
                                         </div>
 
                                         <div class="campo_registro">
                                             <div class="texto_campo_registro" data-for="registro_email">Correo electrónico</div>
-                                            <input id="registro_email" name="email" type="email" maxlength="150" autocomplete="email" required>
+                                            <input id="registro_email" name="email" type="email" maxlength="90" autocomplete="email" required>
                                         </div>
 
                                         <div class="campo_registro">
                                             <div class="texto_campo_registro" data-for="registro_password">Contraseña</div>
-                                            <input id="registro_password" name="password" type="password" minlength="8" autocomplete="new-password" required>
+                                            <input id="registro_password" name="password" type="password" minlength="8" autocomplete="new-password" maxlength="40" required>
                                         </div>
 
                                         <div class="campo_registro">
                                             <div class="texto_campo_registro" data-for="registro_confirmar_password">Confirmar contraseña</div>
-                                            <input id="registro_confirmar_password" name="confirmar_password" type="password" minlength="8" autocomplete="new-password" required>
+                                            <input id="registro_confirmar_password" name="confirmar_password" type="password" minlength="8" maxlength="40" autocomplete="new-password" required>
                                         </div>
+
+                                        <div class="campo_registro campo_codigo_verificacion" id="contenedor_codigo_verificacion" hidden>
+                                            <div class="texto_campo_registro" data-for="registro_codigo">Código enviado a tu correo</div>
+                                            <input id="registro_codigo" name="codigo" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" placeholder="Ingresa los 6 dígitos">
+                                        </div>
+                                        
+                                        <button class="boton_reenviar_codigo" id="boton_reenviar_codigo" type="button" disabled>Reenviar código en 60 s</button>
 
                                         <div id="mensaje_registro" aria-live="polite"></div>
                                         <button type="submit">Registrarme</button>

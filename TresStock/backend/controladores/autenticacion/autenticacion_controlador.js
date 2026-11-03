@@ -149,10 +149,71 @@ const registrarCuenta = async (req, res) => {
     }
 };
 
+const iniciarRegistro = async (req, res) => {
+    try {
+        const nombre = String(req.body.nombre ?? '').trim();
+        const email = String(req.body.email ?? '').trim().toLowerCase();
+        const password = String(req.body.password ?? '');
+        const confirmarPassword = String(req.body.confirmar_password ?? '');
+
+        if (nombre.length < 2 || nombre.length > 100) {
+            return res.status(400).json({ mensaje: 'El nombre debe tener entre 2 y 100 caracteres.' });
+        }
+
+        if (email.length > 150 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            return res.status(400).json({ mensaje: 'El correo electrónico no es válido.' });
+        }
+
+        if (password.length < 8) {
+            return res.status(400).json({ mensaje: 'La contraseña debe tener al menos 8 caracteres.' });
+        }
+
+        if (password !== confirmarPassword) {
+            return res.status(400).json({ mensaje: 'Las contraseñas no coinciden.' });
+        }
+
+        await autenticacionServicio.solicitarCodigoRegistro(nombre, email, password, req.ip);
+        return res.status(200).json({ mensaje: 'Te enviamos un código a tu correo.' });
+    } catch (error) {
+        if (error.code === '23505') {
+            return res.status(409).json({ mensaje: 'Ya existe una cuenta con ese correo electrónico.' });
+        }
+
+        console.error('Error al iniciar registro:', error);
+        return res.status(error.statusCode || 500).json({
+            mensaje: error.statusCode ? error.message : 'No se pudo iniciar el registro.'
+        });
+    }
+};
+
+const verificarCodigoRegistro = async (req, res) => {
+    try {
+        const email = String(req.body.email ?? '').trim().toLowerCase();
+        const codigo = String(req.body.codigo ?? '').trim();
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            return res.status(400).json({ mensaje: 'El correo electrónico no es válido.' });
+        }
+
+        if (!/^\d{6}$/.test(codigo)) {
+            return res.status(400).json({ mensaje: 'Ingresa el código de 6 dígitos.' });
+        }
+
+        const usuario = await autenticacionServicio.verificarCodigoRegistro(email, codigo, req.ip);
+        return res.status(201).json({ mensaje: 'Cuenta creada correctamente.', usuario });
+    } catch (error) {
+        console.error('Error al verificar código de registro:', error);
+        return res.status(error.statusCode || 500).json({
+            mensaje: error.statusCode ? error.message : 'No se pudo verificar el código.'
+        });
+    }
+};
+
 // exporta el controlador
 module.exports = {
     iniciarSesion,
     verificarSesion,
     cerrarSesion,
-    registrarCuenta
+    iniciarRegistro,
+    verificarCodigoRegistro
 };
