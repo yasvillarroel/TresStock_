@@ -1,7 +1,40 @@
+// TITULO 0 CONTROL DE ACCESO AL MENÚ LATERAL
+
+    // almacena si la sesión actual pertenece a un administrador
+    let esAdministradorMenuLateral = false;
+
+    // muestra Administración solamente a usuarios con rol Administrador (id_rol 1)
+    function configurarAccesoAdministracionMenu(usuario) {
+
+        // el backend entrega el id del rol mediante la propiedad rol
+        const idRol = usuario ? (usuario.rol ?? usuario.id_rol) : null;
+
+        esAdministradorMenuLateral = Number(idRol) === 1;
+
+        const opcionAdministracion = document.getElementById(
+            'opcion_administracion_menu'
+        );
+
+        if (opcionAdministracion) {
+
+            // también se encuentra oculta en HTML para evitar que aparezca brevemente
+            opcionAdministracion.hidden = !esAdministradorMenuLateral;
+            opcionAdministracion.style.display = esAdministradorMenuLateral ? '' : 'none';
+
+        }
+
+    }
+
+
 // TITULO 1 SELECCION DE OPCIONES DEL MENU LATERAL
 
     // función para cambiar visualmente la opción activa del menú lateral
     function seleccionarOpcionMenu(opcion, cargar = true) {
+
+        // no permite seleccionar Administración con un rol sin permisos
+        if (opcion === 'administracion' && !esAdministradorMenuLateral) {
+            return;
+        }
 
         const opcionesMenu = [
             'opcion_dashboard_menu',
@@ -72,7 +105,10 @@
 // TITULO 2 FUNCIONAMIENTO OPCIONES MENU LATERAL
 
     // función para activar los clics de las opciones del menú lateral
-    function inicializarMenuLateral(vistaActual) {
+    function inicializarMenuLateral(vistaActual, usuario) {
+
+        // aplica la visibilidad de Administración usando el rol de la sesión vigente
+        configurarAccesoAdministracionMenu(usuario);
 
         const opcionesMenu = {
             opcion_dashboard_menu: 'dashboard',
@@ -91,7 +127,8 @@
 
             const elementoOpcion = document.getElementById(idOpcion);
 
-            if (elementoOpcion) {
+            // Administración solo recibe un evento de navegación para administradores
+            if (elementoOpcion && (idOpcion !== 'opcion_administracion_menu' || esAdministradorMenuLateral)) {
 
                 elementoOpcion.addEventListener(
                     'click',

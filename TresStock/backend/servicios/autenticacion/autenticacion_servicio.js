@@ -4,10 +4,13 @@ const bcrypt = require('bcrypt');
 // importa el pool de conexiones
 const pool = require('../../configuracion/base_datos');
 
-// FUNCION 1 INICIAR SESION
+// =====================
+// TITULO 1 INICIAR SESION
+// =====================
+
 const iniciarSesion = async (email, password) => {
 
-    // busca el usuario por correo
+    // busca la cuenta por correo
     const resultado = await pool.query(
         `SELECT
             id_usuario,
@@ -22,73 +25,60 @@ const iniciarSesion = async (email, password) => {
         [email]
     );
 
-    // obtiene el usuario encontrado
     const usuario = resultado.rows[0];
 
-    // comprueba si existe
-    if (!usuario) {
+    // rechaza las cuentas inexistentes e inactivas
+    if (!usuario || !usuario.activo) {
         return null;
     }
 
-    // comprueba si el usuario esta activo
-    if (!usuario.activo) {
-        return null;
-    }
+    const contrasenaCorrecta = await bcrypt.compare(password, usuario.password_hash);
 
-    // compara la contrasena con el hash
-    const contrasenaCorrecta = await bcrypt.compare(
-        password,
-        usuario.password_hash
-    );
-
-    // comprueba la contrasena
     if (!contrasenaCorrecta) {
         return null;
     }
 
-    // elimina la contrasena antes de devolver los datos
+    // nunca devuelve el hash de contrasena al navegador
     delete usuario.password_hash;
 
-    // devuelve los datos del usuario
     return usuario;
 };
 
+// ===================================
+// TITULO 2 CONSULTAR USUARIO DE SESION
+// ===================================
 
-
-// FUNCION 2 OBTENER USUARIO AUTENTICADO
-// busca los datos publicos del usuario usando el ID del JWT ya validado
+// obtiene la cuenta y su rol actual directamente desde PostgreSQL
+// solo devuelve cuentas activas; el JWT antiguo no conserva permisos anteriores
 const obtenerUsuarioPorId = async (idUsuario) => {
 
     const resultado = await pool.query(
         `SELECT
-            id_usuario,
-            nombre,
-            email,
-            id_rol
-         FROM base_datos.usuarios
-         WHERE id_usuario = $1
-           AND activo = TRUE`,
+            u.id_usuario,
+            u.nombre,
+            u.email,
+            u.id_rol,
+            r.nombre AS nombre_rol
+        FROM base_datos.usuarios u
+        JOIN base_datos.roles r ON r.id_rol = u.id_rol
+        WHERE u.id_usuario = $1
+          AND u.activo = TRUE`,
         [idUsuario]
     );
 
     const usuario = resultado.rows[0];
 
-    // si ya no existe o fue desactivado, la sesion no debe continuar
     if (!usuario) {
         return null;
     }
 
-    // devuelve solamente los datos necesarios para la cabecera
     return {
         id: usuario.id_usuario,
         rol: usuario.id_rol,
+        nombre_rol: usuario.nombre_rol,
         nombre: usuario.nombre,
         email: usuario.email
     };
 };
 
-// exporta el servicio
-module.exports = {
-    iniciarSesion,
-    obtenerUsuarioPorId
-};
+module.exports = { iniciarSesion, obtenerUsuarioPorId };

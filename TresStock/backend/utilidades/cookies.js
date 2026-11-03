@@ -1,8 +1,20 @@
+// ==============================
+// TITULO 1 COOKIE DE SESION JWT
+// ==============================
+
 const OPCIONES_COOKIE_SESION = {
-    httpOnly: true,             // JS del navegador no puede leerla (mitiga XSS)
-    secure: false, // solo HTTPS en producción
-    sameSite: 'lax',         // mitiga CSRF en la mayoría de los casos  //deberia ser 'strict'
-    maxAge: 8 * 60 * 60 * 1000  // 8 horas, igual que expiresIn del JWT
+    // evita que JavaScript del navegador lea la cookie
+    httpOnly: true,
+
+    // en local permite HTTP; en produccion requiere HTTPS
+    // configurar NODE_ENV=production cuando se publique TresStock
+    secure: process.env.NODE_ENV === 'production',
+
+    // protege parcialmente contra CSRF sin romper el frontend actual
+    sameSite: 'lax',
+
+    // dura 8 horas, igual que el JWT
+    maxAge: 8 * 60 * 60 * 1000
 };
 
 module.exports = { OPCIONES_COOKIE_SESION };

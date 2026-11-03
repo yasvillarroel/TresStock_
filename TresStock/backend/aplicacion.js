@@ -1,114 +1,79 @@
 // importa express
 const express = require('express');
 
-// importar cookie-parser
+// importa cookie-parser para leer cookies
 const cookieParser = require('cookie-parser');
 
-// importa cors para permitir peticiones desde otros origenes
+// importa cors para permitir peticiones del frontend
 const cors = require('cors');
 
-// importa el pool de conexiones con PostgreSQL
+// importa la conexion con PostgreSQL
 const pool = require('./configuracion/base_datos');
+
+// importa la validacion de sesion para las rutas privadas
+const { autenticacion } = require('./middleware/autenticacion');
 
 // crea la aplicacion de Express
 const app = express();
 
-// configura los middlewares globales
+// ====================================
+// TITULO 1 CONFIGURACION DE MIDDLEWARES
+// ====================================
 
-// permite peticiones desde otros origenes
-// app.use(cors());
-// configura cors para permitir el frontend
+// conserva los origenes de desarrollo que ya utilizaba TresStock
 app.use(cors({
     origin: [
         'http://127.0.0.1:5500',
         'http://localhost:5500',
-        /^http:\/\/192\.168\.\d+\.\d+:5500$/   // cualquier IP de red local en el puerto 5500
+        /^http:\/\/192\.168\.\d+\.\d+:5500$/
     ],
     credentials: true
 }));
 
-// permite recibir datos en formato JSON
 app.use(express.json());
-
-// permite leer y manejar las cookies que llegan https
 app.use(cookieParser());
 
-// crea una ruta para verificar la conexion con PostgreSQL
+// =======================================
+// TITULO 2 ESTADO DE CONEXION (RUTA PUBLICA)
+// =======================================
+
 app.get('/api/estado_conexion', async (req, res) => {
-
-    // intenta ejecutar la consulta
     try {
-
-        // realiza una consulta de prueba a PostgreSQL
         await pool.query('SELECT 1');
-
-        // envia una respuesta si la conexion funciona
-        res.json({
-
-            // indica que la conexion funciona
+        return res.json({
             estado: 'ok',
-
-            // muestra el mensaje de confirmacion
             mensaje: 'Conexion con PostgreSQL funcionando'
-
         });
-
     } catch (error) {
-
-        // muestra el error en la consola
         console.error('Error de conexion con PostgreSQL:', error);
-
-        // envia una respuesta si la conexion falla
-        res.status(500).json({
-
-            // indica que ocurrio un error
+        return res.status(500).json({
             estado: 'error',
-
-            // muestra el mensaje de error
             mensaje: 'No se pudo conectar con PostgreSQL'
-
         });
-
     }
-
-});
-// ruta de prueba para probar cookies
-app.get('/api/prueba-cookie', (req, res) => {
-
-    res.cookie('sesion', '123', {
-        httpOnly: false,
-        secure: false,
-        sameSite: 'lax',
-        path: '/'
-    });
-
-    res.json({
-        cookies: req.cookies
-    });
 });
 
-// aqui se iran agregando las rutas de cada modulo
+// ===================================
+// TITULO 3 RUTAS DE INICIO Y CIERRE DE SESION
+// ===================================
 
-// registra las rutas de usuarios
-app.use('/api/usuarios', require('./rutas/usuarios/usuarios_rutas'));
-
-// registra las rutas de autenticacion
+// el login debe ser publico; /sesion ya exige autenticacion en su router
 app.use('/api/autenticacion', require('./rutas/autenticacion/autenticacion_rutas'));
 
-// registra las rutas de productos
-app.use('/api/productos', require('./rutas/productos/productos_rutas'));
+// ===========================================
+// TITULO 4 RUTAS DE MODULOS PRIVADOS DE TRESSTOCK
+// ===========================================
 
-// registra las rutas de proveedores
-app.use('/api/proveedores', require('./rutas/proveedores/proveedores_rutas'));
+// cada modulo requiere JWT valido y una cuenta activa en PostgreSQL
+// el router de usuarios ademas exige rol Administrador en todas sus rutas
+app.use('/api/usuarios', require('./rutas/usuarios/usuarios_rutas'));
+app.use('/api/productos', autenticacion, require('./rutas/productos/productos_rutas'));
+app.use('/api/proveedores', autenticacion, require('./rutas/proveedores/proveedores_rutas'));
+app.use('/api/inventario', autenticacion, require('./rutas/inventario/inventario_rutas'));
+app.use('/api/ventas', autenticacion, require('./rutas/ventas/ventas_rutas'));
+app.use('/api/escaneo', autenticacion, require('./rutas/escaneo/escaneo_rutas'));
 
-// registra las rutas de inventario
-app.use('/api/inventario',require('./rutas/inventario/inventario_rutas'));
+// se retiro /api/prueba-cookie: establecia una cookie de sesion no autenticada
 
-// registra las rutas de ventas
-app.use('/api/ventas',require('./rutas/ventas/ventas_rutas'));
-
-// registra las rutas de escaneo
-app.use('/api/escaneo', require('./rutas/escaneo/escaneo_rutas'));
-
-// exporta la aplicacion para utilizarla desde otros archivos
+// exporta la aplicacion
 module.exports = app;

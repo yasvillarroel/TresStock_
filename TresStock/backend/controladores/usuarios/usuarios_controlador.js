@@ -62,12 +62,11 @@ async function resolverIdRol(datos) {
     return numero;
 }
 
-// ADAPTAR con el objeto de sesión real cuando se entregue el archivo de autenticación.
-// Si la sesión no tiene ninguna de estas formas, se sigue protegiendo al último administrador,
-// pero la protección de la cuenta propia NO puede verificarse todavía.
+// identifica la cuenta conectada usando req.usuario.id del middleware.
+// se conservan otras formas para compatibilidad con futuros cambios.
 function obtenerIdUsuarioSesion(req) {
-    const candidato = req.user?.id_usuario ?? req.usuario?.id_usuario ??
-        req.session?.usuario?.id_usuario ?? req.session?.id_usuario;
+    const candidato = req.usuario?.id ?? req.usuario?.id_usuario ??
+        req.user?.id_usuario ?? req.session?.usuario?.id_usuario ?? req.session?.id_usuario;
     const id = Number(candidato);
     return Number.isSafeInteger(id) && id > 0 ? id : null;
 }

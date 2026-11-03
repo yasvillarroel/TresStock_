@@ -14,6 +14,21 @@
 
 // TITULO 2 VERIFICACIÓN DE SESIÓN
 
+    // usuario vigente obtenido desde la ruta protegida /api/autenticacion/sesion
+    let usuarioSesionActual = null;
+
+    // comprueba el rol actual del usuario para controlar las vistas del frontend
+    function puedeAdministrarUsuarios() {
+
+        const idRol = usuarioSesionActual
+            ? (usuarioSesionActual.rol ?? usuarioSesionActual.id_rol)
+            : null;
+
+        return Number(idRol) === 1;
+
+    }
+
+
     // función que consulta al backend si la cookie de sesión sigue siendo válida
     // (esto luego se puede mover a js/comun/autenticacion.js para reutilizarlo en otras páginas)
     async function verificarSesion() {
@@ -67,10 +82,13 @@
             'vista_actual'
         );
 
-        const vistaActual = vistaGuardada || 'dashboard';
+        // evita reabrir Administración si la vista fue guardada con otra cuenta
+        const vistaActual = vistaGuardada === 'administracion' && !puedeAdministrarUsuarios()
+            ? 'dashboard'
+            : (vistaGuardada || 'dashboard');
 
-        // activa el funcionamiento responsive del menú lateral
-        inicializarMenuLateral(vistaActual);
+        // activa el funcionamiento responsive y la visibilidad según el rol
+        inicializarMenuLateral(vistaActual, usuario);
 
         await cargarVista(vistaActual);
     }
@@ -79,6 +97,18 @@
 
     // función para cargar la vista seleccionada desde el menú lateral
     async function cargarVista(vista) {
+
+        // restringe la navegación interna: solo administradores abren Administración
+        if (vista === 'administracion' && !puedeAdministrarUsuarios()) {
+
+            vista = 'dashboard';
+
+            // actualiza también la opción visual activa del menú
+            if (typeof seleccionarOpcionMenu === 'function') {
+                seleccionarOpcionMenu('dashboard', false);
+            }
+
+        }
 
         const rutasVistas = {
 
@@ -152,6 +182,9 @@
         const usuario = await verificarSesion();
 
         if (!usuario) {window.location.href = './html/inicio_sesion/inicio_sesion.html';return;}
+
+        // usa el rol de la sesión confirmada por el backend, no datos del navegador
+        usuarioSesionActual = usuario;
 
         console.log('Usuario autenticado:', usuario);
 
