@@ -7,6 +7,7 @@ const { firmarToken } = require('../../utilidades/jwt');
 // importa las opciones de la cookie de sesion
 const { OPCIONES_COOKIE_SESION } = require('../../utilidades/cookies');
 
+
 // inicia sesion
 const iniciarSesion = async (req, res) => {
 
@@ -112,9 +113,46 @@ const cerrarSesion = (req, res) => {
     });
 };
 
+
+const registrarCuenta = async (req, res) => {
+    try {
+        const nombre = String(req.body.nombre ?? '').trim();
+        const email = String(req.body.email ?? '').trim().toLowerCase();
+        const password = String(req.body.password ?? '');
+        const confirmarPassword = String(req.body.confirmar_password ?? '');
+
+        if (nombre.length < 2 || nombre.length > 100) {
+            return res.status(400).json({ mensaje: 'El nombre debe tener entre 2 y 100 caracteres.' });
+        }
+
+        if (email.length > 150 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            return res.status(400).json({ mensaje: 'El correo electrónico no es válido.' });
+        }
+
+        if (password.length < 8) {
+            return res.status(400).json({ mensaje: 'La contraseña debe tener al menos 8 caracteres.' });
+        }
+
+        if (password !== confirmarPassword) {
+            return res.status(400).json({ mensaje: 'Las contraseñas no coinciden.' });
+        }
+
+        const usuario = await autenticacionServicio.registrarCuenta(nombre, email, password);
+        return res.status(201).json({ mensaje: 'Cuenta creada correctamente.', usuario });
+    } catch (error) {
+        if (error.code === '23505') {
+            return res.status(409).json({ mensaje: 'Ya existe una cuenta con ese correo electrónico.' });
+        }
+
+        console.error('Error al registrar cuenta:', error);
+        return res.status(500).json({ mensaje: 'No se pudo crear la cuenta.' });
+    }
+};
+
 // exporta el controlador
 module.exports = {
     iniciarSesion,
     verificarSesion,
-    cerrarSesion
+    cerrarSesion,
+    registrarCuenta
 };

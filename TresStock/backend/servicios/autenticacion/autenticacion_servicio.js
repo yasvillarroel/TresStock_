@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt');
 // importa el pool de conexiones
 const pool = require('../../configuracion/base_datos');
 
+const usuariosServicio = require('../usuarios/usuarios_servicio');
+
 // =====================
 // TITULO 1 INICIAR SESION
 // =====================
@@ -81,4 +83,18 @@ const obtenerUsuarioPorId = async (idUsuario) => {
     };
 };
 
-module.exports = { iniciarSesion, obtenerUsuarioPorId };
+const registrarCuenta = async (nombre, email, password) => {
+    const idRolUsuario = await usuariosServicio.obtenerIdRol('Usuario');
+
+    if (!idRolUsuario) {
+        throw new Error('No se encontró el rol Usuario.');
+    }
+
+    return usuariosServicio.crearUsuario(nombre, email, password, idRolUsuario);
+};
+
+module.exports = { 
+    iniciarSesion,
+    obtenerUsuarioPorId,
+    registrarCuenta
+};

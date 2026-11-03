@@ -24,5 +24,7 @@ router.get('/sesion', verificarSesionMiddleware, autenticacionControlador.verifi
 // ruta para cerrar sesion y borrar la cookie (incluso si el JWT expiro)
 router.post('/logout', autenticacionControlador.cerrarSesion);
 
+router.post('/registro', autenticacionControlador.registrarCuenta);
+
 // exporta el router
 module.exports = router;

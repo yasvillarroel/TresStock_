@@ -126,8 +126,8 @@
 
     /* clase para establecer el contenedor del icono superior */
     .contenedor_icono_usuario_inicio_sesion {
-        width: 72px;
-        height: 72px;
+        width: 112px;
+        height: 112px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -138,9 +138,11 @@
 
     /* clase para establecer el tamaño del icono superior */
     .icono_usuario_inicio_sesion {
-        width: 32px;
-        height: 32px;
+        width: 50px;
+        height: 50px;
         object-fit: contain;
+        user-select: none;
+        -webkit-user-drag: none;
     }
 
     /* clase para organizar el encabezado del formulario */
@@ -342,7 +344,7 @@
     }
 
 
-/* TITULO 10 BOTON INICIO SESION */
+/* TITULO 9 BOTON INICIO SESION */
 
     /* clase para establecer la opción ingresar */
     .boton_inicio_sesion {
@@ -371,17 +373,187 @@
         font-weight: bold;
     }
 
-    /* clase para establecer la flecha del botón */
     .flecha_boton_inicio_sesion {
         position: absolute;
         right: 34px;
+        top: 50%;
+        transform: translateY(-60%);
         color: #ffffff;
         font-family: Arial, sans-serif;
-        font-size: 31px;
+        font-size: 40px;
+        line-height: 1;
+        transition: transform 0.3s ease;
     }
 
+    .boton_inicio_sesion:hover .flecha_boton_inicio_sesion {
+        transform: translate(5px, -60%);
+    }
 
-/* TITULO 11 PIE INICIO SESION */
+/* TITULO 10 BOTON DE REGISTRO */
+
+    /* Botón de registro */
+    .contenedor_registro_inicio_sesion {
+        width: 100%;
+        height: 58px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        background-color: #00B347;
+        border-radius: 7px;
+        cursor: pointer;
+        box-sizing: border-box;
+        margin-top: 15px;
+        color: #ffffff;
+        font-family: Arial, sans-serif;
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    /* Color al pasar el mouse */
+    .contenedor_registro_inicio_sesion:hover {
+        background-color: #009F3F;
+    }
+
+    /* Ambos textos se superponen y quedan centrados */
+    .texto_registro_inicio_sesion,
+    .boton_registro_inicio_sesion {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.4s ease;
+    }
+
+    /* Texto visible inicialmente */
+    .texto_registro_inicio_sesion {
+        opacity: 1;
+    }
+
+    /* Texto del botón oculto inicialmente */
+    .boton_registro_inicio_sesion {
+        opacity: 0;
+    }
+
+    /* Intercambio de textos al pasar el mouse */
+    .contenedor_registro_inicio_sesion:hover .texto_registro_inicio_sesion {
+        opacity: 0;
+    }
+
+    .contenedor_registro_inicio_sesion:hover .boton_registro_inicio_sesion {
+        opacity: 1;
+    }
+
+/* TITULO 11 MODAL DE REGISTRO */
+
+    .modal_registro {
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background-color: rgba(0, 0, 0, 0.55);
+        box-sizing: border-box;
+    }
+
+    .modal_registro.activo {
+        display: flex;
+    }
+
+    .contenido_modal_registro {
+        position: relative;
+        width: 100%;
+        max-width: 460px;
+        max-height: 90vh;
+        overflow-y: auto;
+        padding: 32px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 12px 35px rgba(18, 53, 72, 0.25);
+        box-sizing: border-box;
+    }
+
+    .titulo_modal_registro {
+        margin-bottom: 24px;
+        color: #082f48;
+        font-size: 26px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .cerrar_modal_registro {
+        position: absolute;
+        top: 10px;
+        right: 14px;
+        border: 0;
+        background: transparent;
+        color: #71818a;
+        font-size: 28px;
+        cursor: pointer;
+    }
+
+    .campo_registro {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+        margin-bottom: 16px;
+    }
+
+    .texto_campo_registro {
+        color: #173c54;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: text;
+    }
+
+    .campo_registro input {
+        width: 100%;
+        height: 46px;
+        padding: 0 12px;
+        border: 1px solid #ced9de;
+        border-radius: 7px;
+        font-size: 15px;
+        box-sizing: border-box;
+    }
+
+    .campo_registro input:focus {
+        outline: 2px solid rgba(21, 155, 163, 0.25);
+        border-color: #159ba3;
+    }
+
+    #mensaje_registro {
+        min-height: 20px;
+        margin-bottom: 12px;
+        color: #c25757;
+        font-size: 14px;
+    }
+
+    #formulario_registro button[type="submit"] {
+        width: 100%;
+        height: 48px;
+        border: 0;
+        border-radius: 7px;
+        background-color: #00B347;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    #formulario_registro button[type="submit"]:hover {
+        background-color: #009F3F;
+    }
+
+    @media (max-width: 500px) {
+        .contenido_modal_registro {
+            padding: 28px 20px;
+        }
+    }
+    
+/* TITULO 12 PIE INICIO SESION */
 
     /* clase para establecer el pie inferior */
     .pie_inicio_sesion {
