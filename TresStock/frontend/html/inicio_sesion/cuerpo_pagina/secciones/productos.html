@@ -275,6 +275,9 @@
 
                             <th class="columna_proveedor_productos">Proveedor</th>
 
+                            <!-- indica si el producto está activo o inactivo -->
+                            <th class="columna_estado_productos">Estado</th>
+
                             <th class="columna_acciones_productos">Acciones</th>
 
                         </tr>
@@ -287,7 +290,7 @@
                         <!-- fila temporal mientras no existan datos cargados -->
                         <tr class="fila_sin_productos">
 
-                            <td class="dato_sin_productos" colspan="8" > No hay productos cargados para mostrar. </td>
+                            <td class="dato_sin_productos" colspan="9" > No hay productos cargados para mostrar. </td>
 
                         </tr>
 
@@ -388,11 +391,36 @@
 
                                 <div class="texto_campo_familia_producto">Familia</div>
 
-                                <select class="input_familia_producto" id="input_familia_producto">
-
+                                <!-- conserva el valor del formulario para crear, editar y guardar -->
+                                <select class="input_familia_producto" id="input_familia_producto" hidden>
                                     <option value="">Seleccionar familia</option>
-
                                 </select>
+
+                                <!-- selector personalizado con el mismo diseño de la vista Productos -->
+                                <div class="contenedor_selector_formulario_producto"
+                                    id="contenedor_selector_familia_formulario_producto">
+
+                                    <button class="boton_selector_formulario_producto"
+                                        id="boton_selector_familia_formulario_producto" type="button"
+                                        aria-haspopup="listbox" aria-expanded="false"
+                                        aria-controls="lista_selector_familia_formulario_producto">
+                                        <span class="texto_selector_formulario_producto"
+                                            id="texto_selector_familia_formulario_producto">Seleccionar familia</span>
+                                        <span class="flecha_selector_formulario_producto" aria-hidden="true">▾</span>
+                                    </button>
+
+                                    <div class="panel_selector_formulario_producto"
+                                        id="panel_selector_familia_formulario_producto" hidden>
+                                        <input class="input_buscar_selector_formulario_producto"
+                                            id="buscar_selector_familia_formulario_producto" type="search"
+                                            placeholder="Buscar familia..." autocomplete="off"
+                                            aria-label="Buscar familia">
+                                        <div class="lista_selector_formulario_producto"
+                                            id="lista_selector_familia_formulario_producto" role="listbox"
+                                            aria-label="Familias disponibles"></div>
+                                    </div>
+
+                                </div>
 
                             </div>
 
@@ -411,11 +439,36 @@
 
                                 <div class="texto_campo_proveedor_producto"> Proveedor </div>
 
-                                <select class="select_proveedor_producto" id="select_proveedor_producto" >
-
-                                    <option class="opcion_proveedor_producto" value="" > Seleccionar proveedor </option>
-
+                                <!-- conserva el proveedor que se enviara al backend -->
+                                <select class="select_proveedor_producto" id="select_proveedor_producto" hidden>
+                                    <option value="">Seleccionar proveedor</option>
                                 </select>
+
+                                <!-- selector personalizado con buscador y scroll hacia abajo -->
+                                <div class="contenedor_selector_formulario_producto"
+                                    id="contenedor_selector_proveedor_formulario_producto">
+
+                                    <button class="boton_selector_formulario_producto"
+                                        id="boton_selector_proveedor_formulario_producto" type="button"
+                                        aria-haspopup="listbox" aria-expanded="false"
+                                        aria-controls="lista_selector_proveedor_formulario_producto">
+                                        <span class="texto_selector_formulario_producto"
+                                            id="texto_selector_proveedor_formulario_producto">Seleccionar proveedor</span>
+                                        <span class="flecha_selector_formulario_producto" aria-hidden="true">▾</span>
+                                    </button>
+
+                                    <div class="panel_selector_formulario_producto"
+                                        id="panel_selector_proveedor_formulario_producto" hidden>
+                                        <input class="input_buscar_selector_formulario_producto"
+                                            id="buscar_selector_proveedor_formulario_producto" type="search"
+                                            placeholder="Buscar proveedor..." autocomplete="off"
+                                            aria-label="Buscar proveedor">
+                                        <div class="lista_selector_formulario_producto"
+                                            id="lista_selector_proveedor_formulario_producto" role="listbox"
+                                            aria-label="Proveedores disponibles"></div>
+                                    </div>
+
+                                </div>
 
                             </div>
 
@@ -564,6 +617,35 @@
                             <div class="boton_confirmar_importacion_productos" id="boton_confirmar_importacion_productos" onclick="importarProductos()">Importar productos</div>
 
                         </div>
+
+                </div>
+
+            </div>
+
+    
+
+        <!-- TITULO 14 MODAL DE MENSAJES Y CONFIRMACIONES -->
+
+            <!-- muestra avisos centrados sin utilizar alert ni confirm del navegador -->
+            <div class="contenedor_alerta_productos" id="contenedor_alerta_productos"
+                role="dialog" aria-modal="true"
+                aria-labelledby="titulo_alerta_productos"
+                aria-describedby="mensaje_alerta_productos" hidden>
+
+                <div class="modal_alerta_productos" data-tipo="informacion">
+
+                    <div class="icono_alerta_productos" id="icono_alerta_productos" aria-hidden="true">i</div>
+
+                    <div class="titulo_alerta_productos" id="titulo_alerta_productos">Aviso</div>
+
+                    <div class="mensaje_alerta_productos" id="mensaje_alerta_productos"></div>
+
+                    <div class="acciones_alerta_productos">
+                        <button class="boton_cancelar_alerta_productos" id="boton_cancelar_alerta_productos"
+                            type="button" hidden>Cancelar</button>
+                        <button class="boton_aceptar_alerta_productos" id="boton_aceptar_alerta_productos"
+                            type="button">Aceptar</button>
+                    </div>
 
                 </div>
 

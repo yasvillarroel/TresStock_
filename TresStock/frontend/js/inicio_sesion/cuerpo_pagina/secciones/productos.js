@@ -26,6 +26,122 @@ const productosPorPagina = 120;
 // almacenar los productos actuales que se estan mostrando 
 let productosFiltradosActuales = [];
 
+// TITULO 16 MODAL DE MENSAJES Y CONFIRMACIONES
+
+let resolverDialogoProducto = null;
+let focoAnteriorDialogoProducto = null;
+
+// prepara los eventos del modal de avisos de Productos
+function configurarDialogoProductos() {
+    const fondo = document.getElementById('contenedor_alerta_productos');
+    const aceptar = document.getElementById('boton_aceptar_alerta_productos');
+    const cancelar = document.getElementById('boton_cancelar_alerta_productos');
+
+    if (!fondo || !aceptar || !cancelar || fondo.dataset.configurado === 'si') return;
+    fondo.dataset.configurado = 'si';
+
+    aceptar.addEventListener('click', () => cerrarDialogoProductos(true));
+    cancelar.addEventListener('click', () => cerrarDialogoProductos(false));
+
+    fondo.addEventListener('click', function(evento) {
+        if (evento.target === fondo) cerrarDialogoProductos(false);
+    });
+
+    // Escape cancela la confirmación; Tab permanece dentro del modal
+    fondo.addEventListener('keydown', function(evento) {
+        if (evento.key === 'Escape') {
+            evento.preventDefault();
+            cerrarDialogoProductos(false);
+            return;
+        }
+
+        if (evento.key !== 'Tab') return;
+
+        const botones = [cancelar, aceptar].filter(boton => !boton.hidden);
+        const primero = botones[0];
+        const ultimo = botones[botones.length - 1];
+
+        if (evento.shiftKey && document.activeElement === primero) {
+            evento.preventDefault();
+            ultimo.focus();
+        } else if (!evento.shiftKey && document.activeElement === ultimo) {
+            evento.preventDefault();
+            primero.focus();
+        }
+    });
+}
+
+// abre una ventana centrada y devuelve true si el usuario confirma
+function abrirDialogoProductos({ titulo, mensaje, tipo = 'informacion', confirmar = false,
+    textoAceptar = 'Aceptar' }) {
+
+    const fondo = document.getElementById('contenedor_alerta_productos');
+    const ventana = fondo?.querySelector('.modal_alerta_productos');
+    const tituloElemento = document.getElementById('titulo_alerta_productos');
+    const mensajeElemento = document.getElementById('mensaje_alerta_productos');
+    const icono = document.getElementById('icono_alerta_productos');
+    const cancelar = document.getElementById('boton_cancelar_alerta_productos');
+    const aceptar = document.getElementById('boton_aceptar_alerta_productos');
+
+    if (!fondo || !ventana || !tituloElemento || !mensajeElemento || !icono || !aceptar || !cancelar) {
+        console.error('No está disponible el modal de mensajes de Productos.');
+        return Promise.resolve(false);
+    }
+
+    // no se superpone otra confirmación mientras haya una abierta
+    if (resolverDialogoProducto) return Promise.resolve(false);
+
+    configurarDialogoProductos();
+
+    const tipoValido = ['correcto', 'error', 'advertencia', 'informacion'].includes(tipo)
+        ? tipo : 'informacion';
+
+    tituloElemento.textContent = String(titulo || 'Aviso');
+    mensajeElemento.textContent = String(mensaje || '');
+    ventana.dataset.tipo = tipoValido;
+    icono.textContent = {
+        correcto: '✓', error: '×', advertencia: '!', informacion: 'i'
+    }[tipoValido];
+
+    cancelar.hidden = !confirmar;
+    aceptar.textContent = textoAceptar;
+    focoAnteriorDialogoProducto = document.activeElement;
+
+    return new Promise(function(resolve) {
+        resolverDialogoProducto = resolve;
+        fondo.hidden = false;
+        (confirmar ? cancelar : aceptar).focus();
+    });
+}
+
+// cierra el diálogo, resuelve la confirmación y devuelve el foco anterior
+function cerrarDialogoProductos(aceptado) {
+    const fondo = document.getElementById('contenedor_alerta_productos');
+    if (!fondo || fondo.hidden) return;
+
+    fondo.hidden = true;
+    const resolver = resolverDialogoProducto;
+    resolverDialogoProducto = null;
+
+    const elemento = focoAnteriorDialogoProducto;
+    focoAnteriorDialogoProducto = null;
+    if (elemento?.isConnected && typeof elemento.focus === 'function') elemento.focus();
+
+    if (resolver) resolver(Boolean(aceptado));
+}
+
+// muestra un aviso de éxito, error, advertencia o información
+function mostrarMensajeProducto(titulo, mensaje, tipo = 'informacion') {
+    return abrirDialogoProductos({ titulo, mensaje, tipo });
+}
+
+// pregunta al usuario antes de ejecutar una operación
+function confirmarAccionProducto(titulo, mensaje, textoAceptar = 'Confirmar') {
+    return abrirDialogoProductos({
+        titulo, mensaje, tipo: 'advertencia', confirmar: true, textoAceptar
+    });
+}
+
 // TITULO 1 FORMULARIO PRODUCTO
 
     // función para mostrar el formulario de registro de un nuevo producto
@@ -70,6 +186,9 @@ let productosFiltradosActuales = [];
 
     // función para ocultar el formulario de producto
     function cerrarFormularioProducto() {
+
+        // cierra los desplegables del formulario antes de ocultar el modal
+        cerrarSelectoresFormularioProducto();
 
         // libera la fotografía seleccionada si se cancela/cierra el formulario
         limpiarArchivoImagenManualProducto();
@@ -147,6 +266,11 @@ let productosFiltradosActuales = [];
         if (selectProveedorProducto) {
             selectProveedorProducto.value = '';
         }
+
+        // restablece también los desplegables personalizados
+        cerrarSelectoresFormularioProducto();
+        actualizarSelectorFormularioProducto('familia');
+        actualizarSelectorFormularioProducto('proveedor');
 
         // descarta archivos seleccionados en un producto anterior
         limpiarArchivoImagenManualProducto();
@@ -307,12 +431,13 @@ let productosFiltradosActuales = [];
         }
 
         // aviso visible antes de reemplazar saldos modificados con el escaner
-        const confirmado = confirm(
+        const confirmado = await confirmarAccionProducto(
+            'Confirmar importación',
             'El Excel debe incluir la columna STOCK ACTUAL.\n\n' +
-            'La importacion reemplazara el stock actual de TODOS los productos ' +
+            'La importación reemplazará el stock actual de todos los productos ' +
             'incluidos en el archivo, incluso si ya existen.\n\n' +
-            'Esto puede sobrescribir ajustes realizados con el escaner.\n\n' +
-            '¿Deseas continuar?'
+            'Esto puede sobrescribir ajustes realizados con el escáner.',
+            'Importar'
         );
 
         if (!confirmado) {
@@ -525,7 +650,7 @@ let productosFiltradosActuales = [];
             <tr class="fila_sin_productos">
                 <td
                     class="dato_sin_productos"
-                    colspan="8"
+                    colspan="9"
                 >
                     ${productosCargados.length
                         ? 'No se encontraron productos con los filtros seleccionados.'
@@ -598,11 +723,6 @@ let productosFiltradosActuales = [];
 
             <td class="dato_descripcion_productos">
                 ${escaparTextoProducto(producto.descripcion || '-')}
-                <div>
-                    <span class="etiqueta_estado_producto ${estaActivo ? 'etiqueta_producto_activo' : 'etiqueta_producto_inactivo'}">
-                        ${estaActivo ? 'Activo' : 'Inactivo'}
-                    </span>
-                </div>
             </td>
 
             <td class="dato_familia_productos">
@@ -617,6 +737,12 @@ let productosFiltradosActuales = [];
                 ${escaparTextoProducto(producto.proveedor || '-')}
             </td>
 
+            <!-- estado del producto en una columna independiente -->
+            <td class="dato_estado_productos">
+                <span class="etiqueta_estado_producto ${estaActivo ? 'etiqueta_producto_activo' : 'etiqueta_producto_inactivo'}">
+                    ${estaActivo ? 'Activo' : 'Inactivo'}
+                </span>
+            </td>
 
             <td class="dato_acciones_productos">
 
@@ -909,6 +1035,7 @@ function escaparTextoProducto(valor) {
                     selectFormulario.add(opcion);
                 });
                 selectFormulario.value = opcionesOrdenadas.includes(anterior) ? anterior : '';
+                actualizarSelectorFormularioProducto('familia');
             }
 
             // respeta la selección al terminar una recarga o edición
@@ -1450,12 +1577,14 @@ function escaparTextoProducto(valor) {
     // función para inicializar el funcionamiento de la vista productos
     async function inicializarProductos() {
 
+        configurarDialogoProductos();
         configurarImportacionProductos();
         configurarFiltroFamilias();
         configurarBusquedaProductos();
         configurarFiltroProveedoresProductos();
         configurarFiltroEstadoProductos();
         configurarLimpiarFiltrosProductos();
+        configurarSelectoresFormularioProducto();
         configurarPaginacionProductos();
         configurarAccionesProductos();
 
@@ -1805,6 +1934,174 @@ function mostrarNumerosPaginasProductos(totalPaginas) {
 
 
 
+// TITULO 14 SELECTORES PERSONALIZADOS DEL FORMULARIO DE PRODUCTO
+
+// reutiliza los select originales para mantener intacto el guardado en PostgreSQL
+function elementosSelectorFormularioProducto(tipo) {
+    if (tipo !== 'familia' && tipo !== 'proveedor') return null;
+
+    const idCampo = tipo === 'familia' ? 'input_familia_producto' : 'select_proveedor_producto';
+    const sufijo = tipo + '_formulario_producto';
+
+    return {
+        contenedor: document.getElementById('contenedor_selector_' + sufijo),
+        campo: document.getElementById(idCampo),
+        boton: document.getElementById('boton_selector_' + sufijo),
+        texto: document.getElementById('texto_selector_' + sufijo),
+        panel: document.getElementById('panel_selector_' + sufijo),
+        buscador: document.getElementById('buscar_selector_' + sufijo),
+        lista: document.getElementById('lista_selector_' + sufijo)
+    };
+}
+
+// actualiza el nombre del boton y las opciones disponibles
+function actualizarSelectorFormularioProducto(tipo) {
+    const elementos = elementosSelectorFormularioProducto(tipo);
+    if (!elementos?.campo || !elementos.texto) return;
+
+    const opcionActual = Array.from(elementos.campo.options).find(
+        opcion => opcion.value === elementos.campo.value
+    );
+
+    elementos.texto.textContent = opcionActual?.textContent?.trim() ||
+        (tipo === 'familia' ? 'Seleccionar familia' : 'Seleccionar proveedor');
+
+    mostrarOpcionesSelectorFormularioProducto(tipo);
+}
+
+// crea cada opcion de manera segura y destaca la seleccion actual
+function mostrarOpcionesSelectorFormularioProducto(tipo) {
+    const elementos = elementosSelectorFormularioProducto(tipo);
+    if (!elementos?.campo || !elementos.lista || !elementos.buscador) return;
+
+    const textoBuscado = normalizarTextoFiltroProducto(elementos.buscador.value);
+    const opciones = Array.from(elementos.campo.options).filter(opcion =>
+        normalizarTextoFiltroProducto(opcion.textContent).includes(textoBuscado)
+    );
+
+    elementos.lista.replaceChildren();
+
+    if (!opciones.length) {
+        const mensaje = document.createElement('div');
+        mensaje.className = 'mensaje_selector_formulario_producto';
+        mensaje.textContent = tipo === 'familia'
+            ? 'No se encontraron familias.'
+            : 'No se encontraron proveedores.';
+        elementos.lista.appendChild(mensaje);
+        return;
+    }
+
+    opciones.forEach(function(opcion) {
+        const boton = document.createElement('button');
+        boton.type = 'button';
+        boton.className = 'opcion_selector_formulario_producto';
+        boton.setAttribute('role', 'option');
+        boton.setAttribute('aria-selected', String(opcion.value === elementos.campo.value));
+        boton.textContent = opcion.textContent.trim();
+        boton.addEventListener('click', function() {
+            elementos.campo.value = opcion.value;
+            elementos.campo.dispatchEvent(new Event('change', { bubbles: true }));
+            actualizarSelectorFormularioProducto(tipo);
+            cerrarSelectorFormularioProducto(tipo);
+            elementos.boton?.focus();
+        });
+        elementos.lista.appendChild(boton);
+    });
+}
+
+// cierra un selector y restablece la busqueda para la siguiente apertura
+function cerrarSelectorFormularioProducto(tipo) {
+    const elementos = elementosSelectorFormularioProducto(tipo);
+    if (!elementos) return;
+
+    if (elementos.panel) elementos.panel.hidden = true;
+    if (elementos.boton) elementos.boton.setAttribute('aria-expanded', 'false');
+    if (elementos.buscador) elementos.buscador.value = '';
+}
+
+function cerrarSelectoresFormularioProducto() {
+    cerrarSelectorFormularioProducto('familia');
+    cerrarSelectorFormularioProducto('proveedor');
+}
+
+// abre hacia abajo el panel y permite buscar entre las opciones
+function abrirSelectorFormularioProducto(tipo) {
+    const elementos = elementosSelectorFormularioProducto(tipo);
+    if (!elementos?.panel || !elementos.boton || elementos.boton.disabled) return;
+
+    cerrarSelectoresFormularioProducto();
+    // evita dejar abiertos los filtros de la tabla si se reutiliza el modal
+    cerrarOtrosFiltrosPersonalizadosProductos();
+
+    elementos.panel.hidden = false;
+    elementos.boton.setAttribute('aria-expanded', 'true');
+    mostrarOpcionesSelectorFormularioProducto(tipo);
+    elementos.buscador?.focus();
+}
+
+// conecta los dos desplegables sin afectar los campos del formulario
+function configurarSelectoresFormularioProducto() {
+    ['familia', 'proveedor'].forEach(function(tipo) {
+        const elementos = elementosSelectorFormularioProducto(tipo);
+        if (!elementos?.boton || !elementos.panel || !elementos.buscador || !elementos.lista) return;
+
+        elementos.boton.addEventListener('click', function() {
+            if (elementos.panel.hidden) abrirSelectorFormularioProducto(tipo);
+            else cerrarSelectorFormularioProducto(tipo);
+        });
+
+        elementos.buscador.addEventListener('input', function() {
+            mostrarOpcionesSelectorFormularioProducto(tipo);
+        });
+
+        elementos.buscador.addEventListener('keydown', function(evento) {
+            if (evento.key === 'Escape') {
+                evento.preventDefault();
+                cerrarSelectorFormularioProducto(tipo);
+                elementos.boton.focus();
+            } else if (evento.key === 'ArrowDown') {
+                evento.preventDefault();
+                elementos.lista.querySelector('.opcion_selector_formulario_producto')?.focus();
+            } else if (evento.key === 'Enter') {
+                evento.preventDefault();
+                elementos.lista.querySelector('.opcion_selector_formulario_producto')?.click();
+            }
+        });
+
+        elementos.lista.addEventListener('keydown', function(evento) {
+            if (evento.key === 'Escape') {
+                evento.preventDefault();
+                cerrarSelectorFormularioProducto(tipo);
+                elementos.boton.focus();
+            } else if (evento.key === 'ArrowDown' || evento.key === 'ArrowUp') {
+                evento.preventDefault();
+                const opciones = Array.from(elementos.lista.querySelectorAll('.opcion_selector_formulario_producto'));
+                const indice = opciones.indexOf(document.activeElement);
+                const siguiente = evento.key === 'ArrowDown'
+                    ? Math.min(indice + 1, opciones.length - 1)
+                    : Math.max(indice - 1, 0);
+                opciones[siguiente]?.focus();
+            }
+        });
+
+        actualizarSelectorFormularioProducto(tipo);
+    });
+
+    document.addEventListener('click', function(evento) {
+        ['familia', 'proveedor'].forEach(function(tipo) {
+            const elementos = elementosSelectorFormularioProducto(tipo);
+            if (elementos?.contenedor && !elementos.contenedor.contains(evento.target)) {
+                cerrarSelectorFormularioProducto(tipo);
+            }
+        });
+    });
+
+    document.addEventListener('keydown', function(evento) {
+        if (evento.key === 'Escape') cerrarSelectoresFormularioProducto();
+    });
+}
+
+
 /* TITULO 14 ACCIONES DE PRODUCTOS */
 
 // obtiene los proveedores para el formulario
@@ -1850,6 +2147,7 @@ async function cargarOpcionesProveedoresProducto() {
     });
 
     select.value = seleccionado;
+    actualizarSelectorFormularioProducto('proveedor');
 }
 
 
@@ -1898,6 +2196,14 @@ function configurarEstadoFormularioProducto() {
             : 'Guardar producto';
     }
 
+    // los selectores del modal también respetan el modo de solo lectura
+    ['familia', 'proveedor'].forEach(function(tipo) {
+        const elementos = elementosSelectorFormularioProducto(tipo);
+        if (elementos?.boton) elementos.boton.disabled = soloLectura;
+        if (soloLectura) cerrarSelectorFormularioProducto(tipo);
+        actualizarSelectorFormularioProducto(tipo);
+    });
+
     actualizarBotonesImagenProducto();
 }
 
@@ -1910,7 +2216,7 @@ async function abrirDetalleProducto(codigo, modo) {
     );
 
     if (!producto) {
-        alert('No se encontró el producto');
+        await mostrarMensajeProducto('Producto no encontrado', 'No se encontró el producto seleccionado.', 'error');
         return;
     }
 
@@ -1949,6 +2255,7 @@ async function abrirDetalleProducto(codigo, modo) {
     document.getElementById(
         'input_familia_producto'
     ).value = producto.familia || '';
+    actualizarSelectorFormularioProducto('familia');
 
     document.getElementById(
         'input_precio_producto'
@@ -1963,10 +2270,11 @@ async function abrirDetalleProducto(codigo, modo) {
         document.getElementById(
             'select_proveedor_producto'
         ).value = producto.proveedor || '';
+        actualizarSelectorFormularioProducto('proveedor');
 
     } catch (error) {
 
-        alert(error.message);
+        await mostrarMensajeProducto('No se pudo completar la operación', error.message || 'Ocurrió un error inesperado.', 'error');
         return;
     }
 
@@ -2025,7 +2333,7 @@ async function guardarCambiosProducto() {
         precio < 0
     ) {
 
-        alert('Completa los campos obligatorios con datos válidos.');
+        await mostrarMensajeProducto('Datos incompletos', 'Completa los campos obligatorios con datos válidos.', 'advertencia');
         return;
     }
 
@@ -2089,15 +2397,15 @@ async function guardarCambiosProducto() {
         await cargarProductos();
         await cargarFamilias();
 
-        alert(
-            esEdicion
-                ? 'Producto actualizado correctamente'
-                : 'Producto creado correctamente'
+        await mostrarMensajeProducto(
+            esEdicion ? 'Producto actualizado' : 'Producto creado',
+            esEdicion ? 'Los cambios se guardaron correctamente.' : 'El producto se registró correctamente.',
+            'correcto'
         );
 
     } catch (error) {
 
-        alert(error.message);
+        await mostrarMensajeProducto('No se pudo completar la operación', error.message || 'Ocurrió un error inesperado.', 'error');
 
     } finally {
 
@@ -2121,10 +2429,12 @@ async function confirmarCambioEstadoProducto(codigo) {
     const nuevoEstado = !estaActivo;
     const accion = nuevoEstado ? 'activar' : 'desactivar';
 
-    const confirmar = confirm(
+    const confirmar = await confirmarAccionProducto(
+        nuevoEstado ? 'Activar producto' : 'Desactivar producto',
         '¿Estás seguro de ' + accion + ' el producto ' +
         producto.descripcion + '?\n\n' +
-        'El producto y su historial se conservarán en la base de datos.'
+        'El producto y su historial se conservarán en la base de datos.',
+        nuevoEstado ? 'Activar' : 'Desactivar'
     );
 
     if (!confirmar) return;
@@ -2153,10 +2463,13 @@ async function confirmarCambioEstadoProducto(codigo) {
 
         await cargarProductos();
 
-        alert('Producto ' + (nuevoEstado ? 'activado' : 'desactivado') +
-              ' correctamente');
+        await mostrarMensajeProducto(
+            nuevoEstado ? 'Producto activado' : 'Producto desactivado',
+            'El estado del producto se actualizó correctamente.',
+            'correcto'
+        );
     } catch (error) {
-        alert(error.message);
+        await mostrarMensajeProducto('No se pudo completar la operación', error.message || 'Ocurrió un error inesperado.', 'error');
     } finally {
         cambiandoEstadoProducto = false;
     }
