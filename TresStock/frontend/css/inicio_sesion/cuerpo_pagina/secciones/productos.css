@@ -359,12 +359,15 @@
 
 /* TITULO 4 FILTROS PRODUCTOS */
 
-    /* clase para organizar las opciones de búsqueda y filtrado */
+    /* distribuye el buscador, tres filtros y el botón limpiar */
     .contenedor_filtros_productos {
+        position: relative;
+        z-index: 5;
         width: 100%;
         display: grid;
-        grid-template-columns: 2fr 1fr 1fr;
-        gap: 18px;
+        grid-template-columns: minmax(190px, 2fr) repeat(3, minmax(110px, 1fr)) auto;
+        gap: 12px;
+        align-items: end;
         background-color: #ffffff;
         border: 1px solid #dce4e8;
         border-radius: 8px;
@@ -373,72 +376,20 @@
         box-sizing: border-box;
     }
 
-    /* clase para organizar el buscador */
-    .contenedor_busqueda_productos {
-        display: flex;
-        flex-direction: column;
-    }
-
-    /* clase para establecer el texto del buscador */
-    .texto_busqueda_productos {
-        color: #536873;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 7px;
-    }
-
-    /* clase para establecer el campo de búsqueda */
-    .input_busqueda_productos {
-        width: 100%;
-        height: 40px;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        padding: 0 12px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        box-sizing: border-box;
-        outline: none;
-    }
-
-    /* clase para organizar el filtro por familia */
-    .contenedor_familia_productos {
-        display: flex;
-        flex-direction: column;
-    }
-
-    /* clase para establecer el texto del filtro familia */
-    .texto_familia_productos {
-        color: #536873;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 7px;
-    }
-
-    /* clase para establecer el selector de familia */
-    .select_familia_productos {
-        width: 100%;
-        height: 40px;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        padding: 0 10px;
-        background-color: #ffffff;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        box-sizing: border-box;
-        outline: none;
-    }
-
-    /* contenedor del filtro por estado */
+    /* organiza los campos sin desbordar la grilla */
+    .contenedor_busqueda_productos,
+    .contenedor_familia_productos,
+    .contenedor_proveedor_filtro_productos,
     .contenedor_estado_productos {
         display: flex;
         flex-direction: column;
+        min-width: 0;
     }
 
-    /* texto del filtro de estado */
+    /* textos superiores iguales para todos los filtros */
+    .texto_busqueda_productos,
+    .texto_familia_productos,
+    .texto_proveedor_filtro_productos,
     .texto_estado_productos {
         color: #536873;
         font-family: Arial, sans-serif;
@@ -447,13 +398,13 @@
         margin-bottom: 7px;
     }
 
-    /* selector de activos, inactivos o todos */
-    .select_estado_productos {
+    /* buscador principal de productos */
+    .input_busqueda_productos {
         width: 100%;
         height: 40px;
         border: 1px solid #ced9de;
         border-radius: 6px;
-        padding: 0 10px;
+        padding: 0 12px;
         background-color: #ffffff;
         color: #37434b;
         font-family: Arial, sans-serif;
@@ -462,14 +413,220 @@
         outline: none;
     }
 
-
-    /* clase para establecer las opciones de familia */
+    /* mantiene el formato de opciones del formulario de edición */
     .opcion_familia_productos {
         color: #37434b;
         font-family: Arial, sans-serif;
         font-size: 13px;
     }
 
+/* SUBTITULO 1 SELECTORES PERSONALIZADOS DE FAMILIA, PROVEEDOR Y ESTADO */
+
+    /* todos los desplegables quedan anclados a su campo */
+    .contenedor_selector_familia_productos,
+    .contenedor_selector_proveedor_productos,
+    .contenedor_selector_estado_productos {
+        position: relative;
+        width: 100%;
+        min-width: 0;
+    }
+
+    /* botones exactamente iguales para los tres filtros */
+    .boton_selector_familia_productos,
+    .boton_selector_proveedor_productos,
+    .boton_selector_estado_productos {
+        width: 100%;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 0 10px;
+        background-color: #ffffff;
+        border: 1px solid #ced9de;
+        border-radius: 6px;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        text-align: left;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+    /* evita que los nombres largos modifiquen las dimensiones */
+    .texto_selector_familia_productos,
+    .texto_selector_proveedor_productos,
+    .texto_selector_estado_productos {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    /* flechas coherentes con el selector de proveedores */
+    .flecha_selector_familia_productos,
+    .flecha_selector_proveedor_productos,
+    .flecha_selector_estado_productos {
+        flex-shrink: 0;
+        color: #536873;
+        font-size: 15px;
+    }
+
+    /* borde turquesa cuando el desplegable está abierto */
+    .boton_selector_familia_productos[aria-expanded="true"],
+    .boton_selector_proveedor_productos[aria-expanded="true"],
+    .boton_selector_estado_productos[aria-expanded="true"] {
+        border-color: #159ba3;
+    }
+
+    /* paneles idénticos, siempre debajo y alineados con el botón */
+    .panel_selector_familia_productos,
+    .panel_selector_proveedor_productos,
+    .panel_selector_estado_productos {
+        position: absolute;
+        top: calc(100% + 5px);
+        left: 0;
+        width: 100%;
+        max-width: 100%;
+        padding: 8px;
+        background-color: #ffffff;
+        border: 1px solid #ced9de;
+        border-radius: 7px;
+        box-shadow: 0 8px 24px rgba(5, 31, 45, 0.15);
+        box-sizing: border-box;
+        z-index: 60;
+    }
+
+    /* oculta los paneles cerrados */
+    .panel_selector_familia_productos[hidden],
+    .panel_selector_proveedor_productos[hidden],
+    .panel_selector_estado_productos[hidden] {
+        display: none;
+    }
+
+    /* buscadores interiores de Familia y Proveedor */
+    .input_buscar_familia_productos,
+    .input_buscar_proveedor_productos {
+        display: block;
+        width: 100%;
+        height: 36px;
+        padding: 0 10px;
+        margin-bottom: 7px;
+        background-color: #ffffff;
+        border: 1px solid #ced9de;
+        border-radius: 5px;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        box-sizing: border-box;
+    }
+
+    /* limita la altura para desplazar las opciones sin agrandar el menú */
+    .lista_opciones_familia_productos,
+    .lista_opciones_proveedor_productos,
+    .lista_opciones_estado_productos {
+        max-height: 224px;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+
+    /* opciones de los tres desplegables */
+    .opcion_lista_familia_productos,
+    .opcion_lista_proveedor_productos,
+    .opcion_lista_estado_productos {
+        display: block;
+        width: 100%;
+        min-height: 34px;
+        padding: 8px 10px;
+        border: none;
+        border-radius: 4px;
+        background-color: #ffffff;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        text-align: left;
+        overflow-wrap: anywhere;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+    /* turquesa suave al pasar el cursor o enfocar con teclado */
+    .opcion_lista_familia_productos:hover,
+    .opcion_lista_proveedor_productos:hover,
+    .opcion_lista_estado_productos:hover,
+    .opcion_lista_familia_productos:focus-visible,
+    .opcion_lista_proveedor_productos:focus-visible,
+    .opcion_lista_estado_productos:focus-visible {
+        background-color: #e4f6f6;
+    }
+
+    /* mismo resaltado para la opción elegida */
+    .opcion_lista_familia_productos[aria-selected="true"],
+    .opcion_lista_proveedor_productos[aria-selected="true"],
+    .opcion_lista_estado_productos[aria-selected="true"] {
+        background-color: #e4f6f6;
+        color: #0f858d;
+        font-weight: bold;
+    }
+
+    /* aviso al buscar un nombre inexistente */
+    .mensaje_lista_familia_productos,
+    .mensaje_lista_proveedor_productos {
+        padding: 12px 8px;
+        color: #697a83;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+    }
+
+/* SUBTITULO 2 LIMPIAR FILTROS */
+
+    .contenedor_limpiar_filtros_productos {
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+    }
+
+    .boton_limpiar_filtros_productos {
+        min-height: 40px;
+        padding: 0 13px;
+        border: 1px solid #159ba3;
+        border-radius: 6px;
+        background-color: #ffffff;
+        color: #0f858d;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        white-space: nowrap;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    .boton_limpiar_filtros_productos:hover {
+        background-color: #e4f6f6;
+    }
+
+    /* indicadores de foco para teclado */
+    .boton_limpiar_filtros_productos:focus-visible,
+    .boton_selector_familia_productos:focus-visible,
+    .boton_selector_proveedor_productos:focus-visible,
+    .boton_selector_estado_productos:focus-visible,
+    .input_buscar_familia_productos:focus-visible,
+    .input_buscar_proveedor_productos:focus-visible,
+    .input_busqueda_productos:focus-visible {
+        outline: 2px solid #159ba3;
+        outline-offset: 2px;
+    }
+
+/* SUBTITULO 3 RESPONSIVE FILTROS */
+
+    @media (max-width: 1200px) {
+        .contenedor_filtros_productos {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .contenedor_limpiar_filtros_productos {
+            grid-column: 1 / -1;
+        }
+    }
 
 /* TITULO 5 TABLA PRODUCTOS */
 
@@ -1572,7 +1729,7 @@
         }
 
         .contenedor_filtros_productos {
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
         .contenedor_campos_producto {
@@ -1964,3 +2121,16 @@
         }
 
     }
+
+/* TITULO FINAL RESPONSIVE FILTROS PRODUCTOS */
+@media (max-width: 600px) {
+    .contenedor_filtros_productos {
+        grid-template-columns: 1fr;
+    }
+    .contenedor_limpiar_filtros_productos {
+        grid-column: auto;
+    }
+    .boton_limpiar_filtros_productos {
+        width: 100%;
+    }
+}

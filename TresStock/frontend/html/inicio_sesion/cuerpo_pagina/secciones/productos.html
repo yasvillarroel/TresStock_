@@ -129,46 +129,112 @@
 
         <!-- TITULO 4 FILTROS PRODUCTOS -->
 
-            <!-- contenedor que agrupa las opciones de búsqueda y filtrado -->
+            <!-- contenedor que agrupa la búsqueda y los filtros de productos -->
             <div class="contenedor_filtros_productos">
 
-                <!-- contenedor del buscador de productos -->
+                <!-- buscador por código, código de barras o descripción -->
                 <div class="contenedor_busqueda_productos">
-
-                    <!-- texto descriptivo del buscador -->
-                    <div class="texto_busqueda_productos"> Buscar producto </div>
-
-                    <!-- campo para buscar por código, código de barras o descripción -->
-                    <input class="input_busqueda_productos" id="input_busqueda_productos" type="text" placeholder="Código, código de barras o descripción" >
-
+                    <div class="texto_busqueda_productos">Buscar producto</div>
+                    <input class="input_busqueda_productos" id="input_busqueda_productos"
+                        type="search" placeholder="Código, código de barras o descripción"
+                        autocomplete="off" aria-label="Buscar producto">
                 </div>
 
-                <!-- contenedor del filtro por familia -->
+                <!-- filtro personalizado por familia, igual al de proveedores -->
                 <div class="contenedor_familia_productos">
+                    <div class="texto_familia_productos">Familia</div>
 
-                    <!-- texto descriptivo del filtro por familia -->
-                    <div class="texto_familia_productos"> Familia </div>
+                    <div class="contenedor_selector_familia_productos" id="contenedor_selector_familia_productos">
+                        <!-- mantiene el valor utilizado por el filtrado de productos -->
+                        <input type="hidden" id="select_familia_productos" value="">
 
-                    <!-- selector para filtrar los productos por familia -->
-                    <select class="select_familia_productos" id="select_familia_productos" >
+                        <button class="boton_selector_familia_productos"
+                            id="boton_selector_familia_productos" type="button"
+                            aria-haspopup="listbox" aria-expanded="false"
+                            aria-controls="lista_opciones_familia_productos">
+                            <span class="texto_selector_familia_productos"
+                                id="texto_selector_familia_productos">Todas las familias</span>
+                            <span class="flecha_selector_familia_productos" aria-hidden="true">▾</span>
+                        </button>
 
-                        <option class="opcion_familia_productos" value="" > Todas las familias </option>
-
-                    </select>
-
+                        <!-- buscador y opciones de familia, siempre bajo el selector -->
+                        <div class="panel_selector_familia_productos"
+                            id="panel_selector_familia_productos" hidden>
+                            <input class="input_buscar_familia_productos"
+                                id="input_buscar_familia_productos" type="search"
+                                placeholder="Buscar familia..." autocomplete="off"
+                                aria-label="Buscar en la lista de familias">
+                            <div class="lista_opciones_familia_productos"
+                                id="lista_opciones_familia_productos" role="listbox"
+                                aria-label="Familias"></div>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- contenedor del filtro por estado del producto -->
-                <div class="contenedor_estado_productos">
+                <!-- filtro personalizado de proveedores con búsqueda y lista hacia abajo -->
+                <div class="contenedor_proveedor_filtro_productos">
+                    <div class="texto_proveedor_filtro_productos">Proveedor</div>
 
+                    <div class="contenedor_selector_proveedor_productos" id="contenedor_selector_proveedor_productos">
+                        <!-- almacena el proveedor seleccionado para los filtros existentes -->
+                        <input type="hidden" id="select_proveedor_filtro_productos" value="">
+
+                        <!-- botón que abre el listado de proveedores -->
+                        <button class="boton_selector_proveedor_productos"
+                            id="boton_selector_proveedor_productos" type="button"
+                            aria-haspopup="listbox" aria-expanded="false"
+                            aria-controls="lista_opciones_proveedor_productos">
+                            <span class="texto_selector_proveedor_productos"
+                                id="texto_selector_proveedor_productos">Todos los proveedores</span>
+                            <span class="flecha_selector_proveedor_productos" aria-hidden="true">▾</span>
+                        </button>
+
+                        <!-- panel desplegable: siempre anclado debajo del botón -->
+                        <div class="panel_selector_proveedor_productos"
+                            id="panel_selector_proveedor_productos" hidden>
+                            <input class="input_buscar_proveedor_productos"
+                                id="input_buscar_proveedor_productos" type="search"
+                                placeholder="Buscar proveedor..." autocomplete="off"
+                                aria-label="Buscar en la lista de proveedores">
+                            <div class="lista_opciones_proveedor_productos"
+                                id="lista_opciones_proveedor_productos" role="listbox"
+                                aria-label="Proveedores"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- filtro personalizado de estado con la misma apariencia -->
+                <div class="contenedor_estado_productos">
                     <div class="texto_estado_productos">Estado</div>
 
-                    <select class="select_estado_productos" id="select_estado_productos">
-                        <option value="activos">Activos</option>
-                        <option value="inactivos">Inactivos</option>
-                        <option value="todos">Todos</option>
-                    </select>
+                    <div class="contenedor_selector_estado_productos" id="contenedor_selector_estado_productos">
+                        <input type="hidden" id="select_estado_productos" value="activos">
 
+                        <button class="boton_selector_estado_productos"
+                            id="boton_selector_estado_productos" type="button"
+                            aria-haspopup="listbox" aria-expanded="false"
+                            aria-controls="lista_opciones_estado_productos">
+                            <span class="texto_selector_estado_productos"
+                                id="texto_selector_estado_productos">Activos</span>
+                            <span class="flecha_selector_estado_productos" aria-hidden="true">▾</span>
+                        </button>
+
+                        <!-- tres estados: no necesita buscador interior -->
+                        <div class="panel_selector_estado_productos"
+                            id="panel_selector_estado_productos" hidden>
+                            <div class="lista_opciones_estado_productos"
+                                id="lista_opciones_estado_productos" role="listbox"
+                                aria-label="Estado de los productos"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- restablece los filtros a la vista de productos activos -->
+                <div class="contenedor_limpiar_filtros_productos">
+                    <button class="boton_limpiar_filtros_productos" id="boton_limpiar_filtros_productos"
+                        type="button" title="Restablecer filtros y mostrar productos activos">
+                        Limpiar filtros
+                    </button>
                 </div>
 
             </div>

@@ -434,7 +434,10 @@ let productosFiltradosActuales = [];
 
             productosCargados = productos;
 
-            // conserva la búsqueda, la familia y el estado seleccionados
+            // actualiza el selector de proveedores con los productos disponibles
+            actualizarOpcionesFiltroProveedoresProductos();
+
+            // conserva los filtros y la página actual al recargar los datos
             filtrarProductos(false);
 
             actualizarIndicadoresProductos(
@@ -524,7 +527,9 @@ let productosFiltradosActuales = [];
                     class="dato_sin_productos"
                     colspan="8"
                 >
-                    No hay productos cargados para mostrar.
+                    ${productosCargados.length
+                        ? 'No se encontraron productos con los filtros seleccionados.'
+                        : 'No hay productos cargados para mostrar.'}
                 </td>
             </tr>
         `;
@@ -848,253 +853,596 @@ function escaparTextoProducto(valor) {
 
 // TITULO 8 CARGAR FAMILIAS
 
-    // función para obtener las familias desde el backend
+    // obtiene las familias desde PostgreSQL para el filtro y el formulario
     async function cargarFamilias() {
 
-        // selector de familias del filtro
-        const selectFamilia = document.getElementById(
-            'select_familia_productos'
-        );
+        const campoFiltro = document.getElementById('select_familia_productos');
+        const selectFormulario = document.getElementById('input_familia_producto');
 
-        // selector de familias del formulario
-        const selectFamiliaFormulario = document.getElementById(
-            'input_familia_producto'
-        );
-
-        if (!selectFamilia && !selectFamiliaFormulario) {
-            return;
-        }
+        if (!campoFiltro && !selectFormulario) return;
 
         try {
-
-            // obtiene las familias desde PostgreSQL
             const respuesta = await fetch(
                 'http://127.0.0.1:3000/api/productos/familias',
-                {
-                    method: 'GET',
-                    credentials: 'include'
-                }
+                { method: 'GET', credentials: 'include' }
             );
 
-            if (!respuesta.ok) {
-                throw new Error('No se pudieron obtener las familias');
-            }
+            if (!respuesta.ok) throw new Error('No se pudieron obtener las familias');
 
-            const familias = await respuesta.json();
+            const datos = await respuesta.json();
+            const familias = Array.isArray(datos) ? datos : [];
 
-            // actualiza ambos selectores
-            const selectores = [
-                {
-                    elemento: selectFamilia,
-                    textoInicial: 'Todas las familias'
-                },
-                {
-                    elemento: selectFamiliaFormulario,
-                    textoInicial: 'Seleccionar familia'
-                }
-            ];
-
-            selectores.forEach(function(selector) {
-
-                if (!selector.elemento) {
-                    return;
-                }
-
-                // conserva la familia seleccionada
-                const valorAnterior = selector.elemento.value;
-
-                // limpia las opciones anteriores
-                selector.elemento.replaceChildren();
-
-                // agrega la opcion inicial
-                const opcionInicial = document.createElement('option');
-
-                opcionInicial.value = '';
-                opcionInicial.textContent = selector.textoInicial;
-
-                selector.elemento.appendChild(opcionInicial);
-
-                // agrega las familias registradas
-                familias.forEach(function(familia) {
-
-                    const opcion = document.createElement('option');
-
-                    opcion.className = 'opcion_familia_productos';
-
-                    opcion.value = familia.familia;
-                    opcion.textContent = familia.familia;
-
-                    selector.elemento.appendChild(opcion);
-
-                });
-
-                // restaura la seleccion anterior
-                selector.elemento.value = valorAnterior;
-
+            // las familias disponibles provienen del mismo endpoint de siempre
+            const nombres = new Map();
+            familias.forEach(function(familia) {
+                const nombre = String(familia.familia ?? '').trim();
+                const clave = normalizarTextoFiltroProducto(nombre);
+                if (clave && !nombres.has(clave)) nombres.set(clave, nombre);
             });
 
-        } catch (error) {
-
-            console.error(
-                'Error al cargar familias:',
-                error
+            const opcionesOrdenadas = Array.from(nombres.values()).sort((a, b) =>
+                a.localeCompare(b, 'es', { sensitivity: 'base' })
             );
 
-        }
+            opcionesDisponiblesFiltroFamiliasProductos = [
+                { valor: '', nombre: 'Todas las familias' },
+                ...opcionesOrdenadas.map(nombre => ({ valor: nombre, nombre }))
+            ];
 
+            // conserva la familia elegida si todavía está disponible
+            if (campoFiltro) {
+                const anterior = campoFiltro.value;
+                campoFiltro.value = opcionesDisponiblesFiltroFamiliasProductos.some(
+                    opcion => opcion.valor === anterior
+                ) ? anterior : '';
+                actualizarTextoFiltroPersonalizadoProductos('familia');
+                mostrarOpcionesListaFiltroPersonalizadoProductos('familia');
+            }
+
+            // el selector del formulario Nuevo/Editar producto sigue siendo nativo
+            if (selectFormulario) {
+                const anterior = selectFormulario.value;
+                selectFormulario.replaceChildren(new Option('Seleccionar familia', ''));
+                opcionesOrdenadas.forEach(function(nombre) {
+                    const opcion = new Option(nombre, nombre);
+                    opcion.className = 'opcion_familia_productos';
+                    selectFormulario.add(opcion);
+                });
+                selectFormulario.value = opcionesOrdenadas.includes(anterior) ? anterior : '';
+            }
+
+            // respeta la selección al terminar una recarga o edición
+            filtrarProductos(false);
+
+        } catch (error) {
+            console.error('Error al cargar familias:', error);
+        }
     }
 
 
+// TITULO 9 FUNCIONES AUXILIARES DE FILTRADO
 
-// TITULO 9 FILTRO FAMILIA
+    // permite buscar sin diferencias entre mayúsculas, tildes o guiones
+    function normalizarTextoFiltroProducto(valor) {
+        return String(valor ?? '')
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, ' ')
+            .trim()
+            .replace(/\s+/g, ' ');
+    }
 
-    // función para activar el filtro por familia
+    // admite productos asociados a más de un proveedor (STRING_AGG del backend)
+    function proveedoresAsociadosFiltroProducto(producto) {
+        return String(producto.proveedor ?? '')
+            .split(',')
+            .map(nombre => nombre.trim())
+            .filter(nombre => nombre !== '' && nombre !== '-');
+    }
+
+    // opciones disponibles en el selector personalizado de proveedores
+    let opcionesDisponiblesFiltroProveedoresProductos = [
+        { valor: '', nombre: 'Todos los proveedores' },
+        { valor: '__sin_proveedor__', nombre: 'Sin proveedor' }
+    ];
+
+    // escribe el nombre del proveedor seleccionado en el botón
+    function actualizarTextoSelectorProveedorProductos() {
+        const campo = document.getElementById('select_proveedor_filtro_productos');
+        const texto = document.getElementById('texto_selector_proveedor_productos');
+        if (!campo || !texto) return;
+
+        const seleccionado = opcionesDisponiblesFiltroProveedoresProductos.find(
+            opcion => opcion.valor === campo.value
+        );
+        texto.textContent = seleccionado?.nombre || 'Todos los proveedores';
+    }
+
+    // construye la lista mediante nodos seguros, sin insertar HTML del proveedor
+    function mostrarOpcionesListaProveedorProductos() {
+        const campo = document.getElementById('select_proveedor_filtro_productos');
+        const buscador = document.getElementById('input_buscar_proveedor_productos');
+        const lista = document.getElementById('lista_opciones_proveedor_productos');
+        if (!campo || !buscador || !lista) return;
+
+        const textoBusqueda = normalizarTextoFiltroProducto(buscador.value);
+        lista.replaceChildren();
+
+        const encontrados = opcionesDisponiblesFiltroProveedoresProductos.filter(
+            opcion => normalizarTextoFiltroProducto(opcion.nombre).includes(textoBusqueda)
+        );
+
+        if (!encontrados.length) {
+            const mensaje = document.createElement('div');
+            mensaje.className = 'mensaje_lista_proveedor_productos';
+            mensaje.textContent = 'No se encontraron proveedores.';
+            lista.appendChild(mensaje);
+            return;
+        }
+
+        encontrados.forEach(function(opcion) {
+            const boton = document.createElement('button');
+            boton.type = 'button';
+            boton.className = 'opcion_lista_proveedor_productos';
+            boton.setAttribute('role', 'option');
+            boton.setAttribute('aria-selected', String(opcion.valor === campo.value));
+            boton.textContent = opcion.nombre;
+            boton.addEventListener('click', function() {
+                seleccionarOpcionProveedorProductos(opcion.valor);
+            });
+            lista.appendChild(boton);
+        });
+    }
+
+    // cierra la lista de proveedores sin cambiar el filtro
+    function cerrarListaProveedorProductos() {
+        const panel = document.getElementById('panel_selector_proveedor_productos');
+        const boton = document.getElementById('boton_selector_proveedor_productos');
+        if (panel) panel.hidden = true;
+        if (boton) boton.setAttribute('aria-expanded', 'false');
+    }
+
+    // abre la lista debajo del selector y permite escribir inmediatamente
+    function abrirListaProveedorProductos() {
+        const panel = document.getElementById('panel_selector_proveedor_productos');
+        const boton = document.getElementById('boton_selector_proveedor_productos');
+        const buscador = document.getElementById('input_buscar_proveedor_productos');
+        if (!panel || !boton || !buscador) return;
+
+        cerrarOtrosFiltrosPersonalizadosProductos('proveedor');
+        panel.hidden = false;
+        boton.setAttribute('aria-expanded', 'true');
+        buscador.value = '';
+        mostrarOpcionesListaProveedorProductos();
+        buscador.focus();
+
+        // si la lista quedara bajo el borde de pantalla, desplaza la vista
+        if (panel.getBoundingClientRect().bottom > window.innerHeight - 12) {
+            panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    }
+
+    // actualiza el valor que usa filtrarProductos y cierra la lista
+    function seleccionarOpcionProveedorProductos(valor) {
+        const campo = document.getElementById('select_proveedor_filtro_productos');
+        const boton = document.getElementById('boton_selector_proveedor_productos');
+        if (!campo) return;
+
+        campo.value = valor;
+        actualizarTextoSelectorProveedorProductos();
+        cerrarListaProveedorProductos();
+        filtrarProductos(true);
+        if (boton) boton.focus();
+    }
+
+    // carga solamente proveedores asociados a productos y conserva la seleccion
+    function actualizarOpcionesFiltroProveedoresProductos() {
+        const campo = document.getElementById('select_proveedor_filtro_productos');
+        if (!campo) return;
+
+        const valorAnterior = campo.value;
+        const nombres = new Map();
+
+        productosCargados.forEach(function(producto) {
+            proveedoresAsociadosFiltroProducto(producto).forEach(function(nombre) {
+                const clave = normalizarTextoFiltroProducto(nombre);
+                if (clave && !nombres.has(clave)) nombres.set(clave, nombre);
+            });
+        });
+
+        const opciones = Array.from(nombres.values()).sort((a, b) =>
+            a.localeCompare(b, 'es', { sensitivity: 'base' })
+        );
+
+        opcionesDisponiblesFiltroProveedoresProductos = [
+            { valor: '', nombre: 'Todos los proveedores' },
+            { valor: '__sin_proveedor__', nombre: 'Sin proveedor' },
+            ...opciones.map(nombre => ({ valor: nombre, nombre }))
+        ];
+
+        const existe = opcionesDisponiblesFiltroProveedoresProductos.some(
+            opcion => opcion.valor === valorAnterior
+        );
+        campo.value = existe ? valorAnterior : '';
+        actualizarTextoSelectorProveedorProductos();
+        mostrarOpcionesListaProveedorProductos();
+    }
+
+
+    // conserva la misma experiencia visual que Proveedor en Familia y Estado
+    let opcionesDisponiblesFiltroFamiliasProductos = [
+        { valor: '', nombre: 'Todas las familias' }
+    ];
+
+    const opcionesDisponiblesFiltroEstadosProductos = [
+        { valor: 'activos', nombre: 'Activos' },
+        { valor: 'inactivos', nombre: 'Inactivos' },
+        { valor: 'todos', nombre: 'Todos' }
+    ];
+
+    // obtiene los elementos de Familia o Estado según el selector solicitado
+    function elementosFiltroPersonalizadoProductos(tipo) {
+        if (tipo !== 'familia' && tipo !== 'estado') return null;
+
+        return {
+            contenedor: document.getElementById('contenedor_selector_' + tipo + '_productos'),
+            campo: document.getElementById('select_' + tipo + '_productos'),
+            boton: document.getElementById('boton_selector_' + tipo + '_productos'),
+            texto: document.getElementById('texto_selector_' + tipo + '_productos'),
+            panel: document.getElementById('panel_selector_' + tipo + '_productos'),
+            lista: document.getElementById('lista_opciones_' + tipo + '_productos'),
+            buscador: tipo === 'familia' ? document.getElementById('input_buscar_familia_productos') : null
+        };
+    }
+
+    function opcionesFiltroPersonalizadoProductos(tipo) {
+        return tipo === 'familia'
+            ? opcionesDisponiblesFiltroFamiliasProductos
+            : opcionesDisponiblesFiltroEstadosProductos;
+    }
+
+    // refleja en el botón la opción elegida (igual que Proveedor)
+    function actualizarTextoFiltroPersonalizadoProductos(tipo) {
+        const elementos = elementosFiltroPersonalizadoProductos(tipo);
+        if (!elementos?.campo || !elementos.texto) return;
+
+        const opcion = opcionesFiltroPersonalizadoProductos(tipo).find(
+            item => item.valor === elementos.campo.value
+        );
+        elementos.texto.textContent = opcion?.nombre || (tipo === 'familia' ? 'Todas las familias' : 'Activos');
+    }
+
+    // crea las opciones de forma segura y marca la seleccionada en turquesa
+    function mostrarOpcionesListaFiltroPersonalizadoProductos(tipo) {
+        const elementos = elementosFiltroPersonalizadoProductos(tipo);
+        if (!elementos?.campo || !elementos.lista) return;
+
+        const busqueda = elementos.buscador
+            ? normalizarTextoFiltroProducto(elementos.buscador.value)
+            : '';
+        elementos.lista.replaceChildren();
+
+        const opciones = opcionesFiltroPersonalizadoProductos(tipo).filter(
+            item => normalizarTextoFiltroProducto(item.nombre).includes(busqueda)
+        );
+
+        if (opciones.length === 0) {
+            const aviso = document.createElement('div');
+            aviso.className = 'mensaje_lista_' + tipo + '_productos';
+            aviso.textContent = tipo === 'familia' ? 'No se encontraron familias.' : 'No hay opciones.';
+            elementos.lista.appendChild(aviso);
+            return;
+        }
+
+        opciones.forEach(function(opcion) {
+            const boton = document.createElement('button');
+            boton.type = 'button';
+            boton.className = 'opcion_lista_' + tipo + '_productos';
+            boton.setAttribute('role', 'option');
+            boton.setAttribute('aria-selected', String(opcion.valor === elementos.campo.value));
+            boton.textContent = opcion.nombre;
+            boton.addEventListener('click', function() {
+                seleccionarOpcionFiltroPersonalizadoProductos(tipo, opcion.valor);
+            });
+            elementos.lista.appendChild(boton);
+        });
+    }
+
+    function cerrarListaFiltroPersonalizadoProductos(tipo) {
+        const elementos = elementosFiltroPersonalizadoProductos(tipo);
+        if (!elementos) return;
+        if (elementos.panel) elementos.panel.hidden = true;
+        if (elementos.boton) elementos.boton.setAttribute('aria-expanded', 'false');
+    }
+
+    // solo abre uno de los tres filtros a la vez
+    function cerrarOtrosFiltrosPersonalizadosProductos(excepto) {
+        if (excepto !== 'familia') cerrarListaFiltroPersonalizadoProductos('familia');
+        if (excepto !== 'proveedor') cerrarListaProveedorProductos();
+        if (excepto !== 'estado') cerrarListaFiltroPersonalizadoProductos('estado');
+    }
+
+    function abrirListaFiltroPersonalizadoProductos(tipo) {
+        const elementos = elementosFiltroPersonalizadoProductos(tipo);
+        if (!elementos?.panel || !elementos.boton) return;
+
+        cerrarOtrosFiltrosPersonalizadosProductos(tipo);
+        elementos.panel.hidden = false;
+        elementos.boton.setAttribute('aria-expanded', 'true');
+
+        if (elementos.buscador) elementos.buscador.value = '';
+        mostrarOpcionesListaFiltroPersonalizadoProductos(tipo);
+
+        // Familia inicia en su buscador; Estado enfoca la opción seleccionada
+        if (elementos.buscador) {
+            elementos.buscador.focus();
+        } else {
+            const seleccionado = elementos.lista.querySelector('[aria-selected="true"]');
+            (seleccionado || elementos.lista.querySelector('button'))?.focus();
+        }
+
+        if (elementos.panel.getBoundingClientRect().bottom > window.innerHeight - 12) {
+            elementos.panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    }
+
+    function seleccionarOpcionFiltroPersonalizadoProductos(tipo, valor) {
+        const elementos = elementosFiltroPersonalizadoProductos(tipo);
+        if (!elementos?.campo) return;
+
+        elementos.campo.value = valor;
+        actualizarTextoFiltroPersonalizadoProductos(tipo);
+        cerrarListaFiltroPersonalizadoProductos(tipo);
+        filtrarProductos(true);
+        elementos.boton?.focus();
+    }
+
+    // eventos de teclado, buscador y clic para Familia y Estado
+    function configurarSelectorPersonalizadoProductos(tipo) {
+        const elementos = elementosFiltroPersonalizadoProductos(tipo);
+        if (!elementos?.contenedor || !elementos.boton || !elementos.panel || !elementos.lista) return;
+
+        const {contenedor, boton, panel, lista, buscador} = elementos;
+        boton.addEventListener('click', function() {
+            if (panel.hidden) abrirListaFiltroPersonalizadoProductos(tipo);
+            else cerrarListaFiltroPersonalizadoProductos(tipo);
+        });
+
+        boton.addEventListener('keydown', function(evento) {
+            if (evento.key === 'ArrowDown' || evento.key === 'ArrowUp') {
+                evento.preventDefault();
+                abrirListaFiltroPersonalizadoProductos(tipo);
+            }
+        });
+
+        if (buscador) {
+            buscador.addEventListener('input', function() {
+                mostrarOpcionesListaFiltroPersonalizadoProductos(tipo);
+            });
+            buscador.addEventListener('keydown', function(evento) {
+                if (evento.key === 'Escape') {
+                    cerrarListaFiltroPersonalizadoProductos(tipo);
+                    boton.focus();
+                } else if (evento.key === 'ArrowDown') {
+                    const primera = lista.querySelector('button');
+                    if (primera) {
+                        evento.preventDefault();
+                        primera.focus();
+                    }
+                } else if (evento.key === 'Enter') {
+                    const primera = lista.querySelector('button');
+                    if (primera) {
+                        evento.preventDefault();
+                        primera.click();
+                    }
+                }
+            });
+        }
+
+        lista.addEventListener('keydown', function(evento) {
+            const opciones = Array.from(lista.querySelectorAll('button'));
+            const indice = opciones.indexOf(document.activeElement);
+            if (evento.key === 'Escape') {
+                cerrarListaFiltroPersonalizadoProductos(tipo);
+                boton.focus();
+            } else if (evento.key === 'ArrowDown' && indice >= 0) {
+                evento.preventDefault();
+                opciones[Math.min(indice + 1, opciones.length - 1)].focus();
+            } else if (evento.key === 'ArrowUp' && indice >= 0) {
+                evento.preventDefault();
+                if (indice === 0 && buscador) buscador.focus();
+                else opciones[Math.max(indice - 1, 0)].focus();
+            }
+        });
+
+        document.addEventListener('pointerdown', function(evento) {
+            if (!contenedor.contains(evento.target)) cerrarListaFiltroPersonalizadoProductos(tipo);
+        });
+    }
+
+
+// TITULO 10 CONFIGURACIÓN DE LOS FILTROS
+
     function configurarFiltroFamilias() {
+        configurarSelectorPersonalizadoProductos('familia');
+    }
 
-        const selectFamilia = document.getElementById(
-            'select_familia_productos'
-        );
+    function configurarFiltroProveedoresProductos() {
+        const contenedor = document.getElementById('contenedor_selector_proveedor_productos');
+        const boton = document.getElementById('boton_selector_proveedor_productos');
+        const panel = document.getElementById('panel_selector_proveedor_productos');
+        const buscador = document.getElementById('input_buscar_proveedor_productos');
+        const lista = document.getElementById('lista_opciones_proveedor_productos');
+        if (!contenedor || !boton || !panel || !buscador || !lista) return;
 
-        if (!selectFamilia) {
-            return;
-        }
+        boton.addEventListener('click', function() {
+            if (panel.hidden) abrirListaProveedorProductos();
+            else cerrarListaProveedorProductos();
+        });
 
-        selectFamilia.addEventListener('change', function() {
-            filtrarProductos(true);
+        boton.addEventListener('keydown', function(evento) {
+            if (evento.key === 'ArrowDown' || evento.key === 'ArrowUp') {
+                evento.preventDefault();
+                abrirListaProveedorProductos();
+            }
+        });
+
+        buscador.addEventListener('input', mostrarOpcionesListaProveedorProductos);
+
+        buscador.addEventListener('keydown', function(evento) {
+            if (evento.key === 'Escape') {
+                cerrarListaProveedorProductos();
+                boton.focus();
+            } else if (evento.key === 'ArrowDown') {
+                const primera = lista.querySelector('.opcion_lista_proveedor_productos');
+                if (primera) {
+                    evento.preventDefault();
+                    primera.focus();
+                }
+            } else if (evento.key === 'Enter') {
+                // permite seleccionar la primera coincidencia con Enter
+                const primera = lista.querySelector('.opcion_lista_proveedor_productos');
+                if (primera) {
+                    evento.preventDefault();
+                    primera.click();
+                }
+            }
+        });
+
+        lista.addEventListener('keydown', function(evento) {
+            const opciones = Array.from(lista.querySelectorAll('.opcion_lista_proveedor_productos'));
+            const indice = opciones.indexOf(document.activeElement);
+            if (evento.key === 'Escape') {
+                cerrarListaProveedorProductos();
+                boton.focus();
+            } else if (evento.key === 'ArrowDown' && indice >= 0) {
+                evento.preventDefault();
+                opciones[Math.min(indice + 1, opciones.length - 1)].focus();
+            } else if (evento.key === 'ArrowUp' && indice >= 0) {
+                evento.preventDefault();
+                if (indice === 0) buscador.focus();
+                else opciones[indice - 1].focus();
+            }
+        });
+
+        // cierra el panel al hacer clic en cualquier otra parte de la vista
+        document.addEventListener('pointerdown', function(evento) {
+            if (!contenedor.contains(evento.target)) cerrarListaProveedorProductos();
         });
     }
 
+    function configurarFiltroEstadoProductos() {
+        configurarSelectorPersonalizadoProductos('estado');
+        mostrarOpcionesListaFiltroPersonalizadoProductos('estado');
+    }
 
-// TITULO 10 BUSQUEDA PRODUCTOS
-
-    // función para activar la búsqueda de productos
     function configurarBusquedaProductos() {
+        const input = document.getElementById('input_busqueda_productos');
+        if (input) input.addEventListener('input', () => filtrarProductos(true));
+    }
 
-        const inputBusqueda = document.getElementById(
-            'input_busqueda_productos'
-        );
+    function configurarLimpiarFiltrosProductos() {
+        const boton = document.getElementById('boton_limpiar_filtros_productos');
+        if (boton) boton.addEventListener('click', limpiarFiltrosProductos);
+    }
 
-        if (!inputBusqueda) {
-            return;
-        }
+    // recupera el estado inicial: sin búsqueda, todas las familias y proveedores,
+    // y productos activos (comportamiento por defecto de esta vista)
+    function limpiarFiltrosProductos() {
+        const buscador = document.getElementById('input_busqueda_productos');
+        const familia = document.getElementById('select_familia_productos');
+        const proveedor = document.getElementById('select_proveedor_filtro_productos');
+        const estado = document.getElementById('select_estado_productos');
 
-        inputBusqueda.addEventListener('input', function() {
-            filtrarProductos(true);
-        });
+        if (buscador) buscador.value = '';
+        if (familia) familia.value = '';
+        if (proveedor) proveedor.value = '';
+        if (estado) estado.value = 'activos';
+
+        actualizarTextoSelectorProveedorProductos();
+        actualizarTextoFiltroPersonalizadoProductos('familia');
+        actualizarTextoFiltroPersonalizadoProductos('estado');
+        cerrarOtrosFiltrosPersonalizadosProductos();
+        filtrarProductos(true);
     }
 
 
 // TITULO 11 FILTRAR PRODUCTOS
 
-    // filtra por familia, búsqueda y estado, conservando paginación al recargar
+    // combina búsqueda, familia, proveedor y estado con la misma paginación
     function filtrarProductos(reiniciarPagina = true) {
-
-        const selectFamilia = document.getElementById(
-            'select_familia_productos'
-        );
-
-        const inputBusqueda = document.getElementById(
-            'input_busqueda_productos'
-        );
-
+        const inputBusqueda = document.getElementById('input_busqueda_productos');
+        const selectFamilia = document.getElementById('select_familia_productos');
+        const selectProveedor = document.getElementById('select_proveedor_filtro_productos');
         const selectEstado = document.getElementById('select_estado_productos');
 
-        if (
-            !selectFamilia ||
-            !inputBusqueda ||
-            !selectEstado
-        ) {
-            return;
-        }
+        if (!inputBusqueda || !selectFamilia || !selectProveedor || !selectEstado) return;
 
-        const familiaSeleccionada =
-            selectFamilia.value;
-
+        const busqueda = normalizarTextoFiltroProducto(inputBusqueda.value);
+        const palabrasBusqueda = busqueda ? busqueda.split(' ') : [];
+        const familiaSeleccionada = normalizarTextoFiltroProducto(selectFamilia.value);
+        const proveedorSeleccionado = normalizarTextoFiltroProducto(selectProveedor.value);
         const estadoSeleccionado = selectEstado.value;
 
-        const textoBusqueda =
-            inputBusqueda.value
-                .trim()
-                .toLowerCase();
+        const productosFiltrados = productosCargados.filter(function(producto) {
+            const codigo = normalizarTextoFiltroProducto(producto.codigo);
+            const barra = normalizarTextoFiltroProducto(producto.cod_barra);
+            const descripcion = normalizarTextoFiltroProducto(producto.descripcion);
+            // busca en un campo a la vez, evitando combinar palabras de
+            // códigos y descripciones distintas para generar falsos positivos
+            const coincideBusqueda = [codigo, barra, descripcion].some(campo => {
+                // la versión compacta permite encontrar "cocacola" aunque
+                // la descripción registrada sea "COCA-COLA"
+                const campoCompacto = campo.replace(/\s+/g, '');
 
-        const productosFiltrados =
-            productosCargados.filter(
-                function(producto) {
+                return palabrasBusqueda.every(palabra =>
+                    campo.includes(palabra) || campoCompacto.includes(palabra)
+                );
+            });
 
-                    const familiaProducto =
-                        producto.familia || '';
+            const coincideFamilia = !familiaSeleccionada ||
+                normalizarTextoFiltroProducto(producto.familia) === familiaSeleccionada;
 
+            const proveedores = proveedoresAsociadosFiltroProducto(producto);
+            const coincideProveedor = !selectProveedor.value ||
+                (selectProveedor.value === '__sin_proveedor__' && proveedores.length === 0) ||
+                (selectProveedor.value !== '__sin_proveedor__' &&
+                    proveedores.some(nombre => normalizarTextoFiltroProducto(nombre) === proveedorSeleccionado));
 
-                    const codigoProducto =
-                        String(
-                            producto.codigo || ''
-                        ).toLowerCase();
+            const estaActivo = producto.activo !== false;
+            const coincideEstado = estadoSeleccionado === 'todos' ||
+                (estadoSeleccionado === 'activos' && estaActivo) ||
+                (estadoSeleccionado === 'inactivos' && !estaActivo);
 
+            return coincideBusqueda && coincideFamilia && coincideProveedor && coincideEstado;
+        });
 
-                    const codigoBarraProducto =
-                        String(
-                            producto.cod_barra || ''
-                        ).toLowerCase();
+        // prioriza códigos exactos y nombres más parecidos cuando se usa el buscador
+        if (busqueda) {
+            function prioridadBusqueda(producto) {
+                const codigo = normalizarTextoFiltroProducto(producto.codigo);
+                const barra = normalizarTextoFiltroProducto(producto.cod_barra);
+                const descripcion = normalizarTextoFiltroProducto(producto.descripcion);
+                if (codigo === busqueda || barra === busqueda) return 0;
+                if (codigo.startsWith(busqueda) || barra.startsWith(busqueda)) return 1;
+                if (descripcion === busqueda) return 2;
+                if (descripcion.startsWith(busqueda)) return 3;
+                if (descripcion.includes(busqueda)) return 4;
+                return 5;
+            }
 
-
-                    const descripcionProducto =
-                        String(
-                            producto.descripcion || ''
-                        ).toLowerCase();
-
-
-                    const coincideFamilia =
-                        !familiaSeleccionada ||
-                        familiaProducto ===
-                        familiaSeleccionada;
-
-
-                    const coincideBusqueda =
-                        !textoBusqueda ||
-                        codigoProducto.includes(
-                            textoBusqueda
-                        ) ||
-                        codigoBarraProducto.includes(
-                            textoBusqueda
-                        ) ||
-                        descripcionProducto.includes(
-                            textoBusqueda
-                        );
-
-                    const estaActivo = producto.activo !== false;
-
-                    const coincideEstado =
-                        estadoSeleccionado === 'todos' ||
-                        (estadoSeleccionado === 'activos' && estaActivo) ||
-                        (estadoSeleccionado === 'inactivos' && !estaActivo);
-
-                    return (
-                        coincideFamilia &&
-                        coincideBusqueda &&
-                        coincideEstado
-                    );
-
-                }
-            );
-
-        if (reiniciarPagina) {
-            paginaActualProductos = 1;
+            productosFiltrados.sort(function(a, b) {
+                const diferencia = prioridadBusqueda(a) - prioridadBusqueda(b);
+                return diferencia || String(a.descripcion || '').localeCompare(
+                    String(b.descripcion || ''), 'es', { sensitivity: 'base' }
+                );
+            });
         }
 
+        if (reiniciarPagina) paginaActualProductos = 1;
         mostrarProductos(productosFiltrados);
-
     }
-
-
-// habilita el selector de productos activos, inactivos y todos
-function configurarFiltroEstadoProductos() {
-    const selector = document.getElementById('select_estado_productos');
-    if (!selector) return;
-
-    selector.addEventListener('change', function() {
-        filtrarProductos(true);
-    });
-}
 
 
 // TITULO 12 INICIALIZACION PRODUCTOS
@@ -1105,7 +1453,9 @@ function configurarFiltroEstadoProductos() {
         configurarImportacionProductos();
         configurarFiltroFamilias();
         configurarBusquedaProductos();
+        configurarFiltroProveedoresProductos();
         configurarFiltroEstadoProductos();
+        configurarLimpiarFiltrosProductos();
         configurarPaginacionProductos();
         configurarAccionesProductos();
 
