@@ -1,41 +1,24 @@
 // importa express
 const express = require('express');
-
-// importa el controlador de usuarios
 const usuariosControlador = require('../../controladores/usuarios/usuarios_controlador');
-
-// crea el router de usuarios
 const router = express.Router();
 
+// TITULO 1 RUTAS DE USUARIOS
 
-// =======================
-// RUTAS DE USUARIO ======
-// =======================
-
-// ruta para crear un usuario
+// IMPORTANTE: antes de usar en producción, aplicar el middleware de autenticación y
+// autorización de Administrador del proyecto a todas estas rutas.
+// La integración definitiva necesita conocer el archivo de inicio de sesión.
 router.post('/', usuariosControlador.crearUsuario);
-
-// ruta para obtener todos los usuarios
 router.get('/', usuariosControlador.obtenerUsuarios);
-
-// ruta para obtener un usuario por id
 router.get('/:id', usuariosControlador.obtenerUsuario);
-
-// ruta para actualizar un usuario
 router.put('/:id', usuariosControlador.actualizarUsuario);
 
-// ruta para eliminar un usuario por id
+// no se permite borrar usuarios permanentemente
 router.delete('/:id', usuariosControlador.eliminarUsuario);
 
-// ruta para cambiar la contrasena
+// se conservan rutas previas de compatibilidad
 router.put('/:id/contrasena', usuariosControlador.cambiarContrasena);
-
-// ruta para cambiar el estado del usuario
 router.put('/:id/estado', usuariosControlador.cambiarEstadoUsuario);
-
-// ruta para cambiar el rol del usuario
 router.put('/:id/rol', usuariosControlador.cambiarRolUsuario);
 
-
-// exporta las rutas
 module.exports = router;

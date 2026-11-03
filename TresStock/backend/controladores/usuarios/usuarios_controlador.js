@@ -1,309 +1,164 @@
 // importa el servicio de usuarios
 const usuariosServicio = require('../../servicios/usuarios/usuarios_servicio');
-
-
-// largo minimo permitido para la contraseña
+const EXPRESION_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const LARGO_MINIMO_PASSWORD = 8;
 
-// formato basico de correo electronico
-const EXPRESION_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// TITULO 1 VALIDACIONES Y RESPUESTAS
 
+function errorSolicitud(mensaje, codigo = 400) {
+    const error = new Error(mensaje);
+    error.statusCode = codigo;
+    return error;
+}
 
-// =======================
-// FUNCIONES DE USUARIO =
-// =======================
+function devolverError(res, error, contexto) {
+    console.error(contexto + ':', error);
+    if (error.code === '23505') {
+        return res.status(409).json({ mensaje: 'Ya existe un usuario con ese correo electrónico.' });
+    }
+    return res.status(error.statusCode || 500).json({
+        mensaje: error.statusCode ? error.message : 'Ocurrió un error al procesar el usuario.'
+    });
+}
 
-    // funcion 1 crear usuario
-    const crearUsuario = async (peticion, respuesta) => {
-
-        try {
-
-            // limpia los datos enviados desde el formulario
-            const nombre = String(peticion.body.nombre || '').trim();
-            const email = String(peticion.body.email || '').trim().toLowerCase();
-            const password = String(peticion.body.password || '');
-            const confirmar_password = String(peticion.body.confirmar_password || '');
-            const rol = String(peticion.body.rol || '').trim();
-
-            // valida el nombre
-            if (nombre.length < 2 || nombre.length > 100) {
-                return respuesta.status(400).json({
-                    mensaje: 'El nombre debe tener entre 2 y 100 caracteres'
-                });
-            }
-
-            // valida el correo
-            if (email.length > 150 || !EXPRESION_EMAIL.test(email)) {
-                return respuesta.status(400).json({
-                    mensaje: 'El correo electrónico no es válido'
-                });
-            }
-
-            // valida el largo de la contraseña
-            if (password.length < LARGO_MINIMO_PASSWORD) {
-                return respuesta.status(400).json({
-                    mensaje: `La contraseña debe tener al menos ${LARGO_MINIMO_PASSWORD} caracteres`
-                });
-            }
-
-            // valida que ambas contraseñas coincidan
-            if (password !== confirmar_password) {
-                return respuesta.status(400).json({
-                    mensaje: 'Las contraseñas no coinciden'
-                });
-            }
-
-            // traduce el nombre del rol a su id
-            const id_rol = await usuariosServicio.obtenerIdRol(rol);
-
-            if (!id_rol) {
-                return respuesta.status(400).json({
-                    mensaje: 'El rol seleccionado no es válido'
-                });
-            }
-
-            // crea el usuario mediante el servicio
-            const usuario = await usuariosServicio.crearUsuario(
-                nombre,
-                email,
-                password,
-                id_rol
-            );
-
-            // envia el usuario creado
-            respuesta.status(201).json(usuario);
-
-        } catch (fallo) {
-
-            // 23505 es violacion de unicidad en postgres
-            if (fallo.code === '23505') {
-                return respuesta.status(409).json({
-                    mensaje: 'Ya existe un usuario con ese correo electrónico'
-                });
-            }
-
-            // muestra el error en la consola
-            console.error('Error al crear usuario:', fallo);
-
-            // envia una respuesta de error
-            respuesta.status(500).json({
-                mensaje: 'Error al crear usuario'
-            });
+function validarCamposUsuario(body, nuevo = false) {
+    const nombre = String(body.nombre ?? '').trim();
+    const email = String(body.email ?? '').trim().toLowerCase();
+    const password = body.password === undefined ? '' : String(body.password);
+    const confirmar = body.confirmar_password === undefined ? '' : String(body.confirmar_password);
+    const rol = typeof body.rol === 'string' ? body.rol.trim() : null;
+    const id_rol = body.id_rol;
+    if (nombre.length < 2 || nombre.length > 100) throw errorSolicitud('El nombre debe tener entre 2 y 100 caracteres.');
+    if (email.length > 150 || !EXPRESION_EMAIL.test(email)) throw errorSolicitud('El correo electrónico no es válido.');
+    if (nuevo || password || confirmar) {
+        if (password.length < LARGO_MINIMO_PASSWORD) {
+            throw errorSolicitud('La contraseña debe tener al menos 8 caracteres.');
         }
-    };
-
-    //FUNCION 2 OBTENER TODOS LOS USUARIOS
-    const obtenerUsuarios = async (req, res) => {
-
-        try {
-
-            // obtiene los usuarios mediante el servicio
-            const usuarios = await usuariosServicio.obtenerUsuarios();
-
-            // envia los usuarios encontrados
-            res.json(usuarios);
-
-        } catch (error) {
-
-            // muestra el error en la consola
-            console.error('Error al obtener usuarios:', error);
-
-            // envia una respuesta de error
-            res.status(500).json({
-                mensaje: 'Error al obtener usuarios'
-            });
+        if (body.confirmar_password !== undefined && password !== confirmar) {
+            throw errorSolicitud('Las contraseñas no coinciden.');
         }
-    };
+    }
+    if (rol === null && id_rol === undefined) throw errorSolicitud('Selecciona un rol válido.');
+    return { nombre, email, password, rol, id_rol };
+}
 
-    //FUNCION 3 OBTENER USUARIO POR ID
-    const obtenerUsuario = async (req, res) => {
-
-        try {
-
-            // obtiene el id desde la url
-            const { id } = req.params;
-
-            // obtiene el usuario mediante el servicio
-            const usuario = await usuariosServicio.obtenerUsuario(id);
-
-            // envia el usuario encontrado
-            res.json(usuario);
-
-        } catch (error) {
-
-            // muestra el error en la consola
-            console.error('Error al obtener usuario:', error);
-
-            // envia una respuesta de error
-            res.status(500).json({
-                mensaje: 'Error al obtener usuario'
-            });
+async function resolverIdRol(datos) {
+    if (datos.rol !== null) {
+        if (!['Administrador', 'Usuario'].includes(datos.rol)) {
+            throw errorSolicitud('El rol seleccionado no es válido.');
         }
-    };
+        const id = await usuariosServicio.obtenerIdRol(datos.rol);
+        if (!id) throw errorSolicitud('El rol seleccionado no existe.');
+        return id;
+    }
+    const numero = Number(datos.id_rol);
+    if (!Number.isSafeInteger(numero) || numero <= 0) throw errorSolicitud('El rol no es válido.');
+    // solo permite los roles de TresStock y no confía ciegamente en el número
+    const roles = await Promise.all([
+        usuariosServicio.obtenerIdRol('Administrador'),
+        usuariosServicio.obtenerIdRol('Usuario')
+    ]);
+    if (!roles.includes(numero)) throw errorSolicitud('El rol seleccionado no es válido.');
+    return numero;
+}
 
+// ADAPTAR con el objeto de sesión real cuando se entregue el archivo de autenticación.
+// Si la sesión no tiene ninguna de estas formas, se sigue protegiendo al último administrador,
+// pero la protección de la cuenta propia NO puede verificarse todavía.
+function obtenerIdUsuarioSesion(req) {
+    const candidato = req.user?.id_usuario ?? req.usuario?.id_usuario ??
+        req.session?.usuario?.id_usuario ?? req.session?.id_usuario;
+    const id = Number(candidato);
+    return Number.isSafeInteger(id) && id > 0 ? id : null;
+}
 
-    //FUNCION 4 ACTUALIZAR USUARIO
-    const actualizarUsuario = async (req, res) => {
+// TITULO 2 CREAR USUARIO
 
-        try {
-
-        const { id } = req.params;
-        const { nombre, email, password, id_rol, activo } = req.body;
-
-        const usuario = await usuariosServicio.actualizarUsuario(
-            id,
-            nombre,
-            email,
-            password,
-            id_rol,
-            activo
+const crearUsuario = async (req, res) => {
+    try {
+        const datos = validarCamposUsuario(req.body, true);
+        const idRol = await resolverIdRol(datos);
+        const usuario = await usuariosServicio.crearUsuario(
+            datos.nombre, datos.email, datos.password, idRol
         );
-            // envia el usuario actualizado
-            res.json(usuario);
+        res.status(201).json(usuario);
+    } catch (error) {
+        devolverError(res, error, 'Error al crear usuario');
+    }
+};
 
-        } catch (error) {
+// TITULO 3 CONSULTAR USUARIOS
 
-            // muestra el error en la consola
-            console.error('Error al actualizar usuario:', error);
+const obtenerUsuarios = async (req, res) => {
+    try { res.json(await usuariosServicio.obtenerUsuarios()); }
+    catch (error) { devolverError(res, error, 'Error al obtener usuarios'); }
+};
 
-            // envia una respuesta de error
-            res.status(500).json({
-                mensaje: 'Error al actualizar usuario'
-            });
+const obtenerUsuario = async (req, res) => {
+    try {
+        const usuario = await usuariosServicio.obtenerUsuario(req.params.id);
+        if (!usuario) return res.status(404).json({ mensaje: 'El usuario no existe.' });
+        res.json(usuario);
+    } catch (error) { devolverError(res, error, 'Error al obtener usuario'); }
+};
+
+// TITULO 4 ACTUALIZAR USUARIO
+
+const actualizarUsuario = async (req, res) => {
+    try {
+        const datos = validarCamposUsuario(req.body);
+        const idRol = await resolverIdRol(datos);
+        const usuario = await usuariosServicio.actualizarUsuario(
+            req.params.id, datos.nombre, datos.email, datos.password, idRol,
+            obtenerIdUsuarioSesion(req)
+        );
+        res.json(usuario);
+    } catch (error) { devolverError(res, error, 'Error al actualizar usuario'); }
+};
+
+// TITULO 5 ACTIVAR O DESACTIVAR USUARIO
+
+const cambiarEstadoUsuario = async (req, res) => {
+    try {
+        if (typeof req.body.activo !== 'boolean') {
+            throw errorSolicitud('El estado debe ser verdadero o falso.');
         }
-    };
+        const usuario = await usuariosServicio.cambiarEstadoUsuario(
+            req.params.id, req.body.activo, obtenerIdUsuarioSesion(req)
+        );
+        res.json(usuario);
+    } catch (error) { devolverError(res, error, 'Error al cambiar estado'); }
+};
 
+// TITULO 6 FUNCIONES EXISTENTES DE COMPATIBILIDAD
 
-    //FUNCION 5 ELIMINAR USUARIO POR ID
-    const eliminarUsuario = async (req, res) => {
+const cambiarContrasena = async (req, res) => {
+    try {
+        const password = String(req.body.password ?? '');
+        if (password.length < LARGO_MINIMO_PASSWORD) throw errorSolicitud('La contraseña debe tener al menos 8 caracteres.');
+        const usuario = await usuariosServicio.cambiarContrasena(req.params.id, password);
+        if (!usuario) return res.status(404).json({ mensaje: 'El usuario no existe.' });
+        res.json(usuario);
+    } catch (error) { devolverError(res, error, 'Error al cambiar contraseña'); }
+};
 
-        try {
+const cambiarRolUsuario = async (req, res) => {
+    try {
+        const idRol = await resolverIdRol({ rol: null, id_rol: req.body.id_rol });
+        const usuario = await usuariosServicio.cambiarRolUsuario(
+            req.params.id, idRol, obtenerIdUsuarioSesion(req)
+        );
+        res.json(usuario);
+    } catch (error) { devolverError(res, error, 'Error al cambiar rol'); }
+};
 
-            // obtiene el id desde la url
-            const { id } = req.params;
+// TITULO 7 ELIMINACION FISICA DESHABILITADA
 
-            // elimina el usuario mediante el servicio
-            const usuario = await usuariosServicio.eliminarUsuario(id);
+const eliminarUsuario = (req, res) => {
+    res.status(405).json({ mensaje: 'Los usuarios no se eliminan. Utiliza activar o desactivar.' });
+};
 
-            // envia el usuario eliminado
-            res.json(usuario);
-
-        } catch (error) {
-
-            // muestra el error en la consola
-            console.error('Error al eliminar usuario:', error);
-
-            // envia una respuesta de error
-            res.status(500).json({
-                mensaje: 'Error al eliminar usuario'
-            });
-        }
-    };
-
-    // FUNCION 6 CAMBIAR CONTRASENA
-    const cambiarContrasena = async (req, res) => {
-
-        try {
-
-            // obtiene el id del usuario
-            const { id } = req.params;
-
-            // obtiene la nueva contrasena
-            const { password } = req.body;
-
-            // cambia la contrasena
-            const usuario = await usuariosServicio.cambiarContrasena(
-                id,
-                password
-            );
-
-            // envia el usuario actualizado
-            res.json(usuario);
-
-        } catch (error) {
-
-            // muestra el error en la consola
-            console.error('Error al cambiar contrasena:', error);
-
-            // envia el error
-            res.status(500).json({
-                mensaje: 'Error al cambiar contrasena'
-            });
-        }
-    };
-
-    // FUNCION 7 CAMBIAR ESTADO DEL USUARIO
-    const cambiarEstadoUsuario = async (req, res) => {
-
-        try {
-
-            // obtiene el id del usuario
-            const { id } = req.params;
-
-            // obtiene el estado
-            const { activo } = req.body;
-
-            // cambia el estado del usuario
-            const usuario = await usuariosServicio.cambiarEstadoUsuario(
-                id,
-                activo
-            );
-
-            // envia el usuario actualizado
-            res.json(usuario);
-
-        } catch (error) {
-
-            // muestra el error en la consola
-            console.error('Error al cambiar estado del usuario:', error);
-
-            // envia el error
-            res.status(500).json({
-                mensaje: 'Error al cambiar estado del usuario'
-            });
-        }
-    };
-
-    // FUNCION 8 CAMBIAR ROL DEL USUARIO
-    const cambiarRolUsuario = async (req, res) => {
-
-        try {
-
-            // obtiene el id del usuario
-            const { id } = req.params;
-
-            // obtiene el nuevo rol
-            const { id_rol } = req.body;
-
-            // cambia el rol del usuario
-            const usuario = await usuariosServicio.cambiarRolUsuario(
-                id,
-                id_rol
-            );
-
-            // envia el usuario actualizado
-            res.json(usuario);
-
-        } catch (error) {
-
-            // muestra el error en la consola
-            console.error('Error al cambiar rol del usuario:', error);
-
-            // envia el error
-            res.status(500).json({
-                mensaje: 'Error al cambiar rol del usuario'
-            });
-        }
-    };
-
-    // EXPORTAR FUNCIONES 
-    module.exports = {
-        crearUsuario,
-        obtenerUsuarios,
-        obtenerUsuario,
-        actualizarUsuario,
-        eliminarUsuario,
-        cambiarContrasena,
-        cambiarEstadoUsuario,
-        cambiarRolUsuario
-    };
+module.exports = {
+    crearUsuario, obtenerUsuarios, obtenerUsuario, actualizarUsuario,
+    eliminarUsuario, cambiarContrasena, cambiarEstadoUsuario, cambiarRolUsuario
+};

@@ -1037,3 +1037,159 @@
         }
 
     }
+
+/* TITULO 12 FILTROS Y SELECTORES PERSONALIZADOS */
+
+    /* mantiene el diseño de filtros de la vista Productos */
+    .contenedor_filtros_usuarios {
+        grid-template-columns: minmax(190px, 2fr) repeat(2, minmax(130px, 1fr)) auto;
+        gap: 12px;
+        align-items: end;
+        overflow: visible;
+    }
+
+    .contenedor_busqueda_usuarios,
+    .contenedor_rol_usuarios,
+    .contenedor_estado_usuarios,
+    .campo_rol_usuario { min-width: 0; }
+
+    .selector_personalizado_usuarios { position: relative; width: 100%; min-width: 0; }
+
+    .boton_selector_usuarios {
+        display: flex; align-items: center; justify-content: space-between;
+        width: 100%; height: 40px; gap: 9px; padding: 0 12px;
+        border: 1px solid #ced9de; border-radius: 6px; box-sizing: border-box;
+        background: #ffffff; color: #37434b; font: 13px Arial, sans-serif;
+        text-align: left; cursor: pointer;
+    }
+    .boton_selector_usuarios > span:first-child {
+        overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .boton_selector_usuarios > span:last-child { flex-shrink: 0; color: #415865; }
+    .boton_selector_usuarios:hover { border-color: #159ba3; }
+    .boton_selector_usuarios[aria-expanded="true"] {
+        border-color: #159ba3; box-shadow: 0 0 0 2px #e4f6f6;
+    }
+    .boton_selector_usuarios:disabled { opacity: .68; cursor: not-allowed; background: #f4f7f8; }
+
+    /* lista anclada debajo del control, sin extenderse a otra columna */
+    .panel_selector_usuarios {
+        position: absolute; left: 0; top: calc(100% + 5px);
+        width: 100%; max-width: 100%; padding: 7px;
+        border: 1px solid #ced9de; border-radius: 7px;
+        background: #ffffff; box-shadow: 0 8px 24px rgba(5,31,45,.15);
+        z-index: 1300; box-sizing: border-box;
+    }
+    .panel_selector_usuarios[hidden] { display: none !important; }
+    .lista_selector_usuarios { max-height: 220px; overflow-y: auto; }
+    .opcion_selector_usuarios {
+        display: block; width: 100%; border: 0; padding: 10px 12px;
+        border-radius: 5px; background: #ffffff; color: #37434b;
+        font: 13px Arial, sans-serif; text-align: left; cursor: pointer;
+    }
+    .opcion_selector_usuarios:hover,
+    .opcion_selector_usuarios[aria-selected="true"] {
+        background: #e4f6f6; color: #0f858d;
+    }
+    .opcion_selector_usuarios[aria-selected="true"] { font-weight: bold; }
+
+    /* evita mostrar los select nativos utilizados solo para guardar el valor */
+    .select_rol_usuario[hidden] { display: none !important; }
+
+    .contenedor_limpiar_filtros_usuarios { display: flex; align-items: end; min-width: 0; }
+    .boton_limpiar_filtros_usuarios {
+        height: 40px; padding: 0 14px; border: 1px solid #159ba3;
+        border-radius: 6px; background: #ffffff; color: #0f858d;
+        font: bold 12px Arial, sans-serif; white-space: nowrap;
+        cursor: pointer; box-sizing: border-box;
+    }
+    .boton_limpiar_filtros_usuarios:hover { background: #e4f6f6; }
+
+/* TITULO 13 BOTONES DE ACCIONES USUARIOS */
+
+    .contenedor_acciones_usuario { display: flex; justify-content: center; align-items: center; gap: 7px; }
+    .boton_accion_usuario {
+        width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center;
+        background: #ffffff; border: 1px solid #dce4e8; border-radius: 8px;
+        color: #159ba3; cursor: pointer; flex-shrink: 0;
+    }
+    .boton_accion_usuario svg { width: 19px; height: 19px; }
+    .boton_accion_usuario:hover { background: #e4f6f6; border-color: #159ba3; }
+    .boton_desactivar_usuario { color: #d58226; border-color: #f5c892; }
+    .boton_desactivar_usuario:hover { background: #fff4e7; border-color: #d58226; }
+    .boton_activar_usuario { color: #159ba3; }
+    .boton_accion_usuario:disabled { opacity: .45; cursor: not-allowed; }
+    .columna_acciones_usuarios { width: 16%; }
+    .columna_nombre_usuarios { width: 17%; }
+    .columna_email_usuarios { width: 25%; }
+    .columna_rol_tabla_usuarios { width: 14%; }
+    .columna_estado_tabla_usuarios { width: 10%; }
+    .columna_fecha_creacion_usuarios { width: 18%; }
+    .dato_acciones_usuarios { padding: 9px 5px; }
+    .fila_usuario_inactivo { opacity: .78; }
+    .tabla_usuarios { min-width: 770px; }
+    .cabecera_contenedor_tabla_usuarios { min-width: 770px; }
+
+/* TITULO 14 FORMULARIO USUARIO */
+
+    .formulario_usuario { max-height: calc(100dvh - 32px); overflow-y: auto; }
+    .boton_guardar_usuario, .boton_cancelar_usuario { border: none; }
+    .boton_guardar_usuario:disabled { opacity: .6; cursor: not-allowed; }
+    .contenedor_campos_usuario > div { min-width: 0; }
+    .contenedor_campos_usuario input { width: 100%; }
+    .campo_password_usuario[hidden], .campo_confirmar_password_usuario[hidden],
+    .contenedor_acciones_formulario_usuario [hidden] { display: none !important; }
+
+/* TITULO 15 MODAL CENTRADO DE ALERTAS Y CONFIRMACIONES */
+
+    .contenedor_alerta_usuarios {
+        position: fixed; inset: 0; height: 100vh; height: 100dvh; width: 100%;
+        display: flex; align-items: center; justify-content: center;
+        padding: 18px; box-sizing: border-box; background: rgba(5,31,45,.58); z-index: 3000;
+    }
+    .contenedor_alerta_usuarios[hidden] { display: none !important; }
+    .modal_alerta_usuarios {
+        --color_alerta: #159ba3; --fondo_alerta: #e4f6f6;
+        width: 420px; max-width: 100%; max-height: calc(100dvh - 36px); overflow-y: auto;
+        padding: 28px; border: 1px solid #dce4e8; border-radius: 12px;
+        background: #ffffff; box-shadow: 0 18px 50px rgba(5,31,45,.22);
+        box-sizing: border-box; font-family: Arial, sans-serif; text-align: center;
+    }
+    .modal_alerta_usuarios[data-tipo="error"] { --color_alerta: #dc2626; --fondo_alerta: #fee8e8; }
+    .modal_alerta_usuarios[data-tipo="advertencia"] { --color_alerta: #d58226; --fondo_alerta: #fff0df; }
+    .modal_alerta_usuarios[data-tipo="informacion"] { --color_alerta: #0b6572; --fondo_alerta: #e4f6f6; }
+    .icono_alerta_usuarios {
+        width: 56px; height: 56px; display: flex; align-items: center; justify-content: center;
+        margin: 0 auto 18px; border-radius: 50%; color: var(--color_alerta);
+        background: var(--fondo_alerta); font-size: 27px; font-weight: bold;
+    }
+    .titulo_alerta_usuarios { margin-bottom: 10px; color: #0b3650; font-size: 20px; font-weight: bold; }
+    .mensaje_alerta_usuarios { color: #536873; font-size: 14px; line-height: 1.55;
+        white-space: pre-line; overflow-wrap: anywhere; }
+    .acciones_alerta_usuarios { display: flex; justify-content: center; flex-wrap: wrap;
+        gap: 10px; margin-top: 25px; }
+    .boton_cancelar_alerta_usuarios, .boton_aceptar_alerta_usuarios {
+        min-width: 122px; min-height: 42px; padding: 0 17px; border-radius: 6px;
+        font: bold 13px Arial, sans-serif; cursor: pointer;
+    }
+    .boton_cancelar_alerta_usuarios { border: 1px solid #dce4e8; background: #edf1f3; color: #44515a; }
+    .boton_cancelar_alerta_usuarios:hover { background: #dfe6e9; }
+    .boton_aceptar_alerta_usuarios { border: 1px solid #159ba3; background: #159ba3; color: white; }
+    .boton_aceptar_alerta_usuarios:hover { background: #0f858d; }
+    .boton_selector_usuarios:focus-visible, .opcion_selector_usuarios:focus-visible,
+    .boton_accion_usuario:focus-visible, .boton_limpiar_filtros_usuarios:focus-visible,
+    .boton_aceptar_alerta_usuarios:focus-visible, .boton_cancelar_alerta_usuarios:focus-visible,
+    .boton_guardar_usuario:focus-visible, .input_busqueda_usuarios:focus-visible {
+        outline: 2px solid #159ba3; outline-offset: 2px;
+    }
+
+/* TITULO 16 RESPONSIVE EXTRA */
+    @media (max-width: 1200px) and (min-width: 901px) {
+        .contenedor_filtros_usuarios { grid-template-columns: repeat(2, minmax(0,1fr)); }
+        .contenedor_busqueda_usuarios { grid-column: 1 / -1; }
+    }
+    @media (max-width: 900px) { .contenedor_filtros_usuarios { grid-template-columns: 1fr; } }
+    @media (max-width: 600px) {
+        .contenedor_limpiar_filtros_usuarios, .boton_limpiar_filtros_usuarios { width: 100%; }
+        .formulario_usuario { max-height: calc(100dvh - 24px); }
+    }

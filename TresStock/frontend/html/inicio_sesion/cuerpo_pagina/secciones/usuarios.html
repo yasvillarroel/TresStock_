@@ -22,7 +22,7 @@
 
 
                 <!-- opción para abrir el formulario de registro de usuario -->
-                <div class="boton_nuevo_usuario" id="boton_nuevo_usuario" onclick="abrirFormularioUsuario()">
+                <div class="boton_nuevo_usuario" id="boton_nuevo_usuario" role="button" tabindex="0" onclick="abrirFormularioUsuario()">
 
                     <div class="icono_nuevo_usuario">+</div>
 
@@ -124,57 +124,49 @@
 
         <!-- TITULO 4 FILTROS USUARIOS -->
 
-            <!-- contenedor que agrupa las opciones de búsqueda y filtrado -->
+            <!-- filtros con los mismos desplegables personalizados de Productos -->
             <div class="contenedor_filtros_usuarios">
 
-
-                <!-- contenedor del buscador de usuarios -->
                 <div class="contenedor_busqueda_usuarios">
-
                     <div class="texto_busqueda_usuarios">Buscar usuario</div>
-
-                    <input class="input_busqueda_usuarios" id="input_busqueda_usuarios" type="text" placeholder="Nombre o correo electrónico">
-
+                    <input class="input_busqueda_usuarios" id="input_busqueda_usuarios" type="search"
+                        placeholder="Nombre o correo electrónico" autocomplete="off" aria-label="Buscar usuario">
                 </div>
 
-
-                <!-- contenedor del filtro por rol -->
                 <div class="contenedor_rol_usuarios">
-
                     <div class="texto_rol_usuarios">Rol</div>
-
-                    <select class="select_rol_usuarios" id="select_rol_usuarios">
-
-                        <option class="opcion_rol_usuarios" value="">Todos los roles</option>
-
-                        <option class="opcion_rol_usuarios" value="Administrador">Administrador</option>
-
-                        <option class="opcion_rol_usuarios" value="Usuario">Usuario</option>
-
-                    </select>
-
+                    <div class="selector_personalizado_usuarios" id="selector_filtro_rol_usuarios">
+                        <input type="hidden" id="select_rol_usuarios" value="">
+                        <button class="boton_selector_usuarios" id="boton_filtro_rol_usuarios" type="button"
+                            aria-haspopup="listbox" aria-expanded="false" aria-controls="opciones_filtro_rol_usuarios">
+                            <span id="texto_filtro_rol_usuarios">Todos los roles</span><span aria-hidden="true">▾</span>
+                        </button>
+                        <div class="panel_selector_usuarios" id="panel_filtro_rol_usuarios" hidden>
+                            <div class="lista_selector_usuarios" id="opciones_filtro_rol_usuarios" role="listbox" aria-label="Roles"></div>
+                        </div>
+                    </div>
                 </div>
 
-
-                <!-- contenedor del filtro por estado -->
                 <div class="contenedor_estado_usuarios">
-
                     <div class="texto_estado_usuarios">Estado</div>
+                    <div class="selector_personalizado_usuarios" id="selector_filtro_estado_usuarios">
+                        <input type="hidden" id="select_estado_usuarios" value="">
+                        <button class="boton_selector_usuarios" id="boton_filtro_estado_usuarios" type="button"
+                            aria-haspopup="listbox" aria-expanded="false" aria-controls="opciones_filtro_estado_usuarios">
+                            <span id="texto_filtro_estado_usuarios">Todos los estados</span><span aria-hidden="true">▾</span>
+                        </button>
+                        <div class="panel_selector_usuarios" id="panel_filtro_estado_usuarios" hidden>
+                            <div class="lista_selector_usuarios" id="opciones_filtro_estado_usuarios" role="listbox" aria-label="Estados de usuario"></div>
+                        </div>
+                    </div>
+                </div>
 
-                    <select class="select_estado_usuarios" id="select_estado_usuarios">
-
-                        <option class="opcion_estado_usuarios" value="">Todos los estados</option>
-
-                        <option class="opcion_estado_usuarios" value="activo">Activo</option>
-
-                        <option class="opcion_estado_usuarios" value="inactivo">Inactivo</option>
-
-                    </select>
-
+                <div class="contenedor_limpiar_filtros_usuarios">
+                    <button class="boton_limpiar_filtros_usuarios" id="boton_limpiar_filtros_usuarios"
+                        type="button">Limpiar filtros</button>
                 </div>
 
             </div>
-
 
         <!-- TITULO 5 TABLA USUARIOS -->
 
@@ -272,7 +264,7 @@
 
                                 <div class="texto_campo_email_usuario">Email</div>
 
-                                <input class="input_email_usuario" id="input_email_usuario" type="email">
+                                <input class="input_email_usuario" id="input_email_usuario" type="email" autocomplete="off">
 
                             </div>
 
@@ -282,7 +274,7 @@
 
                                 <div class="texto_campo_password_usuario">Contraseña</div>
 
-                                <input class="input_password_usuario" id="input_password_usuario" type="password" >
+                                <input class="input_password_usuario" id="input_password_usuario" type="password" autocomplete="new-password" >
 
                             </div>
 
@@ -292,26 +284,32 @@
 
                                 <div class="texto_campo_confirmar_password_usuario"> Confirmar contraseña </div>
 
-                                <input class="input_confirmar_password_usuario" id="input_confirmar_password_usuario" type="password" >
+                                <input class="input_confirmar_password_usuario" id="input_confirmar_password_usuario" type="password" autocomplete="new-password" >
 
                             </div>
 
 
                             <!-- campo rol -->
                             <div class="campo_rol_usuario">
-
                                 <div class="texto_campo_rol_usuario">Rol</div>
-
-                                <select class="select_rol_usuario" id="select_rol_usuario">
-
-                                    <option class="opcion_rol_usuario" value="">Seleccionar rol</option>
-
-                                    <option class="opcion_rol_usuario" value="Administrador">Administrador</option>
-
-                                    <option class="opcion_rol_usuario" value="Usuario">Usuario</option>
-
+                                <!-- select interno: su valor se envia al backend -->
+                                <select class="select_rol_usuario" id="select_rol_usuario" hidden>
+                                    <option value="">Seleccionar rol</option>
+                                    <option value="Administrador">Administrador</option>
+                                    <option value="Usuario">Usuario</option>
                                 </select>
-
+                                <div class="selector_personalizado_usuarios" id="selector_formulario_rol_usuario">
+                                    <button class="boton_selector_usuarios" id="boton_formulario_rol_usuario" type="button"
+                                        aria-haspopup="listbox" aria-expanded="false"
+                                        aria-controls="opciones_formulario_rol_usuario">
+                                        <span id="texto_formulario_rol_usuario">Seleccionar rol</span>
+                                        <span aria-hidden="true">▾</span>
+                                    </button>
+                                    <div class="panel_selector_usuarios" id="panel_formulario_rol_usuario" hidden>
+                                        <div class="lista_selector_usuarios" id="opciones_formulario_rol_usuario"
+                                            role="listbox" aria-label="Seleccionar rol del usuario"></div>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
@@ -322,14 +320,32 @@
                         <!-- contenedor de las opciones inferiores del formulario -->
                         <div class="contenedor_acciones_formulario_usuario">
 
-                            <div class="boton_cancelar_usuario" id="boton_cancelar_usuario" onclick="cerrarFormularioUsuario()">Cancelar</div>
+                            <button class="boton_cancelar_usuario" id="boton_cancelar_usuario" type="button" onclick="cerrarFormularioUsuario()">Cancelar</button>
 
-                            <div class="boton_guardar_usuario" id="boton_guardar_usuario">Guardar usuario</div>
+                            <button class="boton_guardar_usuario" id="boton_guardar_usuario" type="button">Guardar usuario</button>
 
                         </div>
 
                 </div>
 
             </div>
+
+
+        <!-- TITULO 10 MODAL DE MENSAJES Y CONFIRMACIONES -->
+        <div class="contenedor_alerta_usuarios" id="contenedor_alerta_usuarios" hidden
+            role="dialog" aria-modal="true" aria-labelledby="titulo_alerta_usuarios"
+            aria-describedby="mensaje_alerta_usuarios">
+            <div class="modal_alerta_usuarios" data-tipo="informacion">
+                <div class="icono_alerta_usuarios" id="icono_alerta_usuarios" aria-hidden="true">i</div>
+                <div class="titulo_alerta_usuarios" id="titulo_alerta_usuarios">Aviso</div>
+                <div class="mensaje_alerta_usuarios" id="mensaje_alerta_usuarios"></div>
+                <div class="acciones_alerta_usuarios">
+                    <button class="boton_cancelar_alerta_usuarios" id="boton_cancelar_alerta_usuarios"
+                        type="button" hidden>Cancelar</button>
+                    <button class="boton_aceptar_alerta_usuarios" id="boton_aceptar_alerta_usuarios"
+                        type="button">Aceptar</button>
+                </div>
+            </div>
+        </div>
 
     </div>

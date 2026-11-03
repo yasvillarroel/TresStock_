@@ -1,214 +1,216 @@
 // importa el pool de conexiones con PostgreSQL
 const pool = require('../../configuracion/base_datos');
-
-// importa bcrypt para encriptar contraseñas
 const bcrypt = require('bcrypt');
 
-// =======================
-// FUNCIONES DE USUARIO =
-// =======================
+// TITULO 1 FUNCIONES AUXILIARES
 
-    // FUNCION 1 CREAR USUARIO
-    const crearUsuario = async (nombre, email, password, id_rol) => {
+function errorUsuario(mensaje, statusCode = 400) {
+    const error = new Error(mensaje);
+    error.statusCode = statusCode;
+    return error;
+}
 
-        // encripta la contraseña
-        const password_hash = await bcrypt.hash(password, 10);
+const CAMPOS_USUARIO = `u.id_usuario, u.nombre, u.email, u.id_rol,
+    r.nombre AS rol, u.activo, u.fecha_creacion`;
 
-        // ejecuta la consulta para crear el usuario
-        const resultado = await pool.query(
-            `INSERT INTO base_datos.usuarios
-            (nombre, email, password_hash, id_rol)
-            VALUES ($1, $2, $3, $4)
-            RETURNING id_usuario, nombre, email, id_rol, activo, fecha_creacion`,
-            [nombre, email, password_hash, id_rol]
-        );
+// evita cambios simultáneos que puedan dejar sin administradores al sistema
+async function bloquearCambiosAdministradores(cliente) {
+    await cliente.query('SELECT pg_advisory_xact_lock(6032026)');
+}
 
-        // devuelve el usuario creado
-        return resultado.rows[0];
-    };
+async function comprobarUltimoAdministrador(cliente, usuario, nuevoRol, nuevoActivo) {
+    const resultado = await cliente.query(
+        `SELECT COUNT(*)::integer AS cantidad
+         FROM base_datos.usuarios u
+         JOIN base_datos.roles r ON r.id_rol = u.id_rol
+         WHERE u.activo = TRUE AND LOWER(r.nombre) = 'administrador'`
+    );
+    const esAdministrador = String(usuario.rol || '').toLowerCase() === 'administrador';
+    const continuaraAdministrador = String(nuevoRol || '').toLowerCase() === 'administrador';
+    if (usuario.activo && esAdministrador && (!nuevoActivo || !continuaraAdministrador) &&
+        resultado.rows[0].cantidad <= 1) {
+        throw errorUsuario('No se puede desactivar ni quitar el rol al último administrador activo.', 409);
+    }
+}
 
-    //FUNCION 2 OBTENER TODOS LOS USUARIOS
-    const obtenerUsuarios = async () => {
+function validarIdUsuario(id) {
+    const numero = Number(id);
+    if (!Number.isSafeInteger(numero) || numero <= 0) throw errorUsuario('Identificador de usuario no válido.');
+    return numero;
+}
 
-        // ejecuta la consulta para obtener los usuarios
-        const resultado = await pool.query(
-            `SELECT
-                id_usuario,
-                nombre,
-                email,
-                id_rol,
-                activo,
-                fecha_creacion
-            FROM base_datos.usuarios
-            ORDER BY id_usuario`
-        );
+async function consultarUsuarioParaCambio(cliente, id) {
+    const resultado = await cliente.query(
+        `SELECT ${CAMPOS_USUARIO} FROM base_datos.usuarios u
+         JOIN base_datos.roles r ON r.id_rol = u.id_rol
+         WHERE u.id_usuario = $1 FOR UPDATE OF u`,
+        [validarIdUsuario(id)]
+    );
+    if (resultado.rowCount === 0) throw errorUsuario('El usuario no existe.', 404);
+    return resultado.rows[0];
+}
 
-        // devuelve los usuarios encontrados
-        return resultado.rows;
-    };
+async function consultarRol(cliente, idRol) {
+    const resultado = await cliente.query(
+        'SELECT id_rol, nombre FROM base_datos.roles WHERE id_rol = $1', [idRol]
+    );
+    if (!resultado.rowCount) throw errorUsuario('El rol seleccionado no existe.');
+    return resultado.rows[0];
+}
 
-    //FUNCION 3 OBTENER USUARIO POR ID
-    const obtenerUsuario = async (id) => {
+// TITULO 2 CREAR Y CONSULTAR USUARIOS
 
-        // ejecuta la consulta para obtener el usuario
-        const resultado = await pool.query(
-            `SELECT
-                id_usuario,
-                nombre,
-                email,
-                id_rol,
-                activo,
-                fecha_creacion
-            FROM base_datos.usuarios
-            WHERE id_usuario = $1`,
-            [id]
-        );
+const crearUsuario = async (nombre, email, password, id_rol) => {
+    const password_hash = await bcrypt.hash(password, 10);
+    const resultado = await pool.query(
+        `INSERT INTO base_datos.usuarios (nombre, email, password_hash, id_rol)
+         VALUES ($1, $2, $3, $4)
+         RETURNING id_usuario, nombre, email, id_rol, activo, fecha_creacion`,
+        [nombre, email, password_hash, id_rol]
+    );
+    return resultado.rows[0];
+};
 
-        // devuelve el usuario encontrado
-        return resultado.rows[0];
-    };
+const obtenerUsuarios = async () => {
+    const resultado = await pool.query(
+        `SELECT ${CAMPOS_USUARIO}
+         FROM base_datos.usuarios u
+         JOIN base_datos.roles r ON r.id_rol = u.id_rol
+         ORDER BY u.id_usuario`
+    );
+    return resultado.rows;
+};
 
-    // FUNCION 4 ACTUALIZAR USUARIO
-    const actualizarUsuario = async (
-        id,
-        nombre,
-        email,
-        password,
-        id_rol,
-        activo
-    ) => {
+const obtenerUsuario = async id => {
+    const resultado = await pool.query(
+        `SELECT ${CAMPOS_USUARIO}
+         FROM base_datos.usuarios u
+         JOIN base_datos.roles r ON r.id_rol = u.id_rol
+         WHERE u.id_usuario = $1`,
+        [validarIdUsuario(id)]
+    );
+    return resultado.rows[0] || null;
+};
 
-        // revisa si se envio una nueva contraseña
-        if (password) {
+const obtenerIdRol = async nombre => {
+    const resultado = await pool.query(
+        `SELECT id_rol FROM base_datos.roles WHERE LOWER(nombre) = LOWER($1)`,
+        [nombre]
+    );
+    return resultado.rows[0]?.id_rol;
+};
 
-            // encripta la nueva contraseña
-            const password_hash = await bcrypt.hash(password, 10);
+// TITULO 3 EDITAR USUARIOS
 
-            // actualiza todos los datos incluyendo la contraseña
-            const resultado = await pool.query(
-                `UPDATE base_datos.usuarios
-                SET
-                    nombre = $1,
-                    email = $2,
-                    password_hash = $3,
-                    id_rol = $4,
-                    activo = $5
-                WHERE id_usuario = $6
-                RETURNING id_usuario, nombre, email, id_rol, activo, fecha_creacion`,
-                [nombre, email, password_hash, id_rol, activo, id]
-            );
-
-            // devuelve el usuario actualizado
-            return resultado.rows[0];
+// el estado activo no se edita aquí; se cambia exclusivamente mediante /estado
+const actualizarUsuario = async (id, nombre, email, password, idRol, idSesion = null) => {
+    const cliente = await pool.connect();
+    try {
+        await cliente.query('BEGIN');
+        await bloquearCambiosAdministradores(cliente);
+        const usuario = await consultarUsuarioParaCambio(cliente, id);
+        const rol = await consultarRol(cliente, idRol);
+        if (idSesion !== null && Number(idSesion) === Number(id) &&
+            String(usuario.rol).toLowerCase() === 'administrador' &&
+            String(rol.nombre).toLowerCase() !== 'administrador') {
+            throw errorUsuario('No puedes quitarte el rol de administrador a ti mismo.', 409);
         }
-
-        // actualiza los datos sin modificar la contraseña
-        const resultado = await pool.query(
-            `UPDATE base_datos.usuarios
-            SET
-                nombre = $1,
-                email = $2,
-                id_rol = $3,
-                activo = $4
-            WHERE id_usuario = $5
-            RETURNING id_usuario, nombre, email, id_rol, activo, fecha_creacion`,
-            [nombre, email, id_rol, activo, id]
-        );
-
-        // devuelve el usuario actualizado
+        await comprobarUltimoAdministrador(cliente, usuario, rol.nombre, usuario.activo);
+        let resultado;
+        if (password) {
+            const hash = await bcrypt.hash(password, 10);
+            resultado = await cliente.query(
+                `UPDATE base_datos.usuarios SET nombre = $1, email = $2, password_hash = $3, id_rol = $4
+                 WHERE id_usuario = $5
+                 RETURNING id_usuario, nombre, email, id_rol, activo, fecha_creacion`,
+                [nombre, email, hash, idRol, id]
+            );
+        } else {
+            resultado = await cliente.query(
+                `UPDATE base_datos.usuarios SET nombre = $1, email = $2, id_rol = $3
+                 WHERE id_usuario = $4
+                 RETURNING id_usuario, nombre, email, id_rol, activo, fecha_creacion`,
+                [nombre, email, idRol, id]
+            );
+        }
+        await cliente.query('COMMIT');
         return resultado.rows[0];
-    };
+    } catch (error) {
+        await cliente.query('ROLLBACK');
+        throw error;
+    } finally {
+        cliente.release();
+    }
+};
 
-    //FUNCION 5 ELIMINAR USUARIO POR ID
-    const eliminarUsuario = async (id) => {
+// TITULO 4 CAMBIAR ESTADO DEL USUARIO
 
-        // elimina el usuario de la base de datos
-        const resultado = await pool.query(
-            `DELETE FROM base_datos.usuarios
-            WHERE id_usuario = $1
-            RETURNING id_usuario, nombre, email, id_rol, activo`,
-            [id]
-        );
-
-        // devuelve el usuario eliminado
-        return resultado.rows[0];
-    };
-
-    // FUNCION 6 CAMBIAR CONTRASENA
-    const cambiarContrasena = async (id, password) => {
-
-        // encripta la nueva contrasena
-        const password_hash = await bcrypt.hash(password, 10);
-
-        // actualiza la contrasena del usuario
-        const resultado = await pool.query(
-            `UPDATE base_datos.usuarios
-            SET password_hash = $1
-            WHERE id_usuario = $2
-            RETURNING id_usuario, nombre, email, id_rol, activo`,
-            [password_hash, id]
-        );
-
-        // devuelve el usuario actualizado
-        return resultado.rows[0];
-    };
-
-    // FUNCION 7 CAMBIAR ESTADO DEL USUARIO
-    const cambiarEstadoUsuario = async (id, activo) => {
-
-        // actualiza el estado del usuario
-        const resultado = await pool.query(
-            `UPDATE base_datos.usuarios
-            SET activo = $1
-            WHERE id_usuario = $2
-            RETURNING id_usuario, nombre, email, id_rol, activo`,
+const cambiarEstadoUsuario = async (id, activo, idSesion = null) => {
+    if (typeof activo !== 'boolean') throw errorUsuario('El estado debe ser verdadero o falso.');
+    const cliente = await pool.connect();
+    try {
+        await cliente.query('BEGIN');
+        await bloquearCambiosAdministradores(cliente);
+        const usuario = await consultarUsuarioParaCambio(cliente, id);
+        if (!activo && idSesion !== null && Number(idSesion) === Number(id)) {
+            throw errorUsuario('No puedes desactivar tu propia cuenta.', 409);
+        }
+        await comprobarUltimoAdministrador(cliente, usuario, usuario.rol, activo);
+        const resultado = await cliente.query(
+            `UPDATE base_datos.usuarios SET activo = $1 WHERE id_usuario = $2
+             RETURNING id_usuario, nombre, email, id_rol, activo, fecha_creacion`,
             [activo, id]
         );
-
-        // devuelve el usuario actualizado
+        await cliente.query('COMMIT');
         return resultado.rows[0];
-    };
+    } catch (error) {
+        await cliente.query('ROLLBACK');
+        throw error;
+    } finally {
+        cliente.release();
+    }
+};
 
-    // FUNCION 8 CAMBIAR ROL DEL USUARIO
-    const cambiarRolUsuario = async (id, id_rol) => {
+// TITULO 5 CAMBIO DIRECTO DE CONTRASEÑA Y ROL (COMPATIBILIDAD)
 
-        // actualiza el rol del usuario
-        const resultado = await pool.query(
-            `UPDATE base_datos.usuarios
-            SET id_rol = $1
-            WHERE id_usuario = $2
-            RETURNING id_usuario, nombre, email, id_rol, activo`,
-            [id_rol, id]
+const cambiarContrasena = async (id, password) => {
+    const hash = await bcrypt.hash(password, 10);
+    const resultado = await pool.query(
+        `UPDATE base_datos.usuarios SET password_hash = $1 WHERE id_usuario = $2
+         RETURNING id_usuario, nombre, email, id_rol, activo`,
+        [hash, validarIdUsuario(id)]
+    );
+    return resultado.rows[0] || null;
+};
+
+const cambiarRolUsuario = async (id, idRol, idSesion = null) => {
+    const cliente = await pool.connect();
+    try {
+        await cliente.query('BEGIN');
+        await bloquearCambiosAdministradores(cliente);
+        const usuario = await consultarUsuarioParaCambio(cliente, id);
+        const rol = await consultarRol(cliente, idRol);
+        if (idSesion !== null && Number(idSesion) === Number(id) &&
+            String(usuario.rol).toLowerCase() === 'administrador' &&
+            String(rol.nombre).toLowerCase() !== 'administrador') {
+            throw errorUsuario('No puedes quitarte el rol de administrador a ti mismo.', 409);
+        }
+        await comprobarUltimoAdministrador(cliente, usuario, rol.nombre, usuario.activo);
+        const resultado = await cliente.query(
+            `UPDATE base_datos.usuarios SET id_rol = $1 WHERE id_usuario = $2
+             RETURNING id_usuario, nombre, email, id_rol, activo`, [idRol, id]
         );
-
-        // devuelve el usuario actualizado
+        await cliente.query('COMMIT');
         return resultado.rows[0];
-    };
+    } catch (error) {
+        await cliente.query('ROLLBACK');
+        throw error;
+    } finally {
+        cliente.release();
+    }
+};
 
-    // funcion 9 obtener id de rol por nombre
-    const obtenerIdRol = async (nombre) => {
-
-        // busca el rol por su nombre
-        const resultado = await pool.query(
-            `SELECT id_rol
-            FROM base_datos.roles
-            WHERE nombre = $1`,
-            [nombre]
-        );
-
-        // devuelve el id o undefined si no existe
-        return resultado.rows[0]?.id_rol;
-    };
-
-// EXPORTAR FUNCIONES
 module.exports = {
-    crearUsuario,
-    obtenerUsuarios,
-    obtenerUsuario,
-    actualizarUsuario,
-    eliminarUsuario,
-    cambiarContrasena,
-    cambiarEstadoUsuario,
-    cambiarRolUsuario,
-    obtenerIdRol
+    crearUsuario, obtenerUsuarios, obtenerUsuario, obtenerIdRol,
+    actualizarUsuario, cambiarEstadoUsuario, cambiarContrasena, cambiarRolUsuario
 };
