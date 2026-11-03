@@ -551,6 +551,33 @@
         display: none;
     }
 
+    .boton_reenviar_codigo {
+        width: 100%;
+        min-height: 42px;
+        margin-top: 10px;
+        border: 1px solid #00B347;
+        border-radius: 7px;
+        background-color: #ffffff;
+        color: #008f39;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .boton_reenviar_codigo:hover:not(:disabled) {
+        background-color: #00B347;
+        color: #ffffff;
+    }
+
+    .boton_reenviar_codigo:disabled {
+        border-color: #c8d5cc;
+        background-color: #f1f4f2;
+        color: #7c8b80;
+        cursor: not-allowed;
+    }
+
     @media (max-width: 500px) {
         .contenido_modal_registro {
             padding: 28px 20px;
