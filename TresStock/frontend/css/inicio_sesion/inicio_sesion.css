@@ -732,6 +732,23 @@
         cursor: not-allowed;
     }
 
+    .boton_volver_recuperacion {
+        align-self: flex-start;
+        padding: 6px 0;
+        border: 0;
+        background: transparent;
+        color: #159ba3;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .boton_volver_recuperacion:hover {
+        color: #0f858d;
+        text-decoration: underline;
+    }
+
     @media (max-width: 500px) {
         .contenido_modal_recuperacion {
             padding: 28px 20px;

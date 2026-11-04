@@ -358,6 +358,7 @@
     const mensajeRecuperacion = document.getElementById('mensaje_recuperacion');
     const botonEnviarRecuperacion = document.getElementById('boton_enviar_recuperacion');
     const botonReenviarRecuperacion = document.getElementById('boton_reenviar_recuperacion');
+    const botonVolverRecuperacion = document.getElementById('boton_volver_recuperacion');
 
     let pasoCodigoRecuperacionActivo = false;
     let temporizadorReenvioRecuperacion = null;
@@ -409,6 +410,29 @@
 
     botonAbrirRecuperacion.addEventListener('click', abrirModalRecuperacion);
     botonCerrarRecuperacion.addEventListener('click', cerrarModalRecuperacion);
+
+    botonVolverRecuperacion.addEventListener('click', () => {
+        clearInterval(temporizadorReenvioRecuperacion);
+        temporizadorReenvioRecuperacion = null;
+        pasoCodigoRecuperacionActivo = false;
+        pasoCodigoRecuperacion.hidden = true;
+
+        codigoRecuperacion.value = '';
+        codigoRecuperacion.disabled = true;
+        codigoRecuperacion.required = false;
+        passwordRecuperacion.value = '';
+        passwordRecuperacion.disabled = true;
+        passwordRecuperacion.required = false;
+        confirmarPasswordRecuperacion.value = '';
+        confirmarPasswordRecuperacion.disabled = true;
+        confirmarPasswordRecuperacion.required = false;
+
+        botonEnviarRecuperacion.textContent = 'Enviar código';
+        botonReenviarRecuperacion.disabled = true;
+        botonReenviarRecuperacion.textContent = 'Reenviar código en 60 s';
+        mensajeRecuperacion.textContent = '';
+        emailRecuperacion.focus();
+    });
 
     document.addEventListener('keydown', (evento) => {
         if (evento.key === 'Escape' && modalRecuperacion.classList.contains('activo')) {
