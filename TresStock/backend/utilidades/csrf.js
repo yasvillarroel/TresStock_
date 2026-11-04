@@ -1,18 +1,32 @@
 const { doubleCsrf } = require('csrf-csrf');
 
 const {
-    generateToken,
+    generateCsrfToken,
     doubleCsrfProtection
 } = doubleCsrf({
-    getSecret: () => process.env.CSRF_SECRET, // string secreto en tu .env
+    getSecret: () => {
+        const secreto = process.env.CSRF_SECRET;
+
+        if (!secreto) {
+            throw new Error('Falta configurar CSRF_SECRET en el archivo .env');
+        }
+
+        return secreto;
+    },
+    getSessionIdentifier: (req) => req.cookies?.sesion || 'sesion-anonima',
     cookieName: 'csrf-token',
     cookieOptions: {
-        httpOnly: false, // el frontend necesita leerlo para mandarlo en el header
-        sameSite: 'lax', // igual que cookie de sesion
-        secure: true       // requiere https en dev
+        httpOnly: true,
+        sameSite: 'lax',
+        secure: process.env.NODE_ENV === 'production',
+        path: '/'
     },
     size: 64,
-    getTokenFromRequest: (req) => req.headers['x-csrf-token']
+    ignoredMethods: ['GET', 'HEAD', 'OPTIONS'],
+    getCsrfTokenFromRequest: (req) => req.headers['x-csrf-token']
 });
 
-module.exports = { generateToken, doubleCsrfProtection };
+module.exports = {
+    generateCsrfToken, 
+    doubleCsrfProtection
+};
