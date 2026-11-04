@@ -299,7 +299,7 @@ function formatearFechaUsuario(fecha) {
 
 async function cargarUsuarios() {
     try {
-        const respuesta = await fetch(URL_API_USUARIOS, { method: 'GET', credentials: 'include' });
+        const respuesta = await fetchConCsrf(URL_API_USUARIOS, { method: 'GET', credentials: 'include' });
         const resultado = await respuesta.json();
         if (!respuesta.ok) throw new Error(resultado.mensaje || 'No se pudieron cargar los usuarios.');
         usuariosCargados = Array.isArray(resultado) ? resultado :
@@ -468,7 +468,7 @@ async function guardarUsuario() {
     if (boton) boton.disabled = true;
     try {
         const url = nuevo ? URL_API_USUARIOS : URL_API_USUARIOS + '/' + encodeURIComponent(idUsuarioEditado);
-        const respuesta = await fetch(url, {
+        const respuesta = await fetchConCsrf(url, {
             method: nuevo ? 'POST' : 'PUT', credentials: 'include',
             headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(datos)
         });
@@ -506,7 +506,7 @@ async function cambiarEstadoUsuario(idUsuario) {
     if (!confirmado) return;
     cambiandoEstadoUsuario = true;
     try {
-        const respuesta = await fetch(URL_API_USUARIOS + '/' + encodeURIComponent(idUsuario) + '/estado', {
+        const respuesta = await fetchConCsrf(URL_API_USUARIOS + '/' + encodeURIComponent(idUsuario) + '/estado', {
             method: 'PUT', credentials: 'include',
             headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ activo: nuevoEstado })
         });

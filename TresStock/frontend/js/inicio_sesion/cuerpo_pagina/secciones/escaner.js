@@ -275,7 +275,7 @@ async function buscarCodigoProducto(video, miId) {
 // consulta el producto correspondiente al codigo escaneado
 async function consultarProductoEscaneado(codigo) {
     try {
-        const respuesta = await fetch(
+        const respuesta = await fetchConCsrf(
             `${URL_API}/api/escaneo/producto/${encodeURIComponent(codigo)}`,
             {
                 credentials: 'include'
@@ -564,7 +564,7 @@ async function eliminarCodigoAsociado() {
     }
 
     try {
-        const respuesta = await fetch(
+        const respuesta = await fetchConCsrf(
             `${URL_API}/api/escaneo/codigo-asociado/${encodeURIComponent(codigoEliminar)}`,
             {
                 method: 'DELETE',
@@ -739,7 +739,7 @@ async function buscarProductosParaAsociar(termino) {
     resultados.appendChild(mensajeCarga);
 
     try {
-        const respuesta = await fetch(
+        const respuesta = await fetchConCsrf(
             `${URL_API}/api/escaneo/productos-asociar?busqueda=${encodeURIComponent(termino)}`,
             {
                 method: 'GET',
@@ -882,7 +882,7 @@ async function asociarCodigoSeleccionado() {
     }
 
     try {
-        const respuesta = await fetch(
+        const respuesta = await fetchConCsrf(
             `${URL_API}/api/escaneo/asociar-codigo`,
             {
                 method: 'POST',
@@ -1307,7 +1307,7 @@ async function aceptarAjusteProducto() {
 
     try {
         // envia el ajuste al backend
-        const respuesta = await fetch(
+        const respuesta = await fetchConCsrf(
             `${URL_API}/api/inventario/ajustar`,
             {
                 method: 'POST',

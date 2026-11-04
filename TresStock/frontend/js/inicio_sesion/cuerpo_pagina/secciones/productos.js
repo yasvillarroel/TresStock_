@@ -458,7 +458,7 @@ function confirmarAccionProducto(titulo, mensaje, textoAceptar = 'Confirmar') {
 
         try {
 
-            const respuesta = await fetch(
+            const respuesta = await fetchConCsrf(
                 'http://127.0.0.1:3000/api/productos/importar',
                 {
                     method: 'POST',
@@ -536,7 +536,7 @@ function confirmarAccionProducto(titulo, mensaje, textoAceptar = 'Confirmar') {
 
         try {
 
-            const respuesta = await fetch(
+            const respuesta = await fetchConCsrf(
                 'http://127.0.0.1:3000/api/productos',
                 {
                     method: 'GET',
@@ -988,7 +988,7 @@ function escaparTextoProducto(valor) {
         if (!campoFiltro && !selectFormulario) return;
 
         try {
-            const respuesta = await fetch(
+            const respuesta = await fetchConCsrf(
                 'http://127.0.0.1:3000/api/productos/familias',
                 { method: 'GET', credentials: 'include' }
             );
@@ -2109,7 +2109,7 @@ async function cargarOpcionesProveedoresProducto() {
 
     if (listaProveedoresProducto === null) {
 
-        const respuesta = await fetch(
+        const respuesta = await fetchConCsrf(
             'http://127.0.0.1:3000/api/proveedores',
             { credentials: 'include' }
         );
@@ -2382,7 +2382,7 @@ async function guardarCambiosProducto() {
             opciones.body = JSON.stringify(datosProducto);
         }
 
-        const respuesta = await fetch(url, opciones);
+        const respuesta = await fetchConCsrf(url, opciones);
 
         const resultado = await respuesta.json();
 
@@ -2442,7 +2442,7 @@ async function confirmarCambioEstadoProducto(codigo) {
     cambiandoEstadoProducto = true;
 
     try {
-        const respuesta = await fetch(
+        const respuesta = await fetchConCsrf(
             'http://127.0.0.1:3000/api/productos/' +
                 encodeURIComponent(codigo) + '/estado',
             {
@@ -2773,7 +2773,7 @@ async function buscarImagenProductoFormulario() {
     }
 
     try {
-        const respuesta = await fetch(
+        const respuesta = await fetchConCsrf(
             'http://127.0.0.1:3000/api/productos/buscar-imagen/' +
                 encodeURIComponent(codigoBarra),
             { method: 'GET', credentials: 'include' }

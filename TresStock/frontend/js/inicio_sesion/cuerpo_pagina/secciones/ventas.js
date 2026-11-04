@@ -191,7 +191,7 @@ let temporizadorBusquedaVentas = null;
 
         try {
 
-            const respuesta = await fetch(
+            const respuesta = await fetchConCsrf(
                 'http://127.0.0.1:3000/api/ventas/importar',
                 {
                     method: 'POST',
@@ -374,7 +374,7 @@ let temporizadorBusquedaVentas = null;
 
         try {
 
-            const respuesta = await fetch(
+            const respuesta = await fetchConCsrf(
                 'http://127.0.0.1:3000/api/ventas?' +
                 parametros.toString(),
                 {
@@ -542,7 +542,7 @@ let temporizadorBusquedaVentas = null;
 
         try {
 
-            const respuesta = await fetch(
+            const respuesta = await fetchConCsrf(
                 'http://127.0.0.1:3000/api/ventas/resumen',
                 {
                     method: 'GET',
@@ -633,7 +633,7 @@ let temporizadorBusquedaVentas = null;
 
         try {
 
-            const respuesta = await fetch(
+            const respuesta = await fetchConCsrf(
                 'http://127.0.0.1:3000/api/ventas/' +
                 idVenta +
                 '/detalle',

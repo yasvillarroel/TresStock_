@@ -129,7 +129,7 @@ let idProveedorEditando = null;
 
         try {
 
-            const respuesta = await fetch(
+            const respuesta = await fetchConCsrf(
                 'http://127.0.0.1:3000/api/proveedores',
                 {
                     method: 'GET',
@@ -467,7 +467,7 @@ let idProveedorEditando = null;
 
         try {
 
-            const respuesta = await fetch(
+            const respuesta = await fetchConCsrf(
                 'http://127.0.0.1:3000/api/proveedores/resumen',
                 {
                     method: 'GET',
@@ -792,7 +792,7 @@ let idProveedorEditando = null;
             }
 
 
-            const respuesta = await fetch(
+            const respuesta = await fetchConCsrf(
                 url,
                 {
                     method: metodo,
@@ -975,7 +975,7 @@ let idProveedorEditando = null;
         try {
 
             const respuesta =
-                await fetch(
+                await fetchConCsrf(
                     `http://127.0.0.1:3000/api/proveedores/${idProveedor}`,
                     {
                         method: 'DELETE',

@@ -24,7 +24,7 @@
 
         try {
 
-            const respuesta = await fetch(
+            const respuesta = await fetchConCsrf(
                 'http://127.0.0.1:3000/api/inventario/resumen',
                 {
                     method: 'GET',
@@ -148,7 +148,7 @@
 
         try {
 
-            const respuesta = await fetch(
+            const respuesta = await fetchConCsrf(
                 'http://127.0.0.1:3000/api/inventario/familias',
                 {
                     method: 'GET',
@@ -408,7 +408,7 @@
 
         try {
 
-            const respuesta = await fetch(
+            const respuesta = await fetchConCsrf(
                 'http://127.0.0.1:3000/api/inventario',
                 {
                     method: 'GET',
@@ -943,7 +943,7 @@ async function recalcularStockMinimoInventario() {
 
     try {
 
-        const respuesta = await fetch(
+        const respuesta = await fetchConCsrf(
             'http://127.0.0.1:3000/api/inventario/recalcular-stock-minimo',
             {
                 method: 'PUT',
