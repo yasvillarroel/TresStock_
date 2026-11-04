@@ -209,11 +209,77 @@ const verificarCodigoRegistro = async (req, res) => {
     }
 };
 
+const solicitarRecuperacion = async (req, res) => {
+    const email = String(req.body.email ?? '').trim().toLowerCase();
+
+    if (email.length > 150 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        return res.status(400).json({ mensaje: 'Ingresa un correo electrónico válido.' });
+    }
+
+    try {
+        await autenticacionServicio.solicitarRecuperacionContrasena(email, req.ip);
+
+        return res.status(200).json({
+            mensaje: 'Si existe una cuenta con ese correo, enviaremos un código.'
+        });
+    } catch (error) {
+        if (error.statusCode === 429) {
+            return res.status(429).json({ mensaje: error.message });
+        }
+
+        console.error('Error al solicitar recuperación:', error);
+        return res.status(503).json({
+            mensaje: 'No se pudo procesar la solicitud. Intenta nuevamente más tarde.'
+        });
+    }
+};
+
+const confirmarRecuperacion = async (req, res) => {
+    const email = String(req.body.email ?? '').trim().toLowerCase();
+    const codigo = String(req.body.codigo ?? '').trim();
+    const password = String(req.body.password ?? '');
+    const confirmarPassword = String(req.body.confirmar_password ?? '');
+
+    if (email.length > 150 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        return res.status(400).json({ mensaje: 'El correo electrónico no es válido.' });
+    }
+
+    if (!/^\d{6}$/.test(codigo)) {
+        return res.status(400).json({ mensaje: 'El código no es válido o venció.' });
+    }
+
+    if (password.length < 8) {
+        return res.status(400).json({ mensaje: 'La contraseña debe tener al menos 8 caracteres.' });
+    }
+
+    if (password !== confirmarPassword) {
+        return res.status(400).json({ mensaje: 'Las contraseñas no coinciden.' });
+    }
+
+    try {
+        await autenticacionServicio.confirmarRecuperacionContrasena(email, codigo, password, req.ip);
+        return res.status(200).json({ mensaje: 'Contraseña actualizada correctamente.' });
+    } catch (error) {
+        if (error.statusCode === 429) {
+            return res.status(429).json({ mensaje: error.message });
+        }
+
+        if (error.statusCode === 400) {
+            return res.status(400).json({ mensaje: 'El código no es válido o venció.' });
+        }
+
+        console.error('Error al confirmar recuperación:', error);
+        return res.status(500).json({ mensaje: 'No se pudo actualizar la contraseña.' });
+    }
+};
+
 // exporta el controlador
 module.exports = {
     iniciarSesion,
     verificarSesion,
     cerrarSesion,
     iniciarRegistro,
-    verificarCodigoRegistro
+    verificarCodigoRegistro,
+    solicitarRecuperacion,
+    confirmarRecuperacion
 };

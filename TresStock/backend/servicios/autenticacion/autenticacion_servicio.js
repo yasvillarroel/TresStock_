@@ -341,9 +341,291 @@ const registrarReenvioIp = async (ip) => {
     }
 };
 
+const hashearCodigoRecuperacion = (email, codigo) => {
+    const secreto = process.env.REGISTRO_CODE_SECRET;
+
+    if (!secreto || secreto.startsWith('pon-aqui')) {
+        throw crearErrorRegistro('Configura REGISTRO_CODE_SECRET en el archivo .env.', 503);
+    }
+
+    return createHmac('sha256', secreto)
+        .update(`recuperacion:${email}:${codigo}`)
+        .digest('hex');
+};
+
+const comprobarBloqueoRecuperacionIp = async (ip, tipo, cliente = pool) => {
+    const columna = tipo === 'codigo'
+        ? 'bloqueado_codigo_hasta'
+        : 'bloqueado_reenvio_hasta';
+
+    const resultado = await cliente.query(
+        `SELECT ${columna} AS bloqueado_hasta
+         FROM base_datos.limites_recuperacion_ip
+         WHERE ip = $1`,
+        [ip]
+    );
+
+    const hasta = resultado.rows[0]?.bloqueado_hasta;
+
+    if (hasta && new Date(hasta) > new Date()) {
+        const motivo = tipo === 'codigo'
+            ? 'Demasiados intentos de código.'
+            : 'Demasiadas solicitudes de recuperación.';
+
+        throw crearErrorRegistro(mensajeBloqueo(motivo, hasta), 429);
+    }
+};
+
+const registrarSolicitudRecuperacionIp = async (ip) => {
+    const resultado = await pool.query(
+        `INSERT INTO base_datos.limites_recuperacion_ip AS l
+            (ip, reenvios, ventana_reenvios_inicio, actualizado_en)
+         VALUES ($1, 1, NOW(), NOW())
+         ON CONFLICT (ip) DO UPDATE SET
+            reenvios = CASE
+                WHEN l.ventana_reenvios_inicio <= NOW() - INTERVAL '15 minutes' THEN 1
+                ELSE l.reenvios + 1
+            END,
+            ventana_reenvios_inicio = CASE
+                WHEN l.ventana_reenvios_inicio <= NOW() - INTERVAL '15 minutes' THEN NOW()
+                ELSE l.ventana_reenvios_inicio
+            END,
+            bloqueado_reenvio_hasta = CASE
+                WHEN (
+                    CASE
+                        WHEN l.ventana_reenvios_inicio <= NOW() - INTERVAL '15 minutes' THEN 1
+                        ELSE l.reenvios + 1
+                    END
+                ) > 4 THEN NOW() + INTERVAL '15 minutes'
+                ELSE NULL
+            END,
+            actualizado_en = NOW()
+         RETURNING reenvios, bloqueado_reenvio_hasta`,
+        [ip]
+    );
+
+    const hasta = resultado.rows[0].bloqueado_reenvio_hasta;
+
+    if (hasta) {
+        throw crearErrorRegistro(
+            mensajeBloqueo('Superaste el límite de solicitudes de recuperación.', hasta),
+            429
+        );
+    }
+};
+
+const registrarFalloCodigoRecuperacionIp = async (cliente, ip) => {
+    const resultado = await cliente.query(
+        `INSERT INTO base_datos.limites_recuperacion_ip AS l
+            (ip, fallos_codigo, ventana_fallos_inicio, actualizado_en)
+         VALUES ($1, 1, NOW(), NOW())
+         ON CONFLICT (ip) DO UPDATE SET
+            fallos_codigo = CASE
+                WHEN l.ventana_fallos_inicio <= NOW() - INTERVAL '15 minutes' THEN 1
+                ELSE l.fallos_codigo + 1
+            END,
+            ventana_fallos_inicio = CASE
+                WHEN l.ventana_fallos_inicio <= NOW() - INTERVAL '15 minutes' THEN NOW()
+                ELSE l.ventana_fallos_inicio
+            END,
+            bloqueado_codigo_hasta = CASE
+                WHEN (
+                    CASE
+                        WHEN l.ventana_fallos_inicio <= NOW() - INTERVAL '15 minutes' THEN 1
+                        ELSE l.fallos_codigo + 1
+                    END
+                ) >= 2 THEN NOW() + INTERVAL '15 minutes'
+                ELSE NULL
+            END,
+            actualizado_en = NOW()
+         RETURNING fallos_codigo, bloqueado_codigo_hasta`,
+        [ip]
+    );
+
+    return resultado.rows[0];
+};
+
+const solicitarRecuperacionContrasena = async (email, ip) => {
+    await comprobarBloqueoRecuperacionIp(ip, 'reenvio');
+    await registrarSolicitudRecuperacionIp(ip);
+
+    if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS || !process.env.SMTP_FROM) {
+        throw crearErrorRegistro('Falta configurar el envío SMTP en el archivo .env.', 503);
+    }
+
+    if (!process.env.REGISTRO_CODE_SECRET || process.env.REGISTRO_CODE_SECRET.startsWith('pon-aqui')) {
+        throw crearErrorRegistro('Configura REGISTRO_CODE_SECRET en el archivo .env.', 503);
+    }
+
+    const inicio = Date.now();
+
+    const cuenta = await pool.query(
+        `SELECT email
+         FROM base_datos.usuarios
+         WHERE LOWER(email) = LOWER($1)
+           AND activo = TRUE`,
+        [email]
+    );
+
+    if (cuenta.rowCount) {
+        const recuperacionActual = await pool.query(
+            `SELECT creado_en
+             FROM base_datos.recuperaciones_contrasena
+             WHERE email = $1`,
+            [email]
+        );
+
+        const puedeEnviar = !recuperacionActual.rowCount ||
+            Date.now() - new Date(recuperacionActual.rows[0].creado_en).getTime() >= 60000;
+
+        if (puedeEnviar) {
+            const codigo = String(randomInt(100000, 1000000));
+            const codigoHash = hashearCodigoRecuperacion(email, codigo);
+
+            await pool.query(
+                `INSERT INTO base_datos.recuperaciones_contrasena
+                    (email, codigo_hash, vence_en, creado_en, intentos)
+                 VALUES ($1, $2, NOW() + INTERVAL '10 minutes', NOW(), 0)
+                 ON CONFLICT (email) DO UPDATE SET
+                    codigo_hash = EXCLUDED.codigo_hash,
+                    vence_en = EXCLUDED.vence_en,
+                    creado_en = NOW(),
+                    intentos = 0`,
+                [email, codigoHash]
+            );
+
+            const transporte = nodemailer.createTransport({
+                host: process.env.SMTP_HOST,
+                port: Number(process.env.SMTP_PORT || 587),
+                secure: process.env.SMTP_SECURE === 'true',
+                auth: {
+                    user: process.env.SMTP_USER,
+                    pass: process.env.SMTP_PASS
+                }
+            });
+
+            setImmediate(() => {
+                transporte.sendMail({
+                    from: process.env.SMTP_FROM,
+                    to: email,
+                    subject: 'Código para recuperar tu contraseña de TresStock',
+                    text: `Tu código de recuperación es ${codigo}. Vence en 10 minutos.`
+                }).catch((error) => {
+                    console.error('No se pudo enviar el código de recuperación:', error);
+                });
+            });
+        }
+    }
+
+    const tiempoMinimo = 500;
+    const espera = tiempoMinimo - (Date.now() - inicio);
+
+    if (espera > 0) {
+        await new Promise((resolve) => setTimeout(resolve, espera));
+    }
+};
+
+const confirmarRecuperacionContrasena = async (email, codigo, password, ip) => {
+    await comprobarBloqueoRecuperacionIp(ip, 'codigo');
+
+    const cliente = await pool.connect();
+    let transaccionAbierta = false;
+
+    try {
+        await cliente.query('BEGIN');
+        transaccionAbierta = true;
+
+        const resultado = await cliente.query(
+            `SELECT codigo_hash, vence_en, intentos
+             FROM base_datos.recuperaciones_contrasena
+             WHERE email = $1
+             FOR UPDATE`,
+            [email]
+        );
+
+        const pendiente = resultado.rows[0];
+        let codigoValido = false;
+
+        if (pendiente && new Date(pendiente.vence_en) > new Date() && pendiente.intentos < 5) {
+            const recibido = Buffer.from(hashearCodigoRecuperacion(email, codigo), 'hex');
+            const guardado = Buffer.from(pendiente.codigo_hash.trim(), 'hex');
+
+            codigoValido = recibido.length === guardado.length &&
+                timingSafeEqual(recibido, guardado);
+        }
+
+        const cuenta = codigoValido
+            ? await cliente.query(
+                `SELECT id_usuario
+                 FROM base_datos.usuarios
+                 WHERE LOWER(email) = LOWER($1)
+                   AND activo = TRUE
+                 FOR UPDATE`,
+                [email]
+            )
+            : { rowCount: 0, rows: [] };
+
+        if (!codigoValido || !cuenta.rowCount) {
+            if (pendiente) {
+                await cliente.query(
+                    'UPDATE base_datos.recuperaciones_contrasena SET intentos = intentos + 1 WHERE email = $1',
+                    [email]
+                );
+            }
+
+            const bloqueo = await registrarFalloCodigoRecuperacionIp(cliente, ip);
+
+            if (pendiente && new Date(pendiente.vence_en) <= new Date()) {
+                await cliente.query(
+                    'DELETE FROM base_datos.recuperaciones_contrasena WHERE email = $1',
+                    [email]
+                );
+            }
+
+            await cliente.query('COMMIT');
+            transaccionAbierta = false;
+
+            if (bloqueo.bloqueado_codigo_hasta) {
+                throw crearErrorRegistro(
+                    mensajeBloqueo('Demasiados intentos de código.', bloqueo.bloqueado_codigo_hasta),
+                    429
+                );
+            }
+
+            throw crearErrorRegistro('El código no es válido o venció.', 400);
+        }
+
+        const passwordHash = await bcrypt.hash(password, 10);
+
+        await cliente.query(
+            'UPDATE base_datos.usuarios SET password_hash = $1 WHERE id_usuario = $2',
+            [passwordHash, cuenta.rows[0].id_usuario]
+        );
+
+        await cliente.query(
+            'DELETE FROM base_datos.recuperaciones_contrasena WHERE email = $1',
+            [email]
+        );
+        await cliente.query(
+            'DELETE FROM base_datos.limites_recuperacion_ip WHERE ip = $1',
+            [ip]
+        );
+
+        await cliente.query('COMMIT');
+        transaccionAbierta = false;
+    } catch (error) {
+        if (transaccionAbierta) await cliente.query('ROLLBACK');
+        throw error;
+    } finally {
+        cliente.release();
+    }
+};
+
 module.exports = {
     iniciarSesion,
     obtenerUsuarioPorId,
     solicitarCodigoRegistro,
-    verificarCodigoRegistro
+    verificarCodigoRegistro,
+    solicitarRecuperacionContrasena,
+    confirmarRecuperacionContrasena
 };

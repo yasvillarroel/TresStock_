@@ -207,11 +207,54 @@
 
                     </div>
 
+                    <!-- TITULO 12 MODAL DE RECUPERACION -->
+
+                        <div class="modal_recuperacion" id="modal_recuperacion" aria-hidden="true">
+                            <div class="contenido_modal_recuperacion" role="dialog" aria-modal="true" aria-labelledby="titulo_modal_recuperacion">
+                                <button class="cerrar_modal_recuperacion" id="cerrar_modal_recuperacion" type="button" aria-label="Cerrar">×</button>
+                                <div class="titulo_modal_recuperacion" id="titulo_modal_recuperacion">Recuperar contraseña</div>
+                                <div class="descripcion_modal_recuperacion">Ingresa tu correo para recibir instrucciones de recuperación.</div>
+
+                                <form id="formulario_recuperacion">
+                                    <div class="campo_recuperacion">
+                                        <div class="texto_campo_recuperacion" data-for="recuperacion_email">Correo electrónico</div>
+                                        <input id="recuperacion_email" name="email" type="email" maxlength="150" autocomplete="email" required>
+                                    </div>
+
+                                    <div class="paso_codigo_recuperacion" id="paso_codigo_recuperacion" hidden>
+                                        <div class="campo_recuperacion">
+                                            <div class="texto_campo_recuperacion" data-for="recuperacion_codigo">Código de recuperación</div>
+                                            <input id="recuperacion_codigo" name="codigo" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" placeholder="Ingresa los 6 dígitos" disabled>
+                                        </div>
+
+                                        <div class="campo_recuperacion">
+                                            <div class="texto_campo_recuperacion" data-for="recuperacion_password">Nueva contraseña</div>
+                                            <input id="recuperacion_password" name="password" type="password" minlength="8" autocomplete="new-password" disabled>
+                                        </div>
+
+                                        <div class="campo_recuperacion">
+                                            <div class="texto_campo_recuperacion" data-for="recuperacion_confirmar_password">Confirmar contraseña</div>
+                                            <input id="recuperacion_confirmar_password" name="confirmar_password" type="password" minlength="8" autocomplete="new-password" disabled>
+                                        </div>
+
+                                        <button class="boton_reenviar_recuperacion" id="boton_reenviar_recuperacion" type="button" disabled>Reenviar código en 60 s</button>
+                                    </div>
+
+                                    <div class="mensaje_recuperacion" id="mensaje_recuperacion" role="status" aria-live="polite"></div>
+                                    <button class="boton_enviar_recuperacion" id="boton_enviar_recuperacion" type="submit">Enviar código</button>
+                                </form>
+                            </div>
+                        </div>
+
             </div>
 
         <!-- TITULO 12 PIE INICIO SESION -->
 
             <div class="pie_inicio_sesion">© 2026 TresStock. Todos los derechos reservados.</div>
+
+        <!-- TITULO 13 ALERTA NOTIFICAR EXITO -->
+
+            <div class="alerta_superior" id="alerta_superior" role="status" aria-live="polite"></div>
 
         <!-- CONFIGURACION DE IP -->
         <script src="../../js/configuracion/configuracion_conexion.js"></script>

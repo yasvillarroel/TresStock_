@@ -28,5 +28,8 @@ router.post('/registro/iniciar', autenticacionControlador.iniciarRegistro);
 
 router.post('/registro/verificar', autenticacionControlador.verificarCodigoRegistro);
 
+router.post('/recuperar/iniciar', autenticacionControlador.solicitarRecuperacion);
+router.post('/recuperar/confirmar', autenticacionControlador.confirmarRecuperacion);
+
 // exporta el router
 module.exports = router;

@@ -215,10 +215,6 @@
     botonRegistro.addEventListener('click', abrirModalRegistro);
     cerrarModalRegistro.addEventListener('click', cerrarRegistro);
 
-    modalRegistro.addEventListener('click', (evento) => {
-        if (evento.target === modalRegistro) cerrarRegistro();
-    });
-
     document.addEventListener('keydown', (evento) => {
         if (evento.key === 'Escape' && modalRegistro.classList.contains('activo')) {
             cerrarRegistro();
@@ -297,7 +293,7 @@
             cerrarRegistro();
 
             document.getElementById('email').value = email;
-            document.getElementById('mensaje_login').textContent = 'Cuenta creada. Ya puedes iniciar sesión.';
+            mostrarAlertaSuperior('Cuenta creada correctamente. Ya puedes iniciar sesión.');
         } catch (error) {
             mensajeRegistro.textContent = 'No se pudo conectar con el servidor.';
         } finally {
@@ -348,6 +344,219 @@
         }
     });
 
+// TITULO 12 MODAL DE RECUPERACION
+
+    const botonAbrirRecuperacion = document.getElementById('recuperar_contrasena_inicio_sesion');
+    const modalRecuperacion = document.getElementById('modal_recuperacion');
+    const botonCerrarRecuperacion = document.getElementById('cerrar_modal_recuperacion');
+    const formularioRecuperacion = document.getElementById('formulario_recuperacion');
+    const pasoCodigoRecuperacion = document.getElementById('paso_codigo_recuperacion');
+    const emailRecuperacion = document.getElementById('recuperacion_email');
+    const codigoRecuperacion = document.getElementById('recuperacion_codigo');
+    const passwordRecuperacion = document.getElementById('recuperacion_password');
+    const confirmarPasswordRecuperacion = document.getElementById('recuperacion_confirmar_password');
+    const mensajeRecuperacion = document.getElementById('mensaje_recuperacion');
+    const botonEnviarRecuperacion = document.getElementById('boton_enviar_recuperacion');
+    const botonReenviarRecuperacion = document.getElementById('boton_reenviar_recuperacion');
+
+    let pasoCodigoRecuperacionActivo = false;
+    let temporizadorReenvioRecuperacion = null;
+
+    function abrirModalRecuperacion() {
+        modalRecuperacion.classList.add('activo');
+        modalRecuperacion.setAttribute('aria-hidden', 'false');
+        emailRecuperacion.focus();
+    }
+
+    function cerrarModalRecuperacion() {
+        modalRecuperacion.classList.remove('activo');
+        modalRecuperacion.setAttribute('aria-hidden', 'true');
+    }
+
+    function iniciarCuentaAtrasRecuperacion() {
+        let segundos = 60;
+        botonReenviarRecuperacion.disabled = true;
+        botonReenviarRecuperacion.textContent = `Reenviar código en ${segundos} s`;
+
+        clearInterval(temporizadorReenvioRecuperacion);
+
+        temporizadorReenvioRecuperacion = setInterval(() => {
+            segundos--;
+            botonReenviarRecuperacion.textContent = `Reenviar código en ${segundos} s`;
+
+            if (segundos <= 0) {
+                clearInterval(temporizadorReenvioRecuperacion);
+                temporizadorReenvioRecuperacion = null;
+                botonReenviarRecuperacion.disabled = false;
+                botonReenviarRecuperacion.textContent = 'Reenviar código';
+            }
+        }, 1000);
+    }
+
+    function mostrarPasoCodigoRecuperacion() {
+        pasoCodigoRecuperacionActivo = true;
+        pasoCodigoRecuperacion.hidden = false;
+        codigoRecuperacion.disabled = false;
+        codigoRecuperacion.required = true;
+        passwordRecuperacion.disabled = false;
+        passwordRecuperacion.required = true;
+        confirmarPasswordRecuperacion.disabled = false;
+        confirmarPasswordRecuperacion.required = true;
+        botonEnviarRecuperacion.textContent = 'Restablecer contraseña';
+        iniciarCuentaAtrasRecuperacion();
+        codigoRecuperacion.focus();
+    }
+
+    botonAbrirRecuperacion.addEventListener('click', abrirModalRecuperacion);
+    botonCerrarRecuperacion.addEventListener('click', cerrarModalRecuperacion);
+
+    document.addEventListener('keydown', (evento) => {
+        if (evento.key === 'Escape' && modalRecuperacion.classList.contains('activo')) {
+            cerrarModalRecuperacion();
+        }
+    });
+
+    document.querySelectorAll('.texto_campo_recuperacion').forEach((texto) => {
+        texto.addEventListener('click', () => {
+            document.getElementById(texto.dataset.for)?.focus();
+        });
+    });
+
+    formularioRecuperacion.addEventListener('submit', async (evento) => {
+        evento.preventDefault();
+        mensajeRecuperacion.textContent = '';
+
+        const email = emailRecuperacion.value.trim();
+
+        if (!pasoCodigoRecuperacionActivo) {
+            botonEnviarRecuperacion.disabled = true;
+
+            try {
+                const respuesta = await fetch(`${URL_API}/api/autenticacion/recuperar/iniciar`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+
+                const datos = await respuesta.json();
+
+                if (!respuesta.ok) {
+                    mensajeRecuperacion.textContent = datos.mensaje || 'No se pudo procesar la solicitud.';
+                    return;
+                }
+
+                mensajeRecuperacion.textContent = 'Si existe una cuenta con ese correo, enviaremos un código.';
+                mostrarPasoCodigoRecuperacion();
+            } catch (error) {
+                mensajeRecuperacion.textContent = 'No se pudo conectar con el servidor.';
+            } finally {
+                botonEnviarRecuperacion.disabled = false;
+            }
+
+            return;
+        }
+
+        const codigo = codigoRecuperacion.value.trim();
+        const password = passwordRecuperacion.value;
+        const confirmarPassword = confirmarPasswordRecuperacion.value;
+
+        if (!/^\d{6}$/.test(codigo)) {
+            mensajeRecuperacion.textContent = 'Ingresa el código de 6 dígitos.';
+            return;
+        }
+
+        if (password.length < 8) {
+            mensajeRecuperacion.textContent = 'La contraseña debe tener al menos 8 caracteres.';
+            return;
+        }
+
+        if (password !== confirmarPassword) {
+            mensajeRecuperacion.textContent = 'Las contraseñas no coinciden.';
+            return;
+        }
+
+        botonEnviarRecuperacion.disabled = true;
+
+        try {
+            const respuesta = await fetch(`${URL_API}/api/autenticacion/recuperar/confirmar`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, codigo, password, confirmar_password: confirmarPassword })
+            });
+
+            const datos = await respuesta.json();
+
+            if (!respuesta.ok) {
+                mensajeRecuperacion.textContent = datos.mensaje || 'El código no es válido o venció.';
+                return;
+            }
+
+            clearInterval(temporizadorReenvioRecuperacion);
+            formularioRecuperacion.reset();
+            pasoCodigoRecuperacionActivo = false;
+            pasoCodigoRecuperacion.hidden = true;
+            codigoRecuperacion.disabled = true;
+            codigoRecuperacion.required = false;
+            passwordRecuperacion.disabled = true;
+            passwordRecuperacion.required = false;
+            confirmarPasswordRecuperacion.disabled = true;
+            confirmarPasswordRecuperacion.required = false;
+            botonEnviarRecuperacion.textContent = 'Enviar código';
+            botonReenviarRecuperacion.disabled = true;
+            botonReenviarRecuperacion.textContent = 'Reenviar código en 60 s';
+            mensajeRecuperacion.textContent = '';
+
+            cerrarModalRecuperacion();
+            mostrarAlertaSuperior('Contraseña actualizada. Ya puedes iniciar sesión.');
+            return;
+        } catch (error) {
+            mensajeRecuperacion.textContent = 'No se pudo conectar con el servidor.';
+        } finally {
+            botonEnviarRecuperacion.disabled = false;
+        }
+    });
+
+    botonReenviarRecuperacion.addEventListener('click', async () => {
+        botonReenviarRecuperacion.disabled = true;
+        mensajeRecuperacion.textContent = '';
+
+        try {
+            const respuesta = await fetch(`${URL_API}/api/autenticacion/recuperar/iniciar`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: emailRecuperacion.value.trim() })
+            });
+
+            const datos = await respuesta.json();
+
+            if (!respuesta.ok) {
+                mensajeRecuperacion.textContent = datos.mensaje || 'No se pudo procesar la solicitud.';
+                botonReenviarRecuperacion.disabled = false;
+                return;
+            }
+
+            codigoRecuperacion.value = '';
+            mensajeRecuperacion.textContent = 'Si existe una cuenta con ese correo, enviaremos un código.';
+            iniciarCuentaAtrasRecuperacion();
+        } catch (error) {
+            mensajeRecuperacion.textContent = 'No se pudo conectar con el servidor.';
+            botonReenviarRecuperacion.disabled = false;
+        }
+    });
+
 // TITULO 12 PIE INICIO SESION
 
     // Sin funcion
+
+// TITULO 13 ALERTA NOTIFICAR EXITO
+
+    let temporizadorAlerta;
+
+    function mostrarAlertaSuperior(mensaje) {
+        const alerta = document.getElementById('alerta_superior');
+        alerta.textContent = mensaje;
+        alerta.classList.add('visible');
+
+        clearTimeout(temporizadorAlerta);
+        temporizadorAlerta = setTimeout(() => alerta.classList.remove('visible'), 3500);
+    }
