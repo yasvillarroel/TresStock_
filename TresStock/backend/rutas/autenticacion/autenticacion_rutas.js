@@ -1,35 +1,40 @@
-// importa express
+// Importa Express para crear y configurar rutas.
 const express = require('express');
-
-// importa el controlador de autenticacion
+// Importa las funciones controladoras de autenticación.
 const autenticacionControlador = require('../../controladores/autenticacion/autenticacion_controlador');
-
-// importa el middleware de autenticacion (verifica la cookie/JWT)
+// Importa el middleware que valida la sesión del usuario.
 const { autenticacion: verificarSesionMiddleware } = require('../../middleware/autenticacion');
+// Importa la función para generar tokens CSRF y el middleware para validarlos.
+const { generateCsrfToken, doubleCsrfProtection } = require('../../utilidades/csrf');
 
-
-
-
-// crea el router de autenticacion
+// Crea un router para agrupar las rutas de autenticación.
 const router = express.Router();
 
-// ruta para iniciar sesion
+// Define una ruta GET pública para solicitar un token CSRF.
+router.get('/csrf-token', (req, res) => {
+    // Genera el token y configura la cookie CSRF en la respuesta.
+    const csrfToken = generateCsrfToken(req, res);
+    // Envía el token al frontend en formato JSON.
+    return res.json({ csrfToken });
+});
+
+// Aplica la validación CSRF a las rutas registradas a continuación.
+router.use(doubleCsrfProtection);
+
+// Define la ruta POST para iniciar sesión y la conecta con su controlador.
 router.post('/login', autenticacionControlador.iniciarSesion);
-
-// ruta para verificar si la sesion actual sigue siendo valida
-// pasa primero por el middleware: si la cookie es invalida, el middleware responde 401
-// y ni siquiera llega a ejecutarse el controlador
+// Define la ruta GET para verificar la sesión y validar primero la autenticación.
 router.get('/sesion', verificarSesionMiddleware, autenticacionControlador.verificarSesion);
-
-// ruta para cerrar sesion y borrar la cookie (incluso si el JWT expiro)
+// Define la ruta POST para cerrar sesión y la conecta con su controlador.
 router.post('/logout', autenticacionControlador.cerrarSesion);
-
+// Define la ruta POST para iniciar el registro y solicitar un código.
 router.post('/registro/iniciar', autenticacionControlador.iniciarRegistro);
-
+// Define la ruta POST para verificar el código y completar el registro.
 router.post('/registro/verificar', autenticacionControlador.verificarCodigoRegistro);
-
+// Define la ruta POST para iniciar la recuperación y solicitar un código.
 router.post('/recuperar/iniciar', autenticacionControlador.solicitarRecuperacion);
+// Define la ruta POST para verificar el código y cambiar la contraseña.
 router.post('/recuperar/confirmar', autenticacionControlador.confirmarRecuperacion);
 
-// exporta el router
+// Exporta el router para montarlo en la aplicación Express.
 module.exports = router;

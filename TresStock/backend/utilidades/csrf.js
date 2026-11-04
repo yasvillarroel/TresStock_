@@ -13,7 +13,7 @@ const {
 
         return secreto;
     },
-    getSessionIdentifier: (req) => req.cookies?.sesion || 'sesion-anonima',
+    getSessionIdentifier: (req) => req.csrfSessionIdentifier || req.cookies?.sesion || 'sesion-anonima',
     cookieName: 'csrf-token',
     cookieOptions: {
         httpOnly: true,

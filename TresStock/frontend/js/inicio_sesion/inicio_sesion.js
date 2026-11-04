@@ -1,6 +1,5 @@
 // TITULO 1 BODY INICIO DE SESION
 
-    // Esta sección no contiene lógica JavaScript.
     // Sin funcion
 
 // TITULO 2 CONTENEDOR INICIO SESION
@@ -73,7 +72,7 @@
             try {
 
                 // Envía una solicitud al endpoint de inicio de sesión.
-                const respuesta = await fetch(
+                const respuesta = await fetchConCsrf(
                     // Construye la dirección usando la URL base de la API.
                     `${URL_API}/api/autenticacion/login`,
                     // Define las opciones de la solicitud HTTP.
@@ -156,32 +155,26 @@
 
 // TITULO 3 IDENTIDAD TRESSTOCK
 
-    // Esta sección no contiene lógica JavaScript.
     // Sin funcion
 
 // TITULO 4 ACCESO TRESSTOCK
 
-    // Esta sección no contiene lógica JavaScript.
     // Sin funcion
 
 //  TITULO 5 ENCABEZADO FORMULARIO
 
-    // Esta sección no contiene lógica JavaScript.
     // Sin funcion
 
 // TITULO 6 CORREO ELECTRONICO
 
-    // Esta sección no contiene lógica JavaScript.
     // Sin funcion
 
 // TITULO 7 CONTRASEÑA
 
-    // Esta sección no contiene lógica JavaScript.
     // Sin funcion
 
 // TITULO 8 MENSAJE Y RECUPERAR CONTRASEÑA
 
-    // Esta sección no contiene lógica JavaScript.
     // Sin funcion
 
 // TITULO 9 BOTON INICIO SESION
@@ -364,7 +357,7 @@
         // Intenta enviar los datos del registro al servidor.
         try {
             // Envía los datos del registro a la ruta seleccionada.
-            const respuesta = await fetch(`${URL_API}${ruta}`, {
+            const respuesta = await fetchConCsrf(`${URL_API}${ruta}`, {
                 // Envía la solicitud mediante POST.
                 method: 'POST',
                 // Indica que los datos enviados están en formato JSON.
@@ -465,7 +458,7 @@
         // Intenta volver a solicitar un código de verificación.
         try {
             // Envía los datos a la ruta que inicia el registro y solicita el código.
-            const respuesta = await fetch(`${URL_API}/api/autenticacion/registro/iniciar`, {
+            const respuesta = await fetchConCsrf(`${URL_API}/api/autenticacion/registro/iniciar`, {
                 // Envía la solicitud mediante POST.
                 method: 'POST',
                 // Indica que los datos enviados están en formato JSON.
@@ -706,7 +699,7 @@
             // Intenta solicitar un código de recuperación.
             try {
                 // Envía el correo al endpoint que inicia la recuperación.
-                const respuesta = await fetch(`${URL_API}/api/autenticacion/recuperar/iniciar`, {
+                const respuesta = await fetchConCsrf(`${URL_API}/api/autenticacion/recuperar/iniciar`, {
                     // Envía la solicitud mediante POST.
                     method: 'POST',
                     // Indica que los datos se envían en formato JSON.
@@ -781,7 +774,7 @@
         // Intenta validar el código y actualizar la contraseña.
         try {
             // Envía los datos al endpoint que confirma la recuperación.
-            const respuesta = await fetch(`${URL_API}/api/autenticacion/recuperar/confirmar`, {
+            const respuesta = await fetchConCsrf(`${URL_API}/api/autenticacion/recuperar/confirmar`, {
                 // Envía la solicitud mediante POST.
                 method: 'POST',
                 // Indica que los datos se envían en formato JSON.
@@ -857,7 +850,7 @@
         // Intenta solicitar otro código de recuperación.
         try {
             // Envía el correo al endpoint que inicia la recuperación.
-            const respuesta = await fetch(`${URL_API}/api/autenticacion/recuperar/iniciar`, {
+            const respuesta = await fetchConCsrf(`${URL_API}/api/autenticacion/recuperar/iniciar`, {
                 // Envía la solicitud mediante POST.
                 method: 'POST',
                 // Indica que los datos se envían en formato JSON.
@@ -896,25 +889,8 @@
 
 // TITULO 13 PIE INICIO SESION
 
-    // Esta sección no contiene lógica JavaScript.
     // Sin funcion
 
 // TITULO 14 ALERTA NOTIFICAR EXITO
 
-    // Guarda el identificador del temporizador para poder cancelarlo.
-    let temporizadorAlerta;
-
-    // Define la función que muestra una alerta temporal en la parte superior.
-    function mostrarAlertaSuperior(mensaje) {
-        // Busca el elemento de la alerta.
-        const alerta = document.getElementById('alerta_superior');
-        // Define el texto que se mostrará en la alerta.
-        alerta.textContent = mensaje;
-        // Agrega la clase que hace visible la alerta.
-        alerta.classList.add('visible');
-
-        // Cancela el temporizador anterior si la alerta se mostró previamente.
-        clearTimeout(temporizadorAlerta);
-        // Programa que la alerta se oculte después de 3,5 segundos.
-        temporizadorAlerta = setTimeout(() => alerta.classList.remove('visible'), 3500);
-    }
+    // Sin funcion
