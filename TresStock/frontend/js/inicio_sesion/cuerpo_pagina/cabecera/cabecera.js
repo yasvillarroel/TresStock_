@@ -100,7 +100,7 @@
             botonCerrarSesion.textContent = 'Cerrando sesión...';
 
             try {
-                const respuesta = await fetch(
+                const respuesta = await fetchConCsrf(
                     `${URL_API}/api/autenticacion/logout`,
                     {
                         method: 'POST',

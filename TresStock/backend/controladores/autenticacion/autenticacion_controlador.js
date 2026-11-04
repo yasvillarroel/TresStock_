@@ -7,6 +7,8 @@ const { firmarToken } = require('../../utilidades/jwt');
 // importa las opciones de la cookie de sesion
 const { OPCIONES_COOKIE_SESION } = require('../../utilidades/cookies');
 
+// importa las funciones de csrftoken
+const { generateCsrfToken } = require('../../utilidades/csrf')
 
 // inicia sesion
 const iniciarSesion = async (req, res) => {
@@ -35,15 +37,15 @@ const iniciarSesion = async (req, res) => {
             rol: usuario.id_rol
         });
 
-        // guarda el jwt en una cookie segura
-        res.cookie(
-            'sesion',
-            token,
-            OPCIONES_COOKIE_SESION
-        );
+        // Guarda el JWT en una cookie segura.
+        res.cookie('sesion', token, OPCIONES_COOKIE_SESION);
 
-        // envia los datos del usuario
-        res.json(usuario);
+        // Asocia el CSRF nuevo a la sesión recién creada.
+        req.csrfSessionIdentifier = token;
+        const csrfToken = generateCsrfToken(req, res, { overwrite: true });
+
+        // Envía los datos del usuario y el nuevo token CSRF.
+        return res.json({ ...usuario, csrfToken });
 
     } catch (error) {
 

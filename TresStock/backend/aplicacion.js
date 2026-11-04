@@ -30,8 +30,11 @@ app.use(cors({
     credentials: true
 }));
 
+const { doubleCsrfProtection } = require('./utilidades/csrf');
+
 app.use(express.json());
 app.use(cookieParser());
+app.use('/api', doubleCsrfProtection);
 
 // =======================================
 // TITULO 2 ESTADO DE CONEXION (RUTA PUBLICA)
