@@ -1,269 +1,394 @@
 <!DOCTYPE html>
+
+<!-- Inicia el documento e indica que su idioma es español. -->
 <html lang="es">
 
 <head>
 
+    <!-- Define la codificación de caracteres para mostrar correctamente acentos y símbolos. -->
     <meta charset="UTF-8">
+    <!-- Configura la escala de la página para adaptarla al ancho del dispositivo. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Define el título que aparece en la pestaña del navegador. -->
     <title>Iniciar sesión | TresStock</title>
 
-    <!-- favicon -->
+    <!-- Comentario que identifica la configuración del favicon. -->
     <!-- <link rel="icon" type="image/png" href="../../imagenes/favicon.png"> -->
 
-    <!-- CSS INICIO SESION -->
+    <!-- Carga los estilos de la página de inicio de sesión. -->
     <link rel="stylesheet" href="../../css/inicio_sesion/inicio_sesion.css">
 
 </head>
 
 <!-- TITULO 1 BODY INICIO DE SESION -->
     
+    <!-- Inicia el cuerpo de la página y le asigna la clase de estilos correspondiente. -->
     <body class="body_inicio_sesion">
 
 
         <!-- TITULO 2 CONTENEDOR INICIO SESION -->
 
-            <!-- contenedor principal de la pantalla de inicio de sesión -->
+            <!-- Inicia el contenedor principal de la pantalla de inicio de sesión. -->
             <div class="contenedor_inicio_sesion">
 
 
                 <!-- TITULO 3 IDENTIDAD TRESSTOCK -->
 
+                    <!-- Agrupa los elementos visuales de identidad de TresStock. -->
                     <div class="contenedor_identidad_inicio_sesion">
 
+                        <!-- Muestra el borde decorativo de la sección de identidad. -->
                         <div class="borde_identidad_inicio_sesion"></div>
 
+                        <!-- Agrupa el logo y el texto de identidad. -->
                         <div class="contenido_identidad_inicio_sesion">
 
+                            <!-- Muestra el logo de TresStock con texto alternativo para accesibilidad. -->
                             <img class="imagen_logo_inicio_sesion" src="../../imagenes/inicio_sesion/inicio_sesion_img1.png" alt="Logo TresStock" >
 
+                            <!-- Muestra el mensaje principal de la identidad visual. -->
                             <div class="titulo_identidad_inicio_sesion">Gestión inteligente de inventario</div>
 
+                        <!-- Cierra el contenido de identidad. -->
                         </div>
 
+                    <!-- Cierra el contenedor de identidad. -->
                     </div>
 
 
                 <!-- TITULO 4 ACCESO TRESSTOCK -->
 
-                    <!-- contenedor derecho para mostrar el formulario de acceso -->
+                    <!-- Comentario que describe el contenedor del formulario de acceso. -->
+                    <!-- Inicia la sección derecha que contiene el formulario de acceso. -->
                     <div class="contenedor_acceso_inicio_sesion">
 
 
-                        <!-- formulario para ingresar al sistema -->
+                        <!-- Comentario que describe el formulario para ingresar al sistema. -->
+                        <!-- Inicia el formulario de inicio de sesión. -->
                         <form class="formulario_inicio_sesion" id="formulario_inicio_sesion" >
 
 
                             <!-- TITULO 5 ENCABEZADO FORMULARIO -->
 
-                                <!-- icono visual del usuario -->
+                                <!-- Comentario que describe el icono visual del usuario. -->
+                                <!-- Inicia el contenedor del icono de usuario. -->
                                 <div class="contenedor_icono_usuario_inicio_sesion">
 
+                                    <!-- Muestra el icono de usuario con texto alternativo. -->
                                     <img class="icono_usuario_inicio_sesion" src="../../imagenes/inicio_sesion/user.svg" alt="Usuario" >
 
+                                <!-- Cierra el contenedor del icono. -->
                                 </div>
 
 
-                                <!-- contenedor del título y descripción del formulario -->
+                                <!-- Comentario que describe el título y la descripción del formulario. -->
+                                <!-- Inicia el encabezado del formulario. -->
                                 <div class="contenedor_encabezado_inicio_sesion">
 
-                                    <!-- título principal del formulario -->
+                                    <!-- Comentario que identifica el título principal. -->
+                                    <!-- Muestra el saludo del formulario. -->
                                     <div class="titulo_inicio_sesion">Bienvenid@</div>
 
-                                    <!-- descripción del formulario -->
+                                    <!-- Comentario que identifica la descripción del formulario. -->
+                                    <!-- Indica al usuario que inicie sesión para continuar. -->
                                     <div class="descripcion_inicio_sesion">Inicia sesión para continuar</div>
 
+                                <!-- Cierra el encabezado del formulario. -->
                                 </div>
 
 
                             <!-- TITULO 6 CORREO ELECTRONICO -->
 
-                                <!-- contenedor del campo correo electrónico -->
+                                <!-- Comentario que identifica el campo de correo electrónico. -->
+                                <!-- Inicia el contenedor del campo de correo. -->
                                 <div class="campo_email_inicio_sesion">
 
-                                    <!-- texto descriptivo del campo -->
+                                    <!-- Comentario que describe el texto del campo. -->
+                                    <!-- Muestra el nombre del campo de correo. -->
                                     <div class="texto_email_inicio_sesion">Correo electrónico</div>
 
-                                    <!-- contenedor del campo correo -->
+                                    <!-- Comentario que identifica el contenedor del campo de entrada. -->
+                                    <!-- Agrupa el icono y el campo para ingresar el correo. -->
                                     <div class="contenedor_input_email_inicio_sesion">
 
-                                        <!-- icono visual del correo -->
+                                        <!-- Comentario que identifica el icono del correo. -->
+                                        <!-- Inicia el contenedor del icono de correo. -->
                                         <div class="icono_email_inicio_sesion">
 
+                                            <!-- Muestra el icono usado junto al campo de correo. -->
                                             <img class="imagen_icono_email_inicio_sesion" src="../../imagenes/inicio_sesion/user.svg" alt="Usuario" >
 
+                                        <!-- Cierra el contenedor del icono de correo. -->
                                         </div>
 
-                                        <!-- campo para ingresar el correo -->
+                                        <!-- Comentario que identifica el campo para ingresar el correo. -->
+                                        <!-- Permite ingresar un correo electrónico y limita su largo a 90 caracteres. -->
                                         <input class="input_email_inicio_sesion" id="email" type="email" placeholder="usuario@tresstock.cl" autocomplete="email" maxlength="90">
 
+                                    <!-- Cierra el contenedor del campo de correo. -->
                                     </div>
 
+                                <!-- Cierra el contenedor del campo de correo electrónico. -->
                                 </div>
 
 
                             <!-- TITULO 7 CONTRASEÑA -->
 
-                                <!-- contenedor del campo contraseña -->
+                                <!-- Comentario que identifica el campo de contraseña. -->
+                                <!-- Inicia el contenedor del campo de contraseña. -->
                                 <div class="campo_contrasena_inicio_sesion">
 
-                                    <!-- texto descriptivo del campo -->
+                                    <!-- Comentario que describe el texto del campo. -->
+                                    <!-- Muestra el nombre del campo de contraseña. -->
                                     <div class="texto_contrasena_inicio_sesion">Contraseña</div>
 
-                                    <!-- contenedor del campo contraseña -->
+                                    <!-- Comentario que identifica el contenedor del campo de entrada. -->
+                                    <!-- Agrupa el icono y el campo para ingresar la contraseña. -->
                                     <div class="contenedor_input_contrasena_inicio_sesion">
 
-                                        <!-- icono visual de contraseña -->
+                                        <!-- Comentario que identifica el contenedor del icono de contraseña. -->
+                                        <!-- Inicia el contenedor del icono de contraseña. -->
                                         <div class="contenedor_icono_input_inicio_sesion">
 
+                                            <!-- Muestra el icono de candado junto al campo. -->
                                             <img class="icono_input_inicio_sesion" src="../../imagenes/inicio_sesion/lock-keyhole.svg" alt="Contraseña" >
 
+                                        <!-- Cierra el contenedor del icono. -->
                                         </div>
 
-                                        <!-- campo para ingresar la contraseña -->
+                                        <!-- Comentario que identifica el campo para ingresar la contraseña. -->
+                                        <!-- Permite escribir una contraseña y limita su largo a 40 caracteres. -->
                                         <input class="input_contrasena_inicio_sesion" id="contrasena" type="password" placeholder="Ingresa tu contraseña" autocomplete="current-password" maxlength="40"> 
 
+                                    <!-- Cierra el contenedor del campo de contraseña. -->
                                     </div>
 
+                                <!-- Cierra el contenedor de contraseña. -->
                                 </div>
 
 
                             <!-- TITULO 8 MENSAJE Y RECUPERAR CONTRASEÑA -->
 
+                                <!-- Agrupa el mensaje de validación y el acceso a recuperación de contraseña. -->
                                 <div class="contenedor_mensaje_recuperar_inicio_sesion">
 
-                                    <!-- espacio para mostrar mensajes de validación -->
+                                    <!-- Comentario que identifica el espacio de mensajes de validación. -->
+                                    <!-- Muestra mensajes del inicio de sesión mediante JavaScript. -->
                                     <div class="mensaje_login" id="mensaje_login"></div>
 
-                                    <!-- opción para recuperar la contraseña -->
+                                    <!-- Comentario que identifica la opción de recuperar contraseña. -->
+                                    <!-- Permite abrir el modal de recuperación desde JavaScript. -->
                                     <div class="recuperar_contrasena_inicio_sesion" id="recuperar_contrasena_inicio_sesion" > ¿Olvidaste tu contraseña? </div>
 
+                                <!-- Cierra el contenedor de mensajes y recuperación. -->
                                 </div>
 
 
                             <!-- TITULO 9 BOTON INICIO SESION -->
 
-                                <!-- opción para ingresar al sistema -->
+                                <!-- Comentario que identifica la opción para ingresar al sistema. -->
+                                <!-- Crea el botón de inicio de sesión y permite encontrarlo desde JavaScript. -->
                                 <div class="boton_inicio_sesion" id="boton_inicio_sesion" >
 
+                                    <!-- Muestra el texto del botón. -->
                                     <div class="texto_boton_inicio_sesion">Iniciar sesión</div>
 
+                                    <!-- Muestra la flecha decorativa del botón. -->
                                     <div class="flecha_boton_inicio_sesion">→</div>
 
+                                <!-- Cierra el botón de inicio de sesión. -->
                                 </div>
 
                             <!-- TITULO 10 BOTON DE REGISTRO -->
 
-                                <!-- opcion para registrar una cuenta nueva -->
+                                <!-- Comentario que identifica la opción para crear una cuenta. -->
+                                <!-- Agrupa los textos que forman el acceso al registro. -->
                                 <div class="contenedor_registro_inicio_sesion">
 
+                                    <!-- Muestra la pregunta para quienes aún no tienen cuenta. -->
                                     <div class="texto_registro_inicio_sesion">¿No tienes una cuenta?</div>
 
+                                    <!-- Muestra la opción para registrarse y permite detectarla desde JavaScript. -->
                                     <div class="boton_registro_inicio_sesion" id="boton_registro_inicio_sesion">Regístrate aquí</div>
 
+                                <!-- Cierra el contenedor de registro. -->
                                 </div>
                                 
+                        <!-- Cierra el formulario de inicio de sesión. -->
                         </form>
 
                         <!-- TITULO 11 MODAL DE REGISTRO -->
                             
+                            <!-- Inicia el modal de registro y lo marca como oculto para accesibilidad. -->
                             <div class="modal_registro" id="modal_registro" aria-hidden="true">
+                                <!-- Define el panel del modal y sus atributos de diálogo accesible. -->
                                 <div class="contenido_modal_registro" role="dialog" aria-modal="true" aria-labelledby="titulo_modal_registro">
+                                    <!-- Crea el botón para cerrar el modal. -->
                                     <button class="cerrar_modal_registro" id="cerrar_modal_registro" type="button" aria-label="Cerrar">×</button>
+                                    <!-- Muestra el título del modal y lo identifica para accesibilidad. -->
                                     <div class="titulo_modal_registro" id="titulo_modal_registro">Crear cuenta</div>
 
+                                    <!-- Inicia el formulario para crear una cuenta. -->
                                     <form id="formulario_registro">
+                                        <!-- Agrupa el texto y el campo para ingresar el nombre. -->
                                         <div class="campo_registro">
+                                            <!-- Permite enfocar el campo del nombre al hacer clic en el texto. -->
                                             <div class="texto_campo_registro" data-for="registro_nombre">Nombre</div>
+                                            <!-- Permite ingresar un nombre de entre 2 y 50 caracteres. -->
                                             <input id="registro_nombre" name="nombre" type="text" minlength="2" maxlength="50" required>
+                                        <!-- Cierra el campo de nombre. -->
                                         </div>
 
+                                        <!-- Agrupa el texto y el campo para ingresar el correo. -->
                                         <div class="campo_registro">
+                                            <!-- Permite enfocar el campo de correo al hacer clic en el texto. -->
                                             <div class="texto_campo_registro" data-for="registro_email">Correo electrónico</div>
+                                            <!-- Permite ingresar un correo de hasta 90 caracteres y lo marca como obligatorio. -->
                                             <input id="registro_email" name="email" type="email" maxlength="90" autocomplete="email" required>
+                                        <!-- Cierra el campo de correo. -->
                                         </div>
 
+                                        <!-- Agrupa el texto y el campo para ingresar la contraseña. -->
                                         <div class="campo_registro">
+                                            <!-- Permite enfocar el campo de contraseña al hacer clic en el texto. -->
                                             <div class="texto_campo_registro" data-for="registro_password">Contraseña</div>
+                                            <!-- Permite ingresar una contraseña de al menos 8 y hasta 40 caracteres. -->
                                             <input id="registro_password" name="password" type="password" minlength="8" autocomplete="new-password" maxlength="40" required>
+                                        <!-- Cierra el campo de contraseña. -->
                                         </div>
 
+                                        <!-- Agrupa el texto y el campo para confirmar la contraseña. -->
                                         <div class="campo_registro">
+                                            <!-- Permite enfocar el campo de confirmación al hacer clic en el texto. -->
                                             <div class="texto_campo_registro" data-for="registro_confirmar_password">Confirmar contraseña</div>
+                                            <!-- Permite volver a ingresar la contraseña para confirmarla. -->
                                             <input id="registro_confirmar_password" name="confirmar_password" type="password" minlength="8" maxlength="40" autocomplete="new-password" required>
+                                        <!-- Cierra el campo de confirmación de contraseña. -->
                                         </div>
 
+                                        <!-- Crea el área del código, inicialmente oculta, y la identifica para JavaScript. -->
                                         <div class="campo_registro campo_codigo_verificacion" id="contenedor_codigo_verificacion" hidden>
+                                            <!-- Permite enfocar el campo del código al hacer clic en el texto. -->
                                             <div class="texto_campo_registro" data-for="registro_codigo">Código enviado a tu correo</div>
+                                            <!-- Permite ingresar un código numérico de seis dígitos. -->
                                             <input id="registro_codigo" name="codigo" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" placeholder="Ingresa los 6 dígitos">
+                                            <!-- Crea el botón para solicitar el reenvío del código, inicialmente deshabilitado. -->
                                             <button class="boton_reenviar_codigo" id="boton_reenviar_codigo" type="button" disabled>Reenviar código en 60 s</button>
+                                        <!-- Cierra el área del código de verificación. -->
                                         </div>
 
+                                        <!-- Reserva un espacio para mostrar mensajes accesibles sobre el registro. -->
                                         <div id="mensaje_registro" aria-live="polite"></div>
+                                        <!-- Crea el botón que envía el formulario de registro. -->
                                         <button type="submit">Registrarme</button>
+                                    <!-- Cierra el formulario de registro. -->
                                     </form>
+                                <!-- Cierra el panel del modal de registro. -->
                                 </div>
+                            <!-- Cierra el modal de registro. -->
                             </div>
 
+                    <!-- Cierra el contenedor de acceso. -->
                     </div>
 
                     <!-- TITULO 12 MODAL DE RECUPERACION -->
 
+                        <!-- Inicia el modal de recuperación y lo marca como oculto para accesibilidad. -->
                         <div class="modal_recuperacion" id="modal_recuperacion" aria-hidden="true">
+                            <!-- Define el panel del modal y sus atributos de diálogo accesible. -->
                             <div class="contenido_modal_recuperacion" role="dialog" aria-modal="true" aria-labelledby="titulo_modal_recuperacion">
+                                <!-- Crea el botón para cerrar el modal. -->
                                 <button class="cerrar_modal_recuperacion" id="cerrar_modal_recuperacion" type="button" aria-label="Cerrar">×</button>
+                                <!-- Muestra el título del modal y lo identifica para accesibilidad. -->
                                 <div class="titulo_modal_recuperacion" id="titulo_modal_recuperacion">Recuperar contraseña</div>
+                                <!-- Explica al usuario qué debe hacer para iniciar la recuperación. -->
                                 <div class="descripcion_modal_recuperacion">Ingresa tu correo para recibir instrucciones de recuperación.</div>
 
+                                <!-- Inicia el formulario de recuperación de contraseña. -->
                                 <form id="formulario_recuperacion">
+                                    <!-- Agrupa el texto y el campo para ingresar el correo. -->
                                     <div class="campo_recuperacion">
+                                        <!-- Permite enfocar el campo de correo al hacer clic en el texto. -->
                                         <div class="texto_campo_recuperacion" data-for="recuperacion_email">Correo electrónico</div>
+                                        <!-- Permite ingresar el correo y lo marca como obligatorio. -->
                                         <input id="recuperacion_email" name="email" type="email" maxlength="150" autocomplete="email" required>
+                                    <!-- Cierra el campo de correo. -->
                                     </div>
 
+                                    <!-- Agrupa los campos del código y la contraseña; inicia oculto. -->
                                     <div class="paso_codigo_recuperacion" id="paso_codigo_recuperacion" hidden>
 
+                                        <!-- Crea el botón para volver y cambiar el correo ingresado. -->
                                         <button class="boton_volver_recuperacion" id="boton_volver_recuperacion" type="button">← Cambiar correo</button>
 
+                                        <!-- Agrupa el texto y el campo del código de recuperación. -->
                                         <div class="campo_recuperacion">
+                                            <!-- Permite enfocar el campo de código al hacer clic en el texto. -->
                                             <div class="texto_campo_recuperacion" data-for="recuperacion_codigo">Código de recuperación</div>
+                                            <!-- Permite ingresar un código numérico de seis dígitos. -->
                                             <input id="recuperacion_codigo" name="codigo" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" placeholder="Ingresa los 6 dígitos" disabled>
+                                        <!-- Cierra el campo del código. -->
                                         </div>
 
+                                        <!-- Agrupa el texto y el campo de la nueva contraseña. -->
                                         <div class="campo_recuperacion">
+                                            <!-- Permite enfocar el campo de contraseña al hacer clic en el texto. -->
                                             <div class="texto_campo_recuperacion" data-for="recuperacion_password">Nueva contraseña</div>
+                                            <!-- Permite ingresar la contraseña nueva, inicialmente deshabilitada. -->
                                             <input id="recuperacion_password" name="password" type="password" minlength="8" autocomplete="new-password" disabled>
+                                        <!-- Cierra el campo de la nueva contraseña. -->
                                         </div>
 
+                                        <!-- Agrupa el texto y el campo para confirmar la contraseña. -->
                                         <div class="campo_recuperacion">
+                                            <!-- Permite enfocar la confirmación al hacer clic en el texto. -->
                                             <div class="texto_campo_recuperacion" data-for="recuperacion_confirmar_password">Confirmar contraseña</div>
+                                            <!-- Permite confirmar la contraseña, inicialmente deshabilitado. -->
                                             <input id="recuperacion_confirmar_password" name="confirmar_password" type="password" minlength="8" autocomplete="new-password" disabled>
+                                        <!-- Cierra el campo de confirmación de contraseña. -->
                                         </div>
 
+                                        <!-- Crea el botón para reenviar el código, inicialmente deshabilitado. -->
                                         <button class="boton_reenviar_recuperacion" id="boton_reenviar_recuperacion" type="button" disabled>Reenviar código en 60 s</button>
+                                    <!-- Cierra el paso de ingreso del código y la contraseña. -->
                                     </div>
 
+                                    <!-- Reserva un espacio accesible para los mensajes de recuperación. -->
                                     <div class="mensaje_recuperacion" id="mensaje_recuperacion" role="status" aria-live="polite"></div>
+
+                                    <!-- Crea el botón que solicita el código o confirma el cambio de contraseña. -->
                                     <button class="boton_enviar_recuperacion" id="boton_enviar_recuperacion" type="submit">Enviar código</button>
+                                <!-- Cierra el formulario de recuperación. -->
                                 </form>
+                            <!-- Cierra el panel del modal de recuperación. -->
                             </div>
+                        <!-- Cierra el modal de recuperación. -->
                         </div>
 
+            <!-- Cierra el contenedor principal de la pantalla de inicio de sesión. -->
             </div>
 
-        <!-- TITULO 12 PIE INICIO SESION -->
+        <!-- TITULO 13 PIE INICIO SESION -->
 
+            <!-- Muestra el pie de página con el aviso de derechos reservados. -->
             <div class="pie_inicio_sesion">© 2026 TresStock. Todos los derechos reservados.</div>
 
-        <!-- TITULO 13 ALERTA NOTIFICAR EXITO -->
+        <!-- TITULO 14 ALERTA NOTIFICAR EXITO -->
 
+            <!-- Reserva el elemento que JavaScript usa para mostrar alertas superiores. -->
             <div class="alerta_superior" id="alerta_superior" role="status" aria-live="polite"></div>
 
         <!-- CONFIGURACION DE IP -->
+        <!-- Carga la configuración de conexión con la API. -->
         <script src="../../js/configuracion/configuracion_conexion.js"></script>
+
         <!-- JS INICIO SESION -->
+        <!-- Carga la lógica JavaScript de inicio de sesión, registro y recuperación. -->
         <script src="../../js/inicio_sesion/inicio_sesion.js"></script>
 
+
     </body>
+
 
 </html>

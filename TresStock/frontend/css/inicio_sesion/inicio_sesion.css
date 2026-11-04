@@ -1,903 +1,959 @@
 /* TITULO 1 BODY INICIO SESION */
 
-    /* clase para establecer la configuración general de la pantalla */
+    /* Esta clase pertenece al cuerpo de la página de inicio de sesión. */
     .body_inicio_sesion {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        background-color: #f5f7f9;
-        font-family: Arial, sans-serif;
-        box-sizing: border-box;
+        margin: 0; /* Elimina el margen exterior predeterminado del navegador. */
+        padding: 0; /* Elimina el espacio interior predeterminado. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-height: 100vh; /* Asegura que la página mida al menos el alto de la ventana. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        background-color: #f5f7f9; /* Establece el color de fondo general. */
+        font-family: Arial, sans-serif; /* Define la tipografía general. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
-
 
 /* TITULO 2 CONTENEDOR INICIO SESION */
 
-    /* clase para dividir la pantalla entre identidad y acceso */
+    /* Esta clase pertenece al contenedor que divide la identidad y el acceso. */
     .contenedor_inicio_sesion {
-        width: 100%;
-        min-height: calc(100vh - 65px);
-        display: grid;
-        grid-template-columns: 46% 54%;
-        box-sizing: border-box;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-height: calc(100vh - 65px); /* Reserva el alto de la ventana menos el pie de página. */
+        display: grid; /* Organiza los paneles con CSS Grid. */
+        grid-template-columns: 46% 54%; /* Asigna el ancho de cada panel. */
+        box-sizing: border-box; /* Incluye bordes y relleno en el tamaño total. */
     }
-
 
 /* TITULO 3 IDENTIDAD TRESSTOCK */
 
-    /* clase para establecer el panel de identidad visual */
+    /* Esta clase pertenece al panel de identidad visual de TresStock. */
     .contenedor_identidad_inicio_sesion {
-        min-height: calc(100vh - 65px);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        background-color: #062d44;
-        padding: 50px;
-        box-sizing: border-box;
-        /* genera el corte diagonal */
+        min-height: calc(100vh - 65px); /* Mantiene el panel con el alto disponible de la pantalla. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        align-items: center; /* Centra los elementos horizontalmente. */
+        justify-content: center; /* Centra los elementos verticalmente. */
+        position: relative; /* Permite ubicar elementos internos respecto a este panel. */
+        background-color: #062d44; /* Define el fondo azul oscuro del panel. */
+        padding: 50px; /* Agrega espacio interior alrededor del contenido. */
+        box-sizing: border-box; /* Incluye bordes y relleno en el tamaño total. */
+        /* Crea el corte diagonal del panel. */
         clip-path: polygon(
-            0 0,
-            100% 0,
-            86% 100%,
-            0 100%
+            0 0, /* Define la esquina superior izquierda. */
+            100% 0, /* Define la esquina superior derecha. */
+            86% 100%, /* Desplaza el borde inferior hacia la izquierda. */
+            0 100% /* Define la esquina inferior izquierda. */
         );
     }
 
-    /* clase para centrar visualmente el contenido del panel de identidad */
+    /* Esta clase pertenece al grupo del logo y el título de identidad. */
     .contenido_identidad_inicio_sesion {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        width: 100%; /* Ocupa todo el ancho disponible dentro del panel. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Coloca el logo y el texto en una columna. */
+        align-items: center; /* Centra los elementos horizontalmente. */
+        justify-content: center; /* Centra los elementos verticalmente. */
 
-        /* compensa el corte diagonal del panel */
-        transform: translateX(-8%);
+        /* Compensa visualmente el corte diagonal del panel. */
+        transform: translateX(-8%); /* Desplaza el contenido hacia la izquierda. */
     }
 
-    /* clase para establecer el borde diagonal del panel de identidad */
+    /* Esta clase pertenece al borde diagonal decorativo del panel de identidad. */
     .borde_identidad_inicio_sesion {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background-color: #20cdd2;
+        width: 100%; /* Ocupa todo el ancho del panel. */
+        height: 100%; /* Ocupa todo el alto del panel. */
+        position: absolute; /* Permite ubicar el borde sobre el panel. */
+        top: 0; /* Alinea el borde con la parte superior. */
+        left: 0; /* Alinea el borde con el lado izquierdo. */
+        background-color: #20cdd2; /* Define el color turquesa del borde. */
         clip-path: polygon(
-            98.8% 0,
-            100% 0,
-            86% 100%,
-            84.8% 100%
+            98.8% 0, /* Define el inicio superior del borde diagonal. */
+            100% 0, /* Define el extremo superior derecho. */
+            86% 100%, /* Define el extremo inferior derecho. */
+            84.8% 100% /* Define el final inferior del borde diagonal. */
         );
-        pointer-events: none;
+        pointer-events: none; /* Evita que el borde interfiera con clics. */
     }
 
-    /* clase para establecer el tamaño del logo */
+    /* Esta clase pertenece a la imagen del logo de TresStock. */
     .imagen_logo_inicio_sesion {
-        width: 330px;
-        height: auto;
+        width: 330px; /* Define el ancho del logo. */
+        height: auto; /* Mantiene la proporción original de la imagen. */
 
     }
 
-    /* clase para establecer el título descriptivo del sistema */
+    /* Esta clase pertenece al título descriptivo de TresStock. */
     .titulo_identidad_inicio_sesion {
-        max-width: 520px;
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size: 25px;
-        font-weight: normal;
-        line-height: 34px;
-        text-align: center;
+        max-width: 520px; /* Limita el ancho máximo del texto. */
+        color: #ffffff; /* Muestra el texto en blanco. */
+        font-family: Arial, sans-serif; /* Define la tipografía del título. */
+        font-size: 25px; /* Define el tamaño del texto. */
+        font-weight: normal; /* Usa un grosor de fuente normal. */
+        line-height: 34px; /* Define el espacio entre líneas. */
+        text-align: center; /* Centra el texto. */
     }
-
 
 /* TITULO 4 ACCESO TRESSTOCK */
 
-    /* clase para centrar el formulario de inicio de sesión */
+    /* Esta clase pertenece al panel que contiene el formulario de acceso. */
     .contenedor_acceso_inicio_sesion {
-        min-height: calc(100vh - 65px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #f8fafb;
-        padding: 40px;
-        box-sizing: border-box;
+        min-height: calc(100vh - 65px); /* Reserva el alto disponible para el panel. */
+        display: flex; /* Activa Flexbox para centrar el formulario. */
+        align-items: center; /* Centra el formulario verticalmente. */
+        justify-content: center; /* Centra el formulario horizontalmente. */
+        background-color: #f8fafb; /* Define el fondo claro del panel. */
+        padding: 40px; /* Agrega espacio alrededor del formulario. */
+        box-sizing: border-box; /* Incluye bordes y relleno en el tamaño total. */
     }
 
-    /* clase para establecer el diseño principal del formulario */
+    /* Esta clase pertenece al formulario de inicio de sesión. */
     .formulario_inicio_sesion {
-        width: 520px;
-        max-width: 100%;
-        background-color: #ffffff;
-        border: 1px solid #e1e7ea;
-        border-radius: 20px;
-        padding: 38px 40px 34px 40px;
-        box-sizing: border-box;
-        box-shadow: 0 12px 35px rgba(18, 53, 72, 0.10);
+        width: 520px; /* Define el ancho del formulario. */
+        max-width: 100%; /* Evita que el formulario supere el ancho disponible. */
+        background-color: #ffffff; /* Define el fondo blanco del formulario. */
+        border: 1px solid #e1e7ea; /* Agrega un borde fino gris claro. */
+        border-radius: 20px; /* Redondea las esquinas del formulario. */
+        padding: 38px 40px 34px 40px; /* Agrega espacio interior en cada lado. */
+        box-sizing: border-box; /* Incluye bordes y relleno en el ancho total. */
+        box-shadow: 0 12px 35px rgba(18, 53, 72, 0.10); /* Agrega una sombra suave. */
     }
-
 
 /* TITULO 5 ENCABEZADO FORMULARIO */
 
-    /* clase para establecer el contenedor del icono superior */
+    /* Esta clase pertenece al contenedor circular del icono de usuario. */
     .contenedor_icono_usuario_inicio_sesion {
-        width: 112px;
-        height: 112px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 14px auto;
-        background-color: #e5f7f7;
-        border-radius: 50%;
+        width: 112px; /* Define el ancho del contenedor. */
+        height: 112px; /* Define el alto del contenedor. */
+        display: flex; /* Activa Flexbox para centrar el icono. */
+        align-items: center; /* Centra el icono verticalmente. */
+        justify-content: center; /* Centra el icono horizontalmente. */
+        margin: 0 auto 14px auto; /* Centra el contenedor y agrega espacio inferior. */
+        background-color: #e5f7f7; /* Define el fondo turquesa claro. */
+        border-radius: 50%; /* Convierte el contenedor en un círculo. */
     }
 
-    /* clase para establecer el tamaño del icono superior */
+    /* Esta clase pertenece a la imagen del icono de usuario. */
     .icono_usuario_inicio_sesion {
-        width: 50px;
-        height: 50px;
-        object-fit: contain;
-        user-select: none;
-        -webkit-user-drag: none;
+        width: 50px; /* Define el ancho del icono. */
+        height: 50px; /* Define el alto del icono. */
+        object-fit: contain; /* Mantiene el icono completo dentro de sus dimensiones. */
+        user-select: none; /* Evita que el icono se seleccione como texto. */
+        -webkit-user-drag: none; /* Evita arrastrar la imagen en navegadores WebKit. */
     }
 
-    /* clase para organizar el encabezado del formulario */
+    /* Esta clase pertenece al grupo del título y la descripción. */
     .contenedor_encabezado_inicio_sesion {
-        width: 100%;
-        margin-bottom: 34px;
-        text-align: center;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        margin-bottom: 34px; /* Separa el encabezado de los campos. */
+        text-align: center; /* Centra el texto del encabezado. */
     }
 
-    /* clase para establecer el título del formulario */
+    /* Esta clase pertenece al título principal del formulario. */
     .titulo_inicio_sesion {
-        color: #082f48;
-        font-family: Arial, sans-serif;
-        font-size: 32px;
-        font-weight: bold;
-        margin-bottom: 8px;
+        color: #082f48; /* Define el color azul oscuro del título. */
+        font-family: Arial, sans-serif; /* Define la tipografía del título. */
+        font-size: 32px; /* Define el tamaño del título. */
+        font-weight: bold; /* Muestra el título en negrita. */
+        margin-bottom: 8px; /* Agrega espacio debajo del título. */
     }
 
-    /* clase para establecer la descripción del formulario */
+    /* Esta clase pertenece a la descripción del formulario. */
     .descripcion_inicio_sesion {
-        color: #71818a;
-        font-family: Arial, sans-serif;
-        font-size: 16px;
-        line-height: 22px;
+        color: #71818a; /* Define el color gris azulado de la descripción. */
+        font-family: Arial, sans-serif; /* Define la tipografía de la descripción. */
+        font-size: 16px; /* Define el tamaño del texto. */
+        line-height: 22px; /* Define el espacio entre líneas. */
     }
-
 
 /* TITULO 6 CORREO ELECTRONICO */
 
-    /* clase para organizar el campo correo electrónico */
+    /* Esta clase pertenece al grupo del campo de correo. */
     .campo_email_inicio_sesion {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 20px;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Coloca el texto sobre el campo. */
+        margin-bottom: 20px; /* Agrega espacio debajo del campo. */
     }
 
-    /* clase para establecer el texto del correo */
+    /* Esta clase pertenece al texto descriptivo del correo. */
     .texto_email_inicio_sesion {
-        color: #173c54;
-        font-family: Arial, sans-serif;
-        font-size: 15px;
-        font-weight: bold;
-        margin-bottom: 8px;
+        color: #173c54; /* Define el color azul oscuro del texto. */
+        font-family: Arial, sans-serif; /* Define la tipografía del texto. */
+        font-size: 15px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Muestra el texto en negrita. */
+        margin-bottom: 8px; /* Separa el texto del campo de entrada. */
     }
 
-    /* clase para agrupar el icono y campo correo */
+    /* Esta clase pertenece al contenedor del icono y el campo de correo. */
     .contenedor_input_email_inicio_sesion {
-        width: 100%;
-        height: 54px;
-        display: flex;
-        align-items: center;
-        border: 1px solid #ced9de;
-        border-radius: 7px;
-        background-color: #ffffff;
-        box-sizing: border-box;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 54px; /* Define el alto del campo compuesto. */
+        display: flex; /* Coloca el icono y el campo en una fila. */
+        align-items: center; /* Centra el contenido verticalmente. */
+        border: 1px solid #ced9de; /* Agrega un borde gris claro. */
+        border-radius: 7px; /* Redondea las esquinas del contenedor. */
+        background-color: #ffffff; /* Define el fondo blanco. */
+        box-sizing: border-box; /* Incluye borde y relleno en el tamaño total. */
     }
 
-    /* clase para establecer el icono del correo */
+    /* Esta clase pertenece al contenedor del icono de correo. */
     .icono_email_inicio_sesion {
-        width: 52px;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-right: 1px solid #e1e7ea;
-        box-sizing: border-box;
-        background-color: #f1f3f6;
+        width: 52px; /* Define el ancho del espacio del icono. */
+        height: 100%; /* Ocupa todo el alto del contenedor. */
+        display: flex; /* Activa Flexbox para centrar la imagen. */
+        align-items: center; /* Centra el icono verticalmente. */
+        justify-content: center; /* Centra el icono horizontalmente. */
+        border-right: 1px solid #e1e7ea; /* Separa el icono del campo con un borde. */
+        box-sizing: border-box; /* Incluye el borde en el ancho definido. */
+        background-color: #f1f3f6; /* Define el fondo gris claro del icono. */
     }
 
-    /* clase para establecer el tamaño del icono del correo */
+    /* Esta clase pertenece a la imagen del icono de correo. */
     .imagen_icono_email_inicio_sesion {
-        width: 18px;
-        height: 18px;
-        object-fit: contain;
-        opacity: 0.75;
+        width: 18px; /* Define el ancho del icono. */
+        height: 18px; /* Define el alto del icono. */
+        object-fit: contain; /* Mantiene el icono completo dentro de sus dimensiones. */
+        opacity: 0.75; /* Reduce un poco la intensidad del icono. */
     }
 
-    /* clase para establecer el campo correo */
+    /* Esta clase pertenece al campo para escribir el correo. */
     .input_email_inicio_sesion {
-        min-width: 0;
-        height: 100%;
-        flex: 1;
-        border: none;
-        outline: none;
-        padding: 0 14px;
-        color: #37434b;
-        background-color: transparent;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        box-sizing: border-box;
+        min-width: 0; /* Permite que el campo se reduzca dentro del contenedor flex. */
+        height: 100%; /* Ocupa todo el alto disponible. */
+        flex: 1; /* Usa el espacio restante junto al icono. */
+        border: none; /* Elimina el borde predeterminado del campo. */
+        outline: none; /* Elimina el contorno predeterminado al enfocarlo. */
+        padding: 0 14px; /* Agrega espacio interior a los lados del texto. */
+        color: #37434b; /* Define el color del texto ingresado. */
+        background-color: transparent; /* Deja visible el fondo del contenedor. */
+        font-family: Arial, sans-serif; /* Define la tipografía del campo. */
+        font-size: 14px; /* Define el tamaño del texto ingresado. */
+        box-sizing: border-box; /* Incluye el relleno en el tamaño total. */
     }
-
 
 /* TITULO 7 CONTRASEÑA */
 
-    /* clase para organizar el campo contraseña */
+    /* Esta clase pertenece al grupo del campo de contraseña. */
     .campo_contrasena_inicio_sesion {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 20px;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Coloca el texto sobre el campo. */
+        margin-bottom: 20px; /* Agrega espacio debajo del campo. */
     }
 
-    /* clase para establecer el texto de contraseña */
+    /* Esta clase pertenece al texto descriptivo de la contraseña. */
     .texto_contrasena_inicio_sesion {
-        color: #173c54;
-        font-family: Arial, sans-serif;
-        font-size: 15px;
-        font-weight: bold;
-        margin-bottom: 8px;
+        color: #173c54; /* Define el color azul oscuro del texto. */
+        font-family: Arial, sans-serif; /* Define la tipografía del texto. */
+        font-size: 15px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Muestra el texto en negrita. */
+        margin-bottom: 8px; /* Separa el texto del campo de entrada. */
     }
 
-    /* clase para agrupar el icono y campo contraseña */
+    /* Esta clase pertenece al contenedor del icono y el campo de contraseña. */
     .contenedor_input_contrasena_inicio_sesion {
-        width: 100%;
-        height: 54px;
-        display: flex;
-        align-items: center;
-        border: 1px solid #ced9de;
-        border-radius: 7px;
-        background-color: #ffffff;
-        box-sizing: border-box;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 54px; /* Define el alto del campo compuesto. */
+        display: flex; /* Coloca el icono y el campo en una fila. */
+        align-items: center; /* Centra el contenido verticalmente. */
+        border: 1px solid #ced9de; /* Agrega un borde gris claro. */
+        border-radius: 7px; /* Redondea las esquinas del contenedor. */
+        background-color: #ffffff; /* Define el fondo blanco. */
+        box-sizing: border-box; /* Incluye borde y relleno en el tamaño total. */
     }
 
-    /* clase para establecer el contenedor del icono contraseña */
+    /* Esta clase pertenece al contenedor del icono de contraseña. */
     .contenedor_icono_input_inicio_sesion {
-        width: 52px;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-right: 1px solid #e1e7ea;
-        box-sizing: border-box;
-        background-color: #f1f3f6;
+        width: 52px; /* Define el ancho del espacio del icono. */
+        height: 100%; /* Ocupa todo el alto del contenedor. */
+        display: flex; /* Activa Flexbox para centrar la imagen. */
+        align-items: center; /* Centra el icono verticalmente. */
+        justify-content: center; /* Centra el icono horizontalmente. */
+        border-right: 1px solid #e1e7ea; /* Separa el icono del campo con un borde. */
+        box-sizing: border-box; /* Incluye el borde en el ancho definido. */
+        background-color: #f1f3f6; /* Define el fondo gris claro del icono. */
     }
 
-    /* clase para establecer el tamaño del icono contraseña */
+    /* Esta clase pertenece a la imagen del icono de contraseña. */
     .icono_input_inicio_sesion {
-        width: 18px;
-        height: 18px;
-        object-fit: contain;
-        opacity: 0.75;
+        width: 18px; /* Define el ancho del icono. */
+        height: 18px; /* Define el alto del icono. */
+        object-fit: contain; /* Mantiene el icono completo dentro de sus dimensiones. */
+        opacity: 0.75; /* Reduce un poco la intensidad del icono. */
     }
 
-    /* clase para establecer el campo contraseña */
+    /* Esta clase pertenece al campo para escribir la contraseña. */
     .input_contrasena_inicio_sesion {
-        min-width: 0;
-        height: 100%;
-        flex: 1;
-        border: none;
-        outline: none;
-        padding: 0 14px;
-        color: #37434b;
-        background-color: transparent;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        box-sizing: border-box;
+        min-width: 0; /* Permite que el campo se reduzca dentro del contenedor flex. */
+        height: 100%; /* Ocupa todo el alto disponible. */
+        flex: 1; /* Usa el espacio restante junto al icono. */
+        border: none; /* Elimina el borde predeterminado del campo. */
+        outline: none; /* Elimina el contorno predeterminado al enfocarlo. */
+        padding: 0 14px; /* Agrega espacio interior a los lados del texto. */
+        color: #37434b; /* Define el color del texto ingresado. */
+        background-color: transparent; /* Deja visible el fondo del contenedor. */
+        font-family: Arial, sans-serif; /* Define la tipografía del campo. */
+        font-size: 14px; /* Define el tamaño del texto ingresado. */
+        box-sizing: border-box; /* Incluye el relleno en el tamaño total. */
     }
-
 
 /* TITULO 8 MENSAJE Y RECUPERAR CONTRASEÑA */
 
-    /* clase para organizar el mensaje y la recuperación de contraseña */
+    /* Esta clase pertenece al contenedor del mensaje y el enlace de recuperación. */
     .contenedor_mensaje_recuperar_inicio_sesion {
-        width: 100%;
-        min-height: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 15px;
-        margin-bottom: 18px;
-        box-sizing: border-box;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-height: 20px; /* Mantiene un alto mínimo para el contenido. */
+        display: flex; /* Coloca el mensaje y la opción en una fila. */
+        align-items: center; /* Centra ambos elementos verticalmente. */
+        justify-content: space-between; /* Separa los elementos hacia los extremos. */
+        gap: 15px; /* Define el espacio mínimo entre los elementos. */
+        margin-bottom: 18px; /* Separa esta fila del botón de inicio de sesión. */
+        box-sizing: border-box; /* Incluye borde y relleno en el tamaño total. */
     }
 
-    /* clase para establecer los mensajes del formulario */
+    /* Esta clase pertenece al espacio donde aparecen mensajes de acceso. */
     .mensaje_login {
-        flex: 1;
-        min-width: 0;
-        color: #c25757;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        line-height: 18px;
-        box-sizing: border-box;
+        flex: 1; /* Ocupa el espacio libre disponible. */
+        min-width: 0; /* Permite que el mensaje se reduzca dentro de Flexbox. */
+        color: #c25757; /* Muestra los mensajes con un tono rojizo. */
+        font-family: Arial, sans-serif; /* Define la tipografía del mensaje. */
+        font-size: 14px; /* Define el tamaño del mensaje. */
+        line-height: 18px; /* Define el espacio entre líneas. */
+        box-sizing: border-box; /* Incluye borde y relleno en el tamaño total. */
     }
 
-    /* clase para establecer la opción recuperar contraseña */
+    /* Esta clase pertenece a la opción para recuperar la contraseña. */
     .recuperar_contrasena_inicio_sesion {
-        flex-shrink: 0;
-        color: #159ba3;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        cursor: pointer;
-        white-space: nowrap;
+        flex-shrink: 0; /* Evita que el texto se comprima. */
+        color: #159ba3; /* Define el color turquesa del texto. */
+        font-family: Arial, sans-serif; /* Define la tipografía del texto. */
+        font-size: 14px; /* Define el tamaño del texto. */
+        cursor: pointer; /* Muestra el cursor de enlace al pasar encima. */
+        white-space: nowrap; /* Evita que el texto se divida en varias líneas. */
     }
 
+    /* Esta regla pertenece a la opción de recuperación al pasar el cursor. */
     .recuperar_contrasena_inicio_sesion:hover {
-        color: #0b3650;
+        color: #0b3650; /* Cambia el texto a azul oscuro al pasar el cursor. */
     }
-
 
 /* TITULO 9 BOTON INICIO SESION */
 
-    /* clase para establecer la opción ingresar */
+    /* Esta clase pertenece al botón para iniciar sesión. */
     .boton_inicio_sesion {
-        width: 100%;
-        height: 58px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        background-color: #159ba3;
-        border-radius: 7px;
-        cursor: pointer;
-        box-sizing: border-box;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 58px; /* Define el alto del botón. */
+        display: flex; /* Activa Flexbox para centrar el texto. */
+        align-items: center; /* Centra el contenido verticalmente. */
+        justify-content: center; /* Centra el contenido horizontalmente. */
+        position: relative; /* Permite posicionar la flecha respecto al botón. */
+        background-color: #159ba3; /* Define el fondo turquesa del botón. */
+        border-radius: 7px; /* Redondea las esquinas del botón. */
+        cursor: pointer; /* Muestra el cursor de clic. */
+        box-sizing: border-box; /* Incluye bordes y relleno en el tamaño total. */
     }
 
-    /* cambia el fondo al posicionar el cursor */
+    /* Esta regla pertenece al botón al pasar el cursor por encima. */
     .boton_inicio_sesion:hover {
-        background-color: #0f858d;
+        background-color: #0f858d; /* Oscurece el fondo al pasar el cursor. */
     }
 
-    /* clase para establecer el texto ingresar */
+    /* Esta clase pertenece al texto del botón de inicio de sesión. */
     .texto_boton_inicio_sesion {
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size: 18px;
-        font-weight: bold;
+        color: #ffffff; /* Muestra el texto en blanco. */
+        font-family: Arial, sans-serif; /* Define la tipografía del texto. */
+        font-size: 18px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Muestra el texto en negrita. */
     }
 
+    /* Esta clase pertenece a la flecha del botón de inicio de sesión. */
     .flecha_boton_inicio_sesion {
-        position: absolute;
-        right: 34px;
-        top: 50%;
-        transform: translateY(-60%);
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size: 40px;
-        line-height: 1;
-        transition: transform 0.3s ease;
+        position: absolute; /* Permite ubicar la flecha dentro del botón. */
+        right: 34px; /* Separa la flecha del borde derecho. */
+        top: 50%; /* Ubica la flecha en el centro vertical. */
+        transform: translateY(-60%); /* Ajusta la posición vertical de la flecha. */
+        color: #ffffff; /* Muestra la flecha en blanco. */
+        font-family: Arial, sans-serif; /* Define la tipografía de la flecha. */
+        font-size: 40px; /* Define el tamaño de la flecha. */
+        line-height: 1; /* Reduce el espacio adicional de línea. */
+        transition: transform 0.3s ease; /* Anima los cambios de posición. */
     }
 
+    /* Esta regla pertenece a la flecha cuando el cursor pasa sobre el botón. */
     .boton_inicio_sesion:hover .flecha_boton_inicio_sesion {
-        transform: translate(5px, -60%);
+        transform: translate(5px, -60%); /* Desplaza la flecha ligeramente a la derecha. */
     }
 
 /* TITULO 10 BOTON DE REGISTRO */
 
-    /* Botón de registro */
+    /* Esta clase pertenece al contenedor del botón y sus dos textos de registro. */
     .contenedor_registro_inicio_sesion {
-        width: 100%;
-        height: 58px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        background-color: #00B347;
-        border-radius: 7px;
-        cursor: pointer;
-        box-sizing: border-box;
-        margin-top: 15px;
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size: 18px;
-        font-weight: 700;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 58px; /* Define el alto del botón. */
+        display: flex; /* Activa Flexbox para centrar su contenido. */
+        align-items: center; /* Centra los textos verticalmente. */
+        justify-content: center; /* Centra los textos horizontalmente. */
+        position: relative; /* Permite superponer los dos textos dentro del botón. */
+        background-color: #00B347; /* Define el fondo verde del botón. */
+        border-radius: 7px; /* Redondea las esquinas del botón. */
+        cursor: pointer; /* Muestra el cursor de clic. */
+        box-sizing: border-box; /* Incluye bordes y relleno en el tamaño total. */
+        margin-top: 15px; /* Separa el botón del elemento anterior. */
+        color: #ffffff; /* Define el color de los textos. */
+        font-family: Arial, sans-serif; /* Define la tipografía del botón. */
+        font-size: 18px; /* Define el tamaño de los textos. */
+        font-weight: 700; /* Muestra los textos en negrita. */
     }
 
-    /* Color al pasar el mouse */
+    /* Esta regla pertenece al botón de registro al pasar el cursor. */
     .contenedor_registro_inicio_sesion:hover {
-        background-color: #009F3F;
+        background-color: #009F3F; /* Oscurece el fondo al pasar el cursor. */
     }
 
-    /* Ambos textos se superponen y quedan centrados */
+    /* Estas clases pertenecen a los dos textos que se muestran en el botón de registro. */
     .texto_registro_inicio_sesion,
     .boton_registro_inicio_sesion {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: opacity 0.4s ease;
+        position: absolute; /* Superpone ambos textos en la misma posición. */
+        inset: 0; /* Extiende cada texto hasta los cuatro bordes del botón. */
+        display: flex; /* Activa Flexbox para centrar el texto. */
+        align-items: center; /* Centra el texto verticalmente. */
+        justify-content: center; /* Centra el texto horizontalmente. */
+        transition: opacity 0.4s ease; /* Anima la aparición y desaparición de los textos. */
     }
 
-    /* Texto visible inicialmente */
+    /* Esta clase pertenece al texto inicial del botón de registro. */
     .texto_registro_inicio_sesion {
-        opacity: 1;
+        opacity: 1; /* Mantiene visible el texto inicial. */
     }
 
-    /* Texto del botón oculto inicialmente */
+    /* Esta clase pertenece al texto que aparece al pasar el cursor. */
     .boton_registro_inicio_sesion {
-        opacity: 0;
+        opacity: 0; /* Oculta inicialmente el texto interactivo. */
     }
 
-    /* Intercambio de textos al pasar el mouse */
+    /* Esta regla pertenece al texto inicial cuando el cursor pasa sobre el botón. */
     .contenedor_registro_inicio_sesion:hover .texto_registro_inicio_sesion {
-        opacity: 0;
+        opacity: 0; /* Oculta el texto inicial. */
     }
 
+    /* Esta regla pertenece al texto interactivo al pasar el cursor sobre el botón. */
     .contenedor_registro_inicio_sesion:hover .boton_registro_inicio_sesion {
-        opacity: 1;
+        opacity: 1; /* Muestra el texto para registrarse. */
     }
 
 /* TITULO 11 MODAL DE REGISTRO */
 
+    /* Esta clase pertenece al fondo que cubre la página al abrir el modal de registro. */
     .modal_registro {
-        position: fixed;
-        inset: 0;
-        z-index: 1000;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-        background-color: rgba(0, 0, 0, 0.55);
-        box-sizing: border-box;
+        position: fixed; /* Mantiene el modal fijo respecto a la ventana. */
+        inset: 0; /* Extiende el fondo hasta los cuatro bordes de la ventana. */
+        z-index: 1000; /* Coloca el modal sobre el contenido normal de la página. */
+        display: none; /* Oculta el modal inicialmente. */
+        align-items: center; /* Centra el panel del modal verticalmente. */
+        justify-content: center; /* Centra el panel del modal horizontalmente. */
+        padding: 20px; /* Deja espacio entre el panel y los bordes de la ventana. */
+        background-color: rgba(0, 0, 0, 0.55); /* Oscurece el fondo detrás del modal. */
+        box-sizing: border-box; /* Incluye el relleno en el tamaño total. */
     }
 
+    /* Esta regla pertenece al modal de registro cuando está activo. */
     .modal_registro.activo {
-        display: flex;
+        display: flex; /* Muestra el modal y activa su centrado con Flexbox. */
     }
 
+    /* Esta clase pertenece al panel blanco del modal de registro. */
     .contenido_modal_registro {
-        position: relative;
-        width: 100%;
-        max-width: 460px;
-        max-height: 90vh;
-        overflow-y: auto;
-        padding: 32px;
-        background-color: #ffffff;
-        border-radius: 12px;
-        box-shadow: 0 12px 35px rgba(18, 53, 72, 0.25);
-        box-sizing: border-box;
+        position: relative; /* Permite posicionar el botón de cierre respecto al panel. */
+        width: 100%; /* Usa el ancho disponible hasta el máximo establecido. */
+        max-width: 460px; /* Limita el ancho máximo del panel. */
+        max-height: 90vh; /* Limita el alto del panel al 90 % de la ventana. */
+        overflow-y: auto; /* Agrega desplazamiento vertical si el contenido es alto. */
+        padding: 32px; /* Agrega espacio interior alrededor del formulario. */
+        background-color: #ffffff; /* Define el fondo blanco del panel. */
+        border-radius: 12px; /* Redondea las esquinas del panel. */
+        box-shadow: 0 12px 35px rgba(18, 53, 72, 0.25); /* Agrega una sombra alrededor del panel. */
+        box-sizing: border-box; /* Incluye bordes y relleno en el ancho total. */
     }
 
+    /* Esta clase pertenece al título del modal de registro. */
     .titulo_modal_registro {
-        margin-bottom: 24px;
-        color: #082f48;
-        font-size: 26px;
-        font-weight: bold;
-        text-align: center;
+        margin-bottom: 24px; /* Separa el título del formulario. */
+        color: #082f48; /* Define el color azul oscuro del título. */
+        font-size: 26px; /* Define el tamaño del título. */
+        font-weight: bold; /* Muestra el título en negrita. */
+        text-align: center; /* Centra el título. */
     }
 
+    /* Esta clase pertenece al botón para cerrar el modal de registro. */
     .cerrar_modal_registro {
-        position: absolute;
-        top: 10px;
-        right: 14px;
-        border: 0;
-        background: transparent;
-        color: #71818a;
-        font-size: 28px;
-        cursor: pointer;
+        position: absolute; /* Ubica el botón respecto al panel del modal. */
+        top: 10px; /* Separa el botón del borde superior. */
+        right: 14px; /* Separa el botón del borde derecho. */
+        border: 0; /* Elimina el borde del botón. */
+        background: transparent; /* Hace transparente el fondo del botón. */
+        color: #71818a; /* Define el color gris azulado de la equis. */
+        font-size: 28px; /* Define el tamaño de la equis. */
+        cursor: pointer; /* Muestra el cursor de clic. */
     }
 
+    /* Esta clase pertenece al contenedor de cada campo del registro. */
     .campo_registro {
-        display: flex;
-        flex-direction: column;
-        gap: 7px;
-        margin-bottom: 16px;
+        display: flex; /* Activa Flexbox para organizar el campo. */
+        flex-direction: column; /* Coloca el texto sobre el campo de entrada. */
+        gap: 7px; /* Separa el texto del campo. */
+        margin-bottom: 16px; /* Separa este campo del siguiente. */
     }
 
+    /* Esta clase pertenece al texto descriptivo de cada campo del registro. */
     .texto_campo_registro {
-        color: #173c54;
-        font-size: 14px;
-        font-weight: bold;
-        cursor: text;
+        color: #173c54; /* Define el color azul oscuro del texto. */
+        font-size: 14px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Muestra el texto en negrita. */
+        cursor: text; /* Muestra el cursor de texto al pasar encima. */
     }
 
+    /* Esta regla pertenece a los campos de entrada del formulario de registro. */
     .campo_registro input {
-        width: 100%;
-        height: 46px;
-        padding: 0 12px;
-        border: 1px solid #ced9de;
-        border-radius: 7px;
-        font-size: 15px;
-        box-sizing: border-box;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 46px; /* Define el alto del campo. */
+        padding: 0 12px; /* Agrega espacio interior a ambos lados del texto. */
+        border: 1px solid #ced9de; /* Agrega un borde gris claro. */
+        border-radius: 7px; /* Redondea las esquinas del campo. */
+        font-size: 15px; /* Define el tamaño del texto ingresado. */
+        box-sizing: border-box; /* Incluye borde y relleno en el ancho total. */
     }
 
+    /* Esta regla pertenece a los campos de registro cuando están enfocados. */
     .campo_registro input:focus {
-        outline: 2px solid rgba(21, 155, 163, 0.25);
-        border-color: #159ba3;
+        outline: 2px solid rgba(21, 155, 163, 0.25); /* Muestra un contorno turquesa suave. */
+        border-color: #159ba3; /* Cambia el borde a turquesa. */
     }
 
+    /* Esta regla pertenece al espacio de mensajes del registro. */
     #mensaje_registro {
-        min-height: 20px;
-        margin-bottom: 12px;
-        color: #c25757;
-        font-size: 14px;
+        min-height: 20px; /* Reserva espacio para el mensaje. */
+        margin-bottom: 12px; /* Separa el mensaje del botón de envío. */
+        color: #c25757; /* Muestra los mensajes en tono rojizo. */
+        font-size: 14px; /* Define el tamaño del mensaje. */
     }
 
+    /* Esta regla pertenece al botón que envía el formulario de registro. */
     #formulario_registro button[type="submit"] {
-        width: 100%;
-        height: 48px;
-        border: 0;
-        border-radius: 7px;
-        background-color: #00B347;
-        color: #ffffff;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
+        width: 100%; /* Ocupa todo el ancho del formulario. */
+        height: 48px; /* Define el alto del botón. */
+        border: 0; /* Elimina el borde predeterminado. */
+        border-radius: 7px; /* Redondea las esquinas del botón. */
+        background-color: #00B347; /* Define el fondo verde del botón. */
+        color: #ffffff; /* Muestra el texto en blanco. */
+        font-size: 16px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Muestra el texto en negrita. */
+        cursor: pointer; /* Muestra el cursor de clic. */
     }
 
+    /* Esta regla pertenece al botón de registro al pasar el cursor. */
     #formulario_registro button[type="submit"]:hover {
-        background-color: #009F3F;
+        background-color: #009F3F; /* Oscurece el fondo al pasar el cursor. */
     }
 
+    /* Esta regla pertenece al campo de verificación cuando está oculto. */
     .campo_codigo_verificacion[hidden] {
-        display: none;
+        display: none; /* Asegura que el campo oculto no se muestre. */
     }
 
+    /* Esta clase pertenece al botón para reenviar el código de registro. */
     .boton_reenviar_codigo {
-        width: 100%;
-        min-height: 42px;
-        margin-top: 10px;
-        border: 1px solid #00B347;
-        border-radius: 7px;
-        background-color: #ffffff;
-        color: #008f39;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        font-weight: 700;
-        cursor: pointer;
-        transition: background-color 0.2s ease, color 0.2s ease;
+        width: 100%; /* Ocupa todo el ancho del formulario. */
+        min-height: 42px; /* Define el alto mínimo del botón. */
+        margin-top: 10px; /* Separa el botón del campo de código. */
+        border: 1px solid #00B347; /* Agrega un borde verde. */
+        border-radius: 7px; /* Redondea las esquinas del botón. */
+        background-color: #ffffff; /* Define el fondo blanco. */
+        color: #008f39; /* Define el color verde del texto. */
+        font-family: Arial, sans-serif; /* Define la tipografía del botón. */
+        font-size: 14px; /* Define el tamaño del texto. */
+        font-weight: 700; /* Muestra el texto en negrita. */
+        cursor: pointer; /* Muestra el cursor de clic. */
+        transition: background-color 0.2s ease, color 0.2s ease; /* Anima el cambio de fondo y texto. */
     }
 
+    /* Esta regla pertenece al botón habilitado cuando el cursor pasa encima. */
     .boton_reenviar_codigo:hover:not(:disabled) {
-        background-color: #00B347;
-        color: #ffffff;
+        background-color: #00B347; /* Cambia el fondo a verde. */
+        color: #ffffff; /* Cambia el texto a blanco. */
     }
 
+    /* Esta regla pertenece al botón de reenvío cuando está deshabilitado. */
     .boton_reenviar_codigo:disabled {
-        border-color: #c8d5cc;
-        background-color: #f1f4f2;
-        color: #7c8b80;
-        cursor: not-allowed;
+        border-color: #c8d5cc; /* Cambia el borde a un tono gris verdoso. */
+        background-color: #f1f4f2; /* Define un fondo gris claro. */
+        color: #7c8b80; /* Atenúa el color del texto. */
+        cursor: not-allowed; /* Indica que el botón no está disponible. */
     }
 
+    /* Esta regla adapta el panel del modal de registro a pantallas pequeñas. */
     @media (max-width: 500px) {
+        /* Esta clase pertenece al panel del modal de registro en móviles. */
         .contenido_modal_registro {
-            padding: 28px 20px;
+            padding: 28px 20px; /* Reduce el espacio interior para pantallas estrechas. */
         }
     }
 
 /* TITULO 12 MODAL DE RECUPERACION */
 
+    /* Esta clase pertenece al fondo que cubre la página al abrir recuperación. */
     .modal_recuperacion {
-        position: fixed;
-        inset: 0;
-        z-index: 1100;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-        background-color: rgba(0, 0, 0, 0.55);
-        box-sizing: border-box;
+        position: fixed; /* Mantiene el modal fijo respecto a la ventana. */
+        inset: 0; /* Extiende el fondo hasta los cuatro bordes de la ventana. */
+        z-index: 1100; /* Coloca este modal sobre el modal de registro. */
+        display: none; /* Oculta el modal inicialmente. */
+        align-items: center; /* Centra el panel verticalmente. */
+        justify-content: center; /* Centra el panel horizontalmente. */
+        padding: 20px; /* Deja espacio entre el panel y los bordes de la ventana. */
+        background-color: rgba(0, 0, 0, 0.55); /* Oscurece el fondo detrás del modal. */
+        box-sizing: border-box; /* Incluye el relleno en el tamaño total. */
     }
 
+    /* Esta regla pertenece al modal de recuperación cuando está activo. */
     .modal_recuperacion.activo {
-        display: flex;
+        display: flex; /* Muestra el modal y activa su centrado con Flexbox. */
     }
 
+    /* Esta clase pertenece al panel blanco del modal de recuperación. */
     .contenido_modal_recuperacion {
-        position: relative;
-        width: 100%;
-        max-width: 460px;
-        max-height: 90vh;
-        overflow-y: auto;
-        padding: 32px;
-        border-radius: 12px;
-        background-color: #ffffff;
-        box-shadow: 0 12px 35px rgba(18, 53, 72, 0.25);
-        box-sizing: border-box;
+        position: relative; /* Permite posicionar el botón de cierre respecto al panel. */
+        width: 100%; /* Usa el ancho disponible hasta el máximo establecido. */
+        max-width: 460px; /* Limita el ancho máximo del panel. */
+        max-height: 90vh; /* Limita el alto del panel al 90 % de la ventana. */
+        overflow-y: auto; /* Agrega desplazamiento vertical si el contenido es alto. */
+        padding: 32px; /* Agrega espacio interior al panel. */
+        border-radius: 12px; /* Redondea las esquinas del panel. */
+        background-color: #ffffff; /* Define el fondo blanco del panel. */
+        box-shadow: 0 12px 35px rgba(18, 53, 72, 0.25); /* Agrega una sombra alrededor del panel. */
+        box-sizing: border-box; /* Incluye bordes y relleno en el ancho total. */
     }
 
+    /* Esta clase pertenece al título del modal de recuperación. */
     .titulo_modal_recuperacion {
-        margin-bottom: 10px;
-        color: #082f48;
-        font-size: 26px;
-        font-weight: bold;
-        text-align: center;
+        margin-bottom: 10px; /* Separa el título de la descripción. */
+        color: #082f48; /* Define el color azul oscuro del título. */
+        font-size: 26px; /* Define el tamaño del título. */
+        font-weight: bold; /* Muestra el título en negrita. */
+        text-align: center; /* Centra el título. */
     }
 
+    /* Esta clase pertenece a la descripción del modal de recuperación. */
     .descripcion_modal_recuperacion {
-        margin-bottom: 24px;
-        color: #71818a;
-        font-size: 14px;
-        line-height: 21px;
-        text-align: center;
+        margin-bottom: 24px; /* Separa la descripción del formulario. */
+        color: #71818a; /* Define el color gris azulado del texto. */
+        font-size: 14px; /* Define el tamaño del texto. */
+        line-height: 21px; /* Define el espacio entre líneas. */
+        text-align: center; /* Centra la descripción. */
     }
 
+    /* Esta clase pertenece al botón para cerrar el modal de recuperación. */
     .cerrar_modal_recuperacion {
-        position: absolute;
-        top: 10px;
-        right: 14px;
-        border: 0;
-        background: transparent;
-        color: #71818a;
-        font-size: 28px;
-        cursor: pointer;
+        position: absolute; /* Ubica el botón respecto al panel del modal. */
+        top: 10px; /* Separa el botón del borde superior. */
+        right: 14px; /* Separa el botón del borde derecho. */
+        border: 0; /* Elimina el borde del botón. */
+        background: transparent; /* Hace transparente el fondo del botón. */
+        color: #71818a; /* Define el color gris azulado de la equis. */
+        font-size: 28px; /* Define el tamaño de la equis. */
+        cursor: pointer; /* Muestra el cursor de clic. */
     }
 
+    /* Esta regla pertenece al formulario de recuperación. */
     #formulario_recuperacion {
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
+        display: flex; /* Activa Flexbox para organizar los campos. */
+        flex-direction: column; /* Coloca los elementos en una columna. */
+        gap: 14px; /* Separa los elementos del formulario. */
     }
 
+    /* Esta clase pertenece al contenedor de cada campo de recuperación. */
     .campo_recuperacion {
-        display: flex;
-        flex-direction: column;
-        gap: 7px;
+        display: flex; /* Activa Flexbox para organizar el campo. */
+        flex-direction: column; /* Coloca el texto sobre el campo de entrada. */
+        gap: 7px; /* Separa el texto del campo. */
     }
 
+    /* Esta clase pertenece al texto descriptivo de los campos de recuperación. */
     .texto_campo_recuperacion {
-        color: #173c54;
-        font-size: 14px;
-        font-weight: bold;
-        cursor: text;
+        color: #173c54; /* Define el color azul oscuro del texto. */
+        font-size: 14px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Muestra el texto en negrita. */
+        cursor: text; /* Muestra el cursor de texto al pasar encima. */
     }
 
+    /* Esta regla pertenece a los campos de entrada de recuperación. */
     .campo_recuperacion input {
-        width: 100%;
-        height: 46px;
-        padding: 0 12px;
-        border: 1px solid #ced9de;
-        border-radius: 7px;
-        font-size: 15px;
-        box-sizing: border-box;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 46px; /* Define el alto del campo. */
+        padding: 0 12px; /* Agrega espacio interior a ambos lados del texto. */
+        border: 1px solid #ced9de; /* Agrega un borde gris claro. */
+        border-radius: 7px; /* Redondea las esquinas del campo. */
+        font-size: 15px; /* Define el tamaño del texto ingresado. */
+        box-sizing: border-box; /* Incluye borde y relleno en el ancho total. */
     }
 
+    /* Esta regla pertenece a los campos de recuperación cuando están enfocados. */
     .campo_recuperacion input:focus {
-        outline: 2px solid rgba(21, 155, 163, 0.25);
-        border-color: #159ba3;
+        outline: 2px solid rgba(21, 155, 163, 0.25); /* Muestra un contorno turquesa suave. */
+        border-color: #159ba3; /* Cambia el borde a turquesa. */
     }
 
+    /* Esta clase pertenece al grupo del código y las contraseñas. */
     .paso_codigo_recuperacion {
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
+        display: flex; /* Activa Flexbox para organizar los campos. */
+        flex-direction: column; /* Coloca los elementos en una columna. */
+        gap: 14px; /* Separa los elementos del paso. */
     }
 
+    /* Esta regla pertenece al paso de recuperación cuando está oculto. */
     .paso_codigo_recuperacion[hidden] {
-        display: none;
+        display: none; /* Asegura que el paso oculto no se muestre. */
     }
 
+    /* Esta clase pertenece al espacio donde aparecen mensajes de recuperación. */
     .mensaje_recuperacion {
-        min-height: 20px;
-        color: #c25757;
-        font-size: 14px;
-        line-height: 20px;
+        min-height: 20px; /* Reserva espacio para el mensaje. */
+        color: #c25757; /* Muestra los mensajes en tono rojizo. */
+        font-size: 14px; /* Define el tamaño del mensaje. */
+        line-height: 20px; /* Define el espacio entre líneas. */
     }
 
+    /* Estas clases pertenecen a los botones de envío y reenvío de recuperación. */
     .boton_enviar_recuperacion,
     .boton_reenviar_recuperacion {
-        min-height: 46px;
-        border-radius: 7px;
-        font-size: 15px;
-        font-weight: bold;
-        cursor: pointer;
+        min-height: 46px; /* Define el alto mínimo de los botones. */
+        border-radius: 7px; /* Redondea las esquinas de los botones. */
+        font-size: 15px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Muestra el texto en negrita. */
+        cursor: pointer; /* Muestra el cursor de clic. */
     }
 
+    /* Esta clase pertenece al botón que envía el código o cambia la contraseña. */
     .boton_enviar_recuperacion {
-        width: 100%;
-        border: 0;
-        background-color: #159ba3;
-        color: #ffffff;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        border: 0; /* Elimina el borde del botón. */
+        background-color: #159ba3; /* Define el fondo turquesa. */
+        color: #ffffff; /* Muestra el texto en blanco. */
     }
 
+    /* Esta regla pertenece al botón de envío al pasar el cursor. */
     .boton_enviar_recuperacion:hover {
-        background-color: #0f858d;
+        background-color: #0f858d; /* Oscurece el fondo al pasar el cursor. */
     }
 
+    /* Esta clase pertenece al botón que solicita reenviar el código. */
     .boton_reenviar_recuperacion {
-        width: 100%;
-        border: 1px solid #00B347;
-        background-color: #ffffff;
-        color: #008f39;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        border: 1px solid #00B347; /* Agrega un borde verde. */
+        background-color: #ffffff; /* Define el fondo blanco. */
+        color: #008f39; /* Define el color verde del texto. */
     }
 
+    /* Esta regla pertenece al botón de reenvío habilitado al pasar el cursor. */
     .boton_reenviar_recuperacion:hover:not(:disabled) {
-        background-color: #00B347;
-        color: #ffffff;
+        background-color: #00B347; /* Cambia el fondo a verde. */
+        color: #ffffff; /* Cambia el texto a blanco. */
     }
 
+    /* Esta regla pertenece al botón de reenvío cuando está deshabilitado. */
     .boton_reenviar_recuperacion:disabled {
-        border-color: #c8d5cc;
-        background-color: #f1f4f2;
-        color: #7c8b80;
-        cursor: not-allowed;
+        border-color: #c8d5cc; /* Cambia el borde a un tono gris verdoso. */
+        background-color: #f1f4f2; /* Define un fondo gris claro. */
+        color: #7c8b80; /* Atenúa el color del texto. */
+        cursor: not-allowed; /* Indica que el botón no está disponible. */
     }
 
+    /* Esta clase pertenece al botón para volver y cambiar el correo. */
     .boton_volver_recuperacion {
-        align-self: flex-start;
-        padding: 6px 0;
-        border: 0;
-        background: transparent;
-        color: #159ba3;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        font-weight: bold;
-        cursor: pointer;
+        align-self: flex-start; /* Alinea el botón al inicio del contenedor. */
+        padding: 6px 0; /* Agrega espacio vertical alrededor del texto. */
+        border: 0; /* Elimina el borde del botón. */
+        background: transparent; /* Hace transparente el fondo. */
+        color: #159ba3; /* Define el color turquesa del texto. */
+        font-family: Arial, sans-serif; /* Define la tipografía del botón. */
+        font-size: 14px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Muestra el texto en negrita. */
+        cursor: pointer; /* Muestra el cursor de clic. */
     }
 
+    /* Esta regla pertenece al botón de volver al pasar el cursor. */
     .boton_volver_recuperacion:hover {
-        color: #0f858d;
-        text-decoration: underline;
+        color: #0f858d; /* Oscurece el color del texto. */
+        text-decoration: underline; /* Subraya el texto para indicar interacción. */
     }
 
+    /* Esta regla adapta el panel del modal de recuperación a pantallas pequeñas. */
     @media (max-width: 500px) {
+        /* Esta clase pertenece al panel del modal de recuperación en móviles. */
         .contenido_modal_recuperacion {
-            padding: 28px 20px;
+            padding: 28px 20px; /* Reduce el espacio interior para pantallas estrechas. */
         }
     }
 
-/* TITULO 12 PIE INICIO SESION */
+/* TITULO 13 PIE INICIO SESION */
 
-    /* clase para establecer el pie inferior */
+    /* Esta clase pertenece al pie de página de inicio de sesión. */
     .pie_inicio_sesion {
-        width: 100%;
-        min-height: 65px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #39586b;
-        background-color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        text-align: center;
-        box-sizing: border-box;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-height: 65px; /* Define el alto mínimo del pie. */
+        display: flex; /* Activa Flexbox para centrar el contenido. */
+        align-items: center; /* Centra el texto verticalmente. */
+        justify-content: center; /* Centra el texto horizontalmente. */
+        color: #39586b; /* Define el color del texto. */
+        background-color: #ffffff; /* Define el fondo blanco del pie. */
+        font-family: Arial, sans-serif; /* Define la tipografía del pie. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        text-align: center; /* Centra el texto si ocupa más de una línea. */
+        box-sizing: border-box; /* Incluye bordes y relleno en el tamaño total. */
     }
 
-/* TITULO 13 ALERTA NOTIFICAR EXITO */
+/* TITULO 14 ALERTA NOTIFICAR EXITO */
 
+    /* Esta clase pertenece a la alerta que aparece en la parte superior. */
     .alerta_superior {
-        position: fixed;
-        top: 18px;
-        left: 50%;
-        z-index: 2000;
-        width: min(440px, calc(100% - 32px));
-        padding: 14px 20px;
-        border-radius: 8px;
-        background-color: #009F3F;
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size: 15px;
-        font-weight: 700;
-        text-align: center;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-        opacity: 0;
-        transform: translate(-50%, -150%);
-        transition: opacity 0.3s ease, transform 0.3s ease;
-        pointer-events: none;
+        position: fixed; /* Mantiene la alerta fija respecto a la ventana. */
+        top: 18px; /* Separa la alerta del borde superior. */
+        left: 50%; /* Ubica el inicio de la alerta en el centro horizontal. */
+        z-index: 2000; /* Coloca la alerta sobre los demás elementos. */
+        width: min(440px, calc(100% - 32px)); /* Limita el ancho y deja márgenes en pantallas pequeñas. */
+        padding: 14px 20px; /* Agrega espacio interior a la alerta. */
+        border-radius: 8px; /* Redondea las esquinas de la alerta. */
+        background-color: #009F3F; /* Define el fondo verde de éxito. */
+        color: #ffffff; /* Muestra el texto en blanco. */
+        font-family: Arial, sans-serif; /* Define la tipografía de la alerta. */
+        font-size: 15px; /* Define el tamaño del mensaje. */
+        font-weight: 700; /* Muestra el mensaje en negrita. */
+        text-align: center; /* Centra el texto de la alerta. */
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); /* Agrega una sombra a la alerta. */
+        opacity: 0; /* Oculta visualmente la alerta inicialmente. */
+        transform: translate(-50%, -150%); /* La coloca fuera de la pantalla por arriba. */
+        transition: opacity 0.3s ease, transform 0.3s ease; /* Anima su aparición y desplazamiento. */
+        pointer-events: none; /* Evita que la alerta intercepte clics. */
     }
 
+    /* Esta regla pertenece a la alerta cuando está visible. */
     .alerta_superior.visible {
-        opacity: 1;
-        transform: translate(-50%, 0);
+        opacity: 1; /* Hace visible la alerta. */
+        transform: translate(-50%, 0); /* La desplaza a su posición en la parte superior. */
     }
 
-/* TITULO 14 RESPONSIVE INICIO SESION */
+/* TITULO 15 RESPONSIVE INICIO SESION */
 
-    /* adapta la pantalla para tablets */
+    /* Esta regla adapta el inicio de sesión a pantallas de hasta 900 píxeles. */
     @media (max-width: 900px) {
 
+        /* Esta clase pertenece al contenedor principal en tabletas. */
         .contenedor_inicio_sesion {
-            width: 100%;
-            min-height: auto;
-            grid-template-columns: 1fr;
+            width: 100%; /* Ocupa todo el ancho disponible. */
+            min-height: auto; /* Permite que el alto dependa del contenido. */
+            grid-template-columns: 1fr; /* Apila los paneles en una sola columna. */
         }
 
+        /* Esta clase pertenece al panel de identidad en tabletas. */
         .contenedor_identidad_inicio_sesion {
-            min-height: 300px;
-            padding: 35px 25px;
-            clip-path: none;
+            min-height: 300px; /* Define el alto mínimo del panel. */
+            padding: 35px 25px; /* Ajusta el espacio interior para tabletas. */
+            clip-path: none; /* Elimina el corte diagonal. */
         }
 
+        /* Esta clase pertenece al contenido de identidad en tabletas. */
         .contenido_identidad_inicio_sesion {
-            transform: translateX(0);
+            transform: translateX(0); /* Quita el desplazamiento horizontal. */
         }
 
+        /* Esta clase pertenece al borde diagonal decorativo. */
         .borde_identidad_inicio_sesion {
-            display: none;
+            display: none; /* Oculta el borde diagonal en este tamaño. */
         }
 
+        /* Esta clase pertenece al logo de TresStock en tabletas. */
         .imagen_logo_inicio_sesion {
-            width: 230px;
+            width: 230px; /* Reduce el ancho del logo. */
         }
 
+        /* Esta clase pertenece al título de identidad en tabletas. */
         .titulo_identidad_inicio_sesion {
-            font-size: 22px;
-            line-height: 30px;
+            font-size: 22px; /* Reduce el tamaño del título. */
+            line-height: 30px; /* Ajusta el espacio entre líneas. */
         }
 
+        /* Esta clase pertenece al panel de acceso en tabletas. */
         .contenedor_acceso_inicio_sesion {
-            width: 100%;
-            min-height: auto;
-            padding: 40px 20px;
-            box-sizing: border-box;
+            width: 100%; /* Ocupa todo el ancho disponible. */
+            min-height: auto; /* Permite que el alto dependa del contenido. */
+            padding: 40px 20px; /* Ajusta el espacio interior del panel. */
+            box-sizing: border-box; /* Incluye el relleno en el ancho total. */
         }
 
+        /* Esta clase pertenece al pie de página en tabletas. */
         .pie_inicio_sesion {
-            min-height: 55px;
+            min-height: 55px; /* Reduce el alto mínimo del pie. */
         }
 
     }
 
-
-    /* adapta la pantalla para dispositivos móviles */
+    /* Esta regla adapta el inicio de sesión a pantallas de hasta 500 píxeles. */
     @media (max-width: 500px) {
 
+        /* Esta clase pertenece al contenedor principal en móviles. */
         .contenedor_inicio_sesion {
-            width: 100%;
-            min-height: auto;
-            grid-template-columns: 1fr;
+            width: 100%; /* Ocupa todo el ancho disponible. */
+            min-height: auto; /* Permite que el alto dependa del contenido. */
+            grid-template-columns: 1fr; /* Mantiene los paneles en una sola columna. */
         }
 
+        /* Esta clase pertenece al panel de identidad en móviles. */
         .contenedor_identidad_inicio_sesion {
-            min-height: 50px;
+            min-height: 50px; /* Reduce el alto mínimo del panel. */
         }
 
+        /* Esta clase pertenece al logo de TresStock en móviles. */
         .imagen_logo_inicio_sesion {
-            width: 200px;
+            width: 200px; /* Reduce el ancho del logo. */
         }
 
+        /* Esta clase pertenece al panel de acceso en móviles. */
         .contenedor_acceso_inicio_sesion {
-            width: 100%;
-            min-height: auto;
-            padding: 28px 12px;
-            box-sizing: border-box;
+            width: 100%; /* Ocupa todo el ancho disponible. */
+            min-height: auto; /* Permite que el alto dependa del contenido. */
+            padding: 28px 12px; /* Reduce el espacio interior del panel. */
+            box-sizing: border-box; /* Incluye el relleno en el ancho total. */
         }
 
+        /* Esta clase pertenece al formulario de inicio de sesión en móviles. */
         .formulario_inicio_sesion {
-            width: 100%;
-            max-width: 100%;
-            padding: 28px 20px;
+            width: 100%; /* Ocupa todo el ancho del panel. */
+            max-width: 100%; /* Evita que supere el ancho disponible. */
+            padding: 28px 20px; /* Reduce el espacio interior del formulario. */
         }
 
+        /* Esta clase pertenece al título del formulario en móviles. */
         .titulo_inicio_sesion {
-            font-size: 27px;
+            font-size: 27px; /* Reduce el tamaño del título. */
         }
 
+        /* Esta clase pertenece a la descripción en móviles. */
         .descripcion_inicio_sesion {
-            font-size: 14px;
+            font-size: 14px; /* Reduce el tamaño de la descripción. */
         }
 
+        /* Esta clase pertenece al pie de página en móviles. */
         .pie_inicio_sesion {
-            width: 100%;
-            min-height: 50px;
-            padding: 15px 20px;
-            font-size: 13px;
-            line-height: 14px;
-            text-align: center;
-            box-sizing: border-box;
+            width: 100%; /* Ocupa todo el ancho disponible. */
+            min-height: 50px; /* Define el alto mínimo del pie. */
+            padding: 15px 20px; /* Agrega espacio interior para el texto. */
+            font-size: 13px; /* Define el tamaño del texto del pie. */
+            line-height: 14px; /* Ajusta el espacio entre líneas. */
+            text-align: center; /* Centra el texto del pie. */
+            box-sizing: border-box; /* Incluye el relleno en el ancho total. */
         }
 
+        /* Estas clases pertenecen al mensaje y al enlace de recuperación en móviles. */
         .mensaje_login, .recuperar_contrasena_inicio_sesion {
-            font-size: 12px;
+            font-size: 12px; /* Reduce el tamaño de ambos textos. */
         }
 
     }
