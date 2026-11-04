@@ -130,6 +130,7 @@
                     'Bienvenido ' + datos.nombre;
 
                 // Redirige al usuario a la página principal del sistema.
+                actualizarTokenCsrf(datos.csrfToken);
                 window.location.href = '../../index.html';
 
             // Ejecuta este bloque si ocurre un error durante la solicitud.
