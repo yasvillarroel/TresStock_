@@ -18,7 +18,8 @@
     /* Esta clase pertenece al contenedor que divide la identidad y el acceso. */
     .contenedor_inicio_sesion {
         width: 100%; /* Ocupa todo el ancho disponible. */
-        min-height: calc(100vh - 65px); /* Reserva el alto de la ventana menos el pie de página. */
+        flex: 1; /* Aprovecha el espacio libre y mantiene el pie al final de la pantalla. */
+        min-height: calc(100dvh - 54px); /* Reserva el alto de la ventana menos los 54px del pie de página. */
         display: grid; /* Organiza los paneles con CSS Grid. */
         grid-template-columns: 46% 54%; /* Asigna el ancho de cada panel. */
         box-sizing: border-box; /* Incluye bordes y relleno en el tamaño total. */
@@ -28,8 +29,7 @@
 
     /* Esta clase pertenece al panel de identidad visual de TresStock. */
     .contenedor_identidad_inicio_sesion {
-        min-height: calc(100vh - 65px); /* Mantiene el panel con el alto disponible de la pantalla. */
-        display: flex; /* Activa Flexbox para organizar el contenido. */
+        min-height: calc(100dvh - 54px); /* Mantiene el panel con el alto disponible de la pantalla. */        display: flex; /* Activa Flexbox para organizar el contenido. */
         flex-direction: column; /* Organiza los elementos en una columna. */
         align-items: center; /* Centra los elementos horizontalmente. */
         justify-content: center; /* Centra los elementos verticalmente. */
@@ -77,9 +77,8 @@
 
     /* Esta clase pertenece a la imagen del logo de TresStock. */
     .imagen_logo_inicio_sesion {
-        width: 330px; /* Define el ancho del logo. */
+        width: 295px; /* Define el ancho del logo. */
         height: auto; /* Mantiene la proporción original de la imagen. */
-
     }
 
     /* Esta clase pertenece al título descriptivo de TresStock. */
@@ -87,22 +86,23 @@
         max-width: 520px; /* Limita el ancho máximo del texto. */
         color: #ffffff; /* Muestra el texto en blanco. */
         font-family: Arial, sans-serif; /* Define la tipografía del título. */
-        font-size: 25px; /* Define el tamaño del texto. */
+        font-size: 23px; /* Define el tamaño del texto. */
         font-weight: normal; /* Usa un grosor de fuente normal. */
         line-height: 34px; /* Define el espacio entre líneas. */
         text-align: center; /* Centra el texto. */
     }
 
+
 /* TITULO 4 ACCESO TRESSTOCK */
 
     /* Esta clase pertenece al panel que contiene el formulario de acceso. */
     .contenedor_acceso_inicio_sesion {
-        min-height: calc(100vh - 65px); /* Reserva el alto disponible para el panel. */
+        min-height: calc(100dvh - 54px); /* Reserva el alto disponible para el panel. */
         display: flex; /* Activa Flexbox para centrar el formulario. */
         align-items: center; /* Centra el formulario verticalmente. */
         justify-content: center; /* Centra el formulario horizontalmente. */
         background-color: #f8fafb; /* Define el fondo claro del panel. */
-        padding: 40px; /* Agrega espacio alrededor del formulario. */
+        padding: 22px 30px; /* Agrega espacio alrededor del formulario. */
         box-sizing: border-box; /* Incluye bordes y relleno en el tamaño total. */
     }
 
@@ -113,29 +113,30 @@
         background-color: #ffffff; /* Define el fondo blanco del formulario. */
         border: 1px solid #e1e7ea; /* Agrega un borde fino gris claro. */
         border-radius: 20px; /* Redondea las esquinas del formulario. */
-        padding: 38px 40px 34px 40px; /* Agrega espacio interior en cada lado. */
+        padding: 26px 34px 25px 34px; /* Agrega espacio interior en cada lado. */
         box-sizing: border-box; /* Incluye bordes y relleno en el ancho total. */
         box-shadow: 0 12px 35px rgba(18, 53, 72, 0.10); /* Agrega una sombra suave. */
     }
+
 
 /* TITULO 5 ENCABEZADO FORMULARIO */
 
     /* Esta clase pertenece al contenedor circular del icono de usuario. */
     .contenedor_icono_usuario_inicio_sesion {
-        width: 112px; /* Define el ancho del contenedor. */
-        height: 112px; /* Define el alto del contenedor. */
+        width: 86px; /* Define el ancho del contenedor. */
+        height: 86px; /* Define el alto del contenedor. */
         display: flex; /* Activa Flexbox para centrar el icono. */
         align-items: center; /* Centra el icono verticalmente. */
         justify-content: center; /* Centra el icono horizontalmente. */
-        margin: 0 auto 14px auto; /* Centra el contenedor y agrega espacio inferior. */
+        margin: 0 auto 10px auto; /* Centra el contenedor y agrega espacio inferior. */
         background-color: #e5f7f7; /* Define el fondo turquesa claro. */
         border-radius: 50%; /* Convierte el contenedor en un círculo. */
     }
 
     /* Esta clase pertenece a la imagen del icono de usuario. */
     .icono_usuario_inicio_sesion {
-        width: 50px; /* Define el ancho del icono. */
-        height: 50px; /* Define el alto del icono. */
+        width: 40px; /* Define el ancho del icono. */
+        height: 40px; /* Define el alto del icono. */
         object-fit: contain; /* Mantiene el icono completo dentro de sus dimensiones. */
         user-select: none; /* Evita que el icono se seleccione como texto. */
         -webkit-user-drag: none; /* Evita arrastrar la imagen en navegadores WebKit. */
@@ -144,7 +145,7 @@
     /* Esta clase pertenece al grupo del título y la descripción. */
     .contenedor_encabezado_inicio_sesion {
         width: 100%; /* Ocupa todo el ancho disponible. */
-        margin-bottom: 34px; /* Separa el encabezado de los campos. */
+        margin-bottom: 20px; /* Separa el encabezado de los campos. */
         text-align: center; /* Centra el texto del encabezado. */
     }
 
@@ -152,7 +153,7 @@
     .titulo_inicio_sesion {
         color: #082f48; /* Define el color azul oscuro del título. */
         font-family: Arial, sans-serif; /* Define la tipografía del título. */
-        font-size: 32px; /* Define el tamaño del título. */
+        font-size: 30px; /* Define el tamaño del título. */
         font-weight: bold; /* Muestra el título en negrita. */
         margin-bottom: 8px; /* Agrega espacio debajo del título. */
     }
@@ -161,9 +162,10 @@
     .descripcion_inicio_sesion {
         color: #71818a; /* Define el color gris azulado de la descripción. */
         font-family: Arial, sans-serif; /* Define la tipografía de la descripción. */
-        font-size: 16px; /* Define el tamaño del texto. */
+        font-size: 15px; /* Define el tamaño del texto. */
         line-height: 22px; /* Define el espacio entre líneas. */
     }
+
 
 /* TITULO 6 CORREO ELECTRONICO */
 
@@ -342,7 +344,7 @@
     /* Esta clase pertenece al botón para iniciar sesión. */
     .boton_inicio_sesion {
         width: 100%; /* Ocupa todo el ancho disponible. */
-        height: 58px; /* Define el alto del botón. */
+        height: 50px; /* Define el alto del botón. */        
         display: flex; /* Activa Flexbox para centrar el texto. */
         align-items: center; /* Centra el contenido verticalmente. */
         justify-content: center; /* Centra el contenido horizontalmente. */
@@ -362,19 +364,19 @@
     .texto_boton_inicio_sesion {
         color: #ffffff; /* Muestra el texto en blanco. */
         font-family: Arial, sans-serif; /* Define la tipografía del texto. */
-        font-size: 18px; /* Define el tamaño del texto. */
+        font-size: 17px; /* Define el tamaño del texto. */
         font-weight: bold; /* Muestra el texto en negrita. */
     }
 
     /* Esta clase pertenece a la flecha del botón de inicio de sesión. */
     .flecha_boton_inicio_sesion {
         position: absolute; /* Permite ubicar la flecha dentro del botón. */
-        right: 34px; /* Separa la flecha del borde derecho. */
+        right: 28px; /* Separa la flecha del borde derecho. */
         top: 50%; /* Ubica la flecha en el centro vertical. */
         transform: translateY(-60%); /* Ajusta la posición vertical de la flecha. */
         color: #ffffff; /* Muestra la flecha en blanco. */
         font-family: Arial, sans-serif; /* Define la tipografía de la flecha. */
-        font-size: 40px; /* Define el tamaño de la flecha. */
+        font-size: 34px; /* Define el tamaño de la flecha. */
         line-height: 1; /* Reduce el espacio adicional de línea. */
         transition: transform 0.3s ease; /* Anima los cambios de posición. */
     }
@@ -389,7 +391,7 @@
     /* Esta clase pertenece al contenedor del botón y sus dos textos de registro. */
     .contenedor_registro_inicio_sesion {
         width: 100%; /* Ocupa todo el ancho disponible. */
-        height: 58px; /* Define el alto del botón. */
+        height: 50px; /* Define el alto del botón. */
         display: flex; /* Activa Flexbox para centrar su contenido. */
         align-items: center; /* Centra los textos verticalmente. */
         justify-content: center; /* Centra los textos horizontalmente. */
@@ -398,10 +400,10 @@
         border-radius: 7px; /* Redondea las esquinas del botón. */
         cursor: pointer; /* Muestra el cursor de clic. */
         box-sizing: border-box; /* Incluye bordes y relleno en el tamaño total. */
-        margin-top: 15px; /* Separa el botón del elemento anterior. */
+        margin-top: 12px; /* Separa el botón del elemento anterior. */
         color: #ffffff; /* Define el color de los textos. */
         font-family: Arial, sans-serif; /* Define la tipografía del botón. */
-        font-size: 18px; /* Define el tamaño de los textos. */
+        font-size: 17px; /* Define el tamaño de los textos. */
         font-weight: 700; /* Muestra los textos en negrita. */
     }
 
@@ -798,7 +800,7 @@
     /* Esta clase pertenece al pie de página de inicio de sesión. */
     .pie_inicio_sesion {
         width: 100%; /* Ocupa todo el ancho disponible. */
-        min-height: 65px; /* Define el alto mínimo del pie. */
+        min-height: 54px; /* Define el alto mínimo del pie. */
         display: flex; /* Activa Flexbox para centrar el contenido. */
         align-items: center; /* Centra el texto verticalmente. */
         justify-content: center; /* Centra el texto horizontalmente. */
@@ -954,6 +956,69 @@
         /* Estas clases pertenecen al mensaje y al enlace de recuperación en móviles. */
         .mensaje_login, .recuperar_contrasena_inicio_sesion {
             font-size: 12px; /* Reduce el tamaño de ambos textos. */
+        }
+
+    }
+
+/* TITULO 16 AJUSTE DE ALTURA PARA PANTALLAS DE ESCRITORIO BAJAS */
+
+    /* Esta regla adapta el formulario a pantallas de escritorio de 720px de alto o menos. */
+    @media (min-width: 901px) and (max-height: 720px) {
+
+        /* Reduce el espacio interior del panel de acceso. */
+        .contenedor_acceso_inicio_sesion {
+            padding: 12px 24px; /* Disminuye los espacios alrededor del formulario. */
+        }
+
+        /* Reduce el espacio interior del formulario. */
+        .formulario_inicio_sesion {
+            padding: 16px 30px; /* Disminuye el relleno superior, inferior y lateral. */
+        }
+
+        /* Reduce el tamaño del contenedor circular del usuario. */
+        .contenedor_icono_usuario_inicio_sesion {
+            width: 68px; /* Reduce el ancho del círculo. */
+            height: 68px; /* Reduce el alto del círculo. */
+            margin-bottom: 8px; /* Reduce la separación inferior. */
+        }
+
+        /* Reduce el tamaño del icono de usuario. */
+        .icono_usuario_inicio_sesion {
+            width: 34px; /* Reduce el ancho del icono. */
+            height: 34px; /* Reduce el alto del icono. */
+        }
+
+        /* Reduce la separación del encabezado del formulario. */
+        .contenedor_encabezado_inicio_sesion {
+            margin-bottom: 14px; /* Disminuye el espacio antes de los campos. */
+        }
+
+        /* Reduce la separación inferior de los campos. */
+        .campo_email_inicio_sesion,
+        .campo_contrasena_inicio_sesion {
+            margin-bottom: 10px; /* Disminuye el espacio entre campos. */
+        }
+
+        /* Reduce la altura de los campos de entrada. */
+        .contenedor_input_email_inicio_sesion,
+        .contenedor_input_contrasena_inicio_sesion {
+            height: 44px; /* Disminuye el alto de ambos campos. */
+        }
+
+        /* Reduce la separación de los mensajes y recuperación. */
+        .contenedor_mensaje_recuperar_inicio_sesion {
+            margin-bottom: 10px; /* Disminuye el espacio previo al botón. */
+        }
+
+        /* Reduce la altura de los botones. */
+        .boton_inicio_sesion,
+        .contenedor_registro_inicio_sesion {
+            height: 46px; /* Disminuye el alto de ambos botones. */
+        }
+
+        /* Reduce el tamaño del logo de TresStock. */
+        .imagen_logo_inicio_sesion {
+            width: 265px; /* Ajusta el logo para pantallas de poca altura. */
         }
 
     }
