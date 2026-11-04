@@ -461,4 +461,61 @@ CREATE INDEX idx_pp_proveedor
 CREATE INDEX idx_usuarios_email
     ON usuarios(email);
 
+
+-- ============================================================
+-- 13. REGISTROS PENDIENTES DE VERIFICACIÓN POR CORREO
+-- ============================================================
+
+CREATE TABLE base_datos.registros_pendientes (
+    email           VARCHAR(150) PRIMARY KEY,
+    nombre          VARCHAR(100) NOT NULL,
+    password_hash   VARCHAR(255) NOT NULL,
+    codigo_hash     CHAR(64) NOT NULL,
+    vence_en        TIMESTAMPTZ NOT NULL,
+    creado_en       TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    intentos        INTEGER NOT NULL DEFAULT 0,
+
+    CONSTRAINT chk_intentos_registro
+        CHECK (intentos >= 0)
+);
+
+CREATE TABLE base_datos.bloqueos_registro_ip (
+    ip INET PRIMARY KEY,
+    intentos INTEGER NOT NULL DEFAULT 0 CHECK (intentos >= 0),
+    bloqueado_hasta TIMESTAMPTZ,
+    actualizado_en TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE base_datos.reenvios_registro_ip (
+    ip INET PRIMARY KEY,
+    intentos INTEGER NOT NULL DEFAULT 0 CHECK (intentos >= 0),
+    ventana_inicio TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    bloqueado_hasta TIMESTAMPTZ,
+    actualizado_en TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ============================================================
+-- 14. RECUPERACION DE CONTRASENA
+-- ============================================================
+
+CREATE TABLE base_datos.recuperaciones_contrasena (
+    email VARCHAR(150) PRIMARY KEY,
+    codigo_hash CHAR(64) NOT NULL,
+    vence_en TIMESTAMPTZ NOT NULL,
+    creado_en TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    intentos INTEGER NOT NULL DEFAULT 0 CHECK (intentos >= 0)
+);
+
+CREATE TABLE base_datos.limites_recuperacion_ip (
+    ip INET PRIMARY KEY,
+    fallos_codigo INTEGER NOT NULL DEFAULT 0,
+    ventana_fallos_inicio TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    bloqueado_codigo_hasta TIMESTAMPTZ,
+    reenvios INTEGER NOT NULL DEFAULT 0,
+    ventana_reenvios_inicio TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    bloqueado_reenvio_hasta TIMESTAMPTZ,
+    actualizado_en TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT chk_limites_recuperacion_ip CHECK (fallos_codigo >= 0 AND reenvios >= 0)
+);
+
 -- FIN DEL SCHEMA
