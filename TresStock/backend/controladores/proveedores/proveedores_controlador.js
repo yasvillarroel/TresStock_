@@ -272,49 +272,36 @@ const actualizarProveedor = async (req, res) => {
 };
 
 
-// FUNCION 5 ELIMINAR PROVEEDOR
-const eliminarProveedor = async (req, res) => {
+// FUNCION 5 CAMBIAR ESTADO DEL PROVEEDOR
+// activa o desactiva un proveedor sin eliminar sus relaciones con productos
+const cambiarEstadoProveedor = async (req, res) => {
 
     try {
-
-        // obtiene el id del proveedor
         const { id } = req.params;
+        const { activo } = req.body || {};
 
-
-        // elimina el proveedor
-        const proveedor = await proveedoresServicio.eliminarProveedor(id);
-
-
-        // verifica si existe
-        if (!proveedor) {
-
-            return res.status(404).json({
-                mensaje: 'Proveedor no encontrado'
+        // exige un valor booleano, igual que la activación de productos
+        if (typeof activo !== 'boolean') {
+            return res.status(400).json({
+                mensaje: 'El campo activo debe ser true o false.'
             });
-
         }
 
+        const proveedor = await proveedoresServicio.cambiarEstadoProveedor(id, activo);
 
-        // envia el proveedor eliminado
-        res.json(proveedor);
+        if (!proveedor) {
+            return res.status(404).json({ mensaje: 'Proveedor no encontrado.' });
+        }
 
-
-    } catch (error) {
-
-        // muestra el error en la consola
-        console.error(
-            'Error al eliminar proveedor:',
-            error
-        );
-
-
-        // envia el error
-        res.status(500).json({
-            mensaje: 'Error al eliminar proveedor'
+        return res.json({
+            mensaje: activo ? 'Proveedor activado correctamente.' : 'Proveedor desactivado correctamente.',
+            proveedor
         });
 
+    } catch (error) {
+        console.error('Error al cambiar estado del proveedor:', error);
+        return res.status(500).json({ mensaje: 'No se pudo cambiar el estado del proveedor.' });
     }
-
 };
 
 
@@ -350,6 +337,6 @@ module.exports = {
     obtenerProveedores,
     obtenerProveedor,
     actualizarProveedor,
-    eliminarProveedor,
+    cambiarEstadoProveedor,
     obtenerResumenProveedores
 };

@@ -178,25 +178,58 @@
             </div>
 
 
-        <!-- TITULO 4 BUSQUEDA PROVEEDORES -->
+        <!-- TITULO 4 FILTROS PROVEEDORES -->
 
-            <div class="contenedor_busqueda_proveedores">
+            <!-- contenedor que agrupa la búsqueda y los filtros -->
+            <div class="contenedor_filtros_proveedores">
 
+                <!-- búsqueda por los datos principales del proveedor -->
                 <div class="campo_busqueda_proveedores">
-
-                    <div class="texto_busqueda_proveedores">
-                        Buscar proveedor
-                    </div>
-
-                    <input
-                        class="input_busqueda_proveedores"
-                        id="input_busqueda_proveedores"
-                        type="text"
-                        placeholder="Nombre comercial, razón social, RUT, teléfono o correo"
-                    >
-
+                    <div class="texto_busqueda_proveedores">Buscar proveedor</div>
+                    <input class="input_busqueda_proveedores" id="input_busqueda_proveedores"
+                        type="search" autocomplete="off"
+                        placeholder="Nombre, razón social, RUT, teléfono o correo">
                 </div>
 
+                <!-- filtro de estado con menú personalizado como en Productos -->
+                <div class="campo_filtro_proveedores" id="contenedor_filtro_estado_proveedores">
+                    <div class="texto_filtro_proveedores">Estado</div>
+                    <input type="hidden" id="select_estado_proveedores" value="activos">
+                    <div class="selector_proveedores_personalizado">
+                        <button class="boton_selector_proveedores" id="boton_filtro_estado_proveedores"
+                            type="button" aria-expanded="false" aria-haspopup="listbox"
+                            aria-controls="lista_filtro_estado_proveedores">
+                            <span id="texto_filtro_estado_proveedores">Activos</span>
+                            <span class="flecha_selector_proveedores" aria-hidden="true">▾</span>
+                        </button>
+                        <div class="panel_selector_proveedores" id="panel_filtro_estado_proveedores" hidden>
+                            <div class="lista_selector_proveedores" id="lista_filtro_estado_proveedores" role="listbox" aria-label="Filtrar por estado"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- filtro por información registrada -->
+                <div class="campo_filtro_proveedores" id="contenedor_filtro_informacion_proveedores">
+                    <div class="texto_filtro_proveedores">Información</div>
+                    <input type="hidden" id="select_informacion_proveedores" value="todos">
+                    <div class="selector_proveedores_personalizado">
+                        <button class="boton_selector_proveedores" id="boton_filtro_informacion_proveedores"
+                            type="button" aria-expanded="false" aria-haspopup="listbox"
+                            aria-controls="lista_filtro_informacion_proveedores">
+                            <span id="texto_filtro_informacion_proveedores">Todos</span>
+                            <span class="flecha_selector_proveedores" aria-hidden="true">▾</span>
+                        </button>
+                        <div class="panel_selector_proveedores" id="panel_filtro_informacion_proveedores" hidden>
+                            <div class="lista_selector_proveedores" id="lista_filtro_informacion_proveedores" role="listbox" aria-label="Filtrar por información"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- restablece la búsqueda y los filtros -->
+                <div class="contenedor_limpiar_filtros_proveedores">
+                    <button type="button" class="boton_limpiar_filtros_proveedores"
+                        id="boton_limpiar_filtros_proveedores">Limpiar filtros</button>
+                </div>
             </div>
 
 
@@ -248,6 +281,8 @@
                                 Entrega (días)
                             </th>
 
+                            <th class="columna_estado_proveedores">Estado</th>
+
                             <th class="columna_acciones_proveedores">
                                 Acciones
                             </th>
@@ -266,7 +301,7 @@
 
                             <td
                                 class="dato_sin_proveedores"
-                                colspan="8"
+                                colspan="9"
                             >
                                 No hay proveedores cargados para mostrar.
                             </td>
@@ -458,6 +493,25 @@
 
                 </div>
 
+            </div>
+
+
+        <!-- TITULO 10 MODAL DE MENSAJES Y CONFIRMACIONES -->
+
+            <!-- ventana de avisos, errores y confirmaciones de proveedores -->
+            <div class="contenedor_alerta_proveedores" id="contenedor_alerta_proveedores"
+                role="dialog" aria-modal="true" aria-labelledby="titulo_alerta_proveedores" hidden>
+                <div class="modal_alerta_proveedores" data-tipo="informacion">
+                    <div class="icono_alerta_proveedores" id="icono_alerta_proveedores" aria-hidden="true">i</div>
+                    <div class="titulo_alerta_proveedores" id="titulo_alerta_proveedores">Aviso</div>
+                    <div class="mensaje_alerta_proveedores" id="mensaje_alerta_proveedores"></div>
+                    <div class="acciones_alerta_proveedores">
+                        <button type="button" class="boton_cancelar_alerta_proveedores"
+                            id="boton_cancelar_alerta_proveedores" hidden>Cancelar</button>
+                        <button type="button" class="boton_aceptar_alerta_proveedores"
+                            id="boton_aceptar_alerta_proveedores">Aceptar</button>
+                    </div>
+                </div>
             </div>
 
     </div>

@@ -109,7 +109,7 @@
     .icono_total_proveedores {
         width: 46px;
         height: 46px;
-        background-color: #e4f6f6;
+        background-color: #E4F6F6;
         border-radius: 8px;
         margin-right: 14px;
         display: flex;
@@ -125,7 +125,7 @@
 
     /* clase para establecer el texto total proveedores */
     .texto_total_proveedores {
-        color: #697a83;
+        color: #0B3650;
         font-family: Arial, sans-serif;
         font-size: 12px;
         margin-bottom: 6px;
@@ -156,7 +156,7 @@
     .icono_proveedores_asociados {
         width: 46px;
         height: 46px;
-        background-color: #e4f6f6;
+        background-color: #E8F1FC;
         border-radius: 8px;
         margin-right: 14px;
         display: flex;
@@ -203,7 +203,7 @@
     .icono_productos_asociados_proveedores {
         width: 46px;
         height: 46px;
-        background-color: #e4f6f6;
+        background-color: #FFF2DC;
         border-radius: 8px;
         margin-right: 14px;
         display: flex;
@@ -250,7 +250,7 @@
     .icono_productos_sin_proveedor {
         width: 46px;
         height: 46px;
-        background-color: #e4f6f6;
+        background-color: #FBE7E7;
         border-radius: 8px;
         margin-right: 14px;
         display: flex;
@@ -1063,4 +1063,441 @@
             grid-template-columns: 1fr;
         }
 
+    }
+
+/* TITULO 11 FILTROS PERSONALIZADOS DE PROVEEDORES */
+
+    /* distribuye búsqueda, Estado, Información y botón como en Productos */
+    .contenedor_filtros_proveedores {
+        width: 100%;
+        display: grid;
+        grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr) auto;
+        gap: 16px;
+        align-items: end;
+        background-color: #ffffff;
+        border: 1px solid #dce4e8;
+        border-radius: 8px;
+        padding: 18px;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+    }
+
+    /* los campos se adaptan sin ensanchar la grilla */
+    .campo_busqueda_proveedores,
+    .campo_filtro_proveedores {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+    }
+
+    /* texto que identifica cada desplegable */
+    .texto_filtro_proveedores {
+        color: #536873;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        margin-bottom: 7px;
+    }
+
+    /* contiene el desplegable, siempre bajo su botón */
+    .selector_proveedores_personalizado {
+        width: 100%;
+        position: relative;
+        min-width: 0;
+    }
+
+    /* mismo aspecto de los filtros de Productos */
+    .boton_selector_proveedores {
+        width: 100%;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 0 10px;
+        background: #ffffff;
+        border: 1px solid #ced9de;
+        border-radius: 6px;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        text-align: left;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+    .boton_selector_proveedores > span:first-child {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    /* muestra el selector activo con borde turquesa */
+    .boton_selector_proveedores[aria-expanded="true"] {
+        border-color: #159ba3;
+    }
+
+    .flecha_selector_proveedores {
+        color: #536873;
+        flex-shrink: 0;
+        font-size: 15px;
+    }
+
+    /* panel anclado bajo el botón, no sobre él */
+    .panel_selector_proveedores {
+        position: absolute;
+        top: calc(100% + 5px);
+        left: 0;
+        width: 100%;
+        max-width: 100%;
+        padding: 8px;
+        border: 1px solid #ced9de;
+        border-radius: 7px;
+        background-color: #ffffff;
+        box-shadow: 0 8px 24px rgba(5, 31, 45, 0.15);
+        z-index: 60;
+        box-sizing: border-box;
+    }
+
+    /* el atributo hidden debe funcionar aunque haya reglas display */
+    .panel_selector_proveedores[hidden] { display: none; }
+
+    .lista_selector_proveedores {
+        max-height: 220px;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+
+    /* opciones de Estado e Información */
+    .opcion_selector_proveedores {
+        width: 100%;
+        min-height: 34px;
+        display: block;
+        padding: 8px 10px;
+        border: 0;
+        border-radius: 4px;
+        background: #ffffff;
+        color: #37434b;
+        text-align: left;
+        font: 12px Arial, sans-serif;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+    .opcion_selector_proveedores:hover,
+    .opcion_selector_proveedores:focus-visible,
+    .opcion_selector_proveedores[aria-selected="true"] {
+        background-color: #e4f6f6;
+        color: #0f858d;
+    }
+
+    .opcion_selector_proveedores[aria-selected="true"] { font-weight: bold; }
+
+    /* mantiene la altura del botón limpiar igual a los selectores */
+    .contenedor_limpiar_filtros_proveedores {
+        display: flex;
+        align-items: end;
+        justify-content: flex-end;
+    }
+
+    .boton_limpiar_filtros_proveedores {
+        min-height: 40px;
+        padding: 0 13px;
+        border: 1px solid #159ba3;
+        border-radius: 6px;
+        background-color: #ffffff;
+        color: #0f858d;
+        font: bold 12px Arial, sans-serif;
+        white-space: nowrap;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+    .boton_limpiar_filtros_proveedores:hover { background-color: #e4f6f6; }
+
+    .boton_selector_proveedores:focus-visible,
+    .boton_limpiar_filtros_proveedores:focus-visible,
+    .input_busqueda_proveedores:focus-visible {
+        outline: 2px solid #159ba3;
+        outline-offset: 2px;
+    }
+
+
+/* TITULO 12 ESTADO Y ACCIONES DE LA TABLA DE PROVEEDORES */
+
+    /* ajusta los anchos para agregar Estado sin desplazamiento horizontal */
+    .contenedor_tabla_proveedores { overflow-x: hidden; }
+    .tabla_proveedores { table-layout: fixed; min-width: 0; }
+
+    .columna_nombre_proveedores { width: 13%; }
+    .columna_razon_social_proveedores { width: 14%; }
+    .columna_rut_proveedores { width: 10%; }
+    .columna_telefono_proveedores { width: 10%; }
+    .columna_email_proveedores { width: 13%; }
+    .columna_direccion_proveedores { width: 12%; }
+    .columna_tiempo_entrega_proveedores { width: 8%; }
+    .columna_estado_proveedores { width: 9%; }
+    .columna_acciones_proveedores { width: 11%; }
+
+    .columna_estado_proveedores {
+        padding: 13px 6px;
+        text-align: center;
+        color: #667881;
+        font: 11px Arial, sans-serif;
+        box-sizing: border-box;
+        font-weight: bold;
+    }
+
+    /* limita los nombres y datos extensos sin crear scroll horizontal */
+    .dato_nombre_proveedores,
+    .dato_razon_social_proveedores,
+    .dato_rut_proveedores,
+    .dato_telefono_proveedores,
+    .dato_email_proveedores,
+    .dato_direccion_proveedores {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        overflow-wrap: anywhere;
+    }
+
+    .dato_nombre_proveedores,
+    .dato_razon_social_proveedores,
+    .dato_direccion_proveedores {
+        padding-left: 9px;
+        padding-right: 9px;
+    }
+
+    /* marca el estado del proveedor como en Productos */
+    .dato_estado_proveedores {
+        padding: 12px 5px;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .etiqueta_estado_proveedor {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 62px;
+        padding: 5px 9px;
+        border-radius: 14px;
+        font: bold 11px Arial, sans-serif;
+        box-sizing: border-box;
+    }
+
+    .etiqueta_proveedor_activo { color: #2f9164; background: #e5f5ed; }
+    .etiqueta_proveedor_inactivo { color: #6b7280; background: #edf1f3; }
+    .fila_proveedor_inactivo { background: #fafbfc; }
+
+    /* tres botones de acción con el estilo de Productos */
+    .boton_ver_proveedor,
+    .boton_editar_proveedor,
+    .boton_desactivar_proveedor,
+    .boton_activar_proveedor {
+        width: 32px;
+        height: 32px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        background-color: #ffffff;
+        border: 1px solid #dce4e8;
+        border-radius: 7px;
+        padding: 6px;
+        color: #159ba3;
+        cursor: pointer;
+        box-sizing: border-box;
+        transition: background-color .2s, border-color .2s;
+    }
+
+    .boton_ver_proveedor svg,
+    .boton_editar_proveedor svg,
+    .boton_desactivar_proveedor svg,
+    .boton_activar_proveedor svg { width: 19px; height: 19px; }
+
+    .boton_ver_proveedor:hover,
+    .boton_editar_proveedor:hover,
+    .boton_activar_proveedor:hover {
+        background: #e4f6f6;
+        border-color: #159ba3;
+    }
+
+    .boton_desactivar_proveedor { color: #d58226; border-color: #f0d7bb; }
+    .boton_desactivar_proveedor:hover { background: #fff0df; border-color: #d58226; }
+    .contenedor_acciones_proveedores { gap: 5px; }
+    .dato_acciones_proveedores { padding: 9px 5px; }
+
+    /* evita que se desborde la tabla en pantallas menores */
+    @media (max-width: 1450px) {
+        .columna_direccion_proveedores,
+        .dato_direccion_proveedores { display: none; }
+        .columna_nombre_proveedores { width: 15%; }
+        .columna_razon_social_proveedores { width: 17%; }
+        .columna_rut_proveedores { width: 12%; }
+        .columna_telefono_proveedores { width: 11%; }
+        .columna_email_proveedores { width: 14%; }
+        .columna_tiempo_entrega_proveedores { width: 9%; }
+        .columna_estado_proveedores { width: 10%; }
+        .columna_acciones_proveedores { width: 12%; }
+    }
+
+    @media (max-width: 1150px) {
+        .columna_razon_social_proveedores,
+        .dato_razon_social_proveedores,
+        .columna_email_proveedores,
+        .dato_email_proveedores { display: none; }
+        .columna_nombre_proveedores { width: 28%; }
+        .columna_rut_proveedores { width: 18%; }
+        .columna_telefono_proveedores { width: 18%; }
+        .columna_tiempo_entrega_proveedores { width: 12%; }
+        .columna_estado_proveedores { width: 12%; }
+        .columna_acciones_proveedores { width: 12%; }
+    }
+
+    @media (max-width: 690px) {
+        .columna_rut_proveedores, .dato_rut_proveedores,
+        .columna_telefono_proveedores, .dato_telefono_proveedores { display: none; }
+        .columna_nombre_proveedores { width: 40%; }
+        .columna_tiempo_entrega_proveedores { width: 18%; }
+        .columna_estado_proveedores { width: 18%; }
+        .columna_acciones_proveedores { width: 24%; }
+        .boton_ver_proveedor, .boton_editar_proveedor,
+        .boton_desactivar_proveedor, .boton_activar_proveedor { width: 29px; height: 29px; padding: 5px; }
+        .contenedor_acciones_proveedores { gap: 3px; }
+    }
+
+
+/* TITULO 13 MODAL DE MENSAJES DE PROVEEDORES */
+
+    /* ventana centrada que sustituye alert() y confirm() */
+    .contenedor_alerta_proveedores {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 18px;
+        background-color: rgba(5, 31, 45, .58);
+        z-index: 3000;
+        box-sizing: border-box;
+    }
+
+    .contenedor_alerta_proveedores[hidden] { display: none; }
+
+    .modal_alerta_proveedores {
+        --color_alerta_proveedor: #159ba3;
+        --fondo_alerta_proveedor: #e4f6f6;
+        width: 420px;
+        max-width: 100%;
+        max-height: calc(100dvh - 36px);
+        overflow-y: auto;
+        padding: 28px;
+        background: #ffffff;
+        border: 1px solid #dce4e8;
+        border-radius: 12px;
+        box-shadow: 0 18px 50px rgba(5, 31, 45, .22);
+        text-align: center;
+        font-family: Arial, sans-serif;
+        box-sizing: border-box;
+    }
+
+    .modal_alerta_proveedores[data-tipo="error"] {
+        --color_alerta_proveedor: #dc2626;
+        --fondo_alerta_proveedor: #fee8e8;
+    }
+
+    .modal_alerta_proveedores[data-tipo="advertencia"] {
+        --color_alerta_proveedor: #d58226;
+        --fondo_alerta_proveedor: #fff0df;
+    }
+
+    .icono_alerta_proveedores {
+        width: 56px;
+        height: 56px;
+        margin: 0 auto 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        color: var(--color_alerta_proveedor);
+        background-color: var(--fondo_alerta_proveedor);
+        font-size: 27px;
+        font-weight: bold;
+    }
+
+    .titulo_alerta_proveedores {
+        margin-bottom: 10px;
+        color: #0b3650;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .mensaje_alerta_proveedores {
+        color: #536873;
+        font-size: 14px;
+        line-height: 1.55;
+        white-space: pre-line;
+        overflow-wrap: anywhere;
+    }
+
+    .acciones_alerta_proveedores {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 25px;
+    }
+
+    .boton_cancelar_alerta_proveedores,
+    .boton_aceptar_alerta_proveedores {
+        min-width: 122px;
+        min-height: 42px;
+        padding: 0 17px;
+        border-radius: 6px;
+        font: bold 13px Arial, sans-serif;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+    .boton_cancelar_alerta_proveedores {
+        background: #edf1f3;
+        color: #44515a;
+        border: 1px solid #dce4e8;
+    }
+
+    .boton_aceptar_alerta_proveedores {
+        background: #159ba3;
+        color: #ffffff;
+        border: 1px solid #159ba3;
+    }
+
+    .boton_cancelar_alerta_proveedores[hidden] { display: none; }
+    .boton_cancelar_alerta_proveedores:hover { background: #dfe6e9; }
+    .boton_aceptar_alerta_proveedores:hover { background: #0f858d; }
+
+    /* el modal Ver solo muestra información; el botón Guardar queda oculto */
+    .boton_guardar_proveedor[hidden] { display: none; }
+    .formulario_proveedor input:disabled {
+        background-color: #f5f7f9;
+        color: #536873;
+        cursor: default;
+    }
+
+
+/* TITULO 14 RESPONSIVE FILTROS PROVEEDORES */
+
+    @media (max-width: 1100px) {
+        .contenedor_filtros_proveedores { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .contenedor_limpiar_filtros_proveedores { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 600px) {
+        .contenedor_filtros_proveedores { grid-template-columns: 1fr; }
+        .contenedor_limpiar_filtros_proveedores { grid-column: auto; }
+        .boton_limpiar_filtros_proveedores { width: 100%; }
+        .formulario_proveedor { max-width: calc(100% - 24px); padding: 18px; }
+        .contenedor_acciones_formulario_proveedor { flex-direction: column; }
+        .boton_cancelar_proveedor, .boton_guardar_proveedor {
+            width: 100%; justify-content: center;
+        }
     }

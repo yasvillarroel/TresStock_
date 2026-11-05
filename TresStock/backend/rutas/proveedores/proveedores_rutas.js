@@ -45,11 +45,16 @@ router.put(
 );
 
 
-// ruta para eliminar un proveedor
-router.delete(
-    '/:id',
-    proveedoresControlador.eliminarProveedor
-);
+// cambia el estado del proveedor sin borrar sus asociaciones
+router.patch('/:id/estado', proveedoresControlador.cambiarEstadoProveedor);
+
+// evita que clientes antiguos puedan eliminar proveedores definitivamente
+router.delete('/:id', (req, res) => {
+    res.setHeader('Allow', 'GET, PUT, PATCH');
+    return res.status(405).json({
+        mensaje: 'No se permite eliminar proveedores. Utiliza activar o desactivar.'
+    });
+});
 
 
 // exporta el router

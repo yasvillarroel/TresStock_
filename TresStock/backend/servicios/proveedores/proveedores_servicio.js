@@ -33,7 +33,8 @@ const crearProveedor = async (
             telefono,
             email,
             direccion,
-            tiempo_entrega_dias`,
+            tiempo_entrega_dias,
+            activo`,
         [
             nombre_comercial,
             razon_social || null,
@@ -61,7 +62,8 @@ const obtenerProveedores = async () => {
             telefono,
             email,
             direccion,
-            tiempo_entrega_dias
+            tiempo_entrega_dias,
+            activo
         FROM base_datos.proveedores
         ORDER BY nombre_comercial`
     );
@@ -82,7 +84,8 @@ const obtenerProveedor = async (id) => {
             telefono,
             email,
             direccion,
-            tiempo_entrega_dias
+            tiempo_entrega_dias,
+            activo
         FROM base_datos.proveedores
         WHERE id_proveedor = $1`,
         [id]
@@ -123,7 +126,8 @@ const actualizarProveedor = async (
             telefono,
             email,
             direccion,
-            tiempo_entrega_dias`,
+            tiempo_entrega_dias,
+            activo`,
         [
             nombre_comercial,
             razon_social || null,
@@ -140,22 +144,18 @@ const actualizarProveedor = async (
 };
 
 
-// FUNCION 5 ELIMINAR PROVEEDOR
-const eliminarProveedor = async (id) => {
+// FUNCION 5 CAMBIAR ESTADO DEL PROVEEDOR
+// mantiene intactas las asociaciones con productos y el historial del sistema
+const cambiarEstadoProveedor = async (id, activo) => {
 
     const resultado = await pool.query(
-        `DELETE FROM base_datos.proveedores
-        WHERE id_proveedor = $1
-        RETURNING
-            id_proveedor,
-            nombre_comercial,
-            razon_social,
-            rut,
-            telefono,
-            email,
-            direccion,
-            tiempo_entrega_dias`,
-        [id]
+        `UPDATE base_datos.proveedores
+         SET activo = $1
+         WHERE id_proveedor = $2
+         RETURNING
+             id_proveedor, nombre_comercial, razon_social, rut,
+             telefono, email, direccion, tiempo_entrega_dias, activo`,
+        [activo, id]
     );
 
     return resultado.rows[0];
@@ -249,6 +249,6 @@ module.exports = {
     obtenerProveedores,
     obtenerProveedor,
     actualizarProveedor,
-    eliminarProveedor,
+    cambiarEstadoProveedor,
     obtenerResumenProveedores
 };
