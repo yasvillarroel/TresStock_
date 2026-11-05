@@ -674,6 +674,18 @@
         estado
     ) {
 
+        if (estado === 'STOCK NEGATIVO') {
+
+            elemento.className =
+                'estado_stock_negativo_inventario';
+
+            elemento.textContent =
+                'Stock negativo';
+
+            return;
+
+        }
+
         if (estado === 'SIN STOCK') {
 
             elemento.className =

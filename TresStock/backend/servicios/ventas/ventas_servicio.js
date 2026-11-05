@@ -869,6 +869,39 @@ const importarVentas = async (archivo) => {
             detallesInsertar
         );
 
+        const idsVentasImportadas = [...mapaIdsVentas.values()];
+
+        if (idsVentasImportadas.length > 0) {
+
+            await cliente.query(
+                `
+                INSERT INTO base_datos.inventario
+                    (codigo, stock_actual, stock_minimo)
+                SELECT DISTINCT dv.codigo, 0, 0
+                FROM base_datos.detalle_venta dv
+                WHERE dv.id_venta = ANY($1::INTEGER[])
+                ON CONFLICT (codigo) DO NOTHING
+                `,
+                [idsVentasImportadas]
+            );
+
+            await cliente.query(
+                `
+                WITH cantidades_vendidas AS (
+                    SELECT codigo, SUM(cantidad) AS cantidad
+                    FROM base_datos.detalle_venta
+                    WHERE id_venta = ANY($1::INTEGER[])
+                    GROUP BY codigo
+                )
+                UPDATE base_datos.inventario AS i
+                SET stock_actual = i.stock_actual - cantidades_vendidas.cantidad
+                FROM cantidades_vendidas
+                WHERE i.codigo = cantidades_vendidas.codigo
+                `,
+                [idsVentasImportadas]
+            );
+        }
+
         await cliente.query('COMMIT');
 
     } catch (error) {

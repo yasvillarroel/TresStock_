@@ -44,6 +44,9 @@ const obtenerInventario = async () => {
                 AS stock_minimo_calculable,
 
             CASE
+                WHEN COALESCE(i.stock_actual, 0) < 0
+                    THEN 'STOCK NEGATIVO'
+
                 WHEN COALESCE(i.stock_actual, 0) = 0
                     THEN 'SIN STOCK'
 
@@ -80,6 +83,10 @@ const obtenerResumenInventario = async () => {
         `SELECT
 
             COUNT(*) AS total_productos,
+
+            COUNT(*) FILTER (
+                WHERE COALESCE(i.stock_actual, 0) < 0
+            ) AS stock_negativo,
 
             COUNT(*) FILTER (
                 WHERE

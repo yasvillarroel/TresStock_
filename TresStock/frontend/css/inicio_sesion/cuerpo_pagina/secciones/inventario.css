@@ -703,6 +703,20 @@
         font-weight: bold;
     }
 
+    /* clase para señalar existencias negativas como error de inventario */
+    .estado_stock_negativo_inventario {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px 10px;
+        background-color: #fde8e8;
+        color: #b42318;
+        border-radius: 15px;
+        font-family: Arial, sans-serif;
+        font-size: 11px;
+        font-weight: bold;
+    }
+
 
     /* clase para establecer fila sin productos */
     .fila_sin_inventario {

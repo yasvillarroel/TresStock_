@@ -132,16 +132,13 @@ CREATE TABLE detalle_venta (
 
 CREATE TABLE inventario (
     codigo          VARCHAR(50) PRIMARY KEY,
-    stock_actual    INTEGER NOT NULL DEFAULT 0,
+    stock_actual    NUMERIC(12,4) NOT NULL DEFAULT 0,
     stock_minimo    INTEGER NOT NULL DEFAULT 0,
 
     CONSTRAINT fk_inventario_producto
         FOREIGN KEY (codigo)
         REFERENCES productos(codigo)
         ON DELETE CASCADE,
-
-    CONSTRAINT chk_stock_actual
-        CHECK (stock_actual >= 0),
 
     CONSTRAINT chk_stock_minimo
         CHECK (stock_minimo >= 0)
