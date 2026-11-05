@@ -139,7 +139,7 @@
 
         /* clase para establecer el valor total usuarios */
         .valor_total_usuarios {
-            color: #0b3650;
+            color: #0B3650;
             font-family: Arial, sans-serif;
             font-size: 23px;
             font-weight: bold;
@@ -195,7 +195,7 @@
 
         /* clase para establecer el valor usuarios activos */
         .valor_usuarios_activos {
-            color: #2f9164;
+            color: #288447;
             font-family: Arial, sans-serif;
             font-size: 23px;
             font-weight: bold;
@@ -251,7 +251,7 @@
 
         /* clase para establecer el valor usuarios inactivos */
         .valor_usuarios_inactivos {
-            color: #c75b5b;
+            color: #D94B4B;
             font-family: Arial, sans-serif;
             font-size: 23px;
             font-weight: bold;
@@ -307,7 +307,7 @@
 
         /* clase para establecer el valor administradores */
         .valor_administradores_usuarios {
-            color: #0b3650;
+            color: #3869A8;
             font-family: Arial, sans-serif;
             font-size: 23px;
             font-weight: bold;

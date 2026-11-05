@@ -99,7 +99,7 @@
 
     /* clase para establecer el valor total productos */
     .valor_total_productos_inventario {
-        color: #0b3650;
+        color: #0B3650;
         font-family: Arial, sans-serif;
         font-size: 23px;
         font-weight: bold;
@@ -157,7 +157,7 @@
 
     /* clase para establecer el valor stock bajo */
     .valor_stock_bajo_inventario {
-        color: #d58226;
+        color: #D58226;
         font-family: Arial, sans-serif;
         font-size: 23px;
         font-weight: bold;
@@ -214,7 +214,7 @@
 
     /* clase para establecer el valor sin stock */
     .valor_sin_stock_inventario {
-        color: #d94b4b;
+        color: #D94B4B;
         font-family: Arial, sans-serif;
         font-size: 23px;
         font-weight: bold;
@@ -271,7 +271,7 @@
 
     /* clase para establecer el valor próximos a vencer */
     .valor_proximos_vencer_inventario {
-        color: #0b3650;
+        color: #3869A8;
         font-family: Arial, sans-serif;
         font-size: 23px;
         font-weight: bold;

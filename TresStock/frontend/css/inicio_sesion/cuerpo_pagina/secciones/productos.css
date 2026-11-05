@@ -182,7 +182,7 @@
 
         /* clase para establecer el valor total productos */
         .valor_total_productos {
-            color: #0b3650;
+            color: #0B3650;
             font-family: Arial, sans-serif;
             font-size: 23px;
             font-weight: bold;
@@ -238,7 +238,7 @@
 
         /* clase para establecer el valor familias */
         .valor_familias_productos {
-            color: #0b3650;
+            color: #3869A8;
             font-family: Arial, sans-serif;
             font-size: 23px;
             font-weight: bold;
@@ -294,7 +294,7 @@
 
         /* clase para establecer el valor proveedores */
         .valor_proveedores_productos {
-            color: #0b3650;
+            color: #5364A5;
             font-family: Arial, sans-serif;
             font-size: 23px;
             font-weight: bold;
@@ -350,7 +350,7 @@
 
         /* clase para establecer el valor stock bajo */
         .valor_stock_bajo_productos {
-            color: #d58226;
+            color: #D58226;
             font-family: Arial, sans-serif;
             font-size: 23px;
             font-weight: bold;

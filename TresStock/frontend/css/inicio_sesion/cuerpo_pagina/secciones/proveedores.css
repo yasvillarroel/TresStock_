@@ -133,7 +133,7 @@
 
     /* clase para establecer el valor total proveedores */
     .valor_total_proveedores {
-        color: #0b3650;
+        color: #0B3650;
         font-family: Arial, sans-serif;
         font-size: 23px;
         font-weight: bold;
@@ -180,7 +180,7 @@
 
     /* clase para establecer el valor proveedores asociados */
     .valor_proveedores_asociados {
-        color: #0b3650;
+        color: #3869A8;
         font-family: Arial, sans-serif;
         font-size: 23px;
         font-weight: bold;
@@ -227,7 +227,7 @@
 
     /* clase para establecer el valor productos asociados */
     .valor_productos_asociados_proveedores {
-        color: #0b3650;
+        color: #D58226;
         font-family: Arial, sans-serif;
         font-size: 23px;
         font-weight: bold;
@@ -274,7 +274,7 @@
 
     /* clase para establecer el valor productos sin proveedor */
     .valor_productos_sin_proveedor {
-        color: #d58226;
+        color: #D94B4B;
         font-family: Arial, sans-serif;
         font-size: 23px;
         font-weight: bold;
