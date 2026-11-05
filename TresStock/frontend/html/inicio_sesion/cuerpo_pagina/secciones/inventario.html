@@ -251,6 +251,13 @@
 
                         <option
                             class="opcion_estado_inventario"
+                            value="STOCK NEGATIVO"
+                        >
+                            Stock negativo
+                        </option>
+
+                        <option
+                            class="opcion_estado_inventario"
                             value="PENDIENTE"
                         >
                             Pendiente
@@ -258,6 +265,12 @@
 
                     </select>
 
+                </div>
+
+                <div class="contenedor_limpiar_filtros_inventario">
+                    <button class="boton_limpiar_filtros_inventario" id="limpiar_filtros_stock_inventario" type="button" title="Restablecer búsqueda, familia y estado">
+                        Limpiar filtros
+                    </button>
                 </div>
 
             </div>
@@ -384,6 +397,12 @@
                     </select>
                 </div>
 
+                <div class="contenedor_limpiar_filtros_inventario">
+                    <button class="boton_limpiar_filtros_inventario" id="limpiar_filtros_movimientos_inventario" type="button" title="Restablecer búsqueda, fechas y orden">
+                        Limpiar filtros
+                    </button>
+                </div>
+
             </div>
 
             <!-- tabla del historial de inventario -->
@@ -412,7 +431,7 @@
                     <div class="informacion_paginacion_inventario" id="informacion_movimientos_inventario">Mostrando 0 movimientos</div>
                     <div class="controles_paginacion_inventario">
                         <button class="boton_pagina_anterior_inventario" id="anterior_movimientos_inventario" type="button">‹</button>
-                        <span class="pagina_movimientos_inventario" id="pagina_movimientos_inventario">Página 1 de 1</span>
+                        <div class="numeros_paginas_inventario" id="numeros_paginas_movimientos_inventario"></div>
                         <button class="boton_pagina_siguiente_inventario" id="siguiente_movimientos_inventario" type="button">›</button>
                     </div>
                 </div>

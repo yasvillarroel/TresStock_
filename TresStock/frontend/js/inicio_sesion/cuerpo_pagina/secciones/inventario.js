@@ -302,6 +302,21 @@
 
         }
 
+        const botonLimpiar = document.getElementById(
+            'limpiar_filtros_stock_inventario'
+        );
+
+        if (botonLimpiar) {
+            botonLimpiar.addEventListener('click', function() {
+                if (inputBusqueda) inputBusqueda.value = '';
+                if (selectFamilia) selectFamilia.value = '';
+                if (selectEstado) selectEstado.value = '';
+
+                paginaActualInventario = 1;
+                filtrarInventario();
+            });
+        }
+
     }
 
 
@@ -1047,6 +1062,7 @@ async function recalcularStockMinimoInventario() {
         const desde = document.getElementById('desde_movimientos_inventario');
         const hasta = document.getElementById('hasta_movimientos_inventario');
         const orden = document.getElementById('orden_movimientos_inventario');
+        const botonLimpiar = document.getElementById('limpiar_filtros_movimientos_inventario');
 
         if (busqueda) {
             busqueda.addEventListener('input', function() {
@@ -1066,6 +1082,19 @@ async function recalcularStockMinimoInventario() {
                 });
             }
         });
+
+        if (botonLimpiar) {
+            botonLimpiar.addEventListener('click', function() {
+                clearTimeout(temporizadorBusquedaMovimientosInventario);
+                if (busqueda) busqueda.value = '';
+                if (desde) desde.value = '';
+                if (hasta) hasta.value = '';
+                if (orden) orden.value = 'recientes';
+
+                paginaActualMovimientosInventario = 1;
+                cargarMovimientosInventario();
+            });
+        }
 
         document.getElementById('anterior_movimientos_inventario')
             ?.addEventListener('click', function() {
@@ -1148,9 +1177,12 @@ async function recalcularStockMinimoInventario() {
 
         const cuerpo = document.getElementById('cuerpo_movimientos_inventario');
         const informacion = document.getElementById('informacion_movimientos_inventario');
-        const pagina = document.getElementById('pagina_movimientos_inventario');
         const anterior = document.getElementById('anterior_movimientos_inventario');
         const siguiente = document.getElementById('siguiente_movimientos_inventario');
+        const numeros = document.getElementById('numeros_paginas_movimientos_inventario');
+        const controles = document.querySelector(
+            '#paginacion_movimientos_inventario .controles_paginacion_inventario'
+        );
 
         if (!cuerpo) return;
 
@@ -1199,11 +1231,78 @@ async function recalcularStockMinimoInventario() {
         if (informacion) {
             informacion.textContent = `Mostrando ${inicio} a ${fin} de ${total} movimientos`;
         }
-        if (pagina) {
-            pagina.textContent = `Página ${paginaActualMovimientosInventario} de ${totalPaginasMovimientosInventario}`;
-        }
         if (anterior) anterior.disabled = paginaActualMovimientosInventario <= 1;
         if (siguiente) siguiente.disabled = paginaActualMovimientosInventario >= totalPaginasMovimientosInventario;
+        if (controles) {
+            controles.style.display = totalPaginasMovimientosInventario <= 1
+                ? 'none'
+                : 'flex';
+        }
+
+        if (numeros) {
+            numeros.innerHTML = '';
+
+            const paginasMostrar = [];
+
+            if (totalPaginasMovimientosInventario <= 7) {
+                for (let numeroPagina = 1; numeroPagina <= totalPaginasMovimientosInventario; numeroPagina++) {
+                    paginasMostrar.push(numeroPagina);
+                }
+            } else {
+                paginasMostrar.push(1);
+
+                if (paginaActualMovimientosInventario > 4) {
+                    paginasMostrar.push('...');
+                }
+
+                const inicioPaginas = Math.max(2, paginaActualMovimientosInventario - 2);
+                const finPaginas = Math.min(totalPaginasMovimientosInventario - 1, paginaActualMovimientosInventario + 2);
+
+                for (let numeroPagina = inicioPaginas; numeroPagina <= finPaginas; numeroPagina++) {
+                    paginasMostrar.push(numeroPagina);
+                }
+
+                if (paginaActualMovimientosInventario < totalPaginasMovimientosInventario - 3) {
+                    paginasMostrar.push('...');
+                }
+
+                paginasMostrar.push(totalPaginasMovimientosInventario);
+            }
+
+            paginasMostrar.forEach(function(numeroPagina) {
+                if (numeroPagina === '...') {
+                    const puntos = document.createElement('span');
+                    puntos.className = 'puntos_paginacion_inventario';
+                    puntos.setAttribute('aria-hidden', 'true');
+
+                    for (let indice = 0; indice < 3; indice++) {
+                        const punto = document.createElement('div');
+                        punto.className = 'punto_paginacion_inventario';
+                        puntos.appendChild(punto);
+                    }
+
+                    numeros.appendChild(puntos);
+                    return;
+                }
+
+                const boton = document.createElement('button');
+                boton.type = 'button';
+                boton.className = 'boton_numero_pagina_inventario';
+                boton.textContent = numeroPagina;
+
+                if (numeroPagina === paginaActualMovimientosInventario) {
+                    boton.classList.add('pagina_actual_inventario');
+                    boton.setAttribute('aria-current', 'page');
+                }
+
+                boton.addEventListener('click', function() {
+                    paginaActualMovimientosInventario = numeroPagina;
+                    cargarMovimientosInventario();
+                });
+
+                numeros.appendChild(boton);
+            });
+        }
     }
 
     // función para inicializar la vista de inventario

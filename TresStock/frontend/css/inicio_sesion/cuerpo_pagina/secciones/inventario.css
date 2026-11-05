@@ -378,7 +378,7 @@
     .contenedor_filtros_inventario {
         width: 100%;
         display: grid;
-        grid-template-columns: 2fr 1fr 1fr;
+        grid-template-columns: 2fr 1fr 1fr auto;
         gap: 16px;
         background-color: #ffffff;
         border: 1px solid #dce4e8;
@@ -389,7 +389,37 @@
     }
 
     .filtros_movimientos_inventario {
-        grid-template-columns: 2fr 1fr 1fr 1.3fr;
+        grid-template-columns: minmax(220px, 2fr) repeat(3, minmax(125px, 1fr)) auto;
+    }
+
+    .contenedor_limpiar_filtros_inventario {
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+    }
+
+    .boton_limpiar_filtros_inventario {
+        min-height: 40px;
+        padding: 0 13px;
+        border: 1px solid #159ba3;
+        border-radius: 6px;
+        background-color: #ffffff;
+        color: #0f858d;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        white-space: nowrap;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    .boton_limpiar_filtros_inventario:hover {
+        background-color: #e4f6f6;
+    }
+
+    .boton_limpiar_filtros_inventario:focus-visible {
+        outline: 2px solid #159ba3;
+        outline-offset: 2px;
     }
 
     #filtros_movimientos_inventario[hidden],
@@ -987,6 +1017,10 @@
             grid-column: 1 / 3;
         }
 
+        .contenedor_limpiar_filtros_inventario {
+            grid-column: 1 / -1;
+        }
+
     }
 
     @media (max-width: 700px) {
@@ -1009,6 +1043,11 @@
 
         .campo_busqueda_inventario {
             grid-column: auto;
+        }
+
+        .contenedor_limpiar_filtros_inventario,
+        .boton_limpiar_filtros_inventario {
+            width: 100%;
         }
 
         .contenedor_pestanas_inventario {
