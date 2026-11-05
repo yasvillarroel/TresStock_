@@ -485,7 +485,7 @@ const detectarDelimitador = (texto) => {
 
 // FUNCION 11 IMPORTAR VENTAS
 
-const importarVentas = async (archivo) => {
+const importarVentas = async (archivo, correoUsuario) => {
 
     if (!archivo) {
         throw new Error('No se ha seleccionado ningún archivo');
@@ -832,6 +832,7 @@ const importarVentas = async (archivo) => {
     const cliente = await pool.connect();
 
     let detallesImportados = 0;
+    let movimientosInventarioRegistrados = 0;
     let mapaIdsVentas = new Map();
 
     try {
@@ -900,6 +901,27 @@ const importarVentas = async (archivo) => {
                 `,
                 [idsVentasImportadas]
             );
+
+            const resultadoMovimientos = await cliente.query(
+                `
+                INSERT INTO base_datos.movimientos_inventario
+                    (codigo, tipo, cantidad, motivo, correo_usuario)
+                SELECT
+                    dv.codigo,
+                    CASE WHEN dv.cantidad > 0 THEN 'SALIDA' ELSE 'ENTRADA' END,
+                    ABS(dv.cantidad),
+                    'Venta importada, boleta ' || v.boleta::TEXT,
+                    $2
+                FROM base_datos.detalle_venta dv
+                INNER JOIN base_datos.ventas v
+                    ON v.id_venta = dv.id_venta
+                WHERE dv.id_venta = ANY($1::INTEGER[])
+                    AND dv.cantidad <> 0
+                `,
+                [idsVentasImportadas, correoUsuario || null]
+            );
+
+            movimientosInventarioRegistrados = resultadoMovimientos.rowCount;
         }
 
         await cliente.query('COMMIT');
@@ -924,6 +946,7 @@ const importarVentas = async (archivo) => {
             total_filas: filas.length,
             boletas_importadas: mapaIdsVentas.size,
             detalles_importados: detallesImportados,
+            movimientos_inventario_registrados: movimientosInventarioRegistrados,
             boletas_existentes: cantidadBoletasExistentes,
             detalles_sin_producto: detallesSinProducto,
             filas_ignoradas: filasIgnoradas,

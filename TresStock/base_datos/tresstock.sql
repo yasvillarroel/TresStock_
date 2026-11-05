@@ -182,9 +182,10 @@ CREATE TABLE movimientos_inventario (
     id_movimiento   SERIAL PRIMARY KEY,
     codigo          VARCHAR(50) NOT NULL,
     tipo            VARCHAR(20) NOT NULL,
-    cantidad        INTEGER NOT NULL,
+    cantidad        NUMERIC(12,4) NOT NULL,
     fecha_hora      TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     motivo          VARCHAR(255),
+    correo_usuario  VARCHAR(150),
 
     CONSTRAINT fk_movimiento_producto
         FOREIGN KEY (codigo)
@@ -415,52 +416,7 @@ CREATE TABLE lotes_vencimiento (
 
 
 -- ============================================================
--- 12. ÍNDICES
--- Ayudan a acelerar consultas frecuentes.
--- ============================================================
-
-CREATE INDEX idx_ventas_fecha
-    ON ventas(fecha_hora);
-
-CREATE INDEX idx_detalle_codigo
-    ON detalle_venta(codigo);
-
-CREATE INDEX idx_detalle_id_venta
-    ON detalle_venta(id_venta);
-
-CREATE INDEX idx_movimientos_codigo
-    ON movimientos_inventario(codigo);
-
-CREATE INDEX idx_movimientos_fecha
-    ON movimientos_inventario(fecha_hora);
-
-CREATE INDEX idx_predicciones_codigo
-    ON predicciones(codigo);
-
-CREATE INDEX idx_predicciones_fecha_objetivo
-    ON predicciones(fecha_objetivo);
-
-CREATE INDEX idx_recomendaciones_codigo
-    ON recomendaciones(codigo);
-
-CREATE INDEX idx_recomendaciones_fecha
-    ON recomendaciones(fecha);
-	
-CREATE INDEX idx_lotes_codigo
-    ON lotes_vencimiento(codigo);
-
-CREATE INDEX idx_lotes_fecha_vencimiento
-    ON lotes_vencimiento(fecha_vencimiento);
-
-CREATE INDEX idx_pp_proveedor
-    ON producto_proveedor(id_proveedor);
-
-CREATE INDEX idx_usuarios_email
-    ON usuarios(email);
-
-
--- ============================================================
--- 13. REGISTROS PENDIENTES DE VERIFICACIÓN POR CORREO
+-- 12. REGISTROS PENDIENTES DE VERIFICACIÓN POR CORREO
 -- ============================================================
 
 CREATE TABLE base_datos.registros_pendientes (
@@ -492,7 +448,7 @@ CREATE TABLE base_datos.reenvios_registro_ip (
 );
 
 -- ============================================================
--- 14. RECUPERACION DE CONTRASENA
+-- 13. RECUPERACION DE CONTRASENA
 -- ============================================================
 
 CREATE TABLE base_datos.recuperaciones_contrasena (
@@ -514,5 +470,59 @@ CREATE TABLE base_datos.limites_recuperacion_ip (
     actualizado_en TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT chk_limites_recuperacion_ip CHECK (fallos_codigo >= 0 AND reenvios >= 0)
 );
+
+-- ============================================================
+-- 14. ÍNDICES
+-- Ayudan a acelerar búsquedas por código, fechas y relaciones.
+-- ============================================================
+
+CREATE INDEX idx_productos_cod_barra
+    ON productos(cod_barra);
+
+CREATE INDEX idx_codigos_asociados_producto
+    ON codigos_asociados(codigo_producto);
+
+CREATE INDEX idx_ventas_fecha
+    ON ventas(fecha_hora);
+
+CREATE INDEX idx_detalle_codigo
+    ON detalle_venta(codigo);
+
+CREATE INDEX idx_detalle_id_venta
+    ON detalle_venta(id_venta);
+
+CREATE INDEX idx_movimientos_fecha
+    ON movimientos_inventario(fecha_hora DESC);
+
+CREATE INDEX idx_movimientos_codigo_fecha
+    ON movimientos_inventario(codigo, fecha_hora DESC);
+
+CREATE INDEX idx_movimientos_correo_usuario
+    ON movimientos_inventario(correo_usuario)
+    WHERE correo_usuario IS NOT NULL;
+
+CREATE INDEX idx_predicciones_codigo_fecha_objetivo
+    ON predicciones(codigo, fecha_objetivo);
+
+CREATE INDEX idx_predicciones_fecha_objetivo
+    ON predicciones(fecha_objetivo);
+
+CREATE INDEX idx_recomendaciones_codigo_fecha
+    ON recomendaciones(codigo, fecha DESC);
+
+CREATE INDEX idx_recomendaciones_fecha
+    ON recomendaciones(fecha DESC);
+
+CREATE INDEX idx_lotes_codigo_fecha_vencimiento
+    ON lotes_vencimiento(codigo, fecha_vencimiento);
+
+CREATE INDEX idx_lotes_fecha_vencimiento
+    ON lotes_vencimiento(fecha_vencimiento);
+
+CREATE INDEX idx_pp_proveedor
+    ON producto_proveedor(id_proveedor);
+
+CREATE INDEX idx_usuarios_id_rol
+    ON usuarios(id_rol);
 
 -- FIN DEL SCHEMA

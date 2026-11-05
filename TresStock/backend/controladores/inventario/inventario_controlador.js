@@ -189,7 +189,8 @@ const ajustarInventario = async (req, res) => {
             await inventarioServicio.ajustarInventario(
                 codigo.trim(),
                 cantidad,
-                operacion
+                operacion,
+                req.usuario?.email
             );
 
         // envia el resultado del ajuste

@@ -277,7 +277,8 @@ const importarProductos = async (req, res) => {
 
         const resultado = await productosServicio.importarProductos(
             req.file,
-            true
+            true,
+            req.usuario?.email
         );
 
         res.json(resultado);

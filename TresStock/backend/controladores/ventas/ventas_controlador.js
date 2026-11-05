@@ -236,7 +236,8 @@ const importarVentas =
 
             const resultado =
                 await ventasServicio.importarVentas(
-                    req.file
+                    req.file,
+                    req.usuario?.email
                 );
 
 

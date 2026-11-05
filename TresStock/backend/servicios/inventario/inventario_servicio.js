@@ -275,7 +275,8 @@ const recalcularStockMinimo = async () => {
 const ajustarInventario = async (
     codigo,
     cantidad,
-    operacion
+    operacion,
+    correoUsuario
 ) => {
 
     // valida la operacion solicitada
@@ -393,6 +394,20 @@ const ajustarInventario = async (
             [
                 stockNuevo,
                 codigo
+            ]
+        );
+
+        // registra el ajuste en el historial dentro de la misma transaccion
+        await cliente.query(
+            `INSERT INTO base_datos.movimientos_inventario
+                (codigo, tipo, cantidad, motivo, correo_usuario)
+            VALUES ($1, $2, $3, $4, $5)`,
+            [
+                codigo,
+                operacion === 'sumar' ? 'ENTRADA' : 'SALIDA',
+                cantidad,
+                'Ajuste manual de inventario',
+                correoUsuario || null
             ]
         );
 

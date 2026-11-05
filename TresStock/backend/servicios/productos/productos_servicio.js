@@ -267,7 +267,7 @@ const cambiarEstadoProducto = async (id, activo) => {
 
 
 // FUNCION 6 IMPORTAR PRODUCTOS
-const importarProductos = async (archivo, confirmarReemplazoStock = false) => {
+const importarProductos = async (archivo, confirmarReemplazoStock = false, correoUsuario) => {
 
     // protege los ajustes de inventario ante reimportaciones accidentales
     if (!confirmarReemplazoStock) {
@@ -704,6 +704,25 @@ const importarProductos = async (archivo, confirmarReemplazoStock = false) => {
 
             // registra existencias de productos nuevos y actualiza los existentes
             // nunca reemplaza stock_minimo: este se calcula en Inventario
+            await cliente.query(
+                `INSERT INTO base_datos.movimientos_inventario
+                    (codigo, tipo, cantidad, motivo, correo_usuario)
+                 SELECT
+                    datos.codigo,
+                    'AJUSTE',
+                    ABS(datos."stockActual" - inventario.stock_actual),
+                    'Ajuste por importacion de productos',
+                    $2
+                 FROM jsonb_to_recordset($1::jsonb) AS datos(
+                    codigo TEXT,
+                    "stockActual" INTEGER
+                 )
+                 INNER JOIN base_datos.inventario AS inventario
+                    ON inventario.codigo = datos.codigo
+                 WHERE datos."stockActual" <> inventario.stock_actual`,
+                [JSON.stringify(lote), correoUsuario || null]
+            );
+
             const resultadoStock = await cliente.query(
                 `INSERT INTO base_datos.inventario (
                     codigo,
