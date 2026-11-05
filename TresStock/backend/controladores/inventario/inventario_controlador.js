@@ -136,7 +136,30 @@ const recalcularStockMinimo = async (req, res) => {
     }
 
 };
-// FUNCION 5 AJUSTAR INVENTARIO
+// FUNCION 5 OBTENER HISTORIAL DE MOVIMIENTOS
+const obtenerMovimientosInventario = async (req, res) => {
+
+    try {
+        const resultado = await inventarioServicio.obtenerMovimientosInventario({
+            tipo: req.query.tipo,
+            buscar: req.query.buscar,
+            desde: req.query.desde,
+            hasta: req.query.hasta,
+            orden: req.query.orden,
+            pagina: req.query.pagina
+        });
+
+        return res.json(resultado);
+    } catch (error) {
+        console.error('Error al obtener movimientos de inventario:', error);
+        return res.status(500).json({
+            mensaje: 'No se pudo obtener el historial de inventario'
+        });
+    }
+};
+
+
+// FUNCION 6 AJUSTAR INVENTARIO
 const ajustarInventario = async (req, res) => {
 
     try {
@@ -241,5 +264,6 @@ module.exports = {
     obtenerResumenInventario,
     obtenerFamilias,
     recalcularStockMinimo,
+    obtenerMovimientosInventario,
     ajustarInventario
 };

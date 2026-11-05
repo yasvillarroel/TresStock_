@@ -271,7 +271,102 @@ const recalcularStockMinimo = async () => {
 };
 
 
-// FUNCION 5 AJUSTAR INVENTARIO
+// FUNCION 5 OBTENER HISTORIAL DE MOVIMIENTOS
+const obtenerMovimientosInventario = async (filtros = {}) => {
+
+    const paginaSolicitada = Number.parseInt(filtros.pagina, 10);
+    const pagina = Number.isSafeInteger(paginaSolicitada) && paginaSolicitada > 0
+        ? paginaSolicitada
+        : 1;
+    const limite = 25;
+    const valores = [];
+    const condiciones = [];
+
+    if (['ENTRADA', 'SALIDA', 'AJUSTE'].includes(filtros.tipo)) {
+        valores.push(filtros.tipo);
+        condiciones.push(`m.tipo = $${valores.length}`);
+    }
+
+    const busqueda = String(filtros.buscar || '').trim();
+
+    if (busqueda) {
+        valores.push(`%${busqueda.slice(0, 150)}%`);
+        condiciones.push(`(
+            p.descripcion ILIKE $${valores.length}
+            OR p.codigo ILIKE $${valores.length}
+            OR p.cod_barra ILIKE $${valores.length}
+            OR m.correo_usuario ILIKE $${valores.length}
+        )`);
+    }
+
+    if (filtros.desde && /^\d{4}-\d{2}-\d{2}$/.test(filtros.desde)) {
+        valores.push(filtros.desde);
+        condiciones.push(`m.fecha_hora >= $${valores.length}::DATE`);
+    }
+
+    if (filtros.hasta && /^\d{4}-\d{2}-\d{2}$/.test(filtros.hasta)) {
+        valores.push(filtros.hasta);
+        condiciones.push(`m.fecha_hora < ($${valores.length}::DATE + INTERVAL '1 day')`);
+    }
+
+    const where = condiciones.length > 0
+        ? `WHERE ${condiciones.join(' AND ')}`
+        : '';
+
+    const ordenes = {
+        recientes: 'm.fecha_hora DESC, m.id_movimiento DESC',
+        antiguos: 'm.fecha_hora ASC, m.id_movimiento ASC',
+        cantidad_mayor: 'm.cantidad DESC, m.fecha_hora DESC',
+        cantidad_menor: 'm.cantidad ASC, m.fecha_hora DESC'
+    };
+    const orden = ordenes[filtros.orden] || ordenes.recientes;
+
+    const resultadoTotal = await pool.query(
+        `SELECT COUNT(*) AS total
+         FROM base_datos.movimientos_inventario m
+         INNER JOIN base_datos.productos p ON p.codigo = m.codigo
+         ${where}`,
+        valores
+    );
+
+    const total = Number(resultadoTotal.rows[0].total);
+    const totalPaginas = Math.max(1, Math.ceil(total / limite));
+    const paginaActual = Math.min(pagina, totalPaginas);
+    const offset = (paginaActual - 1) * limite;
+    const valoresConsulta = [...valores, limite, offset];
+
+    const resultado = await pool.query(
+        `SELECT
+            m.id_movimiento,
+            m.codigo,
+            p.descripcion AS producto,
+            m.tipo,
+            m.cantidad,
+            m.fecha_hora,
+            m.motivo,
+            m.correo_usuario
+         FROM base_datos.movimientos_inventario m
+         INNER JOIN base_datos.productos p ON p.codigo = m.codigo
+         ${where}
+         ORDER BY ${orden}
+         LIMIT $${valores.length + 1}
+         OFFSET $${valores.length + 2}`,
+        valoresConsulta
+    );
+
+    return {
+        movimientos: resultado.rows,
+        paginacion: {
+            pagina_actual: paginaActual,
+            total_paginas: totalPaginas,
+            total_movimientos: total,
+            limite
+        }
+    };
+};
+
+
+// FUNCION 6 AJUSTAR INVENTARIO
 const ajustarInventario = async (
     codigo,
     cantidad,
@@ -450,5 +545,6 @@ module.exports = {
     obtenerResumenInventario,
     obtenerFamilias,
     recalcularStockMinimo,
+    obtenerMovimientosInventario,
     ajustarInventario
 };

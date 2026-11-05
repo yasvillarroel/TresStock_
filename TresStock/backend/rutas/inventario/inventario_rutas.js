@@ -31,6 +31,12 @@ router.get(
     inventarioControlador.obtenerFamilias
 );
 
+// ruta para consultar entradas, salidas, ajustes y movimientos
+router.get(
+    '/movimientos',
+    inventarioControlador.obtenerMovimientosInventario
+);
+
 // ruta para recalcular automaticamente el stock minimo
 router.put(
     '/recalcular-stock-minimo',

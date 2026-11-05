@@ -139,25 +139,25 @@
             <!-- contenedor de navegación interna de inventario -->
             <div class="contenedor_pestanas_inventario">
 
-                <div class="pestana_stock_actual_inventario">
+                <button class="pestana_stock_actual_inventario pestana_inventario_activa" id="pestana_stock_actual_inventario" type="button" data-vista="stock">
                     Stock actual
-                </div>
+                </button>
 
-                <div class="pestana_entradas_inventario">
+                <button class="pestana_entradas_inventario" id="pestana_entradas_inventario" type="button" data-vista="ENTRADA">
                     Entradas
-                </div>
+                </button>
 
-                <div class="pestana_salidas_inventario">
+                <button class="pestana_salidas_inventario" id="pestana_salidas_inventario" type="button" data-vista="SALIDA">
                     Salidas
-                </div>
+                </button>
 
-                <div class="pestana_ajustes_inventario">
+                <button class="pestana_ajustes_inventario" id="pestana_ajustes_inventario" type="button" data-vista="AJUSTE">
                     Ajustes
-                </div>
+                </button>
 
-                <div class="pestana_movimientos_inventario">
+                <button class="pestana_movimientos_inventario" id="pestana_movimientos_inventario" type="button" data-vista="MOVIMIENTOS">
                     Movimientos
-                </div>
+                </button>
 
             </div>
 
@@ -165,7 +165,7 @@
         <!-- TITULO 5 FILTROS INVENTARIO -->
 
             <!-- contenedor de búsqueda y filtros -->
-            <div class="contenedor_filtros_inventario">
+            <div class="contenedor_filtros_inventario" id="filtros_stock_inventario">
 
 
                 <!-- búsqueda de producto -->
@@ -266,7 +266,7 @@
         <!-- TITULO 6 TABLA INVENTARIO -->
 
             <!-- contenedor principal de la tabla -->
-            <div class="contenedor_tabla_inventario">
+            <div class="contenedor_tabla_inventario" id="vista_stock_actual_inventario">
 
 
                 <!-- cabecera visual de la tabla -->
@@ -354,6 +354,68 @@
 
                     </div>
 
+            </div>
+
+            <!-- filtros del historial de inventario -->
+            <div class="contenedor_filtros_inventario filtros_movimientos_inventario" id="filtros_movimientos_inventario" hidden>
+
+                <div class="campo_busqueda_inventario campo_busqueda_movimientos_inventario">
+                    <div class="texto_busqueda_inventario">Buscar producto o correo</div>
+                    <input class="input_busqueda_inventario" id="busqueda_movimientos_inventario" type="search" maxlength="150" placeholder="Nombre, código o correo del usuario">
+                </div>
+
+                <div class="campo_fecha_movimientos_inventario">
+                    <div class="texto_busqueda_inventario">Desde</div>
+                    <input class="input_busqueda_inventario" id="desde_movimientos_inventario" type="date">
+                </div>
+
+                <div class="campo_fecha_movimientos_inventario">
+                    <div class="texto_busqueda_inventario">Hasta</div>
+                    <input class="input_busqueda_inventario" id="hasta_movimientos_inventario" type="date">
+                </div>
+
+                <div class="campo_fecha_movimientos_inventario">
+                    <div class="texto_busqueda_inventario">Ordenar por</div>
+                    <select class="select_familia_inventario" id="orden_movimientos_inventario">
+                        <option value="recientes">Más recientes</option>
+                        <option value="antiguos">Más antiguos</option>
+                        <option value="cantidad_mayor">Mayor cantidad</option>
+                        <option value="cantidad_menor">Menor cantidad</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <!-- tabla del historial de inventario -->
+            <div class="contenedor_tabla_inventario" id="vista_movimientos_inventario" hidden>
+                <div class="cabecera_contenedor_tabla_inventario">
+                    <div class="titulo_tabla_inventario" id="titulo_movimientos_inventario">Historial de movimientos</div>
+                </div>
+
+                <table class="tabla_inventario tabla_movimientos_inventario">
+                    <thead class="encabezado_tabla_inventario">
+                        <tr class="fila_encabezado_inventario">
+                            <th class="columna_producto_inventario">Producto</th>
+                            <th class="columna_tipo_movimiento_inventario">Tipo</th>
+                            <th class="columna_cantidad_movimiento_inventario">Cantidad</th>
+                            <th class="columna_motivo_movimiento_inventario">Motivo</th>
+                            <th class="columna_correo_movimiento_inventario">Realizado por</th>
+                            <th class="columna_fecha_movimiento_inventario">Fecha y hora</th>
+                        </tr>
+                    </thead>
+                    <tbody class="cuerpo_tabla_inventario" id="cuerpo_movimientos_inventario">
+                        <tr class="fila_sin_inventario"><td class="dato_sin_inventario" colspan="6">Cargando movimientos…</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="contenedor_paginacion_inventario paginacion_movimientos_inventario" id="paginacion_movimientos_inventario">
+                    <div class="informacion_paginacion_inventario" id="informacion_movimientos_inventario">Mostrando 0 movimientos</div>
+                    <div class="controles_paginacion_inventario">
+                        <button class="boton_pagina_anterior_inventario" id="anterior_movimientos_inventario" type="button">‹</button>
+                        <span class="pagina_movimientos_inventario" id="pagina_movimientos_inventario">Página 1 de 1</span>
+                        <button class="boton_pagina_siguiente_inventario" id="siguiente_movimientos_inventario" type="button">›</button>
+                    </div>
+                </div>
             </div>
 
 
