@@ -279,6 +279,17 @@ CREATE TABLE usuarios (
         REFERENCES roles(id_rol)
 );
 
+CREATE TABLE productos_excluidos_ranking (
+    codigo          VARCHAR(50) PRIMARY KEY,
+    fecha_hora      TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    correo_usuario  VARCHAR(150),
+
+    CONSTRAINT fk_producto_excluido_ranking
+        FOREIGN KEY (codigo)
+        REFERENCES productos(codigo)
+        ON DELETE CASCADE
+);
+
 -- Insertar roles
 INSERT INTO base_datos.roles (nombre, descripcion)
 VALUES
@@ -315,6 +326,10 @@ CREATE TABLE proveedores (
             OR tiempo_entrega_dias > 0
         )
 );
+
+-- agrega el estado del proveedor también en bases de datos ya creadas
+ALTER TABLE base_datos.proveedores
+    ADD COLUMN IF NOT EXISTS activo BOOLEAN NOT NULL DEFAULT TRUE;
 
 
 -- ============================================================
@@ -524,5 +539,8 @@ CREATE INDEX idx_pp_proveedor
 
 CREATE INDEX idx_usuarios_id_rol
     ON usuarios(id_rol);
+
+CREATE INDEX idx_productos_excluidos_ranking_fecha
+    ON productos_excluidos_ranking(fecha_hora DESC);
 
 -- FIN DEL SCHEMA

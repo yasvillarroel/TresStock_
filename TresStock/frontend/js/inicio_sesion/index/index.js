@@ -150,6 +150,9 @@
 
         await cargarComponente(rutaVista,'contenedor_contenido');
 
+        // carga los indicadores y el ranking del dashboard
+        if (vista === 'dashboard') {inicializarDashboard();}
+
         // inicializa el funcionamiento de inventario
         if (vista === 'inventario') {await inicializarInventario();}
 

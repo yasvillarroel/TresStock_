@@ -118,6 +118,150 @@
 .valor_stock_bajo_dashboard { color: #bd7d17; }
 .valor_productos_agotados_dashboard { color: #d44848; }
 
+.contenedor_mas_vendidos_dashboard {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    margin: -8px 0 28px;
+}
+
+.boton_mas_vendidos_dashboard {
+    min-height: 42px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 15px;
+    border: 1px solid #159ba3;
+    border-radius: 7px;
+    background: #ffffff;
+    color: #0f858d;
+    font: 700 13px Arial, sans-serif;
+    cursor: pointer;
+}
+
+.boton_mas_vendidos_dashboard:hover { background: #eaf8f8; }
+.flecha_mas_vendidos_dashboard { font-size: 18px; line-height: 1; }
+
+.panel_mas_vendidos_dashboard {
+    position: absolute;
+    z-index: 10;
+    top: calc(100% + 8px);
+    right: 0;
+    width: min(760px, 100%);
+    padding: 16px;
+    border: 1px solid #dce4e8;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: 0 12px 32px rgba(11, 54, 80, 0.16);
+}
+
+#panel_mas_vendidos_dashboard[hidden] { display: none; }
+#panel_excluidos_dashboard[hidden] { display: none; }
+
+.boton_ver_excluidos_dashboard {
+    margin: 12px 0 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #0f858d;
+    font: 700 12px Arial, sans-serif;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.panel_excluidos_dashboard {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #e5ecef;
+}
+
+.tabla_excluidos_dashboard { max-height: 250px; }
+
+.boton_excluir_producto_dashboard,
+.boton_restaurar_producto_dashboard {
+    padding: 6px 9px;
+    border: 1px solid #cbd8dd;
+    border-radius: 5px;
+    background: #ffffff;
+    color: #536873;
+    font: 700 11px Arial, sans-serif;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.boton_excluir_producto_dashboard:hover {
+    border-color: #e1a1a1;
+    background: #fff3f3;
+    color: #b33a3a;
+}
+
+.boton_restaurar_producto_dashboard:hover {
+    border-color: #85c7c9;
+    background: #effafa;
+    color: #0f858d;
+}
+
+.boton_excluir_producto_dashboard:disabled,
+.boton_restaurar_producto_dashboard:disabled {
+    opacity: .55;
+    cursor: wait;
+}
+
+.filtros_mas_vendidos_dashboard {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 190px;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.busqueda_mas_vendidos_dashboard,
+.periodo_mas_vendidos_dashboard {
+    width: 100%;
+    min-height: 40px;
+    padding: 0 11px;
+    border: 1px solid #ced9de;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #37434b;
+    font: 13px Arial, sans-serif;
+}
+
+.estado_mas_vendidos_dashboard {
+    padding: 7px 0 10px;
+    color: #71818a;
+    font-size: 12px;
+}
+
+.tabla_mas_vendidos_dashboard {
+    max-height: 390px;
+    overflow: auto;
+}
+
+.tabla_mas_vendidos_dashboard table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.tabla_mas_vendidos_dashboard th,
+.tabla_mas_vendidos_dashboard td {
+    padding: 9px 10px;
+    border-bottom: 1px solid #e8edef;
+    font-size: 12px;
+}
+
+.tabla_mas_vendidos_dashboard th {
+    position: sticky;
+    top: 0;
+    background: #f4f7f8;
+    color: #536873;
+    font-weight: 700;
+}
+
+.tabla_mas_vendidos_dashboard td { color: #344b56; }
+.tabla_mas_vendidos_dashboard td:last-child,
+.tabla_mas_vendidos_dashboard th:last-child { text-align: right; }
+
 /* TITULO 3 ENCABEZADOS Y ACCIONES RAPIDAS */
 .encabezado_seccion_dashboard {
     display: flex;
@@ -346,6 +490,9 @@
     .contenedor_acciones_dashboard { grid-template-columns: 1fr; gap: 10px; }
     .contenedor_lateral_dashboard { grid-template-columns: 1fr; }
     .descripcion_seccion_dashboard { display: none; }
+    .contenedor_mas_vendidos_dashboard { display: block; }
+    .boton_mas_vendidos_dashboard { width: 100%; justify-content: space-between; }
+    .panel_mas_vendidos_dashboard { position: static; width: 100%; margin-top: 8px; }
 }
 @media (max-width: 480px) {
     .contenedor_dashboard { padding: 14px; }
@@ -355,6 +502,7 @@
     .tarjeta_productos_agotados_dashboard,
     .tarjeta_ventas_mes_dashboard { min-height: 97px; padding: 15px; }
     .titulo_dashboard { font-size: 21px; }
+    .filtros_mas_vendidos_dashboard { grid-template-columns: 1fr; }
     .tarjeta_ventas_seis_meses_dashboard,
     .tarjeta_inventario_familia_dashboard,
     .tarjeta_productos_stock_bajo_dashboard,

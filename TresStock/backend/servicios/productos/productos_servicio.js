@@ -163,15 +163,34 @@ const obtenerProducto = async (id) => {
 
     const resultado = await pool.query(
         `SELECT
-            codigo,
-            cod_barra,
-            descripcion,
-            familia,
-            precio_publico,
-            imagen,
-            activo
-        FROM base_datos.productos
-        WHERE codigo = $1`,
+            p.codigo,
+            p.cod_barra,
+            p.descripcion,
+            p.familia,
+            p.precio_publico,
+            p.imagen,
+            p.activo,
+            i.stock_actual,
+            i.stock_minimo,
+            proveedores_producto.proveedor
+        FROM base_datos.productos p
+        LEFT JOIN base_datos.inventario i
+            ON p.codigo = i.codigo
+        LEFT JOIN (
+            SELECT
+                pp.codigo,
+                STRING_AGG(
+                    DISTINCT pr.nombre_comercial,
+                    ', '
+                    ORDER BY pr.nombre_comercial
+                ) AS proveedor
+            FROM base_datos.producto_proveedor pp
+            INNER JOIN base_datos.proveedores pr
+                ON pr.id_proveedor = pp.id_proveedor
+            GROUP BY pp.codigo
+        ) proveedores_producto
+            ON proveedores_producto.codigo = p.codigo
+        WHERE p.codigo = $1`,
         [id]
     );
 

@@ -14,16 +14,16 @@
             <!-- contenedor que agrupa los indicadores principales del sistema -->
             <div class="contenedor_indicadores_dashboard">
 
-                <!-- indicador para mostrar el stock actual total -->
+                <!-- indicador para mostrar la cantidad de productos registrados -->
                 <div class="tarjeta_stock_actual_dashboard">
 
                     <div class="icono_stock_actual_dashboard"></div>
 
                     <div class="contenido_stock_actual_dashboard">
 
-                        <div class="texto_stock_actual_dashboard">Stock actual</div>
+                        <div class="texto_stock_actual_dashboard">Cantidad de productos</div>
 
-                        <div class="valor_stock_actual_dashboard" id="valor_stock_actual_dashboard">0</div>
+                        <div class="valor_stock_actual_dashboard" id="valor_cantidad_productos_dashboard">0</div>
 
                     </div>
 
@@ -66,7 +66,7 @@
 
                     <div class="contenido_ventas_mes_dashboard">
 
-                        <div class="texto_ventas_mes_dashboard">Ventas del mes</div>
+                        <div class="texto_ventas_mes_dashboard">Ventas del mes actual</div>
 
                         <div class="valor_ventas_mes_dashboard" id="valor_ventas_mes_dashboard">$0</div>
 
@@ -74,6 +74,49 @@
 
                 </div>
 
+            </div>
+
+            <!-- desplegable con los productos de mayor venta -->
+            <div class="contenedor_mas_vendidos_dashboard">
+                <button class="boton_mas_vendidos_dashboard" id="boton_mas_vendidos_dashboard" type="button" aria-expanded="false" aria-controls="panel_mas_vendidos_dashboard">
+                    Ver los 50 productos más vendidos <span class="flecha_mas_vendidos_dashboard" aria-hidden="true">⌄</span>
+                </button>
+
+                <div class="panel_mas_vendidos_dashboard" id="panel_mas_vendidos_dashboard" hidden>
+                    <div class="filtros_mas_vendidos_dashboard">
+                        <input class="busqueda_mas_vendidos_dashboard" id="busqueda_mas_vendidos_dashboard" type="search" maxlength="150" placeholder="Filtrar por producto o código">
+                        <select class="periodo_mas_vendidos_dashboard" id="periodo_mas_vendidos_dashboard" aria-label="Periodo de ventas">
+                            <option value="todo">Todo el historial</option>
+                            <option value="mes">Mes actual</option>
+                            <option value="tres_meses">Últimos 3 meses</option>
+                        </select>
+                    </div>
+                    <div class="estado_mas_vendidos_dashboard" id="estado_mas_vendidos_dashboard">Abre el desplegable para cargar los productos.</div>
+                    <div class="tabla_mas_vendidos_dashboard">
+                        <table>
+                            <thead>
+                                <tr><th>#</th><th>Producto</th><th>Código</th><th>Unidades vendidas</th><th>Acción</th></tr>
+                            </thead>
+                            <tbody id="cuerpo_mas_vendidos_dashboard"></tbody>
+                        </table>
+                    </div>
+
+                    <button class="boton_ver_excluidos_dashboard" id="boton_ver_excluidos_dashboard" type="button" aria-expanded="false" aria-controls="panel_excluidos_dashboard">
+                        Ver lista de exclusión
+                    </button>
+
+                    <div class="panel_excluidos_dashboard" id="panel_excluidos_dashboard" hidden>
+                        <div class="estado_excluidos_dashboard" id="estado_excluidos_dashboard">Cargando lista…</div>
+                        <div class="tabla_mas_vendidos_dashboard tabla_excluidos_dashboard">
+                            <table>
+                                <thead>
+                                    <tr><th>Producto</th><th>Código</th><th>Excluido por</th><th>Fecha</th><th>Acción</th></tr>
+                                </thead>
+                                <tbody id="cuerpo_excluidos_dashboard"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         <!-- TITULO 3 ACCIONES RAPIDAS -->

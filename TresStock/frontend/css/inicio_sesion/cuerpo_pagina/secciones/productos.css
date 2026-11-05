@@ -2493,20 +2493,19 @@
     .tabla_productos td { padding-left: 5px; padding-right: 5px; }
 }
 
-/* en móvil, los detalles completos se consultan desde el botón Ver */
+/* en móvil, conserva imagen y proveedor y permite recorrer la tabla horizontalmente */
 @media (max-width: 600px) {
-    .tabla_productos .columna_imagen_productos,
-    .tabla_productos .dato_imagen_productos,
-    .tabla_productos .columna_proveedor_productos,
-    .tabla_productos .dato_proveedor_productos {
-        display: none;
+    .tabla_productos {
+        min-width: 900px;
     }
 
-    .tabla_productos .columna_codigo_productos { width: 17%; }
-    .tabla_productos .columna_descripcion_productos { width: 33%; }
-    .tabla_productos .columna_precio_productos { width: 16%; }
-    .tabla_productos .columna_estado_productos { width: 14%; }
-    .tabla_productos .columna_acciones_productos { width: 20%; }
+    .tabla_productos .columna_imagen_productos { width: 8%; }
+    .tabla_productos .columna_codigo_productos { width: 13%; }
+    .tabla_productos .columna_descripcion_productos { width: 28%; }
+    .tabla_productos .columna_precio_productos { width: 12%; }
+    .tabla_productos .columna_proveedor_productos { width: 17%; }
+    .tabla_productos .columna_estado_productos { width: 10%; }
+    .tabla_productos .columna_acciones_productos { width: 12%; }
 
     .tabla_productos .dato_codigo_productos {
         white-space: normal;
