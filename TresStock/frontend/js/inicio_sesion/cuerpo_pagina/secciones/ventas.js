@@ -8,6 +8,13 @@ const ventasPorPagina = 120;
 let temporizadorBusquedaVentas = null;
 
 
+// evita que respuestas anteriores sobrescriban los resultados de un filtro nuevo
+let secuenciaSolicitudVentas = 0;
+
+// orden inicial de las ventas; se utiliza para consultar todas las páginas en PostgreSQL
+let ordenVentasSeleccionado = 'recientes';
+
+
 // TITULO 1 IMPORTACION VENTAS
 
     // abre el formulario de importación
@@ -327,6 +334,32 @@ let temporizadorBusquedaVentas = null;
                 : '';
 
 
+        // el ordenamiento se realiza en PostgreSQL, antes de aplicar la paginación
+        const ordenar = ordenVentasSeleccionado;
+
+
+        // invalida respuestas pendientes cuando cambian los filtros
+        const solicitudActual = ++secuenciaSolicitudVentas;
+
+        const mensajeFechas = document.getElementById('mensaje_fechas_ventas');
+        const rangoIncorrecto = Boolean(desde && hasta && desde > hasta);
+
+        if (mensajeFechas) {
+            mensajeFechas.hidden = !rangoIncorrecto;
+        }
+
+        if (inputDesde) inputDesde.setAttribute('aria-invalid', String(rangoIncorrecto));
+        if (inputHasta) inputHasta.setAttribute('aria-invalid', String(rangoIncorrecto));
+
+        if (rangoIncorrecto) {
+            // no consulta la API con fechas contradictorias
+            mostrarVentas([]);
+            totalPaginasVentas = 1;
+            mostrarPaginacionVentas(1, 0, 0);
+            return;
+        }
+
+
         const parametros =
             new URLSearchParams();
 
@@ -339,6 +372,11 @@ let temporizadorBusquedaVentas = null;
         parametros.set(
             'limite',
             ventasPorPagina
+        );
+
+        parametros.set(
+            'ordenar',
+            ordenar
         );
 
 
@@ -386,6 +424,9 @@ let temporizadorBusquedaVentas = null;
 
             const resultado =
                 await respuesta.json();
+
+            // descarta resultados que corresponden a filtros anteriores
+            if (solicitudActual !== secuenciaSolicitudVentas) return;
 
 
             if (!respuesta.ok) {
@@ -514,12 +555,21 @@ let temporizadorBusquedaVentas = null;
 
                     <td class="dato_acciones_ventas">
 
-                        <div
+                        <button
                             class="boton_ver_venta"
+                            type="button"
+                            title="Ver boleta"
+                            aria-label="Ver boleta"
                             onclick="verDetalleVenta(${venta.id_venta})"
                         >
-                            Ver
-                        </div>
+                            <svg viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                aria-hidden="true">
+                                <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                        </button>
 
                     </td>
                 `;
@@ -807,6 +857,127 @@ let temporizadorBusquedaVentas = null;
 
 // TITULO 6 FILTROS VENTAS
 
+    // cierra las opciones del filtro de ordenamiento
+    function cerrarOpcionesOrdenVentas(enfocarBoton = false) {
+        const boton = document.getElementById('boton_orden_ventas');
+        const opciones = document.getElementById('opciones_orden_ventas');
+
+        if (opciones) opciones.hidden = true;
+        if (boton) {
+            boton.setAttribute('aria-expanded', 'false');
+            if (enfocarBoton) boton.focus();
+        }
+    }
+
+
+    // selecciona un orden de ventas y actualiza el texto del filtro
+    function seleccionarOrdenVentas(valor, recargar = true) {
+        const etiquetas = {
+            recientes: 'Más recientes',
+            monto_mayor: 'Mayor monto',
+            monto_menor: 'Menor monto'
+        };
+
+        ordenVentasSeleccionado = Object.prototype.hasOwnProperty.call(etiquetas, valor)
+            ? valor
+            : 'recientes';
+
+        const texto = document.getElementById('texto_orden_ventas');
+        if (texto) texto.textContent = etiquetas[ordenVentasSeleccionado];
+
+        document.querySelectorAll('#opciones_orden_ventas .opcion_orden_ventas').forEach(
+            function(opcion) {
+                const seleccionada = opcion.dataset.valor === ordenVentasSeleccionado;
+                opcion.setAttribute('aria-selected', String(seleccionada));
+                opcion.classList.toggle('opcion_orden_ventas_seleccionada', seleccionada);
+            }
+        );
+
+        cerrarOpcionesOrdenVentas();
+
+        if (recargar) {
+            clearTimeout(temporizadorBusquedaVentas);
+            temporizadorBusquedaVentas = null;
+            paginaActualVentas = 1;
+            cargarVentas();
+        }
+    }
+
+
+    // configura las opciones y el cierre del desplegable de ordenamiento
+    function configurarOrdenVentas() {
+        const selector = document.getElementById('selector_orden_ventas');
+        const boton = document.getElementById('boton_orden_ventas');
+        const opciones = document.getElementById('opciones_orden_ventas');
+
+        if (!selector || !boton || !opciones) return;
+
+        const elementos = Array.from(opciones.querySelectorAll('.opcion_orden_ventas'));
+
+        boton.addEventListener('click', function() {
+            const abrir = opciones.hidden;
+            opciones.hidden = !abrir;
+            boton.setAttribute('aria-expanded', String(abrir));
+        });
+
+        // permite navegar entre las opciones con el teclado
+        selector.addEventListener('keydown', function(evento) {
+            if (evento.key === 'Escape') {
+                cerrarOpcionesOrdenVentas(true);
+                return;
+            }
+
+            if (evento.key === 'ArrowDown' || evento.key === 'ArrowUp') {
+                evento.preventDefault();
+                if (opciones.hidden) {
+                    opciones.hidden = false;
+                    boton.setAttribute('aria-expanded', 'true');
+                }
+                const actual = elementos.indexOf(document.activeElement);
+                const indice = actual === -1
+                    ? elementos.findIndex(opcion => opcion.dataset.valor === ordenVentasSeleccionado)
+                    : actual;
+                const salto = evento.key === 'ArrowDown' ? 1 : -1;
+                elementos[(indice + salto + elementos.length) % elementos.length].focus();
+            }
+        });
+
+        elementos.forEach(function(opcion) {
+            opcion.addEventListener('click', function() {
+                const valor = opcion.dataset.valor;
+                const cambio = valor !== ordenVentasSeleccionado;
+                seleccionarOrdenVentas(valor, cambio);
+                boton.focus();
+            });
+        });
+
+        document.addEventListener('click', function(evento) {
+            if (!selector.contains(evento.target)) cerrarOpcionesOrdenVentas();
+        });
+
+        seleccionarOrdenVentas('recientes', false);
+    }
+
+
+    // restablece la búsqueda, las fechas y el orden sin recargar TresStock
+    function limpiarFiltrosVentas() {
+        const inputBusqueda = document.getElementById('input_busqueda_ventas');
+        const inputDesde = document.getElementById('input_fecha_desde_ventas');
+        const inputHasta = document.getElementById('input_fecha_hasta_ventas');
+
+        clearTimeout(temporizadorBusquedaVentas);
+        temporizadorBusquedaVentas = null;
+
+        if (inputBusqueda) inputBusqueda.value = '';
+        if (inputDesde) inputDesde.value = '';
+        if (inputHasta) inputHasta.value = '';
+        seleccionarOrdenVentas('recientes', false);
+
+        paginaActualVentas = 1;
+        cargarVentas();
+    }
+
+
     // configura búsqueda y fechas
     function configurarFiltrosVentas() {
 
@@ -821,6 +992,16 @@ let temporizadorBusquedaVentas = null;
         const inputHasta = document.getElementById(
             'input_fecha_hasta_ventas'
         );
+
+
+        // configura el filtro de ordenamiento antes de cargar las ventas
+        configurarOrdenVentas();
+
+        // configura la acción Limpiar filtros de la vista de ventas
+        const botonLimpiar = document.getElementById('boton_limpiar_filtros_ventas');
+        if (botonLimpiar) {
+            botonLimpiar.addEventListener('click', limpiarFiltrosVentas);
+        }
 
 
         if (inputBusqueda) {

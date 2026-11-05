@@ -13,7 +13,7 @@ const MAX_DETALLE_RESPUESTA = 200;
 
 // FUNCION 1 OBTENER VENTAS
 
-const obtenerVentas = async (pagina, limite, buscar, desde, hasta) => {
+const obtenerVentas = async (pagina, limite, buscar, desde, hasta, ordenar = 'recientes') => {
 
     const condiciones = [];
     const valores = [];
@@ -62,6 +62,15 @@ const obtenerVentas = async (pagina, limite, buscar, desde, hasta) => {
     valoresConsulta.push(desplazamiento);
     const posicionDesplazamiento = valoresConsulta.length;
 
+    // utiliza solo órdenes predefinidos para evitar inyección SQL
+    let ordenConsulta = 'v.fecha_hora DESC, v.id_venta DESC';
+
+    if (ordenar === 'monto_mayor') {
+        ordenConsulta = 'v.total DESC, v.fecha_hora DESC, v.id_venta DESC';
+    } else if (ordenar === 'monto_menor') {
+        ordenConsulta = 'v.total ASC, v.fecha_hora DESC, v.id_venta DESC';
+    }
+
     const resultado = await pool.query(
         `
         SELECT
@@ -72,9 +81,7 @@ const obtenerVentas = async (pagina, limite, buscar, desde, hasta) => {
             v.total
         FROM base_datos.ventas v
         ${where}
-        ORDER BY
-            v.fecha_hora DESC,
-            v.id_venta DESC
+        ORDER BY ${ordenConsulta}
         LIMIT $${posicionLimite}
         OFFSET $${posicionDesplazamiento}
         `,

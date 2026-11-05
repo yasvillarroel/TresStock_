@@ -52,7 +52,12 @@
                 <div class="tarjeta_total_ventas">
 
                     <div class="icono_total_ventas">
-                        #
+                        <!-- icono de total de ventas -->
+                        <img
+                            src="./imagenes/inicio_sesion/cuerpo_pagina/secciones/receipt-text.svg"
+                            alt="Total ventas"
+                            class="imagen_icono_indicador_ventas"
+                        >
                     </div>
 
                     <div class="contenido_total_ventas">
@@ -77,7 +82,12 @@
                 <div class="tarjeta_ventas_dia">
 
                     <div class="icono_ventas_dia">
-                        ↑
+                        <!-- icono de ventas del dia -->
+                        <img
+                            src="./imagenes/inicio_sesion/cuerpo_pagina/secciones/calendar-check.svg"
+                            alt="Ventas del día"
+                            class="imagen_icono_indicador_ventas"
+                        >
                     </div>
 
                     <div class="contenido_ventas_dia">
@@ -102,7 +112,12 @@
                 <div class="tarjeta_total_vendido">
 
                     <div class="icono_total_vendido">
-                        $
+                        <!-- icono de total vendido -->
+                        <img
+                            src="./imagenes/inicio_sesion/cuerpo_pagina/secciones/wallet.svg"
+                            alt="Total vendido"
+                            class="imagen_icono_indicador_ventas"
+                        >
                     </div>
 
                     <div class="contenido_total_vendido">
@@ -176,6 +191,76 @@
                         type="date"
                     >
 
+                </div>
+
+
+                <!-- selector personalizado para ordenar las ventas registradas -->
+                <div class="contenedor_orden_ventas">
+
+                    <label class="texto_orden_ventas" id="etiqueta_orden_ventas" for="boton_orden_ventas">
+                        Ordenar por
+                    </label>
+
+                    <div class="selector_orden_ventas" id="selector_orden_ventas">
+
+                        <button
+                            class="boton_orden_ventas"
+                            id="boton_orden_ventas"
+                            type="button"
+                            aria-haspopup="listbox"
+                            aria-expanded="false"
+                            aria-controls="opciones_orden_ventas"
+                        >
+                            <span id="texto_orden_ventas">Más recientes</span>
+                            <span class="flecha_orden_ventas" aria-hidden="true"></span>
+                        </button>
+
+                        <div
+                            class="opciones_orden_ventas"
+                            id="opciones_orden_ventas"
+                            role="listbox"
+                            aria-labelledby="etiqueta_orden_ventas"
+                            hidden
+                        >
+                            <button class="opcion_orden_ventas opcion_orden_ventas_seleccionada"
+                                type="button" role="option" aria-selected="true"
+                                data-valor="recientes">Más recientes</button>
+
+                            <button class="opcion_orden_ventas" type="button" role="option"
+                                aria-selected="false" data-valor="monto_mayor">Mayor monto</button>
+
+                            <button class="opcion_orden_ventas" type="button" role="option"
+                                aria-selected="false" data-valor="monto_menor">Menor monto</button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- opción para restablecer la búsqueda, las fechas y el orden -->
+                <div class="contenedor_limpiar_filtros_ventas">
+
+                    <button
+                        class="boton_limpiar_filtros_ventas"
+                        id="boton_limpiar_filtros_ventas"
+                        type="button"
+                    >
+                        Limpiar filtros
+                    </button>
+
+                </div>
+
+
+                <!-- mensaje cuando las fechas seleccionadas no forman un rango valido -->
+                <div
+                    class="mensaje_fechas_ventas"
+                    id="mensaje_fechas_ventas"
+                    role="status"
+                    aria-live="polite"
+                    hidden
+                >
+                    La fecha "Desde" no puede ser posterior a "Hasta".
                 </div>
 
             </div>

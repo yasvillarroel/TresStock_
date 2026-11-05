@@ -72,6 +72,8 @@
             margin-right: 8px;
         }
 
+
+
         /* texto */
         .texto_importar_ventas {
             color: #ffffff;
@@ -123,6 +125,13 @@
             font-weight: bold;
         }
 
+        .imagen_icono_indicador_ventas{
+            width: 24px;
+            height: 24px;
+            display: block;
+            object-fit: contain;
+        }
+
         .contenido_total_ventas {
             display: flex;
             flex-direction: column;
@@ -136,7 +145,7 @@
         }
 
         .valor_total_ventas {
-            color: #0b3650;
+            color: #0F858D;
             font-family: Arial, sans-serif;
             font-size: 23px;
             font-weight: bold;
@@ -172,6 +181,13 @@
             font-weight: bold;
         }
 
+        .imagen_icono_indicador_ventas{
+            width: 24px;
+            height: 24px;
+            display: block;
+            object-fit: contain;
+        }
+
         .contenido_ventas_dia {
             display: flex;
             flex-direction: column;
@@ -185,7 +201,7 @@
         }
 
         .valor_ventas_dia {
-            color: #0b3650;
+            color: #3869A8;
             font-family: Arial, sans-serif;
             font-size: 23px;
             font-weight: bold;
@@ -221,6 +237,13 @@
             font-weight: bold;
         }
 
+        .imagen_icono_indicador_ventas{
+            width: 24px;
+            height: 24px;
+            display: block;
+            object-fit: contain;        
+        }
+
         .contenido_total_vendido {
             display: flex;
             flex-direction: column;
@@ -234,7 +257,7 @@
         }
 
         .valor_total_vendido {
-            color: #0b3650;
+            color: #288447;
             font-family: Arial, sans-serif;
             font-size: 23px;
             font-weight: bold;
@@ -247,8 +270,9 @@
     .contenedor_filtros_ventas {
         width: 100%;
         display: grid;
-        grid-template-columns: 2fr 1fr 1fr;
-        gap: 18px;
+        grid-template-columns: minmax(180px, 2fr) minmax(130px, 1fr) minmax(130px, 1fr) minmax(155px, 1.1fr) auto;
+        gap: 16px;
+        align-items: end;
         background-color: #ffffff;
         border: 1px solid #dce4e8;
         border-radius: 8px;
@@ -274,7 +298,8 @@
 
     .texto_busqueda_ventas,
     .texto_fecha_desde_ventas,
-    .texto_fecha_hasta_ventas {
+    .texto_fecha_hasta_ventas,
+    .texto_orden_ventas {
         color: #536873;
         font-family: Arial, sans-serif;
         font-size: 12px;
@@ -296,6 +321,173 @@
         box-sizing: border-box;
         outline: none;
         background-color: #ffffff;
+    }
+
+
+/* SUBTITULO 1 SELECTOR DE ORDENAMIENTO VENTAS */
+
+    /* alinea el selector con el resto de los filtros de ventas */
+    .contenedor_orden_ventas {
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* permite desplegar las opciones debajo del campo */
+    .selector_orden_ventas {
+        position: relative;
+        width: 100%;
+    }
+
+    /* mantiene el diseño de los filtros desplegables de TresStock */
+    .boton_orden_ventas {
+        width: 100%;
+        height: 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+        padding: 0 12px;
+        border: 1px solid #ced9de;
+        border-radius: 6px;
+        background-color: #ffffff;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        text-align: left;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+    /* muestra la flecha del selector */
+    .flecha_orden_ventas {
+        width: 8px;
+        height: 8px;
+        border-right: 2px solid #607782;
+        border-bottom: 2px solid #607782;
+        transform: translateY(-2px) rotate(45deg);
+        transition: transform 0.2s;
+        flex-shrink: 0;
+    }
+
+    /* gira la flecha cuando el selector está abierto */
+    .boton_orden_ventas[aria-expanded="true"] .flecha_orden_ventas {
+        transform: translateY(2px) rotate(225deg);
+    }
+
+    /* lista de opciones del selector */
+    .opciones_orden_ventas {
+        position: absolute;
+        top: calc(100% + 5px);
+        left: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        padding: 5px;
+        background-color: #ffffff;
+        border: 1px solid #dce4e8;
+        border-radius: 7px;
+        box-shadow: 0 8px 22px rgba(11, 54, 80, 0.12);
+        z-index: 20;
+        box-sizing: border-box;
+    }
+
+    /* oculta las opciones cuando el selector está cerrado */
+    .opciones_orden_ventas[hidden] {
+        display: none;
+    }
+
+    /* diseño de las opciones del selector */
+    .opcion_orden_ventas {
+        width: 100%;
+        min-height: 36px;
+        padding: 8px 10px;
+        border: none;
+        border-radius: 5px;
+        background: transparent;
+        color: #37434b;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        text-align: left;
+        cursor: pointer;
+    }
+
+    /* destaca la opción seleccionada y el efecto al pasar el cursor */
+    .opcion_orden_ventas:hover,
+    .opcion_orden_ventas:focus-visible,
+    .opcion_orden_ventas_seleccionada {
+        background-color: #e4f6f6;
+        color: #0f858d;
+    }
+
+
+/* SUBTITULO 2 ICONOS DE INDICADORES DE VENTAS */
+
+    /* mantiene los iconos oscuros y del mismo tamaño que en Inventario */
+    .icono_total_ventas svg,
+    .icono_ventas_dia svg,
+    .icono_total_vendido svg {
+        width: 25px;
+        height: 25px;
+        color: #111111;
+        flex-shrink: 0;
+    }
+
+
+/* SUBTITULO 3 LIMPIAR FILTROS Y VALIDAR FECHAS */
+
+    /* alinea el botón con los tres campos de búsqueda */
+    .contenedor_limpiar_filtros_ventas {
+        display: flex;
+        align-items: flex-end;
+    }
+
+    /* mantiene el estilo de botón secundario de TresStock */
+    .boton_limpiar_filtros_ventas {
+        min-height: 40px;
+        padding: 0 13px;
+        border: 1px solid #159ba3;
+        border-radius: 6px;
+        background-color: #ffffff;
+        color: #0f858d;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        white-space: nowrap;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    .boton_limpiar_filtros_ventas:hover {
+        background-color: #e4f6f6;
+        border-color: #159ba3;
+    }
+
+    .boton_limpiar_filtros_ventas:focus-visible,
+    .boton_orden_ventas:focus-visible,
+    .input_busqueda_ventas:focus-visible,
+    .input_fecha_desde_ventas:focus-visible,
+    .input_fecha_hasta_ventas:focus-visible {
+        outline: 2px solid #159ba3;
+        outline-offset: 2px;
+    }
+
+    .boton_limpiar_filtros_ventas svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    /* avisa si el rango de fechas ingresado no es valido */
+    .mensaje_fechas_ventas {
+        grid-column: 1 / -1;
+        color: #c2413a;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+    }
+
+    .mensaje_fechas_ventas[hidden] {
+        display: none;
     }
 
 
@@ -415,23 +607,33 @@
         text-align: center;
     }
 
+    /* clase para establecer el boton de ver boleta */
     .boton_ver_venta {
+        width: 44px;
+        height: 44px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-height: 32px;
-        padding: 0 13px;
-        background-color: #e4f6f6;
-        color: #0f7f86;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        border-radius: 5px;
+        background-color: #ffffff;
+        border: 1px solid #dce4e8;
+        border-radius: 8px;
+        color: #159ba3;
+        padding: 0;
         cursor: pointer;
+        box-sizing: border-box;
+        transition: background-color 0.2s, border-color 0.2s;
     }
 
+    /* cambia el fondo del boton al posicionar el cursor */
     .boton_ver_venta:hover {
-        background-color: #cceeee;
+        background-color: #e4f6f6;
+        border-color: #159ba3;
+    }
+
+    /* clase para establecer el tamaño del icono de ver boleta */
+    .boton_ver_venta svg {
+        width: 20px;
+        height: 20px;
     }
 
     .fila_sin_ventas {
@@ -643,6 +845,7 @@
         max-width: calc(100% - 40px);
         max-height: calc(100vh - 60px);
         overflow-y: auto;
+        overflow-x: hidden;
         background-color: #ffffff;
         border-radius: 8px;
         padding: 23px;
@@ -710,15 +913,37 @@
 
     .contenedor_tabla_detalle_venta {
         width: 100%;
-        overflow-x: auto;
+        overflow: hidden;
         border: 1px solid #dce4e8;
         border-radius: 7px;
+        box-sizing: border-box;
     }
 
     .tabla_detalle_venta {
         width: 100%;
-        min-width: 600px;
+        min-width: 0;
         border-collapse: collapse;
+        table-layout: fixed;
+    }
+
+    /* permite ajustar los nombres largos sin generar scroll horizontal */
+    .dato_producto_detalle_venta {
+        text-align: left;
+        overflow-wrap: anywhere;
+    }
+
+    /* distribuye el espacio entre las cuatro columnas */
+    .columna_producto_detalle_venta {
+        width: 46%;
+    }
+
+    .columna_cantidad_detalle_venta {
+        width: 15%;
+    }
+
+    .columna_precio_detalle_venta,
+    .columna_valorizado_detalle_venta {
+        width: 19.5%;
     }
 
     .encabezado_tabla_detalle_venta {
@@ -957,6 +1182,23 @@
 
 /* TITULO 15 RESPONSIVE VENTAS */
 
+    /* evita que los cinco controles queden apretados en ventanas medianas */
+    @media (max-width: 1200px) {
+
+        .contenedor_filtros_ventas {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .contenedor_busqueda_ventas {
+            grid-column: 1 / -1;
+        }
+
+        .contenedor_limpiar_filtros_ventas {
+            justify-content: flex-end;
+        }
+
+    }
+
     @media (max-width: 900px) {
 
         .contenedor_indicadores_ventas {
@@ -964,7 +1206,15 @@
         }
 
         .contenedor_filtros_ventas {
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .contenedor_busqueda_ventas {
+            grid-column: 1 / -1;
+        }
+
+        .contenedor_limpiar_filtros_ventas {
+            grid-column: 1 / -1;
         }
 
     }
@@ -974,6 +1224,56 @@
 
         .contenedor_ventas {
             padding: 18px;
+        }
+
+        .contenedor_filtros_ventas {
+            grid-template-columns: 1fr;
+        }
+
+        .contenedor_busqueda_ventas,
+        .contenedor_limpiar_filtros_ventas {
+            grid-column: auto;
+        }
+
+        .boton_limpiar_filtros_ventas {
+            width: 100%;
+        }
+
+        /* ajusta las cinco columnas de ventas sin desplazamiento horizontal */
+        .tabla_ventas {
+            min-width: 0;
+            table-layout: fixed;
+        }
+
+        .columna_boleta_ventas { width: 25%; }
+        .columna_fecha_ventas { width: 24%; }
+        .columna_hora_ventas { width: 12%; }
+        .columna_total_ventas { width: 23%; }
+        .columna_acciones_ventas { width: 16%; }
+
+        .columna_boleta_ventas,
+        .columna_fecha_ventas,
+        .columna_hora_ventas,
+        .columna_total_ventas,
+        .columna_acciones_ventas,
+        .dato_boleta_ventas,
+        .dato_fecha_ventas,
+        .dato_hora_ventas,
+        .dato_total_ventas,
+        .dato_acciones_ventas {
+            padding: 11px 4px;
+            font-size: 10px;
+            overflow-wrap: anywhere;
+        }
+
+        .dato_total_ventas {
+            white-space: normal;
+        }
+
+        .boton_ver_venta {
+            min-height: 28px;
+            padding: 0 9px;
+            font-size: 11px;
         }
 
         .contenedor_encabezado_ventas {

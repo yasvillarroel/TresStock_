@@ -62,13 +62,22 @@ const obtenerVentas =
                 ).trim();
 
 
+            // recibe el orden solicitado; solo admite los criterios definidos
+            const ordenSolicitado = String(req.query.ordenar || 'recientes').trim();
+            const ordenar = ['recientes', 'monto_mayor', 'monto_menor']
+                .includes(ordenSolicitado)
+                    ? ordenSolicitado
+                    : 'recientes';
+
+
             const resultado =
                 await ventasServicio.obtenerVentas(
                     pagina,
                     limite,
                     buscar,
                     desde,
-                    hasta
+                    hasta,
+                    ordenar
                 );
 
 
