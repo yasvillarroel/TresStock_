@@ -1,11 +1,12 @@
 // importa express
 const express = require('express');
 const path = require('path');
+const os = require('os');
 
 // importa el controlador de productos
 const productosControlador = require('../../controladores/productos/productos_controlador');
 
-// importar multer 
+// importar multer
 const multer = require('multer');
 
 //configurar receptor del archivo
@@ -42,13 +43,33 @@ const recibirImagenProducto = (req, res, next) => {
 // crea el router de productos
 const router = express.Router();
 
-// sirve los archivos guardados sin exponer otras carpetas del servidor
-const carpetaImagenes = path.join(__dirname, '../../imagenes/productos');
-router.use('/imagenes', express.static(carpetaImagenes, {
-    fallthrough: false,
+// sirve las fotos nuevas desde una carpeta fuera del proyecto para evitar recargas de Live Server
+// permite definir la misma carpeta de almacenamiento en produccion con TRESSTOCK_IMAGENES_DIR
+const carpetaImagenes = path.resolve(
+    process.env.TRESSTOCK_IMAGENES_DIR ||
+    path.join(os.homedir(), 'TresStock_datos', 'imagenes', 'productos')
+);
+
+// conserva el acceso a las fotografias anteriores almacenadas dentro del backend
+const carpetaImagenesAnteriores = path.join(__dirname, '../../imagenes/productos');
+
+// mantiene la URL publica original: /api/productos/imagenes/nombre.webp
+// primero busca la foto nueva y despues la antigua; no expone otras carpetas
+const opcionesImagenes = {
     maxAge: '7d',
     setHeaders: (res) => res.setHeader('X-Content-Type-Options', 'nosniff')
-}));
+};
+
+router.use('/imagenes',
+    express.static(carpetaImagenes, {
+        ...opcionesImagenes,
+        fallthrough: true
+    }),
+    express.static(carpetaImagenesAnteriores, {
+        ...opcionesImagenes,
+        fallthrough: false
+    })
+);
 
 // ruta para crear un producto, con fotografia opcional
 router.post('/', recibirImagenProducto, productosControlador.crearProducto);

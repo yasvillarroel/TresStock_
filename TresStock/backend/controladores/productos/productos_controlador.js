@@ -2,11 +2,18 @@
 const productosServicio = require('../../servicios/productos/productos_servicio');
 const fs = require('fs/promises');
 const path = require('path');
+const os = require('os');
 const { randomUUID } = require('crypto');
 const sharp = require('sharp');
 
 // guarda fotografias propias comprimidas en WebP (no se guarda el binario en PostgreSQL)
-const carpetaImagenesProductos = path.join(__dirname, '../../imagenes/productos');
+// las fotos nuevas quedan fuera del proyecto para evitar recargas automaticas de Live Server
+// por defecto: carpeta TresStock_datos/imagenes/productos dentro del directorio del usuario
+// en un servidor se puede configurar una carpeta persistente con TRESSTOCK_IMAGENES_DIR
+const carpetaImagenesProductos = path.resolve(
+    process.env.TRESSTOCK_IMAGENES_DIR ||
+    path.join(os.homedir(), 'TresStock_datos', 'imagenes', 'productos')
+);
 
 const guardarImagenManualProducto = async (archivo) => {
     if (!archivo) return null;
