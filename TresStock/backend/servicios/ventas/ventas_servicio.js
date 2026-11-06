@@ -110,9 +110,19 @@ const obtenerResumenVentas = async () => {
         SELECT
             COUNT(*) AS total_ventas,
 
+            -- cuenta las ventas de la ultima fecha registrada
             COUNT(*) FILTER (
-                WHERE fecha_hora::date = CURRENT_DATE
+                WHERE fecha_hora::date = (
+                    SELECT MAX(fecha_hora)::date
+                    FROM base_datos.ventas
+                )
             ) AS ventas_dia,
+
+            -- obtiene la fecha de la ultima venta registrada
+            TO_CHAR(
+                MAX(fecha_hora),
+                'DD/MM/YYYY'
+            ) AS fecha_ultima_jornada,
 
             COALESCE(SUM(total), 0) AS total_vendido
 

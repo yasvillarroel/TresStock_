@@ -629,6 +629,11 @@ let ordenVentasSeleccionado = 'recientes';
                 'valor_total_vendido'
             );
 
+            // obtiene el texto del indicador de la ultima jornada
+            const textoVentasDia = document.getElementById(
+                'texto_ventas_dia'
+            );
+
 
             if (valorTotalVentas) {
 
@@ -650,6 +655,21 @@ let ordenVentasSeleccionado = 'recientes';
                     ).toLocaleString(
                         'es-CL'
                     );
+
+            }
+
+
+            // muestra la fecha de la ultima jornada registrada
+            if (textoVentasDia) {
+
+                const fechaUltimaJornada =
+                    resumen.fecha_ultima_jornada;
+
+                textoVentasDia.textContent =
+                    fechaUltimaJornada
+                        ? 'Ventas de la última jornada registrada (' +
+                          fechaUltimaJornada + ')'
+                        : 'Ventas de la última jornada registrada';
 
             }
 
