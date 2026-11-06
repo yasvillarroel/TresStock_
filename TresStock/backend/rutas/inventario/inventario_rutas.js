@@ -7,6 +7,9 @@ const inventarioControlador =
     require('../../controladores/inventario/inventario_controlador');
 
 
+// protege los cambios manuales con una sesión válida
+const { autenticacion } = require('../../middleware/autenticacion');
+
 // crea el router de inventario
 const router = express.Router();
 
@@ -46,6 +49,7 @@ router.put(
 // ruta para ajustar el inventario
 router.post(
     '/ajustar',
+    autenticacion,
     inventarioControlador.ajustarInventario
 );
 

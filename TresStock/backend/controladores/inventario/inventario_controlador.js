@@ -163,98 +163,45 @@ const obtenerMovimientosInventario = async (req, res) => {
 const ajustarInventario = async (req, res) => {
 
     try {
+        const codigo = String(req.body.codigo || '').trim();
+        const operacion = String(req.body.operacion || '').trim();
+        const cantidad = Number(req.body.cantidad);
+        const motivo = String(req.body.motivo || '').trim();
 
-        // obtiene el codigo del producto
-        const { codigo, operacion } = req.body;
+        if (!codigo || codigo.length > 50) {
+            return res.status(400).json({mensaje: 'El código del producto no es válido'});
+        }
+        if (!['sumar', 'restar', 'fijar'].includes(operacion)) {
+            return res.status(400).json({mensaje: 'La operación debe ser sumar, restar o fijar'});
+        }
+        if (!Number.isFinite(cantidad) || cantidad > 99999999.9999 ||
+            (operacion === 'fijar' ? cantidad < 0 : cantidad <= 0) ||
+            Math.abs(cantidad - Math.round(cantidad * 10000) / 10000) >= 1e-9) {
+            return res.status(400).json({
+                mensaje: 'Ingresa una cantidad válida de hasta cuatro decimales'
+            });
+        }
+        if (!motivo || motivo.length > 100) {
+            return res.status(400).json({mensaje: 'Selecciona un motivo válido'});
+        }
 
-        // obtiene la cantidad a ajustar
-        const cantidad = Number(
-            req.body.cantidad
+        const inventario = await inventarioServicio.ajustarInventario(
+            codigo,
+            cantidad,
+            operacion,
+            Number(req.usuario?.id),
+            motivo
         );
 
-        // verifica el codigo del producto
-        if (
-            typeof codigo !== 'string' ||
-            codigo.trim() === ''
-        ) {
-
-            return res.status(400).json({
-                mensaje: 'El código del producto es obligatorio'
-            });
-
-        }
-
-        // verifica la cantidad a ajustar
-        if (
-            !Number.isSafeInteger(cantidad) ||
-            cantidad < 1
-        ) {
-
-            return res.status(400).json({
-                mensaje: 'La cantidad debe ser un entero mayor que 0'
-            });
-
-        }
-
-        // verifica la operacion del ajuste
-        if (
-            !['sumar', 'restar'].includes(operacion)
-        ) {
-
-            return res.status(400).json({
-                mensaje: 'La operación debe ser sumar o restar'
-            });
-
-        }
-
-        // ajusta el inventario segun la operacion seleccionada
-        const inventario =
-            await inventarioServicio.ajustarInventario(
-                codigo.trim(),
-                cantidad,
-                operacion,
-                req.usuario?.email
-            );
-
-        // envia el resultado del ajuste
-        return res.json({
-            mensaje: 'Inventario actualizado correctamente',
-            inventario
-        });
+        return res.json({mensaje: 'Inventario actualizado correctamente', inventario});
 
     } catch (error) {
-
-        // verifica si el producto no existe
-        if (error.status === 404) {
-
-            return res.status(404).json({
-                mensaje: error.message
-            });
-
+        if ([400, 401, 404].includes(error.status)) {
+            return res.status(error.status).json({mensaje: error.message});
         }
-
-        // verifica si no existe inventario suficiente para restar
-        if (error.status === 400) {
-
-            return res.status(400).json({
-                mensaje: error.message
-            });
-
-        }
-
-        // muestra el error en la consola
-        console.error(
-            'Error al ajustar inventario:',
-            error
-        );
-
-        // envia el error
-        return res.status(500).json({
-            mensaje: 'Error al ajustar inventario'
-        });
-
+        console.error('Error al ajustar inventario:', error);
+        return res.status(500).json({mensaje: 'Error al ajustar inventario'});
     }
-
 };
 
 

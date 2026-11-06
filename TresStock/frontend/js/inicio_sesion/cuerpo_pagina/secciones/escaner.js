@@ -30,6 +30,123 @@ let productoSeleccionadoAsociar = null;
 // identifica cada busqueda para evitar mostrar resultados antiguos
 let idBusquedaProductosAsociar = 0;
 
+
+// TITULO 1 MODAL DE MENSAJES Y CONFIRMACIONES DEL ESCANER
+// mismo diseño de los avisos personalizados de Productos
+let resolverDialogoEscaner = null;
+let focoAnteriorDialogoEscaner = null;
+
+// conecta los botones del modal una sola vez
+function configurarDialogoEscaner() {
+    const fondo = document.getElementById('contenedor_alerta_escaner');
+    const aceptar = document.getElementById('boton_aceptar_alerta_escaner');
+    const cancelar = document.getElementById('boton_cancelar_alerta_escaner');
+
+    if (!fondo || !aceptar || !cancelar || fondo.dataset.configurado === 'si') return;
+    fondo.dataset.configurado = 'si';
+
+    aceptar.addEventListener('click', () => cerrarDialogoEscaner(true));
+    cancelar.addEventListener('click', () => cerrarDialogoEscaner(false));
+
+    fondo.addEventListener('click', function(evento) {
+        if (evento.target === fondo) cerrarDialogoEscaner(false);
+    });
+
+    // Escape cierra el aviso, sin cerrar también el formulario de ajuste
+    fondo.addEventListener('keydown', function(evento) {
+        if (evento.key === 'Escape') {
+            evento.preventDefault();
+            evento.stopPropagation();
+            cerrarDialogoEscaner(false);
+            return;
+        }
+
+        if (evento.key !== 'Tab') return;
+
+        const botones = [cancelar, aceptar].filter(boton => !boton.hidden);
+        const primero = botones[0];
+        const ultimo = botones[botones.length - 1];
+
+        if (evento.shiftKey && document.activeElement === primero) {
+            evento.preventDefault();
+            ultimo.focus();
+        } else if (!evento.shiftKey && document.activeElement === ultimo) {
+            evento.preventDefault();
+            primero.focus();
+        }
+    });
+}
+
+// muestra un aviso centrado, con confirmación opcional
+function abrirDialogoEscaner({ titulo, mensaje, tipo = 'informacion', confirmar = false,
+    textoAceptar = 'Aceptar' }) {
+
+    const fondo = document.getElementById('contenedor_alerta_escaner');
+    const ventana = fondo?.querySelector('.modal_alerta_escaner');
+    const tituloElemento = document.getElementById('titulo_alerta_escaner');
+    const mensajeElemento = document.getElementById('mensaje_alerta_escaner');
+    const icono = document.getElementById('icono_alerta_escaner');
+    const cancelar = document.getElementById('boton_cancelar_alerta_escaner');
+    const aceptar = document.getElementById('boton_aceptar_alerta_escaner');
+
+    if (!fondo || !ventana || !tituloElemento || !mensajeElemento || !icono || !aceptar || !cancelar) {
+        console.error('No está disponible el modal de mensajes del Escáner.');
+        return Promise.resolve(false);
+    }
+
+    if (resolverDialogoEscaner) return Promise.resolve(false);
+
+    configurarDialogoEscaner();
+
+    const tipoValido = ['correcto', 'error', 'advertencia', 'informacion'].includes(tipo)
+        ? tipo : 'informacion';
+
+    tituloElemento.textContent = String(titulo || 'Aviso');
+    mensajeElemento.textContent = String(mensaje || '');
+    ventana.dataset.tipo = tipoValido;
+    icono.textContent = {
+        correcto: '✓', error: '×', advertencia: '!', informacion: 'i'
+    }[tipoValido];
+
+    cancelar.hidden = !confirmar;
+    aceptar.textContent = textoAceptar;
+    focoAnteriorDialogoEscaner = document.activeElement;
+
+    return new Promise(function(resolve) {
+        resolverDialogoEscaner = resolve;
+        fondo.hidden = false;
+        (confirmar ? cancelar : aceptar).focus();
+    });
+}
+
+// cierra el aviso y devuelve el foco al control que lo abrió
+function cerrarDialogoEscaner(aceptado) {
+    const fondo = document.getElementById('contenedor_alerta_escaner');
+    if (!fondo || fondo.hidden) return;
+
+    fondo.hidden = true;
+    const resolver = resolverDialogoEscaner;
+    resolverDialogoEscaner = null;
+
+    const elemento = focoAnteriorDialogoEscaner;
+    focoAnteriorDialogoEscaner = null;
+    if (elemento?.isConnected && typeof elemento.focus === 'function') elemento.focus();
+
+    if (resolver) resolver(Boolean(aceptado));
+}
+
+// avisa si una operación fue correcta, falló o requiere atención
+function mostrarMensajeEscaner(titulo, mensaje, tipo = 'informacion') {
+    return abrirDialogoEscaner({ titulo, mensaje, tipo });
+}
+
+// solicita autorización antes de cambiar datos
+function confirmarAccionEscaner(titulo, mensaje, textoAceptar = 'Confirmar') {
+    return abrirDialogoEscaner({
+        titulo, mensaje, tipo: 'advertencia', confirmar: true, textoAceptar
+    });
+}
+
 // formatos de codigos de barras admitidos
 const formatosCodigoBarras = [
     'code_128',
@@ -227,7 +344,7 @@ async function inicializarEscaner() {
 
         console.error('Error al iniciar el escaner:', error);
 
-        alert('No se pudo iniciar el escaner: ' + error.message);
+        await mostrarMensajeEscaner('Cámara no disponible', 'No se pudo iniciar el escáner: ' + error.message, 'error');
 
         cerrarEscanerProducto();
     }
@@ -303,7 +420,7 @@ async function consultarProductoEscaneado(codigo) {
     } catch (error) {
         console.error('Error al consultar el producto:', error);
 
-        alert('No se pudo consultar el producto');
+        mostrarMensajeEscaner('Error al consultar', 'No se pudo consultar el producto', 'error');
     }
 }
 
@@ -505,8 +622,20 @@ function mostrarProductoEscaneado(producto) {
         indicadores.appendChild(cuadro);
     };
 
-    agregarIndicador('Stock actual', producto.stock_actual ?? 0);
-    agregarIndicador('Stock mínimo', producto.stock_minimo ?? 0);
+    // muestra números enteros sin decimales y los fraccionarios con un decimal
+    // solo formatea la vista, sin modificar el valor guardado en PostgreSQL
+    const formatearStockEscaner = function(valor) {
+        const cantidad = Number(valor);
+        return Number.isFinite(cantidad)
+            ? cantidad.toLocaleString('es-CL', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 1
+            })
+            : '—';
+    };
+
+    agregarIndicador('Stock actual', formatearStockEscaner(producto.stock_actual));
+    agregarIndicador('Stock mínimo', formatearStockEscaner(producto.stock_minimo));
     agregarIndicador('Unidades por código', producto.factor ?? 1);
     contenedorDatos.appendChild(indicadores);
 }
@@ -522,6 +651,9 @@ function cerrarModalAjusteEscaner() {
 if (typeof document !== 'undefined') {
     document.addEventListener('keydown', function(evento) {
         if (evento.key === 'Escape') {
+            const alerta = document.getElementById('contenedor_alerta_escaner');
+            if (alerta && !alerta.hidden) return;
+
             const menu = document.getElementById('menu_ajustar_producto');
             if (menu && !menu.hidden) cerrarModalAjusteEscaner();
         }
@@ -533,13 +665,13 @@ if (typeof document !== 'undefined') {
 async function eliminarCodigoAsociado() {
     // verifica que exista un codigo escaneado
     if (!codigoProductoEscaneado) {
-        alert('No hay un codigo escaneado para eliminar');
+        mostrarMensajeEscaner('Código no disponible', 'No hay un código escaneado para eliminar', 'advertencia');
         return;
     }
 
     // verifica que el codigo sea realmente un codigo asociado
     if (!esCodigoAsociado(codigoProductoEscaneado, productoEscaneado)) {
-        alert('Este codigo no es un codigo asociado');
+        mostrarMensajeEscaner('Código principal', 'Este código no es un código asociado', 'advertencia');
         return;
     }
 
@@ -551,12 +683,13 @@ async function eliminarCodigoAsociado() {
     const codigoEliminar = codigoProductoEscaneado;
 
     // solicita confirmacion antes de eliminar
-    if (!confirm(
-        '¿Eliminar el codigo asociado ' + codigoEliminar +
-        ' y sus datos?'
-    )) {
-        return;
-    }
+    const confirmarEliminacion = await confirmarAccionEscaner(
+        'Eliminar código asociado',
+        '¿Eliminar el código asociado ' + codigoEliminar + ' y sus datos?',
+        'Eliminar'
+    );
+
+    if (!confirmarEliminacion) return;
 
     // evita enviar varias solicitudes al mismo tiempo
     if (botonEliminarCodigoAsociado) {
@@ -580,7 +713,7 @@ async function eliminarCodigoAsociado() {
             );
         }
 
-        alert(datos.mensaje || 'Codigo asociado eliminado correctamente');
+        await mostrarMensajeEscaner('Código eliminado', datos.mensaje || 'Código asociado eliminado correctamente', 'correcto');
 
         // vuelve a consultar el codigo para mostrar que ya no esta registrado
         await consultarProductoEscaneado(codigoEliminar);
@@ -588,7 +721,7 @@ async function eliminarCodigoAsociado() {
     } catch (error) {
         console.error('Error al eliminar el codigo asociado:', error);
 
-        alert(error.message || 'No se pudo eliminar el codigo asociado');
+        mostrarMensajeEscaner('Error al eliminar', error.message || 'No se pudo eliminar el código asociado', 'error');
 
         // vuelve a habilitar el boton para reintentar
         if (botonEliminarCodigoAsociado) {
@@ -601,7 +734,7 @@ async function eliminarCodigoAsociado() {
 // muestra la vista para asociar el codigo a un producto
 function mostrarProductosParaAsociar() {
     if (!codigoProductoEscaneado) {
-        alert('No hay un codigo escaneado para asociar');
+        mostrarMensajeEscaner('Código no disponible', 'No hay un código escaneado para asociar', 'advertencia');
         return;
     }
 
@@ -844,12 +977,12 @@ async function buscarProductosParaAsociar(termino) {
 // guarda la asociacion entre el codigo escaneado y el producto seleccionado
 async function asociarCodigoSeleccionado() {
     if (!codigoProductoEscaneado) {
-        alert('No hay un codigo escaneado para asociar');
+        mostrarMensajeEscaner('Código no disponible', 'No hay un código escaneado para asociar', 'advertencia');
         return;
     }
 
     if (!productoSeleccionadoAsociar) {
-        alert('Selecciona un producto antes de continuar');
+        mostrarMensajeEscaner('Selecciona un producto', 'Selecciona un producto antes de continuar', 'advertencia');
         return;
     }
 
@@ -868,7 +1001,7 @@ async function asociarCodigoSeleccionado() {
         !Number.isSafeInteger(cantidadUnidades) ||
         cantidadUnidades <= 0
     ) {
-        alert('Ingresa una cantidad de unidades valida');
+        mostrarMensajeEscaner('Cantidad no válida', 'Ingresa una cantidad de unidades válida', 'advertencia');
 
         if (botonConfirmar) {
             botonConfirmar.disabled = false;
@@ -907,7 +1040,7 @@ async function asociarCodigoSeleccionado() {
             );
         }
 
-        alert(datos.mensaje || 'Codigo asociado correctamente');
+        await mostrarMensajeEscaner('Código asociado', datos.mensaje || 'Código asociado correctamente', 'correcto');
 
         // vuelve a consultar el codigo para mostrar el producto asociado
         await consultarProductoEscaneado(codigoProductoEscaneado);
@@ -915,7 +1048,7 @@ async function asociarCodigoSeleccionado() {
     } catch (error) {
         console.error('Error al asociar el codigo:', error);
 
-        alert(error.message || 'No se pudo asociar el codigo');
+        mostrarMensajeEscaner('Error al asociar', error.message || 'No se pudo asociar el código', 'error');
 
         if (botonConfirmar) {
             botonConfirmar.disabled = false;
@@ -932,18 +1065,47 @@ function volverGestionProducto() {
 
 // obtiene la operacion seleccionada para ajustar el inventario
 function obtenerOperacionAjuste() {
-    const opcionRestar = document.getElementById('operacion_restar');
+    if (document.getElementById('operacion_fijar')?.checked) return 'fijar';
+    if (document.getElementById('operacion_restar')?.checked) return 'restar';
+    return 'sumar';
+}
 
-    return opcionRestar && opcionRestar.checked
-        ? 'restar'
-        : 'sumar';
+// permite cantidades con hasta cuatro decimales (NUMERIC(12,4) en PostgreSQL)
+function cantidadValidaEscaner(cantidad, admiteCero = false) {
+    if (!Number.isFinite(cantidad)) return false;
+    if (admiteCero ? cantidad < 0 : cantidad <= 0) return false;
+    if (cantidad > 99999999.9999) return false;
+    return Math.abs(cantidad - Math.round(cantidad * 10000) / 10000) < 1e-9;
+}
+
+// configura motivos coherentes para cada tipo de movimiento
+function actualizarMotivosAjusteEscaner() {
+    const campoMotivo = document.getElementById('motivo_ajuste_escaner');
+    if (!campoMotivo) return;
+
+    const operacion = obtenerOperacionAjuste();
+    const opciones = operacion === 'sumar'
+        ? ['Reposición de proveedor', 'Devolución al inventario', 'Corrección manual']
+        : operacion === 'restar'
+            ? ['Merma o producto dañado', 'Retiro manual', 'Corrección manual']
+            : ['Conteo físico', 'Corrección de inventario', 'Stock simulado para demostración'];
+
+    const anterior = campoMotivo.value;
+    campoMotivo.replaceChildren();
+    opciones.forEach(function(motivo) {
+        const opcion = document.createElement('option');
+        opcion.value = motivo;
+        opcion.textContent = motivo;
+        campoMotivo.appendChild(opcion);
+    });
+    if (opciones.includes(anterior)) campoMotivo.value = anterior;
 }
 
 
 // muestra u oculta el menu de ajuste del inventario
 function ajustarProductoEscaneado() {
     if (!productoEscaneado) {
-        alert('No hay un producto para ajustar');
+        mostrarMensajeEscaner('Producto no disponible', 'No hay un producto para ajustar', 'advertencia');
         return;
     }
 
@@ -994,10 +1156,11 @@ function ajustarProductoEscaneado() {
             ? factor
             : 1;
 
-    campoInventario.textContent =
-        Number.isFinite(inventario) && inventario >= 0
-            ? inventario
-            : 0;
+    // el stock negativo se muestra tal como lo devuelve PostgreSQL;
+    // nunca se reemplaza por cero de manera visual
+    campoInventario.textContent = Number.isFinite(inventario)
+        ? inventario
+        : 0;
 
     // obtiene las opciones para seleccionar el tipo de cantidad
     const opcionCodigoActual = document.getElementById(
@@ -1017,6 +1180,8 @@ function ajustarProductoEscaneado() {
         'operacion_restar'
     );
 
+    const opcionFijar = document.getElementById('operacion_fijar');
+
     // selecciona inicialmente el codigo actual y la suma
     if (opcionCodigoActual) {
         opcionCodigoActual.checked = true;
@@ -1032,6 +1197,10 @@ function ajustarProductoEscaneado() {
 
     if (opcionRestar) {
         opcionRestar.checked = false;
+    }
+
+    if (opcionFijar) {
+        opcionFijar.checked = false;
     }
 
     // conecta la cantidad ingresada con el calculo
@@ -1052,8 +1221,27 @@ function ajustarProductoEscaneado() {
     }
 
     if (opcionRestar) {
-        opcionRestar.onchange = actualizarCalculoAjuste;
+        opcionRestar.onchange = function() {
+            actualizarMotivosAjusteEscaner();
+            actualizarCalculoAjuste();
+        };
     }
+
+    if (opcionSumar) {
+        opcionSumar.onchange = function() {
+            actualizarMotivosAjusteEscaner();
+            actualizarCalculoAjuste();
+        };
+    }
+
+    if (opcionFijar) {
+        opcionFijar.onchange = function() {
+            actualizarMotivosAjusteEscaner();
+            actualizarCalculoAjuste();
+        };
+    }
+
+    actualizarMotivosAjusteEscaner();
 
     // calcula los valores iniciales y muestra el menu
     actualizarCalculoAjuste();
@@ -1071,344 +1259,172 @@ function ajustarProductoEscaneado() {
 }
 
 
- // actualiza los resultados que se muestran en el menu de ajuste
+// actualiza los resultados que se muestran en el menu de ajuste
 function actualizarCalculoAjuste() {
 
-    const campoCantidad = document.getElementById(
-        'cantidad_ingresada_ajuste'
-    );
+    const campoCantidad = document.getElementById('cantidad_ingresada_ajuste');
+    const campoUnidades = document.getElementById('unidades_por_codigo_ajuste');
+    const campoInventario = document.getElementById('inventario_actual_producto');
+    const resultadoCantidad = document.getElementById('cantidad_anadir_inventario');
+    const resultadoInventario = document.getElementById('inventario_resultante_producto');
+    const opcionCodigoActual = document.getElementById('cantidad_codigo_actual');
+    const opcionesModalidad = document.querySelector('.opciones_tipo_cantidad');
+    const tituloModalidad = opcionesModalidad?.previousElementSibling;
+    const contenedorUnidades = document.getElementById('contenedor_unidades_codigo');
+    const botonAceptar = document.getElementById('boton_aceptar_ajuste');
+    const etiquetaCantidad = document.getElementById('texto_cantidad_ajuste');
+    const textoUnidadesAjuste = document.getElementById('texto_unidades_ajuste');
 
-    const campoUnidades = document.getElementById(
-        'unidades_por_codigo_ajuste'
-    );
+    if (!campoCantidad || !campoUnidades || !campoInventario ||
+        !resultadoCantidad || !resultadoInventario || !productoEscaneado) return;
 
-    const campoInventario = document.getElementById(
-        'inventario_actual_producto'
-    );
-
-    const resultadoAnadir = document.getElementById(
-        'cantidad_anadir_inventario'
-    );
-
-    const resultadoInventario = document.getElementById(
-        'inventario_resultante_producto'
-    );
-
-    const opcionCodigoActual = document.getElementById(
-        'cantidad_codigo_actual'
-    );
-
-    const contenedorUnidades = document.getElementById(
-        'contenedor_unidades_codigo'
-    );
-
-    const botonAceptar = document.getElementById(
-        'boton_aceptar_ajuste'
-    );
-
-    // obtiene la etiqueta que describe la cantidad del ajuste
-    const etiquetaCantidad = document.getElementById(
-        'texto_cantidad_ajuste'
-    );
-
-    // obtiene el texto que describe las unidades del ajuste
-    const textoUnidadesAjuste = document.getElementById(
-        'texto_unidades_ajuste'
-    );
-
-    if (
-        !campoCantidad ||
-        !campoUnidades ||
-        !campoInventario ||
-        !resultadoAnadir ||
-        !resultadoInventario
-    ) {
-        return;
-    }
-
-    // identifica si se esta sumando o restando
     const operacion = obtenerOperacionAjuste();
-
-    // actualiza los textos segun la operacion seleccionada
-    if (etiquetaCantidad) {
-        etiquetaCantidad.textContent = operacion === 'restar'
-            ? 'Cantidad a restar'
-            : 'Cantidad a sumar';
-    }
-
-    if (textoUnidadesAjuste) {
-        textoUnidadesAjuste.textContent = operacion === 'restar'
-            ? 'Unidades a restar:'
-            : 'Unidades a sumar:';
-    }
-
-    // al restar se trabaja con unidades individuales
-    if (operacion === 'restar') {
-
-        const opcionCodigoSingular = document.getElementById(
-            'cantidad_codigo_singular'
-        );
-
-        if (opcionCodigoActual) {
-            opcionCodigoActual.checked = false;
-        }
-
-        if (opcionCodigoSingular) {
-            opcionCodigoSingular.checked = true;
-        }
-    }
-
-    // determina si se utiliza el codigo actual o una unidad singular
-    const usarCodigoActual =
-        operacion === 'sumar' &&
-        opcionCodigoActual &&
-        opcionCodigoActual.checked;
-
-    // obtiene el factor del codigo escaneado
-    const factorProducto = Number(productoEscaneado?.factor ?? 1);
-
-    // determina el factor segun la operacion y la opcion seleccionada
-    const factor = usarCodigoActual
-        ? (
-            Number.isSafeInteger(factorProducto) && factorProducto >= 1
-                ? factorProducto
-                : 1
-        )
+    const esFijo = operacion === 'fijar';
+    const factorProducto = Number(productoEscaneado.factor ?? 1);
+    const factor = !esFijo && opcionCodigoActual?.checked && cantidadValidaEscaner(factorProducto)
+        ? factorProducto
         : 1;
 
-    // muestra las unidades representadas por cada codigo
+    // establecer stock indica unidades individuales, sin multiplicar por la caja
+    if (opcionesModalidad) opcionesModalidad.hidden = esFijo;
+    if (tituloModalidad) tituloModalidad.hidden = esFijo;
+    if (contenedorUnidades) contenedorUnidades.hidden = esFijo || factor === 1;
     campoUnidades.value = factor;
 
-    // oculta el factor cuando se restan unidades individuales
-    if (contenedorUnidades) {
-        contenedorUnidades.hidden = operacion === 'restar';
-    }
+    if (etiquetaCantidad) etiquetaCantidad.textContent = esFijo
+        ? 'Nuevo stock (unidades)'
+        : operacion === 'restar' ? 'Cantidad a restar' : 'Cantidad a sumar';
+    if (textoUnidadesAjuste) textoUnidadesAjuste.textContent = esFijo
+        ? 'Stock que deseas establecer:'
+        : operacion === 'restar' ? 'Unidades a restar:' : 'Unidades a sumar:';
 
-    // obtiene la cantidad ingresada
+    campoCantidad.min = esFijo ? '0' : '0.0001';
+    campoCantidad.step = 'any';
+
+    const stockActual = Number(productoEscaneado.stock_actual ?? 0);
     const cantidad = Number(campoCantidad.value);
+    const cantidadTotal = esFijo ? cantidad : Number((cantidad * factor).toFixed(4));
+    const valido = campoCantidad.value.trim() !== '' &&
+        cantidadValidaEscaner(cantidad, esFijo) &&
+        cantidadValidaEscaner(cantidadTotal, esFijo) &&
+        Number.isFinite(stockActual);
 
-    // obtiene el inventario actual
-    const inventario = Number(campoInventario.textContent) || 0;
-
-    // valida la cantidad ingresada
-    if (
-        campoCantidad.value.trim() === '' ||
-        !Number.isSafeInteger(cantidad) ||
-        cantidad < 1
-    ) {
-        resultadoAnadir.textContent = '0';
-        resultadoInventario.textContent = inventario;
-
-        if (botonAceptar) {
-            botonAceptar.disabled = true;
-        }
-
+    if (!valido) {
+        resultadoCantidad.textContent = '—';
+        resultadoInventario.textContent = '—';
+        if (botonAceptar) botonAceptar.disabled = true;
         return;
     }
 
-    // calcula la cantidad de unidades que se ajustaran
-    const cantidadAjuste = cantidad * factor;
+    const nuevoStock = esFijo ? cantidadTotal
+        : operacion === 'restar' ? Number((stockActual - cantidadTotal).toFixed(4))
+        : Number((stockActual + cantidadTotal).toFixed(4));
 
-    // suma o resta la cantidad segun la operacion seleccionada
-    const inventarioResultante = operacion === 'restar'
-        ? inventario - cantidadAjuste
-        : inventario + cantidadAjuste;
-
-    // muestra la cantidad que se ajustara
-    resultadoAnadir.textContent = cantidadAjuste;
-
-    // muestra el inventario resultante
-    resultadoInventario.textContent = inventarioResultante;
-
-    // impide confirmar si el resultado seria negativo
-    if (botonAceptar) {
-        botonAceptar.disabled = inventarioResultante < 0;
-    }
+    // se admite sumar a un saldo negativo existente para recuperarlo;
+    // nunca se permite disminuirlo a un valor negativo nuevo
+    const restaNoValida = operacion === 'restar' && nuevoStock < 0;
+    const sinCambio = esFijo && Math.abs(nuevoStock - stockActual) < 1e-9;
+    resultadoCantidad.textContent = cantidadTotal.toLocaleString('es-CL', {maximumFractionDigits: 4});
+    resultadoInventario.textContent = nuevoStock.toLocaleString('es-CL', {maximumFractionDigits: 4});
+    if (botonAceptar) botonAceptar.disabled = restaNoValida || sinCambio;
 }
 
-// acepta el ajuste del inventario
+
+// confirma el cambio y utiliza el mismo endpoint de inventario de TresStock
 async function aceptarAjusteProducto() {
-    // verifica que exista un producto seleccionado
+
     if (!productoEscaneado) {
-        alert('No hay un producto seleccionado');
+        mostrarMensajeEscaner('Producto no disponible', 'No hay un producto seleccionado', 'advertencia');
         return;
     }
 
-    const campoCantidadAjuste = document.getElementById(
-        'cantidad_anadir_inventario'
-    );
-
-    const campoInventario = document.getElementById(
-        'inventario_actual_producto'
-    );
-
-    const campoResultado = document.getElementById(
-        'inventario_resultante_producto'
-    );
-
-    const botonAceptar = document.getElementById(
-        'boton_aceptar_ajuste'
-    );
-
-    // verifica que los campos necesarios existan
-    if (
-        !campoCantidadAjuste ||
-        !campoInventario ||
-        !campoResultado
-    ) {
-        alert('No se encontraron los campos del ajuste');
-        return;
-    }
-
-    // obtiene el codigo del producto
-    const codigo = productoEscaneado.codigo;
-
-    // obtiene la cantidad que se ajustara
-    const cantidad = Number(campoCantidadAjuste.textContent);
-
-    // determina la operacion seleccionada
+    const botonAceptar = document.getElementById('boton_aceptar_ajuste');
+    const campoCantidad = document.getElementById('cantidad_ingresada_ajuste');
+    const campoMotivo = document.getElementById('motivo_ajuste_escaner');
+    const opcionCodigoActual = document.getElementById('cantidad_codigo_actual');
     const operacion = obtenerOperacionAjuste();
+    const esFijo = operacion === 'fijar';
+    const cantidadIngresada = Number(campoCantidad?.value);
+    const factor = esFijo || !opcionCodigoActual?.checked
+        ? 1
+        : Number(productoEscaneado.factor ?? 1);
+    const cantidad = Number((cantidadIngresada * factor).toFixed(4));
+    const motivo = String(campoMotivo?.value || '').trim();
 
-    // obtiene el inventario resultante calculado
-    const inventarioResultante = Number(campoResultado.textContent);
-
-    // valida la cantidad del ajuste
-    if (
-        !Number.isSafeInteger(cantidad) ||
-        cantidad < 1
-    ) {
-        alert('La cantidad del ajuste no es valida');
+    if (!cantidadValidaEscaner(cantidadIngresada, esFijo) ||
+        !cantidadValidaEscaner(factor) ||
+        !cantidadValidaEscaner(cantidad, esFijo) ||
+        !motivo) {
+        mostrarMensajeEscaner('Datos incompletos', 'Revisa la cantidad y el motivo del movimiento', 'advertencia');
         return;
     }
 
-    // impide enviar un ajuste que deje el inventario negativo
-    if (
-        !Number.isSafeInteger(inventarioResultante) ||
-        inventarioResultante < 0
-    ) {
-        alert('El inventario no puede quedar en negativo');
+    const stockActual = Number(productoEscaneado.stock_actual ?? 0);
+    const nuevoStock = esFijo ? cantidad
+        : operacion === 'sumar' ? Number((stockActual + cantidad).toFixed(4))
+        : Number((stockActual - cantidad).toFixed(4));
+
+    if (operacion === 'restar' && nuevoStock < 0) {
+        mostrarMensajeEscaner('Stock insuficiente', 'No hay existencias suficientes para realizar esta salida', 'advertencia');
         return;
     }
 
-    // prepara la confirmacion segun la operacion seleccionada
-    const mensajeConfirmacion = operacion === 'restar'
-        ? `¿Restar ${cantidad} unidades del inventario?`
-        : `¿Añadir ${cantidad} unidades al inventario?`;
-
-    // solicita confirmacion antes de modificar el inventario
-    if (!confirm(mensajeConfirmacion)) {
+    if (esFijo && Math.abs(nuevoStock - stockActual) < 1e-9) {
+        mostrarMensajeEscaner('Sin cambios', 'El nuevo stock debe ser diferente del actual', 'advertencia');
         return;
     }
 
-    // evita enviar varias solicitudes al mismo tiempo
-    if (botonAceptar) {
-        botonAceptar.disabled = true;
-    }
+    const pregunta = esFijo
+        ? `¿Establecer el stock de ${productoEscaneado.descripcion} en ${cantidad} unidades?`
+        : operacion === 'sumar'
+            ? `¿Sumar ${cantidad} unidades al inventario?`
+            : `¿Restar ${cantidad} unidades del inventario?`;
+
+    const confirmado = await confirmarAccionEscaner(
+        'Confirmar ajuste de inventario',
+        pregunta,
+        'Confirmar ajuste'
+    );
+
+    if (!confirmado) return;
+    if (botonAceptar) botonAceptar.disabled = true;
 
     try {
-        // envia el ajuste al backend
         const respuesta = await fetchConCsrf(
             `${URL_API}/api/inventario/ajustar`,
             {
                 method: 'POST',
                 credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
-                    codigo: codigo,
-                    cantidad: cantidad,
-                    operacion: operacion
+                    codigo: productoEscaneado.codigo,
+                    cantidad,
+                    operacion,
+                    motivo
                 })
             }
         );
 
-        // obtiene la respuesta del backend
-        const resultado = await respuesta.json();
-
-        // verifica si ocurrio un error
+        const datos = await respuesta.json();
         if (!respuesta.ok) {
-            throw new Error(
-                resultado.mensaje ||
-                'No se pudo actualizar el inventario'
-            );
+            throw new Error(datos.mensaje || 'No se pudo actualizar el inventario');
         }
 
-        // obtiene el nuevo inventario informado por el backend
-        const nuevoInventario = Number(
-            resultado.inventario?.stock_actual
-        );
-
-        // verifica que el backend haya devuelto el inventario actualizado
-        if (
-            !Number.isSafeInteger(nuevoInventario) ||
-            nuevoInventario < 0
-        ) {
-            throw new Error(
-                'El backend no devolvio un inventario actualizado valido'
-            );
+        const nuevoInventario = Number(datos.inventario?.stock_actual);
+        if (!Number.isFinite(nuevoInventario)) {
+            throw new Error('El backend no devolvió el nuevo inventario');
         }
 
-        // actualiza el inventario actual mostrado
-        campoInventario.textContent = nuevoInventario;
-
-        // actualiza el inventario resultante mostrado
-        campoResultado.textContent = nuevoInventario;
-
-        // actualiza el inventario del producto almacenado en memoria
         productoEscaneado.stock_actual = nuevoInventario;
-
-        // actualiza el stock si existe en el objeto
-        if ('stock' in productoEscaneado) {
-            productoEscaneado.stock = nuevoInventario;
-        }
-
-        // actualiza el inventario si existe en el objeto
-        if ('inventario' in productoEscaneado) {
-            productoEscaneado.inventario = nuevoInventario;
-        }
-
-        // actualiza la tarjeta con los datos actuales del producto
         mostrarProductoEscaneado(productoEscaneado);
-
-        // actualiza otras propiedades si el producto las utiliza
-        if ('stock' in productoEscaneado) {
-            productoEscaneado.stock = nuevoInventario;
-        }
-
-        if ('inventario' in productoEscaneado) {
-            productoEscaneado.inventario = nuevoInventario;
-        }
-
-        // informa que el ajuste fue exitoso
-        alert(
-            resultado.mensaje ||
-            'Inventario actualizado correctamente'
-        );
-
-        // cierra el menu de ajuste
-        const menu = document.getElementById(
-            'menu_ajustar_producto'
-        );
-
-        if (menu) {
-            menu.hidden = true;
-        }
+        cerrarModalAjusteEscaner();
+        await mostrarMensajeEscaner('Inventario actualizado', datos.mensaje || 'Inventario actualizado correctamente', 'correcto');
 
     } catch (error) {
-        // informa el error del ajuste
         console.error('Error al ajustar inventario:', error);
-
-        alert(
-            error.message ||
-            'Ocurrio un error al actualizar el inventario'
-        );
-
+        mostrarMensajeEscaner('Error al ajustar inventario', error.message || 'No se pudo actualizar el inventario', 'error');
     } finally {
-        // vuelve a habilitar el boton si el menu sigue abierto
-        if (botonAceptar) {
-            botonAceptar.disabled = false;
-        }
+        if (botonAceptar) botonAceptar.disabled = false;
     }
 }
 

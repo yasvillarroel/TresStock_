@@ -371,173 +371,128 @@ const ajustarInventario = async (
     codigo,
     cantidad,
     operacion,
-    correoUsuario
+    idUsuario,
+    motivo
 ) => {
 
-    // valida la operacion solicitada
-    if (!['sumar', 'restar'].includes(operacion)) {
+    // valida los parametros nuevamente antes de modificar PostgreSQL
+    const operacionValida = ['sumar', 'restar', 'fijar'].includes(operacion);
+    const cantidadValida = Number.isFinite(cantidad) && cantidad <= 99999999.9999 &&
+        (operacion === 'fijar' ? cantidad >= 0 : cantidad > 0) &&
+        Math.abs(cantidad - Math.round(cantidad * 10000) / 10000) < 1e-9;
 
-        const error = new Error(
-            'La operacion debe ser sumar o restar'
-        );
-
+    if (!operacionValida || !cantidadValida || !motivo || motivo.length > 100) {
+        const error = new Error('Datos inválidos para ajustar inventario');
         error.status = 400;
-
         throw error;
-
     }
 
-    // valida la cantidad del ajuste
-    if (
-        !Number.isSafeInteger(cantidad) ||
-        cantidad <= 0
-    ) {
-
-        const error = new Error(
-            'La cantidad debe ser un entero positivo'
-        );
-
-        error.status = 400;
-
-        throw error;
-
-    }
-
-    // inicia una transaccion
     const cliente = await pool.connect();
-
     try {
-
-        // inicia la transaccion
         await cliente.query('BEGIN');
 
-        // verifica que el producto exista
+        // obtiene el correo vigente del usuario autenticado
+        const usuario = await cliente.query(
+            `SELECT email FROM base_datos.usuarios
+             WHERE id_usuario = $1 AND activo = TRUE`,
+            [idUsuario]
+        );
+        if (!usuario.rowCount) {
+            const error = new Error('No hay una sesión válida para realizar el ajuste');
+            error.status = 401;
+            throw error;
+        }
+
+        // comprueba que el producto exista
         const producto = await cliente.query(
-            `SELECT codigo
-            FROM base_datos.productos
-            WHERE codigo = $1`,
+            `SELECT codigo FROM base_datos.productos WHERE codigo = $1`,
             [codigo]
         );
-
-        // verifica si el producto existe
-        if (producto.rowCount === 0) {
-
-            const error = new Error(
-                'Producto no encontrado'
-            );
-
+        if (!producto.rowCount) {
+            const error = new Error('Producto no encontrado');
             error.status = 404;
-
             throw error;
-
         }
 
-        // crea el registro de inventario si no existe
+        // crea el inventario si falta y bloquea la fila para evitar concurrencia
         await cliente.query(
-            `INSERT INTO base_datos.inventario
-            (
-                codigo,
-                stock_actual,
-                stock_minimo
-            )
-            VALUES ($1, 0, 0)
-            ON CONFLICT (codigo) DO NOTHING`,
+            `INSERT INTO base_datos.inventario (codigo, stock_actual, stock_minimo)
+             VALUES ($1, 0, 0)
+             ON CONFLICT (codigo) DO NOTHING`,
             [codigo]
         );
 
-        // bloquea el registro para evitar ajustes simultaneos
         const inventario = await cliente.query(
-            `SELECT stock_actual
-            FROM base_datos.inventario
-            WHERE codigo = $1
-            FOR UPDATE`,
+            `SELECT stock_actual FROM base_datos.inventario
+             WHERE codigo = $1 FOR UPDATE`,
             [codigo]
         );
+        const stockAnterior = Number(inventario.rows[0].stock_actual);
+        const stockNuevo = Number((operacion === 'fijar' ? cantidad
+            : operacion === 'restar' ? stockAnterior - cantidad
+            : stockAnterior + cantidad).toFixed(4));
 
-        // obtiene el stock anterior
-        const stockAnterior = Number(
-            inventario.rows[0].stock_actual
-        );
-
-        // calcula el nuevo stock segun la operacion
-        const stockNuevo = operacion === 'restar'
-            ? stockAnterior - cantidad
-            : stockAnterior + cantidad;
-
-        // impide que el inventario quede negativo
-        if (stockNuevo < 0) {
-
-            const error = new Error(
-                'No hay suficiente inventario para realizar la resta'
-            );
-
+        // se puede recuperar con una entrada un saldo histórico negativo;
+        // no se permite crear nuevos negativos mediante una salida manual
+        if (operacion === 'restar' && stockNuevo < 0) {
+            const error = new Error('No hay inventario suficiente para realizar la resta');
             error.status = 400;
-
             throw error;
-
+        }
+        if (operacion === 'fijar' && Math.abs(stockNuevo - stockAnterior) < 1e-9) {
+            const error = new Error('El nuevo stock es igual al actual');
+            error.status = 400;
+            throw error;
+        }
+        if (Math.abs(stockNuevo) > 99999999.9999) {
+            const error = new Error('El inventario resultante excede el límite permitido');
+            error.status = 400;
+            throw error;
         }
 
-        // actualiza el stock
         const resultado = await cliente.query(
-            `UPDATE base_datos.inventario
-            SET stock_actual = $1
-            WHERE codigo = $2
-            RETURNING
-                codigo,
-                stock_actual,
-                stock_minimo`,
-            [
-                stockNuevo,
-                codigo
-            ]
+            `UPDATE base_datos.inventario SET stock_actual = $1
+             WHERE codigo = $2
+             RETURNING codigo, stock_actual, stock_minimo`,
+            [stockNuevo, codigo]
         );
 
-        // registra el ajuste en el historial dentro de la misma transaccion
-        await cliente.query(
-            `INSERT INTO base_datos.movimientos_inventario
-                (codigo, tipo, cantidad, motivo, correo_usuario)
-            VALUES ($1, $2, $3, $4, $5)`,
-            [
-                codigo,
-                operacion === 'sumar' ? 'ENTRADA' : 'SALIDA',
-                cantidad,
-                'Ajuste manual de inventario',
-                correoUsuario || null
-            ]
-        );
+        // AJUSTE almacena la magnitud absoluta; el motivo conserva
+        // explícitamente la dirección mediante stock anterior y nuevo
+        const tipo = operacion === 'fijar' ? 'AJUSTE'
+            : operacion === 'sumar' ? 'ENTRADA' : 'SALIDA';
+        const diferencia = Number(Math.abs(stockNuevo - stockAnterior).toFixed(4));
+        const motivoCompleto = operacion === 'fijar'
+            ? `${motivo}. Stock: ${stockAnterior} a ${stockNuevo}`
+            : `${motivo} (Escáner)`;
 
-        // confirma la transaccion
+        if (diferencia > 0) {
+            await cliente.query(
+                `INSERT INTO base_datos.movimientos_inventario
+                    (codigo, tipo, cantidad, motivo, correo_usuario)
+                 VALUES ($1, $2, $3, $4, $5)`,
+                [codigo, tipo, diferencia, motivoCompleto.slice(0, 255), usuario.rows[0].email]
+            );
+        }
+
         await cliente.query('COMMIT');
-
-        // devuelve el resultado del ajuste
         return {
             codigo: resultado.rows[0].codigo,
             stock_anterior: stockAnterior,
-            cantidad_ajustada: cantidad,
-            operacion: operacion,
-            stock_actual: Number(
-                resultado.rows[0].stock_actual
-            ),
-            stock_minimo: Number(
-                resultado.rows[0].stock_minimo
-            )
+            stock_actual: Number(resultado.rows[0].stock_actual),
+            stock_minimo: Number(resultado.rows[0].stock_minimo),
+            cantidad_ajustada: diferencia,
+            operacion
         };
 
     } catch (error) {
-
-        // revierte la transaccion si ocurre un error
         await cliente.query('ROLLBACK');
-
         throw error;
-
     } finally {
-
-        // libera la conexion
         cliente.release();
-
     }
-
 };
+
 
 // exporta las funciones
 module.exports = {
