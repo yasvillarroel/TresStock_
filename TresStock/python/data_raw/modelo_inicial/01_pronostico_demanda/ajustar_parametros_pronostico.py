@@ -5,7 +5,6 @@ from collections import defaultdict, deque
 from datetime import date, timedelta
 from pathlib import Path
 
-import joblib
 import lightgbm as lgb
 import numpy as np
 import pandas as pd
@@ -17,7 +16,6 @@ ARCHIVO_DATASET = CARPETA / "dataset_pronostico_demanda.csv"
 ARCHIVO_DIARIO = CARPETA.parent / "04_estacionalidad_tendencias" / "dataset_estacionalidad_tendencias.csv"
 ARCHIVO_COMPARACION = CARPETA / "comparacion_modelos.json"
 ARCHIVO_EVALUACION = CARPETA / "evaluacion_pronostico.json"
-CARPETA_MODELOS = CARPETA / "modelos_lightgbm_ajustados"
 ARCHIVO_JSON = CARPETA / "ajuste_parametros.json"
 ARCHIVO_REPORTE = CARPETA / "ajuste_parametros.md"
 HORIZONTES = {7: "objetivo_7_dias", 14: "objetivo_14_dias", 30: "objetivo_30_dias"}
@@ -302,21 +300,13 @@ def ajustar_lightgbm(validaciones, entrenamiento_final, prueba):
         pred_test = np.maximum(p_test * tamano_test, 0)
         metricas_test = metricas(prueba[objetivo].astype(float), pred_test)
 
-        nombre_modelo = CARPETA_MODELOS / f"lightgbm_hurdle_ajustado_{horizonte}_dias.joblib"
-        joblib.dump({
-            "clasificador": clasificador_final,
-            "regresor": regresor_final,
-            "variables": VARIABLES,
-            "horizonte_dias": horizonte,
-            "parametros": mejor_config,
-        }, nombre_modelo)
         resultados[str(horizonte)] = {
             "objetivo": objetivo,
             "configuracion_elegida_id": mejor_id,
             "configuracion_elegida": mejor_config,
             "rejilla_validacion": candidatos,
             "metricas_prueba": metricas_test,
-            "modelo_guardado": nombre_modelo.name,
+            "modelo_guardado": False,
             "importancia_clasificador_gain": {nombre: float(valor) for nombre, valor in sorted(zip(VARIABLES, clasificador_final.booster_.feature_importance(importance_type="gain")), key=lambda par: par[1], reverse=True)},
             "importancia_regresor_gain": {nombre: float(valor) for nombre, valor in sorted(zip(VARIABLES, regresor_final.booster_.feature_importance(importance_type="gain")), key=lambda par: par[1], reverse=True)},
         }
@@ -336,7 +326,6 @@ def main():
     intermitencia = recopilar_metricas_intermitencia(validaciones, prueba, filas_validacion, filas_prueba, tasas)
     del tasas
 
-    CARPETA_MODELOS.mkdir(parents=True, exist_ok=True)
     print("Iniciando búsqueda de LightGBM hurdle en tres ventanas temporales.", flush=True)
     resultados_lightgbm = ajustar_lightgbm(validaciones, entrenamiento_final, prueba)
     resumen_comparacion = json.loads(ARCHIVO_COMPARACION.read_text(encoding="utf-8"))["modelos_por_horizonte"]
@@ -388,7 +377,7 @@ def main():
     ARCHIVO_REPORTE.write_text("\n".join(lineas), encoding="utf-8")
     print(f"Reporte: {ARCHIVO_REPORTE}")
     print(f"Resultados JSON: {ARCHIVO_JSON}")
-    print(f"Modelos LightGBM ajustados: {CARPETA_MODELOS}")
+    print("Los modelos se usaron solo para las pruebas; no se guardaron binarios.")
 
 
 if __name__ == "__main__":

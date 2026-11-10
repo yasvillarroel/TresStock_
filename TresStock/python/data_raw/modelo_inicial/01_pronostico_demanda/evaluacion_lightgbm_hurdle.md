@@ -16,7 +16,7 @@ El modelo estima primero la probabilidad de que las ventas futuras sean mayores 
 - **Diferencia de MAE frente al promedio:** -0,076 unidades (positivo significa mejora).
 - **Diferencia de WAPE frente al promedio:** -11,934 puntos porcentuales (positivo significa mejora).
 - **Predictores más influyentes (clasificador / cantidad):** promedio_28_dias (2285786 / 262539161); codigo (1328200 / 38097411); promedio_7_dias (381531 / 70387134); mes (49721 / 2235229); unidades_mismo_dia_semana_anterior (8645 / 0).
-- **Modelo guardado:** `modelos_lightgbm_hurdle\lightgbm_hurdle_7_dias.joblib`.
+- **Artefacto:** modelo usado solo para evaluación; binario eliminado para ahorrar espacio.
 
 ## Horizonte de 14 días
 
@@ -26,7 +26,7 @@ El modelo estima primero la probabilidad de que las ventas futuras sean mayores 
 - **Diferencia de MAE frente al promedio:** -0,148 unidades (positivo significa mejora).
 - **Diferencia de WAPE frente al promedio:** -11,683 puntos porcentuales (positivo significa mejora).
 - **Predictores más influyentes (clasificador / cantidad):** promedio_28_dias (2522054 / 1078307137); codigo (2125066 / 207399797); promedio_7_dias (434615 / 210831219); mes (75576 / 8946777); unidades_mismo_dia_semana_anterior (7559 / 0).
-- **Modelo guardado:** `modelos_lightgbm_hurdle\lightgbm_hurdle_14_dias.joblib`.
+- **Artefacto:** modelo usado solo para evaluación; binario eliminado para ahorrar espacio.
 
 ## Horizonte de 30 días
 
@@ -36,4 +36,4 @@ El modelo estima primero la probabilidad de que las ventas futuras sean mayores 
 - **Diferencia de MAE frente al promedio:** -0,249 unidades (positivo significa mejora).
 - **Diferencia de WAPE frente al promedio:** -9,154 puntos porcentuales (positivo significa mejora).
 - **Predictores más influyentes (clasificador / cantidad):** codigo (3297132 / 1202501619); promedio_28_dias (2526333 / 5068135655); promedio_7_dias (425288 / 496224716); mes (123212 / 35277313); unidades_mismo_dia_semana_anterior (3325 / 0).
-- **Modelo guardado:** `modelos_lightgbm_hurdle\lightgbm_hurdle_30_dias.joblib`.
+- **Artefacto:** modelo usado solo para evaluación; binario eliminado para ahorrar espacio.

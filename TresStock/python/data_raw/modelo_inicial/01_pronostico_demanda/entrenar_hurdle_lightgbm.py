@@ -3,7 +3,6 @@ import json
 from datetime import timedelta
 from pathlib import Path
 
-import joblib
 import lightgbm as lgb
 import numpy as np
 import pandas as pd
@@ -13,7 +12,6 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 CARPETA = Path(__file__).resolve().parent
 ARCHIVO_DATASET = CARPETA / "dataset_pronostico_demanda.csv"
 ARCHIVO_COMPARACION = CARPETA / "comparacion_modelos.json"
-CARPETA_MODELOS = CARPETA / "modelos_lightgbm_hurdle"
 ARCHIVO_JSON = CARPETA / "evaluacion_lightgbm_hurdle.json"
 ARCHIVO_REPORTE = CARPETA / "evaluacion_lightgbm_hurdle.md"
 VARIABLES_CATEGORICAS = ["codigo", "dia_semana", "mes"]
@@ -112,8 +110,6 @@ def main():
         "- El código de producto, mes y día de semana se entregan a LightGBM como categóricas, sin expandir el código en miles de columnas one-hot.",
         "- Los pronósticos negativos se recortan a cero antes de calcular las métricas.", "",
     ]
-    CARPETA_MODELOS.mkdir(parents=True, exist_ok=True)
-
     for horizonte, objetivo in HORIZONTES.items():
         y_entrenamiento = entrenamiento[objetivo].astype(float)
         y_prueba = prueba[objetivo].astype(float).to_numpy()
@@ -152,14 +148,6 @@ def main():
             "importancia_regresor_gain": {nombre: float(valor) for nombre, valor in sorted(zip(VARIABLES, regresor.booster_.feature_importance(importance_type="gain")), key=lambda par: par[1], reverse=True)},
         }
 
-        archivo_modelo = CARPETA_MODELOS / f"lightgbm_hurdle_{horizonte}_dias.joblib"
-        joblib.dump({
-            "clasificador": clasificador,
-            "regresor": regresor,
-            "variables": VARIABLES,
-            "horizonte_dias": horizonte,
-        }, archivo_modelo)
-
         top_clasificador = list(resultados["horizontes"][str(horizonte)]["importancia_clasificador_gain"].items())[:5]
         top_regresor = dict(list(resultados["horizontes"][str(horizonte)]["importancia_regresor_gain"].items())[:5])
         predictores_principales = "; ".join(
@@ -174,14 +162,14 @@ def main():
             f"- **Diferencia de MAE frente al promedio:** {formato_numero(resultados['horizontes'][str(horizonte)]['mejora_mae_vs_promedio_28_dias'])} unidades (positivo significa mejora).",
             f"- **Diferencia de WAPE frente al promedio:** {formato_numero(resultados['horizontes'][str(horizonte)]['mejora_wape_vs_promedio_28_dias'])} puntos porcentuales (positivo significa mejora).",
             f"- **Predictores más influyentes (clasificador / cantidad):** {predictores_principales}.",
-            f"- **Modelo guardado:** `{archivo_modelo.relative_to(CARPETA)}`.", "",
+            "- El modelo se utilizó para la evaluación y no se guarda como archivo.", "",
         ])
 
     ARCHIVO_JSON.write_text(json.dumps(resultados, ensure_ascii=False, indent=2), encoding="utf-8")
     ARCHIVO_REPORTE.write_text("\n".join(lineas), encoding="utf-8")
     print(f"Reporte: {ARCHIVO_REPORTE}")
     print(f"Métricas JSON: {ARCHIVO_JSON}")
-    print(f"Modelos: {CARPETA_MODELOS}")
+    print("Los modelos se usaron solo para la prueba; no se guardaron binarios.")
 
 
 if __name__ == "__main__":

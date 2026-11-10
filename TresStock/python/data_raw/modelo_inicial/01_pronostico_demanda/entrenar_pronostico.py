@@ -3,7 +3,6 @@ import json
 from datetime import timedelta
 from pathlib import Path
 
-import joblib
 import numpy as np
 import pandas as pd
 from sklearn.compose import ColumnTransformer
@@ -15,7 +14,6 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 CARPETA = Path(__file__).resolve().parent
 ARCHIVO_DATASET = CARPETA / "dataset_pronostico_demanda.csv"
-CARPETA_MODELOS = CARPETA / "modelos"
 ARCHIVO_JSON = CARPETA / "evaluacion_pronostico.json"
 ARCHIVO_REPORTE = CARPETA / "evaluacion_pronostico.md"
 VARIABLES_CATEGORICAS = ["codigo", "dia_semana", "mes"]
@@ -98,7 +96,6 @@ def main():
         x_entrenamiento[columna] = x_entrenamiento[columna].astype("string")
         x_prueba[columna] = x_prueba[columna].astype("string")
 
-    CARPETA_MODELOS.mkdir(parents=True, exist_ok=True)
     resultados = {
         "objetivo": "Pronosticar unidades vendidas por producto",
         "algoritmo": "Regresión lineal con codificación one-hot de producto y calendario",
@@ -143,23 +140,20 @@ def main():
             "mejora_mae_vs_referencia": float(mejora_mae),
             "supera_referencia_en_mae": bool(mejora_mae > 0),
         }
-        archivo_modelo = CARPETA_MODELOS / f"regresion_lineal_{horizonte}_dias.joblib"
-        joblib.dump({"modelo": modelo, "variables": variables, "horizonte_dias": horizonte}, archivo_modelo)
-
         lineas.extend([
             f"## Horizonte de {horizonte} días", "",
             f"- **Objetivo:** `{columna_objetivo}`.",
             f"- **Regresión lineal:** MAE {formato_numero(metricas_modelo['mae'])} unidades · RMSE {formato_numero(metricas_modelo['rmse'])} · WAPE {formato_numero(metricas_modelo['wape_porcentaje'])}% · sesgo {formato_numero(metricas_modelo['sesgo_promedio'])} · R² {formato_numero(metricas_modelo['r2'])}.",
             f"- **Referencia (promedio diario de 28 días × {horizonte}):** MAE {formato_numero(metricas_referencia['mae'])} · RMSE {formato_numero(metricas_referencia['rmse'])} · WAPE {formato_numero(metricas_referencia['wape_porcentaje'])}%.",
             f"- **Comparación:** {'la regresión mejora' if mejora_mae > 0 else 'la regresión no mejora'} el MAE de la referencia por {formato_numero(abs(mejora_mae))} unidades.",
-            f"- **Modelo guardado:** `{archivo_modelo.relative_to(CARPETA)}`.", "",
+            "- El modelo se utilizó para la evaluación y no se guarda como archivo.", "",
         ])
 
     ARCHIVO_JSON.write_text(json.dumps(resultados, ensure_ascii=False, indent=2), encoding="utf-8")
     ARCHIVO_REPORTE.write_text("\n".join(lineas), encoding="utf-8")
     print(f"Reporte: {ARCHIVO_REPORTE}")
     print(f"Métricas estructuradas: {ARCHIVO_JSON}")
-    print(f"Modelos: {CARPETA_MODELOS}")
+    print("El modelo se usó solo para la prueba; no se guardó ningún binario.")
 
 
 if __name__ == "__main__":

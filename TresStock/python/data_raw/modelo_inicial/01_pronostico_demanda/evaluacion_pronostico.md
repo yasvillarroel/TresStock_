@@ -14,7 +14,7 @@ Se entrenó una regresión lineal independiente para cada horizonte. La prueba c
 - **Regresión lineal:** MAE 0,406 unidades · RMSE 1,513 · WAPE 63,913% · sesgo 0,060 · R² 0,954.
 - **Referencia (promedio diario de 28 días × 7):** MAE 0,341 · RMSE 1,540 · WAPE 53,646%.
 - **Comparación:** la regresión no mejora el MAE de la referencia por 0,065 unidades.
-- **Modelo guardado:** `modelos\regresion_lineal_7_dias.joblib`.
+- **Artefacto:** modelo usado solo para evaluación; binario eliminado para ahorrar espacio.
 
 ## Horizonte de 14 días
 
@@ -22,7 +22,7 @@ Se entrenó una regresión lineal independiente para cada horizonte. La prueba c
 - **Regresión lineal:** MAE 0,701 unidades · RMSE 2,424 · WAPE 55,194% · sesgo 0,128 · R² 0,969.
 - **Referencia (promedio diario de 28 días × 14):** MAE 0,572 · RMSE 2,519 · WAPE 44,972%.
 - **Comparación:** la regresión no mejora el MAE de la referencia por 0,130 unidades.
-- **Modelo guardado:** `modelos\regresion_lineal_14_dias.joblib`.
+- **Artefacto:** modelo usado solo para evaluación; binario eliminado para ahorrar espacio.
 
 ## Horizonte de 30 días
 
@@ -30,4 +30,4 @@ Se entrenó una regresión lineal independiente para cada horizonte. La prueba c
 - **Regresión lineal:** MAE 1,340 unidades · RMSE 4,423 · WAPE 49,264% · sesgo 0,278 · R² 0,977.
 - **Referencia (promedio diario de 28 días × 30):** MAE 1,104 · RMSE 5,022 · WAPE 40,580%.
 - **Comparación:** la regresión no mejora el MAE de la referencia por 0,236 unidades.
-- **Modelo guardado:** `modelos\regresion_lineal_30_dias.joblib`.
+- **Artefacto:** modelo usado solo para evaluación; binario eliminado para ahorrar espacio.

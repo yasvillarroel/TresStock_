@@ -77,7 +77,32 @@ Los números usan formato local con coma decimal y, en algunos campos, punto de 
 
 El flujo debe ser idempotente: volver a procesar un lote ya importado no debe duplicar sus ventas. La preparación del dataset no modifica el CSV original ni la base de datos.
 
-## Alcance inicial
+## Búsqueda de método por objetivo
 
-La primera etapa es preparar, validar y describir los datos. El entrenamiento, comparación y evaluación de modelos vendrá después de revisar la calidad del dataset limpio y acordar el tratamiento de devoluciones, días sin venta y valores atípicos.
+Se revisó si cada objetivo requiere un modelo supervisado, una regla de inventario o estadística descriptiva. No se fuerza ML donde faltan etiquetas o donde el objetivo es describir patrones.
+
+| Objetivo | Métodos evaluados/considerados | Selección actual | Estado de parámetros |
+| --- | --- | --- | --- |
+| Pronóstico de demanda | Promedio de 28 días, patrón semanal, regresión lineal, Croston-SBA, TSB y LightGBM hurdle | Promedio de 28 días: mejor MAE/WAPE general en la prueba; patrón semanal queda candidato a 30 días por mejora WAPE mínima | Ajustados por validación temporal; ninguno ML superó la referencia |
+| Reposición | Regla mínimo/máximo, política order-up-to `(R,S)`, regresión/boosting de cantidad | Regla explicable usando demanda durante el plazo, una vez integrados datos operativos | No se pueden optimizar servicio/seguridad sin stock histórico, órdenes y costo de quiebre/sobrante |
+| Alertas de quiebre | Regla de cobertura/plazo, regresión logística, boosting clasificador | Regla determinística hasta tener historial etiquetado de quiebres | No se pueden ajustar umbral o clasificador sin snapshots y fechas de agotamiento/recepción |
+| Estacionalidad y tendencias | Agregados por calendario; STL robusta semanal; regresión/boosting | Agregados descriptivos; posible STL semanal cuando se confirme el calendario de apertura | No hay MAE/WAPE para un objetivo descriptivo; periodo semanal 7 es conocido, el suavizado queda por validar |
+
+### Hallazgos que condicionan la selección
+
+- La demanda del CSV es intermitente: entre 76,5 % y 87,4 % de los objetivos de prueba fueron cero. Las referencias simples superaron los modelos de ML probados.
+- En la base actual hay inventario vigente, movimientos y relaciones con proveedores, pero no una tabla histórica de órdenes de compra ni snapshots de stock por fecha. Sin snapshots no se puede reconstruir qué stock se conocía antes de un quiebre.
+- En las ventas agregadas por fecha se observan 0 unidades los domingos y un nivel claramente menor los sábados. Hay que validar si corresponde al horario del negocio o a cargas faltantes antes de usarlo como patrón.
+- MAE/WAPE evalúan demanda pronosticada. Para reposición se deben medir servicio, quiebres, sobrantes y costos; para alertas, precisión, recall y anticipación; para tendencias descriptivas, cobertura y consistencia del calendario.
+
+## Documentación por objetivo
+
+- [Pronóstico de demanda](01_pronostico_demanda/README.md)
+- [Reposición recomendada](02_reposicion_recomendada/README.md)
+- [Alertas de quiebre de stock](03_alertas_quiebre_stock/README.md)
+- [Estacionalidad y tendencias](04_estacionalidad_tendencias/README.md)
+
+## Alcance y próximos datos
+
+Las pruebas de pronóstico se ejecutaron y los binarios entrenados se eliminaron; sus scripts y métricas se conservaron. Los demás objetivos ya tienen una selección metodológica, pero no deben presentarse como modelos validados con los CSV iniciales. Para completar sus búsquedas hacen falta snapshots fechados de stock, órdenes/recepciones, etiquetas de quiebre y calendario de días abiertos. El CSV original se conserva sin modificar.
 
