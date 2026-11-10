@@ -1,0 +1,219 @@
+{
+  "modelo": "Hurdle global con LightGBM: clasificador de venta × regresor de unidades cuando hay venta",
+  "parametros": {
+    "n_estimators": 350,
+    "learning_rate": 0.04,
+    "num_leaves": 31,
+    "max_depth": -1,
+    "min_child_samples": 100,
+    "subsample": 0.8,
+    "subsample_freq": 1,
+    "colsample_bytree": 0.8,
+    "reg_lambda": 1.0,
+    "random_state": 42,
+    "n_jobs": -1,
+    "verbosity": -1
+  },
+  "separacion": {
+    "desde_entrenamiento": "2025-04-28",
+    "hasta_entrenamiento": "2026-04-25",
+    "desde_prueba": "2026-05-25",
+    "hasta_prueba": "2026-08-31",
+    "filas_entrenamiento": 713341,
+    "filas_prueba": 323383
+  },
+  "predictores": [
+    "codigo",
+    "dia_semana",
+    "mes",
+    "unidades_dia_corte",
+    "unidades_mismo_dia_semana_anterior",
+    "promedio_7_dias",
+    "promedio_28_dias"
+  ],
+  "horizontes": {
+    "7": {
+      "objetivo": "objetivo_7_dias",
+      "porcentaje_objetivo_cero": 87.35647823169431,
+      "metricas_hurdle_lightgbm": {
+        "mae": 0.41646345076691443,
+        "rmse": 1.6411166406613475,
+        "wape_porcentaje": 65.57970322442212,
+        "sesgo_promedio": 0.053234724641508795,
+        "r2": 0.9456287279346365
+      },
+      "metricas_referencia": {
+        "promedio_28_dias": {
+          "mae": 0.34067549871205344,
+          "rmse": 1.5396880691592982,
+          "wape_porcentaje": 53.64551933723581,
+          "sesgo_promedio": 0.002961694337673905,
+          "r2": 0.952141830394638
+        },
+        "mismo_dia_semana_4_semanas": {
+          "mae": 0.34068180763985734,
+          "rmse": 1.5396886631088642,
+          "wape_porcentaje": 53.646512792033064,
+          "sesgo_promedio": 0.0029775529325907694,
+          "r2": 0.9521417934711272
+        },
+        "tsb": {
+          "mae": 0.3425652493065093,
+          "rmse": 1.5589777885639304,
+          "wape_porcentaje": 53.9430947497345,
+          "sesgo_promedio": 0.007445189356507935,
+          "r2": 0.950935152789449
+        },
+        "regresion_lineal": {
+          "mae": 0.40588218584045704,
+          "rmse": 1.513083875182438,
+          "wape_porcentaje": 63.91349167011112,
+          "sesgo_promedio": 0.05991819166792998,
+          "r2": 0.9537814196475413
+        }
+      },
+      "mejora_mae_vs_promedio_28_dias": -0.075787952054861,
+      "mejora_wape_vs_promedio_28_dias": -11.934183887186308,
+      "importancia_clasificador_gain": {
+        "promedio_28_dias": 2285785.952874899,
+        "codigo": 1328199.6300783157,
+        "promedio_7_dias": 381531.0115375519,
+        "mes": 49721.03329563141,
+        "unidades_mismo_dia_semana_anterior": 8644.741134643555,
+        "unidades_dia_corte": 4909.646057128906,
+        "dia_semana": 321.7822299003601
+      },
+      "importancia_regresor_gain": {
+        "promedio_28_dias": 262539161.432724,
+        "promedio_7_dias": 70387134.4954834,
+        "codigo": 38097410.76373291,
+        "mes": 2235228.5241127014,
+        "unidades_dia_corte": 323257.0608482361,
+        "unidades_mismo_dia_semana_anterior": 250856.32631492615,
+        "dia_semana": 19328.041778564453
+      }
+    },
+    "14": {
+      "objetivo": "objetivo_14_dias",
+      "porcentaje_objetivo_cero": 82.64782007712216,
+      "metricas_hurdle_lightgbm": {
+        "mae": 0.7199667887407107,
+        "rmse": 2.6832790960422392,
+        "wape_porcentaje": 56.65455612052439,
+        "sesgo_promedio": 0.10214653995643408,
+        "r2": 0.9625730367758089
+      },
+      "metricas_referencia": {
+        "promedio_28_dias": {
+          "mae": 0.5715039590825739,
+          "rmse": 2.519168452097404,
+          "wape_porcentaje": 44.97193985791795,
+          "sesgo_promedio": 0.005220785260820772,
+          "r2": 0.9670111395562953
+        },
+        "mismo_dia_semana_4_semanas": {
+          "mae": 0.5715094485486251,
+          "rmse": 2.519169243569067,
+          "wape_porcentaje": 44.97237182681892,
+          "sesgo_promedio": 0.005252502450654483,
+          "r2": 0.9670111188274295
+        },
+        "tsb": {
+          "mae": 0.5837390080141315,
+          "rmse": 2.589593306259745,
+          "wape_porcentaje": 45.93472213783771,
+          "sesgo_promedio": 0.014187775298488825,
+          "r2": 0.9651409117815136
+        },
+        "regresion_lineal": {
+          "mae": 0.7014027115213199,
+          "rmse": 2.4235900849330045,
+          "wape_porcentaje": 55.19373935633543,
+          "sesgo_promedio": 0.12761269353168728,
+          "r2": 0.9694668768044599
+        }
+      },
+      "mejora_mae_vs_promedio_28_dias": -0.14846282965813684,
+      "mejora_wape_vs_promedio_28_dias": -11.682616262606437,
+      "importancia_clasificador_gain": {
+        "promedio_28_dias": 2522054.308485985,
+        "codigo": 2125065.9587860107,
+        "promedio_7_dias": 434614.5824742317,
+        "mes": 75576.47947454453,
+        "unidades_mismo_dia_semana_anterior": 7558.937014579773,
+        "unidades_dia_corte": 3699.367820262909,
+        "dia_semana": 110.27147102355957
+      },
+      "importancia_regresor_gain": {
+        "promedio_28_dias": 1078307137.3961563,
+        "promedio_7_dias": 210831219.10250092,
+        "codigo": 207399797.2728424,
+        "mes": 8946776.757591248,
+        "unidades_dia_corte": 645360.2926864624,
+        "unidades_mismo_dia_semana_anterior": 500585.49366760254,
+        "dia_semana": 48536.43669128418
+      }
+    },
+    "30": {
+      "objetivo": "objetivo_30_dias",
+      "porcentaje_objetivo_cero": 76.47464461644552,
+      "metricas_hurdle_lightgbm": {
+        "mae": 1.3531688074927213,
+        "rmse": 5.23189656494984,
+        "wape_porcentaje": 49.7338833251001,
+        "sesgo_promedio": 0.16972020155042117,
+        "r2": 0.9672594847602304
+      },
+      "metricas_referencia": {
+        "promedio_28_dias": {
+          "mae": 1.1041184848925265,
+          "rmse": 5.021927752687791,
+          "wape_porcentaje": 40.58037666895199,
+          "sesgo_promedio": 0.01351414267292964,
+          "r2": 0.9698346664440151
+        },
+        "mismo_dia_semana_4_semanas": {
+          "mae": 1.1035384667715993,
+          "rmse": 4.9965112011294535,
+          "wape_porcentaje": 40.55905888997799,
+          "sesgo_promedio": 0.014049810905335164,
+          "r2": 0.9701392341790175
+        },
+        "tsb": {
+          "mae": 1.151096706765634,
+          "rmse": 5.2287985424245464,
+          "wape_porcentaje": 42.30699746638739,
+          "sesgo_promedio": 0.032729121325075494,
+          "r2": 0.9672982473090461
+        },
+        "regresion_lineal": {
+          "mae": 1.340377867587379,
+          "rmse": 4.422969549906947,
+          "wape_porcentaje": 49.263769685657486,
+          "sesgo_promedio": 0.2776194486008754,
+          "r2": 0.9766011178616396
+        }
+      },
+      "mejora_mae_vs_promedio_28_dias": -0.24905032260019477,
+      "mejora_wape_vs_promedio_28_dias": -9.15350665614811,
+      "importancia_clasificador_gain": {
+        "codigo": 3297131.702468872,
+        "promedio_28_dias": 2526332.929736614,
+        "promedio_7_dias": 425288.40625047684,
+        "mes": 123212.18511009216,
+        "unidades_mismo_dia_semana_anterior": 3324.5540618896484,
+        "unidades_dia_corte": 2454.5216755867004,
+        "dia_semana": 638.2600998878479
+      },
+      "importancia_regresor_gain": {
+        "promedio_28_dias": 5068135655.493927,
+        "codigo": 1202501619.1329956,
+        "promedio_7_dias": 496224716.2509918,
+        "mes": 35277312.60084534,
+        "dia_semana": 2145886.304748535,
+        "unidades_dia_corte": 1291870.6040344238,
+        "unidades_mismo_dia_semana_anterior": 936476.2536315918
+      }
+    }
+  }
+}

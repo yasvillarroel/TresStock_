@@ -1,0 +1,135 @@
+{
+  "metodo": "Evaluación móvil por fecha: en cada corte solo se usan días observados hasta ese corte.",
+  "fecha_inicio_prueba": "2026-05-25",
+  "parametros": {
+    "alfa_sba": 0.1,
+    "alfa_tsb": 0.1,
+    "beta_tsb": 0.1
+  },
+  "filas_prueba": 323383,
+  "modelos_por_horizonte": {
+    "7": {
+      "objetivo": "objetivo_7_dias",
+      "porcentaje_objetivo_cero": 87.35647823169431,
+      "metricas": {
+        "promedio_28_dias": {
+          "mae": 0.34067549871205344,
+          "rmse": 1.5396880691592982,
+          "wape_porcentaje": 53.64551933723581,
+          "sesgo_promedio": 0.002961694337673905,
+          "r2": 0.952141830394638
+        },
+        "mismo_dia_semana_4_semanas": {
+          "mae": 0.34068180763985734,
+          "rmse": 1.5396886631088642,
+          "wape_porcentaje": 53.646512792033064,
+          "sesgo_promedio": 0.0029775529325907694,
+          "r2": 0.9521417934711272
+        },
+        "croston_sba": {
+          "mae": 3.3667801084681543,
+          "rmse": 6.474328504675931,
+          "wape_porcentaje": 530.1604256715484,
+          "sesgo_promedio": 3.0466845042265294,
+          "r2": 0.1537862875594298
+        },
+        "tsb": {
+          "mae": 0.3425652493065093,
+          "rmse": 1.5589777885639304,
+          "wape_porcentaje": 53.9430947497345,
+          "sesgo_promedio": 0.007445189356507935,
+          "r2": 0.950935152789449
+        },
+        "regresion_lineal": {
+          "mae": 0.40588218584045704,
+          "rmse": 1.513083875182438,
+          "wape_porcentaje": 63.91349167011112,
+          "sesgo_promedio": 0.05991819166792998,
+          "r2": 0.9537814196475413
+        }
+      }
+    },
+    "14": {
+      "objetivo": "objetivo_14_dias",
+      "porcentaje_objetivo_cero": 82.64782007712216,
+      "metricas": {
+        "promedio_28_dias": {
+          "mae": 0.5715039590825739,
+          "rmse": 2.519168452097404,
+          "wape_porcentaje": 44.97193985791795,
+          "sesgo_promedio": 0.005220785260820772,
+          "r2": 0.9670111395562953
+        },
+        "mismo_dia_semana_4_semanas": {
+          "mae": 0.5715094485486251,
+          "rmse": 2.519169243569067,
+          "wape_porcentaje": 44.97237182681892,
+          "sesgo_promedio": 0.005252502450654483,
+          "r2": 0.9670111188274295
+        },
+        "croston_sba": {
+          "mae": 6.600644349289526,
+          "rmse": 12.818203071568202,
+          "wape_porcentaje": 519.4080915489599,
+          "sesgo_promedio": 6.092666405038532,
+          "r2": 0.14590301068013
+        },
+        "tsb": {
+          "mae": 0.5837390080141315,
+          "rmse": 2.589593306259745,
+          "wape_porcentaje": 45.93472213783771,
+          "sesgo_promedio": 0.014187775298488825,
+          "r2": 0.9651409117815136
+        },
+        "regresion_lineal": {
+          "mae": 0.7014027115213199,
+          "rmse": 2.4235900849330045,
+          "wape_porcentaje": 55.19373935633543,
+          "sesgo_promedio": 0.12761269353168728,
+          "r2": 0.9694668768044599
+        }
+      }
+    },
+    "30": {
+      "objetivo": "objetivo_30_dias",
+      "porcentaje_objetivo_cero": 76.47464461644552,
+      "metricas": {
+        "promedio_28_dias": {
+          "mae": 1.1041184848925265,
+          "rmse": 5.021927752687791,
+          "wape_porcentaje": 40.58037666895199,
+          "sesgo_promedio": 0.01351414267292964,
+          "r2": 0.9698346664440151
+        },
+        "mismo_dia_semana_4_semanas": {
+          "mae": 1.1035384667715993,
+          "rmse": 4.9965112011294535,
+          "wape_porcentaje": 40.55905888997799,
+          "sesgo_promedio": 0.014049810905335164,
+          "r2": 0.9701392341790175
+        },
+        "croston_sba": {
+          "mae": 13.946788737622708,
+          "rmse": 27.34689729758301,
+          "wape_porcentaje": 512.595294833885,
+          "sesgo_promedio": 13.058040470768022,
+          "r2": 0.10549385130479183
+        },
+        "tsb": {
+          "mae": 1.151096706765634,
+          "rmse": 5.2287985424245464,
+          "wape_porcentaje": 42.30699746638739,
+          "sesgo_promedio": 0.032729121325075494,
+          "r2": 0.9672982473090461
+        },
+        "regresion_lineal": {
+          "mae": 1.340377867587379,
+          "rmse": 4.422969549906947,
+          "wape_porcentaje": 49.263769685657486,
+          "sesgo_promedio": 0.2776194486008754,
+          "r2": 0.9766011178616396
+        }
+      }
+    }
+  }
+}

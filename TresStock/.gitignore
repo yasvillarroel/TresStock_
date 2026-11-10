@@ -21,3 +21,8 @@ Thumbs.db
 
 # Imagenes de productos
 backend/imagenes/productos/
+
+
+# Archivos de datos
+**/ *.csv
+*.csv

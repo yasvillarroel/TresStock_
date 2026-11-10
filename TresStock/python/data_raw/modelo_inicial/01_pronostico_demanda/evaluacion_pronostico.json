@@ -1,0 +1,82 @@
+{
+  "objetivo": "Pronosticar unidades vendidas por producto",
+  "algoritmo": "Regresión lineal con codificación one-hot de producto y calendario",
+  "separacion": {
+    "tipo": "cronológica; se dejan 30 días de separación para evitar que las etiquetas futuras de entrenamiento invadan el periodo de prueba",
+    "desde_entrenamiento": "2025-04-28",
+    "hasta_entrenamiento": "2026-04-25",
+    "desde_prueba": "2026-05-25",
+    "hasta_prueba": "2026-08-31",
+    "filas_entrenamiento": 713341,
+    "filas_prueba": 323383,
+    "filas_descartadas_por_separacion": 88211
+  },
+  "variables_predictoras": [
+    "codigo",
+    "dia_semana",
+    "mes",
+    "unidades_dia_corte",
+    "unidades_mismo_dia_semana_anterior",
+    "promedio_7_dias",
+    "promedio_28_dias"
+  ],
+  "modelos_por_horizonte": {
+    "7": {
+      "variable_objetivo": "objetivo_7_dias",
+      "metricas_regresion_lineal": {
+        "mae": 0.40588218584045704,
+        "rmse": 1.513083875182438,
+        "wape_porcentaje": 63.91349167011112,
+        "sesgo_promedio": 0.05991819166792998,
+        "r2": 0.9537814196475413
+      },
+      "referencia_promedio_28_dias": {
+        "mae": 0.3406754987120535,
+        "rmse": 1.5396880691592982,
+        "wape_porcentaje": 53.645519337235825,
+        "sesgo_promedio": 0.002961694337673908,
+        "r2": 0.952141830394638
+      },
+      "mejora_mae_vs_referencia": -0.06520668712840355,
+      "supera_referencia_en_mae": false
+    },
+    "14": {
+      "variable_objetivo": "objetivo_14_dias",
+      "metricas_regresion_lineal": {
+        "mae": 0.7014027115213199,
+        "rmse": 2.4235900849330045,
+        "wape_porcentaje": 55.19373935633543,
+        "sesgo_promedio": 0.12761269353168728,
+        "r2": 0.9694668768044599
+      },
+      "referencia_promedio_28_dias": {
+        "mae": 0.5715039590825739,
+        "rmse": 2.519168452097404,
+        "wape_porcentaje": 44.971939857917945,
+        "sesgo_promedio": 0.005220785260820772,
+        "r2": 0.9670111395562953
+      },
+      "mejora_mae_vs_referencia": -0.12989875243874605,
+      "supera_referencia_en_mae": false
+    },
+    "30": {
+      "variable_objetivo": "objetivo_30_dias",
+      "metricas_regresion_lineal": {
+        "mae": 1.340377867587379,
+        "rmse": 4.422969549906947,
+        "wape_porcentaje": 49.263769685657486,
+        "sesgo_promedio": 0.2776194486008754,
+        "r2": 0.9766011178616396
+      },
+      "referencia_promedio_28_dias": {
+        "mae": 1.1041184848925265,
+        "rmse": 5.021927752687791,
+        "wape_porcentaje": 40.58037666895202,
+        "sesgo_promedio": 0.013514142672929653,
+        "r2": 0.9698346664440151
+      },
+      "mejora_mae_vs_referencia": -0.23625938269485247,
+      "supera_referencia_en_mae": false
+    }
+  }
+}
