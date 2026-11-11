@@ -185,86 +185,57 @@
                 </div>
 
 
-                <!-- filtro por familia -->
+                <!-- filtro por familia: selector personalizado con búsqueda, como en Productos -->
                 <div class="campo_familia_inventario">
 
-                    <div class="texto_familia_inventario">
-                        Familia
-                    </div>
+                    <div class="texto_familia_inventario">Familia</div>
 
-                    <select
-                        class="select_familia_inventario"
-                        id="select_familia_inventario"
-                    >
-
-                        <option
-                            class="opcion_familia_inventario"
-                            value=""
-                        >
-                            Todas las familias
-                        </option>
-
+                    <!-- conserva el valor utilizado por filtrarInventario -->
+                    <select class="select_familia_inventario" id="select_familia_inventario" hidden tabindex="-1" aria-hidden="true">
+                        <option value="">Todas las familias</option>
                     </select>
 
+                    <div class="contenedor_selector_inventario" id="contenedor_selector_familia_inventario">
+                        <button class="boton_selector_inventario" id="boton_selector_familia_inventario" type="button"
+                            aria-haspopup="listbox" aria-expanded="false" aria-controls="lista_opciones_familia_inventario">
+                            <span class="texto_selector_inventario" id="texto_selector_familia_inventario">Todas las familias</span>
+                            <span class="flecha_selector_inventario" aria-hidden="true">▾</span>
+                        </button>
+                        <div class="panel_selector_inventario" id="panel_selector_familia_inventario" hidden>
+                            <input class="input_buscar_selector_inventario" id="buscar_selector_familia_inventario" type="search"
+                                placeholder="Buscar familia..." autocomplete="off" aria-label="Buscar familia">
+                            <div class="lista_opciones_selector_inventario" id="lista_opciones_familia_inventario"
+                                role="listbox" aria-label="Familias"></div>
+                        </div>
+                    </div>
                 </div>
 
-
-                <!-- filtro por estado -->
+                <!-- filtro por estado: selector personalizado como en Productos -->
                 <div class="campo_estado_inventario">
 
-                    <div class="texto_estado_inventario">
-                        Estado
-                    </div>
+                    <div class="texto_estado_inventario">Estado</div>
 
-                    <select
-                        class="select_estado_inventario"
-                        id="select_estado_inventario"
-                    >
-
-                        <option
-                            class="opcion_estado_inventario"
-                            value=""
-                        >
-                            Todos los estados
-                        </option>
-
-                        <option
-                            class="opcion_estado_inventario"
-                            value="OPTIMO"
-                        >
-                            Óptimo
-                        </option>
-
-                        <option
-                            class="opcion_estado_inventario"
-                            value="STOCK BAJO"
-                        >
-                            Stock bajo
-                        </option>
-
-                        <option
-                            class="opcion_estado_inventario"
-                            value="SIN STOCK"
-                        >
-                            Sin stock
-                        </option>
-
-                        <option
-                            class="opcion_estado_inventario"
-                            value="STOCK NEGATIVO"
-                        >
-                            Stock negativo
-                        </option>
-
-                        <option
-                            class="opcion_estado_inventario"
-                            value="PENDIENTE"
-                        >
-                            Pendiente
-                        </option>
-
+                    <!-- mantiene los valores del filtro original -->
+                    <select class="select_estado_inventario" id="select_estado_inventario" hidden tabindex="-1" aria-hidden="true">
+                        <option value="">Todos los estados</option>
+                        <option value="OPTIMO">Óptimo</option>
+                        <option value="STOCK BAJO">Stock bajo</option>
+                        <option value="SIN STOCK">Sin stock</option>
+                        <option value="STOCK NEGATIVO">Stock negativo</option>
+                        <option value="PENDIENTE">Pendiente</option>
                     </select>
 
+                    <div class="contenedor_selector_inventario" id="contenedor_selector_estado_inventario">
+                        <button class="boton_selector_inventario" id="boton_selector_estado_inventario" type="button"
+                            aria-haspopup="listbox" aria-expanded="false" aria-controls="lista_opciones_estado_inventario">
+                            <span class="texto_selector_inventario" id="texto_selector_estado_inventario">Todos los estados</span>
+                            <span class="flecha_selector_inventario" aria-hidden="true">▾</span>
+                        </button>
+                        <div class="panel_selector_inventario" id="panel_selector_estado_inventario" hidden>
+                            <div class="lista_opciones_selector_inventario" id="lista_opciones_estado_inventario"
+                                role="listbox" aria-label="Estados"></div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="contenedor_limpiar_filtros_inventario">
@@ -295,7 +266,7 @@
                 <!-- tabla del inventario -->
                 <div class="tabla_inventario" role="table" aria-label="Stock de productos">
                     <div class="encabezado_tabla_inventario fila_encabezado_inventario" role="row">
-                        <div class="columna_imagen_inventario" role="columnheader">Foto</div>
+                        <div class="columna_imagen_inventario" role="columnheader">Imagen</div>
                         <div class="columna_producto_inventario" role="columnheader">Producto</div>
                         <div class="columna_familia_inventario" role="columnheader">Familia</div>
                         <div class="columna_stock_actual_inventario" role="columnheader">Stock actual</div>

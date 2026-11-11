@@ -241,6 +241,8 @@
                 }
             );
 
+            // actualiza el selector visual con las familias devueltas por PostgreSQL
+            actualizarSelectorVisualInventario('familia');
 
         } catch (error) {
 
@@ -312,6 +314,9 @@
                 if (selectFamilia) selectFamilia.value = '';
                 if (selectEstado) selectEstado.value = '';
 
+                cerrarSelectoresVisualesInventario();
+                actualizarSelectorVisualInventario('familia');
+                actualizarSelectorVisualInventario('estado');
                 paginaActualInventario = 1;
                 filtrarInventario();
             });
@@ -425,6 +430,131 @@
 
         mostrarInventario();
 
+    }
+
+
+// SUBTITULO 1 SELECTORES PERSONALIZADOS DE INVENTARIO
+
+    // normaliza los nombres para buscar familias con y sin tildes
+    function normalizarTextoSelectorInventario(valor) {
+        return String(valor ?? '')
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .toLowerCase()
+            .trim();
+    }
+
+    // cierra las listas y restablece sus atributos de accesibilidad
+    function cerrarSelectoresVisualesInventario(excepto = '') {
+        ['familia', 'estado'].forEach(function(tipo) {
+            if (tipo === excepto) return;
+            const panel = document.getElementById('panel_selector_' + tipo + '_inventario');
+            const boton = document.getElementById('boton_selector_' + tipo + '_inventario');
+            if (panel) panel.hidden = true;
+            if (boton) boton.setAttribute('aria-expanded', 'false');
+        });
+    }
+
+    // el SELECT original sigue controlando el filtro de stock
+    function actualizarSelectorVisualInventario(tipo) {
+        const select = document.getElementById('select_' + tipo + '_inventario');
+        const etiqueta = document.getElementById('texto_selector_' + tipo + '_inventario');
+        const lista = document.getElementById('lista_opciones_' + tipo + '_inventario');
+        const buscador = tipo === 'familia'
+            ? document.getElementById('buscar_selector_familia_inventario')
+            : null;
+        if (!select || !etiqueta || !lista) return;
+
+        const opcionActual = Array.from(select.options).find(opcion => opcion.value === select.value);
+        etiqueta.textContent = opcionActual?.textContent || (tipo === 'familia' ? 'Todas las familias' : 'Todos los estados');
+        lista.replaceChildren();
+
+        const texto = normalizarTextoSelectorInventario(buscador?.value || '');
+        const opciones = Array.from(select.options).filter(opcion =>
+            normalizarTextoSelectorInventario(opcion.textContent).includes(texto)
+        );
+
+        if (!opciones.length) {
+            const sinResultados = document.createElement('div');
+            sinResultados.className = 'mensaje_lista_selector_inventario';
+            sinResultados.textContent = 'No se encontraron familias.';
+            lista.appendChild(sinResultados);
+            return;
+        }
+
+        opciones.forEach(function(opcion) {
+            const boton = document.createElement('button');
+            boton.type = 'button';
+            boton.className = 'opcion_lista_selector_inventario';
+            boton.setAttribute('role', 'option');
+            boton.setAttribute('aria-selected', String(opcion.value === select.value));
+            boton.textContent = opcion.textContent;
+            boton.addEventListener('click', function() {
+                select.value = opcion.value;
+                select.dispatchEvent(new Event('change', {bubbles: true}));
+                cerrarSelectoresVisualesInventario();
+                actualizarSelectorVisualInventario(tipo);
+                document.getElementById('boton_selector_' + tipo + '_inventario')?.focus();
+            });
+            lista.appendChild(boton);
+        });
+    }
+
+    // añade eventos a los dos desplegables sin modificar la lógica del backend
+    function configurarSelectoresVisualesInventario() {
+        ['familia', 'estado'].forEach(function(tipo) {
+            const select = document.getElementById('select_' + tipo + '_inventario');
+            const contenedor = document.getElementById('contenedor_selector_' + tipo + '_inventario');
+            const boton = document.getElementById('boton_selector_' + tipo + '_inventario');
+            const panel = document.getElementById('panel_selector_' + tipo + '_inventario');
+            if (!select || !contenedor || !boton || !panel || boton.dataset.configurado === 'si') return;
+            boton.dataset.configurado = 'si';
+
+            boton.addEventListener('click', function() {
+                const abrir = panel.hidden;
+                cerrarSelectoresVisualesInventario();
+                panel.hidden = !abrir;
+                boton.setAttribute('aria-expanded', String(abrir));
+                if (abrir) {
+                    const buscador = tipo === 'familia'
+                        ? document.getElementById('buscar_selector_familia_inventario') : null;
+                    if (buscador) buscador.value = '';
+                    actualizarSelectorVisualInventario(tipo);
+                    if (buscador) buscador.focus();
+                }
+            });
+
+            select.addEventListener('change', function() {
+                actualizarSelectorVisualInventario(tipo);
+            });
+
+            panel.addEventListener('keydown', function(evento) {
+                if (evento.key === 'Escape') {
+                    cerrarSelectoresVisualesInventario();
+                    boton.focus();
+                }
+            });
+            actualizarSelectorVisualInventario(tipo);
+        });
+
+        const buscador = document.getElementById('buscar_selector_familia_inventario');
+        if (buscador && buscador.dataset.configurado !== 'si') {
+            buscador.dataset.configurado = 'si';
+            buscador.addEventListener('input', function() {
+                actualizarSelectorVisualInventario('familia');
+            });
+        }
+
+        const filtros = document.getElementById('filtros_stock_inventario');
+        if (filtros && filtros.dataset.selectoresConfigurados !== 'si') {
+            filtros.dataset.selectoresConfigurados = 'si';
+            // solo registra un manejador de cierre por clic fuera de los selectores
+            document.addEventListener('click', function(evento) {
+                if (!evento.target.closest('#contenedor_selector_familia_inventario, #contenedor_selector_estado_inventario')) {
+                    cerrarSelectoresVisualesInventario();
+                }
+            });
+        }
     }
 
 
@@ -576,6 +706,7 @@
                 const datoImagen = document.createElement('div');
                 datoImagen.className = 'dato_imagen_inventario';
                 datoImagen.setAttribute('role', 'cell');
+                datoImagen.dataset.etiqueta = 'Imagen';
                 const botonVerFoto = document.createElement('button');
                 botonVerFoto.className = 'boton_ver_foto_inventario';
                 botonVerFoto.type = 'button';
@@ -613,6 +744,7 @@
                 datoProducto.className =
                     'dato_producto_inventario';
                 datoProducto.setAttribute('role', 'cell');
+                datoProducto.dataset.etiqueta = 'Producto';
 
                 datoProducto.textContent =
                     producto.descripcion ||
@@ -628,6 +760,7 @@
                 datoFamilia.className =
                     'dato_familia_inventario';
                 datoFamilia.setAttribute('role', 'cell');
+                datoFamilia.dataset.etiqueta = 'Familia';
 
                 datoFamilia.textContent =
                     producto.familia ||
@@ -643,6 +776,7 @@
                 datoStockActual.className =
                     'dato_stock_actual_inventario';
                 datoStockActual.setAttribute('role', 'cell');
+                datoStockActual.dataset.etiqueta = 'Stock actual';
 
                 datoStockActual.textContent =
                     formatearCantidadInventario(
@@ -660,6 +794,7 @@
                 datoStockMinimo.className =
                     'dato_stock_minimo_inventario';
                 datoStockMinimo.setAttribute('role', 'cell');
+                datoStockMinimo.dataset.etiqueta = 'Stock mínimo';
 
                 datoStockMinimo.textContent =
                     producto.stock_minimo_calculable
@@ -679,6 +814,7 @@
                 datoEstado.className =
                     'dato_estado_inventario';
                 datoEstado.setAttribute('role', 'cell');
+                datoEstado.dataset.etiqueta = 'Estado';
 
 
                 const estado =
@@ -701,20 +837,28 @@
                 const datoAcciones = document.createElement('div');
                 datoAcciones.className = 'dato_acciones_inventario';
                 datoAcciones.setAttribute('role', 'cell');
+                datoAcciones.dataset.etiqueta = 'Acciones';
                 const botonAjustar = document.createElement('button');
                 botonAjustar.className = 'boton_ajustar_stock_inventario';
                 botonAjustar.type = 'button';
-                botonAjustar.textContent = 'Ajustar stock';
+                botonAjustar.title = 'Ajustar stock';
+                botonAjustar.setAttribute('aria-label', `Ajustar stock de ${producto.descripcion || 'producto'}`);
+                botonAjustar.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L9 17l-4 1 1-4Z"/></svg>`;
                 botonAjustar.dataset.codigo = String(producto.codigo || '');
                 botonAjustar.dataset.descripcion = String(producto.descripcion || 'Producto');
-                datoAcciones.appendChild(botonAjustar);
+                const grupoAcciones = document.createElement('div');
+                grupoAcciones.className = 'contenedor_acciones_inventario';
+                grupoAcciones.appendChild(botonAjustar);
                 const botonHistorial = document.createElement('button');
                 botonHistorial.className = 'boton_historial_stock_inventario';
                 botonHistorial.type = 'button';
-                botonHistorial.textContent = 'Últimos movimientos';
+                botonHistorial.title = 'Últimos movimientos';
+                botonHistorial.setAttribute('aria-label', `Ver últimos movimientos de ${producto.descripcion || 'producto'}`);
+                botonHistorial.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>`;
                 botonHistorial.dataset.codigo = String(producto.codigo || '');
                 botonHistorial.dataset.descripcion = String(producto.descripcion || 'Producto');
-                datoAcciones.appendChild(botonHistorial);
+                grupoAcciones.appendChild(botonHistorial);
+                datoAcciones.appendChild(grupoAcciones);
 
 
                 fila.appendChild(
@@ -1281,6 +1425,7 @@ async function recalcularStockMinimoInventario() {
                     ? 'dato_producto_inventario'
                     : 'dato_movimiento_inventario';
                 celda.setAttribute('role', 'cell');
+                celda.dataset.etiqueta = ['Producto', 'Tipo', 'Cantidad', 'Motivo', 'Realizado por', 'Fecha y hora'][indice];
                 celda.textContent = valor;
                 fila.appendChild(celda);
             });
@@ -1375,6 +1520,7 @@ async function recalcularStockMinimoInventario() {
 
         configurarPestanasInventario();
         configurarFiltrosInventario();
+        configurarSelectoresVisualesInventario();
         configurarAjusteManualInventario();
         configurarHistorialProductoInventario();
         configurarVistaFotoInventario();
