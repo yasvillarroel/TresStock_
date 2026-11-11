@@ -58,22 +58,22 @@ const registrarFalloInicioSesion = async (ip) => {
          ON CONFLICT (ip) DO UPDATE SET
             intentos = CASE
                 WHEN b.bloqueado_hasta IS NOT NULL AND b.bloqueado_hasta <= NOW() THEN 1
-                WHEN b.ventana_inicio <= NOW() - INTERVAL '2 hours' THEN 1
+                WHEN b.ventana_inicio <= NOW() - INTERVAL '15 minutes' THEN 1
                 ELSE b.intentos + 1
             END,
             ventana_inicio = CASE
                 WHEN (b.bloqueado_hasta IS NOT NULL AND b.bloqueado_hasta <= NOW())
-                    OR b.ventana_inicio <= NOW() - INTERVAL '2 hours' THEN NOW()
+                    OR b.ventana_inicio <= NOW() - INTERVAL '15 minutes' THEN NOW()
                 ELSE b.ventana_inicio
             END,
             bloqueado_hasta = CASE
                 WHEN (
                     CASE
                         WHEN b.bloqueado_hasta IS NOT NULL AND b.bloqueado_hasta <= NOW() THEN 1
-                        WHEN b.ventana_inicio <= NOW() - INTERVAL '2 hours' THEN 1
+                        WHEN b.ventana_inicio <= NOW() - INTERVAL '15 minutes' THEN 1
                         ELSE b.intentos + 1
                     END
-                ) >= 5 THEN NOW() + INTERVAL '2 hours'
+                ) >= 5 THEN NOW() + INTERVAL '15 minutes'
                 ELSE NULL
             END,
             actualizado_en = NOW()
