@@ -141,12 +141,14 @@ const obtenerMovimientosInventario = async (req, res) => {
 
     try {
         const resultado = await inventarioServicio.obtenerMovimientosInventario({
+            codigo: req.query.codigo,
             tipo: req.query.tipo,
             buscar: req.query.buscar,
             desde: req.query.desde,
             hasta: req.query.hasta,
             orden: req.query.orden,
-            pagina: req.query.pagina
+            pagina: req.query.pagina,
+            limite: req.query.limite
         });
 
         return res.json(resultado);
@@ -167,6 +169,7 @@ const ajustarInventario = async (req, res) => {
         const operacion = String(req.body.operacion || '').trim();
         const cantidad = Number(req.body.cantidad);
         const motivo = String(req.body.motivo || '').trim();
+        const fechaVencimiento = String(req.body.fecha_vencimiento || '').trim() || null;
 
         if (!codigo || codigo.length > 50) {
             return res.status(400).json({mensaje: 'El código del producto no es válido'});
@@ -184,13 +187,21 @@ const ajustarInventario = async (req, res) => {
         if (!motivo || motivo.length > 100) {
             return res.status(400).json({mensaje: 'Selecciona un motivo válido'});
         }
+        if (fechaVencimiento) {
+            const fechaParseada = new Date(`${fechaVencimiento}T00:00:00Z`);
+            if (operacion !== 'sumar' || !/^\d{4}-\d{2}-\d{2}$/.test(fechaVencimiento) ||
+                Number.isNaN(fechaParseada.getTime()) || fechaParseada.toISOString().slice(0, 10) !== fechaVencimiento) {
+                return res.status(400).json({mensaje: 'Indica una fecha válida para el lote. El vencimiento solo aplica al sumar stock.'});
+            }
+        }
 
         const inventario = await inventarioServicio.ajustarInventario(
             codigo,
             cantidad,
             operacion,
             Number(req.usuario?.id),
-            motivo
+            motivo,
+            fechaVencimiento
         );
 
         return res.json({mensaje: 'Inventario actualizado correctamente', inventario});

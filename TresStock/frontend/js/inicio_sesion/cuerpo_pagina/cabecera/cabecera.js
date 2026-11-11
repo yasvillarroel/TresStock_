@@ -126,3 +126,113 @@
             }
         });
     }
+
+
+// TITULO 3 NOTIFICACIONES DE INVENTARIO
+
+    // carga alertas de stock y permite saltar al producto correspondiente
+    function inicializarNotificacionesCabecera() {
+        const contenedor = document.getElementById('contenedor_notificaciones_cabecera');
+        const boton = document.getElementById('boton_notificaciones_cabecera');
+        const panel = document.getElementById('panel_notificaciones_cabecera');
+        const contador = document.getElementById('contador_notificaciones_cabecera');
+        const lista = document.getElementById('lista_notificaciones_cabecera');
+        const botonActualizar = document.getElementById('actualizar_notificaciones_cabecera');
+        if (!contenedor || !boton || !panel || !lista || boton.dataset.inicializado === 'true') return;
+        boton.dataset.inicializado = 'true';
+
+        const cerrarPanel = () => {
+            panel.hidden = true;
+            boton.setAttribute('aria-expanded', 'false');
+        };
+
+        const formatearStock = (valor, esBalanza) => {
+            const cantidad = Number(valor || 0).toLocaleString('es-CL', {maximumFractionDigits: 3});
+            return esBalanza ? `${cantidad} (KG)` : cantidad;
+        };
+
+        const cargarAlertas = async () => {
+            lista.replaceChildren();
+            const cargando = document.createElement('div');
+            cargando.className = 'estado_notificaciones_cabecera';
+            cargando.textContent = 'Cargando alertas…';
+            lista.appendChild(cargando);
+            try {
+                const respuesta = await fetchConCsrf(`${URL_API}/api/inventario`, {method: 'GET', credentials: 'include'});
+                const productos = await respuesta.json();
+                if (!respuesta.ok) throw new Error(productos.mensaje || 'No se pudieron cargar las alertas.');
+                const alertas = (Array.isArray(productos) ? productos : []).filter(producto => ['STOCK NEGATIVO', 'SIN STOCK', 'STOCK BAJO'].includes(producto.estado));
+                alertas.sort((a, b) => {
+                    const prioridad = {'STOCK NEGATIVO': 0, 'SIN STOCK': 1, 'STOCK BAJO': 2};
+                    return prioridad[a.estado] - prioridad[b.estado] || String(a.descripcion).localeCompare(String(b.descripcion), 'es');
+                });
+                contador.textContent = alertas.length > 99 ? '99+' : String(alertas.length);
+                contador.hidden = alertas.length === 0;
+                boton.setAttribute('aria-label', `Notificaciones de inventario: ${alertas.length} alertas activas`);
+                lista.replaceChildren();
+                if (!alertas.length) {
+                    const vacio = document.createElement('div');
+                    vacio.className = 'estado_notificaciones_cabecera';
+                    vacio.textContent = 'No hay alertas de stock por ahora.';
+                    lista.appendChild(vacio);
+                    return;
+                }
+                alertas.forEach(producto => {
+                    const item = document.createElement('button');
+                    item.type = 'button';
+                    item.className = `item_notificacion_cabecera notificacion_${producto.estado.toLowerCase().replaceAll(' ', '_')}`;
+                    item.setAttribute('role', 'listitem');
+                    const contenido = document.createElement('span');
+                    contenido.className = 'contenido_item_notificacion_cabecera';
+                    const titulo = document.createElement('span');
+                    titulo.className = 'titulo_item_notificacion_cabecera';
+                    titulo.textContent = producto.descripcion || producto.codigo || 'Producto';
+                    const detalle = document.createElement('span');
+                    detalle.className = 'detalle_item_notificacion_cabecera';
+                    detalle.textContent = `${producto.estado === 'STOCK NEGATIVO' ? 'Stock negativo' : producto.estado === 'SIN STOCK' ? 'Sin stock' : 'Stock bajo'} · ${formatearStock(producto.stock_actual, producto.es_producto_balanza)}${producto.estado === 'STOCK BAJO' ? ` / mínimo ${formatearStock(producto.stock_minimo, producto.es_producto_balanza)}` : ''}`;
+                    contenido.append(titulo, detalle);
+                    const flecha = document.createElement('span');
+                    flecha.className = 'flecha_item_notificacion_cabecera';
+                    flecha.textContent = '›';
+                    item.append(contenido, flecha);
+                    item.addEventListener('click', async () => {
+                        cerrarPanel();
+                        if (typeof cargarVista !== 'function') return;
+                        await cargarVista('inventario');
+                        const busqueda = document.getElementById('input_busqueda_inventario');
+                        if (busqueda) {
+                            busqueda.value = producto.codigo || producto.descripcion || '';
+                            busqueda.dispatchEvent(new Event('input', {bubbles: true}));
+                        }
+                    });
+                    lista.appendChild(item);
+                });
+            } catch (error) {
+                contador.hidden = true;
+                lista.replaceChildren();
+                const fallo = document.createElement('div');
+                fallo.className = 'estado_notificaciones_cabecera error_notificaciones_cabecera';
+                fallo.textContent = error.message || 'No se pudieron cargar las alertas.';
+                lista.appendChild(fallo);
+            }
+        };
+
+        boton.addEventListener('click', async () => {
+            const abrir = panel.hidden;
+            panel.hidden = !abrir;
+            boton.setAttribute('aria-expanded', String(abrir));
+            if (abrir) await cargarAlertas();
+        });
+        botonActualizar.addEventListener('click', cargarAlertas);
+        document.addEventListener('click', evento => {
+            if (!contenedor.contains(evento.target)) cerrarPanel();
+        });
+        document.addEventListener('keydown', evento => {
+            if (evento.key === 'Escape' && !panel.hidden) {
+                cerrarPanel();
+                boton.focus();
+            }
+        });
+        cargarAlertas();
+        window.setInterval(cargarAlertas, 60000);
+    }

@@ -200,6 +200,17 @@
 .opciones_operacion_ajuste { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
 .opciones_operacion_ajuste label { display: flex; align-items: center; justify-content: center; gap: 7px; padding: 7px; min-height: 43px; border: 1px solid #cbd9e0; border-radius: 7px; background: #ffffff; color: #385365; font-size: 13px; text-align: center; cursor: pointer; box-sizing: border-box; }
 .opciones_operacion_ajuste label:has(input:checked) { background: #e7f7f7; border-color: #159ba3; color: #0e6970; }
+.opcion_vencimiento_escaner { margin-top: 12px; }
+.opcion_vencimiento_escaner[hidden], .campo_fecha_vencimiento_escaner[hidden] { display: none !important; }
+.boton_toggle_vencimiento_escaner { min-height: 44px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 12px; border: 1px solid #cbd9e0; border-radius: 7px; background: #f8fafb; color: #385365; font-size: 13px; font-weight: 700; cursor: pointer; user-select: none; box-sizing: border-box; }
+.boton_toggle_vencimiento_escaner:focus-visible { outline: 2px solid #159ba3; outline-offset: 2px; }
+.boton_toggle_vencimiento_escaner[aria-pressed="true"] { border-color: #159ba3; background: #e7f7f7; color: #0e6970; }
+.estado_toggle_vencimiento_escaner { min-width: 42px; padding: 5px 9px; border-radius: 999px; background: #e8edef; color: #526873; text-align: center; }
+.boton_toggle_vencimiento_escaner[aria-pressed="true"] .estado_toggle_vencimiento_escaner { background: #159ba3; color: #fff; }
+.campo_fecha_vencimiento_escaner { display: flex; flex-direction: column; gap: 7px; margin-top: 11px; }
+.texto_fecha_vencimiento_escaner { color: #3d5868; font-size: 12px; font-weight: 700; }
+.campo_fecha_vencimiento_escaner input { width: 100%; height: 42px; padding: 9px 12px; border: 1px solid #cbd9e0; border-radius: 7px; box-sizing: border-box; color: #1d3f50; font: inherit; }
+.campo_fecha_vencimiento_escaner input:focus { outline: 2px solid #a6e0e2; border-color: #159ba3; }
 .opciones_tipo_cantidad { display: flex; flex-direction: column; gap: 13px; margin: 3px 0 16px; }
 .opciones_tipo_cantidad label { color: #3d5868; font-size: 13px; display: flex; align-items: center; gap: 9px; cursor: pointer; }
 .opciones_operacion_ajuste input, .opciones_tipo_cantidad input { accent-color: #159ba3; cursor: pointer; }

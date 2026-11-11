@@ -293,55 +293,22 @@
 
 
                 <!-- tabla del inventario -->
-                <table class="tabla_inventario">
-
-                    <thead class="encabezado_tabla_inventario">
-
-                        <tr class="fila_encabezado_inventario">
-
-                            <th class="columna_producto_inventario">
-                                Producto
-                            </th>
-
-                            <th class="columna_familia_inventario">
-                                Familia
-                            </th>
-
-                            <th class="columna_stock_actual_inventario">
-                                Stock actual
-                            </th>
-
-                            <th class="columna_stock_minimo_inventario">
-                                Stock mínimo
-                            </th>
-
-                            <th class="columna_estado_inventario">
-                                Estado
-                            </th>
-</tr>
-
-                    </thead>
-
-
-                    <tbody
-                        class="cuerpo_tabla_inventario"
-                        id="cuerpo_tabla_inventario"
-                    >
-
-                        <tr class="fila_sin_inventario">
-
-                            <td
-                                class="dato_sin_inventario"
-                                colspan="5"
-                            >
-                                No hay productos cargados para mostrar.
-                            </td>
-
-                        </tr>
-
-                    </tbody>
-
-                </table>
+                <div class="tabla_inventario" role="table" aria-label="Stock de productos">
+                    <div class="encabezado_tabla_inventario fila_encabezado_inventario" role="row">
+                        <div class="columna_imagen_inventario" role="columnheader">Foto</div>
+                        <div class="columna_producto_inventario" role="columnheader">Producto</div>
+                        <div class="columna_familia_inventario" role="columnheader">Familia</div>
+                        <div class="columna_stock_actual_inventario" role="columnheader">Stock actual</div>
+                        <div class="columna_stock_minimo_inventario" role="columnheader">Stock mínimo</div>
+                        <div class="columna_estado_inventario" role="columnheader">Estado</div>
+                        <div class="columna_acciones_inventario" role="columnheader">Acciones</div>
+                    </div>
+                    <div class="cuerpo_tabla_inventario" id="cuerpo_tabla_inventario" role="rowgroup">
+                        <div class="fila_sin_inventario" role="row">
+                            <div class="dato_sin_inventario" role="cell">No hay productos cargados para mostrar.</div>
+                        </div>
+                    </div>
+                </div>
 
 
                 <!-- SUBTITULO 1 PAGINACION INVENTARIO -->
@@ -367,6 +334,77 @@
 
                     </div>
 
+            </div>
+
+            <div class="modal_ajuste_stock_inventario" id="modal_ajuste_stock_inventario" aria-hidden="true" hidden>
+                <div class="contenido_modal_ajuste_stock_inventario" role="dialog" aria-modal="true" aria-labelledby="titulo_modal_ajuste_stock_inventario">
+                    <button class="cerrar_modal_ajuste_stock_inventario" id="cerrar_modal_ajuste_stock_inventario" type="button" aria-label="Cerrar">×</button>
+                    <div class="titulo_modal_ajuste_stock_inventario" id="titulo_modal_ajuste_stock_inventario">Ajustar stock</div>
+                    <div class="producto_modal_ajuste_stock_inventario" id="producto_modal_ajuste_stock_inventario"></div>
+                    <form id="formulario_ajuste_stock_inventario">
+                        <div class="campo_modal_ajuste_stock_inventario">
+                            <div class="texto_modal_ajuste_stock_inventario">Tipo de ajuste</div>
+                            <select id="operacion_ajuste_stock_inventario" required>
+                                <option value="sumar">Sumar al stock</option>
+                                <option value="restar">Restar del stock</option>
+                                <option value="fijar">Fijar stock en</option>
+                            </select>
+                        </div>
+                        <div class="campo_modal_ajuste_stock_inventario">
+                            <div class="texto_modal_ajuste_stock_inventario" id="etiqueta_cantidad_ajuste_stock_inventario">Cantidad a sumar</div>
+                            <input id="cantidad_ajuste_stock_inventario" type="number" min="0.0001" max="99999999.9999" step="0.0001" required>
+                        </div>
+                        <div class="campo_lote_vencimiento_inventario" id="campo_lote_vencimiento_inventario" hidden>
+                            <button class="boton_toggle_lote_vencimiento_inventario" id="boton_toggle_lote_vencimiento_inventario" type="button" aria-pressed="false">
+                                <span>¿Lote con vencimiento?</span>
+                                <span class="estado_toggle_lote_vencimiento_inventario" id="estado_toggle_lote_vencimiento_inventario">No</span>
+                            </button>
+                            <div class="campo_fecha_lote_vencimiento_inventario" id="campo_fecha_lote_vencimiento_inventario" hidden>
+                                <div class="texto_modal_ajuste_stock_inventario">Fecha de vencimiento del lote</div>
+                                <input id="fecha_vencimiento_lote_inventario" type="date" disabled>
+                            </div>
+                        </div>
+                        <div class="campo_modal_ajuste_stock_inventario">
+                            <div class="texto_modal_ajuste_stock_inventario">Motivo</div>
+                            <input id="motivo_ajuste_stock_inventario" type="text" maxlength="100" value="Ajuste manual desde inventario" required>
+                        </div>
+                        <div class="mensaje_modal_ajuste_stock_inventario" id="mensaje_ajuste_stock_inventario" role="status" aria-live="polite"></div>
+                        <div class="acciones_modal_ajuste_stock_inventario">
+                            <button class="boton_cancelar_ajuste_stock_inventario" id="cancelar_ajuste_stock_inventario" type="button">Cancelar</button>
+                            <button class="boton_guardar_ajuste_stock_inventario" id="guardar_ajuste_stock_inventario" type="submit">Guardar ajuste</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="modal_historial_producto_inventario" id="modal_historial_producto_inventario" aria-hidden="true" hidden>
+                <div class="contenido_modal_historial_producto_inventario" role="dialog" aria-modal="true" aria-labelledby="titulo_modal_historial_producto_inventario">
+                    <button class="cerrar_modal_ajuste_stock_inventario" id="cerrar_modal_historial_producto_inventario" type="button" aria-label="Cerrar">×</button>
+                    <div class="titulo_modal_ajuste_stock_inventario" id="titulo_modal_historial_producto_inventario">Últimos movimientos del producto</div>
+                    <div class="producto_modal_ajuste_stock_inventario" id="nombre_historial_producto_inventario"></div>
+                    <div class="mensaje_historial_producto_inventario" id="mensaje_historial_producto_inventario" role="status" aria-live="polite">Cargando movimientos…</div>
+                    <div class="tabla_historial_producto_inventario_contenedor" id="tabla_historial_producto_inventario_contenedor" hidden>
+                        <div class="tabla_historial_producto_inventario" role="table" aria-label="Movimientos recientes del producto">
+                            <div class="encabezado_historial_producto_inventario" role="row">
+                                <div role="columnheader">Fecha</div><div role="columnheader">Tipo</div><div role="columnheader">Cantidad</div><div role="columnheader">Motivo</div><div role="columnheader">Realizado por</div>
+                            </div>
+                            <div id="filas_historial_producto_inventario" role="rowgroup"></div>
+                        </div>
+                    </div>
+                    <div class="paginacion_historial_producto_inventario" id="paginacion_historial_producto_inventario" hidden>
+                        <button class="boton_pagina_historial_producto_inventario" id="anterior_historial_producto_inventario" type="button">Anterior</button>
+                        <div class="texto_pagina_historial_producto_inventario" id="texto_pagina_historial_producto_inventario"></div>
+                        <button class="boton_pagina_historial_producto_inventario" id="siguiente_historial_producto_inventario" type="button">Siguiente</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal_foto_producto_inventario" id="modal_foto_producto_inventario" aria-hidden="true" hidden>
+                <div class="contenido_modal_foto_producto_inventario" role="dialog" aria-modal="true" aria-labelledby="titulo_modal_foto_producto_inventario">
+                    <button class="cerrar_modal_ajuste_stock_inventario" id="cerrar_modal_foto_producto_inventario" type="button" aria-label="Cerrar">×</button>
+                    <div class="titulo_modal_foto_producto_inventario" id="titulo_modal_foto_producto_inventario"></div>
+                    <img class="foto_ampliada_producto_inventario" id="foto_ampliada_producto_inventario" alt="">
+                </div>
             </div>
 
             <!-- filtros del historial de inventario -->
@@ -411,21 +449,19 @@
                     <div class="titulo_tabla_inventario" id="titulo_movimientos_inventario">Historial de movimientos</div>
                 </div>
 
-                <table class="tabla_inventario tabla_movimientos_inventario">
-                    <thead class="encabezado_tabla_inventario">
-                        <tr class="fila_encabezado_inventario">
-                            <th class="columna_producto_inventario">Producto</th>
-                            <th class="columna_tipo_movimiento_inventario">Tipo</th>
-                            <th class="columna_cantidad_movimiento_inventario">Cantidad</th>
-                            <th class="columna_motivo_movimiento_inventario">Motivo</th>
-                            <th class="columna_correo_movimiento_inventario">Realizado por</th>
-                            <th class="columna_fecha_movimiento_inventario">Fecha y hora</th>
-                        </tr>
-                    </thead>
-                    <tbody class="cuerpo_tabla_inventario" id="cuerpo_movimientos_inventario">
-                        <tr class="fila_sin_inventario"><td class="dato_sin_inventario" colspan="6">Cargando movimientos…</td></tr>
-                    </tbody>
-                </table>
+                <div class="tabla_inventario tabla_movimientos_inventario" role="table" aria-label="Historial de movimientos">
+                    <div class="encabezado_tabla_inventario fila_encabezado_inventario" role="row">
+                        <div class="columna_producto_inventario" role="columnheader">Producto</div>
+                        <div class="columna_tipo_movimiento_inventario" role="columnheader">Tipo</div>
+                        <div class="columna_cantidad_movimiento_inventario" role="columnheader">Cantidad</div>
+                        <div class="columna_motivo_movimiento_inventario" role="columnheader">Motivo</div>
+                        <div class="columna_correo_movimiento_inventario" role="columnheader">Realizado por</div>
+                        <div class="columna_fecha_movimiento_inventario" role="columnheader">Fecha y hora</div>
+                    </div>
+                    <div class="cuerpo_tabla_inventario" id="cuerpo_movimientos_inventario" role="rowgroup">
+                        <div class="fila_sin_inventario" role="row"><div class="dato_sin_inventario" role="cell">Cargando movimientos…</div></div>
+                    </div>
+                </div>
 
                 <div class="contenedor_paginacion_inventario paginacion_movimientos_inventario" id="paginacion_movimientos_inventario">
                     <div class="informacion_paginacion_inventario" id="informacion_movimientos_inventario">Mostrando 0 movimientos</div>

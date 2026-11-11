@@ -3,7 +3,9 @@ const pool = require('../../configuracion/base_datos');
 const nodemailer = require('nodemailer');
 const { randomInt, createHmac, timingSafeEqual } = require('node:crypto');
 
-const iniciarSesion = async (email, password) => {
+const iniciarSesion = async (email, password, ip) => {
+    await comprobarBloqueoInicioSesion(ip);
+
     const resultado = await pool.query(
         `SELECT id_usuario, nombre, email, password_hash, id_rol, activo, fecha_creacion
          FROM base_datos.usuarios
@@ -13,13 +15,79 @@ const iniciarSesion = async (email, password) => {
 
     const usuario = resultado.rows[0];
 
-    if (!usuario || !usuario.activo) return null;
+    if (!usuario || !usuario.activo) {
+        await registrarFalloInicioSesion(ip);
+        return null;
+    }
 
     const contrasenaCorrecta = await bcrypt.compare(password, usuario.password_hash);
-    if (!contrasenaCorrecta) return null;
+    if (!contrasenaCorrecta) {
+        await registrarFalloInicioSesion(ip);
+        return null;
+    }
+
+    await pool.query(
+        'DELETE FROM base_datos.bloqueos_inicio_sesion_ip WHERE ip = $1',
+        [ip]
+    );
 
     delete usuario.password_hash;
     return usuario;
+};
+
+const comprobarBloqueoInicioSesion = async (ip) => {
+    const resultado = await pool.query(
+        'SELECT bloqueado_hasta FROM base_datos.bloqueos_inicio_sesion_ip WHERE ip = $1',
+        [ip]
+    );
+    const hasta = resultado.rows[0]?.bloqueado_hasta;
+
+    if (hasta && new Date(hasta) > new Date()) {
+        throw crearErrorRegistro(
+            mensajeBloqueo('Demasiados intentos de inicio de sesión.', hasta),
+            429
+        );
+    }
+};
+
+const registrarFalloInicioSesion = async (ip) => {
+    const resultado = await pool.query(
+        `INSERT INTO base_datos.bloqueos_inicio_sesion_ip AS b
+            (ip, intentos, ventana_inicio, actualizado_en)
+         VALUES ($1, 1, NOW(), NOW())
+         ON CONFLICT (ip) DO UPDATE SET
+            intentos = CASE
+                WHEN b.bloqueado_hasta IS NOT NULL AND b.bloqueado_hasta <= NOW() THEN 1
+                WHEN b.ventana_inicio <= NOW() - INTERVAL '2 hours' THEN 1
+                ELSE b.intentos + 1
+            END,
+            ventana_inicio = CASE
+                WHEN (b.bloqueado_hasta IS NOT NULL AND b.bloqueado_hasta <= NOW())
+                    OR b.ventana_inicio <= NOW() - INTERVAL '2 hours' THEN NOW()
+                ELSE b.ventana_inicio
+            END,
+            bloqueado_hasta = CASE
+                WHEN (
+                    CASE
+                        WHEN b.bloqueado_hasta IS NOT NULL AND b.bloqueado_hasta <= NOW() THEN 1
+                        WHEN b.ventana_inicio <= NOW() - INTERVAL '2 hours' THEN 1
+                        ELSE b.intentos + 1
+                    END
+                ) >= 5 THEN NOW() + INTERVAL '2 hours'
+                ELSE NULL
+            END,
+            actualizado_en = NOW()
+         RETURNING intentos, bloqueado_hasta`,
+        [ip]
+    );
+    const bloqueo = resultado.rows[0];
+
+    if (bloqueo.bloqueado_hasta) {
+        throw crearErrorRegistro(
+            mensajeBloqueo('Se alcanzaron 5 intentos fallidos.', bloqueo.bloqueado_hasta),
+            429
+        );
+    }
 };
 
 const obtenerUsuarioPorId = async (idUsuario) => {

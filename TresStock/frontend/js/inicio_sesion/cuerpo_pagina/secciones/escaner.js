@@ -645,6 +645,18 @@ function mostrarProductoEscaneado(producto) {
 function cerrarModalAjusteEscaner() {
     const menu = document.getElementById('menu_ajustar_producto');
     if (menu) menu.hidden = true;
+    const botonLote = document.getElementById('boton_toggle_vencimiento_escaner');
+    const estadoLote = document.getElementById('estado_toggle_vencimiento_escaner');
+    const campoFecha = document.getElementById('campo_fecha_vencimiento_escaner');
+    const fecha = document.getElementById('fecha_vencimiento_escaner');
+    if (botonLote) botonLote.setAttribute('aria-pressed', 'false');
+    if (estadoLote) estadoLote.textContent = 'No';
+    if (campoFecha) campoFecha.hidden = true;
+    if (fecha) {
+        fecha.value = '';
+        fecha.disabled = true;
+        fecha.required = false;
+    }
 }
 
 // cierra el modal al presionar Escape
@@ -1151,6 +1163,19 @@ function ajustarProductoEscaneado() {
     // establece los valores iniciales del ajuste
     campoCantidad.value = '1';
 
+    const botonVencimiento = document.getElementById('boton_toggle_vencimiento_escaner');
+    const estadoVencimiento = document.getElementById('estado_toggle_vencimiento_escaner');
+    const campoFechaVencimiento = document.getElementById('campo_fecha_vencimiento_escaner');
+    const fechaVencimiento = document.getElementById('fecha_vencimiento_escaner');
+    if (botonVencimiento) botonVencimiento.setAttribute('aria-pressed', 'false');
+    if (estadoVencimiento) estadoVencimiento.textContent = 'No';
+    if (campoFechaVencimiento) campoFechaVencimiento.hidden = true;
+    if (fechaVencimiento) {
+        fechaVencimiento.value = '';
+        fechaVencimiento.disabled = true;
+        fechaVencimiento.required = false;
+    }
+
     campoUnidades.value =
         Number.isSafeInteger(factor) && factor >= 1
             ? factor
@@ -1181,6 +1206,28 @@ function ajustarProductoEscaneado() {
     );
 
     const opcionFijar = document.getElementById('operacion_fijar');
+
+    if (botonVencimiento) {
+        const alternarVencimiento = () => {
+            const activado = botonVencimiento.getAttribute('aria-pressed') !== 'true';
+            botonVencimiento.setAttribute('aria-pressed', String(activado));
+            if (estadoVencimiento) estadoVencimiento.textContent = activado ? 'Sí' : 'No';
+            if (campoFechaVencimiento) campoFechaVencimiento.hidden = !activado;
+            if (fechaVencimiento) {
+                fechaVencimiento.disabled = !activado;
+                fechaVencimiento.required = activado;
+                if (activado) fechaVencimiento.focus();
+                else fechaVencimiento.value = '';
+            }
+        };
+        botonVencimiento.onclick = alternarVencimiento;
+        botonVencimiento.onkeydown = evento => {
+            if (evento.key === 'Enter' || evento.key === ' ') {
+                evento.preventDefault();
+                alternarVencimiento();
+            }
+        };
+    }
 
     // selecciona inicialmente el codigo actual y la suma
     if (opcionCodigoActual) {
@@ -1280,6 +1327,24 @@ function actualizarCalculoAjuste() {
 
     const operacion = obtenerOperacionAjuste();
     const esFijo = operacion === 'fijar';
+    const bloqueVencimiento = document.getElementById('opcion_vencimiento_escaner');
+    const botonVencimiento = document.getElementById('boton_toggle_vencimiento_escaner');
+    const estadoVencimiento = document.getElementById('estado_toggle_vencimiento_escaner');
+    const campoFechaVencimiento = document.getElementById('campo_fecha_vencimiento_escaner');
+    const fechaVencimiento = document.getElementById('fecha_vencimiento_escaner');
+    const seSumaStock = operacion === 'sumar';
+
+    if (bloqueVencimiento) bloqueVencimiento.hidden = !seSumaStock;
+    if (!seSumaStock && botonVencimiento?.getAttribute('aria-pressed') === 'true') {
+        botonVencimiento.setAttribute('aria-pressed', 'false');
+        if (estadoVencimiento) estadoVencimiento.textContent = 'No';
+        if (campoFechaVencimiento) campoFechaVencimiento.hidden = true;
+        if (fechaVencimiento) {
+            fechaVencimiento.value = '';
+            fechaVencimiento.disabled = true;
+            fechaVencimiento.required = false;
+        }
+    }
     const factorProducto = Number(productoEscaneado.factor ?? 1);
     const factor = !esFijo && opcionCodigoActual?.checked && cantidadValidaEscaner(factorProducto)
         ? factorProducto
@@ -1342,8 +1407,12 @@ async function aceptarAjusteProducto() {
     const campoCantidad = document.getElementById('cantidad_ingresada_ajuste');
     const campoMotivo = document.getElementById('motivo_ajuste_escaner');
     const opcionCodigoActual = document.getElementById('cantidad_codigo_actual');
+    const botonVencimiento = document.getElementById('boton_toggle_vencimiento_escaner');
+    const fechaVencimiento = document.getElementById('fecha_vencimiento_escaner');
     const operacion = obtenerOperacionAjuste();
     const esFijo = operacion === 'fijar';
+    const incluirVencimiento = botonVencimiento?.getAttribute('aria-pressed') === 'true';
+    const fechaLote = String(fechaVencimiento?.value || '').trim();
     const cantidadIngresada = Number(campoCantidad?.value);
     const factor = esFijo || !opcionCodigoActual?.checked
         ? 1
@@ -1356,6 +1425,12 @@ async function aceptarAjusteProducto() {
         !cantidadValidaEscaner(cantidad, esFijo) ||
         !motivo) {
         mostrarMensajeEscaner('Datos incompletos', 'Revisa la cantidad y el motivo del movimiento', 'advertencia');
+        return;
+    }
+
+    if (incluirVencimiento && (operacion !== 'sumar' || !fechaLote)) {
+        mostrarMensajeEscaner('Fecha requerida', 'Selecciona la fecha de vencimiento del lote', 'advertencia');
+        fechaVencimiento?.focus();
         return;
     }
 
@@ -1377,7 +1452,7 @@ async function aceptarAjusteProducto() {
     const pregunta = esFijo
         ? `¿Establecer el stock de ${productoEscaneado.descripcion} en ${cantidad} unidades?`
         : operacion === 'sumar'
-            ? `¿Sumar ${cantidad} unidades al inventario?`
+            ? `¿Sumar ${cantidad} unidades al inventario${incluirVencimiento ? ` con vencimiento el ${fechaLote}` : ''}?`
             : `¿Restar ${cantidad} unidades del inventario?`;
 
     const confirmado = await confirmarAccionEscaner(
@@ -1400,7 +1475,8 @@ async function aceptarAjusteProducto() {
                     codigo: productoEscaneado.codigo,
                     cantidad,
                     operacion,
-                    motivo
+                    motivo: `${motivo} (Escáner)`,
+                    fecha_vencimiento: incluirVencimiento ? fechaLote : null
                 })
             }
         );

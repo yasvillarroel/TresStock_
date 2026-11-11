@@ -170,6 +170,17 @@
                                   value="fijar"> Stock fijo</label>
                 </div>
 
+                <div class="opcion_vencimiento_escaner" id="opcion_vencimiento_escaner" hidden>
+                    <div class="boton_toggle_vencimiento_escaner" id="boton_toggle_vencimiento_escaner" role="button" tabindex="0" aria-pressed="false">
+                        <div>¿Lote con vencimiento?</div>
+                        <div class="estado_toggle_vencimiento_escaner" id="estado_toggle_vencimiento_escaner">No</div>
+                    </div>
+                    <div class="campo_fecha_vencimiento_escaner" id="campo_fecha_vencimiento_escaner" hidden>
+                        <div class="texto_fecha_vencimiento_escaner">Fecha de vencimiento</div>
+                        <input id="fecha_vencimiento_escaner" type="date" disabled>
+                    </div>
+                </div>
+
                 <div class="etiqueta_opciones_escaner">Modalidad</div>
                 <div class="opciones_tipo_cantidad">
                     <label><input type="radio" name="tipo_cantidad_ajuste"

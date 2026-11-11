@@ -49,12 +49,21 @@
                 <!-- contenedor de notificaciones -->
                 <div class="contenedor_notificaciones_cabecera" id="contenedor_notificaciones_cabecera">
 
-                    <!-- icono visual de notificaciones -->
-                    <div class="icono_notificaciones_cabecera">
+                    <button class="boton_notificaciones_cabecera" id="boton_notificaciones_cabecera" type="button" aria-label="Notificaciones de inventario" aria-expanded="false" aria-controls="panel_notificaciones_cabecera">
+                        <span class="icono_notificaciones_cabecera">
+                            <img class="imagen_notificaciones_cabecera" src="./imagenes/inicio_sesion/cuerpo_pagina/cabecera/bell.svg" alt="">
+                        </span>
+                        <span class="contador_notificaciones_cabecera" id="contador_notificaciones_cabecera" hidden></span>
+                    </button>
 
-                        <!-- imagen del icono de notificaciones -->
-                        <img class="imagen_notificaciones_cabecera" src="./imagenes/inicio_sesion/cuerpo_pagina/cabecera/bell.svg" alt="Notificaciones">
-
+                    <div class="panel_notificaciones_cabecera" id="panel_notificaciones_cabecera" hidden>
+                        <div class="encabezado_notificaciones_cabecera">
+                            <div class="titulo_notificaciones_cabecera">Alertas de inventario</div>
+                            <button class="boton_actualizar_notificaciones_cabecera" id="actualizar_notificaciones_cabecera" type="button">Actualizar</button>
+                        </div>
+                        <div class="lista_notificaciones_cabecera" id="lista_notificaciones_cabecera" role="list" aria-live="polite">
+                            <div class="estado_notificaciones_cabecera">Cargando alertas…</div>
+                        </div>
                     </div>
 
                 </div>

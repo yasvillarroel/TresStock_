@@ -1,0 +1,76 @@
+<div class="contenedor_alertas_vencimientos">
+    <div class="encabezado_alertas_vencimientos">
+        <div class="titulo_alertas_vencimientos">Alertas</div>
+        <div class="descripcion_alertas_vencimientos">Revisa el estado del inventario y los lotes con vencimiento.</div>
+    </div>
+
+    <div class="contenedor_tabla_vencimientos">
+        <div class="encabezado_tabla_vencimientos">
+            <div class="titulo_tabla_vencimientos">Productos con alertas de stock</div>
+        </div>
+        <div class="tabla_vencimientos_desplazable">
+            <div class="tabla_vencimientos tabla_alertas_stock" role="table" aria-label="Productos con alertas de stock">
+                <div class="fila_encabezado_vencimientos fila_stock_alertas" role="row">
+                    <div class="celda_encabezado_vencimientos" role="columnheader">Producto</div>
+                    <div class="celda_encabezado_vencimientos" role="columnheader">Código</div>
+                    <div class="celda_encabezado_vencimientos" role="columnheader">Familia</div>
+                    <div class="celda_encabezado_vencimientos" role="columnheader">Stock actual</div>
+                    <div class="celda_encabezado_vencimientos" role="columnheader">Stock mínimo</div>
+                    <div class="celda_encabezado_vencimientos" role="columnheader">Estado</div>
+                </div>
+                <div class="filas_tabla_vencimientos" id="filas_alertas_inventario" role="rowgroup">
+                    <div class="fila_vencimiento"><div class="mensaje_tabla_vencimientos" role="cell">Cargando alertas de inventario…</div></div>
+                </div>
+            </div>
+        </div>
+        <div class="paginador_vencimientos">
+            <div class="informacion_paginador_vencimientos" id="informacion_alertas_inventario">Mostrando 0 productos</div>
+            <div class="controles_paginador_vencimientos">
+                <div class="boton_pagina_vencimientos" id="anterior_alertas_inventario" role="button" tabindex="0" aria-label="Página anterior" aria-disabled="true">‹</div>
+                <div class="numeros_paginas_vencimientos" id="numeros_alertas_inventario"></div>
+                <div class="boton_pagina_vencimientos" id="siguiente_alertas_inventario" role="button" tabindex="0" aria-label="Página siguiente" aria-disabled="true">›</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="seccion_vencimientos">
+        <div class="titulo_seccion_vencimientos">Vencimientos</div>
+        <div class="pestanas_vencimientos" role="tablist" aria-label="Estado de los lotes">
+            <div class="pestana_vencimientos pestana_vencimientos_activa" id="pestana_lotes_activos" role="tab" tabindex="0" aria-selected="true" data-estado="activos">
+                Activos <div class="contador_pestana_vencimientos" id="contador_lotes_activos">0</div>
+            </div>
+            <div class="pestana_vencimientos" id="pestana_lotes_inactivos" role="tab" tabindex="-1" aria-selected="false" data-estado="inactivos">
+                Inactivos <div class="contador_pestana_vencimientos" id="contador_lotes_inactivos">0</div>
+            </div>
+        </div>
+
+        <div class="contenedor_tabla_vencimientos">
+            <div class="encabezado_tabla_vencimientos">
+                <div class="titulo_tabla_vencimientos" id="titulo_tabla_vencimientos">Lotes activos</div>
+            </div>
+            <div class="tabla_vencimientos_desplazable">
+                <div class="tabla_vencimientos" role="table" aria-label="Lotes con vencimiento">
+                    <div class="fila_encabezado_vencimientos fila_lotes_vencimiento" role="row">
+                        <div class="celda_encabezado_vencimientos" role="columnheader">Producto</div>
+                        <div class="celda_encabezado_vencimientos" role="columnheader">Código</div>
+                        <div class="celda_encabezado_vencimientos" role="columnheader">Cantidad</div>
+                        <div class="celda_encabezado_vencimientos" role="columnheader">Fecha de ingreso</div>
+                        <div class="celda_encabezado_vencimientos" role="columnheader">Fecha de vencimiento</div>
+                        <div class="celda_encabezado_vencimientos" role="columnheader">Estado</div>
+                    </div>
+                    <div class="filas_tabla_vencimientos" id="filas_vencimientos" role="rowgroup">
+                        <div class="fila_vencimiento"><div class="mensaje_tabla_vencimientos" role="cell">Cargando vencimientos…</div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="paginador_vencimientos">
+                <div class="informacion_paginador_vencimientos" id="informacion_paginador_vencimientos">Mostrando 0 lotes</div>
+                <div class="controles_paginador_vencimientos">
+                    <div class="boton_pagina_vencimientos" id="anterior_vencimientos" role="button" tabindex="0" aria-label="Página anterior" aria-disabled="true">‹</div>
+                    <div class="numeros_paginas_vencimientos" id="numeros_paginas_vencimientos"></div>
+                    <div class="boton_pagina_vencimientos" id="siguiente_vencimientos" role="button" tabindex="0" aria-label="Página siguiente" aria-disabled="true">›</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

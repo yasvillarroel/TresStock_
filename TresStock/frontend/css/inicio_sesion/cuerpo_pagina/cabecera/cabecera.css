@@ -67,6 +67,7 @@
 
     /* clase para establecer el espacio de notificaciones */
     .contenedor_notificaciones_cabecera {
+        position: relative;
         width: 38px;
         height: 38px;
         display: flex;
@@ -74,6 +75,25 @@
         justify-content: center;
         cursor: pointer;
         border-radius: 50%;
+    }
+
+    .boton_notificaciones_cabecera {
+        position: relative;
+        width: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        border: 0;
+        border-radius: 50%;
+        background: transparent;
+        cursor: pointer;
+    }
+
+    .boton_notificaciones_cabecera:hover,
+    .boton_notificaciones_cabecera[aria-expanded="true"] {
+        background-color: #eef5f6;
     }
 
     /* cambia el fondo de notificaciones al posicionar el cursor */
@@ -94,6 +114,125 @@
     .imagen_notificaciones_cabecera {
         width: 20px;
         height: 20px;
+    }
+
+    .contador_notificaciones_cabecera {
+        position: absolute;
+        top: -2px;
+        right: -3px;
+        min-width: 17px;
+        height: 17px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 4px;
+        border: 2px solid #ffffff;
+        border-radius: 12px;
+        background: #e24b4b;
+        color: #ffffff;
+        font: 700 10px Arial, sans-serif;
+        box-sizing: border-box;
+    }
+
+    .contador_notificaciones_cabecera[hidden] { display: none; }
+
+    .panel_notificaciones_cabecera {
+        position: absolute;
+        top: calc(100% + 12px);
+        right: -8px;
+        z-index: 1300;
+        width: 360px;
+        max-width: calc(100vw - 24px);
+        overflow: hidden;
+        border: 1px solid #dce4e8;
+        border-radius: 10px;
+        background: #ffffff;
+        box-shadow: 0 12px 30px rgba(5, 31, 45, 0.16);
+    }
+
+    .panel_notificaciones_cabecera[hidden] { display: none; }
+
+    .encabezado_notificaciones_cabecera {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 15px 16px;
+        border-bottom: 1px solid #e6ecef;
+    }
+
+    .titulo_notificaciones_cabecera {
+        color: #0b3650;
+        font: 700 14px Arial, sans-serif;
+    }
+
+    .boton_actualizar_notificaciones_cabecera {
+        padding: 6px 8px;
+        border: 0;
+        border-radius: 5px;
+        background: #effafb;
+        color: #0f858d;
+        font: 700 11px Arial, sans-serif;
+        cursor: pointer;
+    }
+
+    .lista_notificaciones_cabecera {
+        max-height: min(420px, calc(100vh - 150px));
+        overflow-y: auto;
+    }
+
+    .estado_notificaciones_cabecera {
+        padding: 22px 16px;
+        color: #71818a;
+        font: 12px Arial, sans-serif;
+        text-align: center;
+    }
+
+    .error_notificaciones_cabecera { color: #b54735; }
+
+    .item_notificacion_cabecera {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 12px 14px;
+        border: 0;
+        border-bottom: 1px solid #edf1f3;
+        background: #ffffff;
+        text-align: left;
+        cursor: pointer;
+    }
+
+    .item_notificacion_cabecera:hover { background: #f7fafb; }
+    .notificacion_stock_negativo { box-shadow: inset 3px 0 #d94848; }
+    .notificacion_sin_stock { box-shadow: inset 3px 0 #e79a31; }
+    .notificacion_stock_bajo { box-shadow: inset 3px 0 #e5b83b; }
+
+    .contenido_item_notificacion_cabecera {
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .titulo_item_notificacion_cabecera {
+        overflow: hidden;
+        color: #263a45;
+        font: 700 12px Arial, sans-serif;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .detalle_item_notificacion_cabecera {
+        color: #71818a;
+        font: 11px Arial, sans-serif;
+    }
+
+    .flecha_item_notificacion_cabecera {
+        color: #80919a;
+        font: 24px Arial, sans-serif;
+        flex-shrink: 0;
     }
 
     /* clase para establecer el diseño del icono del usuario conectado */

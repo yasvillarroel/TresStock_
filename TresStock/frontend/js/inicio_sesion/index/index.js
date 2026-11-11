@@ -77,6 +77,8 @@
 
         // configura el menu desplegable despues de insertar cabecera.html
         inicializarMenuUsuarioCabecera();
+        // conecta la campanita con las alertas actuales de inventario
+        inicializarNotificacionesCabecera();
 
         const vistaGuardada = sessionStorage.getItem(
             'vista_actual'
@@ -155,6 +157,9 @@
 
         // inicializa el funcionamiento de inventario
         if (vista === 'inventario') {await inicializarInventario();}
+
+        // carga los lotes de vencimiento y la paginación de la vista de alertas
+        if (vista === 'alertas') {await inicializarAlertasVencimientos();}
 
         // inicializa ventas
         if (vista === 'ventas') {await inicializarVentas();}

@@ -1,0 +1,240 @@
+.contenedor_alertas_vencimientos {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 26px;
+    box-sizing: border-box;
+}
+
+.encabezado_alertas_vencimientos {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.titulo_alertas_vencimientos {
+    color: #0b3650;
+    font: 700 25px Arial, sans-serif;
+}
+
+.descripcion_alertas_vencimientos {
+    color: #71818a;
+    font: 13px Arial, sans-serif;
+}
+
+.titulo_seccion_vencimientos {
+    margin-bottom: -7px;
+    color: #0b3650;
+    font: 700 18px Arial, sans-serif;
+}
+
+.pestanas_vencimientos {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    overflow-x: auto;
+    border-bottom: 1px solid #dce4e8;
+}
+
+.pestana_vencimientos {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 5px;
+    border-bottom: 2px solid transparent;
+    color: #536873;
+    font: 13px Arial, sans-serif;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.pestana_vencimientos:hover,
+.pestana_vencimientos_activa {
+    border-bottom-color: #159ba3;
+    color: #138b92;
+    font-weight: 700;
+}
+
+.contador_pestana_vencimientos {
+    min-width: 22px;
+    padding: 3px 6px;
+    border-radius: 12px;
+    background: #edf3f4;
+    color: #536873;
+    font: 700 10px Arial, sans-serif;
+    text-align: center;
+}
+
+.pestana_vencimientos_activa .contador_pestana_vencimientos {
+    background: #e4f6f6;
+    color: #0f858d;
+}
+
+.contenedor_tabla_vencimientos {
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid #dce4e8;
+    border-radius: 9px;
+    background: #ffffff;
+    box-shadow: 0 3px 12px rgba(16, 47, 61, 0.04);
+}
+
+.encabezado_tabla_vencimientos {
+    padding: 16px 18px;
+    border-bottom: 1px solid #e4eaed;
+}
+
+.titulo_tabla_vencimientos {
+    color: #0b3650;
+    font: 700 14px Arial, sans-serif;
+}
+
+.tabla_vencimientos_desplazable {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.tabla_vencimientos {
+    width: 100%;
+    min-width: 850px;
+}
+
+.tabla_alertas_stock { min-width: 760px; }
+
+.fila_encabezado_vencimientos,
+.fila_vencimiento {
+    display: grid;
+    align-items: stretch;
+}
+
+.fila_lotes_vencimiento,
+.fila_encabezado_vencimientos.fila_lotes_vencimiento {
+    grid-template-columns: 25% 14% 12% 17% 18% 14%;
+}
+
+.fila_stock_alertas,
+.fila_encabezado_vencimientos.fila_stock_alertas {
+    grid-template-columns: 28% 15% 14% 15% 14% 14%;
+}
+
+.fila_encabezado_vencimientos {
+    background: #f4f7f8;
+}
+
+.celda_encabezado_vencimientos {
+    min-width: 0;
+    padding: 13px 12px;
+    color: #667881;
+    font: 700 11px Arial, sans-serif;
+    overflow-wrap: anywhere;
+}
+
+.fila_vencimiento {
+    border-top: 1px solid #edf1f3;
+}
+
+.fila_vencimiento > [role="cell"] {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    padding: 14px 12px;
+    color: #405762;
+    font: 12px Arial, sans-serif;
+    overflow-wrap: anywhere;
+    box-sizing: border-box;
+}
+
+.fila_mensaje_vencimiento {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.fila_mensaje_vencimiento .mensaje_tabla_vencimientos {
+    min-height: 90px;
+    justify-content: center;
+    color: #788993;
+    text-align: center;
+}
+
+.etiqueta_estado_vencimiento {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 9px;
+    border-radius: 15px;
+    font: 700 10px Arial, sans-serif;
+    white-space: nowrap;
+}
+
+.estado_lote_vigente { background: #e8f7f0; color: #18845d; }
+.estado_lote_proximo { background: #fff2dc; color: #b96b14; }
+.estado_lote_inactivo { background: #fdeaea; color: #b54747; }
+
+.paginador_vencimientos {
+    min-height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 12px 16px;
+    border-top: 1px solid #e4eaed;
+    box-sizing: border-box;
+}
+
+.informacion_paginador_vencimientos {
+    color: #71818a;
+    font: 12px Arial, sans-serif;
+}
+
+.controles_paginador_vencimientos,
+.numeros_paginas_vencimientos {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.boton_pagina_vencimientos,
+.boton_numero_pagina_vencimientos {
+    min-width: 34px;
+    min-height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 9px;
+    border: 1px solid #dce4e8;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #43545d;
+    font: 12px Arial, sans-serif;
+    cursor: pointer;
+    user-select: none;
+}
+
+.boton_pagina_vencimientos:hover:not([aria-disabled="true"]),
+.boton_numero_pagina_vencimientos:hover {
+    border-color: #159ba3;
+    color: #0f858d;
+}
+
+.boton_pagina_vencimientos[aria-disabled="true"] {
+    opacity: 0.45;
+    cursor: default;
+}
+
+.boton_numero_pagina_vencimientos.pagina_actual_vencimientos {
+    border-color: #159ba3;
+    background: #159ba3;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.puntos_paginas_vencimientos {
+    padding: 0 3px;
+    color: #71818a;
+}
+
+@media (max-width: 700px) {
+    .contenedor_alertas_vencimientos { padding: 18px; }
+    .paginador_vencimientos { align-items: flex-start; flex-direction: column; }
+    .controles_paginador_vencimientos { width: 100%; justify-content: center; flex-wrap: wrap; }
+}

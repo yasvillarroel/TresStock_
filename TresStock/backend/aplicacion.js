@@ -76,6 +76,7 @@ app.use('/api/inventario', autenticacion, require('./rutas/inventario/inventario
 app.use('/api/ventas', autenticacion, require('./rutas/ventas/ventas_rutas'));
 app.use('/api/escaneo', autenticacion, require('./rutas/escaneo/escaneo_rutas'));
 app.use('/api/dashboard', autenticacion, require('./rutas/dashboard/dashboard_rutas'));
+app.use('/api/alertas', autenticacion, require('./rutas/alertas/alertas_rutas'));
 
 // se retiro /api/prueba-cookie: establecia una cookie de sesion no autenticada
 

@@ -563,15 +563,34 @@
     .tabla_inventario {
         width: 100%;
         min-width: 950px;
-        border-collapse: collapse;
-        table-layout: fixed;
+        display: block;
     }
 
     .tabla_movimientos_inventario {
         min-width: 1180px;
     }
 
-    .tabla_movimientos_inventario .columna_producto_inventario { width: 22%; }
+    .encabezado_tabla_inventario,
+    .fila_producto_inventario {
+        display: grid;
+        grid-template-columns: 8% 26% 17% 11% 11% 13% 14%;
+        align-items: center;
+    }
+
+    .encabezado_tabla_inventario > div,
+    .fila_producto_inventario > div {
+        min-width: 0;
+        width: auto;
+    }
+
+    .cuerpo_tabla_inventario { display: flex; flex-direction: column; }
+
+    .tabla_movimientos_inventario .encabezado_tabla_inventario,
+    .tabla_movimientos_inventario .fila_producto_inventario {
+        grid-template-columns: 22% 11% 10% 18% 20% 19%;
+    }
+
+    .tabla_movimientos_inventario .columna_producto_inventario { width: auto; }
     .columna_tipo_movimiento_inventario { width: 11%; }
     .columna_cantidad_movimiento_inventario { width: 10%; }
     .columna_motivo_movimiento_inventario { width: 18%; }
@@ -608,7 +627,7 @@
 
     /* clase para establecer columna producto */
     .columna_producto_inventario {
-        width: 36%;
+        width: 26%;
         padding: 13px 12px;
         text-align: left;
         color: #667881;
@@ -619,7 +638,7 @@
 
     /* clase para establecer columna familia */
     .columna_familia_inventario {
-        width: 24%;
+        width: 17%;
         padding: 13px 12px;
         text-align: left;
         color: #667881;
@@ -630,7 +649,7 @@
 
     /* clase para establecer columna stock actual */
     .columna_stock_actual_inventario {
-        width: 14%;
+        width: 11%;
         padding: 13px 12px;
         text-align: center;
         color: #667881;
@@ -641,7 +660,7 @@
 
     /* clase para establecer columna stock mínimo */
     .columna_stock_minimo_inventario {
-        width: 14%;
+        width: 11%;
         padding: 13px 12px;
         text-align: center;
         color: #667881;
@@ -652,8 +671,28 @@
 
     /* clase para establecer columna estado */
     .columna_estado_inventario {
-        width: 12%;
+        width: 13%;
         padding: 13px 12px;
+        text-align: center;
+        color: #667881;
+        font-family: Arial, sans-serif;
+        font-size: 11px;
+        box-sizing: border-box;
+    }
+
+    .columna_imagen_inventario {
+        width: 8%;
+        padding: 12px 5px;
+        text-align: center;
+        color: #667881;
+        font-family: Arial, sans-serif;
+        font-size: 11px;
+        box-sizing: border-box;
+    }
+
+    .columna_acciones_inventario {
+        width: 14%;
+        padding: 13px 8px;
         text-align: center;
         color: #667881;
         font-family: Arial, sans-serif;
@@ -679,11 +718,88 @@
         padding: 14px 12px;
         color: #263a45;
         font-family: Arial, sans-serif;
-        font-size: 12px;
+        font-size: 14px;
         font-weight: bold;
         text-align: left;
         vertical-align: middle;
         box-sizing: border-box;
+    }
+
+    .dato_imagen_inventario {
+        width: 8%;
+        padding: 7px 5px;
+        text-align: center;
+        vertical-align: middle;
+        box-sizing: border-box;
+    }
+
+    .imagen_miniatura_inventario {
+        width: 80px;
+        height: 80px;
+        display: inline-block;
+        object-fit: contain;
+        border: 1px solid #dce4e8;
+        border-radius: 7px;
+        background: #f8fafb;
+        box-sizing: border-box;
+    }
+
+    .boton_ver_foto_inventario {
+        display: inline-flex;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        cursor: zoom-in;
+    }
+
+    .imagen_miniatura_inventario_vacia {
+        padding: 8px;
+        opacity: 0.6;
+    }
+
+    .modal_foto_producto_inventario {
+        position: fixed;
+        inset: 0;
+        z-index: 1502;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background: rgba(10, 22, 30, 0.82);
+        box-sizing: border-box;
+    }
+
+    .modal_foto_producto_inventario[hidden] {
+        display: none !important;
+    }
+
+    .contenido_modal_foto_producto_inventario {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+        width: min(100%, 1000px);
+        max-height: 92vh;
+        padding: 22px;
+        border-radius: 12px;
+        background: #ffffff;
+        box-sizing: border-box;
+    }
+
+    .titulo_modal_foto_producto_inventario {
+        align-self: flex-start;
+        padding-right: 34px;
+        color: #0b3650;
+        font: 700 17px Arial, sans-serif;
+        overflow-wrap: anywhere;
+    }
+
+    .foto_ampliada_producto_inventario {
+        display: block;
+        max-width: 100%;
+        max-height: calc(92vh - 100px);
+        object-fit: contain;
     }
 
     /* clase para establecer la familia */
@@ -726,6 +842,352 @@
         text-align: center;
         vertical-align: middle;
         box-sizing: border-box;
+    }
+
+    .dato_acciones_inventario {
+        padding: 10px 8px;
+        text-align: center;
+        vertical-align: middle;
+        box-sizing: border-box;
+    }
+
+    .dato_acciones_inventario > button {
+        display: block;
+        width: 100%;
+        max-width: 145px;
+        margin: 4px auto;
+    }
+
+    .boton_ajustar_stock_inventario {
+        min-height: 34px;
+        padding: 7px 10px;
+        border: 1px solid #0f858d;
+        border-radius: 6px;
+        background-color: #159ba3;
+        color: #ffffff;
+        font-family: Arial, sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .boton_ajustar_stock_inventario:hover {
+        background-color: #0f858d;
+        transform: translateY(-1px);
+    }
+
+    .boton_historial_stock_inventario {
+        min-height: 32px;
+        padding: 6px 9px;
+        border: 1px solid #cbd7dc;
+        border-radius: 6px;
+        background: #ffffff;
+        color: #405762;
+        font-family: Arial, sans-serif;
+        font-size: 10px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .boton_historial_stock_inventario:hover {
+        border-color: #159ba3;
+        background: #effafb;
+        color: #0f858d;
+    }
+
+    .modal_ajuste_stock_inventario {
+        position: fixed;
+        inset: 0;
+        z-index: 1500;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background: rgba(13, 31, 40, 0.58);
+        box-sizing: border-box;
+    }
+
+    .modal_ajuste_stock_inventario[hidden] {
+        display: none !important;
+    }
+
+    .modal_historial_producto_inventario {
+        position: fixed;
+        inset: 0;
+        z-index: 1501;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background: rgba(13, 31, 40, 0.58);
+        box-sizing: border-box;
+    }
+
+    .modal_historial_producto_inventario[hidden],
+    .tabla_historial_producto_inventario_contenedor[hidden] {
+        display: none !important;
+    }
+
+    .contenido_modal_historial_producto_inventario {
+        position: relative;
+        width: min(100%, 1000px);
+        max-height: 85vh;
+        padding: 28px;
+        overflow: auto;
+        border-radius: 12px;
+        background: #ffffff;
+        box-shadow: 0 18px 55px rgba(10, 35, 45, 0.24);
+        box-sizing: border-box;
+    }
+
+    .mensaje_historial_producto_inventario {
+        margin: 12px 0;
+        color: #536873;
+        font: 13px Arial, sans-serif;
+    }
+
+    .tabla_historial_producto_inventario_contenedor {
+        overflow-x: auto;
+        border: 1px solid #e2e8eb;
+        border-radius: 7px;
+    }
+
+    .tabla_historial_producto_inventario {
+        width: 100%;
+        min-width: 760px;
+        font: 12px Arial, sans-serif;
+    }
+
+    .encabezado_historial_producto_inventario,
+    .fila_historial_producto_inventario {
+        display: grid;
+        grid-template-columns: 20% 15% 15% 25% 25%;
+    }
+
+    .encabezado_historial_producto_inventario {
+        background: #f4f7f8;
+        color: #667881;
+        font-weight: 700;
+    }
+
+    .encabezado_historial_producto_inventario > div {
+        padding: 11px;
+        text-align: left;
+        white-space: nowrap;
+        box-sizing: border-box;
+    }
+
+    .fila_historial_producto_inventario > div {
+        padding: 11px;
+        border-top: 1px solid #edf1f3;
+        color: #405762;
+        overflow-wrap: anywhere;
+        box-sizing: border-box;
+    }
+
+    .paginacion_historial_producto_inventario {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        margin-top: 16px;
+    }
+
+    .paginacion_historial_producto_inventario[hidden] {
+        display: none !important;
+    }
+
+    .boton_pagina_historial_producto_inventario {
+        min-height: 36px;
+        padding: 7px 12px;
+        border: 1px solid #cbd7dc;
+        border-radius: 6px;
+        background: #ffffff;
+        color: #405762;
+        font: 700 12px Arial, sans-serif;
+        cursor: pointer;
+    }
+
+    .boton_pagina_historial_producto_inventario:disabled {
+        opacity: 0.5;
+        cursor: default;
+    }
+
+    .texto_pagina_historial_producto_inventario {
+        color: #536873;
+        font: 12px Arial, sans-serif;
+    }
+
+    .contenido_modal_ajuste_stock_inventario {
+        position: relative;
+        width: min(100%, 440px);
+        padding: 28px;
+        border-radius: 12px;
+        background: #ffffff;
+        box-shadow: 0 18px 55px rgba(10, 35, 45, 0.24);
+        box-sizing: border-box;
+    }
+
+    .cerrar_modal_ajuste_stock_inventario {
+        position: absolute;
+        top: 12px;
+        right: 14px;
+        border: 0;
+        background: transparent;
+        color: #6b7b83;
+        font-size: 26px;
+        cursor: pointer;
+    }
+
+    .titulo_modal_ajuste_stock_inventario {
+        margin: 0 28px 8px 0;
+        color: #0b3650;
+        font-family: Arial, sans-serif;
+        font-size: 22px;
+        font-weight: 700;
+    }
+
+    .producto_modal_ajuste_stock_inventario {
+        margin-bottom: 20px;
+        color: #536873;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        overflow-wrap: anywhere;
+    }
+
+    .campo_modal_ajuste_stock_inventario {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+        margin-bottom: 15px;
+    }
+
+    .texto_modal_ajuste_stock_inventario {
+        color: #334b57;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .campo_modal_ajuste_stock_inventario input,
+    .campo_modal_ajuste_stock_inventario select {
+        width: 100%;
+        min-height: 42px;
+        padding: 9px 11px;
+        border: 1px solid #cbd7dc;
+        border-radius: 6px;
+        background: #ffffff;
+        color: #263a45;
+        font: 14px Arial, sans-serif;
+        box-sizing: border-box;
+    }
+
+    .campo_lote_vencimiento_inventario[hidden],
+    .campo_fecha_lote_vencimiento_inventario[hidden] {
+        display: none !important;
+    }
+
+    .campo_lote_vencimiento_inventario {
+        margin: 2px 0 16px;
+    }
+
+    .boton_toggle_lote_vencimiento_inventario {
+        width: 100%;
+        min-height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 9px 11px;
+        border: 1px solid #cbd7dc;
+        border-radius: 7px;
+        background: #f8fafb;
+        color: #334b57;
+        font: 700 12px Arial, sans-serif;
+        text-align: left;
+        cursor: pointer;
+    }
+
+    .boton_toggle_lote_vencimiento_inventario[aria-pressed="true"] {
+        border-color: #159ba3;
+        background: #effafb;
+    }
+
+    .estado_toggle_lote_vencimiento_inventario {
+        min-width: 38px;
+        padding: 5px 8px;
+        border-radius: 12px;
+        background: #e6ecef;
+        color: #536873;
+        text-align: center;
+    }
+
+    .boton_toggle_lote_vencimiento_inventario[aria-pressed="true"] .estado_toggle_lote_vencimiento_inventario {
+        background: #159ba3;
+        color: #ffffff;
+    }
+
+    .campo_fecha_lote_vencimiento_inventario {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+        margin-top: 12px;
+    }
+
+    .campo_fecha_lote_vencimiento_inventario input {
+        width: 100%;
+        min-height: 42px;
+        padding: 9px 11px;
+        border: 1px solid #cbd7dc;
+        border-radius: 6px;
+        background: #ffffff;
+        color: #263a45;
+        font: 14px Arial, sans-serif;
+        box-sizing: border-box;
+    }
+
+    .mensaje_modal_ajuste_stock_inventario {
+        min-height: 18px;
+        margin: 2px 0 12px;
+        color: #b54735;
+        font: 12px Arial, sans-serif;
+    }
+
+    .acciones_modal_ajuste_stock_inventario {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+    }
+
+    .acciones_modal_ajuste_stock_inventario button {
+        min-height: 40px;
+        padding: 9px 14px;
+        border-radius: 6px;
+        font: 700 13px Arial, sans-serif;
+        cursor: pointer;
+    }
+
+    .boton_cancelar_ajuste_stock_inventario {
+        border: 1px solid #cbd7dc;
+        background: #ffffff;
+        color: #405762;
+    }
+
+    .boton_guardar_ajuste_stock_inventario {
+        border: 1px solid #0f858d;
+        background: #159ba3;
+        color: #ffffff;
+    }
+
+    .boton_guardar_ajuste_stock_inventario:hover {
+        background: #0f858d;
+    }
+
+    .boton_guardar_ajuste_stock_inventario:disabled {
+        opacity: 0.65;
+        cursor: wait;
     }
 
 
@@ -803,16 +1265,19 @@
 
     /* clase para establecer fila sin productos */
     .fila_sin_inventario {
+        display: block;
         border-bottom: 1px solid #edf1f3;
     }
 
     /* clase para establecer mensaje sin productos */
     .dato_sin_inventario {
+        width: 100%;
         padding: 38px 15px;
         text-align: center;
         color: #84939a;
         font-family: Arial, sans-serif;
         font-size: 13px;
+        box-sizing: border-box;
     }
 
 

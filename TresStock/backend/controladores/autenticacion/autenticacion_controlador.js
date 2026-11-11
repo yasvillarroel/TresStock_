@@ -21,7 +21,8 @@ const iniciarSesion = async (req, res) => {
         // inicia sesion
         const usuario = await autenticacionServicio.iniciarSesion(
             email,
-            password
+            password,
+            req.ip
         );
 
         // comprueba si los datos son incorrectos
@@ -53,8 +54,8 @@ const iniciarSesion = async (req, res) => {
         console.error('Error al iniciar sesion:', error);
 
         // envia el error
-        res.status(500).json({
-            mensaje: 'Error al iniciar sesion'
+        res.status(error.statusCode || 500).json({
+            mensaje: error.statusCode ? error.message : 'Error al iniciar sesion'
         });
 
     }

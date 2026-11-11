@@ -29,6 +29,12 @@ const obtenerInventario = async () => {
             INNER JOIN base_datos.proveedores prov
                 ON prov.id_proveedor = pp.id_proveedor
             WHERE prov.tiempo_entrega_dias IS NOT NULL
+        ),
+
+        productos_por_peso AS (
+            SELECT DISTINCT codigo
+            FROM base_datos.detalle_venta
+            WHERE cantidad <> TRUNC(cantidad)
         )
 
         SELECT
@@ -36,6 +42,12 @@ const obtenerInventario = async () => {
             p.cod_barra,
             p.descripcion,
             p.familia,
+            p.imagen,
+            (
+                p.familia ~* '(^|[^[:alnum:]])BALANZA([^[:alnum:]]|$)'
+                OR p.descripcion ~* '(^|[^[:alnum:]])(KG|KGS|KILO|KILOS)([^[:alnum:]]|$)'
+                OR ppeso.codigo IS NOT NULL
+            ) AS es_producto_balanza,
 
             COALESCE(i.stock_actual, 0) AS stock_actual,
             COALESCE(i.stock_minimo, 0) AS stock_minimo,
@@ -67,6 +79,8 @@ const obtenerInventario = async () => {
             ON p.codigo = pv.codigo
         LEFT JOIN productos_con_plazo pp
             ON p.codigo = pp.codigo
+        LEFT JOIN productos_por_peso ppeso
+            ON p.codigo = ppeso.codigo
 
         ORDER BY p.descripcion`
     );
@@ -278,9 +292,18 @@ const obtenerMovimientosInventario = async (filtros = {}) => {
     const pagina = Number.isSafeInteger(paginaSolicitada) && paginaSolicitada > 0
         ? paginaSolicitada
         : 1;
-    const limite = 25;
+    const limiteSolicitado = Number.parseInt(filtros.limite, 10);
+    const limite = Number.isSafeInteger(limiteSolicitado) && limiteSolicitado >= 1 && limiteSolicitado <= 100
+        ? limiteSolicitado
+        : 25;
     const valores = [];
     const condiciones = [];
+
+    const codigoExacto = String(filtros.codigo || '').trim();
+    if (codigoExacto && codigoExacto.length <= 50) {
+        valores.push(codigoExacto);
+        condiciones.push(`m.codigo = $${valores.length}`);
+    }
 
     if (['ENTRADA', 'SALIDA', 'AJUSTE'].includes(filtros.tipo)) {
         valores.push(filtros.tipo);
@@ -372,7 +395,8 @@ const ajustarInventario = async (
     cantidad,
     operacion,
     idUsuario,
-    motivo
+    motivo,
+    fechaVencimiento = null
 ) => {
 
     // valida los parametros nuevamente antes de modificar PostgreSQL
@@ -385,6 +409,15 @@ const ajustarInventario = async (
         const error = new Error('Datos inválidos para ajustar inventario');
         error.status = 400;
         throw error;
+    }
+    if (fechaVencimiento) {
+        const fechaParseada = new Date(`${fechaVencimiento}T00:00:00Z`);
+        if (operacion !== 'sumar' || !/^\d{4}-\d{2}-\d{2}$/.test(fechaVencimiento) ||
+            Number.isNaN(fechaParseada.getTime()) || fechaParseada.toISOString().slice(0, 10) !== fechaVencimiento) {
+            const error = new Error('La fecha de vencimiento no es válida para esta operación');
+            error.status = 400;
+            throw error;
+        }
     }
 
     const cliente = await pool.connect();
@@ -457,14 +490,24 @@ const ajustarInventario = async (
             [stockNuevo, codigo]
         );
 
+        // registra el lote con la misma cantidad que se añadió al inventario
+        if (fechaVencimiento) {
+            await cliente.query(
+                `INSERT INTO base_datos.lotes_vencimiento (codigo, cantidad, fecha_vencimiento)
+                 VALUES ($1, $2, $3)`,
+                [codigo, cantidad, fechaVencimiento]
+            );
+        }
+
         // AJUSTE almacena la magnitud absoluta; el motivo conserva
         // explícitamente la dirección mediante stock anterior y nuevo
         const tipo = operacion === 'fijar' ? 'AJUSTE'
             : operacion === 'sumar' ? 'ENTRADA' : 'SALIDA';
         const diferencia = Number(Math.abs(stockNuevo - stockAnterior).toFixed(4));
-        const motivoCompleto = operacion === 'fijar'
+        let motivoCompleto = operacion === 'fijar'
             ? `${motivo}. Stock: ${stockAnterior} a ${stockNuevo}`
-            : `${motivo} (Escáner)`;
+            : motivo;
+        if (fechaVencimiento) motivoCompleto += ` (Lote vence ${fechaVencimiento})`;
 
         if (diferencia > 0) {
             await cliente.query(

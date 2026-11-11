@@ -290,12 +290,6 @@ CREATE TABLE productos_excluidos_ranking (
         ON DELETE CASCADE
 );
 
--- Insertar roles
-INSERT INTO base_datos.roles (nombre, descripcion)
-VALUES
-('Administrador', 'Acceso completo al sistema'),
-('Usuario', 'Acceso a las funciones operativas del sistema');
-
 -- ============================================================
 -- 10. PROVEEDORES
 --
@@ -317,6 +311,7 @@ CREATE TABLE proveedores (
     telefono VARCHAR(30),
     email VARCHAR(150),
     direccion VARCHAR(255),
+    activo BOOLEAN NOT NULL DEFAULT TRUE,
     -- creación campo de tiempo de entrega del proveedor
     tiempo_entrega_dias INTEGER DEFAULT 7,
 
@@ -327,58 +322,6 @@ CREATE TABLE proveedores (
         )
 );
 
--- agrega el estado del proveedor también en bases de datos ya creadas
-ALTER TABLE base_datos.proveedores
-    ADD COLUMN IF NOT EXISTS activo BOOLEAN NOT NULL DEFAULT TRUE;
-
-
--- ============================================================
--- PROVEEDORES INICIALES DEL MINIMARKET LOS TRES
--- ============================================================
-
-INSERT INTO base_datos.proveedores
-(
-    nombre_comercial,
-    razon_social,
-    rut,
-    telefono,
-    email,
-    direccion,
-    tiempo_entrega_dias
-)
-VALUES
-    ('Agrosuper', 'Agrosuper Comercializadora de Alimentos Limitada', '79.084.240-3', '6006007777', 'contacto@agrosuperventas.com', 'Ruta 5 Sur Servicio 1471, Puerto Montt', 7),
-    ('ICB', 'ICB S.A.', '77.965.620-9', '966490324', 'ccc@icbfs.cl', 'Camino Tepual, Km 3, Parcela 9, Bodegas 5 y 6, Puerto Montt.', 7),
-    ('Marino', 'Comercial e Inversiones Marino SpA', '77.814.271-6', '996943286', NULL, 'Lt 1 a la Vara Senda Sur, Puerto Montt', 7),
-    ('Evercrisp', 'Evercrisp Snack Productos de Chile S.A.', '94.528.000-K', '800395176', 'joychilefoods@pepsico.com', 'Cardonal - Lotes 3 y 4, Puerto Montt', 7),
-    ('MIK', 'Comercial MIK Ltda.', '77.619.710-6', '642207570', 'mik@telsur.cl', 'Juan de Dios Angulo #614, Osorno', 7),
-    ('Allendes Hnos', 'Sociedad Comercial Allendes Hermanos Limitada', '77.784.000-2', '932684021', 'ventas@allendeshnos.cl', 'Parque Espacio Puerto, Bodega 7, Ruta 5 Sur, Lote 6, Km 117.5, Sector Chinchin, Puerto Montt.', 7),
-    ('San Mateo', 'Comercial San Mateo SpA', '76.845.766-2', '994509309', 'ventas@comercialsanmateo.cl', 'Los Pellines #158, Presidente Ibáñez, Puerto Montt', 7),
-    ('Coca-Cola', 'Coca-Cola Embonor S.A.', '93.281.000-K', '652321590', 'clientes@embonor.cl', 'Panamericana Norte 4500, Puerto Montt', 7),
-    ('Mödinger Hermanos', 'Mödinger Hermanos Sociedad Anónima', '80.634.800-7', '652242650', 'modinger@modinger.cl', 'Av. Vicente Pérez Rosales 901, Llanquihue', 7),
-    ('PF', 'Productos Fernández S.A.', '91.004.000-6', '71224430', 'contacto@pfalimentos.cl', 'Ruta 5 Sur, Km. 1025, Sector Alto Bonito ,Puerto Montt', 7),
-    ('Candy Mascotas', 'Candy Mascotas SpA', '77.692.254-4', NULL, 'mauro_1609@hotmail.com', 'Pasaje Lonco Queipul 2520, Parque Fundadores, Puerto Montt.', 7),
-    ('Ideal', 'Ideal S.A.', '82.623.500-4', '226758200', 'patricia.carmen@grupobimbo.com', 'Ruta 226 Km 3, Parcela 6, Bodega 5 y 6, Puerto Montt.', 7),
-    ('Almonacid', 'Almonacid SpA', '77.645.932-1', '432351492', 'contacto@almonacid.cl', 'Avenida Las Industrias 13850, Bodega 1, Los Ángeles', 7),
-    ('Mi Librería', 'Soc. Comercial Mi Librería Limitada', '76.118.130-0', '652508056', 'milibrerialtda@gmail.com', 'Egaña 121, Puerto Montt', 7),
-    ('Sobo', 'Distribuidora y Servicios Logísticos Sobo SpA', '78.003.696-6', '56923840620', 'contacto@sobospa.cl', 'Freire 1249, Osorno', 7),
-    ('Empresas Vican', 'María Andrea Rehbein González', '12.999.115-1', '945229054', NULL, 'Benjamín Franklin #2344, Sector Portal, Puerto Montt.', 7),
-    ('Cecinas Ancud', 'Sociedad Comercial Cecinas Ancud Ltda.', '78.586.430-1', '966074305', 'contacto@cecinasancud.cl', 'Bima 36, Parque Industrial, Puerto Montt.', 7),
-    ('Agrocomercial Codigua', 'Agrocomercial Codigua SpA', '77.471.270-4', '225847461', NULL, 'Suecia 0142, Oficina 1101, Piso 11, Providencia', 7),
-    ('Nestlé', 'Nestlé Chile S.A.', '90.703.000-8', '957287613', 'mario.pulgar1@cl.nestle.com.', 'Ruta 226, Km 4, Lagunita Lote 1, Puerto Montt', 7),
-    ('Comercial El Bosque', 'Comercial El Bosque SpA', NULL, '976122052', 'com.elbosque@hotmail.com', 'San Francisco 1070 Of. 14, Puerto Varas', 7),
-    ('Dimak', 'Distribuidora y Comercial Dimak Limitada', '78.809.560-0', '953191577', 'ventas@dimak.cl', 'Camino Puerto Octay 1191, Osorno', 7),
-    ('Comercial Itzel', 'Comercial Itzel SpA', '76.976.409-7', '56953690161', 'marceloparedes254@gmail.com', 'Ruta U V 617 Parcela 28 Colonia La Poza LT 28, Puerto Varas', 7),
-    ('Arcor', 'Comercial Aldo Patricio Balkenhol Flores SpA', '76.803.580-6', '652721648', 'combalkenhol@gmail.com', 'Parcela Nº 2, Pasaje Harry Beyer, Sector Lagunitas, Puerto Montt.', 7),
-    ('Soprole', 'Comercial Santa Elena S.A.', '84.472.400-4', '652253539', NULL, 'Ruta 5 Sur, Km 1.025 sector Alto Bonito, Puerto Montt', 7),
-    ('Cecinas Río Frío', 'José Renato Andrade Pérez', '9.226.728-8', '994726023', 'ventas@cecinasriofrio.cl', 'Km 14 Camino a Fresia, Los Muermos', 14),
-    ('Comercial Los Muermos', 'Comercializadora Los Muermos SpA', '77.833.765-7', NULL, 'comerciallosmuermos@gmail.com', 'Manío Cululil LT 4-B, Los Muermos.', 7),
-    ('Sofilim', 'Sofilim SpA', '77.383.217-K', '98479 8818', 'facturas@sofilim.cl', 'Av. El Tepual 1360, Local 12, Puerto Montt', 7),
-    ('Waldemar Barría', 'Waldemar Alfonso Barría Arellano', '16.934.044-7', '652311551', 'acgyt.osorio@gmail.com', 'Pje Manquehue, 1243 Puerto Montt, Los Lagos', 7),
-    ('Fundo El Peumo', 'Comercializadora y Distribuidora Pizarro y Hermanos Ltda.', '76.131.587-0', '954038743', 'consultas@fundoelpeumo.cl', 'Ruta 226, El Tepual s/n, Cordonal Bajo, Puerto Montt', 7),
-    ('Espol', 'Espol S.A.', '84.398.200-K', '800201555', 'contacto@espol.cl', 'León Gallo 0450, Temuco', 7),
-    ('HN', 'Sociedad Comercial y Distribuidora HN Limitada', '76.603.980-4', '652435854', 'hn_ltda@hotmail.com', 'Lote Campanillas, Parcela 11, Bodegas 1 y 2, Sector Chin Chin, Puerto Montt', 7),
-    ('CCU', 'Comercial CCU S.A.', '99.554.560-8', '6004502502', NULL, 'Bima 195, Puerto Montt.', 7);
 
 -- ============================================================
 -- RELACIÓN PRODUCTO - PROVEEDOR
@@ -416,7 +359,7 @@ CREATE TABLE producto_proveedor (
 CREATE TABLE lotes_vencimiento (
     id_lote         SERIAL PRIMARY KEY,
     codigo          VARCHAR(50) NOT NULL,
-    cantidad        INTEGER NOT NULL,
+    cantidad        NUMERIC(12,4) NOT NULL,
     fecha_vencimiento DATE NOT NULL,
     fecha_ingreso   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -431,8 +374,17 @@ CREATE TABLE lotes_vencimiento (
 
 
 -- ============================================================
--- 12. REGISTROS PENDIENTES DE VERIFICACIÓN POR CORREO
+-- 12. REGISTRO, RECUPERACIÓN Y SEGURIDAD DE AUTENTICACIÓN
 -- ============================================================
+
+-- Registra fallos por IP y bloquea el inicio de sesión según la política configurada.
+CREATE TABLE base_datos.bloqueos_inicio_sesion_ip (
+    ip INET PRIMARY KEY,
+    intentos INTEGER NOT NULL DEFAULT 0 CHECK (intentos >= 0),
+    ventana_inicio TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    bloqueado_hasta TIMESTAMPTZ,
+    actualizado_en TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
 
 CREATE TABLE base_datos.registros_pendientes (
     email           VARCHAR(150) PRIMARY KEY,
@@ -485,6 +437,66 @@ CREATE TABLE base_datos.limites_recuperacion_ip (
     actualizado_en TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT chk_limites_recuperacion_ip CHECK (fallos_codigo >= 0 AND reenvios >= 0)
 );
+
+-- ============================================================
+-- DATOS INICIALES
+-- ============================================================
+
+-- Insertar roles
+INSERT INTO base_datos.roles (nombre, descripcion)
+VALUES
+('Administrador', 'Acceso completo al sistema'),
+('Usuario', 'Acceso a las funciones operativas del sistema');
+
+
+-- ============================================================
+-- PROVEEDORES INICIALES DEL MINIMARKET LOS TRES
+-- ============================================================
+
+INSERT INTO base_datos.proveedores
+(
+    nombre_comercial,
+    razon_social,
+    rut,
+    telefono,
+    email,
+    direccion,
+    tiempo_entrega_dias
+)
+VALUES
+    ('Agrosuper', 'Agrosuper Comercializadora de Alimentos Limitada', '79.084.240-3', '6006007777', 'contacto@agrosuperventas.com', 'Ruta 5 Sur Servicio 1471, Puerto Montt', 7),
+    ('ICB', 'ICB S.A.', '77.965.620-9', '966490324', 'ccc@icbfs.cl', 'Camino Tepual, Km 3, Parcela 9, Bodegas 5 y 6, Puerto Montt.', 7),
+    ('Marino', 'Comercial e Inversiones Marino SpA', '77.814.271-6', '996943286', NULL, 'Lt 1 a la Vara Senda Sur, Puerto Montt', 7),
+    ('Evercrisp', 'Evercrisp Snack Productos de Chile S.A.', '94.528.000-K', '800395176', 'joychilefoods@pepsico.com', 'Cardonal - Lotes 3 y 4, Puerto Montt', 7),
+    ('MIK', 'Comercial MIK Ltda.', '77.619.710-6', '642207570', 'mik@telsur.cl', 'Juan de Dios Angulo #614, Osorno', 7),
+    ('Allendes Hnos', 'Sociedad Comercial Allendes Hermanos Limitada', '77.784.000-2', '932684021', 'ventas@allendeshnos.cl', 'Parque Espacio Puerto, Bodega 7, Ruta 5 Sur, Lote 6, Km 117.5, Sector Chinchin, Puerto Montt.', 7),
+    ('San Mateo', 'Comercial San Mateo SpA', '76.845.766-2', '994509309', 'ventas@comercialsanmateo.cl', 'Los Pellines #158, Presidente Ibáñez, Puerto Montt', 7),
+    ('Coca-Cola', 'Coca-Cola Embonor S.A.', '93.281.000-K', '652321590', 'clientes@embonor.cl', 'Panamericana Norte 4500, Puerto Montt', 7),
+    ('Mödinger Hermanos', 'Mödinger Hermanos Sociedad Anónima', '80.634.800-7', '652242650', 'modinger@modinger.cl', 'Av. Vicente Pérez Rosales 901, Llanquihue', 7),
+    ('PF', 'Productos Fernández S.A.', '91.004.000-6', '71224430', 'contacto@pfalimentos.cl', 'Ruta 5 Sur, Km. 1025, Sector Alto Bonito ,Puerto Montt', 7),
+    ('Candy Mascotas', 'Candy Mascotas SpA', '77.692.254-4', NULL, 'mauro_1609@hotmail.com', 'Pasaje Lonco Queipul 2520, Parque Fundadores, Puerto Montt.', 7),
+    ('Ideal', 'Ideal S.A.', '82.623.500-4', '226758200', 'patricia.carmen@grupobimbo.com', 'Ruta 226 Km 3, Parcela 6, Bodega 5 y 6, Puerto Montt.', 7),
+    ('Almonacid', 'Almonacid SpA', '77.645.932-1', '432351492', 'contacto@almonacid.cl', 'Avenida Las Industrias 13850, Bodega 1, Los Ángeles', 7),
+    ('Mi Librería', 'Soc. Comercial Mi Librería Limitada', '76.118.130-0', '652508056', 'milibrerialtda@gmail.com', 'Egaña 121, Puerto Montt', 7),
+    ('Sobo', 'Distribuidora y Servicios Logísticos Sobo SpA', '78.003.696-6', '56923840620', 'contacto@sobospa.cl', 'Freire 1249, Osorno', 7),
+    ('Empresas Vican', 'María Andrea Rehbein González', '12.999.115-1', '945229054', NULL, 'Benjamín Franklin #2344, Sector Portal, Puerto Montt.', 7),
+    ('Cecinas Ancud', 'Sociedad Comercial Cecinas Ancud Ltda.', '78.586.430-1', '966074305', 'contacto@cecinasancud.cl', 'Bima 36, Parque Industrial, Puerto Montt.', 7),
+    ('Agrocomercial Codigua', 'Agrocomercial Codigua SpA', '77.471.270-4', '225847461', NULL, 'Suecia 0142, Oficina 1101, Piso 11, Providencia', 7),
+    ('Nestlé', 'Nestlé Chile S.A.', '90.703.000-8', '957287613', 'mario.pulgar1@cl.nestle.com.', 'Ruta 226, Km 4, Lagunita Lote 1, Puerto Montt', 7),
+    ('Comercial El Bosque', 'Comercial El Bosque SpA', NULL, '976122052', 'com.elbosque@hotmail.com', 'San Francisco 1070 Of. 14, Puerto Varas', 7),
+    ('Dimak', 'Distribuidora y Comercial Dimak Limitada', '78.809.560-0', '953191577', 'ventas@dimak.cl', 'Camino Puerto Octay 1191, Osorno', 7),
+    ('Comercial Itzel', 'Comercial Itzel SpA', '76.976.409-7', '56953690161', 'marceloparedes254@gmail.com', 'Ruta U V 617 Parcela 28 Colonia La Poza LT 28, Puerto Varas', 7),
+    ('Arcor', 'Comercial Aldo Patricio Balkenhol Flores SpA', '76.803.580-6', '652721648', 'combalkenhol@gmail.com', 'Parcela Nº 2, Pasaje Harry Beyer, Sector Lagunitas, Puerto Montt.', 7),
+    ('Soprole', 'Comercial Santa Elena S.A.', '84.472.400-4', '652253539', NULL, 'Ruta 5 Sur, Km 1.025 sector Alto Bonito, Puerto Montt', 7),
+    ('Cecinas Río Frío', 'José Renato Andrade Pérez', '9.226.728-8', '994726023', 'ventas@cecinasriofrio.cl', 'Km 14 Camino a Fresia, Los Muermos', 14),
+    ('Comercial Los Muermos', 'Comercializadora Los Muermos SpA', '77.833.765-7', NULL, 'comerciallosmuermos@gmail.com', 'Manío Cululil LT 4-B, Los Muermos.', 7),
+    ('Sofilim', 'Sofilim SpA', '77.383.217-K', '98479 8818', 'facturas@sofilim.cl', 'Av. El Tepual 1360, Local 12, Puerto Montt', 7),
+    ('Waldemar Barría', 'Waldemar Alfonso Barría Arellano', '16.934.044-7', '652311551', 'acgyt.osorio@gmail.com', 'Pje Manquehue, 1243 Puerto Montt, Los Lagos', 7),
+    ('Fundo El Peumo', 'Comercializadora y Distribuidora Pizarro y Hermanos Ltda.', '76.131.587-0', '954038743', 'consultas@fundoelpeumo.cl', 'Ruta 226, El Tepual s/n, Cordonal Bajo, Puerto Montt', 7),
+    ('Espol', 'Espol S.A.', '84.398.200-K', '800201555', 'contacto@espol.cl', 'León Gallo 0450, Temuco', 7),
+    ('HN', 'Sociedad Comercial y Distribuidora HN Limitada', '76.603.980-4', '652435854', 'hn_ltda@hotmail.com', 'Lote Campanillas, Parcela 11, Bodegas 1 y 2, Sector Chin Chin, Puerto Montt', 7),
+    ('CCU', 'Comercial CCU S.A.', '99.554.560-8', '6004502502', NULL, 'Bima 195, Puerto Montt.', 7);
+
 
 -- ============================================================
 -- 14. ÍNDICES
