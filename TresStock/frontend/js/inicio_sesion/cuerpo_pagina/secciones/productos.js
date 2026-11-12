@@ -267,6 +267,10 @@ function confirmarAccionProducto(titulo, mensaje, textoAceptar = 'Confirmar') {
             selectProveedorProducto.value = '';
         }
 
+        // los productos nuevos controlan stock por defecto
+        const opcionControlStockSi = document.getElementById('controla_stock_si_producto');
+        if (opcionControlStockSi) opcionControlStockSi.checked = true;
+
         // restablece también los desplegables personalizados
         cerrarSelectoresFormularioProducto();
         actualizarSelectorFormularioProducto('familia');
@@ -2162,7 +2166,9 @@ function configurarEstadoFormularioProducto() {
         'input_descripcion_producto',
         'input_familia_producto',
         'input_precio_producto',
-        'select_proveedor_producto'
+        'select_proveedor_producto',
+        'controla_stock_si_producto',
+        'controla_stock_no_producto'
     ];
 
     campos.forEach(function(id) {
@@ -2261,6 +2267,10 @@ async function abrirDetalleProducto(codigo, modo) {
         'input_precio_producto'
     ).value = producto.precio_publico ?? 0;
 
+    // conserva la clasificacion existente al abrir el registro
+    document.getElementById('controla_stock_si_producto').checked = producto.controla_stock !== false;
+    document.getElementById('controla_stock_no_producto').checked = producto.controla_stock === false;
+
     configurarEstadoFormularioProducto();
 
     try {
@@ -2322,6 +2332,7 @@ async function guardarCambiosProducto() {
     ).value;
 
     const precio = Number(precioTexto);
+    const controlaStock = document.getElementById('controla_stock_si_producto').checked;
 
     // valida los datos obligatorios
     if (
@@ -2356,7 +2367,8 @@ async function guardarCambiosProducto() {
             familia,
             precio_publico: precio,
             imagen: imagenOriginalProducto,
-            proveedor: proveedor || null
+            proveedor: proveedor || null,
+            controla_stock: controlaStock
         };
 
         const opciones = {

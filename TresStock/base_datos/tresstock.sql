@@ -22,6 +22,7 @@ SET search_path TO base_datos;
 -- precio_publico
 -- imagen
 -- activo: TRUE = activo, FALSE = desactivado
+-- controla_stock: FALSE = registro comercial sin mercaderia fisica
 -- ============================================================
 
 CREATE TABLE productos (
@@ -32,6 +33,7 @@ CREATE TABLE productos (
     precio_publico  DECIMAL(12,2) NOT NULL DEFAULT 0,
     imagen          VARCHAR(255),
     activo          BOOLEAN NOT NULL DEFAULT TRUE,
+    controla_stock   BOOLEAN NOT NULL DEFAULT TRUE,
 
     CONSTRAINT chk_precio_publico
         CHECK (precio_publico >= 0)

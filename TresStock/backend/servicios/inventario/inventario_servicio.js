@@ -82,6 +82,7 @@ const obtenerInventario = async () => {
         LEFT JOIN productos_por_peso ppeso
             ON p.codigo = ppeso.codigo
 
+        WHERE p.controla_stock = TRUE
         ORDER BY p.descripcion`
     );
 
@@ -118,6 +119,9 @@ const obtenerResumenInventario = async () => {
                 SELECT COUNT(DISTINCT lv.codigo)
 
                 FROM base_datos.lotes_vencimiento lv
+                 INNER JOIN base_datos.productos producto_lote
+                    ON producto_lote.codigo = lv.codigo
+                       AND producto_lote.controla_stock = TRUE
 
                 WHERE
                     lv.cantidad > 0
@@ -130,7 +134,8 @@ const obtenerResumenInventario = async () => {
         FROM base_datos.productos p
 
         LEFT JOIN base_datos.inventario i
-            ON p.codigo = i.codigo`
+            ON p.codigo = i.codigo
+        WHERE p.controla_stock = TRUE`
     );
 
 
@@ -149,6 +154,7 @@ const obtenerFamilias = async () => {
         WHERE
             familia IS NOT NULL
             AND TRIM(familia) <> ''
+            AND controla_stock = TRUE
 
         ORDER BY familia`
     );
@@ -267,6 +273,7 @@ const recalcularStockMinimo = async () => {
             ON cs.codigo = p.codigo
 
         WHERE i.codigo = p.codigo
+            AND p.controla_stock = TRUE
             AND i.stock_minimo IS DISTINCT FROM
                 COALESCE(cs.stock_minimo, 0)
 
@@ -443,12 +450,17 @@ const ajustarInventario = async (
 
         // comprueba que el producto exista
         const producto = await cliente.query(
-            `SELECT codigo FROM base_datos.productos WHERE codigo = $1`,
+            `SELECT codigo, controla_stock FROM base_datos.productos WHERE codigo = $1 FOR UPDATE`,
             [codigo]
         );
         if (!producto.rowCount) {
             const error = new Error('Producto no encontrado');
             error.status = 404;
+            throw error;
+        }
+        if (producto.rows[0].controla_stock === false) {
+            const error = new Error('Este registro no controla stock. Puedes cambiarlo desde Productos.');
+            error.status = 400;
             throw error;
         }
 

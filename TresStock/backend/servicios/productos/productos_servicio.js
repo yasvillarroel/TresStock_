@@ -57,7 +57,8 @@ const crearProducto = async (
     familia,
     precio_publico,
     imagen,
-    proveedor
+    proveedor,
+    controla_stock
 ) => {
 
     const cliente = await pool.connect();
@@ -74,9 +75,10 @@ const crearProducto = async (
                     descripcion,
                     familia,
                     precio_publico,
-                    imagen
+                    imagen,
+                    controla_stock
                 )
-             VALUES ($1, $2, $3, $4, $5, $6)
+             VALUES ($1, $2, $3, $4, $5, $6, $7)
              RETURNING *`,
             [
                 codigo,
@@ -84,7 +86,8 @@ const crearProducto = async (
                 descripcion,
                 familia,
                 precio_publico,
-                imagen
+                imagen,
+                controla_stock
             ]
         );
 
@@ -123,6 +126,7 @@ const obtenerProductos = async () => {
             p.precio_publico,
             p.imagen,
             p.activo,
+            p.controla_stock,
             i.stock_actual,
             i.stock_minimo,
             proveedores_producto.proveedor
@@ -170,6 +174,7 @@ const obtenerProducto = async (id) => {
             p.precio_publico,
             p.imagen,
             p.activo,
+            p.controla_stock,
             i.stock_actual,
             i.stock_minimo,
             proveedores_producto.proveedor
@@ -208,7 +213,8 @@ const actualizarProducto = async (
     familia,
     precio_publico,
     imagen,
-    proveedor
+    proveedor,
+    controla_stock
 ) => {
 
     const cliente = await pool.connect();
@@ -226,8 +232,9 @@ const actualizarProducto = async (
                 descripcion = $3,
                 familia = $4,
                 precio_publico = $5,
-                imagen = $6
-             WHERE codigo = $7
+                imagen = $6,
+                controla_stock = COALESCE($7::BOOLEAN, controla_stock)
+             WHERE codigo = $8
              RETURNING *`,
             [
                 codigo,
@@ -236,6 +243,7 @@ const actualizarProducto = async (
                 familia,
                 precio_publico,
                 imagen,
+                controla_stock,
                 id
             ]
         );
@@ -738,6 +746,8 @@ const importarProductos = async (archivo, confirmarReemplazoStock = false, corre
                  )
                  INNER JOIN base_datos.inventario AS inventario
                     ON inventario.codigo = datos.codigo
+                 INNER JOIN base_datos.productos AS p
+                    ON p.codigo = datos.codigo AND p.controla_stock = TRUE
                  WHERE datos."stockActual" <> inventario.stock_actual`,
                 [JSON.stringify(lote), correoUsuario || null]
             );
@@ -756,6 +766,9 @@ const importarProductos = async (archivo, confirmarReemplazoStock = false, corre
                     codigo TEXT,
                     "stockActual" INTEGER
                  )
+                 INNER JOIN base_datos.productos AS p
+                    ON p.codigo = datos.codigo
+                 WHERE p.controla_stock = TRUE
                  ON CONFLICT (codigo) DO UPDATE SET
                     stock_actual = EXCLUDED.stock_actual`,
                 [JSON.stringify(lote)]

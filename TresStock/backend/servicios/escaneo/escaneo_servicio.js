@@ -38,6 +38,7 @@ const buscarProductoPorCodigo = async (codigo) => {
             p.familia,
             p.precio_publico,
             p.imagen,
+            p.controla_stock,
             e.factor,
             COALESCE(i.stock_actual, 0) AS stock_actual,
             COALESCE(i.stock_minimo, 0) AS stock_minimo
@@ -68,7 +69,8 @@ const buscarProductosParaAsociar = async (termino) => {
             p.cod_barra,
             p.descripcion,
             p.familia,
-            p.precio_publico
+            p.precio_publico,
+            p.controla_stock
         FROM base_datos.productos p
         WHERE
             p.codigo ILIKE $1

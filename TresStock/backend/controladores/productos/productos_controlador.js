@@ -56,6 +56,17 @@ const limpiarArchivoFallido = async (archivoGuardado) => {
 };
 
 
+// interpreta el valor tanto en JSON como en formularios multipart
+const leerControlStockProducto = (valor, predeterminado = null) => {
+    if (valor === undefined || valor === null || valor === '') return predeterminado;
+    if (valor === true || valor === 'true') return true;
+    if (valor === false || valor === 'false') return false;
+    const error = new Error('El control de inventario debe ser Sí o No.');
+    error.statusCode = 400;
+    throw error;
+};
+
+
 // FUNCION 1 CREAR PRODUCTO
 const crearProducto = async (req, res) => {
 
@@ -71,7 +82,8 @@ const crearProducto = async (req, res) => {
             familia,
             precio_publico,
             imagen,
-            proveedor
+            proveedor,
+            controla_stock
         } = req.body;
 
         // una fotografia nueva tiene prioridad sobre una URL existente
@@ -86,7 +98,8 @@ const crearProducto = async (req, res) => {
             familia,
             precio_publico,
             imagenFinal,
-            proveedor
+            proveedor,
+            leerControlStockProducto(controla_stock, true)
         );
 
         // envia el producto creado
@@ -182,7 +195,8 @@ const actualizarProducto = async (req, res) => {
             familia,
             precio_publico,
             imagen,
-            proveedor
+            proveedor,
+            controla_stock
         } = req.body;
 
         // si se adjunto un archivo, usar su ruta en lugar de la URL anterior
@@ -198,7 +212,8 @@ const actualizarProducto = async (req, res) => {
             familia,
             precio_publico,
             imagenFinal,
-            proveedor
+            proveedor,
+            leerControlStockProducto(controla_stock, null)
         );
 
         // envia el producto actualizado

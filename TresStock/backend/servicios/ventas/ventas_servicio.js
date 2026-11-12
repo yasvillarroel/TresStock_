@@ -890,6 +890,8 @@ const importarVentas = async (archivo, correoUsuario) => {
                     (codigo, stock_actual, stock_minimo)
                 SELECT DISTINCT dv.codigo, 0, 0
                 FROM base_datos.detalle_venta dv
+                INNER JOIN base_datos.productos p
+                    ON p.codigo = dv.codigo AND p.controla_stock = TRUE
                 WHERE dv.id_venta = ANY($1::INTEGER[])
                 ON CONFLICT (codigo) DO NOTHING
                 `,
@@ -899,10 +901,12 @@ const importarVentas = async (archivo, correoUsuario) => {
             await cliente.query(
                 `
                 WITH cantidades_vendidas AS (
-                    SELECT codigo, SUM(cantidad) AS cantidad
-                    FROM base_datos.detalle_venta
-                    WHERE id_venta = ANY($1::INTEGER[])
-                    GROUP BY codigo
+                    SELECT dv.codigo, SUM(dv.cantidad) AS cantidad
+                    FROM base_datos.detalle_venta dv
+                    INNER JOIN base_datos.productos p
+                        ON p.codigo = dv.codigo AND p.controla_stock = TRUE
+                    WHERE dv.id_venta = ANY($1::INTEGER[])
+                    GROUP BY dv.codigo
                 )
                 UPDATE base_datos.inventario AS i
                 SET stock_actual = i.stock_actual - cantidades_vendidas.cantidad
@@ -925,6 +929,8 @@ const importarVentas = async (archivo, correoUsuario) => {
                 FROM base_datos.detalle_venta dv
                 INNER JOIN base_datos.ventas v
                     ON v.id_venta = dv.id_venta
+                INNER JOIN base_datos.productos p
+                    ON p.codigo = dv.codigo AND p.controla_stock = TRUE
                 WHERE dv.id_venta = ANY($1::INTEGER[])
                     AND dv.cantidad <> 0
                 `,

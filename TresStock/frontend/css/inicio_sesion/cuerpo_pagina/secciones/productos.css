@@ -2522,3 +2522,72 @@
         gap: 3px;
     }
 }
+
+
+/* SUBTITULO 2 CONTROL DE INVENTARIO EN FORMULARIO */
+
+    .campo_control_stock_producto {
+        grid-column: 1 / -1;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+    }
+
+    .texto_campo_control_stock_producto {
+        color: #425966;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+
+    .opciones_control_stock_producto {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .opcion_control_stock_producto {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        min-height: 42px;
+        padding: 9px 12px;
+        color: #425966;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        background: #ffffff;
+        border: 1px solid #ced9de;
+        border-radius: 6px;
+        box-sizing: border-box;
+        cursor: pointer;
+    }
+
+    .opcion_control_stock_producto:has(input:checked) {
+        border-color: #159ba3;
+        background: #e4f6f6;
+        color: #0f858d;
+    }
+
+    .opcion_control_stock_producto input {
+        margin: 0;
+        accent-color: #159ba3;
+        flex-shrink: 0;
+    }
+
+    .opcion_control_stock_producto:has(input:disabled) {
+        cursor: default;
+        opacity: 0.76;
+    }
+
+    .ayuda_control_stock_producto {
+        margin-top: 8px;
+        color: #71818a;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        line-height: 1.45;
+    }
+
+    @media (max-width: 600px) {
+        .opciones_control_stock_producto { grid-template-columns: 1fr; }
+    }

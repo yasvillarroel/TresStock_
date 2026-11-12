@@ -472,6 +472,24 @@
 
                             </div>
 
+                            <!-- indica si el registro representa mercaderia fisica -->
+                            <div class="campo_control_stock_producto">
+                                <div class="texto_campo_control_stock_producto">Control de inventario</div>
+                                <div class="opciones_control_stock_producto" role="radiogroup" aria-label="Control de inventario">
+                                    <label class="opcion_control_stock_producto">
+                                        <input type="radio" id="controla_stock_si_producto" name="controla_stock_producto" value="true" checked>
+                                        <span>Sí, controla stock</span>
+                                    </label>
+                                    <label class="opcion_control_stock_producto">
+                                        <input type="radio" id="controla_stock_no_producto" name="controla_stock_producto" value="false">
+                                        <span>No controla stock</span>
+                                    </label>
+                                </div>
+                                <div class="ayuda_control_stock_producto">
+                                    Los registros sin inventario se mantienen en Productos y Ventas, pero no descuentan existencias ni aparecen en Stock actual.
+                                </div>
+                            </div>
+
                         </div>
 
                     <!-- TITULO 9 IMAGEN DEL PRODUCTO -->
