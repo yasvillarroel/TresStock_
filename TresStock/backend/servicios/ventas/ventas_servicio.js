@@ -495,7 +495,15 @@ const detectarDelimitador = (texto) => {
 
 // FUNCION 11 IMPORTAR VENTAS
 
-const importarVentas = async (archivo, correoUsuario) => {
+// historico: registra ventas sin modificar inventario
+// diario: descuenta unicamente ventas nuevas desde la fecha de inicio configurada
+const importarVentas = async (archivo, idUsuario, modalidad) => {
+
+    if (!['historico', 'diario'].includes(modalidad)) {
+        const error = new Error('Selecciona una modalidad válida: histórica o diaria.');
+        error.status = 400;
+        throw error;
+    }
 
     if (!archivo) {
         throw new Error('No se ha seleccionado ningún archivo');
@@ -844,10 +852,58 @@ const importarVentas = async (archivo, correoUsuario) => {
     let detallesImportados = 0;
     let movimientosInventarioRegistrados = 0;
     let mapaIdsVentas = new Map();
+    let fechaInicioDescuento = null;
 
     try {
 
         await cliente.query('BEGIN');
+
+        // verifica la sesion y obtiene el correo real para registrar la importacion
+        const usuario = await cliente.query(
+            `SELECT email FROM base_datos.usuarios
+             WHERE id_usuario = $1 AND activo = TRUE`,
+            [idUsuario]
+        );
+        if (!usuario.rowCount) {
+            const error = new Error('No hay una sesión válida para importar ventas.');
+            error.status = 401;
+            throw error;
+        }
+        const correoUsuario = usuario.rows[0].email;
+
+        // bloquea la configuracion durante la transaccion para impedir cambios simultaneos
+        const configuracion = await cliente.query(
+            `SELECT TO_CHAR(fecha_inicio_descuento, 'YYYY-MM-DD') AS fecha_inicio_descuento
+             FROM base_datos.configuracion_inventario
+             WHERE id_configuracion = 1 FOR SHARE`
+        );
+        if (!configuracion.rowCount) {
+            throw new Error('Falta la configuración de inventario. Ejecuta la migración SQL.');
+        }
+        fechaInicioDescuento = configuracion.rows[0].fecha_inicio_descuento;
+
+        // solo se validan las boletas NUEVAS; las ya importadas no se vuelven a descontar
+        if (modalidad === 'diario' && !fechaInicioDescuento) {
+            const error = new Error(
+                'Antes de importar ventas diarias, establece el stock inicial y configura la fecha de inicio.'
+            );
+            error.status = 409;
+            throw error;
+        }
+
+        const fueraPeriodo = ventasNuevas.find(venta => {
+            const fechaVenta = venta.fecha_hora.slice(0, 10);
+            return modalidad === 'diario'
+                ? fechaVenta < fechaInicioDescuento
+                : Boolean(fechaInicioDescuento && fechaVenta >= fechaInicioDescuento);
+        });
+        if (fueraPeriodo) {
+            const error = new Error(modalidad === 'diario'
+                ? `La boleta ${fueraPeriodo.boleta} es anterior al inicio del control (${fechaInicioDescuento}). Impórtala como histórica.`
+                : `La boleta ${fueraPeriodo.boleta} pertenece al período de control desde ${fechaInicioDescuento}. Impórtala como diaria.`);
+            error.status = 409;
+            throw error;
+        }
 
         mapaIdsVentas = await insertarVentasEnBloques(cliente, ventasNuevas);
 
@@ -882,7 +938,8 @@ const importarVentas = async (archivo, correoUsuario) => {
 
         const idsVentasImportadas = [...mapaIdsVentas.values()];
 
-        if (idsVentasImportadas.length > 0) {
+        // el historico aporta al analisis, pero no debe descontar stock ni crear movimientos
+        if (modalidad === 'diario' && idsVentasImportadas.length > 0) {
 
             await cliente.query(
                 `
@@ -959,6 +1016,8 @@ const importarVentas = async (archivo, correoUsuario) => {
         mensaje: 'Importacion de ventas completada',
 
         resumen: {
+            modalidad_importacion: modalidad,
+            fecha_inicio_descuento: fechaInicioDescuento,
             total_filas: filas.length,
             boletas_importadas: mapaIdsVentas.size,
             detalles_importados: detallesImportados,
@@ -985,10 +1044,109 @@ const importarVentas = async (archivo, correoUsuario) => {
 };
 
 
+// FUNCION 12 OBTENER CONFIGURACION DE CONTROL DE INVENTARIO
+const obtenerConfiguracionInventario = async () => {
+    const resultado = await pool.query(
+        `SELECT TO_CHAR(fecha_inicio_descuento, 'YYYY-MM-DD') AS fecha_inicio_descuento,
+                TO_CHAR(fecha_configuracion, 'DD/MM/YYYY HH24:MI') AS fecha_configuracion,
+                configurado_por
+         FROM base_datos.configuracion_inventario
+         WHERE id_configuracion = 1`
+    );
+    if (!resultado.rowCount) {
+        throw new Error('Falta ejecutar la migración de control de inventario.');
+    }
+    return {
+        configurado: Boolean(resultado.rows[0].fecha_inicio_descuento),
+        ...resultado.rows[0]
+    };
+};
+
+// FUNCION 13 ESTABLECER FECHA DE INICIO (OPERACION UNICA)
+const configurarInicioInventario = async (fechaInicio, idUsuario) => {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(fechaInicio)) {
+        const error = new Error('La fecha debe tener formato AAAA-MM-DD.');
+        error.status = 400;
+        throw error;
+    }
+
+    // comprueba que la fecha exista realmente, sin depender del formato local del servidor
+    const fechaVerificada = new Date(fechaInicio + 'T00:00:00Z');
+    if (Number.isNaN(fechaVerificada.getTime()) ||
+        fechaVerificada.toISOString().slice(0, 10) !== fechaInicio) {
+        const error = new Error('La fecha de inicio no es válida.');
+        error.status = 400;
+        throw error;
+    }
+
+    const cliente = await pool.connect();
+    try {
+        await cliente.query('BEGIN');
+
+        const usuario = await cliente.query(
+            `SELECT email FROM base_datos.usuarios
+             WHERE id_usuario = $1 AND activo = TRUE`, [idUsuario]
+        );
+        if (!usuario.rowCount) {
+            const error = new Error('No hay una sesión válida para configurar el inventario.');
+            error.status = 401;
+            throw error;
+        }
+
+        const estado = await cliente.query(
+            `SELECT TO_CHAR(fecha_inicio_descuento, 'YYYY-MM-DD') AS fecha_inicio_descuento
+             FROM base_datos.configuracion_inventario
+             WHERE id_configuracion = 1 FOR UPDATE`
+        );
+        if (!estado.rowCount) {
+            throw new Error('Falta ejecutar la migración de configuración de inventario.');
+        }
+        if (estado.rows[0].fecha_inicio_descuento) {
+            const error = new Error('La fecha de inicio ya fue establecida. No puede cambiarse desde la importación.');
+            error.status = 409;
+            throw error;
+        }
+
+        // evita activar descuentos sobre boletas que ya fueron importadas.
+        // ON CONFLICT protege de duplicados, pero no permite descontarlas retroactivamente.
+        const ventasYaRegistradas = await cliente.query(
+            `SELECT 1 FROM base_datos.ventas
+             WHERE fecha_hora >= $1::DATE LIMIT 1`, [fechaInicio]
+        );
+        if (ventasYaRegistradas.rowCount) {
+            const error = new Error(
+                'Ya hay boletas registradas desde esa fecha. Elige una fecha posterior a la última venta existente ' +
+                'o prepara una nueva base de pruebas antes de comenzar el control diario.'
+            );
+            error.status = 409;
+            throw error;
+        }
+
+        const actualizado = await cliente.query(
+            `UPDATE base_datos.configuracion_inventario
+             SET fecha_inicio_descuento = $1::DATE,
+                 fecha_configuracion = CURRENT_TIMESTAMP,
+                 configurado_por = $2
+             WHERE id_configuracion = 1
+             RETURNING TO_CHAR(fecha_inicio_descuento, 'YYYY-MM-DD') AS fecha_inicio_descuento`,
+            [fechaInicio, usuario.rows[0].email]
+        );
+        await cliente.query('COMMIT');
+        return { configurado: true, fecha_inicio_descuento: actualizado.rows[0].fecha_inicio_descuento };
+    } catch (error) {
+        await cliente.query('ROLLBACK');
+        throw error;
+    } finally {
+        cliente.release();
+    }
+};
+
 // exporta las funciones
 module.exports = {
     obtenerVentas,
     obtenerResumenVentas,
     obtenerDetalleVenta,
-    importarVentas
+    importarVentas,
+    obtenerConfiguracionInventario,
+    configurarInicioInventario
 };

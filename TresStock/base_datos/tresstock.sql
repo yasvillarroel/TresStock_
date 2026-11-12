@@ -171,6 +171,21 @@ EXECUTE FUNCTION crear_inventario_producto();
 
 
 -- ============================================================
+-- 5.1 CONFIGURACION DE INICIO DEL CONTROL DE STOCK
+-- Primera fecha de ventas que descontaran existencias; se fija una sola vez.
+-- ============================================================
+
+CREATE TABLE configuracion_inventario (
+    id_configuracion SMALLINT PRIMARY KEY DEFAULT 1
+        CONSTRAINT chk_configuracion_unica CHECK (id_configuracion = 1),
+    fecha_inicio_descuento DATE,
+    fecha_configuracion TIMESTAMP,
+    configurado_por VARCHAR(150)
+);
+
+INSERT INTO configuracion_inventario (id_configuracion) VALUES (1);
+
+-- ============================================================
 -- 6. MOVIMIENTOS DE INVENTARIO
 --
 -- Registra el historial de cambios de stock.

@@ -15,6 +15,113 @@ let secuenciaSolicitudVentas = 0;
 let ordenVentasSeleccionado = 'recientes';
 
 
+// TITULO 0 ESTADO DE LA IMPORTACION DE VENTAS
+let modalidadImportacionVentas = 'historico';
+let configuracionInventarioVentas = null;
+let errorConfiguracionInventarioVentas = '';
+let importandoVentasEnCurso = false;
+let configurandoInicioVentas = false;
+
+// actualiza los mensajes y habilita las acciones correspondientes
+function actualizarModalidadImportacionVentas() {
+    const diaria = modalidadImportacionVentas === 'diario';
+    const panel = document.getElementById('panel_inicio_control_ventas');
+    const ayuda = document.getElementById('ayuda_modalidad_importacion_ventas');
+    const estado = document.getElementById('estado_inicio_control_ventas');
+    const formulario = document.getElementById('formulario_inicio_control_ventas');
+    const botonImportar = document.getElementById('boton_confirmar_importacion_ventas');
+
+    if (panel) panel.hidden = !diaria;
+    if (ayuda) ayuda.textContent = diaria
+        ? 'Descuenta existencias solo por las boletas nuevas desde la fecha de inicio configurada.'
+        : 'Guarda boletas y detalles para estadísticas, pero no modifica las existencias.';
+
+    if (formulario) formulario.hidden = !diaria || Boolean(configuracionInventarioVentas?.configurado);
+    if (estado && diaria) {
+        estado.textContent = errorConfiguracionInventarioVentas || (configuracionInventarioVentas?.configurado
+            ? 'Control activo desde ' + configuracionInventarioVentas.fecha_inicio_descuento +
+              '. Solo las ventas desde esa fecha pueden descontar stock.'
+            : 'Sin fecha de inicio configurada. Primero establece el stock inicial de referencia.');
+    }
+    if (botonImportar) botonImportar.disabled = importandoVentasEnCurso ||
+        (diaria && !configuracionInventarioVentas?.configurado);
+}
+
+// consulta la fecha de inicio guardada por PostgreSQL
+async function cargarConfiguracionInventarioVentas() {
+    try {
+        const respuesta = await fetchConCsrf('http://127.0.0.1:3000/api/ventas/configuracion-inventario', {
+            method: 'GET', credentials: 'include'
+        });
+        const datos = await respuesta.json();
+        if (!respuesta.ok) throw new Error(datos.mensaje || 'No se pudo consultar la configuración.');
+        configuracionInventarioVentas = datos;
+        errorConfiguracionInventarioVentas = '';
+    } catch (error) {
+        configuracionInventarioVentas = null;
+        errorConfiguracionInventarioVentas = error.message;
+        console.error('Error al consultar la configuración de inventario:', error);
+        const estado = document.getElementById('estado_inicio_control_ventas');
+        if (estado) estado.textContent = error.message;
+    }
+    actualizarModalidadImportacionVentas();
+}
+
+// establece una sola vez el inicio de los descuentos diarios
+async function guardarInicioControlVentas() {
+    if (configurandoInicioVentas || configuracionInventarioVentas?.configurado) return;
+    const fecha = document.getElementById('fecha_inicio_control_ventas')?.value || '';
+    const confirmado = document.getElementById('confirmar_inicio_control_ventas')?.checked;
+    const estado = document.getElementById('estado_inicio_control_ventas');
+    const boton = document.getElementById('boton_inicio_control_ventas');
+
+    if (!fecha || !confirmado) {
+        if (estado) estado.textContent = 'Selecciona la fecha y confirma el stock inicial.';
+        return;
+    }
+    configurandoInicioVentas = true;
+    if (boton) boton.disabled = true;
+    try {
+        const respuesta = await fetchConCsrf('http://127.0.0.1:3000/api/ventas/configuracion-inventario', {
+            method: 'POST', credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                fecha_inicio_descuento: fecha,
+                confirmar_stock_inicial: 'SI'
+            })
+        });
+        const resultado = await respuesta.json();
+        if (!respuesta.ok) throw new Error(resultado.mensaje || 'No se pudo guardar la fecha.');
+        configuracionInventarioVentas = resultado;
+        errorConfiguracionInventarioVentas = '';
+        actualizarModalidadImportacionVentas();
+    } catch (error) {
+        if (estado) estado.textContent = error.message;
+    } finally {
+        configurandoInicioVentas = false;
+        if (boton) boton.disabled = !document.getElementById('confirmar_inicio_control_ventas')?.checked;
+    }
+}
+
+// configura los controles del modo histórico/diario
+function configurarModalidadesImportacionVentas() {
+    document.querySelectorAll('input[name="modalidad_importacion_ventas"]').forEach(function(radio) {
+        radio.addEventListener('change', function() {
+            if (radio.checked) {
+                modalidadImportacionVentas = radio.value;
+                actualizarModalidadImportacionVentas();
+            }
+        });
+    });
+    const check = document.getElementById('confirmar_inicio_control_ventas');
+    const boton = document.getElementById('boton_inicio_control_ventas');
+    if (check && boton) check.addEventListener('change', function() {
+        boton.disabled = !check.checked || configurandoInicioVentas;
+    });
+    if (boton) boton.addEventListener('click', guardarInicioControlVentas);
+    actualizarModalidadImportacionVentas();
+}
+
 // TITULO 1 IMPORTACION VENTAS
 
     // abre el formulario de importación
@@ -30,6 +137,8 @@ let ordenVentasSeleccionado = 'recientes';
                 'contenedor_importacion_ventas_oculto'
             );
 
+            // refresca el inicio configurado al abrir el formulario
+            cargarConfiguracionInventarioVentas();
         }
 
     }
@@ -73,6 +182,10 @@ let ordenVentasSeleccionado = 'recientes';
                 'No se ha seleccionado ningún archivo.';
 
         }
+        const historico = document.querySelector('input[name="modalidad_importacion_ventas"][value="historico"]');
+        if (historico) historico.checked = true;
+        modalidadImportacionVentas = 'historico';
+        actualizarModalidadImportacionVentas();
 
     }
 
@@ -168,6 +281,11 @@ let ordenVentasSeleccionado = 'recientes';
         }
 
 
+        if (importandoVentasEnCurso) return;
+        if (modalidadImportacionVentas === 'diario' && !configuracionInventarioVentas?.configurado) {
+            informacionArchivo.textContent = 'Configura primero la fecha de inicio del inventario.';
+            return;
+        }
         const archivo =
             inputArchivo.files[0];
 
@@ -182,8 +300,10 @@ let ordenVentasSeleccionado = 'recientes';
         }
 
 
+        importandoVentasEnCurso = true;
+        actualizarModalidadImportacionVentas();
         informacionArchivo.textContent =
-            'Importando ventas. Este proceso puede tardar algunos minutos...';
+            'Importando ventas en modo ' + (modalidadImportacionVentas === 'historico' ? 'histórico' : 'diario') + '...';
 
 
         const datos =
@@ -194,6 +314,7 @@ let ordenVentasSeleccionado = 'recientes';
             'archivo',
             archivo
         );
+        datos.append('modalidad_importacion', modalidadImportacionVentas);
 
 
         try {
@@ -240,7 +361,9 @@ let ordenVentasSeleccionado = 'recientes';
 
 
             informacionArchivo.textContent =
-                'Importación completada\n\n' +
+                'Importación ' + (resumen.modalidad_importacion === 'historico' ? 'histórica' : 'diaria') + ' completada\n\n' +
+                'Afectó inventario: ' + (resumen.modalidad_importacion === 'diario' ? 'Sí (solo boletas nuevas)' : 'No') + '\n' +
+                'Movimientos registrados: ' + Number(resumen.movimientos_inventario_registrados || 0).toLocaleString('es-CL') + '\n' +
 
                 'Filas procesadas: ' +
                 Number(
@@ -295,6 +418,9 @@ let ordenVentasSeleccionado = 'recientes';
             informacionArchivo.textContent =
                 'No se pudo conectar con el servidor.';
 
+        } finally {
+            importandoVentasEnCurso = false;
+            actualizarModalidadImportacionVentas();
         }
 
     }
@@ -1312,6 +1438,7 @@ let ordenVentasSeleccionado = 'recientes';
     async function inicializarVentas() {
 
         configurarImportacionVentas();
+        configurarModalidadesImportacionVentas();
         configurarFiltrosVentas();
 
         await Promise.all([

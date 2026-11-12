@@ -492,6 +492,46 @@
                                 Selecciona el archivo CSV exportado desde DimaSoft.
                             </div>
 
+                            <!-- SUBTITULO 1 MODALIDAD DE IMPORTACION -->
+                            <div class="contenedor_modalidad_importacion_ventas">
+                                <div class="etiqueta_modalidad_importacion_ventas">Tipo de importación</div>
+                                <div class="opciones_modalidad_importacion_ventas" role="radiogroup" aria-label="Tipo de importación">
+                                    <label class="opcion_modalidad_importacion_ventas">
+                                        <input type="radio" name="modalidad_importacion_ventas" value="historico" checked>
+                                        <span>Histórica (sin descontar stock)</span>
+                                    </label>
+                                    <label class="opcion_modalidad_importacion_ventas">
+                                        <input type="radio" name="modalidad_importacion_ventas" value="diario">
+                                        <span>Diaria (descontar stock)</span>
+                                    </label>
+                                </div>
+                                <div class="ayuda_modalidad_importacion_ventas" id="ayuda_modalidad_importacion_ventas" role="status">
+                                    Guarda boletas y detalles para estadísticas, pero no modifica las existencias.
+                                </div>
+                            </div>
+
+                            <!-- SUBTITULO 2 FECHA DE INICIO DEL CONTROL DIARIO -->
+                            <div class="contenedor_inicio_control_ventas" id="panel_inicio_control_ventas" hidden>
+                                <div class="titulo_inicio_control_ventas">Inicio del control de existencias</div>
+                                <div class="estado_inicio_control_ventas" id="estado_inicio_control_ventas" role="status" aria-live="polite">
+                                    Consultando la configuración...
+                                </div>
+                                <div class="formulario_inicio_control_ventas" id="formulario_inicio_control_ventas" hidden>
+                                    <label for="fecha_inicio_control_ventas">Primera fecha de ventas que descontarán stock</label>
+                                    <input type="date" id="fecha_inicio_control_ventas">
+                                    <div class="aviso_inicio_control_ventas">
+                                        Antes de activarlo, establece el stock inicial al cierre del día anterior a esta fecha.
+                                        La fecha solo puede configurarse una vez desde esta pantalla.
+                                    </div>
+                                    <label class="confirmacion_inicio_control_ventas">
+                                        <input type="checkbox" id="confirmar_inicio_control_ventas">
+                                        <span>Confirmo que ya establecí el stock inicial de referencia.</span>
+                                    </label>
+                                    <button class="boton_inicio_control_ventas" id="boton_inicio_control_ventas"
+                                            type="button" disabled>Establecer fecha de inicio</button>
+                                </div>
+                            </div>
+
                             <div
                                 class="zona_seleccion_archivo_ventas"
                                 onclick="seleccionarArchivoVentas()"
@@ -541,12 +581,14 @@
                                 Cancelar
                             </div>
 
-                            <div
+                            <button
                                 class="boton_confirmar_importacion_ventas"
+                                id="boton_confirmar_importacion_ventas"
+                                type="button"
                                 onclick="importarVentas()"
                             >
                                 Importar ventas
-                            </div>
+                            </button>
 
                         </div>
 

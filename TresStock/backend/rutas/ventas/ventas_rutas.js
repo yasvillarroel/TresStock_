@@ -9,6 +9,9 @@ const ventasControlador = require(
 // importa multer
 const multer = require('multer');
 
+// protege importaciones y configuración con una sesión válida
+const { autenticacion } = require('../../middleware/autenticacion');
+
 
 // configura la recepción del archivo
 const cargarArchivo = multer(
@@ -45,15 +48,21 @@ router.get(
 );
 
 
-// ruta para importar ventas
+// ruta para consultar el inicio del control de inventario
+router.get('/configuracion-inventario', autenticacion,
+    ventasControlador.obtenerConfiguracionInventario);
+
+// establece una sola vez la fecha desde la que se descuentan ventas
+router.post('/configuracion-inventario', autenticacion,
+    ventasControlador.configurarInicioInventario);
+
+// ruta para importar ventas con sesion validada
 router.post(
     '/importar',
-    cargarArchivo.single(
-        'archivo'
-    ),
+    autenticacion,
+    cargarArchivo.single('archivo'),
     ventasControlador.importarVentas
 );
-
 
 // ruta para obtener detalle
 router.get(

@@ -237,7 +237,8 @@ const importarVentas =
             const resultado =
                 await ventasServicio.importarVentas(
                     req.file,
-                    req.usuario?.email
+                    Number(req.usuario?.id),
+                    String(req.body.modalidad_importacion || '').trim()
                 );
 
 
@@ -254,11 +255,8 @@ const importarVentas =
             );
 
 
-            res.status(400).json(
-                {
-                    mensaje:
-                        error.message
-                }
+            res.status([400, 401, 409].includes(error.status) ? error.status : 400).json(
+                { mensaje: error.message }
             );
 
         }
@@ -266,10 +264,45 @@ const importarVentas =
     };
 
 
+// FUNCION 5 CONSULTAR CONFIGURACION DE INVENTARIO
+const obtenerConfiguracionInventario = async (req, res) => {
+    try {
+        return res.json(await ventasServicio.obtenerConfiguracionInventario());
+    } catch (error) {
+        console.error('Error al consultar configuracion de inventario:', error);
+        return res.status(500).json({ mensaje: error.message });
+    }
+};
+
+// FUNCION 6 ESTABLECER INICIO DE CONTROL DE STOCK
+const configurarInicioInventario = async (req, res) => {
+    try {
+        if (req.body?.confirmar_stock_inicial !== 'SI') {
+            return res.status(400).json({
+                mensaje: 'Debes confirmar que estableciste el stock al cierre del día anterior.'
+            });
+        }
+        const fecha = String(req.body?.fecha_inicio_descuento || '').trim();
+        const resultado = await ventasServicio.configurarInicioInventario(
+            fecha, Number(req.usuario?.id)
+        );
+        return res.json({ mensaje: 'Fecha de inicio configurada correctamente', ...resultado });
+    } catch (error) {
+        if (![400, 401, 409].includes(error.status)) {
+            console.error('Error al configurar inicio de inventario:', error);
+        }
+        return res.status([400, 401, 409].includes(error.status) ? error.status : 500).json({
+            mensaje: error.status ? error.message : 'No se pudo configurar el inicio de inventario.'
+        });
+    }
+};
+
 // exporta las funciones
 module.exports = {
     obtenerVentas,
     obtenerResumenVentas,
     obtenerDetalleVenta,
-    importarVentas
+    importarVentas,
+    obtenerConfiguracionInventario,
+    configurarInicioInventario
 };
