@@ -8,7 +8,7 @@ const { firmarToken } = require('../../utilidades/jwt');
 const { OPCIONES_COOKIE_SESION } = require('../../utilidades/cookies');
 
 // importa las funciones de csrftoken
-const { generateCsrfToken } = require('../../utilidades/csrf')
+const { generateCsrfToken } = require('../../utilidades/csrf');
 
 // inicia sesion
 const iniciarSesion = async (req, res) => {
@@ -111,8 +111,13 @@ const cerrarSesion = (req, res) => {
         path: '/'
     });
 
+    // desvincula el token CSRF de la sesión cerrada y crea otro para la sesión anónima
+    req.csrfSessionIdentifier = 'sesion-anonima';
+    const csrfToken = generateCsrfToken(req, res, { overwrite: true });
+
     return res.status(200).json({
-        mensaje: 'Sesion cerrada correctamente'
+        mensaje: 'Sesion cerrada correctamente',
+        csrfToken
     });
 };
 

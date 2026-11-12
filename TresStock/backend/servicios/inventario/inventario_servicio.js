@@ -1,5 +1,6 @@
 // importa el pool de conexiones
 const pool = require('../../configuracion/base_datos');
+const { obtenerFechaActualChile } = require('../../utilidades/fechas');
 
 
 // FUNCION 1 OBTENER INVENTARIO
@@ -425,8 +426,9 @@ const ajustarInventario = async (
     if (fechaVencimiento) {
         const fechaParseada = new Date(`${fechaVencimiento}T00:00:00Z`);
         if (operacion !== 'sumar' || !/^\d{4}-\d{2}-\d{2}$/.test(fechaVencimiento) ||
-            Number.isNaN(fechaParseada.getTime()) || fechaParseada.toISOString().slice(0, 10) !== fechaVencimiento) {
-            const error = new Error('La fecha de vencimiento no es válida para esta operación');
+            Number.isNaN(fechaParseada.getTime()) || fechaParseada.toISOString().slice(0, 10) !== fechaVencimiento ||
+            fechaVencimiento < obtenerFechaActualChile()) {
+            const error = new Error('La fecha de vencimiento debe ser hoy o posterior y solo se admite al sumar stock');
             error.status = 400;
             throw error;
         }
@@ -510,8 +512,9 @@ const ajustarInventario = async (
         // registra el lote con la misma cantidad que se añadió al inventario
         if (fechaVencimiento) {
             await cliente.query(
-                `INSERT INTO base_datos.lotes_vencimiento (codigo, cantidad, fecha_vencimiento)
-                 VALUES ($1, $2, $3)`,
+                `INSERT INTO base_datos.lotes_vencimiento
+                    (codigo, cantidad, cantidad_original, fecha_vencimiento)
+                 VALUES ($1, $2, $2, $3)`,
                 [codigo, cantidad, fechaVencimiento]
             );
         }

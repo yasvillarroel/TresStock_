@@ -49,14 +49,17 @@
                 <div class="titulo_tabla_vencimientos" id="titulo_tabla_vencimientos">Lotes activos</div>
             </div>
             <div class="tabla_vencimientos_desplazable">
-                <div class="tabla_vencimientos" role="table" aria-label="Lotes con vencimiento">
+                <div class="tabla_vencimientos tabla_lotes_vencimiento" role="table" aria-label="Lotes con vencimiento">
                     <div class="fila_encabezado_vencimientos fila_lotes_vencimiento" role="row">
                         <div class="celda_encabezado_vencimientos" role="columnheader">Producto</div>
                         <div class="celda_encabezado_vencimientos" role="columnheader">Código</div>
-                        <div class="celda_encabezado_vencimientos" role="columnheader">Cantidad</div>
+                        <div class="celda_encabezado_vencimientos" role="columnheader">Cantidad original del lote</div>
+                        <div class="celda_encabezado_vencimientos" role="columnheader">Cantidad afectada del lote</div>
                         <div class="celda_encabezado_vencimientos" role="columnheader">Fecha de ingreso</div>
                         <div class="celda_encabezado_vencimientos" role="columnheader">Fecha de vencimiento</div>
                         <div class="celda_encabezado_vencimientos" role="columnheader">Estado</div>
+                        <div class="celda_encabezado_vencimientos" role="columnheader">Motivo</div>
+                        <div class="celda_encabezado_vencimientos" role="columnheader">Acciones</div>
                     </div>
                     <div class="filas_tabla_vencimientos" id="filas_vencimientos" role="rowgroup">
                         <div class="fila_vencimiento"><div class="mensaje_tabla_vencimientos" role="cell">Cargando vencimientos…</div></div>
@@ -70,6 +73,63 @@
                     <div class="numeros_paginas_vencimientos" id="numeros_paginas_vencimientos"></div>
                     <div class="boton_pagina_vencimientos" id="siguiente_vencimientos" role="button" tabindex="0" aria-label="Página siguiente" aria-disabled="true">›</div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal_editar_vencimiento" id="modal_editar_vencimiento" aria-hidden="true" hidden>
+        <div class="contenido_modal_editar_vencimiento" role="dialog" aria-modal="true" aria-labelledby="titulo_modal_editar_vencimiento">
+            <button class="cerrar_modal_editar_vencimiento" id="cerrar_modal_editar_vencimiento" type="button" aria-label="Cerrar">×</button>
+            <div class="titulo_modal_editar_vencimiento" id="titulo_modal_editar_vencimiento">Modificar vencimiento del lote</div>
+            <div class="descripcion_modal_editar_vencimiento" id="descripcion_modal_editar_vencimiento"></div>
+            <div class="campo_modal_editar_vencimiento">
+                <div class="texto_modal_editar_vencimiento">Nueva fecha de vencimiento</div>
+                <input id="fecha_editar_vencimiento" type="date" required>
+            </div>
+            <div class="mensaje_modal_editar_vencimiento" id="mensaje_modal_editar_vencimiento" role="status" aria-live="polite"></div>
+            <div class="acciones_modal_editar_vencimiento">
+                <button class="boton_cancelar_editar_vencimiento" id="cancelar_editar_vencimiento" type="button">Cancelar</button>
+                <button class="boton_guardar_editar_vencimiento" id="guardar_editar_vencimiento" type="button">Guardar fecha</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal_baja_lote_vencimiento" id="modal_baja_lote_vencimiento" aria-hidden="true" hidden>
+        <div class="contenido_modal_baja_lote_vencimiento" role="dialog" aria-modal="true" aria-labelledby="titulo_modal_baja_lote_vencimiento">
+            <button class="cerrar_modal_baja_lote_vencimiento" id="cerrar_modal_baja_lote_vencimiento" type="button" aria-label="Cerrar">×</button>
+            <div class="titulo_modal_baja_lote_vencimiento" id="titulo_modal_baja_lote_vencimiento">Dar de baja el lote</div>
+            <div class="descripcion_modal_baja_lote_vencimiento" id="descripcion_modal_baja_lote_vencimiento"></div>
+            <div class="aviso_modal_baja_lote_vencimiento">El lote quedará en Inactivos. Esta acción solo archiva el lote y no modifica el stock general del producto.</div>
+            <div class="campo_modal_baja_lote_vencimiento">
+                <div class="texto_modal_baja_lote_vencimiento">Estado del lote</div>
+                <select id="estado_baja_lote_vencimiento">
+                    <option value="" selected disabled>Selecciona un estado</option>
+                    <option value="VENDIDO">Vendido</option>
+                    <option value="ELIMINADO">Eliminado</option>
+                    <option value="MERMA">Merma o dañado</option>
+                    <option value="OTRO">Otro</option>
+                </select>
+            </div>
+            <div class="campo_modal_baja_lote_vencimiento" id="campo_cantidad_merma_lote" hidden>
+                <div class="texto_modal_baja_lote_vencimiento">Cantidad perdida</div>
+                <input id="cantidad_merma_lote_vencimiento" type="text" inputmode="decimal" maxlength="9" pattern="[0-9]{1,4}([.,][0-9]{1,4})?" placeholder="Cantidad (hasta 4 dígitos enteros)">
+                <div class="ayuda_opcion_descuento_merma_lote">Puedes bajar la cantidad si se perdió solo una parte del lote.</div>
+            </div>
+            <div class="opcion_descuento_merma_lote" id="opcion_descuento_merma_lote" hidden>
+                <input id="descontar_stock_merma_lote" type="checkbox" aria-labelledby="texto_pregunta_descontar_merma">
+                <div class="contenido_opcion_descuento_merma_lote">
+                    <div class="texto_modal_baja_lote_vencimiento" id="texto_pregunta_descontar_merma">¿Descontar del stock?</div>
+                    <div class="ayuda_opcion_descuento_merma_lote">Si lo marcas, se descontará del stock general la cantidad perdida indicada arriba.</div>
+                </div>
+            </div>
+            <div class="campo_modal_baja_lote_vencimiento">
+                <div class="texto_modal_baja_lote_vencimiento">Motivo / detalle</div>
+                <input id="motivo_baja_lote_vencimiento" type="text" maxlength="255" placeholder="Describe brevemente el motivo" required>
+            </div>
+            <div class="mensaje_modal_baja_lote_vencimiento" id="mensaje_modal_baja_lote_vencimiento" role="status" aria-live="polite"></div>
+            <div class="acciones_modal_baja_lote_vencimiento">
+                <button class="boton_cancelar_baja_lote_vencimiento" id="cancelar_baja_lote_vencimiento" type="button">Cancelar</button>
+                <button class="boton_confirmar_baja_lote_vencimiento" id="confirmar_baja_lote_vencimiento" type="button">Confirmar baja</button>
             </div>
         </div>
     </div>

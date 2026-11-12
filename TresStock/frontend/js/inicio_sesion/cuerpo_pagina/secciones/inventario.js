@@ -1752,6 +1752,12 @@ async function recalcularStockMinimoInventario() {
         let productoBalanzaSeleccionado = false;
         let incluirLoteVencimiento = false;
 
+        const obtenerFechaMinimaLote = () => {
+            const hoy = new Date();
+            hoy.setMinutes(hoy.getMinutes() - hoy.getTimezoneOffset());
+            return hoy.toISOString().slice(0, 10);
+        };
+
         if (!modal || !formulario || !tabla) return;
 
         const cerrar = () => {
@@ -1774,6 +1780,7 @@ async function recalcularStockMinimoInventario() {
             const etiquetas = {sumar: `Cantidad a sumar${unidad}`, restar: `Cantidad a restar${unidad}`, fijar: `Nuevo stock total${unidad}`};
             etiquetaCantidad.textContent = etiquetas[operacion.value] || `Cantidad${unidad}`;
             cantidad.min = operacion.value === 'fijar' ? '0' : '0.0001';
+            fechaVencimiento.min = obtenerFechaMinimaLote();
             campoLote.hidden = operacion.value !== 'sumar';
             if (operacion.value !== 'sumar' && incluirLoteVencimiento) {
                 incluirLoteVencimiento = false;
@@ -1807,6 +1814,7 @@ async function recalcularStockMinimoInventario() {
             botonToggleLote.setAttribute('aria-pressed', String(incluirLoteVencimiento));
             estadoToggleLote.textContent = incluirLoteVencimiento ? 'Sí' : 'No';
             campoFechaLote.hidden = !incluirLoteVencimiento;
+            fechaVencimiento.min = obtenerFechaMinimaLote();
             fechaVencimiento.disabled = !incluirLoteVencimiento;
             fechaVencimiento.required = incluirLoteVencimiento;
             if (incluirLoteVencimiento) fechaVencimiento.focus();
@@ -1823,6 +1831,11 @@ async function recalcularStockMinimoInventario() {
             }
             const loteSeGuardara = incluirLoteVencimiento;
             const fechaLoteGuardada = fechaVencimiento.value;
+            if (loteSeGuardara && (!fechaLoteGuardada || fechaLoteGuardada < obtenerFechaMinimaLote())) {
+                mensaje.textContent = 'El vencimiento debe ser hoy o una fecha futura.';
+                fechaVencimiento.focus();
+                return;
+            }
             botonGuardar.disabled = true;
             mensaje.textContent = 'Guardando ajuste…';
             try {

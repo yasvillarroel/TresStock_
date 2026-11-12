@@ -58,8 +58,12 @@
 
                     <div class="panel_notificaciones_cabecera" id="panel_notificaciones_cabecera" hidden>
                         <div class="encabezado_notificaciones_cabecera">
-                            <div class="titulo_notificaciones_cabecera">Alertas de inventario</div>
+                            <div class="titulo_notificaciones_cabecera" id="titulo_notificaciones_cabecera">Alertas de inventario</div>
                             <button class="boton_actualizar_notificaciones_cabecera" id="actualizar_notificaciones_cabecera" type="button">Actualizar</button>
+                        </div>
+                        <div class="pestanas_notificaciones_cabecera" role="tablist" aria-label="Tipo de alerta">
+                            <button class="pestana_notificaciones_cabecera pestana_notificaciones_activa" id="pestana_notificaciones_inventario" type="button" role="tab" aria-selected="true">Inventario</button>
+                            <button class="pestana_notificaciones_cabecera" id="pestana_notificaciones_vencimientos" type="button" role="tab" aria-selected="false">Vencimientos</button>
                         </div>
                         <div class="lista_notificaciones_cabecera" id="lista_notificaciones_cabecera" role="list" aria-live="polite">
                             <div class="estado_notificaciones_cabecera">Cargando alertas…</div>

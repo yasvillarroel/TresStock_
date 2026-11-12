@@ -379,8 +379,14 @@ CREATE TABLE lotes_vencimiento (
     id_lote         SERIAL PRIMARY KEY,
     codigo          VARCHAR(50) NOT NULL,
     cantidad        NUMERIC(12,4) NOT NULL,
+    cantidad_original NUMERIC(12,4) NOT NULL,
     fecha_vencimiento DATE NOT NULL,
     fecha_ingreso   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    activo          BOOLEAN NOT NULL DEFAULT TRUE,
+    estado_baja     VARCHAR(20),
+    motivo_baja      VARCHAR(255),
+    fecha_baja       TIMESTAMPTZ,
+    correo_usuario_baja VARCHAR(150),
 
     CONSTRAINT fk_lote_producto
         FOREIGN KEY (codigo)
@@ -388,8 +394,66 @@ CREATE TABLE lotes_vencimiento (
         ON DELETE CASCADE,
 
     CONSTRAINT chk_cantidad_lote
+        CHECK (cantidad >= 0 AND cantidad_original >= cantidad),
+
+    CONSTRAINT chk_estado_baja_lote
+        CHECK (estado_baja IS NULL OR estado_baja IN ('ELIMINADO', 'VENDIDO', 'MERMA', 'OTRO')),
+
+    CONSTRAINT chk_datos_baja_lote
+        CHECK (
+            (activo = TRUE AND estado_baja IS NULL AND motivo_baja IS NULL AND fecha_baja IS NULL)
+            OR
+            (activo = FALSE AND estado_baja IS NOT NULL AND motivo_baja IS NOT NULL AND fecha_baja IS NOT NULL)
+        )
+);
+
+-- Conserva los eventos de merma para poder analizarlos por producto y fecha.
+CREATE TABLE mermas_inventario (
+    id_merma        SERIAL PRIMARY KEY,
+    codigo          VARCHAR(50) NOT NULL,
+    id_lote         INTEGER,
+    cantidad        NUMERIC(12,4) NOT NULL,
+    fecha_hora      TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    motivo          VARCHAR(255) NOT NULL,
+    descontado_stock BOOLEAN NOT NULL DEFAULT FALSE,
+    correo_usuario  VARCHAR(150),
+
+    CONSTRAINT fk_merma_producto
+        FOREIGN KEY (codigo)
+        REFERENCES productos(codigo),
+
+    CONSTRAINT fk_merma_lote
+        FOREIGN KEY (id_lote)
+        REFERENCES lotes_vencimiento(id_lote)
+        ON DELETE SET NULL,
+
+    CONSTRAINT chk_cantidad_merma
         CHECK (cantidad >= 0)
 );
+
+-- Migración 005 integrada: conserva la cantidad inicial del lote.
+-- En una instalación nueva la columna ya existe desde CREATE TABLE;
+-- estas instrucciones también permiten completar lotes antiguos si se conserva el esquema.
+ALTER TABLE base_datos.lotes_vencimiento
+    ADD COLUMN IF NOT EXISTS cantidad_original NUMERIC(12,4);
+
+UPDATE base_datos.lotes_vencimiento lote
+SET cantidad_original = lote.cantidad + COALESCE((
+    SELECT SUM(merma.cantidad)
+    FROM base_datos.mermas_inventario merma
+    WHERE merma.id_lote = lote.id_lote
+), 0)
+WHERE lote.cantidad_original IS NULL;
+
+ALTER TABLE base_datos.lotes_vencimiento
+    ALTER COLUMN cantidad_original SET NOT NULL;
+
+ALTER TABLE base_datos.lotes_vencimiento
+    DROP CONSTRAINT IF EXISTS chk_cantidad_lote;
+
+ALTER TABLE base_datos.lotes_vencimiento
+    ADD CONSTRAINT chk_cantidad_lote
+    CHECK (cantidad >= 0 AND cantidad_original >= cantidad);
 
 
 -- ============================================================
@@ -564,6 +628,12 @@ CREATE INDEX idx_lotes_codigo_fecha_vencimiento
 
 CREATE INDEX idx_lotes_fecha_vencimiento
     ON lotes_vencimiento(fecha_vencimiento);
+
+CREATE INDEX idx_mermas_codigo_fecha
+    ON mermas_inventario(codigo, fecha_hora DESC);
+
+CREATE INDEX idx_mermas_fecha
+    ON mermas_inventario(fecha_hora DESC);
 
 CREATE INDEX idx_pp_proveedor
     ON producto_proveedor(id_proveedor);

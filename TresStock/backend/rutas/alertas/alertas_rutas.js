@@ -4,5 +4,8 @@ const alertasControlador = require('../../controladores/alertas/alertas_controla
 const router = express.Router();
 
 router.get('/vencimientos', alertasControlador.obtenerLotesVencimiento);
+router.get('/vencimientos/notificaciones', alertasControlador.obtenerAlertasVencimiento);
+router.patch('/vencimientos/:id/fecha', alertasControlador.actualizarFechaVencimiento);
+router.patch('/vencimientos/:id/baja', alertasControlador.darDeBajaLote);
 
 module.exports = router;

@@ -30,6 +30,25 @@ let productoSeleccionadoAsociar = null;
 // identifica cada busqueda para evitar mostrar resultados antiguos
 let idBusquedaProductosAsociar = 0;
 
+// Muestra enteros sin ceros decimales y conserva los decimales que sí existen.
+function formatearCantidadEscaner(valor, esBalanza = false) {
+    const cantidad = Number(valor);
+    if (!Number.isFinite(cantidad)) return '—';
+
+    const cantidadFormateada = cantidad.toLocaleString('es-CL', {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 4
+    });
+
+    return esBalanza ? `${cantidadFormateada} (KG)` : cantidadFormateada;
+}
+
+function obtenerFechaMinimaLoteEscaner() {
+    const hoy = new Date();
+    hoy.setMinutes(hoy.getMinutes() - hoy.getTimezoneOffset());
+    return hoy.toISOString().slice(0, 10);
+}
+
 
 // TITULO 1 MODAL DE MENSAJES Y CONFIRMACIONES DEL ESCANER
 // mismo diseño de los avisos personalizados de Productos
@@ -465,9 +484,10 @@ function abrirMenuProducto(codigo, producto = null) {
         const cantidadUnidades = Number(producto.factor ?? 1);
 
         // determina el formato del codigo
+        const cantidadUnidadesFormateada = formatearCantidadEscaner(cantidadUnidades);
         const tipoCodigo = cantidadUnidades === 1
-            ? 'Unidad x1'
-            : 'Caja x' + cantidadUnidades;
+            ? `Unidad x${cantidadUnidadesFormateada}`
+            : `Caja x${cantidadUnidadesFormateada}`;
 
         // muestra el codigo escaneado y su formato
         elementoCodigo.textContent =
@@ -622,21 +642,10 @@ function mostrarProductoEscaneado(producto) {
         indicadores.appendChild(cuadro);
     };
 
-    // muestra números enteros sin decimales y los fraccionarios con un decimal
-    // solo formatea la vista, sin modificar el valor guardado en PostgreSQL
-    const formatearStockEscaner = function(valor) {
-        const cantidad = Number(valor);
-        return Number.isFinite(cantidad)
-            ? cantidad.toLocaleString('es-CL', {
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 1
-            })
-            : '—';
-    };
-
-    agregarIndicador('Stock actual', formatearStockEscaner(producto.stock_actual));
-    agregarIndicador('Stock mínimo', formatearStockEscaner(producto.stock_minimo));
-    agregarIndicador('Unidades por código', producto.factor ?? 1);
+    const esBalanza = Boolean(producto.es_producto_balanza);
+    agregarIndicador('Stock actual', formatearCantidadEscaner(producto.stock_actual, esBalanza));
+    agregarIndicador('Stock mínimo', formatearCantidadEscaner(producto.stock_minimo, esBalanza));
+    agregarIndicador('Unidades por código (actual)', formatearCantidadEscaner(producto.factor ?? 1, esBalanza));
     contenedorDatos.appendChild(indicadores);
 }
 
@@ -1172,6 +1181,7 @@ function ajustarProductoEscaneado() {
     if (campoFechaVencimiento) campoFechaVencimiento.hidden = true;
     if (fechaVencimiento) {
         fechaVencimiento.value = '';
+        fechaVencimiento.min = obtenerFechaMinimaLoteEscaner();
         fechaVencimiento.disabled = true;
         fechaVencimiento.required = false;
     }
@@ -1214,6 +1224,7 @@ function ajustarProductoEscaneado() {
             if (estadoVencimiento) estadoVencimiento.textContent = activado ? 'Sí' : 'No';
             if (campoFechaVencimiento) campoFechaVencimiento.hidden = !activado;
             if (fechaVencimiento) {
+                fechaVencimiento.min = obtenerFechaMinimaLoteEscaner();
                 fechaVencimiento.disabled = !activado;
                 fechaVencimiento.required = activado;
                 if (activado) fechaVencimiento.focus();
@@ -1428,8 +1439,12 @@ async function aceptarAjusteProducto() {
         return;
     }
 
-    if (incluirVencimiento && (operacion !== 'sumar' || !fechaLote)) {
-        mostrarMensajeEscaner('Fecha requerida', 'Selecciona la fecha de vencimiento del lote', 'advertencia');
+    if (incluirVencimiento && (
+        operacion !== 'sumar' ||
+        !fechaLote ||
+        fechaLote < obtenerFechaMinimaLoteEscaner()
+    )) {
+        mostrarMensajeEscaner('Fecha no válida', 'Selecciona hoy o una fecha futura para el vencimiento del lote', 'advertencia');
         fechaVencimiento?.focus();
         return;
     }

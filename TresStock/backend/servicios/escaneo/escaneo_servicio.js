@@ -39,6 +39,16 @@ const buscarProductoPorCodigo = async (codigo) => {
             p.precio_publico,
             p.imagen,
             p.controla_stock,
+            (
+                p.familia ~* '(^|[^[:alnum:]])BALANZA([^[:alnum:]]|$)'
+                OR p.descripcion ~* '(^|[^[:alnum:]])(KG|KGS|KILO|KILOS)([^[:alnum:]]|$)'
+                OR EXISTS (
+                    SELECT 1
+                    FROM base_datos.detalle_venta dv
+                    WHERE dv.codigo = p.codigo
+                        AND dv.cantidad <> TRUNC(dv.cantidad)
+                )
+            ) AS es_producto_balanza,
             e.factor,
             COALESCE(i.stock_actual, 0) AS stock_actual,
             COALESCE(i.stock_minimo, 0) AS stock_minimo

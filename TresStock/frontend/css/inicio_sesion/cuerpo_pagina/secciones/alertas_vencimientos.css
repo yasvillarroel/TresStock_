@@ -100,6 +100,7 @@
     min-width: 850px;
 }
 
+.tabla_lotes_vencimiento { min-width: 1320px; }
 .tabla_alertas_stock { min-width: 760px; }
 
 .fila_encabezado_vencimientos,
@@ -110,7 +111,7 @@
 
 .fila_lotes_vencimiento,
 .fila_encabezado_vencimientos.fila_lotes_vencimiento {
-    grid-template-columns: 25% 14% 12% 17% 18% 14%;
+    grid-template-columns: 18% 9% 12% 11% 13% 14% 10% 6% 7%;
 }
 
 .fila_stock_alertas,
@@ -167,8 +168,119 @@
 }
 
 .estado_lote_vigente { background: #e8f7f0; color: #18845d; }
-.estado_lote_proximo { background: #fff2dc; color: #b96b14; }
+.estado_lote_critico { background: #fde2e2; color: #b42318; }
+.estado_lote_riesgo { background: #fff4cc; color: #9a6700; }
+.estado_lote_proximo { background: #e8f7f0; color: #18845d; }
+.estado_lote_vendido { background: #e8f7f0; color: #18845d; }
 .estado_lote_inactivo { background: #fdeaea; color: #b54747; }
+
+.boton_editar_vencimiento {
+    width: 100%;
+    height: 34px;
+    padding: 4px 8px;
+    box-sizing: border-box;
+    border: 1px solid #159ba3;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #0f858d;
+    font: 700 11px Arial, sans-serif;
+    cursor: pointer;
+}
+
+.boton_editar_vencimiento:hover { background: #e8f7f7; }
+
+.acciones_lote_vencimiento { display: flex; flex-direction: column; gap: 5px; }
+.boton_baja_lote_vencimiento { width: 100%; height: 34px; padding: 4px 8px; box-sizing: border-box; border: 1px solid #e3bcbc; border-radius: 6px; background: #fffafa; color: #a33f3f; font: 700 10px Arial, sans-serif; cursor: pointer; }
+.boton_baja_lote_vencimiento:hover { background: #fdeaea; }
+
+.modal_editar_vencimiento {
+    position: fixed;
+    inset: 0;
+    z-index: 1800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(5, 31, 45, .58);
+    box-sizing: border-box;
+}
+
+.modal_editar_vencimiento[hidden] { display: none !important; }
+
+.contenido_modal_editar_vencimiento {
+    position: relative;
+    width: min(100%, 440px);
+    padding: 26px;
+    border: 1px solid #dce4e8;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 18px 48px rgba(0, 0, 0, .22);
+    box-sizing: border-box;
+}
+
+.cerrar_modal_editar_vencimiento {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    width: 32px;
+    height: 32px;
+    border: 0;
+    border-radius: 5px;
+    background: transparent;
+    color: #637682;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.cerrar_modal_editar_vencimiento:hover { background: #f1f5f7; }
+
+.titulo_modal_editar_vencimiento {
+    padding-right: 36px;
+    color: #0b3650;
+    font: 700 19px Arial, sans-serif;
+}
+
+.descripcion_modal_editar_vencimiento {
+    margin-top: 9px;
+    color: #71818a;
+    font: 13px/1.5 Arial, sans-serif;
+}
+
+.campo_modal_editar_vencimiento { display: flex; flex-direction: column; gap: 7px; margin-top: 19px; }
+.texto_modal_editar_vencimiento { color: #3d5868; font: 700 12px Arial, sans-serif; }
+.campo_modal_editar_vencimiento input { width: 100%; height: 42px; padding: 9px 12px; border: 1px solid #cbd9e0; border-radius: 7px; color: #1d3f50; font: 14px Arial, sans-serif; box-sizing: border-box; }
+.campo_modal_editar_vencimiento input:focus { outline: 2px solid #a6e0e2; border-color: #159ba3; }
+.mensaje_modal_editar_vencimiento { min-height: 18px; margin-top: 10px; color: #b54747; font: 12px Arial, sans-serif; }
+
+.acciones_modal_editar_vencimiento { display: flex; justify-content: flex-end; gap: 9px; margin-top: 12px; }
+.acciones_modal_editar_vencimiento button { min-height: 38px; padding: 8px 13px; border: 1px solid #cbd9e0; border-radius: 6px; background: #ffffff; color: #405762; font: 700 12px Arial, sans-serif; cursor: pointer; }
+.acciones_modal_editar_vencimiento .boton_guardar_editar_vencimiento { border-color: #159ba3; background: #159ba3; color: #ffffff; }
+.acciones_modal_editar_vencimiento button:disabled { opacity: .55; cursor: wait; }
+
+.modal_baja_lote_vencimiento { position: fixed; inset: 0; z-index: 1801; display: flex; align-items: center; justify-content: center; padding: 20px; background: rgba(5, 31, 45, .58); box-sizing: border-box; }
+.modal_baja_lote_vencimiento[hidden] { display: none !important; }
+.contenido_modal_baja_lote_vencimiento { position: relative; width: min(100%, 460px); padding: 26px; border: 1px solid #dce4e8; border-radius: 12px; background: #ffffff; box-shadow: 0 18px 48px rgba(0, 0, 0, .22); box-sizing: border-box; }
+.cerrar_modal_baja_lote_vencimiento { position: absolute; top: 12px; right: 14px; width: 32px; height: 32px; border: 0; border-radius: 5px; background: transparent; color: #637682; font-size: 24px; cursor: pointer; }
+.cerrar_modal_baja_lote_vencimiento:hover { background: #f1f5f7; }
+.titulo_modal_baja_lote_vencimiento { padding-right: 36px; color: #0b3650; font: 700 19px Arial, sans-serif; }
+.descripcion_modal_baja_lote_vencimiento { margin-top: 9px; color: #71818a; font: 13px/1.5 Arial, sans-serif; }
+.aviso_modal_baja_lote_vencimiento { margin-top: 14px; padding: 10px 12px; border-radius: 7px; background: #fff7e8; color: #805415; font: 12px/1.45 Arial, sans-serif; }
+.campo_modal_baja_lote_vencimiento { display: flex; flex-direction: column; gap: 7px; margin-top: 16px; }
+.campo_modal_baja_lote_vencimiento[hidden] { display: none !important; }
+.texto_modal_baja_lote_vencimiento { color: #3d5868; font: 700 12px Arial, sans-serif; }
+.campo_modal_baja_lote_vencimiento select,
+.campo_modal_baja_lote_vencimiento input { width: 100%; height: 42px; padding: 9px 12px; border: 1px solid #cbd9e0; border-radius: 7px; background: #ffffff; color: #1d3f50; font: 14px Arial, sans-serif; box-sizing: border-box; }
+.campo_modal_baja_lote_vencimiento :focus { outline: 2px solid #a6e0e2; border-color: #159ba3; }
+.opcion_descuento_merma_lote { display: grid; grid-template-columns: 20px 1fr; align-items: start; gap: 10px; margin-top: 14px; padding: 12px; border: 1px solid #dce4e8; border-radius: 7px; background: #f8fafb; }
+.opcion_descuento_merma_lote[hidden] { display: none !important; }
+.opcion_descuento_merma_lote input { width: 17px; height: 17px; margin: 1px 0 0; accent-color: #159ba3; cursor: pointer; }
+.contenido_opcion_descuento_merma_lote { display: flex; flex-direction: column; gap: 5px; }
+.ayuda_opcion_descuento_merma_lote { color: #71818a; font: 11px/1.45 Arial, sans-serif; }
+.mensaje_modal_baja_lote_vencimiento { min-height: 18px; margin-top: 10px; color: #b54747; font: 12px Arial, sans-serif; }
+.acciones_modal_baja_lote_vencimiento { display: flex; justify-content: flex-end; gap: 9px; margin-top: 12px; }
+.acciones_modal_baja_lote_vencimiento button { min-height: 38px; padding: 8px 13px; border: 1px solid #cbd9e0; border-radius: 6px; background: #ffffff; color: #405762; font: 700 12px Arial, sans-serif; cursor: pointer; }
+.acciones_modal_baja_lote_vencimiento .boton_confirmar_baja_lote_vencimiento { border-color: #c65353; background: #b54747; color: #ffffff; }
+.acciones_modal_baja_lote_vencimiento button:disabled { opacity: .55; cursor: wait; }
 
 .paginador_vencimientos {
     min-height: 64px;
@@ -237,4 +349,5 @@
     .contenedor_alertas_vencimientos { padding: 18px; }
     .paginador_vencimientos { align-items: flex-start; flex-direction: column; }
     .controles_paginador_vencimientos { width: 100%; justify-content: center; flex-wrap: wrap; }
+    .contenido_modal_editar_vencimiento { padding: 22px 18px; }
 }

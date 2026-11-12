@@ -112,6 +112,11 @@
                     throw new Error('No se pudo cerrar la sesión. Inténtalo nuevamente.');
                 }
 
+                const datos = await respuesta.json();
+                if (datos.csrfToken && typeof actualizarTokenCsrf === 'function') {
+                    actualizarTokenCsrf(datos.csrfToken);
+                }
+
                 // elimina solo la ultima vista guardada de TresStock
                 sessionStorage.removeItem('vista_actual');
 
@@ -130,7 +135,7 @@
 
 // TITULO 3 NOTIFICACIONES DE INVENTARIO
 
-    // carga alertas de stock y permite saltar al producto correspondiente
+    // carga alertas de inventario y vencimientos desde la campanita
     function inicializarNotificacionesCabecera() {
         const contenedor = document.getElementById('contenedor_notificaciones_cabecera');
         const boton = document.getElementById('boton_notificaciones_cabecera');
@@ -138,8 +143,16 @@
         const contador = document.getElementById('contador_notificaciones_cabecera');
         const lista = document.getElementById('lista_notificaciones_cabecera');
         const botonActualizar = document.getElementById('actualizar_notificaciones_cabecera');
+        const tituloPanel = document.getElementById('titulo_notificaciones_cabecera');
+        const pestanaInventario = document.getElementById('pestana_notificaciones_inventario');
+        const pestanaVencimientos = document.getElementById('pestana_notificaciones_vencimientos');
         if (!contenedor || !boton || !panel || !lista || boton.dataset.inicializado === 'true') return;
         boton.dataset.inicializado = 'true';
+
+        let tipoActual = 'inventario';
+        let alertasInventario = [];
+        let alertasVencimiento = [];
+        let totalVencimientos = 0;
 
         const cerrarPanel = () => {
             panel.hidden = true;
@@ -151,69 +164,116 @@
             return esBalanza ? `${cantidad} (KG)` : cantidad;
         };
 
-        const cargarAlertas = async () => {
+        const actualizarContador = () => {
+            const total = alertasInventario.length + totalVencimientos;
+            contador.textContent = total > 99 ? '99+' : String(total);
+            contador.hidden = total === 0;
+            boton.setAttribute('aria-label', `Notificaciones: ${alertasInventario.length} de inventario y ${totalVencimientos} de vencimiento`);
+        };
+
+        const mostrarEstado = texto => {
             lista.replaceChildren();
-            const cargando = document.createElement('div');
-            cargando.className = 'estado_notificaciones_cabecera';
-            cargando.textContent = 'Cargando alertas…';
-            lista.appendChild(cargando);
+            const estado = document.createElement('div');
+            estado.className = 'estado_notificaciones_cabecera';
+            estado.textContent = texto;
+            lista.appendChild(estado);
+        };
+
+        const seleccionarTipo = tipo => {
+            tipoActual = tipo;
+            const inventarioSeleccionado = tipo === 'inventario';
+            pestanaInventario.classList.toggle('pestana_notificaciones_activa', inventarioSeleccionado);
+            pestanaVencimientos.classList.toggle('pestana_notificaciones_activa', !inventarioSeleccionado);
+            pestanaInventario.setAttribute('aria-selected', String(inventarioSeleccionado));
+            pestanaVencimientos.setAttribute('aria-selected', String(!inventarioSeleccionado));
+            pestanaInventario.tabIndex = inventarioSeleccionado ? 0 : -1;
+            pestanaVencimientos.tabIndex = inventarioSeleccionado ? -1 : 0;
+            tituloPanel.textContent = inventarioSeleccionado ? 'Alertas de inventario' : 'Alertas de vencimiento';
+            renderizarAlertas();
+        };
+
+        const renderizarAlertas = () => {
+            const esInventario = tipoActual === 'inventario';
+            const alertas = esInventario ? alertasInventario : alertasVencimiento;
+            const total = esInventario ? alertasInventario.length : totalVencimientos;
+            lista.replaceChildren();
+            if (!alertas.length) {
+                mostrarEstado(esInventario ? 'No hay alertas de inventario por ahora.' : 'No hay vencimientos críticos o en riesgo durante los próximos 10 días.');
+                return;
+            }
+            alertas.forEach(alerta => {
+                const esVencimiento = !esInventario;
+                const item = document.createElement('button');
+                item.type = 'button';
+                item.className = esVencimiento
+                    ? `item_notificacion_cabecera ${alerta.estado === 'VENCIMIENTO CRÍTICO' ? 'notificacion_vencimiento_critico' : 'notificacion_vencimiento_riesgo'}`
+                    : `item_notificacion_cabecera notificacion_${alerta.estado.toLowerCase().replaceAll(' ', '_')}`;
+                item.setAttribute('role', 'listitem');
+                const contenido = document.createElement('span');
+                contenido.className = 'contenido_item_notificacion_cabecera';
+                const titulo = document.createElement('span');
+                titulo.className = 'titulo_item_notificacion_cabecera';
+                titulo.textContent = alerta.descripcion || alerta.producto || alerta.codigo || 'Producto';
+                const detalle = document.createElement('span');
+                detalle.className = 'detalle_item_notificacion_cabecera';
+                if (esVencimiento) {
+                    const dias = Number(alerta.dias_restantes);
+                    const fecha = new Date(`${String(alerta.fecha_vencimiento).slice(0, 10)}T00:00:00`).toLocaleDateString('es-CL');
+                    const cantidad = formatearStock(alerta.cantidad, String(alerta.familia || '').toLowerCase() === 'balanza');
+                    detalle.textContent = `${alerta.estado} · ${dias === 0 ? 'vence hoy' : `vence en ${dias} días`} · ${fecha} · ${cantidad}`;
+                } else {
+                    detalle.textContent = `${alerta.estado === 'STOCK NEGATIVO' ? 'Stock negativo' : alerta.estado === 'SIN STOCK' ? 'Sin stock' : 'Stock bajo'} · ${formatearStock(alerta.stock_actual, alerta.es_producto_balanza)}${alerta.estado === 'STOCK BAJO' ? ` / mínimo ${formatearStock(alerta.stock_minimo, alerta.es_producto_balanza)}` : ''}`;
+                }
+                contenido.append(titulo, detalle);
+                const flecha = document.createElement('span');
+                flecha.className = 'flecha_item_notificacion_cabecera';
+                flecha.textContent = '›';
+                item.append(contenido, flecha);
+                item.addEventListener('click', async () => {
+                    cerrarPanel();
+                    if (typeof cargarVista !== 'function') return;
+                    await cargarVista(esVencimiento ? 'alertas' : 'inventario');
+                    if (!esVencimiento) {
+                        const busqueda = document.getElementById('input_busqueda_inventario');
+                        if (busqueda) {
+                            busqueda.value = alerta.codigo || alerta.descripcion || '';
+                            busqueda.dispatchEvent(new Event('input', {bubbles: true}));
+                        }
+                    }
+                });
+                lista.appendChild(item);
+            });
+            if (total > alertas.length) {
+                const nota = document.createElement('div');
+                nota.className = 'estado_notificaciones_cabecera';
+                nota.textContent = `Mostrando ${alertas.length} de ${total} alertas.`;
+                lista.appendChild(nota);
+            }
+        };
+
+        const cargarAlertas = async () => {
+            mostrarEstado('Cargando alertas…');
             try {
-                const respuesta = await fetchConCsrf(`${URL_API}/api/inventario`, {method: 'GET', credentials: 'include'});
-                const productos = await respuesta.json();
-                if (!respuesta.ok) throw new Error(productos.mensaje || 'No se pudieron cargar las alertas.');
-                const alertas = (Array.isArray(productos) ? productos : []).filter(producto => ['STOCK NEGATIVO', 'SIN STOCK', 'STOCK BAJO'].includes(producto.estado));
-                alertas.sort((a, b) => {
+                const [respuestaInventario, respuestaVencimiento] = await Promise.all([
+                    fetchConCsrf(`${URL_API}/api/inventario`, {method: 'GET', credentials: 'include'}),
+                    fetchConCsrf(`${URL_API}/api/alertas/vencimientos/notificaciones`, {method: 'GET', credentials: 'include'})
+                ]);
+                const [productos, datosVencimiento] = await Promise.all([respuestaInventario.json(), respuestaVencimiento.json()]);
+                if (!respuestaInventario.ok) throw new Error(productos.mensaje || 'No se pudieron cargar las alertas de inventario.');
+                if (!respuestaVencimiento.ok) throw new Error(datosVencimiento.mensaje || 'No se pudieron cargar las alertas de vencimiento.');
+                alertasInventario = (Array.isArray(productos) ? productos : []).filter(producto => ['STOCK NEGATIVO', 'SIN STOCK', 'STOCK BAJO'].includes(producto.estado));
+                alertasInventario.sort((a, b) => {
                     const prioridad = {'STOCK NEGATIVO': 0, 'SIN STOCK': 1, 'STOCK BAJO': 2};
                     return prioridad[a.estado] - prioridad[b.estado] || String(a.descripcion).localeCompare(String(b.descripcion), 'es');
                 });
-                contador.textContent = alertas.length > 99 ? '99+' : String(alertas.length);
-                contador.hidden = alertas.length === 0;
-                boton.setAttribute('aria-label', `Notificaciones de inventario: ${alertas.length} alertas activas`);
-                lista.replaceChildren();
-                if (!alertas.length) {
-                    const vacio = document.createElement('div');
-                    vacio.className = 'estado_notificaciones_cabecera';
-                    vacio.textContent = 'No hay alertas de stock por ahora.';
-                    lista.appendChild(vacio);
-                    return;
-                }
-                alertas.forEach(producto => {
-                    const item = document.createElement('button');
-                    item.type = 'button';
-                    item.className = `item_notificacion_cabecera notificacion_${producto.estado.toLowerCase().replaceAll(' ', '_')}`;
-                    item.setAttribute('role', 'listitem');
-                    const contenido = document.createElement('span');
-                    contenido.className = 'contenido_item_notificacion_cabecera';
-                    const titulo = document.createElement('span');
-                    titulo.className = 'titulo_item_notificacion_cabecera';
-                    titulo.textContent = producto.descripcion || producto.codigo || 'Producto';
-                    const detalle = document.createElement('span');
-                    detalle.className = 'detalle_item_notificacion_cabecera';
-                    detalle.textContent = `${producto.estado === 'STOCK NEGATIVO' ? 'Stock negativo' : producto.estado === 'SIN STOCK' ? 'Sin stock' : 'Stock bajo'} · ${formatearStock(producto.stock_actual, producto.es_producto_balanza)}${producto.estado === 'STOCK BAJO' ? ` / mínimo ${formatearStock(producto.stock_minimo, producto.es_producto_balanza)}` : ''}`;
-                    contenido.append(titulo, detalle);
-                    const flecha = document.createElement('span');
-                    flecha.className = 'flecha_item_notificacion_cabecera';
-                    flecha.textContent = '›';
-                    item.append(contenido, flecha);
-                    item.addEventListener('click', async () => {
-                        cerrarPanel();
-                        if (typeof cargarVista !== 'function') return;
-                        await cargarVista('inventario');
-                        const busqueda = document.getElementById('input_busqueda_inventario');
-                        if (busqueda) {
-                            busqueda.value = producto.codigo || producto.descripcion || '';
-                            busqueda.dispatchEvent(new Event('input', {bubbles: true}));
-                        }
-                    });
-                    lista.appendChild(item);
-                });
+                alertasVencimiento = Array.isArray(datosVencimiento.alertas) ? datosVencimiento.alertas : [];
+                totalVencimientos = Number(datosVencimiento.total || 0);
+                actualizarContador();
+                renderizarAlertas();
             } catch (error) {
                 contador.hidden = true;
-                lista.replaceChildren();
-                const fallo = document.createElement('div');
-                fallo.className = 'estado_notificaciones_cabecera error_notificaciones_cabecera';
-                fallo.textContent = error.message || 'No se pudieron cargar las alertas.';
-                lista.appendChild(fallo);
+                mostrarEstado(error.message || 'No se pudieron cargar las alertas.');
+                lista.firstElementChild?.classList.add('error_notificaciones_cabecera');
             }
         };
 
@@ -224,6 +284,8 @@
             if (abrir) await cargarAlertas();
         });
         botonActualizar.addEventListener('click', cargarAlertas);
+        pestanaInventario.addEventListener('click', () => seleccionarTipo('inventario'));
+        pestanaVencimientos.addEventListener('click', () => seleccionarTipo('vencimientos'));
         document.addEventListener('click', evento => {
             if (!contenedor.contains(evento.target)) cerrarPanel();
         });
@@ -233,6 +295,7 @@
                 boton.focus();
             }
         });
+        seleccionarTipo('inventario');
         cargarAlertas();
         window.setInterval(cargarAlertas, 60000);
     }

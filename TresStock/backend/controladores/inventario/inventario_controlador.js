@@ -1,6 +1,7 @@
 // importa el servicio de inventario
 const inventarioServicio =
     require('../../servicios/inventario/inventario_servicio');
+const { obtenerFechaActualChile } = require('../../utilidades/fechas');
 
 
 // FUNCION 1 OBTENER INVENTARIO
@@ -190,8 +191,9 @@ const ajustarInventario = async (req, res) => {
         if (fechaVencimiento) {
             const fechaParseada = new Date(`${fechaVencimiento}T00:00:00Z`);
             if (operacion !== 'sumar' || !/^\d{4}-\d{2}-\d{2}$/.test(fechaVencimiento) ||
-                Number.isNaN(fechaParseada.getTime()) || fechaParseada.toISOString().slice(0, 10) !== fechaVencimiento) {
-                return res.status(400).json({mensaje: 'Indica una fecha válida para el lote. El vencimiento solo aplica al sumar stock.'});
+                Number.isNaN(fechaParseada.getTime()) || fechaParseada.toISOString().slice(0, 10) !== fechaVencimiento ||
+                fechaVencimiento < obtenerFechaActualChile()) {
+                return res.status(400).json({mensaje: 'Indica una fecha válida para el lote. Debe ser hoy o posterior y solo aplica al sumar stock.'});
             }
         }
 

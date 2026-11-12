@@ -166,6 +166,29 @@
         font: 700 14px Arial, sans-serif;
     }
 
+    .pestanas_notificaciones_cabecera {
+        display: flex;
+        gap: 6px;
+        padding: 9px 12px 0;
+        border-bottom: 1px solid #e6ecef;
+    }
+
+    .pestana_notificaciones_cabecera {
+        padding: 8px 10px;
+        border: 0;
+        border-bottom: 2px solid transparent;
+        background: transparent;
+        color: #627782;
+        font: 700 11px Arial, sans-serif;
+        cursor: pointer;
+    }
+
+    .pestana_notificaciones_cabecera:hover,
+    .pestana_notificaciones_cabecera.pestana_notificaciones_activa {
+        border-bottom-color: #159ba3;
+        color: #0f858d;
+    }
+
     .boton_actualizar_notificaciones_cabecera {
         padding: 6px 8px;
         border: 0;
@@ -208,6 +231,8 @@
     .notificacion_stock_negativo { box-shadow: inset 3px 0 #d94848; }
     .notificacion_sin_stock { box-shadow: inset 3px 0 #e79a31; }
     .notificacion_stock_bajo { box-shadow: inset 3px 0 #e5b83b; }
+    .notificacion_vencimiento_critico { box-shadow: inset 3px 0 #d94848; }
+    .notificacion_vencimiento_riesgo { box-shadow: inset 3px 0 #e5b83b; }
 
     .contenido_item_notificacion_cabecera {
         min-width: 0;
