@@ -10,7 +10,7 @@ const ventasControlador = require(
 const multer = require('multer');
 
 // protege importaciones y configuración con una sesión válida
-const { autenticacion } = require('../../middleware/autenticacion');
+const { autenticacion, autorizar } = require('../../middleware/autenticacion');
 
 
 // configura la recepción del archivo
@@ -32,6 +32,8 @@ const cargarArchivo = multer(
 // crea el router
 const router =
     express.Router();
+
+router.use(autorizar('ventas', 'acceder'));
 
 
 // ruta para obtener ventas

@@ -3,6 +3,9 @@ const dashboardControlador = require('../../controladores/dashboard/dashboard_co
 
 const router = express.Router();
 
+const { autorizar } = require('../../middleware/autenticacion');
+router.use(autorizar('dashboard', 'acceder'));
+
 router.get('/resumen', dashboardControlador.obtenerResumen);
 router.get('/productos-mas-vendidos', dashboardControlador.obtenerProductosMasVendidos);
 router.get('/productos-excluidos', dashboardControlador.obtenerProductosExcluidosRanking);

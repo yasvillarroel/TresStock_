@@ -5,7 +5,7 @@ const express = require('express');
 const usuariosControlador = require('../../controladores/usuarios/usuarios_controlador');
 
 // importa la validacion de sesion y del rol administrador
-const { autenticacion, soloAdministrador } = require('../../middleware/autenticacion');
+const { autenticacion, autorizar } = require('../../middleware/autenticacion');
 
 // crea el router de usuarios
 const router = express.Router();
@@ -16,7 +16,7 @@ const router = express.Router();
 
 // si no hay sesion valida, responde 401
 // si la cuenta no tiene rol Administrador, responde 403
-router.use(autenticacion, soloAdministrador);
+router.use(autenticacion, autorizar('usuarios', 'gestionar'));
 
 // =========================
 // TITULO 2 RUTAS DE USUARIOS

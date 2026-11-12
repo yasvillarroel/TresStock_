@@ -8,6 +8,9 @@ const escaneoControlador =
 // crea el router de inventario
 const router = express.Router();
 
+const { autorizar } = require('../../middleware/autenticacion');
+router.use(autorizar('escaneo', 'acceder'));
+
 
 // busca un producto mediante su codigo escaneado
 router.get(

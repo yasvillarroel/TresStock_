@@ -9,6 +9,9 @@ const proveedoresControlador = require('../../controladores/proveedores/proveedo
 // crea el router de proveedores
 const router = express.Router();
 
+const { autorizar } = require('../../middleware/autenticacion');
+router.use(autorizar('proveedores', 'acceder'));
+
 
 // ruta para crear un proveedor
 router.post(

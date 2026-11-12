@@ -43,6 +43,9 @@ const recibirImagenProducto = (req, res, next) => {
 // crea el router de productos
 const router = express.Router();
 
+const { autorizar } = require('../../middleware/autenticacion');
+router.use(autorizar('productos', 'acceder'));
+
 // sirve las fotos nuevas desde una carpeta fuera del proyecto para evitar recargas de Live Server
 // permite definir la misma carpeta de almacenamiento en produccion con TRESSTOCK_IMAGENES_DIR
 const carpetaImagenes = path.resolve(

@@ -3,6 +3,7 @@ const { verificarToken } = require('../utilidades/jwt');
 
 // importa el servicio que consulta la cuenta vigente en PostgreSQL
 const autenticacionServicio = require('../servicios/autenticacion/autenticacion_servicio');
+const permisos = require('../configuracion/permisos');
 
 // ==============================
 // TITULO 1 VERIFICAR AUTENTICACION
@@ -51,20 +52,19 @@ async function autenticacion(req, res, next) {
     }
 }
 
-// ===================================
-// TITULO 2 AUTORIZAR ADMINISTRADORES
-// ===================================
+// crea una verificación reutilizable para permisos definidos en configuracion/permisos.js
+function autorizar(modulo, permiso) {
+    return (req, res, next) => {
+        const nombreRol = String(req.usuario?.nombre_rol || '').trim().toLowerCase();
+        const permisosRol = permisos[nombreRol];
+        const permisosModulo = permisosRol?.[modulo];
 
-// impide que usuarios sin rol Administrador utilicen Gestión de usuarios
-function soloAdministrador(req, res, next) {
+        if (!Array.isArray(permisosModulo) || !permisosModulo.includes(permiso)) {
+            return res.status(403).json({ mensaje: 'No tienes permisos para realizar esta acción' });
+        }
 
-    const nombreRol = String(req.usuario?.nombre_rol || '').trim().toLowerCase();
-
-    if (nombreRol !== 'administrador') {
-        return res.status(403).json({ mensaje: 'No tienes permisos para administrar usuarios' });
-    }
-
-    return next();
+        return next();
+    };
 }
 
-module.exports = { autenticacion, soloAdministrador };
+module.exports = { autenticacion, autorizar };

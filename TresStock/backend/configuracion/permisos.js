@@ -1,22 +1,28 @@
-// define los permisos de cada rol
+// Centraliza los módulos disponibles para cada rol.
+// Ambos roles pueden usar las funciones del sistema; solo Administrador gestiona cuentas.
+const modulosOperativos = [
+    'productos',
+    'inventario',
+    'ventas',
+    'proveedores',
+    'escaneo',
+    'dashboard',
+    'alertas'
+];
+
 const permisos = {
-
-    Administrador: {
-        usuarios: ['ver', 'crear', 'editar', 'eliminar'],
-        productos: ['ver', 'crear', 'editar', 'eliminar'],
-        inventario: ['ver', 'crear', 'editar', 'eliminar'],
-        ventas: ['ver'],
-        proveedores: ['ver', 'crear', 'editar', 'eliminar']
+    administrador: {
+        usuarios: ['gestionar']
     },
-
-    Usuario: {
-        usuarios: [],
-        productos: ['ver'],
-        inventario: ['ver', 'editar'],
-        ventas: ['ver'],
-        proveedores: ['ver']
+    usuario: {
+        usuarios: []
     }
-
 };
+
+for (const rol of Object.values(permisos)) {
+    for (const modulo of modulosOperativos) {
+        rol[modulo] = ['acceder'];
+    }
+}
 
 module.exports = permisos;

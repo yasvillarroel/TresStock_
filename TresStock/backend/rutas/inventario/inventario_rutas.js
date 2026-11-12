@@ -8,10 +8,11 @@ const inventarioControlador =
 
 
 // protege los cambios manuales con una sesión válida
-const { autenticacion } = require('../../middleware/autenticacion');
+const { autenticacion, autorizar } = require('../../middleware/autenticacion');
 
 // crea el router de inventario
 const router = express.Router();
+router.use(autorizar('inventario', 'acceder'));
 
 
 // ruta para obtener el inventario
