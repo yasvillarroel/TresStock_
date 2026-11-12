@@ -186,6 +186,8 @@ CREATE TABLE movimientos_inventario (
     fecha_hora      TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     motivo          VARCHAR(255),
     correo_usuario  VARCHAR(150),
+    stock_anterior  NUMERIC(12,4),
+    stock_nuevo     NUMERIC(12,4),
 
     CONSTRAINT fk_movimiento_producto
         FOREIGN KEY (codigo)

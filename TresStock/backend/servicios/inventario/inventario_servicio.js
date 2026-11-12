@@ -293,9 +293,12 @@ const obtenerMovimientosInventario = async (filtros = {}) => {
         ? paginaSolicitada
         : 1;
     const limiteSolicitado = Number.parseInt(filtros.limite, 10);
-    const limite = Number.isSafeInteger(limiteSolicitado) && limiteSolicitado >= 1 && limiteSolicitado <= 100
-        ? limiteSolicitado
-        : 25;
+
+    const limite = Number.isSafeInteger(limiteSolicitado) &&
+        limiteSolicitado >= 1 &&
+        limiteSolicitado <= 120
+            ? limiteSolicitado
+            : 120;
     const valores = [];
     const condiciones = [];
 
@@ -367,7 +370,9 @@ const obtenerMovimientosInventario = async (filtros = {}) => {
             m.cantidad,
             m.fecha_hora,
             m.motivo,
-            m.correo_usuario
+            m.correo_usuario,
+            m.stock_anterior,
+            m.stock_nuevo
          FROM base_datos.movimientos_inventario m
          INNER JOIN base_datos.productos p ON p.codigo = m.codigo
          ${where}
@@ -512,9 +517,10 @@ const ajustarInventario = async (
         if (diferencia > 0) {
             await cliente.query(
                 `INSERT INTO base_datos.movimientos_inventario
-                    (codigo, tipo, cantidad, motivo, correo_usuario)
-                 VALUES ($1, $2, $3, $4, $5)`,
-                [codigo, tipo, diferencia, motivoCompleto.slice(0, 255), usuario.rows[0].email]
+                    (codigo, tipo, cantidad, motivo, correo_usuario, stock_anterior, stock_nuevo)
+                 VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+                [codigo, tipo, diferencia, motivoCompleto.slice(0, 255), usuario.rows[0].email,
+                    stockAnterior, stockNuevo]
             );
         }
 

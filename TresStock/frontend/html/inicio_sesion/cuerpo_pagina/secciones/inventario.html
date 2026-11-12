@@ -396,18 +396,52 @@
                     <input class="input_busqueda_inventario" id="hasta_movimientos_inventario" type="date">
                 </div>
 
+                <!-- SUBTITULO 1 TIPO DE MOVIMIENTO: solo en la pestaña Movimientos -->
+                <div class="campo_fecha_movimientos_inventario" id="campo_tipo_movimientos_inventario" hidden>
+                    <div class="texto_busqueda_inventario">Tipo de movimiento</div>
+                    <select id="tipo_movimientos_inventario" hidden tabindex="-1" aria-hidden="true">
+                        <option value="">Todos los movimientos</option>
+                        <option value="ENTRADA">Entradas</option>
+                        <option value="SALIDA">Salidas</option>
+                        <option value="AJUSTE">Ajustes</option>
+                    </select>
+                    <div class="contenedor_selector_inventario" id="contenedor_selector_tipo_movimientos_inventario">
+                        <button class="boton_selector_inventario" id="boton_selector_tipo_movimientos_inventario" type="button"
+                            aria-haspopup="listbox" aria-expanded="false" aria-controls="lista_opciones_tipo_movimientos_inventario">
+                            <span class="texto_selector_inventario" id="texto_selector_tipo_movimientos_inventario">Todos los movimientos</span>
+                            <span class="flecha_selector_inventario" aria-hidden="true">▾</span>
+                        </button>
+                        <div class="panel_selector_inventario" id="panel_selector_tipo_movimientos_inventario" hidden>
+                            <div class="lista_opciones_selector_inventario" id="lista_opciones_tipo_movimientos_inventario"
+                                role="listbox" aria-label="Tipo de movimiento"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SUBTITULO 2 ORDENAR POR: mantiene las opciones originales -->
                 <div class="campo_fecha_movimientos_inventario">
                     <div class="texto_busqueda_inventario">Ordenar por</div>
-                    <select class="select_familia_inventario" id="orden_movimientos_inventario">
+                    <select id="orden_movimientos_inventario" hidden tabindex="-1" aria-hidden="true">
                         <option value="recientes">Más recientes</option>
                         <option value="antiguos">Más antiguos</option>
                         <option value="cantidad_mayor">Mayor cantidad</option>
                         <option value="cantidad_menor">Menor cantidad</option>
                     </select>
+                    <div class="contenedor_selector_inventario" id="contenedor_selector_orden_movimientos_inventario">
+                        <button class="boton_selector_inventario" id="boton_selector_orden_movimientos_inventario" type="button"
+                            aria-haspopup="listbox" aria-expanded="false" aria-controls="lista_opciones_orden_movimientos_inventario">
+                            <span class="texto_selector_inventario" id="texto_selector_orden_movimientos_inventario">Más recientes</span>
+                            <span class="flecha_selector_inventario" aria-hidden="true">▾</span>
+                        </button>
+                        <div class="panel_selector_inventario" id="panel_selector_orden_movimientos_inventario" hidden>
+                            <div class="lista_opciones_selector_inventario" id="lista_opciones_orden_movimientos_inventario"
+                                role="listbox" aria-label="Orden de movimientos"></div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="contenedor_limpiar_filtros_inventario">
-                    <button class="boton_limpiar_filtros_inventario" id="limpiar_filtros_movimientos_inventario" type="button" title="Restablecer búsqueda, fechas y orden">
+                    <button class="boton_limpiar_filtros_inventario" id="limpiar_filtros_movimientos_inventario" type="button" title="Restablecer búsqueda, fechas, tipo y orden">
                         Limpiar filtros
                     </button>
                 </div>
@@ -418,16 +452,12 @@
             <div class="contenedor_tabla_inventario" id="vista_movimientos_inventario" hidden>
                 <div class="cabecera_contenedor_tabla_inventario">
                     <div class="titulo_tabla_inventario" id="titulo_movimientos_inventario">Historial de movimientos</div>
+                    <div class="descripcion_historial_inventario" id="descripcion_movimientos_inventario"></div>
                 </div>
 
                 <div class="tabla_inventario tabla_movimientos_inventario" role="table" aria-label="Historial de movimientos">
-                    <div class="encabezado_tabla_inventario fila_encabezado_inventario" role="row">
-                        <div class="columna_producto_inventario" role="columnheader">Producto</div>
-                        <div class="columna_tipo_movimiento_inventario" role="columnheader">Tipo</div>
-                        <div class="columna_cantidad_movimiento_inventario" role="columnheader">Cantidad</div>
-                        <div class="columna_motivo_movimiento_inventario" role="columnheader">Motivo</div>
-                        <div class="columna_correo_movimiento_inventario" role="columnheader">Realizado por</div>
-                        <div class="columna_fecha_movimiento_inventario" role="columnheader">Fecha y hora</div>
+                    <div class="encabezado_tabla_inventario fila_encabezado_inventario" id="encabezado_movimientos_inventario" role="row">
+                        <!-- Las columnas se adaptan a Entradas, Salidas, Ajustes o Movimientos mediante inventario.js -->
                     </div>
                     <div class="cuerpo_tabla_inventario" id="cuerpo_movimientos_inventario" role="rowgroup">
                         <div class="fila_sin_inventario" role="row"><div class="dato_sin_inventario" role="cell">Cargando movimientos…</div></div>

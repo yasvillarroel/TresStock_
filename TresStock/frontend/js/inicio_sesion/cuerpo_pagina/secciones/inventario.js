@@ -1255,6 +1255,11 @@ async function recalcularStockMinimoInventario() {
                 });
 
                 const esStockActual = vistaActivaInventario === 'stock';
+                const filtroTipo = document.getElementById('campo_tipo_movimientos_inventario');
+                const filtrosHistorial = document.getElementById('filtros_movimientos_inventario');
+                if (filtroTipo) filtroTipo.hidden = vistaActivaInventario !== 'MOVIMIENTOS';
+                if (filtrosHistorial) filtrosHistorial.dataset.vista = vistaActivaInventario;
+                cerrarSelectoresHistorialInventario();
                 document.getElementById('filtros_stock_inventario').hidden = !esStockActual;
                 document.getElementById('vista_stock_actual_inventario').hidden = !esStockActual;
                 document.getElementById('filtros_movimientos_inventario').hidden = esStockActual;
@@ -1270,7 +1275,11 @@ async function recalcularStockMinimoInventario() {
         const desde = document.getElementById('desde_movimientos_inventario');
         const hasta = document.getElementById('hasta_movimientos_inventario');
         const orden = document.getElementById('orden_movimientos_inventario');
+        const tipo = document.getElementById('tipo_movimientos_inventario');
         const botonLimpiar = document.getElementById('limpiar_filtros_movimientos_inventario');
+
+        // mismos desplegables personalizados que los filtros de Productos
+        configurarSelectoresHistorialInventario();
 
         if (busqueda) {
             busqueda.addEventListener('input', function() {
@@ -1282,7 +1291,7 @@ async function recalcularStockMinimoInventario() {
             });
         }
 
-        [desde, hasta, orden].forEach(function(control) {
+        [desde, hasta, orden, tipo].forEach(function(control) {
             if (control) {
                 control.addEventListener('change', function() {
                     paginaActualMovimientosInventario = 1;
@@ -1298,6 +1307,10 @@ async function recalcularStockMinimoInventario() {
                 if (desde) desde.value = '';
                 if (hasta) hasta.value = '';
                 if (orden) orden.value = 'recientes';
+                if (tipo) tipo.value = '';
+                actualizarSelectorHistorialInventario('orden');
+                actualizarSelectorHistorialInventario('tipo');
+                cerrarSelectoresHistorialInventario();
 
                 paginaActualMovimientosInventario = 1;
                 cargarMovimientosInventario();
@@ -1322,6 +1335,125 @@ async function recalcularStockMinimoInventario() {
     }
 
 
+    // SUBTITULO 1 SELECTORES PERSONALIZADOS DEL HISTORIAL
+
+    // cierra los menús de Tipo y Orden sin afectar sus valores seleccionados
+    function cerrarSelectoresHistorialInventario() {
+        ['tipo', 'orden'].forEach(function(nombre) {
+            const panel = document.getElementById(`panel_selector_${nombre}_movimientos_inventario`);
+            const boton = document.getElementById(`boton_selector_${nombre}_movimientos_inventario`);
+            if (panel) panel.hidden = true;
+            if (boton) boton.setAttribute('aria-expanded', 'false');
+        });
+    }
+
+    // actualiza el texto y opciones del selector según el SELECT original
+    function actualizarSelectorHistorialInventario(nombre) {
+        const select = document.getElementById(`${nombre}_movimientos_inventario`);
+        const etiqueta = document.getElementById(`texto_selector_${nombre}_movimientos_inventario`);
+        const lista = document.getElementById(`lista_opciones_${nombre}_movimientos_inventario`);
+        if (!select || !etiqueta || !lista) return;
+
+        etiqueta.textContent = select.selectedOptions[0]?.textContent || 'Todos';
+        lista.replaceChildren();
+        Array.from(select.options).forEach(function(opcion) {
+            const boton = document.createElement('button');
+            boton.type = 'button';
+            boton.className = 'opcion_lista_selector_inventario';
+            boton.setAttribute('role', 'option');
+            boton.setAttribute('aria-selected', String(opcion.value === select.value));
+            boton.textContent = opcion.textContent;
+            boton.addEventListener('click', function() {
+                select.value = opcion.value;
+                select.dispatchEvent(new Event('change', {bubbles: true}));
+                actualizarSelectorHistorialInventario(nombre);
+                cerrarSelectoresHistorialInventario();
+                document.getElementById(`boton_selector_${nombre}_movimientos_inventario`)?.focus();
+            });
+            lista.appendChild(boton);
+        });
+    }
+
+    // permite seleccionar Tipo y Orden con los mismos estilos de Productos
+    function configurarSelectoresHistorialInventario() {
+        ['tipo', 'orden'].forEach(function(nombre) {
+            const boton = document.getElementById(`boton_selector_${nombre}_movimientos_inventario`);
+            const panel = document.getElementById(`panel_selector_${nombre}_movimientos_inventario`);
+            if (!boton || !panel || boton.dataset.configurado === 'si') return;
+            boton.dataset.configurado = 'si';
+            actualizarSelectorHistorialInventario(nombre);
+
+            boton.addEventListener('click', function() {
+                const abrir = panel.hidden;
+                cerrarSelectoresHistorialInventario();
+                panel.hidden = !abrir;
+                boton.setAttribute('aria-expanded', String(abrir));
+                if (abrir) {
+                    actualizarSelectorHistorialInventario(nombre);
+                    panel.querySelector('button')?.focus();
+                }
+            });
+            panel.addEventListener('keydown', function(evento) {
+                if (evento.key === 'Escape') {
+                    cerrarSelectoresHistorialInventario();
+                    boton.focus();
+                }
+            });
+        });
+        const contenedor = document.getElementById('filtros_movimientos_inventario');
+        if (contenedor && contenedor.dataset.selectorConfigurado !== 'si') {
+            contenedor.dataset.selectorConfigurado = 'si';
+            document.addEventListener('click', function(evento) {
+                if (!evento.target.closest('#contenedor_selector_tipo_movimientos_inventario, #contenedor_selector_orden_movimientos_inventario')) {
+                    cerrarSelectoresHistorialInventario();
+                }
+            });
+        }
+    }
+
+    // SUBTITULO 2 COLUMNAS SEGÚN PESTAÑA
+
+    function configurarColumnasHistorialInventario() {
+        const tabla = document.querySelector('.tabla_movimientos_inventario');
+        const cabecera = document.getElementById('encabezado_movimientos_inventario');
+        if (!tabla || !cabecera) return;
+
+        const modo = ['ENTRADA', 'SALIDA', 'AJUSTE'].includes(vistaActivaInventario)
+            ? vistaActivaInventario : 'MOVIMIENTOS';
+        tabla.dataset.modo = modo;
+        const columnas = modo === 'AJUSTE'
+            ? ['Producto', 'Stock anterior', 'Stock nuevo', 'Diferencia', 'Motivo', 'Realizado por', 'Fecha de registro']
+            : modo === 'MOVIMIENTOS'
+                ? ['Producto', 'Tipo', 'Cantidad', 'Motivo', 'Realizado por', 'Fecha de registro']
+                : ['Producto', 'Cantidad', 'Motivo', 'Realizado por', 'Fecha de registro'];
+
+        cabecera.replaceChildren();
+        columnas.forEach(function(nombre) {
+            const celda = document.createElement('div');
+            celda.setAttribute('role', 'columnheader');
+            celda.textContent = nombre;
+            cabecera.appendChild(celda);
+        });
+    }
+
+    // mantiene la precisión registrada de los movimientos, incluso cantidades por peso
+    function formatearCantidadMovimientoInventario(valor) {
+        const numero = Number(valor);
+        if (!Number.isFinite(numero)) return '—';
+        return numero.toLocaleString('es-CL', {minimumFractionDigits: 0, maximumFractionDigits: 4});
+    }
+
+    // recupera saldos antiguos SOLO si aparecen explícitamente en el motivo generado por TresStock
+    function obtenerSaldosAjusteInventario(movimiento) {
+        if (movimiento.stock_anterior !== null && movimiento.stock_anterior !== undefined &&
+            movimiento.stock_nuevo !== null && movimiento.stock_nuevo !== undefined) {
+            return {anterior: Number(movimiento.stock_anterior), nuevo: Number(movimiento.stock_nuevo)};
+        }
+        const coincidencia = String(movimiento.motivo || '').match(/(?:^|\s)Stock:\s*(-?\d+(?:\.\d+)?)\s+a\s*(-?\d+(?:\.\d+)?)(?:\s|$)/i);
+        if (!coincidencia) return null;
+        return {anterior: Number(coincidencia[1]), nuevo: Number(coincidencia[2])};
+    }
+
     // carga del backend los movimientos de la pestaña seleccionada
     async function cargarMovimientosInventario() {
 
@@ -1336,6 +1468,7 @@ async function recalcularStockMinimoInventario() {
         const desde = document.getElementById('desde_movimientos_inventario');
         const hasta = document.getElementById('hasta_movimientos_inventario');
         const orden = document.getElementById('orden_movimientos_inventario');
+        const tipoSeleccionado = document.getElementById('tipo_movimientos_inventario');
         const titulo = document.getElementById('titulo_movimientos_inventario');
 
         const titulos = {
@@ -1348,9 +1481,18 @@ async function recalcularStockMinimoInventario() {
         if (titulo) {
             titulo.textContent = titulos[vistaActivaInventario] || 'Historial de movimientos';
         }
+        const descripcionHistorial = document.getElementById('descripcion_movimientos_inventario');
+        if (descripcionHistorial) {
+            descripcionHistorial.textContent = vistaActivaInventario === 'AJUSTE'
+                ? '* En los ajustes antiguos sin stock anterior y nuevo, la diferencia indica solamente la magnitud; no se conoce su dirección.'
+                : 'Fecha de registro: momento en que TresStock guardó el movimiento (no necesariamente la fecha de la venta en DimaSoft).';
+        }
+        configurarColumnasHistorialInventario();
 
         if (['ENTRADA', 'SALIDA', 'AJUSTE'].includes(vistaActivaInventario)) {
             parametros.set('tipo', vistaActivaInventario);
+        } else if (vistaActivaInventario === 'MOVIMIENTOS' && tipoSeleccionado?.value) {
+            parametros.set('tipo', tipoSeleccionado.value);
         }
 
         if (busqueda?.value.trim()) parametros.set('buscar', busqueda.value.trim());
@@ -1400,6 +1542,7 @@ async function recalcularStockMinimoInventario() {
             cuerpo.innerHTML = '<div class="fila_sin_inventario" role="row"><div class="dato_sin_inventario" role="cell">No hay movimientos para los filtros seleccionados.</div></div>';
         }
 
+        // muestra las columnas propias de cada pestaña, con signos y colores claros
         movimientos.forEach(function(movimiento) {
             const fila = document.createElement('div');
             fila.className = 'fila_producto_inventario';
@@ -1407,26 +1550,75 @@ async function recalcularStockMinimoInventario() {
 
             const fecha = movimiento.fecha_hora
                 ? new Date(movimiento.fecha_hora).toLocaleString('es-CL')
-                : '-';
-            const productoMovimiento = inventarioCargado.find(producto => String(producto.codigo) === String(movimiento.codigo));
-            const cantidad = formatearCantidadInventario(movimiento.cantidad, productoMovimiento?.es_producto_balanza);
-            const datos = [
-                movimiento.producto || movimiento.codigo || '-',
-                movimiento.tipo || '-',
-                cantidad,
-                movimiento.motivo || '-',
-                movimiento.correo_usuario || 'No registrado',
-                fecha
-            ];
+                : '—';
+            const cantidad = formatearCantidadMovimientoInventario(movimiento.cantidad);
+            const tipo = String(movimiento.tipo || '').toUpperCase();
+            const motivo = movimiento.motivo || '—';
+            const usuario = movimiento.correo_usuario || 'No registrado';
+            const nombre = movimiento.producto || movimiento.codigo || '—';
 
-            datos.forEach(function(valor, indice) {
+            // no se puede inferir el signo de un AJUSTE antiguo guardado solo con ABS()
+            const saldos = tipo === 'AJUSTE' ? obtenerSaldosAjusteInventario(movimiento) : null;
+            const diferencia = saldos ? Number((saldos.nuevo - saldos.anterior).toFixed(4)) : null;
+            const cantidadConSigno = tipo === 'ENTRADA' ? `+${cantidad}`
+                : tipo === 'SALIDA' ? `−${cantidad}`
+                : diferencia === null ? cantidad
+                : `${diferencia > 0 ? '+' : diferencia < 0 ? '−' : ''}${formatearCantidadMovimientoInventario(Math.abs(diferencia))}`;
+
+            let celdas;
+            if (vistaActivaInventario === 'AJUSTE') {
+                celdas = [
+                    ['Producto', nombre, 'producto'],
+                    ['Stock anterior', saldos ? formatearCantidadMovimientoInventario(saldos.anterior) : '—', 'numero'],
+                    ['Stock nuevo', saldos ? formatearCantidadMovimientoInventario(saldos.nuevo) : '—', 'numero'],
+                    ['Diferencia', diferencia === null ? `${cantidad}*` : cantidadConSigno, 'diferencia'],
+                    ['Motivo', motivo, 'motivo'],
+                    ['Realizado por', usuario, 'usuario'],
+                    ['Fecha de registro', fecha, 'fecha']
+                ];
+            } else if (vistaActivaInventario === 'MOVIMIENTOS') {
+                celdas = [
+                    ['Producto', nombre, 'producto'],
+                    ['Tipo', tipo, 'tipo'],
+                    ['Cantidad', cantidadConSigno, 'cantidad'],
+                    ['Motivo', motivo, 'motivo'],
+                    ['Realizado por', usuario, 'usuario'],
+                    ['Fecha de registro', fecha, 'fecha']
+                ];
+            } else {
+                celdas = [
+                    ['Producto', nombre, 'producto'],
+                    ['Cantidad', cantidadConSigno, 'cantidad'],
+                    ['Motivo', motivo, 'motivo'],
+                    ['Realizado por', usuario, 'usuario'],
+                    ['Fecha de registro', fecha, 'fecha']
+                ];
+            }
+
+            celdas.forEach(function([etiqueta, valor, clase]) {
                 const celda = document.createElement('div');
-                celda.className = indice === 0
-                    ? 'dato_producto_inventario'
-                    : 'dato_movimiento_inventario';
+                celda.className = clase === 'producto' ? 'dato_producto_inventario' : 'dato_movimiento_inventario';
+                celda.classList.add(`celda_historial_${clase}_inventario`);
                 celda.setAttribute('role', 'cell');
-                celda.dataset.etiqueta = ['Producto', 'Tipo', 'Cantidad', 'Motivo', 'Realizado por', 'Fecha y hora'][indice];
-                celda.textContent = valor;
+                celda.dataset.etiqueta = etiqueta;
+                if (clase === 'tipo') {
+                    const insignia = document.createElement('span');
+                    insignia.className = `etiqueta_tipo_movimiento_inventario etiqueta_tipo_${tipo.toLowerCase()}_inventario`;
+                    insignia.textContent = tipo;
+                    celda.appendChild(insignia);
+                } else {
+                    celda.textContent = String(valor);
+                }
+                if (clase === 'diferencia' && diferencia === null) {
+                    celda.title = 'Movimiento histórico sin stock anterior y nuevo: se muestra la magnitud sin dirección confirmada.';
+                }
+                if (clase === 'cantidad' || clase === 'diferencia') {
+                    if (tipo === 'ENTRADA' || (tipo === 'AJUSTE' && diferencia > 0)) {
+                        celda.classList.add('cantidad_positiva_inventario');
+                    } else if (tipo === 'SALIDA' || (tipo === 'AJUSTE' && diferencia < 0)) {
+                        celda.classList.add('cantidad_negativa_inventario');
+                    }
+                }
                 fila.appendChild(celda);
             });
 

@@ -1969,3 +1969,179 @@
             grid-row: auto;
         }
     }
+
+/* TITULO 10 HISTORIALES DE INVENTARIO - MISMO DISEÑO DE PRODUCTOS */
+
+    /* filtra por tipo únicamente cuando se consulta el historial completo */
+    #campo_tipo_movimientos_inventario[hidden] {
+        display: none !important;
+    }
+
+    #tipo_movimientos_inventario[hidden],
+    #orden_movimientos_inventario[hidden] {
+        display: none !important;
+    }
+
+    /* cinco controles para Entradas, Salidas y Ajustes */
+    #filtros_movimientos_inventario {
+        grid-template-columns: minmax(190px, 2fr) repeat(3, minmax(125px, 1fr)) auto;
+    }
+
+    /* Movimientos incluye el selector de Tipo */
+    #filtros_movimientos_inventario[data-vista="MOVIMIENTOS"] {
+        grid-template-columns: minmax(190px, 2fr) repeat(2, minmax(120px, 1fr)) minmax(145px, 1fr) minmax(145px, 1fr) auto;
+    }
+
+    #filtros_movimientos_inventario .campo_fecha_movimientos_inventario {
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #filtros_movimientos_inventario .boton_selector_inventario {
+        min-width: 0;
+    }
+
+    /* rejillas independientes para evitar una columna Tipo innecesaria */
+    .tabla_movimientos_inventario[data-modo="ENTRADA"] .encabezado_tabla_inventario,
+    .tabla_movimientos_inventario[data-modo="ENTRADA"] .fila_producto_inventario,
+    .tabla_movimientos_inventario[data-modo="SALIDA"] .encabezado_tabla_inventario,
+    .tabla_movimientos_inventario[data-modo="SALIDA"] .fila_producto_inventario {
+        grid-template-columns: minmax(0, 28fr) minmax(0, 11fr) minmax(0, 25fr) minmax(0, 19fr) minmax(0, 17fr);
+    }
+
+    .tabla_movimientos_inventario[data-modo="AJUSTE"] .encabezado_tabla_inventario,
+    .tabla_movimientos_inventario[data-modo="AJUSTE"] .fila_producto_inventario {
+        grid-template-columns: minmax(0, 19fr) minmax(0, 10fr) minmax(0, 10fr) minmax(0, 11fr) minmax(0, 20fr) minmax(0, 16fr) minmax(0, 14fr);
+    }
+
+    .tabla_movimientos_inventario[data-modo="MOVIMIENTOS"] .encabezado_tabla_inventario,
+    .tabla_movimientos_inventario[data-modo="MOVIMIENTOS"] .fila_producto_inventario {
+        grid-template-columns: minmax(0, 24fr) minmax(0, 11fr) minmax(0, 10fr) minmax(0, 23fr) minmax(0, 17fr) minmax(0, 15fr);
+    }
+
+    /* encabezados y registros compactos, como en Productos */
+    .tabla_movimientos_inventario .encabezado_tabla_inventario > div {
+        padding: 13px 10px;
+        color: #667881;
+        font: 11px Arial, sans-serif;
+        line-height: 16px;
+        overflow-wrap: anywhere;
+        box-sizing: border-box;
+    }
+
+    .tabla_movimientos_inventario .fila_producto_inventario {
+        min-height: 58px;
+    }
+
+    .tabla_movimientos_inventario .fila_producto_inventario > div {
+        width: auto;
+        min-width: 0;
+        display: flex;
+        align-items: center;
+        padding: 11px 10px;
+        font-size: 12px;
+        line-height: 17px;
+        overflow-wrap: anywhere;
+        box-sizing: border-box;
+    }
+
+    .tabla_movimientos_inventario .celda_historial_producto_inventario {
+        font-weight: 600;
+        color: #0b3650;
+    }
+
+    .tabla_movimientos_inventario .celda_historial_numero_inventario,
+    .tabla_movimientos_inventario .celda_historial_cantidad_inventario,
+    .tabla_movimientos_inventario .celda_historial_diferencia_inventario {
+        font-variant-numeric: tabular-nums;
+        font-weight: 600;
+    }
+
+    .tabla_movimientos_inventario .cantidad_positiva_inventario { color: #18845d; }
+    .tabla_movimientos_inventario .cantidad_negativa_inventario { color: #c73d3d; }
+
+    .etiqueta_tipo_movimiento_inventario {
+        display: inline-flex;
+        align-items: center;
+        padding: 5px 8px;
+        border-radius: 6px;
+        font: 700 10px Arial, sans-serif;
+        white-space: nowrap;
+    }
+
+    .etiqueta_tipo_entrada_inventario {
+        background: #e8f7f0;
+        color: #18845d;
+    }
+
+    .etiqueta_tipo_salida_inventario {
+        background: #fde8e8;
+        color: #c73d3d;
+    }
+
+    .etiqueta_tipo_ajuste_inventario {
+        background: #fff2dc;
+        color: #b36b12;
+    }
+
+    /* tabla de siete columnas en Ajustes, manteniendo espacio para textos largos */
+    .tabla_movimientos_inventario .celda_historial_motivo_inventario,
+    .tabla_movimientos_inventario .celda_historial_usuario_inventario,
+    .tabla_movimientos_inventario .celda_historial_fecha_inventario {
+        font-weight: 400;
+        color: #536873;
+    }
+
+    @media (max-width: 1320px) {
+        #filtros_movimientos_inventario,
+        #filtros_movimientos_inventario[data-vista="MOVIMIENTOS"] {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        #filtros_movimientos_inventario .campo_busqueda_movimientos_inventario,
+        #filtros_movimientos_inventario .contenedor_limpiar_filtros_inventario {
+            grid-column: 1 / -1;
+        }
+    }
+
+    @media (max-width: 900px) {
+        /* conserva las tarjetas responsivas ya utilizadas por Inventario */
+        .tabla_movimientos_inventario .fila_producto_inventario > div {
+            display: block;
+            padding: 0;
+        }
+        .tabla_movimientos_inventario .fila_producto_inventario {
+            min-height: 0;
+        }
+    }
+
+    @media (max-width: 700px) {
+        #filtros_movimientos_inventario,
+        #filtros_movimientos_inventario[data-vista="MOVIMIENTOS"] {
+            grid-template-columns: minmax(0, 1fr);
+        }
+        #filtros_movimientos_inventario .campo_busqueda_movimientos_inventario,
+        #filtros_movimientos_inventario .contenedor_limpiar_filtros_inventario {
+            grid-column: auto;
+        }
+    }
+
+/* SUBTITULO 4 REJILLAS RESPONSIVAS DE LOS CUATRO HISTORIALES */
+
+    @media (max-width: 900px) {
+        .tabla_movimientos_inventario[data-modo] .fila_producto_inventario {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    @media (max-width: 420px) {
+        .tabla_movimientos_inventario[data-modo] .fila_producto_inventario {
+            grid-template-columns: minmax(0, 1fr);
+        }
+    }
+
+    .descripcion_historial_inventario {
+        margin-top: 6px;
+        color: #71818a;
+        font: 11px/16px Arial, sans-serif;
+    }
