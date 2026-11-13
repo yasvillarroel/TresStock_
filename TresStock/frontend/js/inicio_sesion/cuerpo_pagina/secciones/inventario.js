@@ -274,6 +274,7 @@
                 'select_estado_inventario'
             );
 
+        const selectActividad = document.getElementById('select_actividad_inventario');
 
         if (inputBusqueda) {
 
@@ -304,6 +305,10 @@
 
         }
 
+        if (selectActividad) {
+            selectActividad.addEventListener('change', filtrarInventario);
+        }
+
         const botonLimpiar = document.getElementById(
             'limpiar_filtros_stock_inventario'
         );
@@ -313,10 +318,13 @@
                 if (inputBusqueda) inputBusqueda.value = '';
                 if (selectFamilia) selectFamilia.value = '';
                 if (selectEstado) selectEstado.value = '';
+                // Limpiar devuelve el listado inicial de ventas recientes.
+                if (selectActividad) selectActividad.value = 'RECIENTES';
 
                 cerrarSelectoresVisualesInventario();
                 actualizarSelectorVisualInventario('familia');
                 actualizarSelectorVisualInventario('estado');
+                actualizarSelectorVisualInventario('actividad');
                 paginaActualInventario = 1;
                 filtrarInventario();
             });
@@ -343,6 +351,8 @@
                 'select_estado_inventario'
             );
 
+        const selectActividad = document.getElementById('select_actividad_inventario');
+        const actividadSeleccionada = selectActividad?.value || 'RECIENTES';
 
         const textoBusqueda =
             inputBusqueda
@@ -390,6 +400,9 @@
                     const estado =
                         producto.estado || '';
 
+                    const actividadComercial = producto.actividad_comercial || '';
+                    const coincideActividad = actividadSeleccionada === 'TODOS'
+                        || actividadComercial === actividadSeleccionada;
 
                     const coincideBusqueda =
                         codigo.includes(
@@ -418,7 +431,8 @@
                     return (
                         coincideBusqueda &&
                         coincideFamilia &&
-                        coincideEstado
+                        coincideEstado &&
+                        coincideActividad
                     );
 
                 }
@@ -427,9 +441,29 @@
 
         paginaActualInventario = 1;
 
-
+        actualizarDescripcionActividadInventario(actividadSeleccionada);
         mostrarInventario();
 
+    }
+
+    // Explica el alcance del filtro, sin confundir ventas con existencia fisica.
+    function actualizarDescripcionActividadInventario(actividadSeleccionada) {
+        const descripcion = document.getElementById('descripcion_actividad_inventario');
+        if (!descripcion) return;
+
+        const totalCategoria = actividadSeleccionada === 'TODOS'
+            ? inventarioCargado.length
+            : inventarioCargado.filter(producto =>
+                producto.actividad_comercial === actividadSeleccionada
+            ).length;
+        const cantidad = totalCategoria.toLocaleString('es-CL');
+        const mensajes = {
+            RECIENTES: `Ventas recientes: ${cantidad} productos con ventas durante los últimos seis meses registrados. Los niveles de reposición se calculan con ese período.`,
+            ANTIGUAS: `Solo ventas antiguas: ${cantidad} productos con ventas únicamente anteriores a los últimos seis meses. Los valores en 0 no equivalen a una recomendación de compra.`,
+            SIN_HISTORIAL: `Sin historial: ${cantidad} productos sin ventas asociadas a su código en los datos importados. No implica que estén descontinuados.`,
+            TODOS: `Catálogo completo: ${cantidad} productos inventariables, incluidos registros históricos. No se han eliminado ni desactivado productos.`
+        };
+        descripcion.textContent = mensajes[actividadSeleccionada] || mensajes.RECIENTES;
     }
 
 
@@ -446,7 +480,7 @@
 
     // cierra las listas y restablece sus atributos de accesibilidad
     function cerrarSelectoresVisualesInventario(excepto = '') {
-        ['familia', 'estado'].forEach(function(tipo) {
+        ['familia', 'estado', 'actividad'].forEach(function(tipo) {
             if (tipo === excepto) return;
             const panel = document.getElementById('panel_selector_' + tipo + '_inventario');
             const boton = document.getElementById('boton_selector_' + tipo + '_inventario');
@@ -466,7 +500,7 @@
         if (!select || !etiqueta || !lista) return;
 
         const opcionActual = Array.from(select.options).find(opcion => opcion.value === select.value);
-        etiqueta.textContent = opcionActual?.textContent || (tipo === 'familia' ? 'Todas las familias' : 'Todos los estados');
+        etiqueta.textContent = opcionActual?.textContent || ({familia: 'Todas las familias', estado: 'Todos los estados', actividad: 'Ventas recientes'}[tipo] || 'Todos');
         lista.replaceChildren();
 
         const texto = normalizarTextoSelectorInventario(buscador?.value || '');
@@ -477,7 +511,7 @@
         if (!opciones.length) {
             const sinResultados = document.createElement('div');
             sinResultados.className = 'mensaje_lista_selector_inventario';
-            sinResultados.textContent = 'No se encontraron familias.';
+            sinResultados.textContent = 'No hay opciones disponibles.';
             lista.appendChild(sinResultados);
             return;
         }
@@ -502,7 +536,7 @@
 
     // añade eventos a los dos desplegables sin modificar la lógica del backend
     function configurarSelectoresVisualesInventario() {
-        ['familia', 'estado'].forEach(function(tipo) {
+        ['familia', 'estado', 'actividad'].forEach(function(tipo) {
             const select = document.getElementById('select_' + tipo + '_inventario');
             const contenedor = document.getElementById('contenedor_selector_' + tipo + '_inventario');
             const boton = document.getElementById('boton_selector_' + tipo + '_inventario');
@@ -550,7 +584,7 @@
             filtros.dataset.selectoresConfigurados = 'si';
             // solo registra un manejador de cierre por clic fuera de los selectores
             document.addEventListener('click', function(evento) {
-                if (!evento.target.closest('#contenedor_selector_familia_inventario, #contenedor_selector_estado_inventario')) {
+                if (!evento.target.closest('#contenedor_selector_familia_inventario, #contenedor_selector_estado_inventario, #contenedor_selector_actividad_inventario')) {
                     cerrarSelectoresVisualesInventario();
                 }
             });
@@ -649,8 +683,10 @@
                 'dato_sin_inventario';
             dato.setAttribute('role', 'cell');
 
-            dato.textContent =
-                'No se encontraron productos para mostrar.';
+            const actividad = document.getElementById('select_actividad_inventario')?.value;
+            dato.textContent = actividad === 'RECIENTES'
+                ? 'No se encontraron productos con ventas recientes. Puedes elegir «Todos los productos» en Actividad comercial.'
+                : 'No se encontraron productos para los filtros seleccionados.';
 
 
             fila.appendChild(
@@ -778,11 +814,30 @@
                 datoStockActual.setAttribute('role', 'cell');
                 datoStockActual.dataset.etiqueta = 'Stock actual';
 
-                datoStockActual.textContent =
-                    formatearCantidadInventario(
-                        producto.stock_actual,
-                        producto.es_producto_balanza
-                    );
+                // Las existencias son de demostracion: no equivalen a un conteo fisico.
+                // La actividad comercial indica donde priorizar la verificacion,
+                // pero no confirma la existencia ni la ausencia de mercaderia.
+                datoStockActual.title = 'Saldo de demostración: partió de un stock simulado y puede incluir movimientos de prueba. Pendiente de validación con un conteo físico.';
+
+                const valorStockActual = document.createElement('span');
+                valorStockActual.className = 'valor_stock_actual_inventario';
+                valorStockActual.textContent = formatearCantidadInventario(
+                    producto.stock_actual,
+                    producto.es_producto_balanza
+                );
+                datoStockActual.appendChild(valorStockActual);
+
+                const actividadSinVentasRecientes =
+                    producto.actividad_comercial === 'ANTIGUAS' ||
+                    producto.actividad_comercial === 'SIN_HISTORIAL';
+
+                if (actividadSinVentasRecientes) {
+                    const avisoVerificacion = document.createElement('span');
+                    avisoVerificacion.className = 'indicador_verificacion_stock_inventario';
+                    avisoVerificacion.textContent = 'Por verificar';
+                    avisoVerificacion.title = 'Producto sin ventas recientes: se recomienda comprobar si todavía existe físicamente. No significa que su stock sea cero ni que esté descontinuado.';
+                    datoStockActual.appendChild(avisoVerificacion);
+                }
 
 
                 // stock mínimo
@@ -796,14 +851,42 @@
                 datoStockMinimo.setAttribute('role', 'cell');
                 datoStockMinimo.dataset.etiqueta = 'Stock mínimo';
 
-                datoStockMinimo.textContent =
-                    producto.stock_minimo_calculable
-                        ? formatearCantidadInventario(
-                            producto.stock_minimo,
-                            producto.es_producto_balanza
-                        )
-                        : '—';
+                // Sin ventas recientes, el calculo automatico es 0.
+                // Esto NO equivale a recomendar un inventario objetivo de cero.
+                datoStockMinimo.textContent = formatearCantidadInventario(
+                    producto.stock_minimo_calculable === true ? producto.stock_minimo : 0,
+                    producto.es_producto_balanza
+                );
 
+                if (producto.stock_minimo_calculable !== true) {
+                    datoStockMinimo.title = 'Sin ventas en los últimos seis meses analizados. Mínimo histórico 0; no se ha definido un mínimo manual.';
+                } else if (producto.plazo_estimado) {
+                    datoStockMinimo.title = 'Mínimo calculado con plazo estimado de 7 días.';
+                } else {
+                    datoStockMinimo.title = 'Mínimo calculado con demanda histórica y plazo del proveedor.';
+                }
+
+                // stock de seguridad: reserva calculada con las ventas diarias y el plazo de entrega
+                const datoStockSeguridad =
+                    document.createElement('div');
+
+                datoStockSeguridad.className =
+                    'dato_stock_seguridad_inventario';
+                datoStockSeguridad.setAttribute('role', 'cell');
+                datoStockSeguridad.dataset.etiqueta = 'Stock seguridad';
+
+                datoStockSeguridad.textContent = formatearCantidadInventario(
+                    producto.stock_seguridad_calculable === true ? producto.stock_seguridad : 0,
+                    producto.es_producto_balanza
+                );
+
+                if (producto.stock_seguridad_calculable === true) {
+                    datoStockSeguridad.title = producto.plazo_estimado
+                        ? 'Reserva calculada con un plazo provisional de 7 días.'
+                        : 'Reserva calculada según la variación de ventas y el plazo del proveedor.';
+                } else {
+                    datoStockSeguridad.title = 'Sin ventas en los últimos seis meses analizados. Seguridad histórica 0; no se ha definido una reserva manual.';
+                }
 
                 // estado
                 const datoEstado =
@@ -832,6 +915,15 @@
                 datoEstado.appendChild(
                     estado
                 );
+
+                // permite consultar el punto de reposición sin añadir otra columna
+                if (producto.stock_minimo_calculable === true &&
+                    producto.stock_seguridad_calculable === true) {
+                    const puntoReposicion = Number(producto.punto_reposicion);
+                    if (Number.isFinite(puntoReposicion)) {
+                        estado.title = `Punto de reposición: ${formatearCantidadInventario(puntoReposicion, producto.es_producto_balanza)} (mínimo + seguridad)${producto.plazo_estimado ? '. Plazo estimado: 7 días.' : ''}`;
+                    }
+                }
 
                 // botón para abrir el ajuste manual del producto
                 const datoAcciones = document.createElement('div');
@@ -879,6 +971,10 @@
 
                 fila.appendChild(
                     datoStockMinimo
+                );
+
+                fila.appendChild(
+                    datoStockSeguridad
                 );
 
                 fila.appendChild(
@@ -943,6 +1039,21 @@
 
         }
 
+
+        if (estado === 'SIN VENTAS' || estado === 'SIN VENTAS RECIENTES') {
+
+            elemento.className = 'estado_sin_ventas_inventario';
+            elemento.textContent = 'Sin ventas recientes';
+            elemento.title = 'Solo presenta ventas antiguas, fuera de los últimos seis meses analizados. No se genera recomendación automática con demanda reciente cero.';
+            return;
+        }
+
+        if (estado === 'SIN HISTORIAL') {
+            elemento.className = 'estado_sin_historial_inventario';
+            elemento.textContent = 'Sin historial';
+            elemento.title = 'No hay ventas asociadas a este código en los archivos importados. Puede ser un producto antiguo, nuevo o sin ventas registradas.';
+            return;
+        }
 
         if (estado === 'PENDIENTE') {
 

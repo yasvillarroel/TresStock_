@@ -136,6 +136,7 @@ CREATE TABLE inventario (
     codigo          VARCHAR(50) PRIMARY KEY,
     stock_actual    NUMERIC(12,4) NOT NULL DEFAULT 0,
     stock_minimo    INTEGER NOT NULL DEFAULT 0,
+    stock_seguridad INTEGER NOT NULL DEFAULT 0,
 
     CONSTRAINT fk_inventario_producto
         FOREIGN KEY (codigo)
@@ -143,7 +144,10 @@ CREATE TABLE inventario (
         ON DELETE CASCADE,
 
     CONSTRAINT chk_stock_minimo
-        CHECK (stock_minimo >= 0)
+        CHECK (stock_minimo >= 0),
+
+    CONSTRAINT chk_stock_seguridad
+        CHECK (stock_seguridad >= 0)
 );
 
 
@@ -154,9 +158,9 @@ AS $$
 BEGIN
 
     INSERT INTO base_datos.inventario
-    (codigo, stock_actual, stock_minimo)
+    (codigo, stock_actual, stock_minimo, stock_seguridad)
     VALUES
-    (NEW.codigo, 0, 0);
+    (NEW.codigo, 0, 0, 0);
 
     RETURN NEW;
 

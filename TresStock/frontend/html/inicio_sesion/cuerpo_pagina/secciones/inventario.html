@@ -16,7 +16,7 @@
                     </div>
 
                     <div class="descripcion_inventario">
-                        Controla el stock actual, stock mínimo y estado de los productos.
+                        Controla el stock actual, stock mínimo, stock de seguridad y estado de los productos.
                     </div>
 
                 </div>
@@ -222,7 +222,8 @@
                         <option value="STOCK BAJO">Stock bajo</option>
                         <option value="SIN STOCK">Sin stock</option>
                         <option value="STOCK NEGATIVO">Stock negativo</option>
-                        <option value="PENDIENTE">Pendiente</option>
+                        <option value="SIN VENTAS RECIENTES">Sin ventas recientes</option>
+                        <option value="SIN HISTORIAL">Sin historial</option>
                     </select>
 
                     <div class="contenedor_selector_inventario" id="contenedor_selector_estado_inventario">
@@ -238,8 +239,32 @@
                     </div>
                 </div>
 
+                <!-- filtro de actividad comercial: no altera el catalogo ni el stock -->
+                <div class="campo_actividad_inventario">
+                    <div class="texto_actividad_inventario">Actividad comercial</div>
+
+                    <select class="select_actividad_inventario" id="select_actividad_inventario" hidden tabindex="-1" aria-hidden="true">
+                        <option value="RECIENTES" selected>Ventas recientes</option>
+                        <option value="TODOS">Todos los productos</option>
+                        <option value="ANTIGUAS">Solo ventas antiguas</option>
+                        <option value="SIN_HISTORIAL">Sin historial de ventas</option>
+                    </select>
+
+                    <div class="contenedor_selector_inventario" id="contenedor_selector_actividad_inventario">
+                        <button class="boton_selector_inventario" id="boton_selector_actividad_inventario" type="button"
+                            aria-haspopup="listbox" aria-expanded="false" aria-controls="lista_opciones_actividad_inventario">
+                            <span class="texto_selector_inventario" id="texto_selector_actividad_inventario">Ventas recientes</span>
+                            <span class="flecha_selector_inventario" aria-hidden="true">▾</span>
+                        </button>
+                        <div class="panel_selector_inventario" id="panel_selector_actividad_inventario" hidden>
+                            <div class="lista_opciones_selector_inventario" id="lista_opciones_actividad_inventario"
+                                role="listbox" aria-label="Actividad comercial"></div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="contenedor_limpiar_filtros_inventario">
-                    <button class="boton_limpiar_filtros_inventario" id="limpiar_filtros_stock_inventario" type="button" title="Restablecer búsqueda, familia y estado">
+                    <button class="boton_limpiar_filtros_inventario" id="limpiar_filtros_stock_inventario" type="button" title="Restablecer búsqueda, familia, estado y actividad comercial">
                         Limpiar filtros
                     </button>
                 </div>
@@ -271,6 +296,7 @@
                         <div class="columna_familia_inventario" role="columnheader">Familia</div>
                         <div class="columna_stock_actual_inventario" role="columnheader">Stock actual</div>
                         <div class="columna_stock_minimo_inventario" role="columnheader">Stock mínimo</div>
+                        <div class="columna_stock_seguridad_inventario" role="columnheader" title="Reserva adicional ante variaciones de demanda">Stock seguridad</div>
                         <div class="columna_estado_inventario" role="columnheader">Estado</div>
                         <div class="columna_acciones_inventario" role="columnheader">Acciones</div>
                     </div>

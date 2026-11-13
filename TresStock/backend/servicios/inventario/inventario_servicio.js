@@ -2,6 +2,10 @@
 const pool = require('../../configuracion/base_datos');
 const { obtenerFechaActualChile } = require('../../utilidades/fechas');
 
+// Nivel de servicio aproximado del 95% para el stock de seguridad.
+// La demanda diaria se estima con los 6 meses anteriores a la ultima venta.
+const FACTOR_SERVICIO_STOCK = 1.65;
+
 
 // FUNCION 1 OBTENER INVENTARIO
 const obtenerInventario = async () => {
@@ -24,12 +28,24 @@ const obtenerInventario = async () => {
                 AND v.fecha_hora::date <= p.fecha_fin
         ),
 
-        productos_con_plazo AS (
-            SELECT DISTINCT pp.codigo
+        -- Presencia de una venta en cualquier fecha del historial importado.
+        -- No se interpreta como fecha de ingreso ni vigencia fisica.
+        productos_con_historial AS (
+            SELECT DISTINCT dv.codigo
+            FROM base_datos.detalle_venta dv
+            INNER JOIN base_datos.ventas v
+                ON v.id_venta = dv.id_venta
+        ),
+
+        plazos_reposicion AS (
+            SELECT
+                pp.codigo,
+                MAX(prov.tiempo_entrega_dias) AS dias_entrega
             FROM base_datos.producto_proveedor pp
             INNER JOIN base_datos.proveedores prov
                 ON prov.id_proveedor = pp.id_proveedor
             WHERE prov.tiempo_entrega_dias IS NOT NULL
+            GROUP BY pp.codigo
         ),
 
         productos_por_peso AS (
@@ -52,9 +68,25 @@ const obtenerInventario = async () => {
 
             COALESCE(i.stock_actual, 0) AS stock_actual,
             COALESCE(i.stock_minimo, 0) AS stock_minimo,
+            COALESCE(i.stock_seguridad, 0) AS stock_seguridad,
+            (
+                COALESCE(i.stock_minimo, 0)
+                + COALESCE(i.stock_seguridad, 0)
+            ) AS punto_reposicion,
 
-            (pv.codigo IS NOT NULL AND pp.codigo IS NOT NULL)
-                AS stock_minimo_calculable,
+            GREATEST(7, COALESCE(pr.dias_entrega, 7)) AS dias_entrega,
+            (pr.dias_entrega IS NULL OR pr.dias_entrega < 7)
+                AS plazo_estimado,
+
+            -- Permite distinguir falta de ventas de un error en el calculo.
+            (pv.codigo IS NULL) AS sin_ventas_recientes,
+            CASE
+                WHEN pv.codigo IS NOT NULL THEN 'RECIENTES'
+                WHEN ph.codigo IS NOT NULL THEN 'ANTIGUAS'
+                ELSE 'SIN_HISTORIAL'
+            END AS actividad_comercial,
+            (pv.codigo IS NOT NULL) AS stock_minimo_calculable,
+            (pv.codigo IS NOT NULL) AS stock_seguridad_calculable,
 
             CASE
                 WHEN COALESCE(i.stock_actual, 0) < 0
@@ -63,11 +95,20 @@ const obtenerInventario = async () => {
                 WHEN COALESCE(i.stock_actual, 0) = 0
                     THEN 'SIN STOCK'
 
-                WHEN pv.codigo IS NULL OR pp.codigo IS NULL
-                    THEN 'PENDIENTE'
+                WHEN pv.codigo IS NULL AND ph.codigo IS NOT NULL
+                    THEN 'SIN VENTAS RECIENTES'
 
-                WHEN COALESCE(i.stock_minimo, 0) > 0
-                    AND COALESCE(i.stock_actual, 0) <= i.stock_minimo
+                WHEN pv.codigo IS NULL
+                    THEN 'SIN HISTORIAL'
+
+                WHEN (
+                    COALESCE(i.stock_minimo, 0)
+                    + COALESCE(i.stock_seguridad, 0)
+                ) > 0
+                    AND COALESCE(i.stock_actual, 0) <= (
+                        COALESCE(i.stock_minimo, 0)
+                        + COALESCE(i.stock_seguridad, 0)
+                    )
                     THEN 'STOCK BAJO'
 
                 ELSE 'OPTIMO'
@@ -78,8 +119,10 @@ const obtenerInventario = async () => {
             ON p.codigo = i.codigo
         LEFT JOIN productos_con_ventas pv
             ON p.codigo = pv.codigo
-        LEFT JOIN productos_con_plazo pp
-            ON p.codigo = pp.codigo
+        LEFT JOIN productos_con_historial ph
+            ON p.codigo = ph.codigo
+        LEFT JOIN plazos_reposicion pr
+            ON p.codigo = pr.codigo
         LEFT JOIN productos_por_peso ppeso
             ON p.codigo = ppeso.codigo
 
@@ -87,10 +130,8 @@ const obtenerInventario = async () => {
         ORDER BY p.descripcion`
     );
 
-
     return resultado.rows;
 };
-
 
 // FUNCION 2 OBTENER RESUMEN INVENTARIO
 const obtenerResumenInventario = async () => {
@@ -107,9 +148,14 @@ const obtenerResumenInventario = async () => {
             COUNT(*) FILTER (
                 WHERE
                     COALESCE(i.stock_actual, 0) > 0
-                    AND COALESCE(i.stock_minimo, 0) > 0
-                    AND COALESCE(i.stock_actual, 0)
-                        <= COALESCE(i.stock_minimo, 0)
+                    AND (
+                        COALESCE(i.stock_minimo, 0)
+                        + COALESCE(i.stock_seguridad, 0)
+                    ) > 0
+                    AND COALESCE(i.stock_actual, 0) <= (
+                        COALESCE(i.stock_minimo, 0)
+                        + COALESCE(i.stock_seguridad, 0)
+                    )
             ) AS stock_bajo,
 
             COUNT(*) FILTER (
@@ -165,133 +211,133 @@ const obtenerFamilias = async () => {
 };
 
 
-// FUNCION 4 RECALCULAR STOCK MINIMO
-
+// FUNCION 4 RECALCULAR STOCK MINIMO Y STOCK DE SEGURIDAD
+// Se mantiene el nombre de la funcion para no cambiar controladores ni rutas.
 const recalcularStockMinimo = async () => {
 
     const resultado = await pool.query(
-        `
-        WITH periodo AS
-        (
+        `WITH periodo AS (
             SELECT
                 MAX(fecha_hora)::date AS fecha_fin,
+                (MAX(fecha_hora)::date - INTERVAL '6 months')::date AS fecha_inicio,
                 (
                     MAX(fecha_hora)::date
-                    - INTERVAL '6 months'
-                )::date AS fecha_inicio
+                    - (MAX(fecha_hora)::date - INTERVAL '6 months')::date
+                )::numeric AS dias_periodo
             FROM base_datos.ventas
         ),
 
-        ventas_6_meses AS
-        (
+        -- Si hay varios proveedores se usa el mayor plazo de entrega.
+        -- Sin proveedor se aplican 7 dias estimados.
+        plazos AS (
             SELECT
-                dv.codigo,
-
-                SUM(
-                    dv.cantidad
-                ) AS cantidad_vendida,
-
-                (
-                    p.fecha_fin -
-                    p.fecha_inicio
-                ) AS dias_periodo
-
-            FROM base_datos.detalle_venta dv
-
-            INNER JOIN base_datos.ventas v
-                ON v.id_venta = dv.id_venta
-
-            CROSS JOIN periodo p
-
-            WHERE
-                v.fecha_hora::date >
-                p.fecha_inicio
-
-                AND
-
-                v.fecha_hora::date <=
-                p.fecha_fin
-
-            GROUP BY
-                dv.codigo,
-                p.fecha_inicio,
-                p.fecha_fin
+                pp.codigo,
+                GREATEST(7, MAX(prov.tiempo_entrega_dias)) AS dias_entrega
+            FROM base_datos.producto_proveedor pp
+            INNER JOIN base_datos.proveedores prov
+                ON prov.id_proveedor = pp.id_proveedor
+            WHERE prov.tiempo_entrega_dias IS NOT NULL
+            GROUP BY pp.codigo
         ),
 
-        calculo_stock AS
-        (
+        -- Agrupa las ventas por producto y por dia.
+        -- Las correcciones negativas se mantienen para el stock minimo,
+        -- pero no generan demanda negativa en la variabilidad diaria.
+        ventas_por_dia AS (
             SELECT
-                pp.codigo,
+                dv.codigo,
+                v.fecha_hora::date AS fecha_venta,
+                SUM(dv.cantidad) AS venta_neta_dia
+            FROM base_datos.detalle_venta dv
+            INNER JOIN base_datos.ventas v
+                ON v.id_venta = dv.id_venta
+            CROSS JOIN periodo p
+            WHERE v.fecha_hora >= (p.fecha_inicio + 1)::timestamp
+                AND v.fecha_hora < (p.fecha_fin + 1)::timestamp
+            GROUP BY dv.codigo, v.fecha_hora::date
+        ),
 
-                CEIL(
-                    GREATEST(
-                        COALESCE(
-                            v6.cantidad_vendida,
-                            0
-                        ),
-                        0
-                    )
-                    /
-                    NULLIF(
-                        v6.dias_periodo,
-                        0
-                    )
-                    *
-                    MAX(
-                        prov.tiempo_entrega_dias
-                    )
-                )::INTEGER
-                AS stock_minimo
+        -- Los dias sin ventas cuentan como 0: el divisor incluye
+        -- todos los dias calendario del mismo periodo de 6 meses.
+        resumen_ventas AS (
+            SELECT
+                codigo,
+                SUM(venta_neta_dia) AS total_neto,
+                SUM(GREATEST(venta_neta_dia, 0)) AS demanda_positiva,
+                SUM(POWER(GREATEST(venta_neta_dia, 0), 2)) AS cuadrados_diarios
+            FROM ventas_por_dia
+            GROUP BY codigo
+        ),
 
-            FROM base_datos.producto_proveedor pp
+        calculos AS (
+            SELECT
+                p.codigo,
 
-            INNER JOIN base_datos.proveedores prov
-                ON prov.id_proveedor =
-                pp.id_proveedor
+                -- El minimo conserva la formula que ya tenia TresStock:
+                -- promedio neto diario de 6 meses * dias de entrega.
+                CASE
+                    WHEN per.dias_periodo > 0 THEN
+                        LEAST(
+                            CEIL(
+                                GREATEST(COALESCE(rv.total_neto, 0), 0)
+                                / per.dias_periodo
+                                * COALESCE(pl.dias_entrega, 7)
+                            ),
+                            2147483647::numeric
+                        )::integer
+                    ELSE 0
+                END AS stock_minimo,
 
-            INNER JOIN ventas_6_meses v6
-                ON v6.codigo =
-                pp.codigo
+                -- Seguridad: Z * desviacion diaria * raiz(plazo).
+                -- Varianza poblacional: E[X^2] - E[X]^2.
+                CASE
+                    WHEN per.dias_periodo > 0 THEN
+                        LEAST(
+                            CEIL(
+                                $1::numeric
+                                * SQRT(GREATEST(
+                                    0::numeric,
+                                    COALESCE(rv.cuadrados_diarios, 0)
+                                        / per.dias_periodo
+                                    - POWER(
+                                        COALESCE(rv.demanda_positiva, 0)
+                                            / per.dias_periodo,
+                                        2
+                                    )
+                                ))
+                                * SQRT(COALESCE(pl.dias_entrega, 7)::numeric)
+                            ),
+                            2147483647::numeric
+                        )::integer
+                    ELSE 0
+                END AS stock_seguridad
 
-            WHERE
-                prov.tiempo_entrega_dias
-                IS NOT NULL
-
-            GROUP BY
-                pp.codigo,
-                v6.cantidad_vendida,
-                v6.dias_periodo
+            FROM base_datos.productos p
+            CROSS JOIN periodo per
+            LEFT JOIN resumen_ventas rv
+                ON rv.codigo = p.codigo
+            LEFT JOIN plazos pl
+                ON pl.codigo = p.codigo
+            WHERE p.controla_stock = TRUE
         )
 
         UPDATE base_datos.inventario i
-
-        SET stock_minimo =
-            COALESCE(cs.stock_minimo, 0)
-
-        FROM base_datos.productos p
-
-        LEFT JOIN calculo_stock cs
-            ON cs.codigo = p.codigo
-
-        WHERE i.codigo = p.codigo
-            AND p.controla_stock = TRUE
-            AND i.stock_minimo IS DISTINCT FROM
-                COALESCE(cs.stock_minimo, 0)
-
-        RETURNING
-            i.codigo,
-            i.stock_minimo
-        `
+        SET stock_minimo = c.stock_minimo,
+            stock_seguridad = c.stock_seguridad
+        FROM calculos c
+        WHERE i.codigo = c.codigo
+            AND (
+                i.stock_minimo IS DISTINCT FROM c.stock_minimo
+                OR i.stock_seguridad IS DISTINCT FROM c.stock_seguridad
+            )
+        RETURNING i.codigo, i.stock_minimo, i.stock_seguridad`,
+        [FACTOR_SERVICIO_STOCK]
     );
 
-
     return {
-        productos_actualizados:
-            resultado.rowCount
+        productos_actualizados: resultado.rowCount
     };
-
 };
-
 
 // FUNCION 5 OBTENER HISTORIAL DE MOVIMIENTOS
 const obtenerMovimientosInventario = async (filtros = {}) => {
@@ -505,7 +551,7 @@ const ajustarInventario = async (
         const resultado = await cliente.query(
             `UPDATE base_datos.inventario SET stock_actual = $1
              WHERE codigo = $2
-             RETURNING codigo, stock_actual, stock_minimo`,
+             RETURNING codigo, stock_actual, stock_minimo, stock_seguridad`,
             [stockNuevo, codigo]
         );
 
@@ -545,6 +591,9 @@ const ajustarInventario = async (
             stock_anterior: stockAnterior,
             stock_actual: Number(resultado.rows[0].stock_actual),
             stock_minimo: Number(resultado.rows[0].stock_minimo),
+            stock_seguridad: Number(resultado.rows[0].stock_seguridad),
+            punto_reposicion: Number(resultado.rows[0].stock_minimo) +
+                Number(resultado.rows[0].stock_seguridad),
             cantidad_ajustada: diferencia,
             operacion
         };
