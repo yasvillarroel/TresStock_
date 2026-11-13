@@ -158,6 +158,9 @@
         // inicializa el funcionamiento de inventario
         if (vista === 'inventario') {await inicializarInventario();}
 
+        // carga la lista paginada de pronósticos por producto
+        if (vista === 'analisis') {await inicializarAnalisisPronostico();}
+
         // carga los lotes de vencimiento y la paginación de la vista de alertas
         if (vista === 'alertas') {await inicializarAlertasVencimientos();}
 

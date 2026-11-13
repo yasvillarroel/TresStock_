@@ -1,0 +1,104 @@
+.contenedor_analisis_pronostico {
+    width: calc(100% - 16px);
+    margin: 10px 8px 0;
+    padding: 16px;
+    border: 1px solid #dce4e8;
+    border-radius: 10px;
+    background: #ffffff;
+    box-sizing: border-box;
+}
+
+.encabezado_analisis_pronostico { margin-bottom: 14px; }
+.titulo_analisis_pronostico { color: #0b3650; font: 700 18px Arial, sans-serif; }
+.descripcion_analisis_pronostico { margin-top: 7px; color: #62747d; font: 13px/1.5 Arial, sans-serif; }
+
+.filtros_analisis_pronostico {
+    display: grid;
+    grid-template-columns: minmax(190px, 2fr) minmax(180px, 1fr) auto;
+    align-items: flex-end;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+
+.campo_busqueda_analisis_pronostico { width: min(100%, 360px); }
+.campo_filtro_pronostico_analisis { min-width: 0; }
+#filtro_pronostico_analisis[hidden] { display: none !important; }
+.campo_filtro_pronostico_analisis .boton_selector_inventario { height: 36px; font-size: 12px; }
+.etiqueta_busqueda_analisis_pronostico { margin-bottom: 7px; color: #536873; font: 700 12px Arial, sans-serif; }
+.input_busqueda_analisis_pronostico { width: 100%; height: 36px; padding: 0 12px; border: 1px solid #ced9de; border-radius: 6px; color: #37434b; font: 12px Arial, sans-serif; box-sizing: border-box; }
+.input_busqueda_analisis_pronostico:focus-visible { outline: 2px solid #159ba3; outline-offset: 2px; }
+.fecha_corte_analisis_pronostico { padding-bottom: 10px; color: #62747d; font: 11px Arial, sans-serif; white-space: nowrap; }
+
+.contenedor_tabla_analisis_pronostico { width: 100%; overflow-x: auto; border: 1px solid #e0e7ea; border-radius: 8px; }
+.tabla_analisis_pronostico { min-width: 720px; }
+.encabezado_tabla_analisis_pronostico,
+.fila_analisis_pronostico {
+    display: grid;
+    grid-template-columns: 64px minmax(170px, 2fr) repeat(4, minmax(105px, 1fr));
+    align-items: center;
+}
+
+.encabezado_tabla_analisis_pronostico { min-height: 40px; background: #f4f7f8; border-bottom: 1px solid #dce4e8; }
+.encabezado_tabla_analisis_pronostico > div { padding: 10px 7px; color: #667881; font: 700 10px Arial, sans-serif; text-align: center; }
+.encabezado_tabla_analisis_pronostico > div:nth-child(2) { text-align: left; }
+.fila_analisis_pronostico { min-height: 58px; border-bottom: 1px solid #edf1f3; }
+.fila_analisis_pronostico:last-child { border-bottom: 0; }
+.fila_analisis_pronostico > div { min-width: 0; padding: 7px; color: #455861; font: 11px/1.35 Arial, sans-serif; text-align: center; overflow-wrap: anywhere; box-sizing: border-box; }
+.fila_analisis_pronostico > div:nth-child(2) { color: #37434b; font-weight: 700; text-align: left; }
+.fila_analisis_pronostico[tabindex] { cursor: pointer; }
+.fila_analisis_pronostico[tabindex]:hover,
+.fila_analisis_pronostico[tabindex]:focus-visible,
+.fila_analisis_pronostico.seleccionada { background: #effafa; outline: none; }
+.imagen_producto_analisis_pronostico { width: 40px; height: 40px; object-fit: contain; border-radius: 6px; user-select: none; }
+.imagen_producto_analisis_pronostico_vacia { padding: 5px; background: #f3f6f7; }
+.cantidad_analisis_pronostico { font-variant-numeric: tabular-nums; font-weight: 700; }
+.fila_vacia_analisis_pronostico > div { padding: 28px 14px; color: #71818a; font: 13px Arial, sans-serif; text-align: center; }
+
+.contenedor_grafico_analisis_pronostico { margin-top: 14px; padding: 16px; overflow-x: auto; border: 1px solid #dce4e8; border-radius: 8px; background: #ffffff; }
+.contenedor_grafico_analisis_pronostico[hidden] { display: none !important; }
+.encabezado_grafico_analisis_pronostico { margin-bottom: 5px; }
+.titulo_grafico_analisis_pronostico { color: #0b3650; font: 700 15px Arial, sans-serif; }
+.descripcion_grafico_analisis_pronostico,
+.mensaje_grafico_analisis_pronostico { margin-top: 5px; color: #62747d; font: 11px/1.45 Arial, sans-serif; }
+.grafico_barras_analisis_pronostico { min-width: 720px; height: 170px; display: grid; grid-template-columns: repeat(28, minmax(0, 1fr)); gap: 5px; margin-top: 12px; padding-top: 8px; border-bottom: 1px solid #dce4e8; box-sizing: border-box; }
+.columna_dia_analisis_pronostico { min-width: 0; display: grid; grid-template-rows: minmax(0, 1fr) 17px 15px; align-items: end; text-align: center; }
+.area_barra_dia_analisis_pronostico { width: 100%; height: 100%; display: flex; align-items: flex-end; justify-content: center; }
+.barra_dia_analisis_pronostico { width: 70%; min-height: 2px; border-radius: 3px 3px 0 0; background: linear-gradient(180deg, #27b7a1, #0f858d); transition: height 0.2s ease; }
+.barra_dia_sin_ventas_analisis_pronostico { background: #d8e1e4; }
+.valor_dia_analisis_pronostico { color: #52656e; font: 9px Arial, sans-serif; white-space: nowrap; }
+.fecha_dia_analisis_pronostico { color: #71818a; font: 9px Arial, sans-serif; white-space: nowrap; }
+
+.paginacion_analisis_pronostico { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding-top: 16px; }
+.resumen_paginacion_analisis_pronostico { color: #62747d; font: 12px Arial, sans-serif; }
+.controles_paginacion_analisis_pronostico,
+.numeros_pagina_analisis_pronostico { display: flex; align-items: center; gap: 6px; }
+.boton_pagina_analisis_pronostico,
+.boton_numero_analisis_pronostico { min-width: 34px; height: 34px; padding: 0 9px; border: 1px solid #d5dfe3; border-radius: 6px; background: #ffffff; color: #405762; font: 13px Arial, sans-serif; cursor: pointer; }
+.boton_pagina_analisis_pronostico { font-size: 20px; }
+.boton_pagina_analisis_pronostico:hover:not(:disabled),
+.boton_numero_analisis_pronostico:hover { border-color: #159ba3; background: #effafa; }
+.boton_pagina_analisis_pronostico:disabled { opacity: 0.45; cursor: default; }
+.boton_numero_analisis_pronostico.activa { border-color: #159ba3; background: #159ba3; color: #ffffff; font-weight: 700; }
+.puntos_pagina_analisis_pronostico { padding: 0 3px; color: #71818a; font: 12px Arial, sans-serif; }
+
+@media (max-width: 700px) {
+    .contenedor_analisis_pronostico { padding: 13px; }
+    .filtros_analisis_pronostico { grid-template-columns: minmax(0, 1fr); align-items: stretch; gap: 10px; }
+    .campo_busqueda_analisis_pronostico { width: 100%; }
+    .fecha_corte_analisis_pronostico { padding: 0; }
+    .paginacion_analisis_pronostico { align-items: flex-start; flex-direction: column; }
+    .controles_paginacion_analisis_pronostico { width: 100%; justify-content: center; }
+    .contenedor_grafico_analisis_pronostico { padding: 12px; }
+}
+
+@media (max-width: 560px) {
+    .tabla_analisis_pronostico { min-width: 0; }
+    .encabezado_tabla_analisis_pronostico { display: none; }
+    .fila_analisis_pronostico { grid-template-columns: 58px minmax(0, 1fr); gap: 0 8px; padding: 12px; }
+    .fila_analisis_pronostico > div { padding: 6px 0; text-align: left; }
+    .fila_analisis_pronostico > div[data-etiqueta]::before { display: block; margin-bottom: 3px; color: #71818a; content: attr(data-etiqueta); font: 700 10px Arial, sans-serif; }
+    .fila_analisis_pronostico > div:nth-child(1) { grid-column: 1; grid-row: 1 / 7; }
+    .fila_analisis_pronostico > div:nth-child(2) { grid-column: 2; grid-row: 1; }
+    .fila_analisis_pronostico > div:nth-child(n+3) { grid-column: 2; }
+    .imagen_producto_analisis_pronostico { width: 40px; height: 40px; }
+}

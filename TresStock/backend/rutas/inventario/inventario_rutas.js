@@ -21,6 +21,12 @@ router.get(
     inventarioControlador.obtenerInventario
 );
 
+// ruta para consultar las ventas diarias del producto seleccionado en Análisis
+router.get(
+    '/pronostico/:codigo/ventas-diarias',
+    inventarioControlador.obtenerVentasDiariasPronostico
+);
+
 
 // ruta para obtener los indicadores
 router.get(

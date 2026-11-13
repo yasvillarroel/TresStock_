@@ -36,6 +36,22 @@ const obtenerInventario = async (req, res) => {
 
 };
 
+// entrega la serie diaria usada para explicar el pronóstico de un producto
+const obtenerVentasDiariasPronostico = async (req, res) => {
+    const codigo = String(req.params.codigo || '').trim();
+    if (!codigo || codigo.length > 50) {
+        return res.status(400).json({ mensaje: 'El código del producto no es válido.' });
+    }
+
+    try {
+        const dias = await inventarioServicio.obtenerVentasDiariasPronostico(codigo);
+        return res.json({ codigo, dias });
+    } catch (error) {
+        console.error('Error al obtener las ventas diarias del pronóstico:', error);
+        return res.status(500).json({ mensaje: 'No se pudieron cargar las ventas por día.' });
+    }
+};
+
 
 // FUNCION 2 OBTENER RESUMEN INVENTARIO
 const obtenerResumenInventario = async (req, res) => {
@@ -221,6 +237,7 @@ const ajustarInventario = async (req, res) => {
 // exporta las funciones
 module.exports = {
     obtenerInventario,
+    obtenerVentasDiariasPronostico,
     obtenerResumenInventario,
     obtenerFamilias,
     recalcularStockMinimo,

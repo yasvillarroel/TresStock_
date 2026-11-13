@@ -1,0 +1,61 @@
+<div class="contenedor_analisis_pronostico">
+    <div class="encabezado_analisis_pronostico">
+        <div class="titulo_analisis_pronostico">Pronóstico de ventas por producto</div>
+        <div class="descripcion_analisis_pronostico">Se utiliza el <strong>promedio móvil simple de 28 días</strong>: se suman las unidades positivas vendidas en los últimos 28 días calendario, incluidos los días sin ventas, y se divide por 28. Ese promedio diario se multiplica por 7, 14 o 30 días para estimar las ventas del período.</div>
+    </div>
+    <div class="filtros_analisis_pronostico">
+        <div class="campo_busqueda_analisis_pronostico">
+            <div class="etiqueta_busqueda_analisis_pronostico">Buscar producto</div>
+            <input class="input_busqueda_analisis_pronostico" id="buscar_producto_analisis_pronostico" type="search" placeholder="Nombre o código" autocomplete="off">
+        </div>
+        <div class="campo_filtro_pronostico_analisis">
+            <div class="etiqueta_busqueda_analisis_pronostico">Pronóstico</div>
+            <select id="filtro_pronostico_analisis" hidden tabindex="-1" aria-hidden="true">
+                <option value="">Todos</option>
+                <option value="CON_PRONOSTICO">Con pronóstico (&gt; 0)</option>
+                <option value="SIN_PRONOSTICO">Sin pronóstico (todo en 0)</option>
+            </select>
+            <div class="contenedor_selector_inventario" id="contenedor_selector_pronostico_analisis">
+                <button class="boton_selector_inventario" id="boton_selector_pronostico_analisis" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="lista_selector_pronostico_analisis">
+                    <span class="texto_selector_inventario" id="texto_selector_pronostico_analisis">Todos</span>
+                    <span class="flecha_selector_inventario" aria-hidden="true">▾</span>
+                </button>
+                <div class="panel_selector_inventario" id="panel_selector_pronostico_analisis" hidden>
+                    <div class="lista_opciones_selector_inventario" id="lista_selector_pronostico_analisis" role="listbox" aria-label="Filtrar por pronóstico"></div>
+                </div>
+            </div>
+        </div>
+        <div class="fecha_corte_analisis_pronostico" id="fecha_corte_analisis_pronostico">Fecha de corte: —</div>
+    </div>
+    <div class="contenedor_tabla_analisis_pronostico">
+        <div class="tabla_analisis_pronostico" role="table" aria-label="Pronóstico de ventas por producto">
+            <div class="encabezado_tabla_analisis_pronostico" role="row">
+                <div role="columnheader">Foto</div>
+                <div role="columnheader">Producto</div>
+                <div role="columnheader">Ventas · 28 días</div>
+                <div role="columnheader">Pronóstico · 7 días</div>
+                <div role="columnheader">Pronóstico · 14 días</div>
+                <div role="columnheader">Pronóstico · 30 días</div>
+            </div>
+            <div class="cuerpo_tabla_analisis_pronostico" id="cuerpo_tabla_analisis_pronostico" role="rowgroup">
+                <div class="fila_vacia_analisis_pronostico" role="row"><div role="cell">Cargando pronósticos...</div></div>
+            </div>
+        </div>
+    </div>
+    <div class="contenedor_grafico_analisis_pronostico" id="contenedor_grafico_analisis_pronostico" hidden>
+        <div class="encabezado_grafico_analisis_pronostico">
+            <div class="titulo_grafico_analisis_pronostico" id="titulo_grafico_analisis_pronostico">Ventas por día</div>
+            <div class="descripcion_grafico_analisis_pronostico" id="descripcion_grafico_analisis_pronostico">Selecciona un producto para ver sus ventas diarias de los últimos 28 días.</div>
+        </div>
+        <div class="mensaje_grafico_analisis_pronostico" id="mensaje_grafico_analisis_pronostico" role="status" aria-live="polite"></div>
+        <div class="grafico_barras_analisis_pronostico" id="grafico_barras_analisis_pronostico" role="img" aria-label="Gráfico de ventas diarias de los últimos 28 días"></div>
+    </div>
+    <div class="paginacion_analisis_pronostico" id="paginacion_analisis_pronostico">
+        <div class="resumen_paginacion_analisis_pronostico" id="resumen_paginacion_analisis_pronostico">Mostrando 0 productos</div>
+        <div class="controles_paginacion_analisis_pronostico" id="controles_paginacion_analisis_pronostico">
+            <button class="boton_pagina_analisis_pronostico" id="pagina_anterior_analisis_pronostico" type="button" aria-label="Página anterior">‹</button>
+            <div class="numeros_pagina_analisis_pronostico" id="numeros_pagina_analisis_pronostico"></div>
+            <button class="boton_pagina_analisis_pronostico" id="pagina_siguiente_analisis_pronostico" type="button" aria-label="Página siguiente">›</button>
+        </div>
+    </div>
+</div>

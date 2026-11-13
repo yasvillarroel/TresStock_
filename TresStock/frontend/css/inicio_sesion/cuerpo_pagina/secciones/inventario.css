@@ -680,6 +680,11 @@
         box-sizing: border-box;
     }
 
+    .columna_pronostico_ventas_inventario {
+        width: 13%; padding: 13px 8px; text-align: center; color: #667881;
+        font-family: Arial, sans-serif; font-size: 11px; box-sizing: border-box;
+    }
+
     /* clase para establecer columna estado */
     .columna_estado_inventario {
         width: 13%;
@@ -857,6 +862,14 @@
         vertical-align: middle;
         box-sizing: border-box;
     }
+
+    .dato_pronostico_ventas_inventario {
+        padding: 10px 6px; color: #263a45; font-family: Arial, sans-serif;
+        font-size: 11px; line-height: 17px; text-align: center;
+        vertical-align: middle; box-sizing: border-box;
+    }
+
+    .etiqueta_horizonte_pronostico_inventario { color: #71818a; font-weight: normal; }
 
     /* clase para establecer el estado */
     .dato_estado_inventario {
@@ -1564,7 +1577,7 @@
     #filtros_stock_inventario {
         position: relative;
         z-index: 5;
-        grid-template-columns: minmax(180px, 2fr) repeat(3, minmax(110px, 1fr)) auto;
+        grid-template-columns: minmax(180px, 2fr) repeat(4, minmax(110px, 1fr)) auto;
         align-items: end;
         gap: 12px;
     }
@@ -1584,19 +1597,22 @@
     /* SELECT nativos ocultos; los botones siguientes usan sus valores reales */
     #select_familia_inventario[hidden],
     #select_estado_inventario[hidden],
-    #select_actividad_inventario[hidden] {
+    #select_actividad_inventario[hidden],
+    #select_pronostico_inventario[hidden] {
         display: none !important;
     }
 
 /* SUBTITULO 1 SELECTORES DE FAMILIA, ESTADO Y ACTIVIDAD */
 
-    .campo_actividad_inventario {
+    .campo_actividad_inventario,
+    .campo_pronostico_inventario {
         display: flex;
         flex-direction: column;
         min-width: 0;
     }
 
-    .texto_actividad_inventario {
+    .texto_actividad_inventario,
+    .texto_pronostico_inventario {
         color: #536873;
         font: bold 12px Arial, sans-serif;
         margin-bottom: 7px;
@@ -1749,9 +1765,11 @@
 
     .tabla_inventario:not(.tabla_movimientos_inventario) .encabezado_tabla_inventario,
     .tabla_inventario:not(.tabla_movimientos_inventario) .fila_producto_inventario {
-        /* ocho columnas compactas; no modifica las tablas de movimientos */
-        grid-template-columns: 7% minmax(0, 28fr) minmax(0, 12fr) minmax(0, 10fr) minmax(0, 10fr) minmax(0, 11fr) minmax(0, 12fr) minmax(0, 10fr);
+        /* nueve columnas, con espacio para el pronóstico por horizonte */
+        grid-template-columns: 7% minmax(0, 25fr) minmax(0, 11fr) minmax(0, 9fr) minmax(0, 9fr) minmax(0, 10fr) minmax(0, 13fr) minmax(0, 8fr) minmax(0, 8fr);
     }
+
+    .tabla_inventario:not(.tabla_movimientos_inventario) { min-width: 1080px; }
 
     .tabla_movimientos_inventario .encabezado_tabla_inventario,
     .tabla_movimientos_inventario .fila_producto_inventario {
@@ -1880,6 +1898,7 @@
     .tabla_inventario .columna_stock_actual_inventario,
     .tabla_inventario .columna_stock_minimo_inventario,
     .tabla_inventario .columna_stock_seguridad_inventario,
+    .tabla_inventario .columna_pronostico_ventas_inventario,
     .tabla_inventario .columna_estado_inventario,
     .tabla_inventario .columna_acciones_inventario {
         width: auto;
@@ -1888,6 +1907,7 @@
     .tabla_inventario .dato_stock_actual_inventario,
     .tabla_inventario .dato_stock_minimo_inventario,
     .tabla_inventario .dato_stock_seguridad_inventario,
+    .tabla_inventario .dato_pronostico_ventas_inventario,
     .tabla_inventario .columna_stock_seguridad_inventario {
         overflow-wrap: anywhere;
     }
@@ -1925,6 +1945,7 @@
 
     @media (max-width: 900px) {
         /* las tablas pasan a tarjetas legibles para no desplazar toda la pantalla */
+        .tabla_inventario:not(.tabla_movimientos_inventario) { min-width: 0; }
         .tabla_inventario .encabezado_tabla_inventario {
             display: none;
         }

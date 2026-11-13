@@ -18,6 +18,18 @@ const obtenerInventario = async () => {
             FROM base_datos.ventas
         ),
 
+        -- Ventas positivas agregadas en los últimos 28 días registrados.
+        demanda_ultimos_28_dias AS (
+            SELECT dv.codigo, SUM(GREATEST(dv.cantidad, 0)) AS unidades_positivas
+            FROM base_datos.detalle_venta dv
+            INNER JOIN base_datos.ventas v ON v.id_venta = dv.id_venta
+            CROSS JOIN periodo p
+            WHERE p.fecha_fin IS NOT NULL
+                AND v.fecha_hora >= (p.fecha_fin - INTERVAL '27 days')::timestamp
+                AND v.fecha_hora < (p.fecha_fin + 1)::timestamp
+            GROUP BY dv.codigo
+        ),
+
         productos_con_ventas AS (
             SELECT DISTINCT dv.codigo
             FROM base_datos.detalle_venta dv
@@ -78,6 +90,19 @@ const obtenerInventario = async () => {
             (pr.dias_entrega IS NULL OR pr.dias_entrega < 7)
                 AS plazo_estimado,
 
+            COALESCE(d28.unidades_positivas, 0) AS ventas_ultimos_28_dias,
+            -- Proyección basada en el promedio diario calendario de los últimos 28 días.
+            CASE WHEN per.fecha_fin IS NULL THEN NULL
+                ELSE ROUND(COALESCE(d28.unidades_positivas, 0) * 7 / 28, 3)
+            END AS pronostico_7_dias,
+            CASE WHEN per.fecha_fin IS NULL THEN NULL
+                ELSE ROUND(COALESCE(d28.unidades_positivas, 0) * 14 / 28, 3)
+            END AS pronostico_14_dias,
+            CASE WHEN per.fecha_fin IS NULL THEN NULL
+                ELSE ROUND(COALESCE(d28.unidades_positivas, 0) * 30 / 28, 3)
+            END AS pronostico_30_dias,
+            per.fecha_fin AS fecha_corte_pronostico,
+
             -- Permite distinguir falta de ventas de un error en el calculo.
             (pv.codigo IS NULL) AS sin_ventas_recientes,
             CASE
@@ -115,6 +140,7 @@ const obtenerInventario = async () => {
             END AS estado
 
         FROM base_datos.productos p
+        CROSS JOIN periodo per
         LEFT JOIN base_datos.inventario i
             ON p.codigo = i.codigo
         LEFT JOIN productos_con_ventas pv
@@ -123,6 +149,8 @@ const obtenerInventario = async () => {
             ON p.codigo = ph.codigo
         LEFT JOIN plazos_reposicion pr
             ON p.codigo = pr.codigo
+        LEFT JOIN demanda_ultimos_28_dias d28
+            ON p.codigo = d28.codigo
         LEFT JOIN productos_por_peso ppeso
             ON p.codigo = ppeso.codigo
 
@@ -130,6 +158,39 @@ const obtenerInventario = async () => {
         ORDER BY p.descripcion`
     );
 
+    return resultado.rows;
+};
+
+// entrega las ventas positivas de cada uno de los últimos 28 días registrados para un producto
+const obtenerVentasDiariasPronostico = async (codigo) => {
+    const resultado = await pool.query(
+        `WITH periodo AS (
+            SELECT MAX(fecha_hora)::date AS fecha_fin
+            FROM base_datos.ventas
+        ),
+        dias AS (
+            SELECT serie.fecha::date AS fecha
+            FROM periodo p
+            CROSS JOIN LATERAL generate_series(
+                p.fecha_fin - INTERVAL '27 days',
+                p.fecha_fin,
+                INTERVAL '1 day'
+            ) AS serie(fecha)
+        )
+        SELECT
+            d.fecha,
+            COALESCE(SUM(GREATEST(dv.cantidad, 0)), 0) AS unidades
+        FROM dias d
+        LEFT JOIN base_datos.ventas v
+            ON v.fecha_hora >= d.fecha::timestamp
+            AND v.fecha_hora < (d.fecha + 1)::timestamp
+        LEFT JOIN base_datos.detalle_venta dv
+            ON dv.id_venta = v.id_venta
+            AND dv.codigo = $1
+        GROUP BY d.fecha
+        ORDER BY d.fecha ASC`,
+        [codigo]
+    );
     return resultado.rows;
 };
 
@@ -610,6 +671,7 @@ const ajustarInventario = async (
 // exporta las funciones
 module.exports = {
     obtenerInventario,
+    obtenerVentasDiariasPronostico,
     obtenerResumenInventario,
     obtenerFamilias,
     recalcularStockMinimo,

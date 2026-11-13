@@ -91,6 +91,22 @@ Después de elegir parámetros, los modelos se midieron en la ventana de prueba 
 
 El promedio de 28 días siguió obteniendo el menor MAE y WAPE en todos los horizontes, incluso después del ajuste. La búsqueda no cambió la decisión.
 
+### 6. Variables adicionales disponibles en el CSV inicial
+
+Se preparó una copia experimental independiente del dataset base. Añade cantidad de boletas distintas en ventanas de 7 y 28 días, precio efectivo medio ponderado, descuento agregado y conteo de boletas por bloques horarios. Cada predictor se calcula usando únicamente datos hasta la fecha de corte. El CSV base no se reemplazó.
+
+Se volvió a evaluar LightGBM hurdle con los mismos parámetros y la misma separación temporal ya utilizada. Las métricas fueron:
+
+| Horizonte | Promedio 28 días MAE / WAPE | LightGBM base MAE / WAPE | LightGBM enriquecido MAE / WAPE |
+| --- | ---: | ---: | ---: |
+| 7 días | **0,341 / 53,646 %** | 0,416 / 65,580 % | 0,416 / 65,541 % |
+| 14 días | **0,572 / 44,972 %** | 0,720 / 56,655 % | 0,715 / 56,295 % |
+| 30 días | **1,104 / 40,580 %** | 1,353 / 49,734 % | 1,330 / 48,877 % |
+
+Las boletas aportaron información al LightGBM y mejoraron ligeramente sus métricas frente al modelo base. Sin embargo, el modelo enriquecido todavía tuvo más error que el promedio de 28 días en los tres horizontes. La diferencia más visible fue a 30 días, pero no alcanza para elegirlo. El precio, descuento y horarios tampoco cambiaron la selección general; la importancia del modelo ubica con mayor frecuencia las boletas y promedios de demanda entre las señales principales.
+
+Esta prueba reutiliza una ventana que ya se había consultado. Los parámetros del LightGBM enriquecido no se volvieron a buscar y no contamos con evaluación posterior independiente. Por ello se conserva como experimento y no como modelo operativo.
+
 ## Método seleccionado
 
 Para la estimación general de **7, 14 y 30 días se selecciona el promedio diario de los últimos 28 días multiplicado por el horizonte**. Motivos:
@@ -118,6 +134,9 @@ En 30 días, el promedio por día de semana obtuvo WAPE de 40,559 %, apenas 0,02
 - Evaluación de regresión lineal: `evaluacion_pronostico.md`.
 - Evaluación LightGBM hurdle: `evaluacion_lightgbm_hurdle.md`.
 - Búsqueda de parámetros: `ajuste_parametros.md`.
+- Dataset experimental enriquecido: `dataset_pronostico_demanda_enriquecido.csv` y `dataset_pronostico_demanda_enriquecido_reporte.md`.
+- Evaluación de variables adicionales: `evaluacion_variables_enriquecidas.md` y `evaluacion_variables_enriquecidas.json`.
+- Preparación y comparación experimental: `preparar_dataset_pronostico_enriquecido.py` y `evaluar_dataset_pronostico_enriquecido.py`.
 - Script de entrenamiento lineal: `entrenar_pronostico.py`.
 - Script de comparación SBA/TSB: `comparar_modelos_intermitentes.py`.
 - Script LightGBM: `entrenar_hurdle_lightgbm.py`.

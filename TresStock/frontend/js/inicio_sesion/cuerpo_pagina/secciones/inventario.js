@@ -275,6 +275,7 @@
             );
 
         const selectActividad = document.getElementById('select_actividad_inventario');
+        const selectPronostico = document.getElementById('select_pronostico_inventario');
 
         if (inputBusqueda) {
 
@@ -308,6 +309,7 @@
         if (selectActividad) {
             selectActividad.addEventListener('change', filtrarInventario);
         }
+        if (selectPronostico) selectPronostico.addEventListener('change', filtrarInventario);
 
         const botonLimpiar = document.getElementById(
             'limpiar_filtros_stock_inventario'
@@ -320,11 +322,13 @@
                 if (selectEstado) selectEstado.value = '';
                 // Limpiar devuelve el listado inicial de ventas recientes.
                 if (selectActividad) selectActividad.value = 'RECIENTES';
+                if (selectPronostico) selectPronostico.value = '';
 
                 cerrarSelectoresVisualesInventario();
                 actualizarSelectorVisualInventario('familia');
                 actualizarSelectorVisualInventario('estado');
                 actualizarSelectorVisualInventario('actividad');
+                actualizarSelectorVisualInventario('pronostico');
                 paginaActualInventario = 1;
                 filtrarInventario();
             });
@@ -353,6 +357,7 @@
 
         const selectActividad = document.getElementById('select_actividad_inventario');
         const actividadSeleccionada = selectActividad?.value || 'RECIENTES';
+        const pronosticoSeleccionado = document.getElementById('select_pronostico_inventario')?.value || '';
 
         const textoBusqueda =
             inputBusqueda
@@ -403,6 +408,17 @@
                     const actividadComercial = producto.actividad_comercial || '';
                     const coincideActividad = actividadSeleccionada === 'TODOS'
                         || actividadComercial === actividadSeleccionada;
+                    const valoresPronostico = [
+                        producto.pronostico_7_dias,
+                        producto.pronostico_14_dias,
+                        producto.pronostico_30_dias
+                    ].map(Number);
+                    const tienePronostico = valoresPronostico.some(valor => Number.isFinite(valor) && valor > 0);
+                    const coincidePronostico = pronosticoSeleccionado === 'CON_PRONOSTICO'
+                        ? tienePronostico
+                        : pronosticoSeleccionado === 'SIN_PRONOSTICO'
+                            ? !tienePronostico
+                            : true;
 
                     const coincideBusqueda =
                         codigo.includes(
@@ -432,7 +448,8 @@
                         coincideBusqueda &&
                         coincideFamilia &&
                         coincideEstado &&
-                        coincideActividad
+                        coincideActividad &&
+                        coincidePronostico
                     );
 
                 }
@@ -480,7 +497,7 @@
 
     // cierra las listas y restablece sus atributos de accesibilidad
     function cerrarSelectoresVisualesInventario(excepto = '') {
-        ['familia', 'estado', 'actividad'].forEach(function(tipo) {
+        ['familia', 'estado', 'actividad', 'pronostico'].forEach(function(tipo) {
             if (tipo === excepto) return;
             const panel = document.getElementById('panel_selector_' + tipo + '_inventario');
             const boton = document.getElementById('boton_selector_' + tipo + '_inventario');
@@ -500,7 +517,7 @@
         if (!select || !etiqueta || !lista) return;
 
         const opcionActual = Array.from(select.options).find(opcion => opcion.value === select.value);
-        etiqueta.textContent = opcionActual?.textContent || ({familia: 'Todas las familias', estado: 'Todos los estados', actividad: 'Ventas recientes'}[tipo] || 'Todos');
+        etiqueta.textContent = opcionActual?.textContent || ({familia: 'Todas las familias', estado: 'Todos los estados', actividad: 'Ventas recientes', pronostico: 'Todos'}[tipo] || 'Todos');
         lista.replaceChildren();
 
         const texto = normalizarTextoSelectorInventario(buscador?.value || '');
@@ -536,7 +553,7 @@
 
     // añade eventos a los dos desplegables sin modificar la lógica del backend
     function configurarSelectoresVisualesInventario() {
-        ['familia', 'estado', 'actividad'].forEach(function(tipo) {
+        ['familia', 'estado', 'actividad', 'pronostico'].forEach(function(tipo) {
             const select = document.getElementById('select_' + tipo + '_inventario');
             const contenedor = document.getElementById('contenedor_selector_' + tipo + '_inventario');
             const boton = document.getElementById('boton_selector_' + tipo + '_inventario');
@@ -584,7 +601,7 @@
             filtros.dataset.selectoresConfigurados = 'si';
             // solo registra un manejador de cierre por clic fuera de los selectores
             document.addEventListener('click', function(evento) {
-                if (!evento.target.closest('#contenedor_selector_familia_inventario, #contenedor_selector_estado_inventario, #contenedor_selector_actividad_inventario')) {
+                if (!evento.target.closest('#contenedor_selector_familia_inventario, #contenedor_selector_estado_inventario, #contenedor_selector_actividad_inventario, #contenedor_selector_pronostico_inventario')) {
                     cerrarSelectoresVisualesInventario();
                 }
             });
@@ -888,6 +905,37 @@
                     datoStockSeguridad.title = 'Sin ventas en los últimos seis meses analizados. Seguridad histórica 0; no se ha definido una reserva manual.';
                 }
 
+                // pronóstico de ventas calculado con el promedio diario de los últimos 28 días
+                const datoPronostico = document.createElement('div');
+                datoPronostico.className = 'dato_pronostico_ventas_inventario';
+                datoPronostico.setAttribute('role', 'cell');
+                datoPronostico.dataset.etiqueta = 'Pronóstico de ventas';
+                const fechaCortePronostico = producto.fecha_corte_pronostico
+                    ? new Date(`${String(producto.fecha_corte_pronostico).slice(0, 10)}T00:00:00`)
+                    : null;
+                if (producto.pronostico_7_dias === null || producto.pronostico_7_dias === undefined) {
+                    datoPronostico.textContent = 'Sin historial';
+                    datoPronostico.title = 'No hay ventas importadas para calcular un pronóstico.';
+                } else {
+                    const horizontesPronostico = [
+                        ['7 días', producto.pronostico_7_dias],
+                        ['14 días', producto.pronostico_14_dias],
+                        ['30 días', producto.pronostico_30_dias]
+                    ];
+                    horizontesPronostico.forEach(([etiqueta, valor]) => {
+                        const linea = document.createElement('div');
+                        const nombreHorizonte = document.createElement('span');
+                        nombreHorizonte.className = 'etiqueta_horizonte_pronostico_inventario';
+                        nombreHorizonte.textContent = `${etiqueta}: `;
+                        const cantidadPronosticada = document.createElement('span');
+                        cantidadPronosticada.textContent = formatearCantidadInventario(valor, producto.es_producto_balanza);
+                        linea.append(nombreHorizonte, cantidadPronosticada);
+                        datoPronostico.appendChild(linea);
+                    });
+                    const sinVentasEnVentana = Number(producto.pronostico_30_dias) === 0;
+                    datoPronostico.title = `${sinVentasEnVentana ? 'No hubo ventas positivas en la ventana. ' : ''}Estimación por promedio de ventas positivas de 28 días calendario${fechaCortePronostico && !Number.isNaN(fechaCortePronostico.getTime()) ? ` hasta ${fechaCortePronostico.toLocaleDateString('es-CL')}` : ''}. No es una orden de compra.`;
+                }
+
                 // estado
                 const datoEstado =
                     document.createElement(
@@ -976,6 +1024,8 @@
                 fila.appendChild(
                     datoStockSeguridad
                 );
+
+                fila.appendChild(datoPronostico);
 
                 fila.appendChild(
                     datoEstado

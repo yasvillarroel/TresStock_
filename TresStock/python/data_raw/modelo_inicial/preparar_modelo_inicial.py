@@ -180,6 +180,11 @@ def normalizar_ventas():
 
     ventas = defaultdict(Decimal)
     correcciones = defaultdict(Decimal)
+    metricas_boletas = defaultdict(lambda: {
+        "boletas": set(), "boletas_por_hora": [set() for _ in range(4)],
+        "unidades": Decimal("0"), "importe_regular": Decimal("0"),
+        "importe_venta": Decimal("0"),
+    })
     productos = {}
     filas_fuente = 0
     filas_validas = 0
@@ -231,6 +236,13 @@ def normalizar_ventas():
             clave = (codigo, dia)
             if cantidad > 0:
                 ventas[clave] += cantidad
+                metricas = metricas_boletas[clave]
+                if numero_boleta:
+                    metricas["boletas"].add(numero_boleta)
+                    metricas["boletas_por_hora"][min(fecha_hora.hour // 6, 3)].add(numero_boleta)
+                metricas["unidades"] += cantidad
+                metricas["importe_regular"] += precio * cantidad
+                metricas["importe_venta"] += precio_descuento * cantidad
             else:
                 correcciones[clave] += abs(cantidad)
             productos[codigo] = descripcion
@@ -247,6 +259,7 @@ def normalizar_ventas():
     return {
         "ventas": ventas,
         "correcciones": correcciones,
+        "metricas_boletas": metricas_boletas,
         "productos": productos,
         "fechas_por_codigo": fechas_por_codigo,
         "fecha_inicial": fecha_inicial,
@@ -343,6 +356,88 @@ def escribir_pronostico(datos, series, atipicos):
                 })
                 filas += 1
     return ruta, filas
+
+
+def escribir_pronostico_enriquecido(datos, series, atipicos, ruta):
+    """Genera una versión experimental con señales de boletas, precio, descuento y hora."""
+    columnas_base = [
+        "codigo", "descripcion", "fecha_corte", "dia_semana", "mes",
+        "unidades_dia_corte", "unidades_mismo_dia_semana_anterior",
+        "promedio_7_dias", "promedio_28_dias",
+    ]
+    columnas_nuevas = [
+        "boletas_7_dias", "boletas_28_dias", "precio_venta_promedio_28_dias",
+        "descuento_porcentaje_28_dias", "boletas_00_06_28_dias",
+        "boletas_06_12_28_dias", "boletas_12_18_28_dias", "boletas_18_24_28_dias",
+    ]
+    columnas_objetivo = ["objetivo_7_dias", "objetivo_14_dias", "objetivo_30_dias"]
+    ruta.parent.mkdir(parents=True, exist_ok=True)
+    filas = 0
+    with ruta.open("w", encoding="utf-8-sig", newline="") as archivo:
+        escritor = csv.DictWriter(archivo, fieldnames=[*columnas_base, *columnas_nuevas, *columnas_objetivo])
+        escritor.writeheader()
+        for codigo, (dias, unidades, _) in series.items():
+            prefijos_ventas = construir_prefijos(unidades)
+            boletas_dia = []
+            unidades_dia = []
+            importe_regular_dia = []
+            importe_venta_dia = []
+            boletas_hora_dia = [[] for _ in range(4)]
+            for dia in dias:
+                metrica = datos["metricas_boletas"].get((codigo, dia), {})
+                boletas_dia.append(Decimal(len(metrica.get("boletas", ()))))
+                unidades_dia.append(metrica.get("unidades", Decimal("0")))
+                importe_regular_dia.append(metrica.get("importe_regular", Decimal("0")))
+                importe_venta_dia.append(metrica.get("importe_venta", Decimal("0")))
+                for bloque in range(4):
+                    boletas_hora_dia[bloque].append(Decimal(len(metrica.get("boletas_por_hora", [set()] * 4)[bloque])))
+            prefijos_boletas = construir_prefijos(boletas_dia)
+            prefijos_unidades = construir_prefijos(unidades_dia)
+            prefijos_regular = construir_prefijos(importe_regular_dia)
+            prefijos_venta = construir_prefijos(importe_venta_dia)
+            prefijos_hora = [construir_prefijos(valores) for valores in boletas_hora_dia]
+            for indice in range(27, len(dias) - 30):
+                corte = dias[indice]
+                if any((codigo, dias[pos]) in atipicos for pos in range(indice - 27, indice + 31)):
+                    continue
+                inicio_7 = indice - 6
+                inicio_28 = indice - 27
+                boletas_7 = suma_rango(prefijos_boletas, inicio_7, indice)
+                boletas_28 = suma_rango(prefijos_boletas, inicio_28, indice)
+                unidades_28 = suma_rango(prefijos_unidades, inicio_28, indice)
+                importe_regular = suma_rango(prefijos_regular, inicio_28, indice)
+                importe_venta = suma_rango(prefijos_venta, inicio_28, indice)
+                descuento = Decimal("0")
+                if importe_regular > 0:
+                    descuento = max(Decimal("0"), (importe_regular - importe_venta) / importe_regular)
+                precio_medio = importe_venta / unidades_28 if unidades_28 > 0 else Decimal("0")
+                fila = {
+                    "codigo": codigo,
+                    "descripcion": datos["productos"][codigo],
+                    "fecha_corte": corte.isoformat(),
+                    "dia_semana": corte.weekday(),
+                    "mes": corte.month,
+                    "unidades_dia_corte": f"{unidades[indice]:.4f}",
+                    "unidades_mismo_dia_semana_anterior": f"{unidades[indice - 7]:.4f}",
+                    "promedio_7_dias": f"{suma_rango(prefijos_ventas, indice - 6, indice) / Decimal(7):.4f}",
+                    "promedio_28_dias": f"{suma_rango(prefijos_ventas, indice - 27, indice) / Decimal(28):.4f}",
+                    "boletas_7_dias": int(boletas_7),
+                    "boletas_28_dias": int(boletas_28),
+                    "precio_venta_promedio_28_dias": f"{precio_medio:.4f}",
+                    "descuento_porcentaje_28_dias": f"{descuento:.6f}",
+                }
+                for bloque in range(4):
+                    fila[f"boletas_{bloque * 6:02d}_{(bloque + 1) * 6:02d}_28_dias"] = int(
+                        suma_rango(prefijos_hora[bloque], inicio_28, indice)
+                    )
+                fila.update({
+                    "objetivo_7_dias": f"{suma_rango(prefijos_ventas, indice + 1, indice + 7):.4f}",
+                    "objetivo_14_dias": f"{suma_rango(prefijos_ventas, indice + 1, indice + 14):.4f}",
+                    "objetivo_30_dias": f"{suma_rango(prefijos_ventas, indice + 1, indice + 30):.4f}",
+                })
+                escritor.writerow(fila)
+                filas += 1
+    return ruta, filas, [*columnas_base, *columnas_nuevas, *columnas_objetivo]
 
 
 def metricas_recientes(dias, unidades, fecha_final, ventana):

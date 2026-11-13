@@ -239,8 +239,27 @@
                     </div>
                 </div>
 
+                <!-- filtro para mostrar productos con o sin datos de pronóstico -->
+                <div class="campo_pronostico_inventario">
+                    <div class="texto_pronostico_inventario">Pronóstico</div>
+                    <select class="select_pronostico_inventario" id="select_pronostico_inventario" hidden tabindex="-1" aria-hidden="true">
+                        <option value="">Todos</option>
+                        <option value="CON_PRONOSTICO">Con pronóstico (&gt; 0)</option>
+                        <option value="SIN_PRONOSTICO">Sin pronóstico (todo en 0)</option>
+                    </select>
+                    <div class="contenedor_selector_inventario" id="contenedor_selector_pronostico_inventario">
+                        <button class="boton_selector_inventario" id="boton_selector_pronostico_inventario" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="lista_opciones_pronostico_inventario">
+                            <span class="texto_selector_inventario" id="texto_selector_pronostico_inventario">Todos</span>
+                            <span class="flecha_selector_inventario" aria-hidden="true">▾</span>
+                        </button>
+                        <div class="panel_selector_inventario" id="panel_selector_pronostico_inventario" hidden>
+                            <div class="lista_opciones_selector_inventario" id="lista_opciones_pronostico_inventario" role="listbox" aria-label="Pronóstico"></div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="contenedor_limpiar_filtros_inventario">
-                    <button class="boton_limpiar_filtros_inventario" id="limpiar_filtros_stock_inventario" type="button" title="Restablecer búsqueda, familia, estado y actividad comercial">
+                    <button class="boton_limpiar_filtros_inventario" id="limpiar_filtros_stock_inventario" type="button" title="Restablecer búsqueda, familia, estado, actividad comercial y pronóstico">
                         Limpiar filtros
                     </button>
                 </div>
@@ -273,6 +292,7 @@
                         <div class="columna_stock_actual_inventario" role="columnheader">Stock actual</div>
                         <div class="columna_stock_minimo_inventario" role="columnheader">Stock mínimo</div>
                         <div class="columna_stock_seguridad_inventario" role="columnheader" title="Reserva adicional ante variaciones de demanda">Stock seguridad</div>
+                        <div class="columna_pronostico_ventas_inventario" role="columnheader" title="Estimación basada en el promedio de ventas diarias de los últimos 28 días">Pronóstico de ventas</div>
                         <div class="columna_estado_inventario" role="columnheader">Estado</div>
                         <div class="columna_acciones_inventario" role="columnheader">Acciones</div>
                     </div>
