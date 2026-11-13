@@ -204,7 +204,41 @@ function limpiarFormularioUsuario() {
         const elemento = document.getElementById(id);
         if (elemento) elemento.value = '';
     });
+    document.querySelectorAll('.boton_ver_contrasena_usuario').forEach(boton => {
+        const idCampo = boton.id === 'boton_ver_password_usuario'
+            ? 'input_password_usuario' : 'input_confirmar_password_usuario';
+        const campo = document.getElementById(idCampo);
+        if (campo) campo.type = 'password';
+        boton.classList.remove('mostrando');
+        const imagen = boton.querySelector('.icono_ojo_usuario');
+        if (imagen) imagen.src = './imagenes/inicio_sesion/eye.svg';
+        boton.setAttribute('aria-label', 'Mostrar contraseña');
+        boton.setAttribute('aria-pressed', 'false');
+        boton.title = 'Mostrar contraseña';
+    });
     actualizarSelectorUsuarios('formularioRol', '');
+}
+
+function configurarVisibilidadContrasenasUsuario() {
+    [
+        ['input_password_usuario', 'boton_ver_password_usuario'],
+        ['input_confirmar_password_usuario', 'boton_ver_confirmar_password_usuario']
+    ].forEach(([idCampo, idBoton]) => {
+        const campo = document.getElementById(idCampo);
+        const boton = document.getElementById(idBoton);
+        if (!campo || !boton || boton.dataset.configurado === 'si') return;
+        boton.dataset.configurado = 'si';
+        boton.addEventListener('click', () => {
+            const mostrar = campo.type === 'password';
+            campo.type = mostrar ? 'text' : 'password';
+            boton.classList.toggle('mostrando', mostrar);
+            const imagen = boton.querySelector('.icono_ojo_usuario');
+            if (imagen) imagen.src = mostrar ? './imagenes/inicio_sesion/eye-off.svg' : './imagenes/inicio_sesion/eye.svg';
+            boton.setAttribute('aria-label', mostrar ? 'Ocultar contraseña' : 'Mostrar contraseña');
+            boton.setAttribute('aria-pressed', String(mostrar));
+            boton.title = mostrar ? 'Ocultar contraseña' : 'Mostrar contraseña';
+        });
+    });
 }
 
 function configurarModoFormularioUsuario() {
@@ -220,6 +254,7 @@ function configurarModoFormularioUsuario() {
         editando ? 'Editar usuario' : 'Nuevo usuario';
     if (guardar) {
         guardar.hidden = viendo;
+        guardar.style.display = viendo ? 'none' : 'flex';
         guardar.textContent = editando ? 'Guardar cambios' : 'Guardar usuario';
     }
     if (campoPassword) campoPassword.hidden = viendo;
@@ -356,14 +391,17 @@ function mostrarUsuarios(usuarios) {
                 ${activo ? 'Activo' : 'Inactivo'}</span></td>
             <td class="dato_fecha_creacion_usuarios">${escaparTextoUsuario(formatearFechaUsuario(usuario.fecha_creacion))}</td>
             <td class="dato_acciones_usuarios"><div class="contenedor_acciones_usuario">
-                <button class="boton_accion_usuario boton_ver_usuario" type="button" title="Ver usuario"
+                <button class="boton_accion_usuario boton_ver_usuario" data-id-usuario="${Number(usuario.id_usuario)}" type="button" title="Ver usuario"
                     aria-label="Ver usuario">${ojo}</button>
-                <button class="boton_accion_usuario boton_editar_usuario" type="button" title="Editar usuario"
+                <button class="boton_accion_usuario boton_editar_usuario" data-id-usuario="${Number(usuario.id_usuario)}" type="button" title="Editar usuario"
                     aria-label="Editar usuario">${lapiz}</button>
-                <button class="boton_accion_usuario ${activo ? 'boton_desactivar_usuario' : 'boton_activar_usuario'}"
+                <button class="boton_accion_usuario ${activo ? 'boton_desactivar_usuario' : 'boton_activar_usuario'}" data-id-usuario="${Number(usuario.id_usuario)}"
                     type="button" title="${activo ? 'Desactivar' : 'Activar'} usuario"
                     aria-label="${activo ? 'Desactivar' : 'Activar'} usuario">${activo ? prohibido : activar}</button>
             </div></td>`;
+        fila.querySelector('.boton_ver_usuario').setAttribute('onclick', `abrirDetalleUsuario(${Number(usuario.id_usuario)}, 'ver')`);
+        fila.querySelector('.boton_editar_usuario').setAttribute('onclick', `abrirDetalleUsuario(${Number(usuario.id_usuario)}, 'editar')`);
+        fila.querySelector('.boton_desactivar_usuario, .boton_activar_usuario').setAttribute('onclick', `cambiarEstadoUsuario(${Number(usuario.id_usuario)})`);
         cuerpo.appendChild(fila);
     });
 }
@@ -437,11 +475,11 @@ async function guardarUsuario() {
     const rol = document.getElementById('select_rol_usuario').value;
     const nuevo = modoFormularioUsuario === 'nuevo';
 
-    if (nombre.length < 2 || nombre.length > 100) {
-        await mostrarMensajeUsuarios('Datos incompletos', 'El nombre debe tener entre 2 y 100 caracteres.', 'advertencia');
+    if (nombre.length < 2 || nombre.length > 50) {
+        await mostrarMensajeUsuarios('Datos incompletos', 'El nombre debe tener entre 2 y 50 caracteres.', 'advertencia');
         return;
     }
-    if (email.length > 150 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (email.length > 90 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         await mostrarMensajeUsuarios('Correo no válido', 'Ingresa un correo electrónico válido.', 'advertencia');
         return;
     }
@@ -450,8 +488,8 @@ async function guardarUsuario() {
         return;
     }
     if ((nuevo || password || confirmar_password) &&
-        (password.length < 8 || !/\p{Lu}/u.test(password) || !/\d/.test(password))) {
-        await mostrarMensajeUsuarios('Contraseña no válida', 'La contraseña debe tener al menos 8 caracteres, una mayúscula y un número.', 'advertencia');
+        (password.length < 8 || password.length > 40 || !/\p{Lu}/u.test(password) || !/\d/.test(password))) {
+        await mostrarMensajeUsuarios('Contraseña no válida', 'La contraseña debe tener entre 8 y 40 caracteres, una mayúscula y un número.', 'advertencia');
         return;
     }
     if ((nuevo || password || confirmar_password) && password !== confirmar_password) {
@@ -530,8 +568,11 @@ function configurarAccionesTablaUsuarios() {
     cuerpo.addEventListener('click', evento => {
         const boton = evento.target.closest('button.boton_accion_usuario');
         if (!boton || !cuerpo.contains(boton)) return;
-        const id = Number(boton.closest('tr')?.dataset.idUsuario);
-        if (!Number.isSafeInteger(id) || id <= 0) return;
+        const id = Number(boton.dataset.idUsuario || boton.closest('tr')?.dataset.idUsuario);
+        if (!Number.isSafeInteger(id) || id <= 0) {
+            mostrarMensajeUsuarios('No se pudo identificar el usuario', 'Actualiza la vista e intenta nuevamente.', 'error');
+            return;
+        }
         if (boton.classList.contains('boton_ver_usuario')) abrirDetalleUsuario(id, 'ver');
         else if (boton.classList.contains('boton_editar_usuario')) abrirDetalleUsuario(id, 'editar');
         else if (boton.classList.contains('boton_desactivar_usuario') ||
@@ -543,18 +584,9 @@ function configurarAccionesTablaUsuarios() {
 // TITULO 9 INICIALIZACION USUARIOS
 
 async function inicializarUsuarios() {
-    configurarAlertasUsuarios();
-    configurarSelectoresUsuarios();
-    configurarFiltrosUsuarios();
-    configurarAccionesTablaUsuarios();
-    const guardar = document.getElementById('boton_guardar_usuario');
-    if (guardar && guardar.dataset.configurado !== 'si') {
-        guardar.dataset.configurado = 'si';
-        guardar.addEventListener('click', guardarUsuario);
-    }
     const nuevo = document.getElementById('boton_nuevo_usuario');
-    if (nuevo && nuevo.dataset.teclado !== 'si') {
-        nuevo.dataset.teclado = 'si';
+    if (nuevo && nuevo.dataset.configurado !== 'si') {
+        nuevo.dataset.configurado = 'si';
         nuevo.addEventListener('keydown', evento => {
             if (evento.key === 'Enter' || evento.key === ' ') {
                 evento.preventDefault();
@@ -562,5 +594,10 @@ async function inicializarUsuarios() {
             }
         });
     }
+    const guardar = document.getElementById('boton_guardar_usuario');
+    configurarAlertasUsuarios();
+    configurarSelectoresUsuarios();
+    configurarFiltrosUsuarios();
+    configurarVisibilidadContrasenasUsuario();
     await cargarUsuarios();
 }

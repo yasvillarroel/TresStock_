@@ -121,7 +121,7 @@
             proveedores:'./html/inicio_sesion/cuerpo_pagina/secciones/proveedores.html',
             alertas:'./html/inicio_sesion/cuerpo_pagina/secciones/alertas_vencimientos.html',
             analisis:'./html/inicio_sesion/cuerpo_pagina/secciones/reportes_analitica.html',
-            administracion:'./html/inicio_sesion/cuerpo_pagina/secciones/usuarios.html',
+            administracion:'./html/inicio_sesion/cuerpo_pagina/secciones/usuarios.html?v=20261113-6',
             escaner:'./html/inicio_sesion/cuerpo_pagina/secciones/escaner.html'
         };
 

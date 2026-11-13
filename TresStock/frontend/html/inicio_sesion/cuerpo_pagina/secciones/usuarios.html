@@ -270,7 +270,12 @@
 
                                 <div class="texto_campo_password_usuario">Contraseña</div>
 
-                                <input class="input_password_usuario" id="input_password_usuario" type="password" minlength="8" maxlength="40" autocomplete="new-password">
+                                <div class="contenedor_password_usuario">
+                                    <input class="input_password_usuario" id="input_password_usuario" type="password" minlength="8" maxlength="40" autocomplete="new-password">
+                                    <button class="boton_ver_contrasena_usuario" id="boton_ver_password_usuario" type="button" aria-label="Mostrar contraseña" aria-pressed="false" title="Mostrar contraseña">
+                                        <img class="icono_ojo_usuario" src="./imagenes/inicio_sesion/eye.svg" alt="">
+                                    </button>
+                                </div>
                                 <div class="ayuda_politica_contrasena_usuario">Entre 8 y 40 caracteres, una mayúscula y un número.</div>
 
                             </div>
@@ -281,7 +286,12 @@
 
                                 <div class="texto_campo_confirmar_password_usuario"> Confirmar contraseña </div>
 
-                                <input class="input_confirmar_password_usuario" id="input_confirmar_password_usuario" type="password" minlength="8" maxlength="40" autocomplete="new-password">
+                                <div class="contenedor_password_usuario">
+                                    <input class="input_confirmar_password_usuario" id="input_confirmar_password_usuario" type="password" minlength="8" maxlength="40" autocomplete="new-password">
+                                    <button class="boton_ver_contrasena_usuario" id="boton_ver_confirmar_password_usuario" type="button" aria-label="Mostrar contraseña" aria-pressed="false" title="Mostrar contraseña">
+                                        <img class="icono_ojo_usuario" src="./imagenes/inicio_sesion/eye.svg" alt="">
+                                    </button>
+                                </div>
 
                             </div>
 
@@ -316,7 +326,7 @@
 
                             <button class="boton_cancelar_usuario" id="boton_cancelar_usuario" type="button" onclick="cerrarFormularioUsuario()">Cancelar</button>
 
-                            <button class="boton_guardar_usuario" id="boton_guardar_usuario" type="button">Guardar usuario</button>
+                            <button class="boton_guardar_usuario" id="boton_guardar_usuario" type="button" onclick="guardarUsuario()">Guardar usuario</button>
 
                         </div>
 
