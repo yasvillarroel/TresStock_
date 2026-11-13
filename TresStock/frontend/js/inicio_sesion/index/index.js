@@ -120,7 +120,7 @@
             ventas:'./html/inicio_sesion/cuerpo_pagina/secciones/ventas.html',
             proveedores:'./html/inicio_sesion/cuerpo_pagina/secciones/proveedores.html',
             alertas:'./html/inicio_sesion/cuerpo_pagina/secciones/alertas_vencimientos.html',
-            analisis:'./html/inicio_sesion/cuerpo_pagina/secciones/reportes_analitica.html?v=20261113-7',
+            analisis:'./html/inicio_sesion/cuerpo_pagina/secciones/reportes_analitica.html?v=20261113-9',
             administracion:'./html/inicio_sesion/cuerpo_pagina/secciones/usuarios.html?v=20261113-6',
             escaner:'./html/inicio_sesion/cuerpo_pagina/secciones/escaner.html'
         };

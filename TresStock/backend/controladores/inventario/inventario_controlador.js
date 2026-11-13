@@ -36,6 +36,17 @@ const obtenerInventario = async (req, res) => {
 
 };
 
+// obtiene la proyección experimental LightGBM para la vista de Análisis
+const obtenerPronosticosLightgbm = async (req, res) => {
+    try {
+        const resultado = await inventarioServicio.obtenerPronosticosLightgbm();
+        return res.json(resultado);
+    } catch (error) {
+        console.error('Error al obtener pronósticos LightGBM:', error);
+        return res.status(500).json({ mensaje: 'No se pudieron calcular los pronósticos experimentales. Revisa que Python y LightGBM estén instalados.' });
+    }
+};
+
 // entrega la serie diaria usada para explicar el pronóstico de un producto
 const obtenerVentasDiariasPronostico = async (req, res) => {
     const codigo = String(req.params.codigo || '').trim();
@@ -237,6 +248,7 @@ const ajustarInventario = async (req, res) => {
 // exporta las funciones
 module.exports = {
     obtenerInventario,
+    obtenerPronosticosLightgbm,
     obtenerVentasDiariasPronostico,
     obtenerResumenInventario,
     obtenerFamilias,

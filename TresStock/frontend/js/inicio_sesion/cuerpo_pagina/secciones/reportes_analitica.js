@@ -5,6 +5,7 @@ let paginaPronosticoAnalisis = 1;
 let paginaReposicionAnalisis = 1;
 const productosPorPaginaAnalisis = 8;
 let solicitudGraficoPronosticoAnalisis = 0;
+let pronosticosLightgbmAnalisisCargados = false;
 
 async function inicializarAnalisisPronostico() {
     const busqueda = document.getElementById('buscar_producto_analisis_pronostico');
@@ -19,7 +20,21 @@ async function inicializarAnalisisPronostico() {
     const siguiente = document.getElementById('pagina_siguiente_analisis_pronostico');
     const anteriorReposicion = document.getElementById('pagina_anterior_reposicion_analisis');
     const siguienteReposicion = document.getElementById('pagina_siguiente_reposicion_analisis');
+    const metodoPronostico = document.getElementById('metodo_pronostico_analisis');
     if (!busqueda || !anterior || !siguiente) return;
+
+    metodoPronostico?.addEventListener('change', async () => {
+        if (metodoPronostico.value === 'LIGHTGBM' && !pronosticosLightgbmAnalisisCargados) {
+            await cargarPronosticosLightgbmAnalisis();
+            if (!pronosticosLightgbmAnalisisCargados) {
+                filtrarProductosPronosticoAnalisis();
+                return;
+            }
+        }
+        actualizarDescripcionMetodoPronosticoAnalisis();
+        paginaPronosticoAnalisis = 1;
+        filtrarProductosPronosticoAnalisis();
+    });
 
     busqueda.addEventListener('input', () => {
         paginaPronosticoAnalisis = 1;
@@ -125,6 +140,39 @@ async function cargarProductosPronosticoAnalisis() {
     }
 }
 
+async function cargarPronosticosLightgbmAnalisis() {
+    const descripcion = document.getElementById('descripcion_metodo_pronostico_analisis');
+    if (descripcion) descripcion.textContent = 'Calculando pronósticos experimentales con LightGBM…';
+    try {
+        const respuesta = await fetchConCsrf(`${URL_API}/api/inventario/pronostico-modelo`, { method: 'GET', credentials: 'include' });
+        const datos = await respuesta.json();
+        if (!respuesta.ok) throw new Error(datos.mensaje || 'No se pudieron obtener los pronósticos LightGBM.');
+        const porCodigo = new Map((datos.productos || []).map(producto => [String(producto.codigo), producto]));
+        productosPronosticoAnalisis.forEach(producto => {
+            const prediccion = porCodigo.get(String(producto.codigo));
+            producto.pronostico_lightgbm_disponible = Boolean(prediccion?.disponible);
+            producto.pronostico_lightgbm_origen = prediccion?.origen || null;
+            producto.pronostico_lightgbm_7_dias = prediccion?.disponible ? Number(prediccion.pronostico_7_dias) : null;
+            producto.pronostico_lightgbm_14_dias = prediccion?.disponible ? Number(prediccion.pronostico_14_dias) : null;
+            producto.pronostico_lightgbm_30_dias = prediccion?.disponible ? Number(prediccion.pronostico_30_dias) : null;
+        });
+        pronosticosLightgbmAnalisisCargados = true;
+    } catch (error) {
+        const metodo = document.getElementById('metodo_pronostico_analisis');
+        if (metodo) metodo.value = 'PROMEDIO';
+        if (descripcion) descripcion.textContent = error.message || 'No se pudo cargar el modelo experimental.';
+        pronosticosLightgbmAnalisisCargados = false;
+    }
+}
+
+function actualizarDescripcionMetodoPronosticoAnalisis() {
+    const descripcion = document.getElementById('descripcion_metodo_pronostico_analisis');
+    if (!descripcion) return;
+    descripcion.textContent = document.getElementById('metodo_pronostico_analisis')?.value === 'LIGHTGBM'
+        ? 'LightGBM proyecta los códigos incluidos en su entrenamiento. Para códigos nuevos se usa el promedio de ventas de los últimos 28 días. El domingo se considera cerrado en LightGBM; este pronóstico no calcula la reposición.'
+        : 'Se utiliza el promedio móvil simple de 28 días: las unidades positivas vendidas se dividen por 28 y el promedio diario se proyecta a 7, 14 o 30 días. Se redondea hacia arriba en productos unitarios y se conservan decimales en productos de balanza.';
+}
+
 function filtrarProductosPronosticoAnalisis() {
     const texto = (document.getElementById('buscar_producto_analisis_pronostico')?.value || '').trim().toLocaleLowerCase('es-CL');
     const filtroPronostico = document.getElementById('filtro_pronostico_analisis')?.value || '';
@@ -132,7 +180,7 @@ function filtrarProductosPronosticoAnalisis() {
         const coincideTexto = String(producto.descripcion || '').toLocaleLowerCase('es-CL').includes(texto)
             || String(producto.codigo || '').toLocaleLowerCase('es-CL').includes(texto)
             || String(producto.cod_barra || '').toLocaleLowerCase('es-CL').includes(texto);
-        const valoresPronostico = [producto.pronostico_7_dias, producto.pronostico_14_dias, producto.pronostico_30_dias].map(Number);
+        const valoresPronostico = obtenerValoresPronosticoAnalisis(producto).map(Number);
         const tienePronostico = valoresPronostico.some(valor => Number.isFinite(valor) && valor > 0);
         const coincidePronostico = filtroPronostico === 'CON_PRONOSTICO'
             ? tienePronostico
@@ -142,6 +190,12 @@ function filtrarProductosPronosticoAnalisis() {
     paginaReposicionAnalisis = 1;
     filtrarProductosReposicionAnalisis();
     mostrarProductosPronosticoAnalisis();
+}
+
+function obtenerValoresPronosticoAnalisis(producto) {
+    return document.getElementById('metodo_pronostico_analisis')?.value === 'LIGHTGBM'
+        ? [producto.pronostico_lightgbm_7_dias, producto.pronostico_lightgbm_14_dias, producto.pronostico_lightgbm_30_dias]
+        : [producto.pronostico_7_dias, producto.pronostico_14_dias, producto.pronostico_30_dias];
 }
 
 function filtrarProductosReposicionAnalisis() {
@@ -306,9 +360,9 @@ function crearFilaPronosticoAnalisis(producto) {
     fila.append(celdaFoto, celdaProducto);
     [
         ['Ventas · 28 días', producto.ventas_ultimos_28_dias],
-        ['Pronóstico · 7 días', producto.pronostico_7_dias],
-        ['Pronóstico · 14 días', producto.pronostico_14_dias],
-        ['Pronóstico · 30 días', producto.pronostico_30_dias]
+        ['Pronóstico · 7 días', obtenerValoresPronosticoAnalisis(producto)[0]],
+        ['Pronóstico · 14 días', obtenerValoresPronosticoAnalisis(producto)[1]],
+        ['Pronóstico · 30 días', obtenerValoresPronosticoAnalisis(producto)[2]]
     ].forEach(([etiqueta, valor]) => {
         const celda = document.createElement('div');
         celda.dataset.etiqueta = etiqueta;

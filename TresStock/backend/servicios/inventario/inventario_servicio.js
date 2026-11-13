@@ -1,10 +1,63 @@
 // importa el pool de conexiones
 const pool = require('../../configuracion/base_datos');
 const { obtenerFechaActualChile } = require('../../utilidades/fechas');
+const { predecirPronosticos } = require('../../modelo/pronostico_lightgbm');
 
 // Nivel de servicio aproximado del 95% para el stock de seguridad.
 // La demanda diaria se estima con los 6 meses anteriores a la ultima venta.
 const FACTOR_SERVICIO_STOCK = 1.65;
+
+// Calcula pronósticos experimentales usando el artefacto LightGBM evaluado en Node.js.
+const obtenerPronosticosLightgbm = async () => {
+    const resultado = await pool.query(`
+        WITH corte AS (
+            SELECT MAX(fecha_hora)::date AS fecha_corte
+            FROM base_datos.ventas
+        ), calendario AS (
+            SELECT generate_series(c.fecha_corte - 34, c.fecha_corte, INTERVAL '1 day')::date AS fecha
+            FROM corte c
+            WHERE c.fecha_corte IS NOT NULL
+        ), ventas_diarias AS (
+            SELECT dv.codigo, v.fecha_hora::date AS fecha, SUM(GREATEST(dv.cantidad, 0)) AS unidades
+            FROM base_datos.detalle_venta dv
+            INNER JOIN base_datos.ventas v ON v.id_venta = dv.id_venta
+            CROSS JOIN corte c
+            WHERE v.fecha_hora >= (c.fecha_corte - 34)::timestamp
+                AND v.fecha_hora < (c.fecha_corte + 1)::timestamp
+            GROUP BY dv.codigo, v.fecha_hora::date
+        ), productos_por_peso AS (
+            SELECT DISTINCT codigo
+            FROM base_datos.detalle_venta
+            WHERE cantidad <> TRUNC(cantidad)
+        )
+        SELECT p.codigo, c.fecha_corte,
+            COALESCE((
+                p.familia ~* '(^|[^[:alnum:]])BALANZA([^[:alnum:]]|$)'
+                OR p.descripcion ~* '(^|[^[:alnum:]])(KG|KGS|KILO|KILOS)([^[:alnum:]]|$)'
+                OR pp.codigo IS NOT NULL
+            ), FALSE) AS es_producto_balanza,
+            ARRAY_AGG(COALESCE(vd.unidades, 0)::float8 ORDER BY cal.fecha) AS ventas
+        FROM base_datos.productos p
+        CROSS JOIN corte c
+        CROSS JOIN calendario cal
+        LEFT JOIN ventas_diarias vd ON vd.codigo = p.codigo AND vd.fecha = cal.fecha
+        LEFT JOIN productos_por_peso pp ON pp.codigo = p.codigo
+        GROUP BY p.codigo, c.fecha_corte, p.familia, p.descripcion, pp.codigo
+        ORDER BY p.codigo
+    `);
+
+    if (!resultado.rows.length) return { fecha_corte: null, metodo: 'lightgbm_experimental', productos: [] };
+
+    const solicitud = {
+        fecha_corte: resultado.rows[0].fecha_corte.toISOString().slice(0, 10),
+        productos: resultado.rows.map(fila => ({
+            codigo: fila.codigo,
+            ventas: fila.ventas,
+            es_producto_balanza: fila.es_producto_balanza
+        }))
+    };
+    return predecirPronosticos(solicitud);
+};
 
 
 // FUNCION 1 OBTENER INVENTARIO
@@ -91,15 +144,27 @@ const obtenerInventario = async () => {
                 AS plazo_estimado,
 
             COALESCE(d28.unidades_positivas, 0) AS ventas_ultimos_28_dias,
-            -- Proyección basada en el promedio diario calendario de los últimos 28 días.
+            -- Proyecta el promedio móvil; redondea unidades hacia arriba y conserva decimales para balanza.
             CASE WHEN per.fecha_fin IS NULL THEN NULL
-                ELSE ROUND(COALESCE(d28.unidades_positivas, 0) * 7 / 28, 3)
+                WHEN p.familia ~* '(^|[^[:alnum:]])BALANZA([^[:alnum:]]|$)'
+                    OR p.descripcion ~* '(^|[^[:alnum:]])(KG|KGS|KILO|KILOS)([^[:alnum:]]|$)'
+                    OR ppeso.codigo IS NOT NULL
+                    THEN ROUND(COALESCE(d28.unidades_positivas, 0) * 7 / 28, 3)
+                ELSE CEIL(COALESCE(d28.unidades_positivas, 0) * 7 / 28)
             END AS pronostico_7_dias,
             CASE WHEN per.fecha_fin IS NULL THEN NULL
-                ELSE ROUND(COALESCE(d28.unidades_positivas, 0) * 14 / 28, 3)
+                WHEN p.familia ~* '(^|[^[:alnum:]])BALANZA([^[:alnum:]]|$)'
+                    OR p.descripcion ~* '(^|[^[:alnum:]])(KG|KGS|KILO|KILOS)([^[:alnum:]]|$)'
+                    OR ppeso.codigo IS NOT NULL
+                    THEN ROUND(COALESCE(d28.unidades_positivas, 0) * 14 / 28, 3)
+                ELSE CEIL(COALESCE(d28.unidades_positivas, 0) * 14 / 28)
             END AS pronostico_14_dias,
             CASE WHEN per.fecha_fin IS NULL THEN NULL
-                ELSE ROUND(COALESCE(d28.unidades_positivas, 0) * 30 / 28, 3)
+                WHEN p.familia ~* '(^|[^[:alnum:]])BALANZA([^[:alnum:]]|$)'
+                    OR p.descripcion ~* '(^|[^[:alnum:]])(KG|KGS|KILO|KILOS)([^[:alnum:]]|$)'
+                    OR ppeso.codigo IS NOT NULL
+                    THEN ROUND(COALESCE(d28.unidades_positivas, 0) * 30 / 28, 3)
+                ELSE CEIL(COALESCE(d28.unidades_positivas, 0) * 30 / 28)
             END AS pronostico_30_dias,
             per.fecha_fin AS fecha_corte_pronostico,
 
@@ -671,6 +736,7 @@ const ajustarInventario = async (
 // exporta las funciones
 module.exports = {
     obtenerInventario,
+    obtenerPronosticosLightgbm,
     obtenerVentasDiariasPronostico,
     obtenerResumenInventario,
     obtenerFamilias,

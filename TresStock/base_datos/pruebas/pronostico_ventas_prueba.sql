@@ -1,6 +1,7 @@
 -- Datos ficticios para probar el pronóstico de ventas en Inventario.
 -- Ejecuta este archivo después de crear el esquema y tener productos existentes.
--- Inserta 28 días de ventas para hasta tres productos y no modifica el SQL principal.
+-- Inserta 28 días de ventas para hasta 20 productos con patrones diferentes.
+-- Al volver a ejecutarlo, reemplaza solo las ventas de prueba de este archivo.
 -- Para borrar estas ventas al terminar, ejecuta la consulta de limpieza al final.
 
 DO $$
@@ -19,18 +20,41 @@ BEGIN
     INTO fecha_base
     FROM base_datos.ventas;
 
+    -- Limpia la ejecución anterior de esta simulación para regenerar todos los patrones.
+    DELETE FROM base_datos.ventas WHERE boleta LIKE 'PRONOSTICO_TEST_%';
+
     FOR producto IN
-        SELECT codigo
+        SELECT codigo, descripcion
         FROM base_datos.productos
         WHERE controla_stock = TRUE
         ORDER BY codigo
-        LIMIT 3
+        LIMIT 20
     LOOP
         indice_producto := indice_producto + 1;
 
         FOR dia IN 0..27 LOOP
             fecha_venta := fecha_base - dia;
-            unidades := indice_producto;
+            -- El modelo considera el domingo como día cerrado.
+            IF EXTRACT(ISODOW FROM fecha_venta) = 7 THEN
+                CONTINUE;
+            END IF;
+
+            -- Asigna un patrón de demanda distinto según el producto simulado.
+            CASE indice_producto % 5
+                WHEN 1 THEN unidades := 2;
+                WHEN 2 THEN unidades := 1 + ((27 - dia) / 7);
+                WHEN 3 THEN unidades := CASE WHEN EXTRACT(ISODOW FROM fecha_venta) IN (5, 6) THEN 7 ELSE 2 END;
+                WHEN 4 THEN unidades := CASE WHEN dia % 4 = 0 THEN 5 ELSE 0 END;
+                ELSE unidades := CASE EXTRACT(ISODOW FROM fecha_venta)::INTEGER
+                    WHEN 1 THEN 1 WHEN 2 THEN 3 WHEN 3 THEN 2
+                    WHEN 4 THEN 4 WHEN 5 THEN 3 ELSE 6
+                END;
+            END CASE;
+
+            IF unidades <= 0 THEN
+                CONTINUE;
+            END IF;
+
             boleta_prueba := 'PRONOSTICO_TEST_' || SUBSTRING(MD5(producto.codigo), 1, 8) || '_' || TO_CHAR(fecha_venta, 'YYYYMMDD');
 
             INSERT INTO base_datos.ventas (boleta, fecha_hora, total)
@@ -50,7 +74,7 @@ BEGIN
     IF indice_producto = 0 THEN
         RAISE NOTICE 'No hay productos en base_datos.productos; no se insertaron ventas.';
     ELSE
-        RAISE NOTICE 'Se generaron ventas de prueba para % producto(s), con fecha de corte %.', indice_producto, fecha_base;
+        RAISE NOTICE 'Se generaron ventas ficticias para % producto(s), con fecha de corte %.', indice_producto, fecha_base;
     END IF;
 END;
 $$;

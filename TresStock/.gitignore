@@ -1,6 +1,7 @@
 # Evitar entorno
 
 python/venv/
+backend/modelo/venv/
 
 # Node.js
 node_modules/

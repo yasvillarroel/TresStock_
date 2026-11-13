@@ -1,0 +1,361 @@
+{
+  "dataset": "dataset_estacionalidad_tendencias.csv",
+  "periodo": {
+    "desde": "2025-04-01",
+    "hasta": "2026-09-30"
+  },
+  "prueba_temporal": {
+    "desde": "2026-08-06",
+    "hasta": "2026-09-30",
+    "dias_reservados": 56
+  },
+  "registros": {
+    "filas_entrenamiento": 1108030,
+    "filas_prueba": 189661,
+    "productos_entrenamiento": 3853,
+    "dias_atipicos_excluidos": 7843
+  },
+  "objetivo": "unidades_vendidas por producto y día abierto; solo ventas positivas del dataset; domingos cerrados y días atípicos excluidos",
+  "metricas": {
+    "referencia_producto_dia_semana": {
+      "mae": 0.17199334897082058,
+      "rmse": 0.6078791447296916,
+      "sesgo_predicho_menos_real": 0.012609565880561077,
+      "r2": 0.7252210617352384,
+      "wape_porcentaje": 111.69398907712535,
+      "tasa_venta_real_porcentaje": 7.20179689024101,
+      "tasa_venta_predicha_porcentaje": 7.23975936012148,
+      "clasificacion_venta_umbral_0_5": {
+        "precision": 0.5022940790911077,
+        "recall": 0.5049417966176147,
+        "f1": 0.5036144578313253,
+        "accuracy": 0.9283142027090441,
+        "umbral": 0.5
+      }
+    },
+    "lightgbm_parametros_iniciales": {
+      "mae": 0.11667349447843751,
+      "rmse": 0.6135903992651818,
+      "sesgo_predicho_menos_real": -0.0842558997022363,
+      "r2": 0.7200335019804326,
+      "wape_porcentaje": 75.76879045523751,
+      "tasa_venta_real_porcentaje": 7.20179689024101,
+      "tasa_venta_predicha_porcentaje": 3.0396338730682637,
+      "clasificacion_venta_umbral_0_5": {
+        "precision": 0.7500433651344319,
+        "recall": 0.3165678307343144,
+        "f1": 0.44522240527182866,
+        "accuracy": 0.9431828367455618,
+        "umbral": 0.5
+      }
+    },
+    "lightgbm": {
+      "mae": 0.11648528869587696,
+      "rmse": 0.602729109142124,
+      "sesgo_predicho_menos_real": -0.08362251298122675,
+      "r2": 0.7298572686917055,
+      "wape_porcentaje": 75.64656796961606,
+      "tasa_venta_real_porcentaje": 7.20179689024101,
+      "tasa_venta_predicha_porcentaje": 2.545067251569906,
+      "clasificacion_venta_umbral_0_5": {
+        "precision": 0.7855811062771908,
+        "recall": 0.2776191522073358,
+        "f1": 0.41025641025641024,
+        "accuracy": 0.9425184935226536,
+        "umbral": 0.5
+      }
+    },
+    "clasificador_referencia_siempre_sin_venta": {
+      "mae": 0.1539862175144073,
+      "rmse": 1.169825265180113,
+      "sesgo_predicho_menos_real": -0.1539862175144073,
+      "r2": -0.01763244979602474,
+      "wape_porcentaje": 100.0,
+      "tasa_venta_real_porcentaje": 7.20179689024101,
+      "tasa_venta_predicha_porcentaje": 0.0,
+      "clasificacion_venta_umbral_0_5": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "accuracy": 0.9279820310975899,
+        "umbral": 0.5
+      }
+    }
+  },
+  "resumen_por_producto": {
+    "productos_evaluados": 4095,
+    "productos_con_ventas_reales": 1554,
+    "mediana_mae_por_producto_con_ventas": 0.11241730923755615,
+    "productos_con_mayor_sobreestimacion": [
+      {
+        "codigo": "9157",
+        "dias_evaluados": 48.0,
+        "unidades_reales": 2188.0,
+        "unidades_predichas": 2231.056323682028,
+        "mae": 15.001597941566546,
+        "sesgo_predicho_menos_real": 0.8970067433755782
+      },
+      {
+        "codigo": "7800143131509",
+        "dias_evaluados": 45.0,
+        "unidades_reales": 1.0,
+        "unidades_predichas": 12.60137922010987,
+        "mae": 0.2814784907537469,
+        "sesgo_predicho_menos_real": 0.2578084271135527
+      },
+      {
+        "codigo": "7801610001622",
+        "dias_evaluados": 48.0,
+        "unidades_reales": 139.0,
+        "unidades_predichas": 149.175061121105,
+        "mae": 1.389547701426357,
+        "sesgo_predicho_menos_real": 0.2119804400230203
+      },
+      {
+        "codigo": "7806500506829",
+        "dias_evaluados": 48.0,
+        "unidades_reales": 85.0,
+        "unidades_predichas": 94.55290354819753,
+        "mae": 1.0171186811995,
+        "sesgo_predicho_menos_real": 0.19901882392078182
+      },
+      {
+        "codigo": "7613035671621",
+        "dias_evaluados": 48.0,
+        "unidades_reales": 24.0,
+        "unidades_predichas": 33.47339324985973,
+        "mae": 0.794259367384314,
+        "sesgo_predicho_menos_real": 0.19736235937207783
+      },
+      {
+        "codigo": "7802200134775",
+        "dias_evaluados": 48.0,
+        "unidades_reales": 0.0,
+        "unidades_predichas": 8.628434169233223,
+        "mae": 0.17975904519235883,
+        "sesgo_predicho_menos_real": 0.17975904519235883
+      },
+      {
+        "codigo": "9007",
+        "dias_evaluados": 47.0,
+        "unidades_reales": 109.45,
+        "unidades_predichas": 116.56617109488464,
+        "mae": 1.219901308218386,
+        "sesgo_predicho_menos_real": 0.1514078956358432
+      },
+      {
+        "codigo": "7802820500035",
+        "dias_evaluados": 48.0,
+        "unidades_reales": 0.0,
+        "unidades_predichas": 7.22203781392615,
+        "mae": 0.15045912112346146,
+        "sesgo_predicho_menos_real": 0.15045912112346146
+      },
+      {
+        "codigo": "78028791",
+        "dias_evaluados": 47.0,
+        "unidades_reales": 10.0,
+        "unidades_predichas": 14.923748735208028,
+        "mae": 0.3674482381678762,
+        "sesgo_predicho_menos_real": 0.10476061138740497
+      },
+      {
+        "codigo": "78019324",
+        "dias_evaluados": 48.0,
+        "unidades_reales": 83.0,
+        "unidades_predichas": 87.66194507848707,
+        "mae": 0.9376892040439704,
+        "sesgo_predicho_menos_real": 0.09712385580181386
+      }
+    ],
+    "productos_con_mayor_subestimacion": [
+      {
+        "codigo": "3194",
+        "dias_evaluados": 48.0,
+        "unidades_reales": 160.0,
+        "unidades_predichas": 35.69054503654557,
+        "mae": 3.12721622057254,
+        "sesgo_predicho_menos_real": -2.589780311738634
+      },
+      {
+        "codigo": "3165",
+        "dias_evaluados": 47.0,
+        "unidades_reales": 165.0,
+        "unidades_predichas": 48.89676171406488,
+        "mae": 2.9090725310889445,
+        "sesgo_predicho_menos_real": -2.4702816656581947
+      },
+      {
+        "codigo": "4610095962686",
+        "dias_evaluados": 46.0,
+        "unidades_reales": 144.0,
+        "unidades_predichas": 46.260588739623685,
+        "mae": 2.5755474905895497,
+        "sesgo_predicho_menos_real": -2.124769810008181
+      },
+      {
+        "codigo": "7622201717636",
+        "dias_evaluados": 46.0,
+        "unidades_reales": 110.0,
+        "unidades_predichas": 18.15915280832898,
+        "mae": 2.183547575048579,
+        "sesgo_predicho_menos_real": -1.9965401563406746
+      },
+      {
+        "codigo": "59098447",
+        "dias_evaluados": 45.0,
+        "unidades_reales": 98.0,
+        "unidades_predichas": 9.269945635904067,
+        "mae": 2.067314013122244,
+        "sesgo_predicho_menos_real": -1.9717789858687982
+      },
+      {
+        "codigo": "3167",
+        "dias_evaluados": 48.0,
+        "unidades_reales": 112.0,
+        "unidades_predichas": 18.181014559555635,
+        "mae": 2.3223014652020475,
+        "sesgo_predicho_menos_real": -1.9545621966759246
+      },
+      {
+        "codigo": "6992548154489",
+        "dias_evaluados": 20.0,
+        "unidades_reales": 42.0,
+        "unidades_predichas": 4.2411550112504575,
+        "mae": 2.0747632418447286,
+        "sesgo_predicho_menos_real": -1.8879422494374771
+      },
+      {
+        "codigo": "9067",
+        "dias_evaluados": 45.0,
+        "unidades_reales": 299.0,
+        "unidades_predichas": 219.06577383682836,
+        "mae": 3.1767314733870324,
+        "sesgo_predicho_menos_real": -1.7763161369593705
+      },
+      {
+        "codigo": "59080473",
+        "dias_evaluados": 14.0,
+        "unidades_reales": 34.0,
+        "unidades_predichas": 9.85131097494317,
+        "mae": 2.279091292809024,
+        "sesgo_predicho_menos_real": -1.7249063589326306
+      },
+      {
+        "codigo": "3209",
+        "dias_evaluados": 48.0,
+        "unidades_reales": 83.0,
+        "unidades_predichas": 3.753021580543968,
+        "mae": 1.757699765469221,
+        "sesgo_predicho_menos_real": -1.6509787170720005
+      }
+    ]
+  },
+  "ajuste_parametros": {
+    "validacion_desde": "2026-07-09",
+    "validacion_hasta": "2026-08-05",
+    "filas_entrenamiento_ajuste": 1017436,
+    "filas_validacion": 90594,
+    "criterio_seleccion": "menor MAE en validación temporal",
+    "combinaciones_probadas": [
+      {
+        "num_leaves": 15,
+        "min_child_samples": 50,
+        "mae": 0.11771360520992107,
+        "wape_porcentaje": 79.6363716839799
+      },
+      {
+        "num_leaves": 15,
+        "min_child_samples": 100,
+        "mae": 0.11749852783279634,
+        "wape_porcentaje": 79.49086614182124
+      },
+      {
+        "num_leaves": 31,
+        "min_child_samples": 50,
+        "mae": 0.11403781156442307,
+        "wape_porcentaje": 77.14959992582615
+      },
+      {
+        "num_leaves": 31,
+        "min_child_samples": 100,
+        "mae": 0.11678151066196027,
+        "wape_porcentaje": 79.00578503485261
+      },
+      {
+        "num_leaves": 63,
+        "min_child_samples": 50,
+        "mae": 0.11323379210319946,
+        "wape_porcentaje": 76.60565946506998
+      },
+      {
+        "num_leaves": 63,
+        "min_child_samples": 100,
+        "mae": 0.11256738493400463,
+        "wape_porcentaje": 76.15481736466681
+      }
+    ],
+    "mejores_parametros": {
+      "objective": "regression_l1",
+      "n_estimators": 250,
+      "learning_rate": 0.04,
+      "max_depth": -1,
+      "subsample": 0.85,
+      "colsample_bytree": 0.85,
+      "reg_lambda": 1.0,
+      "random_state": 42,
+      "n_jobs": 4,
+      "verbosity": -1,
+      "num_leaves": 63,
+      "min_child_samples": 100
+    }
+  },
+  "mejora_lightgbm_frente_referencia_porcentaje": {
+    "mae": 32.273376038721594,
+    "wape": 32.2733760387216
+  },
+  "mejora_parametros_frente_modelo_inicial_porcentaje": {
+    "mae": 0.16130980168365255,
+    "wape": 0.16130980168365738
+  },
+  "iteraciones_lightgbm": 250,
+  "variables_importantes": [
+    {
+      "variable": "codigo",
+      "importancia": 8399
+    },
+    {
+      "variable": "promedio_ultimos_28_dias",
+      "importancia": 2349
+    },
+    {
+      "variable": "dia_semana",
+      "importancia": 2276
+    },
+    {
+      "variable": "promedio_ultimos_7_dias",
+      "importancia": 1183
+    },
+    {
+      "variable": "promedio_ultimos_4_mismos_dias",
+      "importancia": 696
+    },
+    {
+      "variable": "mes",
+      "importancia": 201
+    },
+    {
+      "variable": "venta_mismo_dia_semana_2",
+      "importancia": 176
+    },
+    {
+      "variable": "indice_fecha",
+      "importancia": 118
+    },
+    {
+      "variable": "venta_mismo_dia_semana_1",
+      "importancia": 102
+    }
+  ],
+  "nota": "Las métricas de una serie con muchos ceros deben leerse junto con MAE; WAPE puede verse dominado por los productos de mayor volumen. Se omitieron domingos por cierre comercial; otros días faltantes de importación no se pueden identificar con el dataset disponible."
+}

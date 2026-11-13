@@ -1,7 +1,7 @@
 <div class="contenedor_analisis_pronostico">
     <div class="encabezado_analisis_pronostico">
         <div class="titulo_analisis_pronostico">Pronóstico de ventas por producto</div>
-        <div class="descripcion_analisis_pronostico">Se utiliza el <strong>promedio móvil simple de 28 días</strong>: las unidades positivas vendidas se dividen por 28 y el promedio diario se proyecta a 7, 14 o 30 días.</div>
+        <div class="descripcion_analisis_pronostico" id="descripcion_metodo_pronostico_analisis">Se utiliza el <strong>promedio móvil simple de 28 días</strong>: las unidades positivas vendidas se dividen por 28 y el promedio diario se proyecta a 7, 14 o 30 días. Se redondea hacia arriba en productos unitarios y se conservan decimales en productos de balanza.</div>
     </div>
     <div class="filtros_analisis_pronostico">
         <div class="campo_busqueda_analisis_pronostico">
@@ -24,6 +24,13 @@
                     <div class="lista_opciones_selector_inventario" id="lista_selector_pronostico_analisis" role="listbox" aria-label="Filtrar por pronóstico"></div>
                 </div>
             </div>
+        </div>
+        <div class="campo_metodo_pronostico_analisis">
+            <div class="etiqueta_busqueda_analisis_pronostico">Método</div>
+            <select class="selector_metodo_pronostico_analisis" id="metodo_pronostico_analisis">
+                <option value="PROMEDIO">Promedio móvil · 28 días</option>
+                <option value="LIGHTGBM">LightGBM · experimental</option>
+            </select>
         </div>
         <div class="fecha_corte_analisis_pronostico" id="fecha_corte_analisis_pronostico">Fecha de corte: —</div>
     </div>

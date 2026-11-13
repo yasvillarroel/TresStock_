@@ -14,7 +14,7 @@
 
 .filtros_analisis_pronostico {
     display: grid;
-    grid-template-columns: minmax(190px, 2fr) minmax(180px, 1fr) auto;
+    grid-template-columns: minmax(190px, 2fr) minmax(180px, 1fr) minmax(190px, 1.4fr) auto;
     align-items: flex-end;
     gap: 16px;
     margin-bottom: 12px;
@@ -22,6 +22,9 @@
 
 .campo_busqueda_analisis_pronostico { width: min(100%, 360px); }
 .campo_filtro_pronostico_analisis { min-width: 0; }
+.campo_metodo_pronostico_analisis { min-width: 0; }
+.selector_metodo_pronostico_analisis { width: 100%; height: 36px; padding: 0 10px; border: 1px solid #ced9de; border-radius: 6px; background: #fff; color: #37434b; font: 12px Arial, sans-serif; }
+.selector_metodo_pronostico_analisis:focus-visible { outline: 2px solid #159ba3; outline-offset: 2px; }
 #filtro_pronostico_analisis[hidden] { display: none !important; }
 .campo_filtro_pronostico_analisis .boton_selector_inventario { height: 36px; font-size: 12px; }
 .etiqueta_busqueda_analisis_pronostico { margin-bottom: 7px; color: #536873; font: 700 12px Arial, sans-serif; }

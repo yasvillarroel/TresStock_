@@ -21,6 +21,12 @@ router.get(
     inventarioControlador.obtenerInventario
 );
 
+// devuelve los pronósticos LightGBM experimentales para Análisis
+router.get(
+    '/pronostico-modelo',
+    inventarioControlador.obtenerPronosticosLightgbm
+);
+
 // ruta para consultar las ventas diarias del producto seleccionado en Análisis
 router.get(
     '/pronostico/:codigo/ventas-diarias',
