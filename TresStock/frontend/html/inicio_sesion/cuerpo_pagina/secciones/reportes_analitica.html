@@ -1,7 +1,7 @@
 <div class="contenedor_analisis_pronostico">
     <div class="encabezado_analisis_pronostico">
         <div class="titulo_analisis_pronostico">Pronóstico de ventas por producto</div>
-        <div class="descripcion_analisis_pronostico">Se utiliza el <strong>promedio móvil simple de 28 días</strong>: se suman las unidades positivas vendidas en los últimos 28 días calendario, incluidos los días sin ventas, y se divide por 28. Ese promedio diario se multiplica por 7, 14 o 30 días para estimar las ventas del período.</div>
+        <div class="descripcion_analisis_pronostico">Se utiliza el <strong>promedio móvil simple de 28 días</strong>: las unidades positivas vendidas se dividen por 28 y el promedio diario se proyecta a 7, 14 o 30 días.</div>
     </div>
     <div class="filtros_analisis_pronostico">
         <div class="campo_busqueda_analisis_pronostico">
@@ -42,6 +42,14 @@
             </div>
         </div>
     </div>
+    <div class="paginacion_analisis_pronostico" id="paginacion_pronostico_analisis">
+        <div class="resumen_paginacion_analisis_pronostico" id="resumen_paginacion_analisis_pronostico">Mostrando 0 productos</div>
+        <div class="controles_paginacion_analisis_pronostico" id="controles_paginacion_analisis_pronostico">
+            <button class="boton_pagina_analisis_pronostico" id="pagina_anterior_analisis_pronostico" type="button" aria-label="Página anterior de pronósticos">‹</button>
+            <div class="numeros_pagina_analisis_pronostico" id="numeros_pagina_analisis_pronostico"></div>
+            <button class="boton_pagina_analisis_pronostico" id="pagina_siguiente_analisis_pronostico" type="button" aria-label="Página siguiente de pronósticos">›</button>
+        </div>
+    </div>
     <div class="contenedor_grafico_analisis_pronostico" id="contenedor_grafico_analisis_pronostico" hidden>
         <div class="encabezado_grafico_analisis_pronostico">
             <div class="titulo_grafico_analisis_pronostico" id="titulo_grafico_analisis_pronostico">Ventas por día</div>
@@ -50,12 +58,60 @@
         <div class="mensaje_grafico_analisis_pronostico" id="mensaje_grafico_analisis_pronostico" role="status" aria-live="polite"></div>
         <div class="grafico_barras_analisis_pronostico" id="grafico_barras_analisis_pronostico" role="img" aria-label="Gráfico de ventas diarias de los últimos 28 días"></div>
     </div>
-    <div class="paginacion_analisis_pronostico" id="paginacion_analisis_pronostico">
-        <div class="resumen_paginacion_analisis_pronostico" id="resumen_paginacion_analisis_pronostico">Mostrando 0 productos</div>
-        <div class="controles_paginacion_analisis_pronostico" id="controles_paginacion_analisis_pronostico">
-            <button class="boton_pagina_analisis_pronostico" id="pagina_anterior_analisis_pronostico" type="button" aria-label="Página anterior">‹</button>
-            <div class="numeros_pagina_analisis_pronostico" id="numeros_pagina_analisis_pronostico"></div>
-            <button class="boton_pagina_analisis_pronostico" id="pagina_siguiente_analisis_pronostico" type="button" aria-label="Página siguiente">›</button>
+    <div class="seccion_reposicion_analisis_pronostico">
+        <div class="titulo_reposicion_analisis_pronostico">Reposición recomendada</div>
+        <div class="descripcion_reposicion_analisis_pronostico">
+            <div><strong>Punto de reposición:</strong> stock mínimo + stock de seguridad.</div>
+            <div><strong>Cantidad sugerida:</strong> máximo entre 0 y (punto de reposición + pronóstico de 7 días − stock actual). Se redondea hacia arriba a unidades enteras o a 0,001 KG.</div>
+            <div><strong>Reponer:</strong> “Ahora” si el stock llegó al punto de reposición; si no, estima los días para alcanzarlo usando las ventas promedio diarias de los últimos 28 días. “No requerida” si la cantidad sugerida es 0.</div>
+            <div><strong>Alcance:</strong> no descuenta compras pendientes ni lotes próximos a vencer. Si el stock es negativo, solicita corregir el inventario antes de sugerir una compra.</div>
+        </div>
+        <div class="controles_filtro_reposicion_analisis">
+            <div class="campo_busqueda_reposicion_analisis">
+                <div class="etiqueta_busqueda_analisis_pronostico">Buscar producto</div>
+                <input class="input_busqueda_analisis_pronostico" id="buscar_producto_reposicion_analisis" type="search" placeholder="Nombre o código" autocomplete="off">
+            </div>
+            <div class="filtro_reposicion_analisis_pronostico">
+                <div class="etiqueta_busqueda_analisis_pronostico">Mostrar</div>
+                <select id="filtro_estado_reposicion_analisis" hidden tabindex="-1" aria-hidden="true">
+                    <option value="">Todas las recomendaciones</option>
+                    <option value="NECESARIA">Reposición necesaria</option>
+                    <option value="NO_REQUERIDA">No requerida</option>
+                    <option value="REVISAR_STOCK">Revisar stock negativo</option>
+                </select>
+                <div class="contenedor_selector_inventario" id="contenedor_selector_estado_reposicion_analisis">
+                    <button class="boton_selector_inventario" id="boton_selector_estado_reposicion_analisis" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="lista_selector_estado_reposicion_analisis">
+                        <span class="texto_selector_inventario" id="texto_selector_estado_reposicion_analisis">Todas las recomendaciones</span>
+                        <span class="flecha_selector_inventario" aria-hidden="true">▾</span>
+                    </button>
+                    <div class="panel_selector_inventario" id="panel_selector_estado_reposicion_analisis" hidden>
+                        <div class="lista_opciones_selector_inventario" id="lista_selector_estado_reposicion_analisis" role="listbox" aria-label="Filtrar recomendaciones"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="contenedor_tabla_reposicion_analisis_pronostico">
+            <div class="tabla_reposicion_analisis_pronostico" role="table" aria-label="Reposición recomendada por producto">
+                <div class="encabezado_reposicion_analisis_pronostico" role="row">
+                    <div role="columnheader">Foto</div>
+                    <div role="columnheader">Producto</div>
+                    <div role="columnheader">Stock actual</div>
+                    <div role="columnheader" title="Stock mínimo más stock de seguridad">Punto de reposición</div>
+                    <div role="columnheader" title="Máximo entre 0 y punto de reposición + pronóstico de 7 días − stock actual">Cantidad sugerida</div>
+                    <div role="columnheader">Reponer</div>
+                </div>
+                <div class="cuerpo_reposicion_analisis_pronostico" id="cuerpo_reposicion_analisis_pronostico" role="rowgroup">
+                    <div class="fila_vacia_analisis_pronostico" role="row"><div role="cell">Cargando recomendaciones...</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="paginacion_analisis_pronostico" id="paginacion_reposicion_analisis">
+        <div class="resumen_paginacion_analisis_pronostico" id="resumen_paginacion_reposicion_analisis">Mostrando 0 productos</div>
+        <div class="controles_paginacion_analisis_pronostico" id="controles_paginacion_reposicion_analisis">
+            <button class="boton_pagina_analisis_pronostico" id="pagina_anterior_reposicion_analisis" type="button" aria-label="Página anterior de reposición">‹</button>
+            <div class="numeros_pagina_analisis_pronostico" id="numeros_pagina_reposicion_analisis"></div>
+            <button class="boton_pagina_analisis_pronostico" id="pagina_siguiente_reposicion_analisis" type="button" aria-label="Página siguiente de reposición">›</button>
         </div>
     </div>
 </div>
