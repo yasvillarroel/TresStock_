@@ -299,8 +299,14 @@ CREATE TABLE usuarios (
 
     CONSTRAINT fk_usuario_rol
         FOREIGN KEY (id_rol)
-        REFERENCES roles(id_rol)
+        REFERENCES roles(id_rol),
+
+    CONSTRAINT chk_usuario_email_minusculas
+        CHECK (email = LOWER(email))
 );
+
+CREATE UNIQUE INDEX uq_usuarios_email_normalizado
+    ON usuarios (LOWER(email));
 
 CREATE TABLE productos_excluidos_ranking (
     codigo          VARCHAR(50) PRIMARY KEY,
@@ -534,6 +540,17 @@ INSERT INTO base_datos.roles (nombre, descripcion)
 VALUES
 ('Administrador', 'Acceso completo al sistema'),
 ('Usuario', 'Acceso a las funciones operativas del sistema');
+
+-- Cuenta de administrador inicial; la contraseña está almacenada como hash bcrypt.
+INSERT INTO base_datos.usuarios (nombre, email, password_hash, id_rol)
+SELECT
+    'Administrador',
+    'admin@gmail.com',
+    '$2b$10$AyUH0RjlajcmTja0iw0mqeU6elwM7OmlriRiPzAGXqdzkWhEfSBOS',
+    id_rol
+FROM base_datos.roles
+WHERE nombre = 'Administrador'
+ON CONFLICT (email) DO NOTHING;
 
 
 -- ============================================================

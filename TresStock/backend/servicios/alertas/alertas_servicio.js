@@ -176,7 +176,7 @@ const darDeBajaLote = async (idLote, estadoBaja, motivoBaja, cantidadMermaSolici
     }
 };
 
-const obtenerLotesVencimiento = async (estadoSolicitado, paginaSolicitada) => {
+const obtenerLotesVencimiento = async (estadoSolicitado, paginaSolicitada, filtrosSolicitados = {}) => {
     const estado = estadoSolicitado === 'inactivos' ? 'inactivos' : 'activos';
     const paginaNumero = Number.parseInt(paginaSolicitada, 10);
     const paginaPedida = Number.isSafeInteger(paginaNumero) && paginaNumero > 0 ? paginaNumero : 1;
@@ -185,11 +185,69 @@ const obtenerLotesVencimiento = async (estadoSolicitado, paginaSolicitada) => {
         ? 'lv.activo = TRUE AND lv.cantidad > 0 AND lv.fecha_vencimiento >= CURRENT_DATE'
         : '(lv.activo = FALSE OR lv.cantidad <= 0 OR lv.fecha_vencimiento < CURRENT_DATE)';
 
+    const estadoFiltro = String(filtrosSolicitados.estado || '').trim().toUpperCase();
+    const ordenSolicitado = String(filtrosSolicitados.orden || 'asc').trim().toLowerCase();
+    if (!['asc', 'desc'].includes(ordenSolicitado)) {
+        const error = new Error('El orden de fechas seleccionado no es válido.');
+        error.status = 400;
+        throw error;
+    }
+    const estadosPermitidos = [
+        'VENCIMIENTO CRÍTICO', 'VENCIMIENTO EN RIESGO', 'PRÓXIMO A VENCER',
+        'VENCIDO', 'AGOTADO', 'VENDIDO', 'ELIMINADO', 'MERMA', 'OTRO'
+    ];
+    if (estadoFiltro && !estadosPermitidos.includes(estadoFiltro)) {
+        const error = new Error('El estado seleccionado no es válido.');
+        error.status = 400;
+        throw error;
+    }
+
+    const validarFechaFiltro = valor => {
+        const fecha = String(valor || '').trim();
+        if (!fecha) return '';
+        const parseada = new Date(`${fecha}T00:00:00Z`);
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(fecha) || Number.isNaN(parseada.getTime()) || parseada.toISOString().slice(0, 10) !== fecha) {
+            const error = new Error('Una de las fechas del filtro no es válida.');
+            error.status = 400;
+            throw error;
+        }
+        return fecha;
+    };
+    const fechaDesde = validarFechaFiltro(filtrosSolicitados.fecha_desde);
+    const fechaHasta = validarFechaFiltro(filtrosSolicitados.fecha_hasta);
+    const busqueda = String(filtrosSolicitados.busqueda || '').trim().slice(0, 150);
+    const condiciones = [condicion];
+    const valoresFiltros = [];
+    const agregarFiltro = (sql, valor) => {
+        valoresFiltros.push(valor);
+        condiciones.push(sql.replaceAll('?', `$${valoresFiltros.length}`));
+    };
+
+    if (busqueda) agregarFiltro(
+        `(p.descripcion ILIKE ? OR lv.codigo ILIKE ? OR COALESCE(lv.correo_usuario_baja, '') ILIKE ? OR COALESCE(lv.motivo_baja, '') ILIKE ?)`,
+        `%${busqueda}%`
+    );
+    if (fechaDesde) agregarFiltro('lv.fecha_vencimiento >= ?::date', fechaDesde);
+    if (fechaHasta) agregarFiltro('lv.fecha_vencimiento <= ?::date', fechaHasta);
+
+    const expresionEstado = `CASE
+        WHEN lv.activo = FALSE THEN lv.estado_baja
+        WHEN lv.cantidad <= 0 THEN 'AGOTADO'
+        WHEN lv.fecha_vencimiento < CURRENT_DATE THEN 'VENCIDO'
+        WHEN lv.fecha_vencimiento <= CURRENT_DATE + INTERVAL '5 days' THEN 'VENCIMIENTO CRÍTICO'
+        WHEN lv.fecha_vencimiento <= CURRENT_DATE + INTERVAL '10 days' THEN 'VENCIMIENTO EN RIESGO'
+        ELSE 'PRÓXIMO A VENCER'
+    END`;
+    if (estadoFiltro) agregarFiltro(`(${expresionEstado}) = ?`, estadoFiltro);
+    const condicionCompleta = condiciones.join(' AND ');
+
     const [conteo, resumen] = await Promise.all([
         pool.query(
             `SELECT COUNT(*) AS total
              FROM base_datos.lotes_vencimiento lv
-             WHERE ${condicion}`
+             INNER JOIN base_datos.productos p ON p.codigo = lv.codigo
+             WHERE ${condicionCompleta}`,
+            valoresFiltros
         ),
         pool.query(
             `SELECT
@@ -203,9 +261,8 @@ const obtenerLotesVencimiento = async (estadoSolicitado, paginaSolicitada) => {
     const totalPaginas = Math.max(1, Math.ceil(total / limite));
     const pagina = Math.min(paginaPedida, totalPaginas);
     const offset = (pagina - 1) * limite;
-    const orden = estado === 'activos'
-        ? 'lv.fecha_vencimiento ASC, lv.fecha_ingreso ASC, lv.id_lote ASC'
-        : 'lv.fecha_vencimiento DESC, lv.fecha_ingreso DESC, lv.id_lote DESC';
+    const sentidoOrden = ordenSolicitado.toUpperCase();
+    const orden = `lv.fecha_vencimiento ${sentidoOrden}, lv.fecha_ingreso ${sentidoOrden}, lv.id_lote ${sentidoOrden}`;
 
     const resultado = await pool.query(
         `SELECT
@@ -237,10 +294,10 @@ const obtenerLotesVencimiento = async (estadoSolicitado, paginaSolicitada) => {
             END AS estado
          FROM base_datos.lotes_vencimiento lv
          INNER JOIN base_datos.productos p ON p.codigo = lv.codigo
-         WHERE ${condicion}
+         WHERE ${condicionCompleta}
          ORDER BY ${orden}
-         LIMIT $1 OFFSET $2`,
-        [limite, offset]
+        LIMIT $${valoresFiltros.length + 1} OFFSET $${valoresFiltros.length + 2}`,
+        [...valoresFiltros, limite, offset]
     );
 
     return {

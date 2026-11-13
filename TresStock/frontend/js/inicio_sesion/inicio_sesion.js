@@ -2,6 +2,18 @@
 
     // Sin funcion
 
+    // Comprueba la regla común de seguridad para contraseñas nuevas.
+    function cumplePoliticaContrasena(password) {
+        return password.length >= 8 && /\p{Lu}/u.test(password) && /\d/.test(password);
+    }
+
+    // Convierte a minúsculas los correos de inicio, registro y recuperación al escribir.
+    document.querySelectorAll('#email, #registro_email, #recuperacion_email').forEach(campoCorreo => {
+        campoCorreo.addEventListener('input', () => {
+            campoCorreo.value = campoCorreo.value.toLowerCase();
+        });
+    });
+
 // TITULO 2 CONTENEDOR INICIO SESION
 
     // Busca el formulario de inicio de sesión en el HTML.
@@ -15,6 +27,20 @@
         // Usa el identificador del mensaje.
         'mensaje_login'
     );
+
+    // Busca el campo y el botón que muestran u ocultan la contraseña.
+    const campoContrasenaInicioSesion = document.getElementById('contrasena');
+    const botonVerContrasenaInicioSesion = document.getElementById('boton_ver_contrasena_inicio_sesion');
+
+    // Alterna la visibilidad de la contraseña sin cambiar su valor.
+    botonVerContrasenaInicioSesion.addEventListener('click', () => {
+        const mostrar = campoContrasenaInicioSesion.type === 'password';
+        campoContrasenaInicioSesion.type = mostrar ? 'text' : 'password';
+        botonVerContrasenaInicioSesion.classList.toggle('mostrando', mostrar);
+        botonVerContrasenaInicioSesion.setAttribute('aria-label', mostrar ? 'Ocultar contraseña' : 'Mostrar contraseña');
+        botonVerContrasenaInicioSesion.title = mostrar ? 'Ocultar contraseña' : 'Mostrar contraseña';
+        botonVerContrasenaInicioSesion.setAttribute('aria-pressed', String(mostrar));
+    });
 
     // Ejecuta esta función cuando se envía el formulario.
     formularioInicioSesion.addEventListener(
@@ -30,7 +56,7 @@
             const email = document.getElementById(
                 // Usa el identificador del campo de correo.
                 'email'
-            ).value.trim();
+            ).value.trim().toLowerCase();
 
             // Busca el campo de contraseña y obtiene su valor.
             const password = document.getElementById(
@@ -226,6 +252,40 @@
     // Busca el botón de envío del formulario dentro del formulario de registro.
     const botonEnviar = formularioRegistro.querySelector('button[type="submit"]');
 
+    // Relaciona cada contraseña del registro con su botón para mostrarla u ocultarla.
+    const camposPasswordRegistro = [
+        ['registro_password', 'boton_ver_registro_password'],
+        ['registro_confirmar_password', 'boton_ver_registro_confirmar_password']
+    ];
+
+    // Restablece los campos y botones del registro al modo oculto.
+    function restablecerVisibilidadPasswordRegistro() {
+        camposPasswordRegistro.forEach(([idCampo, idBoton]) => {
+            const campo = document.getElementById(idCampo);
+            const boton = document.getElementById(idBoton);
+            campo.type = 'password';
+            boton.classList.remove('mostrando');
+            boton.setAttribute('aria-label', 'Mostrar contraseña');
+            boton.setAttribute('aria-pressed', 'false');
+            boton.title = 'Mostrar contraseña';
+        });
+    }
+
+    // Permite alternar la visibilidad de cada contraseña del formulario de registro.
+    camposPasswordRegistro.forEach(([idCampo, idBoton]) => {
+        const campo = document.getElementById(idCampo);
+        const boton = document.getElementById(idBoton);
+
+        boton.addEventListener('click', () => {
+            const mostrar = campo.type === 'password';
+            campo.type = mostrar ? 'text' : 'password';
+            boton.classList.toggle('mostrando', mostrar);
+            boton.setAttribute('aria-label', mostrar ? 'Ocultar contraseña' : 'Mostrar contraseña');
+            boton.setAttribute('aria-pressed', String(mostrar));
+            boton.title = mostrar ? 'Ocultar contraseña' : 'Mostrar contraseña';
+        });
+    });
+
     // Indica si ya se solicitó el código de verificación.
     let codigoEnviado = false;
     // Guarda el identificador del temporizador para poder cancelarlo.
@@ -316,13 +376,19 @@
         // Obtiene el nombre ingresado y elimina espacios al principio y al final.
         const nombre = document.getElementById('registro_nombre').value.trim();
         // Obtiene el correo ingresado y elimina espacios al principio y al final.
-        const email = document.getElementById('registro_email').value.trim();
+        const email = document.getElementById('registro_email').value.trim().toLowerCase();
         // Obtiene la contraseña ingresada.
         const password = document.getElementById('registro_password').value;
         // Obtiene la confirmación de la contraseña.
         const confirmarPassword = document.getElementById('registro_confirmar_password').value;
         // Obtiene el código ingresado y elimina espacios al principio y al final.
         const codigo = inputCodigo.value.trim();
+
+        // Comprueba que la contraseña tenga el largo y los caracteres requeridos.
+        if (!cumplePoliticaContrasena(password)) {
+            mensajeRegistro.textContent = 'La contraseña debe tener al menos 8 caracteres, una mayúscula y un número.';
+            return;
+        }
 
         // Comprueba si la contraseña y su confirmación son diferentes.
         if (password !== confirmarPassword) {
@@ -400,6 +466,8 @@
 
             // Limpia los campos del formulario después de completar el registro.
             formularioRegistro.reset();
+            // Mantiene ocultas las contraseñas para el siguiente registro.
+            restablecerVisibilidadPasswordRegistro();
             // Oculta el campo del código de verificación.
             campoCodigo.hidden = true;
             // Deja de exigir el código en el formulario.
@@ -449,7 +517,7 @@
             // Obtiene el nombre ingresado.
             nombre: document.getElementById('registro_nombre').value.trim(),
             // Obtiene el correo ingresado.
-            email: document.getElementById('registro_email').value.trim(),
+            email: document.getElementById('registro_email').value.trim().toLowerCase(),
             // Obtiene la contraseña ingresada.
             password: document.getElementById('registro_password').value,
             // Obtiene la confirmación de la contraseña.
@@ -533,6 +601,35 @@
     const botonReenviarRecuperacion = document.getElementById('boton_reenviar_recuperacion');
     // Busca el botón que vuelve al paso donde se ingresa el correo.
     const botonVolverRecuperacion = document.getElementById('boton_volver_recuperacion');
+
+    // Relaciona cada contraseña de recuperación con su botón para mostrarla u ocultarla.
+    const camposPasswordRecuperacion = [
+        [passwordRecuperacion, document.getElementById('boton_ver_recuperacion_password')],
+        [confirmarPasswordRecuperacion, document.getElementById('boton_ver_recuperacion_confirmar_password')]
+    ];
+
+    // Restablece los campos y botones de recuperación al modo oculto.
+    function restablecerVisibilidadPasswordRecuperacion() {
+        camposPasswordRecuperacion.forEach(([campo, boton]) => {
+            campo.type = 'password';
+            boton.classList.remove('mostrando');
+            boton.setAttribute('aria-label', 'Mostrar contraseña');
+            boton.setAttribute('aria-pressed', 'false');
+            boton.title = 'Mostrar contraseña';
+        });
+    }
+
+    // Permite alternar la visibilidad de cada contraseña de recuperación.
+    camposPasswordRecuperacion.forEach(([campo, boton]) => {
+        boton.addEventListener('click', () => {
+            const mostrar = campo.type === 'password';
+            campo.type = mostrar ? 'text' : 'password';
+            boton.classList.toggle('mostrando', mostrar);
+            boton.setAttribute('aria-label', mostrar ? 'Ocultar contraseña' : 'Mostrar contraseña');
+            boton.setAttribute('aria-pressed', String(mostrar));
+            boton.title = mostrar ? 'Ocultar contraseña' : 'Mostrar contraseña';
+        });
+    });
 
     // Indica si el usuario ya avanzó al paso de ingresar el código y la contraseña.
     let pasoCodigoRecuperacionActivo = false;
@@ -651,6 +748,8 @@
         confirmarPasswordRecuperacion.disabled = true;
         // Deja de exigir la confirmación de la contraseña.
         confirmarPasswordRecuperacion.required = false;
+        // Restablece ambos campos de contraseña al modo oculto.
+        restablecerVisibilidadPasswordRecuperacion();
 
         // Restablece el texto del botón para solicitar un código.
         botonEnviarRecuperacion.textContent = 'Enviar código';
@@ -690,7 +789,7 @@
         mensajeRecuperacion.textContent = '';
 
         // Obtiene el correo ingresado y elimina los espacios de los extremos.
-        const email = emailRecuperacion.value.trim();
+        const email = emailRecuperacion.value.trim().toLowerCase();
 
         // Comprueba si todavía se está en el paso de ingresar el correo.
         if (!pasoCodigoRecuperacionActivo) {
@@ -754,9 +853,9 @@
         }
 
         // Comprueba que la contraseña tenga al menos ocho caracteres.
-        if (password.length < 8) {
-            // Informa el largo mínimo requerido para la contraseña.
-            mensajeRecuperacion.textContent = 'La contraseña debe tener al menos 8 caracteres.';
+        if (!cumplePoliticaContrasena(password)) {
+            // Informa los requisitos mínimos de la contraseña nueva.
+            mensajeRecuperacion.textContent = 'La contraseña debe tener al menos 8 caracteres, una mayúscula y un número.';
             // Detiene el envío del formulario.
             return;
         }
@@ -799,6 +898,8 @@
             clearInterval(temporizadorReenvioRecuperacion);
             // Limpia los campos del formulario.
             formularioRecuperacion.reset();
+            // Mantiene ocultas las contraseñas para la próxima recuperación.
+            restablecerVisibilidadPasswordRecuperacion();
             // Restablece el proceso al paso inicial.
             pasoCodigoRecuperacionActivo = false;
             // Oculta el paso del código y las contraseñas.
@@ -857,7 +958,7 @@
                 // Indica que los datos se envían en formato JSON.
                 headers: { 'Content-Type': 'application/json' },
                 // Envía el correo ingresado en el modal.
-                body: JSON.stringify({ email: emailRecuperacion.value.trim() })
+                body: JSON.stringify({ email: emailRecuperacion.value.trim().toLowerCase() })
             });
 
             // Convierte la respuesta del servidor desde JSON a un objeto.

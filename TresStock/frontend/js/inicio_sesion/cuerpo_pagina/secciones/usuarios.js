@@ -449,8 +449,9 @@ async function guardarUsuario() {
         await mostrarMensajeUsuarios('Falta seleccionar rol', 'Selecciona un rol para el usuario.', 'advertencia');
         return;
     }
-    if ((nuevo || password || confirmar_password) && password.length < 8) {
-        await mostrarMensajeUsuarios('Contraseña no válida', 'La contraseña debe tener al menos 8 caracteres.', 'advertencia');
+    if ((nuevo || password || confirmar_password) &&
+        (password.length < 8 || !/\p{Lu}/u.test(password) || !/\d/.test(password))) {
+        await mostrarMensajeUsuarios('Contraseña no válida', 'La contraseña debe tener al menos 8 caracteres, una mayúscula y un número.', 'advertencia');
         return;
     }
     if ((nuevo || password || confirmar_password) && password !== confirmar_password) {

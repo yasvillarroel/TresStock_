@@ -124,7 +124,7 @@
 
                                         <!-- Comentario que identifica el campo para ingresar el correo. -->
                                         <!-- Permite ingresar un correo electrónico y limita su largo a 90 caracteres. -->
-                                        <input class="input_email_inicio_sesion" id="email" type="email" placeholder="usuario@tresstock.cl" autocomplete="email" maxlength="90">
+                                        <input class="input_email_inicio_sesion" id="email" type="email" placeholder="usuario@tresstock.cl" autocomplete="email" autocapitalize="none" spellcheck="false" maxlength="90">
 
                                     <!-- Cierra el contenedor del campo de correo. -->
                                     </div>
@@ -160,6 +160,10 @@
                                         <!-- Comentario que identifica el campo para ingresar la contraseña. -->
                                         <!-- Permite escribir una contraseña y limita su largo a 40 caracteres. -->
                                         <input class="input_contrasena_inicio_sesion" id="contrasena" type="password" placeholder="Ingresa tu contraseña" autocomplete="current-password" maxlength="40"> 
+                                        <button class="boton_ver_contrasena_inicio_sesion" id="boton_ver_contrasena_inicio_sesion" type="button" aria-label="Mostrar contraseña" aria-pressed="false" title="Mostrar contraseña">
+                                            <svg class="icono_ojo_contrasena icono_ojo_visible" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+                                            <svg class="icono_ojo_contrasena icono_ojo_oculto" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 3 18 18M10.6 5.2A10.8 10.8 0 0 1 12 5c6.4 0 10 7 10 7a15.7 15.7 0 0 1-3.1 4.1M6.2 6.2C3.5 8 2 12 2 12s3.6 7 10 7c1.5 0 2.8-.4 4-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>
+                                        </button>
 
                                     <!-- Cierra el contenedor del campo de contraseña. -->
                                     </div>
@@ -245,7 +249,7 @@
                                             <!-- Permite enfocar el campo de correo al hacer clic en el texto. -->
                                             <div class="texto_campo_registro" data-for="registro_email">Correo electrónico</div>
                                             <!-- Permite ingresar un correo de hasta 90 caracteres y lo marca como obligatorio. -->
-                                            <input id="registro_email" name="email" type="email" maxlength="90" autocomplete="email" required>
+                                            <input id="registro_email" name="email" type="email" maxlength="90" autocomplete="email" autocapitalize="none" spellcheck="false" required>
                                         <!-- Cierra el campo de correo. -->
                                         </div>
 
@@ -254,7 +258,14 @@
                                             <!-- Permite enfocar el campo de contraseña al hacer clic en el texto. -->
                                             <div class="texto_campo_registro" data-for="registro_password">Contraseña</div>
                                             <!-- Permite ingresar una contraseña de al menos 8 y hasta 40 caracteres. -->
-                                            <input id="registro_password" name="password" type="password" minlength="8" autocomplete="new-password" maxlength="40" required>
+                                            <div class="contenedor_password_registro">
+                                                <input id="registro_password" name="password" type="password" minlength="8" autocomplete="new-password" maxlength="40" required>
+                                                <button class="boton_ver_contrasena_registro" id="boton_ver_registro_password" type="button" aria-label="Mostrar contraseña" aria-pressed="false" title="Mostrar contraseña">
+                                                    <svg class="icono_ojo_contrasena icono_ojo_visible" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+                                                    <svg class="icono_ojo_contrasena icono_ojo_oculto" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 3 18 18M10.6 5.2A10.8 10.8 0 0 1 12 5c6.4 0 10 7 10 7a15.7 15.7 0 0 1-3.1 4.1M6.2 6.2C3.5 8 2 12 2 12s3.6 7 10 7c1.5 0 2.8-.4 4-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>
+                                                </button>
+                                            </div>
+                                            <div class="ayuda_politica_contrasena">Entre 8 y 40 caracteres, una mayúscula y un número.</div>
                                         <!-- Cierra el campo de contraseña. -->
                                         </div>
 
@@ -263,7 +274,13 @@
                                             <!-- Permite enfocar el campo de confirmación al hacer clic en el texto. -->
                                             <div class="texto_campo_registro" data-for="registro_confirmar_password">Confirmar contraseña</div>
                                             <!-- Permite volver a ingresar la contraseña para confirmarla. -->
-                                            <input id="registro_confirmar_password" name="confirmar_password" type="password" minlength="8" maxlength="40" autocomplete="new-password" required>
+                                            <div class="contenedor_password_registro">
+                                                <input id="registro_confirmar_password" name="confirmar_password" type="password" minlength="8" maxlength="40" autocomplete="new-password" required>
+                                                <button class="boton_ver_contrasena_registro" id="boton_ver_registro_confirmar_password" type="button" aria-label="Mostrar contraseña" aria-pressed="false" title="Mostrar contraseña">
+                                                    <svg class="icono_ojo_contrasena icono_ojo_visible" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+                                                    <svg class="icono_ojo_contrasena icono_ojo_oculto" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 3 18 18M10.6 5.2A10.8 10.8 0 0 1 12 5c6.4 0 10 7 10 7a15.7 15.7 0 0 1-3.1 4.1M6.2 6.2C3.5 8 2 12 2 12s3.6 7 10 7c1.5 0 2.8-.4 4-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>
+                                                </button>
+                                            </div>
                                         <!-- Cierra el campo de confirmación de contraseña. -->
                                         </div>
 
@@ -312,7 +329,7 @@
                                         <!-- Permite enfocar el campo de correo al hacer clic en el texto. -->
                                         <div class="texto_campo_recuperacion" data-for="recuperacion_email">Correo electrónico</div>
                                         <!-- Permite ingresar el correo y lo marca como obligatorio. -->
-                                        <input id="recuperacion_email" name="email" type="email" maxlength="150" autocomplete="email" required>
+                                        <input id="recuperacion_email" name="email" type="email" maxlength="90" autocomplete="email" autocapitalize="none" spellcheck="false" required>
                                     <!-- Cierra el campo de correo. -->
                                     </div>
 
@@ -336,7 +353,14 @@
                                             <!-- Permite enfocar el campo de contraseña al hacer clic en el texto. -->
                                             <div class="texto_campo_recuperacion" data-for="recuperacion_password">Nueva contraseña</div>
                                             <!-- Permite ingresar la contraseña nueva, inicialmente deshabilitada. -->
-                                            <input id="recuperacion_password" name="password" type="password" minlength="8" autocomplete="new-password" disabled>
+                                            <div class="contenedor_password_recuperacion">
+                                                <input id="recuperacion_password" name="password" type="password" minlength="8" maxlength="40" autocomplete="new-password" disabled>
+                                                <button class="boton_ver_contrasena_recuperacion" id="boton_ver_recuperacion_password" type="button" aria-label="Mostrar contraseña" aria-pressed="false" title="Mostrar contraseña">
+                                                    <svg class="icono_ojo_contrasena icono_ojo_visible" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+                                                    <svg class="icono_ojo_contrasena icono_ojo_oculto" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 3 18 18M10.6 5.2A10.8 10.8 0 0 1 12 5c6.4 0 10 7 10 7a15.7 15.7 0 0 1-3.1 4.1M6.2 6.2C3.5 8 2 12 2 12s3.6 7 10 7c1.5 0 2.8-.4 4-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>
+                                                </button>
+                                            </div>
+                                            <div class="ayuda_politica_contrasena">Entre 8 y 40 caracteres, una mayúscula y un número.</div>
                                         <!-- Cierra el campo de la nueva contraseña. -->
                                         </div>
 
@@ -345,7 +369,13 @@
                                             <!-- Permite enfocar la confirmación al hacer clic en el texto. -->
                                             <div class="texto_campo_recuperacion" data-for="recuperacion_confirmar_password">Confirmar contraseña</div>
                                             <!-- Permite confirmar la contraseña, inicialmente deshabilitado. -->
-                                            <input id="recuperacion_confirmar_password" name="confirmar_password" type="password" minlength="8" autocomplete="new-password" disabled>
+                                            <div class="contenedor_password_recuperacion">
+                                                <input id="recuperacion_confirmar_password" name="confirmar_password" type="password" minlength="8" maxlength="40" autocomplete="new-password" disabled>
+                                                <button class="boton_ver_contrasena_recuperacion" id="boton_ver_recuperacion_confirmar_password" type="button" aria-label="Mostrar contraseña" aria-pressed="false" title="Mostrar contraseña">
+                                                    <svg class="icono_ojo_contrasena icono_ojo_visible" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+                                                    <svg class="icono_ojo_contrasena icono_ojo_oculto" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 3 18 18M10.6 5.2A10.8 10.8 0 0 1 12 5c6.4 0 10 7 10 7a15.7 15.7 0 0 1-3.1 4.1M6.2 6.2C3.5 8 2 12 2 12s3.6 7 10 7c1.5 0 2.8-.4 4-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>
+                                                </button>
+                                            </div>
                                         <!-- Cierra el campo de confirmación de contraseña. -->
                                         </div>
 

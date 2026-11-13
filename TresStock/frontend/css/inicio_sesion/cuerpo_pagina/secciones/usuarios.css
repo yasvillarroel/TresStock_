@@ -851,6 +851,8 @@
         box-sizing: border-box;
     }
 
+    .ayuda_politica_contrasena_usuario { margin-top: 5px; color: #71818a; font: 11px/1.4 Arial, sans-serif; }
+
     /* clase para organizar el campo confirmar contraseña */
     .campo_confirmar_password_usuario {
         display: flex;

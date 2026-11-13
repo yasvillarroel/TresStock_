@@ -9,6 +9,7 @@ const { OPCIONES_COOKIE_SESION } = require('../../utilidades/cookies');
 
 // importa las funciones de csrftoken
 const { generateCsrfToken } = require('../../utilidades/csrf');
+const {contrasenaCumplePolitica, MENSAJE_POLITICA_CONTRASENA} = require('../../utilidades/validacion_contrasena');
 
 // inicia sesion
 const iniciarSesion = async (req, res) => {
@@ -16,7 +17,8 @@ const iniciarSesion = async (req, res) => {
     try {
 
         // obtiene los datos del formulario
-        const { email, password } = req.body;
+        const email = String(req.body.email ?? '').trim().toLowerCase();
+        const password = String(req.body.password ?? '');
 
         // inicia sesion
         const usuario = await autenticacionServicio.iniciarSesion(
@@ -129,16 +131,16 @@ const registrarCuenta = async (req, res) => {
         const password = String(req.body.password ?? '');
         const confirmarPassword = String(req.body.confirmar_password ?? '');
 
-        if (nombre.length < 2 || nombre.length > 100) {
-            return res.status(400).json({ mensaje: 'El nombre debe tener entre 2 y 100 caracteres.' });
+        if (nombre.length < 2 || nombre.length > 50) {
+            return res.status(400).json({ mensaje: 'El nombre debe tener entre 2 y 50 caracteres.' });
         }
 
-        if (email.length > 150 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        if (email.length > 90 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
             return res.status(400).json({ mensaje: 'El correo electrónico no es válido.' });
         }
 
-        if (password.length < 8) {
-            return res.status(400).json({ mensaje: 'La contraseña debe tener al menos 8 caracteres.' });
+        if (!contrasenaCumplePolitica(password)) {
+            return res.status(400).json({ mensaje: MENSAJE_POLITICA_CONTRASENA });
         }
 
         if (password !== confirmarPassword) {
@@ -164,16 +166,16 @@ const iniciarRegistro = async (req, res) => {
         const password = String(req.body.password ?? '');
         const confirmarPassword = String(req.body.confirmar_password ?? '');
 
-        if (nombre.length < 2 || nombre.length > 100) {
-            return res.status(400).json({ mensaje: 'El nombre debe tener entre 2 y 100 caracteres.' });
+        if (nombre.length < 2 || nombre.length > 50) {
+            return res.status(400).json({ mensaje: 'El nombre debe tener entre 2 y 50 caracteres.' });
         }
 
-        if (email.length > 150 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        if (email.length > 90 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
             return res.status(400).json({ mensaje: 'El correo electrónico no es válido.' });
         }
 
-        if (password.length < 8) {
-            return res.status(400).json({ mensaje: 'La contraseña debe tener al menos 8 caracteres.' });
+        if (!contrasenaCumplePolitica(password)) {
+            return res.status(400).json({ mensaje: MENSAJE_POLITICA_CONTRASENA });
         }
 
         if (password !== confirmarPassword) {
@@ -220,7 +222,7 @@ const verificarCodigoRegistro = async (req, res) => {
 const solicitarRecuperacion = async (req, res) => {
     const email = String(req.body.email ?? '').trim().toLowerCase();
 
-    if (email.length > 150 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (email.length > 90 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         return res.status(400).json({ mensaje: 'Ingresa un correo electrónico válido.' });
     }
 
@@ -248,7 +250,7 @@ const confirmarRecuperacion = async (req, res) => {
     const password = String(req.body.password ?? '');
     const confirmarPassword = String(req.body.confirmar_password ?? '');
 
-    if (email.length > 150 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (email.length > 90 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         return res.status(400).json({ mensaje: 'El correo electrónico no es válido.' });
     }
 
@@ -256,8 +258,8 @@ const confirmarRecuperacion = async (req, res) => {
         return res.status(400).json({ mensaje: 'El código no es válido o venció.' });
     }
 
-    if (password.length < 8) {
-        return res.status(400).json({ mensaje: 'La contraseña debe tener al menos 8 caracteres.' });
+    if (!contrasenaCumplePolitica(password)) {
+        return res.status(400).json({ mensaje: MENSAJE_POLITICA_CONTRASENA });
     }
 
     if (password !== confirmarPassword) {

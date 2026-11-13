@@ -299,6 +299,43 @@
         box-sizing: border-box; /* Incluye el relleno en el tamaño total. */
     }
 
+    /* Esta clase pertenece al botón que alterna la visibilidad de la contraseña. */
+    .boton_ver_contrasena_inicio_sesion {
+        width: 44px; /* Reserva un espacio compacto para el icono. */
+        height: 100%; /* Ocupa el alto del campo para facilitar el clic. */
+        display: flex; /* Centra el icono dentro del botón. */
+        align-items: center; /* Centra el icono verticalmente. */
+        justify-content: center; /* Centra el icono horizontalmente. */
+        flex-shrink: 0; /* Evita que el botón se comprima junto al campo. */
+        padding: 0; /* Mantiene el tamaño del área del icono. */
+        border: 0; /* Quita el borde predeterminado del botón. */
+        border-radius: 0 7px 7px 0; /* Conserva el redondeo del extremo derecho. */
+        background: transparent; /* Mantiene el fondo del campo. */
+        color: #0f858d; /* Destaca la acción con el color de la interfaz. */
+        cursor: pointer; /* Indica que el control es interactivo. */
+    }
+
+    .boton_ver_contrasena_inicio_sesion:hover { background: #effafb; /* Resalta el botón al pasar el cursor. */ }
+    .boton_ver_contrasena_inicio_sesion:focus-visible { outline: 2px solid #159ba3; outline-offset: -3px; /* Muestra el foco del teclado dentro del campo. */ }
+    .contenedor_password_registro { position: relative; width: 100%; }
+    .contenedor_password_registro input { padding-right: 48px; }
+    .boton_ver_contrasena_registro { position: absolute; top: 3px; right: 3px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 5px; background: transparent; cursor: pointer; }
+    .boton_ver_contrasena_registro:hover { background: #effafb; }
+    .boton_ver_contrasena_registro:focus-visible { outline: 2px solid #159ba3; outline-offset: -2px; }
+    .contenedor_password_recuperacion { position: relative; width: 100%; }
+    .contenedor_password_recuperacion input { padding-right: 48px; }
+    .boton_ver_contrasena_recuperacion { position: absolute; top: 3px; right: 3px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 5px; background: transparent; cursor: pointer; }
+    .boton_ver_contrasena_recuperacion:hover { background: #effafb; }
+    .boton_ver_contrasena_recuperacion:focus-visible { outline: 2px solid #159ba3; outline-offset: -2px; }
+    .icono_ojo_contrasena { width: 20px; height: 20px; fill: none; stroke: #0f858d; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .icono_ojo_oculto { display: none; }
+    .boton_ver_contrasena_inicio_sesion.mostrando .icono_ojo_visible,
+    .boton_ver_contrasena_registro.mostrando .icono_ojo_visible,
+    .boton_ver_contrasena_recuperacion.mostrando .icono_ojo_visible { display: none; }
+    .boton_ver_contrasena_inicio_sesion.mostrando .icono_ojo_oculto,
+    .boton_ver_contrasena_registro.mostrando .icono_ojo_oculto,
+    .boton_ver_contrasena_recuperacion.mostrando .icono_ojo_oculto { display: block; }
+
 /* TITULO 8 MENSAJE Y RECUPERAR CONTRASEÑA */
 
     /* Esta clase pertenece al contenedor del mensaje y el enlace de recuperación. */
@@ -530,6 +567,8 @@
         outline: 2px solid rgba(21, 155, 163, 0.25); /* Muestra un contorno turquesa suave. */
         border-color: #159ba3; /* Cambia el borde a turquesa. */
     }
+
+    .ayuda_politica_contrasena { color: #71818a; font: 11px/1.4 Arial, sans-serif; margin-top: 5px; }
 
     /* Esta regla pertenece al espacio de mensajes del registro. */
     #mensaje_registro {

@@ -8,6 +8,19 @@
         <div class="encabezado_tabla_vencimientos">
             <div class="titulo_tabla_vencimientos">Productos con alertas de stock</div>
         </div>
+        <div class="filtros_alertas_vencimientos filtros_alertas_stock">
+            <input id="busqueda_alertas_inventario" type="search" placeholder="Buscar producto o código" aria-label="Buscar alertas de inventario por producto o código">
+            <select id="filtro_estado_alertas_inventario" aria-label="Filtrar alertas por estado">
+                <option value="">Todos los estados</option>
+                <option value="STOCK NEGATIVO">Stock negativo</option>
+                <option value="SIN STOCK">Sin stock</option>
+                <option value="STOCK BAJO">Stock bajo</option>
+            </select>
+            <select id="filtro_familia_alertas_inventario" aria-label="Filtrar alertas por familia">
+                <option value="">Todas las familias</option>
+            </select>
+            <button class="boton_limpiar_filtros_alertas" id="limpiar_filtros_alertas_inventario" type="button">Limpiar filtros</button>
+        </div>
         <div class="tabla_vencimientos_desplazable">
             <div class="tabla_vencimientos tabla_alertas_stock" role="table" aria-label="Productos con alertas de stock">
                 <div class="fila_encabezado_vencimientos fila_stock_alertas" role="row">
@@ -47,6 +60,30 @@
         <div class="contenedor_tabla_vencimientos">
             <div class="encabezado_tabla_vencimientos">
                 <div class="titulo_tabla_vencimientos" id="titulo_tabla_vencimientos">Lotes activos</div>
+            </div>
+            <div class="filtros_alertas_vencimientos filtros_lista_vencimientos">
+                <input id="busqueda_vencimientos" type="search" placeholder="Producto, código, correo o motivo" aria-label="Buscar lotes por producto, código, correo o motivo">
+                <select id="filtro_estado_vencimientos" aria-label="Filtrar lotes por estado">
+                    <option value="">Todos los estados</option>
+                    <option value="VENCIMIENTO CRÍTICO">Vencimiento crítico</option>
+                    <option value="VENCIMIENTO EN RIESGO">Vencimiento en riesgo</option>
+                    <option value="PRÓXIMO A VENCER">Próximo a vencer</option>
+                    <option value="VENCIDO">Vencido</option>
+                    <option value="AGOTADO">Agotado</option>
+                    <option value="VENDIDO">Vendido</option>
+                    <option value="ELIMINADO">Eliminado</option>
+                    <option value="MERMA">Merma</option>
+                    <option value="OTRO">Otro</option>
+                </select>
+                <select id="orden_vencimientos" aria-label="Ordenar vencimientos por fecha">
+                    <option value="asc">Fecha ascendente · más próximos primero</option>
+                    <option value="desc">Fecha descendente · más lejanos primero</option>
+                </select>
+                <div class="filtro_fechas_vencimientos">
+                    <div class="campo_filtro_fecha_vencimiento"><div>Vencimiento desde</div><input id="fecha_desde_vencimientos" type="date" aria-label="Vencimiento desde"></div>
+                    <div class="campo_filtro_fecha_vencimiento"><div>Vencimiento hasta</div><input id="fecha_hasta_vencimientos" type="date" aria-label="Vencimiento hasta"></div>
+                </div>
+                <button class="boton_limpiar_filtros_alertas" id="limpiar_filtros_vencimientos" type="button">Limpiar filtros</button>
             </div>
             <div class="tabla_vencimientos_desplazable">
                 <div class="tabla_vencimientos tabla_lotes_vencimiento" role="table" aria-label="Lotes con vencimiento">

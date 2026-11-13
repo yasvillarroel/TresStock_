@@ -5,7 +5,13 @@ const obtenerLotesVencimiento = async (req, res) => {
         const estado = ['activos', 'inactivos'].includes(req.query.estado)
             ? req.query.estado
             : 'activos';
-        const resultado = await alertasServicio.obtenerLotesVencimiento(estado, req.query.pagina);
+        const resultado = await alertasServicio.obtenerLotesVencimiento(estado, req.query.pagina, {
+            busqueda: req.query.busqueda,
+            estado: req.query.filtro_estado,
+            orden: req.query.orden,
+            fecha_desde: req.query.fecha_desde,
+            fecha_hasta: req.query.fecha_hasta
+        });
         return res.json(resultado);
     } catch (error) {
         console.error('Error al obtener lotes de vencimiento:', error);

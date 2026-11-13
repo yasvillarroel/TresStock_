@@ -1,7 +1,7 @@
 // importa el servicio de usuarios
 const usuariosServicio = require('../../servicios/usuarios/usuarios_servicio');
+const {contrasenaCumplePolitica, MENSAJE_POLITICA_CONTRASENA} = require('../../utilidades/validacion_contrasena');
 const EXPRESION_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const LARGO_MINIMO_PASSWORD = 8;
 
 // TITULO 1 VALIDACIONES Y RESPUESTAS
 
@@ -28,11 +28,11 @@ function validarCamposUsuario(body, nuevo = false) {
     const confirmar = body.confirmar_password === undefined ? '' : String(body.confirmar_password);
     const rol = typeof body.rol === 'string' ? body.rol.trim() : null;
     const id_rol = body.id_rol;
-    if (nombre.length < 2 || nombre.length > 100) throw errorSolicitud('El nombre debe tener entre 2 y 100 caracteres.');
-    if (email.length > 150 || !EXPRESION_EMAIL.test(email)) throw errorSolicitud('El correo electrónico no es válido.');
+    if (nombre.length < 2 || nombre.length > 50) throw errorSolicitud('El nombre debe tener entre 2 y 50 caracteres.');
+    if (email.length > 90 || !EXPRESION_EMAIL.test(email)) throw errorSolicitud('El correo electrónico no es válido.');
     if (nuevo || password || confirmar) {
-        if (password.length < LARGO_MINIMO_PASSWORD) {
-            throw errorSolicitud('La contraseña debe tener al menos 8 caracteres.');
+        if (!contrasenaCumplePolitica(password)) {
+            throw errorSolicitud(MENSAJE_POLITICA_CONTRASENA);
         }
         if (body.confirmar_password !== undefined && password !== confirmar) {
             throw errorSolicitud('Las contraseñas no coinciden.');
@@ -134,7 +134,7 @@ const cambiarEstadoUsuario = async (req, res) => {
 const cambiarContrasena = async (req, res) => {
     try {
         const password = String(req.body.password ?? '');
-        if (password.length < LARGO_MINIMO_PASSWORD) throw errorSolicitud('La contraseña debe tener al menos 8 caracteres.');
+        if (!contrasenaCumplePolitica(password)) throw errorSolicitud(MENSAJE_POLITICA_CONTRASENA);
         const usuario = await usuariosServicio.cambiarContrasena(req.params.id, password);
         if (!usuario) return res.status(404).json({ mensaje: 'El usuario no existe.' });
         res.json(usuario);

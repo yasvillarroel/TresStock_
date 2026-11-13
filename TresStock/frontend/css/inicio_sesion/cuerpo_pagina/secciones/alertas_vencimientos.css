@@ -90,6 +90,38 @@
     font: 700 14px Arial, sans-serif;
 }
 
+.filtros_alertas_vencimientos {
+    display: grid;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    border-bottom: 1px solid #e4eaed;
+    box-sizing: border-box;
+}
+
+.filtros_alertas_stock { grid-template-columns: minmax(180px, 2fr) minmax(150px, 1fr) minmax(150px, 1fr) auto; }
+.filtros_lista_vencimientos { grid-template-columns: minmax(190px, 2fr) minmax(145px, 1fr) minmax(205px, 1.5fr) minmax(240px, 1.5fr) auto; }
+.filtros_alertas_vencimientos input,
+.filtros_alertas_vencimientos select {
+    width: 100%;
+    min-width: 0;
+    height: 38px;
+    padding: 8px 10px;
+    border: 1px solid #cbd9e0;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #405762;
+    font: 12px Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+.filtros_alertas_vencimientos input:focus,
+.filtros_alertas_vencimientos select:focus { outline: 2px solid #a6e0e2; border-color: #159ba3; }
+.filtro_fechas_vencimientos { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+.campo_filtro_fecha_vencimiento { min-width: 0; display: flex; flex-direction: column; gap: 4px; color: #71818a; font: 10px Arial, sans-serif; }
+.boton_limpiar_filtros_alertas { min-height: 38px; padding: 8px 11px; border: 1px solid #cbd9e0; border-radius: 6px; background: #ffffff; color: #435b69; font: 700 11px Arial, sans-serif; white-space: nowrap; cursor: pointer; }
+.boton_limpiar_filtros_alertas:hover { border-color: #159ba3; background: #effafb; color: #0f858d; }
+
 .tabla_vencimientos_desplazable {
     width: 100%;
     overflow-x: auto;
@@ -350,4 +382,6 @@
     .paginador_vencimientos { align-items: flex-start; flex-direction: column; }
     .controles_paginador_vencimientos { width: 100%; justify-content: center; flex-wrap: wrap; }
     .contenido_modal_editar_vencimiento { padding: 22px 18px; }
+    .filtros_alertas_stock,
+    .filtros_lista_vencimientos { grid-template-columns: minmax(0, 1fr); }
 }

@@ -2,8 +2,11 @@ const bcrypt = require('bcrypt');
 const pool = require('../../configuracion/base_datos');
 const nodemailer = require('nodemailer');
 const { randomInt, createHmac, timingSafeEqual } = require('node:crypto');
+const {contrasenaCumplePolitica, MENSAJE_POLITICA_CONTRASENA} = require('../../utilidades/validacion_contrasena');
+const normalizarCorreo = correo => String(correo ?? '').trim().toLowerCase();
 
 const iniciarSesion = async (email, password, ip) => {
+    email = normalizarCorreo(email);
     await comprobarBloqueoInicioSesion(ip);
 
     const resultado = await pool.query(
@@ -137,6 +140,8 @@ const hashearCodigoRegistro = (codigo) => {
 };
 
 const solicitarCodigoRegistro = async (nombre, email, password, ip) => {
+    email = normalizarCorreo(email);
+    if (!contrasenaCumplePolitica(password)) throw crearErrorRegistro(MENSAJE_POLITICA_CONTRASENA, 400);
     await comprobarBloqueoIp(ip);
     await comprobarBloqueoReenvioIp(ip);
 
@@ -216,6 +221,7 @@ const solicitarCodigoRegistro = async (nombre, email, password, ip) => {
 };
 
 const verificarCodigoRegistro = async (email, codigo, ip) => {
+    email = normalizarCorreo(email);
     await comprobarBloqueoIp(ip);
 
     const cliente = await pool.connect();
@@ -514,6 +520,7 @@ const registrarFalloCodigoRecuperacionIp = async (cliente, ip) => {
 };
 
 const solicitarRecuperacionContrasena = async (email, ip) => {
+    email = normalizarCorreo(email);
     await comprobarBloqueoRecuperacionIp(ip, 'reenvio');
     await registrarSolicitudRecuperacionIp(ip);
 
@@ -594,6 +601,8 @@ const solicitarRecuperacionContrasena = async (email, ip) => {
 };
 
 const confirmarRecuperacionContrasena = async (email, codigo, password, ip) => {
+    email = normalizarCorreo(email);
+    if (!contrasenaCumplePolitica(password)) throw crearErrorRegistro(MENSAJE_POLITICA_CONTRASENA, 400);
     await comprobarBloqueoRecuperacionIp(ip, 'codigo');
 
     const cliente = await pool.connect();

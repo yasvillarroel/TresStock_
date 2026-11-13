@@ -5,12 +5,22 @@ async function inicializarAlertasVencimientos() {
     const numerosStock = document.getElementById('numeros_alertas_inventario');
     const anteriorStock = document.getElementById('anterior_alertas_inventario');
     const siguienteStock = document.getElementById('siguiente_alertas_inventario');
+    const busquedaStock = document.getElementById('busqueda_alertas_inventario');
+    const estadoStock = document.getElementById('filtro_estado_alertas_inventario');
+    const familiaStock = document.getElementById('filtro_familia_alertas_inventario');
+    const limpiarStock = document.getElementById('limpiar_filtros_alertas_inventario');
     const filas = document.getElementById('filas_vencimientos');
     const informacion = document.getElementById('informacion_paginador_vencimientos');
     const numeros = document.getElementById('numeros_paginas_vencimientos');
     const botonAnterior = document.getElementById('anterior_vencimientos');
     const botonSiguiente = document.getElementById('siguiente_vencimientos');
     const titulo = document.getElementById('titulo_tabla_vencimientos');
+    const busquedaVencimientos = document.getElementById('busqueda_vencimientos');
+    const estadoVencimientos = document.getElementById('filtro_estado_vencimientos');
+    const ordenVencimientos = document.getElementById('orden_vencimientos');
+    const fechaDesdeVencimientos = document.getElementById('fecha_desde_vencimientos');
+    const fechaHastaVencimientos = document.getElementById('fecha_hasta_vencimientos');
+    const limpiarVencimientos = document.getElementById('limpiar_filtros_vencimientos');
     const pestañas = Array.from(document.querySelectorAll('.pestana_vencimientos'));
     const modalEditar = document.getElementById('modal_editar_vencimiento');
     const fechaEditar = document.getElementById('fecha_editar_vencimiento');
@@ -39,6 +49,9 @@ async function inicializarAlertasVencimientos() {
     let idLoteEditado = null;
     let idLoteBaja = null;
     let cantidadLoteDisponible = 0;
+    let temporizadorBusquedaVencimientos = null;
+
+    const normalizarTexto = texto => String(texto || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
 
     const fechaLocalHoy = () => {
         const hoy = new Date();
@@ -280,8 +293,22 @@ async function inicializarAlertasVencimientos() {
 
     const renderizarStock = () => {
         filasStock.replaceChildren();
-        if (!alertasStock.length) {
-            mostrarMensajeTabla(filasStock, 'No hay productos con alertas de stock.');
+        const busqueda = normalizarTexto(busquedaStock.value);
+        const estadoSeleccionado = estadoStock.value;
+        const familiaSeleccionada = familiaStock.value;
+        const alertasFiltradas = alertasStock.filter(producto => {
+            const textoProducto = normalizarTexto(`${producto.descripcion || ''} ${producto.codigo || ''}`);
+            return (!busqueda || textoProducto.includes(busqueda)) &&
+                (!estadoSeleccionado || producto.estado === estadoSeleccionado) &&
+                (!familiaSeleccionada || String(producto.familia || '') === familiaSeleccionada);
+        });
+        totalPaginasStock = Math.max(1, Math.ceil(alertasFiltradas.length / filasPorPagina));
+        paginaStock = Math.min(paginaStock, totalPaginasStock);
+        if (!alertasFiltradas.length) {
+            const mensaje = alertasStock.length
+                ? 'Ningún producto coincide con los filtros.'
+                : 'No hay productos con alertas de stock.';
+            mostrarMensajeTabla(filasStock, mensaje);
             informacionStock.textContent = 'Mostrando 0 productos';
             actualizarEstadoControl(anteriorStock, true);
             actualizarEstadoControl(siguienteStock, true);
@@ -290,7 +317,7 @@ async function inicializarAlertasVencimientos() {
         }
 
         const inicio = (paginaStock - 1) * filasPorPagina;
-        const paginaProductos = alertasStock.slice(inicio, inicio + filasPorPagina);
+        const paginaProductos = alertasFiltradas.slice(inicio, inicio + filasPorPagina);
         paginaProductos.forEach(producto => {
             const valores = [
                 producto.descripcion || '—',
@@ -304,8 +331,8 @@ async function inicializarAlertasVencimientos() {
             filasStock.appendChild(crearFila(valores, 'fila_stock_alertas', clase));
         });
 
-        const fin = Math.min(paginaStock * filasPorPagina, alertasStock.length);
-        informacionStock.textContent = `Mostrando ${inicio + 1} a ${fin} de ${alertasStock.length} productos`;
+        const fin = Math.min(paginaStock * filasPorPagina, alertasFiltradas.length);
+        informacionStock.textContent = `Mostrando ${inicio + 1} a ${fin} de ${alertasFiltradas.length} productos`;
         actualizarEstadoControl(anteriorStock, paginaStock <= 1);
         actualizarEstadoControl(siguienteStock, paginaStock >= totalPaginasStock);
         renderizarNumeros(numerosStock, paginaStock, totalPaginasStock, pagina => {
@@ -323,8 +350,12 @@ async function inicializarAlertasVencimientos() {
             alertasStock = (Array.isArray(productos) ? productos : [])
                 .filter(producto => Object.prototype.hasOwnProperty.call(prioridad, producto.estado))
                 .sort((a, b) => prioridad[a.estado] - prioridad[b.estado] || String(a.descripcion).localeCompare(String(b.descripcion), 'es'));
-            totalPaginasStock = Math.max(1, Math.ceil(alertasStock.length / filasPorPagina));
-            paginaStock = Math.min(paginaStock, totalPaginasStock);
+            const familiaActual = familiaStock.value;
+            familiaStock.replaceChildren(new Option('Todas las familias', ''));
+            [...new Set(alertasStock.map(producto => String(producto.familia || '').trim()).filter(Boolean))]
+                .sort((a, b) => a.localeCompare(b, 'es'))
+                .forEach(familia => familiaStock.add(new Option(familia, familia)));
+            familiaStock.value = familiaActual;
             renderizarStock();
         } catch (error) {
             mostrarMensajeTabla(filasStock, error.message || 'No se pudieron cargar las alertas de inventario.');
@@ -345,6 +376,11 @@ async function inicializarAlertasVencimientos() {
         mostrarMensajeTabla(filas, 'Cargando vencimientos…');
         try {
             const parametros = new URLSearchParams({estado: estadoActual, pagina: String(paginaActual)});
+            if (busquedaVencimientos.value.trim()) parametros.set('busqueda', busquedaVencimientos.value.trim());
+            if (estadoVencimientos.value) parametros.set('filtro_estado', estadoVencimientos.value);
+            parametros.set('orden', ordenVencimientos.value);
+            if (fechaDesdeVencimientos.value) parametros.set('fecha_desde', fechaDesdeVencimientos.value);
+            if (fechaHastaVencimientos.value) parametros.set('fecha_hasta', fechaHastaVencimientos.value);
             const respuesta = await fetchConCsrf(`${URL_API}/api/alertas/vencimientos?${parametros}`, {method: 'GET', credentials: 'include'});
             const datos = await respuesta.json();
             if (!respuesta.ok) throw new Error(datos.mensaje || 'No se pudo cargar el listado de vencimientos.');
@@ -424,6 +460,7 @@ async function inicializarAlertasVencimientos() {
     const cambiarPestana = pestaña => {
         estadoActual = pestaña.dataset.estado;
         paginaActual = 1;
+        estadoVencimientos.value = '';
         pestañas.forEach(opcion => {
             const activa = opcion === pestaña;
             opcion.classList.toggle('pestana_vencimientos_activa', activa);
@@ -433,6 +470,44 @@ async function inicializarAlertasVencimientos() {
         titulo.textContent = estadoActual === 'activos' ? 'Lotes activos' : 'Lotes inactivos';
         cargarLotes();
     };
+
+    const aplicarFiltrosStock = () => {
+        paginaStock = 1;
+        renderizarStock();
+    };
+
+    busquedaStock.addEventListener('input', aplicarFiltrosStock);
+    estadoStock.addEventListener('change', aplicarFiltrosStock);
+    familiaStock.addEventListener('change', aplicarFiltrosStock);
+    limpiarStock.addEventListener('click', () => {
+        busquedaStock.value = '';
+        estadoStock.value = '';
+        familiaStock.value = '';
+        aplicarFiltrosStock();
+    });
+
+    const aplicarFiltrosVencimientos = () => {
+        paginaActual = 1;
+        cargarLotes();
+    };
+    const buscarVencimientosConPausa = () => {
+        clearTimeout(temporizadorBusquedaVencimientos);
+        temporizadorBusquedaVencimientos = setTimeout(aplicarFiltrosVencimientos, 250);
+    };
+    busquedaVencimientos.addEventListener('input', buscarVencimientosConPausa);
+    estadoVencimientos.addEventListener('change', aplicarFiltrosVencimientos);
+    ordenVencimientos.addEventListener('change', aplicarFiltrosVencimientos);
+    fechaDesdeVencimientos.addEventListener('change', aplicarFiltrosVencimientos);
+    fechaHastaVencimientos.addEventListener('change', aplicarFiltrosVencimientos);
+    limpiarVencimientos.addEventListener('click', () => {
+        clearTimeout(temporizadorBusquedaVencimientos);
+        busquedaVencimientos.value = '';
+        estadoVencimientos.value = '';
+        ordenVencimientos.value = 'asc';
+        fechaDesdeVencimientos.value = '';
+        fechaHastaVencimientos.value = '';
+        aplicarFiltrosVencimientos();
+    });
 
     pestañas.forEach(pestaña => {
         configurarDivInteractivo(pestaña, () => cambiarPestana(pestaña));

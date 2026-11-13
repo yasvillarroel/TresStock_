@@ -1,6 +1,7 @@
 // importa el pool de conexiones con PostgreSQL
 const pool = require('../../configuracion/base_datos');
 const bcrypt = require('bcrypt');
+const {contrasenaCumplePolitica, MENSAJE_POLITICA_CONTRASENA} = require('../../utilidades/validacion_contrasena');
 
 // TITULO 1 FUNCIONES AUXILIARES
 
@@ -61,6 +62,8 @@ async function consultarRol(cliente, idRol) {
 // TITULO 2 CREAR Y CONSULTAR USUARIOS
 
 const crearUsuario = async (nombre, email, password, id_rol) => {
+    if (!contrasenaCumplePolitica(password)) throw errorUsuario(MENSAJE_POLITICA_CONTRASENA);
+    email = String(email ?? '').trim().toLowerCase();
     const password_hash = await bcrypt.hash(password, 10);
     const resultado = await pool.query(
         `INSERT INTO base_datos.usuarios (nombre, email, password_hash, id_rol)
@@ -104,6 +107,8 @@ const obtenerIdRol = async nombre => {
 
 // el estado activo no se edita aquí; se cambia exclusivamente mediante /estado
 const actualizarUsuario = async (id, nombre, email, password, idRol, idSesion = null) => {
+    if (password && !contrasenaCumplePolitica(password)) throw errorUsuario(MENSAJE_POLITICA_CONTRASENA);
+    email = String(email ?? '').trim().toLowerCase();
     const cliente = await pool.connect();
     try {
         await cliente.query('BEGIN');
@@ -174,6 +179,7 @@ const cambiarEstadoUsuario = async (id, activo, idSesion = null) => {
 // TITULO 5 CAMBIO DIRECTO DE CONTRASEÑA Y ROL (COMPATIBILIDAD)
 
 const cambiarContrasena = async (id, password) => {
+    if (!contrasenaCumplePolitica(password)) throw errorUsuario(MENSAJE_POLITICA_CONTRASENA);
     const hash = await bcrypt.hash(password, 10);
     const resultado = await pool.query(
         `UPDATE base_datos.usuarios SET password_hash = $1 WHERE id_usuario = $2

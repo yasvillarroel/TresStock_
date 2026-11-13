@@ -24,11 +24,7 @@
 
 
                 <!-- opción para importar ventas -->
-                <div
-                    class="boton_importar_ventas"
-                    id="boton_importar_ventas"
-                    onclick="abrirImportacionVentas()"
-                >
+                <div class="boton_importar_ventas" id="boton_importar_ventas" onclick="abrirImportacionVentas()">
 
                     <div class="icono_importar_ventas">
                         ↑
@@ -53,11 +49,7 @@
 
                     <div class="icono_total_ventas">
                         <!-- icono de total de ventas -->
-                        <img
-                            src="./imagenes/inicio_sesion/cuerpo_pagina/secciones/receipt-text.svg"
-                            alt="Total ventas"
-                            class="imagen_icono_indicador_ventas"
-                        >
+                        <img src="./imagenes/inicio_sesion/cuerpo_pagina/secciones/receipt-text.svg" alt="Total ventas" class="imagen_icono_indicador_ventas">
                     </div>
 
                     <div class="contenido_total_ventas">
@@ -66,10 +58,7 @@
                             Total ventas
                         </div>
 
-                        <div
-                            class="valor_total_ventas"
-                            id="valor_total_ventas"
-                        >
+                        <div class="valor_total_ventas" id="valor_total_ventas">
                             0
                         </div>
 
@@ -83,11 +72,7 @@
 
                     <div class="icono_ventas_dia">
                         <!-- icono de ventas del dia -->
-                        <img
-                            src="./imagenes/inicio_sesion/cuerpo_pagina/secciones/calendar-check.svg"
-                            alt="Ventas del día"
-                            class="imagen_icono_indicador_ventas"
-                        >
+                        <img src="./imagenes/inicio_sesion/cuerpo_pagina/secciones/calendar-check.svg" alt="Ventas del día" class="imagen_icono_indicador_ventas">
                     </div>
 
                     <div class="contenido_ventas_dia">
@@ -96,10 +81,7 @@
                             Ventas de la última jornada registrada
                         </div>
 
-                        <div
-                            class="valor_ventas_dia"
-                            id="valor_ventas_dia"
-                        >
+                        <div class="valor_ventas_dia" id="valor_ventas_dia">
                             0
                         </div>
 
@@ -113,11 +95,7 @@
 
                     <div class="icono_total_vendido">
                         <!-- icono de total vendido -->
-                        <img
-                            src="./imagenes/inicio_sesion/cuerpo_pagina/secciones/wallet.svg"
-                            alt="Total vendido"
-                            class="imagen_icono_indicador_ventas"
-                        >
+                        <img src="./imagenes/inicio_sesion/cuerpo_pagina/secciones/wallet.svg" alt="Total vendido" class="imagen_icono_indicador_ventas">
                     </div>
 
                     <div class="contenido_total_vendido">
@@ -126,10 +104,7 @@
                             Total vendido
                         </div>
 
-                        <div
-                            class="valor_total_vendido"
-                            id="valor_total_vendido"
-                        >
+                        <div class="valor_total_vendido" id="valor_total_vendido">
                             $0
                         </div>
 
@@ -152,12 +127,7 @@
                         Buscar venta
                     </div>
 
-                    <input
-                        class="input_busqueda_ventas"
-                        id="input_busqueda_ventas"
-                        type="text"
-                        placeholder="Número de boleta"
-                    >
+                    <input class="input_busqueda_ventas" id="input_busqueda_ventas" type="text" placeholder="Número de boleta">
 
                 </div>
 
@@ -169,11 +139,7 @@
                         Desde
                     </div>
 
-                    <input
-                        class="input_fecha_desde_ventas"
-                        id="input_fecha_desde_ventas"
-                        type="date"
-                    >
+                    <input class="input_fecha_desde_ventas" id="input_fecha_desde_ventas" type="date">
 
                 </div>
 
@@ -185,11 +151,7 @@
                         Hasta
                     </div>
 
-                    <input
-                        class="input_fecha_hasta_ventas"
-                        id="input_fecha_hasta_ventas"
-                        type="date"
-                    >
+                    <input class="input_fecha_hasta_ventas" id="input_fecha_hasta_ventas" type="date">
 
                 </div>
 
@@ -203,34 +165,17 @@
 
                     <div class="selector_orden_ventas" id="selector_orden_ventas">
 
-                        <button
-                            class="boton_orden_ventas"
-                            id="boton_orden_ventas"
-                            type="button"
-                            aria-haspopup="listbox"
-                            aria-expanded="false"
-                            aria-controls="opciones_orden_ventas"
-                        >
+                        <button class="boton_orden_ventas" id="boton_orden_ventas" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="opciones_orden_ventas">
                             <span id="texto_orden_ventas">Más recientes</span>
                             <span class="flecha_orden_ventas" aria-hidden="true"></span>
                         </button>
 
-                        <div
-                            class="opciones_orden_ventas"
-                            id="opciones_orden_ventas"
-                            role="listbox"
-                            aria-labelledby="etiqueta_orden_ventas"
-                            hidden
-                        >
-                            <button class="opcion_orden_ventas opcion_orden_ventas_seleccionada"
-                                type="button" role="option" aria-selected="true"
-                                data-valor="recientes">Más recientes</button>
+                        <div class="opciones_orden_ventas" id="opciones_orden_ventas" role="listbox" aria-labelledby="etiqueta_orden_ventas" hidden>
+                            <button class="opcion_orden_ventas opcion_orden_ventas_seleccionada" type="button" role="option" aria-selected="true" data-valor="recientes">Más recientes</button>
 
-                            <button class="opcion_orden_ventas" type="button" role="option"
-                                aria-selected="false" data-valor="monto_mayor">Mayor monto</button>
+                            <button class="opcion_orden_ventas" type="button" role="option" aria-selected="false" data-valor="monto_mayor">Mayor monto</button>
 
-                            <button class="opcion_orden_ventas" type="button" role="option"
-                                aria-selected="false" data-valor="monto_menor">Menor monto</button>
+                            <button class="opcion_orden_ventas" type="button" role="option" aria-selected="false" data-valor="monto_menor">Menor monto</button>
                         </div>
 
                     </div>
@@ -241,11 +186,7 @@
                 <!-- opción para restablecer la búsqueda, las fechas y el orden -->
                 <div class="contenedor_limpiar_filtros_ventas">
 
-                    <button
-                        class="boton_limpiar_filtros_ventas"
-                        id="boton_limpiar_filtros_ventas"
-                        type="button"
-                    >
+                    <button class="boton_limpiar_filtros_ventas" id="boton_limpiar_filtros_ventas" type="button">
                         Limpiar filtros
                     </button>
 
@@ -253,13 +194,7 @@
 
 
                 <!-- mensaje cuando las fechas seleccionadas no forman un rango valido -->
-                <div
-                    class="mensaje_fechas_ventas"
-                    id="mensaje_fechas_ventas"
-                    role="status"
-                    aria-live="polite"
-                    hidden
-                >
+                <div class="mensaje_fechas_ventas" id="mensaje_fechas_ventas" role="status" aria-live="polite" hidden>
                     La fecha "Desde" no puede ser posterior a "Hasta".
                 </div>
 
@@ -311,17 +246,11 @@
                     </thead>
 
 
-                    <tbody
-                        class="cuerpo_tabla_ventas"
-                        id="cuerpo_tabla_ventas"
-                    >
+                    <tbody class="cuerpo_tabla_ventas" id="cuerpo_tabla_ventas">
 
                         <tr class="fila_sin_ventas">
 
-                            <td
-                                class="dato_sin_ventas"
-                                colspan="5"
-                            >
+                            <td class="dato_sin_ventas" colspan="5">
                                 No hay ventas cargadas para mostrar.
                             </td>
 
@@ -362,10 +291,7 @@
         <!-- TITULO 6 DETALLE VENTA -->
 
             <!-- fondo del detalle de la venta -->
-            <div
-                class="contenedor_detalle_venta contenedor_detalle_venta_oculto"
-                id="contenedor_detalle_venta"
-            >
+            <div class="contenedor_detalle_venta contenedor_detalle_venta_oculto" id="contenedor_detalle_venta">
 
                 <div class="formulario_detalle_venta">
 
@@ -374,17 +300,11 @@
 
                         <div class="cabecera_detalle_venta">
 
-                            <div
-                                class="titulo_detalle_venta"
-                                id="titulo_detalle_venta"
-                            >
+                            <div class="titulo_detalle_venta" id="titulo_detalle_venta">
                                 Detalle de venta
                             </div>
 
-                            <div
-                                class="boton_cerrar_detalle_venta"
-                                onclick="cerrarDetalleVenta()"
-                            >
+                            <div class="boton_cerrar_detalle_venta" onclick="cerrarDetalleVenta()">
                                 ×
                             </div>
 
@@ -395,17 +315,11 @@
 
                         <div class="informacion_detalle_venta">
 
-                            <div
-                                class="fecha_detalle_venta"
-                                id="fecha_detalle_venta"
-                            >
+                            <div class="fecha_detalle_venta" id="fecha_detalle_venta">
                                 -
                             </div>
 
-                            <div
-                                class="total_detalle_venta"
-                                id="total_detalle_venta"
-                            >
+                            <div class="total_detalle_venta" id="total_detalle_venta">
                                 Total: $0
                             </div>
 
@@ -440,10 +354,7 @@
 
                                 </thead>
 
-                                <tbody
-                                    class="cuerpo_tabla_detalle_venta"
-                                    id="cuerpo_tabla_detalle_venta"
-                                >
+                                <tbody class="cuerpo_tabla_detalle_venta" id="cuerpo_tabla_detalle_venta">
                                 </tbody>
 
                             </table>
@@ -458,10 +369,7 @@
         <!-- TITULO 9 FORMULARIO IMPORTACION VENTAS -->
 
             <!-- contenedor superpuesto del formulario -->
-            <div
-                class="contenedor_importacion_ventas contenedor_importacion_ventas_oculto"
-                id="contenedor_importacion_ventas"
-            >
+            <div class="contenedor_importacion_ventas contenedor_importacion_ventas_oculto" id="contenedor_importacion_ventas">
 
                 <div class="formulario_importacion_ventas">
 
@@ -474,10 +382,7 @@
                                 Importar ventas
                             </div>
 
-                            <div
-                                class="boton_cerrar_importacion_ventas"
-                                onclick="cerrarImportacionVentas()"
-                            >
+                            <div class="boton_cerrar_importacion_ventas" onclick="cerrarImportacionVentas()">
                                 ×
                             </div>
 
@@ -527,15 +432,11 @@
                                         <input type="checkbox" id="confirmar_inicio_control_ventas">
                                         <span>Confirmo que ya establecí el stock inicial de referencia.</span>
                                     </label>
-                                    <button class="boton_inicio_control_ventas" id="boton_inicio_control_ventas"
-                                            type="button" disabled>Establecer fecha de inicio</button>
+                                    <button class="boton_inicio_control_ventas" id="boton_inicio_control_ventas" type="button" disabled>Establecer fecha de inicio</button>
                                 </div>
                             </div>
 
-                            <div
-                                class="zona_seleccion_archivo_ventas"
-                                onclick="seleccionarArchivoVentas()"
-                            >
+                            <div class="zona_seleccion_archivo_ventas" onclick="seleccionarArchivoVentas()">
 
                                 <div class="icono_archivo_ventas">
                                     ↑
@@ -552,18 +453,10 @@
                             </div>
 
 
-                            <input
-                                type="file"
-                                id="input_archivo_ventas"
-                                accept=".csv"
-                                hidden
-                            >
+                            <input type="file" id="input_archivo_ventas" accept=".csv" hidden>
 
 
-                            <div
-                                class="informacion_archivo_ventas"
-                                id="informacion_archivo_ventas"
-                            >
+                            <div class="informacion_archivo_ventas" id="informacion_archivo_ventas">
                                 No se ha seleccionado ningún archivo.
                             </div>
 
@@ -574,19 +467,11 @@
 
                         <div class="contenedor_acciones_importacion_ventas">
 
-                            <div
-                                class="boton_cancelar_importacion_ventas"
-                                onclick="cerrarImportacionVentas()"
-                            >
+                            <div class="boton_cancelar_importacion_ventas" onclick="cerrarImportacionVentas()">
                                 Cancelar
                             </div>
 
-                            <button
-                                class="boton_confirmar_importacion_ventas"
-                                id="boton_confirmar_importacion_ventas"
-                                type="button"
-                                onclick="importarVentas()"
-                            >
+                            <button class="boton_confirmar_importacion_ventas" id="boton_confirmar_importacion_ventas" type="button" onclick="importarVentas()">
                                 Importar ventas
                             </button>
 

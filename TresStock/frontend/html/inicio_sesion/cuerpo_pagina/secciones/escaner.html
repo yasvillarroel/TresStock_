@@ -1,6 +1,5 @@
 <!-- TITULO 1 CONTENEDOR PRINCIPAL DEL ESCANER -->
-<div class="contenedor_escaner_producto contenedor_escaner_producto_oculto"
-     id="contenedor_escaner_producto">
+<div class="contenedor_escaner_producto contenedor_escaner_producto_oculto" id="contenedor_escaner_producto">
 
     <div class="contenido_escaner_producto">
 
@@ -17,9 +16,7 @@
             </div>
 
             <div class="marco_camara_escaner">
-                <video class="lector_codigo_barras"
-                       id="lector_codigo_barras"
-                       autoplay playsinline muted></video>
+                <video class="lector_codigo_barras" id="lector_codigo_barras" autoplay playsinline muted></video>
                 <div class="guia_lectura_escaner" aria-hidden="true"></div>
             </div>
 
@@ -28,9 +25,7 @@
                     <span class="punto_camara_escaner"></span>
                     Cámara para leer códigos de barras
                 </div>
-                <button type="button"
-                        class="boton_secundario_escaner"
-                        onclick="cerrarEscanerProducto(); cargarVista('inventario')">
+                <button type="button" class="boton_secundario_escaner" onclick="cerrarEscanerProducto(); cargarVista('inventario')">
                     Cerrar escáner
                 </button>
             </div>
@@ -53,36 +48,23 @@
             <div id="datos_producto_escaneado" class="datos_producto_escaneado"></div>
 
             <div class="acciones_gestion_escaner">
-                <button type="button"
-                        class="boton_principal_escaner"
-                        id="boton_ajustar_producto"
-                        onclick="ajustarProductoEscaneado()">
+                <button type="button" class="boton_principal_escaner" id="boton_ajustar_producto" onclick="ajustarProductoEscaneado()">
                     Ajustar inventario
                 </button>
 
-                <button type="button"
-                        class="boton_principal_escaner"
-                        id="boton_asociar_codigo"
-                        onclick="mostrarProductosParaAsociar()" hidden>
+                <button type="button" class="boton_principal_escaner" id="boton_asociar_codigo" onclick="mostrarProductosParaAsociar()" hidden>
                     Asociar código a un producto
                 </button>
 
-                <button type="button"
-                        class="boton_secundario_escaner"
-                        onclick="volverAlEscanerProducto()">
+                <button type="button" class="boton_secundario_escaner" onclick="volverAlEscanerProducto()">
                     Escanear otro código
                 </button>
 
-                <button type="button"
-                        class="boton_peligro_escaner"
-                        id="boton_eliminar_codigo_asociado"
-                        onclick="eliminarCodigoAsociado()" hidden>
+                <button type="button" class="boton_peligro_escaner" id="boton_eliminar_codigo_asociado" onclick="eliminarCodigoAsociado()" hidden>
                     Eliminar código asociado
                 </button>
 
-                <button type="button"
-                        class="boton_texto_escaner"
-                        onclick="cerrarEscanerProducto(); cargarVista('inventario')">
+                <button type="button" class="boton_texto_escaner" onclick="cerrarEscanerProducto(); cargarVista('inventario')">
                     Cerrar
                 </button>
             </div>
@@ -104,10 +86,7 @@
 
             <div class="campo_asociar_escaner">
                 <label for="busqueda_producto_asociar">Buscar producto</label>
-                <input type="text"
-                       id="busqueda_producto_asociar"
-                       placeholder="Código, código de barras o descripción"
-                       autocomplete="off">
+                <input type="text" id="busqueda_producto_asociar" placeholder="Código, código de barras o descripción" autocomplete="off">
             </div>
 
             <div id="resultados_productos_asociar" class="resultados_productos_asociar"></div>
@@ -121,21 +100,15 @@
 
             <div class="campo_asociar_escaner">
                 <label for="cantidad_unidades_asociar">Cantidad de unidades que representa el código</label>
-                <input type="number"
-                       id="cantidad_unidades_asociar"
-                       min="0.0001" step="any" value="1" required>
+                <input type="number" id="cantidad_unidades_asociar" min="0.0001" step="any" value="1" required>
             </div>
 
             <div class="acciones_gestion_escaner">
-                <button type="button"
-                        class="boton_principal_escaner"
-                        id="boton_confirmar_asociacion" disabled>
+                <button type="button" class="boton_principal_escaner" id="boton_confirmar_asociacion" disabled>
                     Asociar al producto seleccionado
                 </button>
-                <button type="button" class="boton_secundario_escaner"
-                        onclick="volverGestionProducto()">Volver</button>
-                <button type="button" class="boton_texto_escaner"
-                        onclick="cerrarEscanerProducto(); cargarVista('inventario')">Cerrar</button>
+                <button type="button" class="boton_secundario_escaner" onclick="volverGestionProducto()">Volver</button>
+                <button type="button" class="boton_texto_escaner" onclick="cerrarEscanerProducto(); cargarVista('inventario')">Cerrar</button>
             </div>
         </div>
     </div>
@@ -143,8 +116,7 @@
     <!-- TITULO 5 MODAL CENTRADO PARA AJUSTAR INVENTARIO -->
     <!-- se mantiene el id utilizado por escaner.js para controlar su visibilidad -->
     <div class="superposicion_ajuste_escaner" id="menu_ajustar_producto" hidden>
-        <div class="modal_ajuste_escaner" role="dialog" aria-modal="true"
-             aria-labelledby="titulo_ajuste_producto">
+        <div class="modal_ajuste_escaner" role="dialog" aria-modal="true" aria-labelledby="titulo_ajuste_producto">
 
             <div class="cabecera_modal_ajuste_escaner">
                 <div>
@@ -155,8 +127,7 @@
                         Indica cómo cambiar las unidades disponibles.
                     </div>
                 </div>
-                <button type="button" class="boton_cerrar_modal_ajuste_escaner"
-                        aria-label="Cerrar ajuste" onclick="cerrarModalAjusteEscaner()">×</button>
+                <button type="button" class="boton_cerrar_modal_ajuste_escaner" aria-label="Cerrar ajuste" onclick="cerrarModalAjusteEscaner()">×</button>
             </div>
 
             <div class="cuerpo_modal_ajuste_escaner">
@@ -198,13 +169,11 @@
                         <label for="cantidad_ingresada_ajuste" id="texto_cantidad_ajuste">
                             Cantidad a sumar
                         </label>
-                        <input type="number" id="cantidad_ingresada_ajuste"
-                               min="0.0001" step="any" value="1">
+                        <input type="number" id="cantidad_ingresada_ajuste" min="0.0001" step="any" value="1">
                     </div>
                     <div class="campo_unidades_codigo" id="contenedor_unidades_codigo">
                         <label for="unidades_por_codigo_ajuste">Unidades por código</label>
-                        <input type="number" id="unidades_por_codigo_ajuste"
-                               min="0.0001" step="any" value="1" readonly>
+                        <input type="number" id="unidades_por_codigo_ajuste" min="0.0001" step="any" value="1" readonly>
                     </div>
                 </div>
 
@@ -231,10 +200,8 @@
             </div>
 
             <div class="pie_modal_ajuste_escaner">
-                <button type="button" class="boton_secundario_escaner"
-                        onclick="cerrarModalAjusteEscaner()">Cancelar</button>
-                <button type="button" class="boton_principal_escaner"
-                        id="boton_aceptar_ajuste" onclick="aceptarAjusteProducto()">
+                <button type="button" class="boton_secundario_escaner" onclick="cerrarModalAjusteEscaner()">Cancelar</button>
+                <button type="button" class="boton_principal_escaner" id="boton_aceptar_ajuste" onclick="aceptarAjusteProducto()">
                     Confirmar ajuste
                 </button>
             </div>
@@ -243,10 +210,7 @@
 
     <!-- TITULO 7 MODAL DE MENSAJES Y CONFIRMACIONES -->
     <!-- conserva el estilo de los avisos personalizados de Productos -->
-    <div class="contenedor_alerta_escaner" id="contenedor_alerta_escaner"
-         role="dialog" aria-modal="true"
-         aria-labelledby="titulo_alerta_escaner"
-         aria-describedby="mensaje_alerta_escaner" hidden>
+    <div class="contenedor_alerta_escaner" id="contenedor_alerta_escaner" role="dialog" aria-modal="true" aria-labelledby="titulo_alerta_escaner" aria-describedby="mensaje_alerta_escaner" hidden>
 
         <div class="modal_alerta_escaner" data-tipo="informacion">
             <div class="icono_alerta_escaner" id="icono_alerta_escaner" aria-hidden="true">i</div>
@@ -254,10 +218,8 @@
             <div class="mensaje_alerta_escaner" id="mensaje_alerta_escaner"></div>
 
             <div class="acciones_alerta_escaner">
-                <button type="button" class="boton_cancelar_alerta_escaner"
-                        id="boton_cancelar_alerta_escaner" hidden>Cancelar</button>
-                <button type="button" class="boton_aceptar_alerta_escaner"
-                        id="boton_aceptar_alerta_escaner">Aceptar</button>
+                <button type="button" class="boton_cancelar_alerta_escaner" id="boton_cancelar_alerta_escaner" hidden>Cancelar</button>
+                <button type="button" class="boton_aceptar_alerta_escaner" id="boton_aceptar_alerta_escaner">Aceptar</button>
             </div>
         </div>
     </div>
