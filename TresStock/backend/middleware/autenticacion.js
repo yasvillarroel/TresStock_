@@ -2,7 +2,7 @@
 const { verificarToken } = require('../utilidades/jwt');
 
 // importa el servicio que consulta la cuenta vigente en PostgreSQL
-const autenticacionServicio = require('../servicios/autenticacion/autenticacion_servicio');
+const autenticacionServicio = require('../servicios/autenticacion_servicio');
 const permisos = require('../configuracion/permisos');
 
 // ==============================

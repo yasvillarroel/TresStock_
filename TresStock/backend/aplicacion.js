@@ -61,7 +61,7 @@ app.get('/api/estado_conexion', async (req, res) => {
 // ===================================
 
 // el login debe ser publico; /sesion ya exige autenticacion en su router
-app.use('/api/autenticacion', require('./rutas/autenticacion/autenticacion_rutas'));
+app.use('/api/autenticacion', require('./rutas/autenticacion_rutas'));
 
 // ===========================================
 // TITULO 4 RUTAS DE MODULOS PRIVADOS DE TRESSTOCK
@@ -69,14 +69,14 @@ app.use('/api/autenticacion', require('./rutas/autenticacion/autenticacion_rutas
 
 // cada modulo requiere JWT valido y una cuenta activa en PostgreSQL
 // el router de usuarios ademas exige rol Administrador en todas sus rutas
-app.use('/api/usuarios', require('./rutas/usuarios/usuarios_rutas'));
-app.use('/api/productos', autenticacion, require('./rutas/productos/productos_rutas'));
-app.use('/api/proveedores', autenticacion, require('./rutas/proveedores/proveedores_rutas'));
-app.use('/api/inventario', autenticacion, require('./rutas/inventario/inventario_rutas'));
-app.use('/api/ventas', autenticacion, require('./rutas/ventas/ventas_rutas'));
-app.use('/api/escaneo', autenticacion, require('./rutas/escaneo/escaneo_rutas'));
-app.use('/api/dashboard', autenticacion, require('./rutas/dashboard/dashboard_rutas'));
-app.use('/api/alertas', autenticacion, require('./rutas/alertas/alertas_rutas'));
+app.use('/api/usuarios', require('./rutas/usuarios_rutas'));
+app.use('/api/productos', autenticacion, require('./rutas/productos_rutas'));
+app.use('/api/proveedores', autenticacion, require('./rutas/proveedores_rutas'));
+app.use('/api/inventario', autenticacion, require('./rutas/inventario_rutas'));
+app.use('/api/ventas', autenticacion, require('./rutas/ventas_rutas'));
+app.use('/api/escaneo', autenticacion, require('./rutas/escaneo_rutas'));
+app.use('/api/dashboard', autenticacion, require('./rutas/dashboard_rutas'));
+app.use('/api/alertas', autenticacion, require('./rutas/alertas_rutas'));
 
 // se retiro /api/prueba-cookie: establecia una cookie de sesion no autenticada
 
