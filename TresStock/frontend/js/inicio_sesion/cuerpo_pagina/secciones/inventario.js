@@ -1892,7 +1892,7 @@ async function recalcularStockMinimoInventario() {
 
     }
 
-    // configura el modal para sumar, restar o fijar el stock de un producto
+    // Configura el modal para sumar, restar o fijar stock, con motivos y observaciones.
     function configurarAjusteManualInventario() {
         const modal = document.getElementById('modal_ajuste_stock_inventario');
         const formulario = document.getElementById('formulario_ajuste_stock_inventario');
@@ -1906,6 +1906,9 @@ async function recalcularStockMinimoInventario() {
         const fechaVencimiento = document.getElementById('fecha_vencimiento_lote_inventario');
         const etiquetaCantidad = document.getElementById('etiqueta_cantidad_ajuste_stock_inventario');
         const motivo = document.getElementById('motivo_ajuste_stock_inventario');
+        const observaciones = document.getElementById('observaciones_ajuste_stock_inventario');
+        const etiquetaObservaciones = document.getElementById('etiqueta_observaciones_ajuste_stock_inventario');
+        const contadorMotivo = document.getElementById('contador_motivo_ajuste_stock_inventario');
         const mensaje = document.getElementById('mensaje_ajuste_stock_inventario');
         const botonGuardar = document.getElementById('guardar_ajuste_stock_inventario');
         const etiquetaProducto = document.getElementById('producto_modal_ajuste_stock_inventario');
@@ -1913,55 +1916,147 @@ async function recalcularStockMinimoInventario() {
         let productoBalanzaSeleccionado = false;
         let incluirLoteVencimiento = false;
 
+        // El backend recibe el texto completo en "motivo", con un máximo de 100 caracteres.
+        const LIMITE_MOTIVO = 100;
+        const motivosPorOperacion = {
+            sumar: [
+                'Reposición de proveedor',
+                'Ingreso de mercadería',
+                'Devolución física',
+                'Corrección de ingreso'
+            ],
+            restar: [
+                'Merma o daño',
+                'Pérdida de producto',
+                'Retiro de mercadería',
+                'Uso interno'
+            ],
+            fijar: [
+                'Conteo físico',
+                'Corrección de registro',
+                'Regularización de inventario'
+            ]
+        };
+
         const obtenerFechaMinimaLote = () => {
             const hoy = new Date();
             hoy.setMinutes(hoy.getMinutes() - hoy.getTimezoneOffset());
             return hoy.toISOString().slice(0, 10);
         };
 
-        if (!modal || !formulario || !tabla) return;
+        if (!modal || !formulario || !tabla || !operacion || !cantidad || !motivo || !observaciones) return;
 
-        const cerrar = () => {
-            modal.hidden = true;
-            modal.setAttribute('aria-hidden', 'true');
-            formulario.reset();
-            motivo.value = 'Ajuste manual desde inventario';
+        const obtenerMotivoCompleto = () => {
+            const motivoElegido = motivo.value.trim();
+            const textoAdicional = observaciones.value.trim();
+            if (!motivoElegido) return '';
+            if (motivoElegido === 'OTRO') {
+                return textoAdicional ? `Otro: ${textoAdicional}` : '';
+            }
+            return textoAdicional ? `${motivoElegido}: ${textoAdicional}` : motivoElegido;
+        };
+
+        const actualizarContadorMotivo = () => {
+            const motivoElegido = motivo.value.trim();
+            const textoAdicional = observaciones.value.trim();
+            const prefijo = motivoElegido === 'OTRO' ? 'Otro: '
+                : motivoElegido ? `${motivoElegido}: ` : '';
+            const limiteObservaciones = motivoElegido
+                ? Math.max(0, LIMITE_MOTIVO - prefijo.length)
+                : LIMITE_MOTIVO;
+            observaciones.maxLength = limiteObservaciones;
+            const caracteres = textoAdicional
+                ? prefijo.length + textoAdicional.length
+                : motivoElegido === 'OTRO' ? 0 : motivoElegido.length;
+            if (contadorMotivo) {
+                contadorMotivo.textContent = `${caracteres}/${LIMITE_MOTIVO}`;
+                contadorMotivo.classList.toggle('contador_motivo_excedido_inventario', caracteres > LIMITE_MOTIVO);
+            }
+            const otroMotivo = motivoElegido === 'OTRO';
+            observaciones.required = otroMotivo;
+            if (etiquetaObservaciones) {
+                etiquetaObservaciones.textContent = otroMotivo
+                    ? 'Observaciones (obligatorias)'
+                    : 'Observaciones (opcionales)';
+            }
+        };
+
+        const cargarMotivos = () => {
+            motivo.replaceChildren();
+            const inicial = document.createElement('option');
+            inicial.value = '';
+            inicial.textContent = 'Selecciona un motivo';
+            inicial.disabled = true;
+            inicial.selected = true;
+            motivo.appendChild(inicial);
+
+            (motivosPorOperacion[operacion.value] || []).forEach((texto) => {
+                const opcion = document.createElement('option');
+                opcion.value = texto;
+                opcion.textContent = texto;
+                motivo.appendChild(opcion);
+            });
+            const otro = document.createElement('option');
+            otro.value = 'OTRO';
+            otro.textContent = 'Otro motivo (especificar)';
+            motivo.appendChild(otro);
+            motivo.value = '';
+            observaciones.value = '';
+            actualizarContadorMotivo();
+        };
+
+        const reiniciarLote = () => {
             incluirLoteVencimiento = false;
             botonToggleLote.setAttribute('aria-pressed', 'false');
             estadoToggleLote.textContent = 'No';
             campoFechaLote.hidden = true;
             fechaVencimiento.required = false;
             fechaVencimiento.disabled = true;
-            mensaje.textContent = '';
-            if (botonGuardar) botonGuardar.disabled = false;
+            fechaVencimiento.value = '';
         };
 
         const actualizarEtiqueta = () => {
             const unidad = productoBalanzaSeleccionado ? ' (KG)' : '';
-            const etiquetas = {sumar: `Cantidad a sumar${unidad}`, restar: `Cantidad a restar${unidad}`, fijar: `Nuevo stock total${unidad}`};
+            const etiquetas = {
+                sumar: `Cantidad a sumar${unidad}`,
+                restar: `Cantidad a restar${unidad}`,
+                fijar: `Nuevo stock total${unidad}`
+            };
             etiquetaCantidad.textContent = etiquetas[operacion.value] || `Cantidad${unidad}`;
             cantidad.min = operacion.value === 'fijar' ? '0' : '0.0001';
             fechaVencimiento.min = obtenerFechaMinimaLote();
             campoLote.hidden = operacion.value !== 'sumar';
-            if (operacion.value !== 'sumar' && incluirLoteVencimiento) {
-                incluirLoteVencimiento = false;
-                botonToggleLote.setAttribute('aria-pressed', 'false');
-                estadoToggleLote.textContent = 'No';
-                campoFechaLote.hidden = true;
-                fechaVencimiento.required = false;
-                fechaVencimiento.disabled = true;
-                fechaVencimiento.value = '';
-            }
+            if (operacion.value !== 'sumar') reiniciarLote();
         };
 
+        const cerrar = () => {
+            modal.hidden = true;
+            modal.setAttribute('aria-hidden', 'true');
+            formulario.reset();
+            operacion.value = 'sumar';
+            reiniciarLote();
+            cargarMotivos();
+            actualizarEtiqueta();
+            mensaje.textContent = '';
+            if (botonGuardar) botonGuardar.disabled = false;
+        };
+
+        // Se conserva el uso de "Ajustar stock" desde las filas del inventario.
         tabla.onclick = (evento) => {
             const boton = evento.target.closest('.boton_ajustar_stock_inventario');
             if (!boton) return;
             codigoSeleccionado = boton.dataset.codigo;
-            const productoSeleccionado = inventarioCargado.find(producto => String(producto.codigo) === codigoSeleccionado);
+            const productoSeleccionado = inventarioCargado.find(
+                producto => String(producto.codigo) === codigoSeleccionado
+            );
             productoBalanzaSeleccionado = Boolean(productoSeleccionado?.es_producto_balanza);
             etiquetaProducto.textContent = `${boton.dataset.descripcion} · Stock actual: ${formatearCantidadInventario(productoSeleccionado?.stock_actual ?? 0, productoSeleccionado?.es_producto_balanza)}`;
+            formulario.reset();
+            operacion.value = 'sumar';
+            reiniciarLote();
+            cargarMotivos();
             actualizarEtiqueta();
+            mensaje.textContent = '';
             modal.hidden = false;
             modal.setAttribute('aria-hidden', 'false');
             cantidad.focus();
@@ -1969,7 +2064,18 @@ async function recalcularStockMinimoInventario() {
 
         document.getElementById('cerrar_modal_ajuste_stock_inventario').onclick = cerrar;
         document.getElementById('cancelar_ajuste_stock_inventario').onclick = cerrar;
-        operacion.onchange = actualizarEtiqueta;
+
+        operacion.onchange = () => {
+            actualizarEtiqueta();
+            cargarMotivos();
+            mensaje.textContent = '';
+        };
+        motivo.onchange = () => {
+            actualizarContadorMotivo();
+            mensaje.textContent = '';
+        };
+        observaciones.addEventListener('input', actualizarContadorMotivo);
+
         botonToggleLote.onclick = () => {
             incluirLoteVencimiento = !incluirLoteVencimiento;
             botonToggleLote.setAttribute('aria-pressed', String(incluirLoteVencimiento));
@@ -1982,12 +2088,32 @@ async function recalcularStockMinimoInventario() {
             else fechaVencimiento.value = '';
         };
         actualizarEtiqueta();
+        cargarMotivos();
 
         formulario.onsubmit = async (evento) => {
             evento.preventDefault();
             const valor = Number(cantidad.value);
-            if (!codigoSeleccionado || !Number.isFinite(valor) || valor < Number(cantidad.min)) {
-                mensaje.textContent = 'Ingresa una cantidad válida.';
+            if (!codigoSeleccionado || !cantidad.value.trim() || !Number.isFinite(valor) ||
+                valor < Number(cantidad.min) || valor > 99999999.9999 ||
+                Math.abs(valor - Math.round(valor * 10000) / 10000) > 1e-9) {
+                mensaje.textContent = 'Ingresa una cantidad válida (hasta cuatro decimales).';
+                cantidad.focus();
+                return;
+            }
+            if (!motivo.value) {
+                mensaje.textContent = 'Selecciona un motivo para el movimiento.';
+                motivo.focus();
+                return;
+            }
+            if (motivo.value === 'OTRO' && !observaciones.value.trim()) {
+                mensaje.textContent = 'Describe el motivo en Observaciones.';
+                observaciones.focus();
+                return;
+            }
+            const motivoCompleto = obtenerMotivoCompleto();
+            if (!motivoCompleto || motivoCompleto.length > LIMITE_MOTIVO) {
+                mensaje.textContent = 'El motivo y las observaciones deben sumar como máximo 100 caracteres.';
+                observaciones.focus();
                 return;
             }
             const loteSeGuardara = incluirLoteVencimiento;
@@ -2004,7 +2130,13 @@ async function recalcularStockMinimoInventario() {
                     method: 'POST',
                     credentials: 'include',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({codigo: codigoSeleccionado, cantidad: valor, operacion: operacion.value, motivo: motivo.value.trim(), fecha_vencimiento: incluirLoteVencimiento ? fechaVencimiento.value : null})
+                    body: JSON.stringify({
+                        codigo: codigoSeleccionado,
+                        cantidad: valor,
+                        operacion: operacion.value,
+                        motivo: motivoCompleto,
+                        fecha_vencimiento: loteSeGuardara ? fechaLoteGuardada : null
+                    })
                 });
                 const datos = await respuesta.json();
                 if (!respuesta.ok) throw new Error(datos.mensaje || 'No se pudo actualizar el stock.');

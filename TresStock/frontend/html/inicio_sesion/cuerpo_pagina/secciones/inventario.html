@@ -42,7 +42,7 @@
                     <div class="contenido_total_productos_inventario">
 
                         <div class="texto_total_productos_inventario">
-                            Total productos
+                            Productos inventariables
                         </div>
 
                         <div class="valor_total_productos_inventario" id="valor_total_productos_inventario">
@@ -335,31 +335,46 @@
                     <div class="titulo_modal_ajuste_stock_inventario" id="titulo_modal_ajuste_stock_inventario">Ajustar stock</div>
                     <div class="producto_modal_ajuste_stock_inventario" id="producto_modal_ajuste_stock_inventario"></div>
                     <form id="formulario_ajuste_stock_inventario">
-                        <div class="campo_modal_ajuste_stock_inventario">
-                            <div class="texto_modal_ajuste_stock_inventario">Tipo de ajuste</div>
-                            <select id="operacion_ajuste_stock_inventario" required>
-                                <option value="sumar">Sumar al stock</option>
-                                <option value="restar">Restar del stock</option>
-                                <option value="fijar">Fijar stock en</option>
-                            </select>
+                        <!-- Operación y cantidad: el resto de la lógica de ajuste se conserva. -->
+                        <div class="rejilla_campos_modal_ajuste_stock_inventario">
+                            <div class="campo_modal_ajuste_stock_inventario">
+                                <label class="texto_modal_ajuste_stock_inventario" for="operacion_ajuste_stock_inventario">Tipo de ajuste</label>
+                                <select id="operacion_ajuste_stock_inventario" required>
+                                    <option value="sumar">Sumar al stock</option>
+                                    <option value="restar">Restar del stock</option>
+                                    <option value="fijar">Fijar stock en</option>
+                                </select>
+                            </div>
+                            <div class="campo_modal_ajuste_stock_inventario">
+                                <label class="texto_modal_ajuste_stock_inventario" for="cantidad_ajuste_stock_inventario" id="etiqueta_cantidad_ajuste_stock_inventario">Cantidad a sumar</label>
+                                <input id="cantidad_ajuste_stock_inventario" type="number" min="0.0001" max="99999999.9999" step="0.0001" placeholder="Ingresa la cantidad" required>
+                            </div>
                         </div>
-                        <div class="campo_modal_ajuste_stock_inventario">
-                            <div class="texto_modal_ajuste_stock_inventario" id="etiqueta_cantidad_ajuste_stock_inventario">Cantidad a sumar</div>
-                            <input id="cantidad_ajuste_stock_inventario" type="number" min="0.0001" max="99999999.9999" step="0.0001" required>
-                        </div>
+                        <!-- Mantiene el registro de lotes cuando se suman unidades. -->
                         <div class="campo_lote_vencimiento_inventario" id="campo_lote_vencimiento_inventario" hidden>
                             <button class="boton_toggle_lote_vencimiento_inventario" id="boton_toggle_lote_vencimiento_inventario" type="button" aria-pressed="false">
                                 <span>¿Lote con vencimiento?</span>
                                 <span class="estado_toggle_lote_vencimiento_inventario" id="estado_toggle_lote_vencimiento_inventario">No</span>
                             </button>
                             <div class="campo_fecha_lote_vencimiento_inventario" id="campo_fecha_lote_vencimiento_inventario" hidden>
-                                <div class="texto_modal_ajuste_stock_inventario">Fecha de vencimiento del lote</div>
+                                <label class="texto_modal_ajuste_stock_inventario" for="fecha_vencimiento_lote_inventario">Fecha de vencimiento del lote</label>
                                 <input id="fecha_vencimiento_lote_inventario" type="date" disabled>
                             </div>
                         </div>
+                        <div class="separador_modal_ajuste_stock_inventario" aria-hidden="true"></div>
                         <div class="campo_modal_ajuste_stock_inventario">
-                            <div class="texto_modal_ajuste_stock_inventario">Motivo</div>
-                            <input id="motivo_ajuste_stock_inventario" type="text" maxlength="100" value="Ajuste manual desde inventario" required>
+                            <label class="texto_modal_ajuste_stock_inventario" for="motivo_ajuste_stock_inventario">Motivo del movimiento</label>
+                            <select id="motivo_ajuste_stock_inventario" required aria-describedby="ayuda_motivo_ajuste_stock_inventario">
+                                <option value="" selected disabled>Selecciona un motivo</option>
+                            </select>
+                        </div>
+                        <div class="campo_modal_ajuste_stock_inventario">
+                            <label class="texto_modal_ajuste_stock_inventario" id="etiqueta_observaciones_ajuste_stock_inventario" for="observaciones_ajuste_stock_inventario">Observaciones (opcionales)</label>
+                            <textarea id="observaciones_ajuste_stock_inventario" rows="3" maxlength="100" placeholder="Escribe información adicional sobre el movimiento..."></textarea>
+                            <div class="pie_observaciones_ajuste_stock_inventario">
+                                <span id="ayuda_motivo_ajuste_stock_inventario">Se guardarán el motivo y las observaciones en el historial.</span>
+                                <span id="contador_motivo_ajuste_stock_inventario" aria-live="polite">0/100</span>
+                            </div>
                         </div>
                         <div class="mensaje_modal_ajuste_stock_inventario" id="mensaje_ajuste_stock_inventario" role="status" aria-live="polite"></div>
                         <div class="acciones_modal_ajuste_stock_inventario">
