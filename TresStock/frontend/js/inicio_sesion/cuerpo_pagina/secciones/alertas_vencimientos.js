@@ -172,7 +172,7 @@ async function inicializarAlertasVencimientos() {
         actualizar();
     };
     const actualizarSelectoresLotes = () => selectoresLotesPersonalizados.forEach(item => item.actualizar());
-    [estadoVencimientos, ordenVencimientos].forEach(configurarSelectorLotes);
+    [estadoStock, actividadStock, familiaStock, estadoVencimientos, ordenVencimientos].forEach(configurarSelectorLotes);
     document.addEventListener('click', evento => {
         if (!evento.target.closest('.selector_visual_vencimientos')) cerrarSelectoresLotes();
     });
@@ -517,6 +517,7 @@ async function inicializarAlertasVencimientos() {
                 .sort((a, b) => a.localeCompare(b, 'es'))
                 .forEach(familia => familiaStock.add(new Option(familia, familia)));
             familiaStock.value = familiaActual;
+            actualizarSelectoresLotes(); // Refresca las familias del desplegable personalizado.
             document.getElementById('resumen_alertas_stock').textContent = alertasStock.length.toLocaleString('es-CL');
             renderizarStock();
         } catch (error) {
@@ -716,6 +717,8 @@ async function inicializarAlertasVencimientos() {
         estadoStock.value = '';
         familiaStock.value = '';
         actividadStock.value = 'RECIENTES';
+        actualizarSelectoresLotes(); // Restablece los textos visibles de los selectores.
+        cerrarSelectoresLotes();
         aplicarFiltrosStock();
     });
 

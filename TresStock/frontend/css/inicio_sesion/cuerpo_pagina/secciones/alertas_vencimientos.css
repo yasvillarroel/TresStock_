@@ -773,7 +773,7 @@
     .filtros_lista_vencimientos .campo_boton_filtros_alertas button { width: 100%; }
 }
 /* El selector original continúa en DOM para preservar los listeners y valores de la API. */
-.seccion_vencimientos .selector_nativo_oculto_vencimientos {
+.contenedor_alertas_vencimientos .selector_nativo_oculto_vencimientos {
     position: absolute !important;
     width: 1px !important;
     height: 1px !important;
@@ -782,8 +782,8 @@
     border: 0 !important;
     pointer-events: none !important;
 }
-.seccion_vencimientos .selector_visual_vencimientos { position: relative; width: 100%; min-width: 0; }
-.seccion_vencimientos .boton_selector_visual_vencimientos {
+.contenedor_alertas_vencimientos .selector_visual_vencimientos { position: relative; width: 100%; min-width: 0; }
+.contenedor_alertas_vencimientos .boton_selector_visual_vencimientos {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -800,20 +800,20 @@
     cursor: pointer;
     box-sizing: border-box;
 }
-.seccion_vencimientos .boton_selector_visual_vencimientos:hover { border-color: #159ba3; }
-.seccion_vencimientos .boton_selector_visual_vencimientos:focus-visible {
+.contenedor_alertas_vencimientos .boton_selector_visual_vencimientos:hover { border-color: #159ba3; }
+.contenedor_alertas_vencimientos .boton_selector_visual_vencimientos:focus-visible {
     outline: 2px solid #a6e0e2;
     outline-offset: 1px;
 }
-.seccion_vencimientos .texto_selector_visual_vencimientos {
+.contenedor_alertas_vencimientos .texto_selector_visual_vencimientos {
     flex: 1;
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-.seccion_vencimientos .boton_selector_visual_vencimientos svg { width: 16px; height: 16px; flex-shrink: 0; }
-.seccion_vencimientos .panel_selector_visual_vencimientos {
+.contenedor_alertas_vencimientos .boton_selector_visual_vencimientos svg { width: 16px; height: 16px; flex-shrink: 0; }
+.contenedor_alertas_vencimientos .panel_selector_visual_vencimientos {
     position: absolute;
     left: 0;
     top: calc(100% + 5px);
@@ -828,8 +828,8 @@
     overscroll-behavior: contain;
     box-sizing: border-box;
 }
-.seccion_vencimientos .panel_selector_visual_vencimientos[hidden] { display: none !important; }
-.seccion_vencimientos .opcion_selector_visual_vencimientos {
+.contenedor_alertas_vencimientos .panel_selector_visual_vencimientos[hidden] { display: none !important; }
+.contenedor_alertas_vencimientos .opcion_selector_visual_vencimientos {
     display: block;
     width: 100%;
     padding: 9px 11px;
@@ -842,9 +842,9 @@
     white-space: normal;
     cursor: pointer;
 }
-.seccion_vencimientos .opcion_selector_visual_vencimientos:hover,
-.seccion_vencimientos .opcion_selector_visual_vencimientos:focus-visible { outline: 0; background: #e4f6f6; color: #0f858d; }
-.seccion_vencimientos .opcion_selector_visual_vencimientos[aria-selected="true"] { background: #dff2f3; color: #086f76; font-weight: 700; }
+.contenedor_alertas_vencimientos .opcion_selector_visual_vencimientos:hover,
+.contenedor_alertas_vencimientos .opcion_selector_visual_vencimientos:focus-visible { outline: 0; background: #e4f6f6; color: #0f858d; }
+.contenedor_alertas_vencimientos .opcion_selector_visual_vencimientos[aria-selected="true"] { background: #dff2f3; color: #086f76; font-weight: 700; }
 
 /* ============================================================
    PAGINADORES - IDENTICOS A LOS DE INVENTARIO
@@ -904,4 +904,49 @@
     .paginador_vencimientos { padding: 12px 8px; }
     .controles_paginador_vencimientos,
     .numeros_paginas_vencimientos { flex-wrap: wrap; justify-content: center; }
+}
+
+
+/* ============================================================
+   ALERTAS DE STOCK: MISMOS SELECTORES QUE VENCIMIENTOS
+   Los select nativos se conservan para los filtros del JS.
+   ============================================================ */
+.contenedor_alertas_vencimientos > .contenedor_tabla_vencimientos {
+    overflow: visible;
+    min-width: 0;
+    container: panel-alertas / inline-size;
+}
+.contenedor_alertas_vencimientos .filtros_alertas_stock {
+    position: relative;
+    z-index: 5;
+    grid-template-columns: minmax(180px, 1.9fr) minmax(130px, 1fr) minmax(155px, 1.15fr) minmax(145px, 1.05fr) auto;
+    align-items: end;
+    gap: 10px;
+}
+.contenedor_alertas_vencimientos .filtros_alertas_stock > * { min-width: 0; }
+/* Paneles desplegables con el mismo comportamiento, estilos y altura que Vencimientos. */
+.contenedor_alertas_vencimientos .filtros_alertas_stock .selector_visual_vencimientos {
+    min-width: 0;
+}
+@container panel-alertas (max-width: 860px) {
+    .contenedor_alertas_vencimientos .filtros_alertas_stock {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .contenedor_alertas_vencimientos .filtros_alertas_stock > .campo_filtro_alertas:first-child {
+        grid-column: 1 / -1;
+    }
+    .contenedor_alertas_vencimientos .filtros_alertas_stock > .campo_boton_filtros_alertas {
+        grid-column: 1 / -1;
+        justify-content: flex-end;
+    }
+}
+@container panel-alertas (max-width: 480px) {
+    .contenedor_alertas_vencimientos .filtros_alertas_stock {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .contenedor_alertas_vencimientos .filtros_alertas_stock > .campo_filtro_alertas:first-child,
+    .contenedor_alertas_vencimientos .filtros_alertas_stock > .campo_boton_filtros_alertas {
+        grid-column: auto;
+    }
+    .contenedor_alertas_vencimientos .filtros_alertas_stock .campo_boton_filtros_alertas button { width: 100%; }
 }
