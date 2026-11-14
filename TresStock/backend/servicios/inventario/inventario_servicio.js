@@ -478,7 +478,7 @@ const obtenerMovimientosInventario = async (filtros = {}) => {
         limiteSolicitado >= 1 &&
         limiteSolicitado <= 120
             ? limiteSolicitado
-            : 120;
+            : 25;
     const valores = [];
     const condiciones = [];
 
@@ -486,6 +486,29 @@ const obtenerMovimientosInventario = async (filtros = {}) => {
     if (codigoExacto && codigoExacto.length <= 50) {
         valores.push(codigoExacto);
         condiciones.push(`m.codigo = $${valores.length}`);
+    }
+
+    // Los registros anteriores de importaciones se conservan, pero por defecto
+    // no contaminan los historiales operativos (Entradas / Salidas / Ajustes).
+    // La consulta por codigo exacto conserva "todos" para el historial del producto.
+    // El frontend puede ofrecer 'operativos', 'importaciones' y 'todos'.
+    const origenSolicitado = String(filtros.origen || '').trim().toLowerCase();
+    const origen = ['operativos', 'importaciones', 'todos'].includes(origenSolicitado)
+        ? origenSolicitado
+        : codigoExacto ? 'todos' : 'operativos';
+
+    // Registros antiguos identificados por el motivo exacto que generaban
+    // los servicios previos a la separacion de ventas historicas y diarias.
+    // No modifica ni elimina ninguno de estos movimientos.
+    const importacionAnterior = `(
+        COALESCE(m.motivo, '') ILIKE 'Venta importada, boleta %'
+        OR COALESCE(m.motivo, '') ILIKE 'Ajuste por importacion de productos%'
+    )`;
+
+    if (origen === 'operativos') {
+        condiciones.push(`NOT ${importacionAnterior}`);
+    } else if (origen === 'importaciones') {
+        condiciones.push(importacionAnterior);
     }
 
     if (['ENTRADA', 'SALIDA', 'AJUSTE'].includes(filtros.tipo)) {
@@ -522,8 +545,8 @@ const obtenerMovimientosInventario = async (filtros = {}) => {
     const ordenes = {
         recientes: 'm.fecha_hora DESC, m.id_movimiento DESC',
         antiguos: 'm.fecha_hora ASC, m.id_movimiento ASC',
-        cantidad_mayor: 'm.cantidad DESC, m.fecha_hora DESC',
-        cantidad_menor: 'm.cantidad ASC, m.fecha_hora DESC'
+        cantidad_mayor: 'm.cantidad DESC, m.fecha_hora DESC, m.id_movimiento DESC',
+        cantidad_menor: 'm.cantidad ASC, m.fecha_hora DESC, m.id_movimiento DESC'
     };
     const orden = ordenes[filtros.orden] || ordenes.recientes;
 
@@ -552,7 +575,15 @@ const obtenerMovimientosInventario = async (filtros = {}) => {
             m.motivo,
             m.correo_usuario,
             m.stock_anterior,
-            m.stock_nuevo
+            m.stock_nuevo,
+            CASE
+                WHEN COALESCE(m.motivo, '') ILIKE 'Venta importada, boleta %'
+                  OR COALESCE(m.motivo, '') ILIKE 'Ajuste por importacion de productos%'
+                    THEN 'IMPORTACION_HISTORICA'
+                WHEN COALESCE(m.motivo, '') ILIKE 'Venta diaria importada, boleta %'
+                    THEN 'VENTA_DIARIA'
+                ELSE 'OPERACION'
+            END AS origen_movimiento
          FROM base_datos.movimientos_inventario m
          INNER JOIN base_datos.productos p ON p.codigo = m.codigo
          ${where}
@@ -568,7 +599,8 @@ const obtenerMovimientosInventario = async (filtros = {}) => {
             pagina_actual: paginaActual,
             total_paginas: totalPaginas,
             total_movimientos: total,
-            limite
+            limite,
+            origen
         }
     };
 };

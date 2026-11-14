@@ -973,23 +973,50 @@ const importarVentas = async (archivo, idUsuario, modalidad) => {
                 [idsVentasImportadas]
             );
 
+            // Las ventas DIARIAS tienen un motivo distinto al de las viejas
+            // importaciones masivas. Esto permite separar ambos historiales
+            // sin borrar registros ni modificar el stock que ya existe.
+            // Cada linea conserva saldo anterior y nuevo. El UPDATE agregado
+            // se hizo arriba dentro de la misma transaccion con filas bloqueadas.
             const resultadoMovimientos = await cliente.query(
                 `
+                WITH detalles_controlados AS (
+                    SELECT
+                        dv.id_detalle,
+                        dv.codigo,
+                        dv.cantidad,
+                        v.boleta
+                    FROM base_datos.detalle_venta dv
+                    INNER JOIN base_datos.ventas v ON v.id_venta = dv.id_venta
+                    INNER JOIN base_datos.productos p
+                        ON p.codigo = dv.codigo AND p.controla_stock = TRUE
+                    WHERE dv.id_venta = ANY($1::INTEGER[])
+                        AND dv.cantidad <> 0
+                ), acumulados AS (
+                    SELECT
+                        d.*,
+                        SUM(d.cantidad) OVER (
+                            PARTITION BY d.codigo
+                        ) AS cantidad_total,
+                        SUM(d.cantidad) OVER (
+                            PARTITION BY d.codigo ORDER BY d.id_detalle
+                            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+                        ) AS cantidad_acumulada
+                    FROM detalles_controlados d
+                )
                 INSERT INTO base_datos.movimientos_inventario
-                    (codigo, tipo, cantidad, motivo, correo_usuario)
+                    (codigo, tipo, cantidad, motivo, correo_usuario,
+                     stock_anterior, stock_nuevo)
                 SELECT
-                    dv.codigo,
-                    CASE WHEN dv.cantidad > 0 THEN 'SALIDA' ELSE 'ENTRADA' END,
-                    ABS(dv.cantidad),
-                    'Venta importada, boleta ' || v.boleta::TEXT,
-                    $2
-                FROM base_datos.detalle_venta dv
-                INNER JOIN base_datos.ventas v
-                    ON v.id_venta = dv.id_venta
-                INNER JOIN base_datos.productos p
-                    ON p.codigo = dv.codigo AND p.controla_stock = TRUE
-                WHERE dv.id_venta = ANY($1::INTEGER[])
-                    AND dv.cantidad <> 0
+                    a.codigo,
+                    CASE WHEN a.cantidad > 0 THEN 'SALIDA' ELSE 'ENTRADA' END,
+                    ABS(a.cantidad),
+                    'Venta diaria importada, boleta ' || a.boleta::TEXT,
+                    $2,
+                    i.stock_actual + a.cantidad_total - a.cantidad_acumulada + a.cantidad,
+                    i.stock_actual + a.cantidad_total - a.cantidad_acumulada
+                FROM acumulados a
+                INNER JOIN base_datos.inventario i ON i.codigo = a.codigo
                 `,
                 [idsVentasImportadas, correoUsuario || null]
             );
