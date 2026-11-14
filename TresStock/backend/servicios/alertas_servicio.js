@@ -16,12 +16,12 @@ const actualizarFechaVencimiento = async (idLote, fechaVencimiento) => {
     const resultado = await pool.query(
         `UPDATE base_datos.lotes_vencimiento
          SET fecha_vencimiento = $1
-         WHERE id_lote = $2
+         WHERE id_lote = $2 AND activo = TRUE AND cantidad > 0
          RETURNING id_lote, codigo, fecha_vencimiento`,
         [fechaVencimiento, idLote]
     );
     if (!resultado.rowCount) {
-        const error = new Error('No se encontró el lote que quieres modificar.');
+        const error = new Error('No se encontró un lote activo para modificar.');
         error.status = 404;
         throw error;
     }
@@ -66,7 +66,7 @@ const darDeBajaLote = async (idLote, estadoBaja, motivoBaja, cantidadMermaSolici
         }
 
         const resultadoLote = await cliente.query(
-            `SELECT id_lote, codigo, cantidad, cantidad_original, fecha_vencimiento
+            `SELECT id_lote, codigo, cantidad, cantidad_original, fecha_vencimiento, fecha_ingreso
              FROM base_datos.lotes_vencimiento
              WHERE id_lote = $1 AND activo = TRUE
              FOR UPDATE`,
@@ -121,19 +121,20 @@ const darDeBajaLote = async (idLote, estadoBaja, motivoBaja, cantidadMermaSolici
         }
 
         if (descontarStock) {
-            await cliente.query(
-                `INSERT INTO base_datos.inventario (codigo, stock_actual, stock_minimo)
-                 VALUES ($1, 0, 0)
-                 ON CONFLICT (codigo) DO NOTHING`,
-                [lote.codigo]
-            );
+            // No permite descontar una cantidad mayor al stock general registrado.
+            // Si no hay stock suficiente, toda la transacción (incluida la merma) se revierte.
             const resultadoInventario = await cliente.query(
                 `UPDATE base_datos.inventario
                  SET stock_actual = stock_actual - $1
-                 WHERE codigo = $2
+                 WHERE codigo = $2 AND stock_actual >= $1
                  RETURNING stock_actual`,
                 [cantidadMerma, lote.codigo]
             );
+            if (!resultadoInventario.rowCount) {
+                const error = new Error('No hay stock general suficiente para descontar esta merma. Revisa el stock registrado o deja sin marcar el descuento.');
+                error.status = 409;
+                throw error;
+            }
             inventario = resultadoInventario.rows[0];
             await cliente.query(
                 `INSERT INTO base_datos.movimientos_inventario
@@ -176,14 +177,16 @@ const darDeBajaLote = async (idLote, estadoBaja, motivoBaja, cantidadMermaSolici
     }
 };
 
+const FECHA_HOY_CHILE_SQL = "((CURRENT_TIMESTAMP AT TIME ZONE 'America/Santiago')::date)";
+
 const obtenerLotesVencimiento = async (estadoSolicitado, paginaSolicitada, filtrosSolicitados = {}) => {
     const estado = estadoSolicitado === 'inactivos' ? 'inactivos' : 'activos';
     const paginaNumero = Number.parseInt(paginaSolicitada, 10);
     const paginaPedida = Number.isSafeInteger(paginaNumero) && paginaNumero > 0 ? paginaNumero : 1;
     const limite = 15;
     const condicion = estado === 'activos'
-        ? 'lv.activo = TRUE AND lv.cantidad > 0 AND lv.fecha_vencimiento >= CURRENT_DATE'
-        : '(lv.activo = FALSE OR lv.cantidad <= 0 OR lv.fecha_vencimiento < CURRENT_DATE)';
+        ? 'lv.activo = TRUE AND lv.cantidad > 0'
+        : '(lv.activo = FALSE OR lv.cantidad <= 0)';
 
     const estadoFiltro = String(filtrosSolicitados.estado || '').trim().toUpperCase();
     const ordenSolicitado = String(filtrosSolicitados.orden || 'asc').trim().toLowerCase();
@@ -194,7 +197,7 @@ const obtenerLotesVencimiento = async (estadoSolicitado, paginaSolicitada, filtr
     }
     const estadosPermitidos = [
         'VENCIMIENTO CRÍTICO', 'VENCIMIENTO EN RIESGO', 'PRÓXIMO A VENCER',
-        'VENCIDO', 'AGOTADO', 'VENDIDO', 'ELIMINADO', 'MERMA', 'OTRO'
+        'VENCIDO', 'AGOTADO', 'VENDIDO', 'ELIMINADO', 'MERMA', 'OTRO', 'VIGENTE'
     ];
     if (estadoFiltro && !estadosPermitidos.includes(estadoFiltro)) {
         const error = new Error('El estado seleccionado no es válido.');
@@ -233,10 +236,11 @@ const obtenerLotesVencimiento = async (estadoSolicitado, paginaSolicitada, filtr
     const expresionEstado = `CASE
         WHEN lv.activo = FALSE THEN lv.estado_baja
         WHEN lv.cantidad <= 0 THEN 'AGOTADO'
-        WHEN lv.fecha_vencimiento < CURRENT_DATE THEN 'VENCIDO'
-        WHEN lv.fecha_vencimiento <= CURRENT_DATE + INTERVAL '5 days' THEN 'VENCIMIENTO CRÍTICO'
-        WHEN lv.fecha_vencimiento <= CURRENT_DATE + INTERVAL '10 days' THEN 'VENCIMIENTO EN RIESGO'
-        ELSE 'PRÓXIMO A VENCER'
+        WHEN lv.fecha_vencimiento < ${FECHA_HOY_CHILE_SQL} THEN 'VENCIDO'
+        WHEN lv.fecha_vencimiento <= ${FECHA_HOY_CHILE_SQL} + INTERVAL '5 days' THEN 'VENCIMIENTO CRÍTICO'
+        WHEN lv.fecha_vencimiento <= ${FECHA_HOY_CHILE_SQL} + INTERVAL '10 days' THEN 'VENCIMIENTO EN RIESGO'
+        WHEN lv.fecha_vencimiento <= ${FECHA_HOY_CHILE_SQL} + INTERVAL '30 days' THEN 'PRÓXIMO A VENCER'
+        ELSE 'VIGENTE'
     END`;
     if (estadoFiltro) agregarFiltro(`(${expresionEstado}) = ?`, estadoFiltro);
     const condicionCompleta = condiciones.join(' AND ');
@@ -251,8 +255,11 @@ const obtenerLotesVencimiento = async (estadoSolicitado, paginaSolicitada, filtr
         ),
         pool.query(
             `SELECT
-                COUNT(*) FILTER (WHERE lv.activo = TRUE AND lv.cantidad > 0 AND lv.fecha_vencimiento >= CURRENT_DATE) AS activos,
-                COUNT(*) FILTER (WHERE lv.activo = FALSE OR lv.cantidad <= 0 OR lv.fecha_vencimiento < CURRENT_DATE) AS inactivos
+                COUNT(*) FILTER (WHERE lv.activo = TRUE AND lv.cantidad > 0) AS activos,
+                COUNT(*) FILTER (WHERE lv.activo = FALSE OR lv.cantidad <= 0) AS inactivos,
+                COUNT(*) FILTER (WHERE lv.activo = TRUE AND lv.cantidad > 0
+                    AND lv.fecha_vencimiento >= ${FECHA_HOY_CHILE_SQL}
+                    AND lv.fecha_vencimiento <= ${FECHA_HOY_CHILE_SQL} + INTERVAL '5 days') AS criticos
              FROM base_datos.lotes_vencimiento lv`
         )
     ]);
@@ -287,10 +294,11 @@ const obtenerLotesVencimiento = async (estadoSolicitado, paginaSolicitada, filtr
             CASE
                 WHEN lv.activo = FALSE THEN lv.estado_baja
                 WHEN lv.cantidad <= 0 THEN 'AGOTADO'
-                WHEN lv.fecha_vencimiento < CURRENT_DATE THEN 'VENCIDO'
-                WHEN lv.fecha_vencimiento <= CURRENT_DATE + INTERVAL '5 days' THEN 'VENCIMIENTO CRÍTICO'
-                WHEN lv.fecha_vencimiento <= CURRENT_DATE + INTERVAL '10 days' THEN 'VENCIMIENTO EN RIESGO'
-                ELSE 'PRÓXIMO A VENCER'
+                WHEN lv.fecha_vencimiento < ${FECHA_HOY_CHILE_SQL} THEN 'VENCIDO'
+                WHEN lv.fecha_vencimiento <= ${FECHA_HOY_CHILE_SQL} + INTERVAL '5 days' THEN 'VENCIMIENTO CRÍTICO'
+                WHEN lv.fecha_vencimiento <= ${FECHA_HOY_CHILE_SQL} + INTERVAL '10 days' THEN 'VENCIMIENTO EN RIESGO'
+                WHEN lv.fecha_vencimiento <= ${FECHA_HOY_CHILE_SQL} + INTERVAL '30 days' THEN 'PRÓXIMO A VENCER'
+                ELSE 'VIGENTE'
             END AS estado
          FROM base_datos.lotes_vencimiento lv
          INNER JOIN base_datos.productos p ON p.codigo = lv.codigo
@@ -305,7 +313,8 @@ const obtenerLotesVencimiento = async (estadoSolicitado, paginaSolicitada, filtr
         paginacion: {pagina_actual: pagina, total_paginas: totalPaginas, total_lotes: total, limite},
         resumen: {
             activos: Number(resumen.rows[0].activos),
-            inactivos: Number(resumen.rows[0].inactivos)
+            inactivos: Number(resumen.rows[0].inactivos),
+            criticos: Number(resumen.rows[0].criticos)
         }
     };
 };
@@ -319,9 +328,9 @@ const obtenerAlertasVencimiento = async () => {
             p.familia,
             lv.cantidad,
             lv.fecha_vencimiento,
-            (lv.fecha_vencimiento - CURRENT_DATE) AS dias_restantes,
+            (lv.fecha_vencimiento - ${FECHA_HOY_CHILE_SQL}) AS dias_restantes,
             CASE
-                WHEN lv.fecha_vencimiento <= CURRENT_DATE + INTERVAL '5 days' THEN 'VENCIMIENTO CRÍTICO'
+                WHEN lv.fecha_vencimiento <= ${FECHA_HOY_CHILE_SQL} + INTERVAL '5 days' THEN 'VENCIMIENTO CRÍTICO'
                 ELSE 'VENCIMIENTO EN RIESGO'
             END AS estado,
             COUNT(*) OVER() AS total_alertas
@@ -329,7 +338,7 @@ const obtenerAlertasVencimiento = async () => {
          INNER JOIN base_datos.productos p ON p.codigo = lv.codigo
          WHERE lv.activo = TRUE
            AND lv.cantidad > 0
-           AND lv.fecha_vencimiento BETWEEN CURRENT_DATE AND CURRENT_DATE + INTERVAL '10 days'
+           AND lv.fecha_vencimiento BETWEEN ${FECHA_HOY_CHILE_SQL} AND ${FECHA_HOY_CHILE_SQL} + INTERVAL '10 days'
          ORDER BY lv.fecha_vencimiento ASC, p.descripcion ASC
          LIMIT 50`
     );

@@ -23,10 +23,27 @@
     font: 13px Arial, sans-serif;
 }
 
+.seccion_vencimientos {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 0;
+    margin-top: 10px;
+}
+.encabezado_seccion_vencimientos {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding: 3px 0 0;
+}
 .titulo_seccion_vencimientos {
-    margin-bottom: -7px;
+    margin: 0;
     color: #0b3650;
-    font: 700 18px Arial, sans-serif;
+    font: 700 25px Arial, sans-serif;
+}
+.descripcion_seccion_vencimientos {
+    color: #71818a;
+    font: 13px/1.45 Arial, sans-serif;
 }
 
 .pestanas_vencimientos {
@@ -92,33 +109,65 @@
 
 .filtros_alertas_vencimientos {
     display: grid;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 16px;
+    align-items: end;
+    gap: 12px;
+    padding: 17px 16px;
     border-bottom: 1px solid #e4eaed;
     box-sizing: border-box;
 }
 
-.filtros_alertas_stock { grid-template-columns: minmax(180px, 2fr) minmax(150px, 1fr) minmax(150px, 1fr) auto; }
+.filtros_alertas_stock { grid-template-columns: minmax(180px, 2fr) repeat(3, minmax(120px, 1fr)) auto; }
 .filtros_lista_vencimientos { grid-template-columns: minmax(190px, 2fr) minmax(145px, 1fr) minmax(205px, 1.5fr) minmax(240px, 1.5fr) auto; }
 .filtros_alertas_vencimientos input,
 .filtros_alertas_vencimientos select {
     width: 100%;
     min-width: 0;
-    height: 38px;
-    padding: 8px 10px;
-    border: 1px solid #cbd9e0;
+    height: 42px;
+    padding: 8px 12px;
+    border: 1px solid #ced9de;
     border-radius: 6px;
     background: #ffffff;
-    color: #405762;
-    font: 12px Arial, sans-serif;
+    color: #37434b;
+    font: 13px Arial, sans-serif;
     box-sizing: border-box;
 }
 
 .filtros_alertas_vencimientos input:focus,
 .filtros_alertas_vencimientos select:focus { outline: 2px solid #a6e0e2; border-color: #159ba3; }
 .filtro_fechas_vencimientos { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
-.campo_filtro_fecha_vencimiento { min-width: 0; display: flex; flex-direction: column; gap: 4px; color: #71818a; font: 10px Arial, sans-serif; }
+.campo_filtro_fecha_vencimiento,
+.campo_filtro_alertas {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    min-width: 0;
+}
+.etiqueta_filtro_alertas {
+    display: block;
+    margin: 0;
+    color: #536873;
+    font: 700 12px Arial, sans-serif;
+    line-height: 16px;
+}
+.campo_boton_filtros_alertas {
+    min-width: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+.campo_boton_filtros_alertas .boton_limpiar_filtros_alertas {
+    height: 42px;
+    min-height: 42px;
+    padding: 0 13px;
+    border: 1px solid #159ba3;
+    background: #ffffff;
+    color: #0f858d;
+    font: 700 12px Arial, sans-serif;
+}
+.campo_boton_filtros_alertas .boton_limpiar_filtros_alertas:hover { background: #e4f6f6; }
+.filtros_alertas_vencimientos input:focus-visible,
+.filtros_alertas_vencimientos select:focus-visible,
+.boton_limpiar_filtros_alertas:focus-visible { outline: 2px solid #159ba3; outline-offset: 2px; }
 .boton_limpiar_filtros_alertas { min-height: 38px; padding: 8px 11px; border: 1px solid #cbd9e0; border-radius: 6px; background: #ffffff; color: #435b69; font: 700 11px Arial, sans-serif; white-space: nowrap; cursor: pointer; }
 .boton_limpiar_filtros_alertas:hover { border-color: #159ba3; background: #effafb; color: #0f858d; }
 
@@ -132,7 +181,7 @@
     min-width: 850px;
 }
 
-.tabla_lotes_vencimiento { min-width: 1320px; }
+.tabla_lotes_vencimiento { min-width: 0; }
 .tabla_alertas_stock { min-width: 760px; }
 
 .fila_encabezado_vencimientos,
@@ -143,7 +192,7 @@
 
 .fila_lotes_vencimiento,
 .fila_encabezado_vencimientos.fila_lotes_vencimiento {
-    grid-template-columns: 18% 9% 12% 11% 13% 14% 10% 6% 7%;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1.2fr) minmax(0, 1.3fr) minmax(0, 1.5fr) 96px;
 }
 
 .fila_stock_alertas,
@@ -206,24 +255,39 @@
 .estado_lote_vendido { background: #e8f7f0; color: #18845d; }
 .estado_lote_inactivo { background: #fdeaea; color: #b54747; }
 
-.boton_editar_vencimiento {
-    width: 100%;
-    height: 34px;
-    padding: 4px 8px;
-    box-sizing: border-box;
-    border: 1px solid #159ba3;
-    border-radius: 6px;
-    background: #ffffff;
-    color: #0f858d;
-    font: 700 11px Arial, sans-serif;
-    cursor: pointer;
+/* Acciones de lotes: iconos tipo Inventario (Lucide inline). */
+.acciones_lote_vencimiento {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 0;
 }
-
-.boton_editar_vencimiento:hover { background: #e8f7f7; }
-
-.acciones_lote_vencimiento { display: flex; flex-direction: column; gap: 5px; }
-.boton_baja_lote_vencimiento { width: 100%; height: 34px; padding: 4px 8px; box-sizing: border-box; border: 1px solid #e3bcbc; border-radius: 6px; background: #fffafa; color: #a33f3f; font: 700 10px Arial, sans-serif; cursor: pointer; }
-.boton_baja_lote_vencimiento:hover { background: #fdeaea; }
+.boton_editar_vencimiento,
+.boton_baja_lote_vencimiento {
+    flex: 0 0 36px;
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px;
+    border-radius: 7px;
+    border: 1px solid #dce4e8;
+    background: #ffffff;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: background-color .18s, border-color .18s;
+}
+.boton_editar_vencimiento { color: #159ba3; }
+.boton_editar_vencimiento:hover { border-color: #159ba3; background: #e4f6f6; }
+.boton_baja_lote_vencimiento { color: #c04e4e; }
+.boton_baja_lote_vencimiento:hover { border-color: #d99e9e; background: #fce9e9; }
+.acciones_lote_vencimiento button:focus-visible { outline: 2px solid #159ba3; outline-offset: 2px; }
+.acciones_lote_vencimiento button svg { width: 19px; height: 19px; display: block; pointer-events: none; }
 
 .modal_editar_vencimiento {
     position: fixed;
@@ -384,4 +448,460 @@
     .contenido_modal_editar_vencimiento { padding: 22px 18px; }
     .filtros_alertas_stock,
     .filtros_lista_vencimientos { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Alertas de stock: filtros y estados visuales. */
+.aviso_datos_alertas_stock { margin-top: 6px; color: #71818a; font: 11px/1.45 Arial, sans-serif; }
+.filtros_alertas_stock { grid-template-columns: minmax(180px, 2fr) repeat(3, minmax(130px, 1fr)) auto; }
+.estado_alerta_sin_stock { background: #fde8e8; color: #b42318; }
+.estado_alerta_stock_bajo { background: #fff2dc; color: #a35a11; }
+@media (max-width: 1100px) {
+    .filtros_alertas_stock { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .filtros_alertas_stock > .campo_filtro_alertas:first-child { grid-column: 1 / -1; }
+}
+@media (max-width: 700px) {
+    .filtros_alertas_stock { grid-template-columns: minmax(0,1fr); }
+    .filtros_alertas_stock > .campo_filtro_alertas:first-child { grid-column: auto; }
+    .filtros_alertas_stock .campo_boton_filtros_alertas button { width: 100%; }
+}
+
+/* ====================================
+   INDICADORES DE ALERTAS Y VENCIMIENTOS
+   ==================================== */
+
+.resumen_alertas_vencimientos {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    width: 100%;
+}
+
+/* Tarjetas */
+.tarjeta_resumen_alertas {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-height: 105px;
+    padding: 18px;
+    background: #ffffff;
+    border: 1px solid #dce4e8;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+/* Contenedor del icono */
+.icono_resumen_alertas {
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+/* Tamaño de los SVG */
+.icono_resumen_alertas img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+/* Colores de fondo de cada icono */
+.icono_resumen_stock {
+    background-color: #fde8e8;
+}
+
+.icono_resumen_criticos {
+    background-color: #fff4df;
+}
+
+.icono_resumen_lotes {
+    background-color: #e4f6f6;
+}
+
+/* Información del KPI */
+.contenido_resumen_alertas {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.etiqueta_resumen_alertas {
+    color: #697a83;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+}
+
+.valor_resumen_alertas {
+    color: #0b3650;
+    font-family: Arial, sans-serif;
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.tarjeta_resumen_stock .valor_resumen_alertas {
+    color: #d94b4b;
+}
+
+.tarjeta_resumen_criticos .valor_resumen_alertas {
+    color: #d58226;
+}
+
+.tarjeta_resumen_lotes .valor_resumen_alertas {
+    color: #159ba3;
+}
+
+.nota_resumen_alertas {
+    color: #71818a;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+/* Responsive */
+@media (max-width: 1000px) {
+    .resumen_alertas_vencimientos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 650px) {
+    .resumen_alertas_vencimientos {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 1100px) {
+    .filtros_alertas_stock { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .filtros_alertas_stock > .campo_filtro_alertas:first-child { grid-column: 1 / -1; }
+}
+@media (max-width: 700px) {
+    .resumen_alertas_vencimientos { grid-template-columns: 1fr; }
+    .filtros_alertas_stock { grid-template-columns: minmax(0,1fr); }
+    .filtros_alertas_stock > .campo_filtro_alertas:first-child { grid-column: auto; }
+    .filtros_alertas_stock .campo_boton_filtros_alertas button { width: 100%; }
+}
+
+/* ==============================================================
+   TITULO - TABLA DE LOTES (DISEÑO FINAL, SIN SCROLL HORIZONTAL)
+   Mantener estas reglas en el archivo principal. No agregar parches.
+   ============================================================== */
+
+/* La vista se adapta al ancho DISPONIBLE junto al menú lateral. */
+.seccion_vencimientos .contenedor_tabla_vencimientos {
+    min-width: 0;
+    overflow: visible; /* Permite desplegables por debajo de los filtros. */
+    container: panel-lotes / inline-size;
+}
+.seccion_vencimientos .tabla_vencimientos_desplazable {
+    width: 100%;
+    overflow: hidden;
+}
+.seccion_vencimientos .tabla_lotes_vencimiento {
+    width: 100%;
+    min-width: 0;
+}
+
+/* Filtros compactos y alineados: no estiran el ancho de la tabla. */
+.seccion_vencimientos .filtros_lista_vencimientos {
+    /* Buscar ocupa menos que Ordenar, para mostrar completo el valor elegido. */
+    grid-template-columns: minmax(185px, 1.08fr) minmax(170px, .92fr) minmax(190px, 1fr) minmax(275px, 1.75fr) auto;
+    align-items: end;
+    gap: 10px;
+    position: relative;
+    z-index: 4;
+}
+.seccion_vencimientos .filtros_lista_vencimientos > * { min-width: 0; }
+.seccion_vencimientos .filtros_lista_vencimientos input,
+.seccion_vencimientos .filtros_lista_vencimientos select { height: 42px; }
+.seccion_vencimientos .filtros_lista_vencimientos .boton_limpiar_filtros_alertas {
+    min-height: 42px;
+    border-color: #159ba3;
+    color: #0f858d;
+    font-size: 12px;
+}
+
+/* Activos: cinco columnas. Inactivos: seis, incluyendo motivo. */
+.seccion_vencimientos .tabla_lotes_vencimiento[data-modo="activos"] .fila_lotes_vencimiento {
+    grid-template-columns: minmax(0, 2.4fr) minmax(0, 1.05fr) minmax(0, 1.3fr) minmax(0, 1.4fr) 104px;
+}
+.seccion_vencimientos .tabla_lotes_vencimiento[data-modo="inactivos"] .fila_lotes_vencimiento {
+    grid-template-columns: minmax(0, 2.1fr) minmax(0, 1fr) minmax(0, 1.2fr) minmax(0, 1.3fr) minmax(0, 1.5fr) 104px;
+}
+.seccion_vencimientos .tabla_lotes_vencimiento [role="columnheader"][hidden] { display: none !important; }
+.seccion_vencimientos .tabla_lotes_vencimiento .fila_encabezado_vencimientos.fila_lotes_vencimiento,
+.seccion_vencimientos .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento {
+    min-width: 0;
+    align-items: center;
+    gap: 0;
+}
+.seccion_vencimientos .tabla_lotes_vencimiento .fila_encabezado_vencimientos.fila_lotes_vencimiento > [role="columnheader"] {
+    min-width: 0;
+    padding: 14px 12px;
+    font: 700 11px/1.3 Arial, sans-serif;
+    color: #667881;
+    box-sizing: border-box;
+}
+.seccion_vencimientos .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento {
+    min-height: 86px;
+    padding: 0;
+    border-top: 1px solid #edf1f3;
+}
+.seccion_vencimientos .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento:hover { background-color: #f8fafb; }
+.seccion_vencimientos .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento > [role="cell"] {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 5px;
+    padding: 14px 12px;
+    color: #405762;
+    font: 12px/1.4 Arial, sans-serif;
+    box-sizing: border-box;
+    overflow-wrap: anywhere;
+}
+.seccion_vencimientos .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento > [role="cell"]::before { display: none; }
+.seccion_vencimientos .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento > .acciones_lote_vencimiento {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+}
+.nombre_producto_lote { font-weight: 700; color: #0b3650; font-size: 12px; line-height: 1.4; }
+.dato_principal_lote { color: #324b57; font-weight: 600; font-size: 12px; }
+.dato_secundario_lote { display: block; color: #71818a; font-size: 11px; line-height: 1.4; }
+.dato_motivo_lote { color: #405762; font-size: 12px; line-height: 1.45; }
+.seccion_vencimientos .tabla_lotes_vencimiento .etiqueta_estado_vencimiento {
+    max-width: 100%; white-space: normal; text-align: center;
+    font-size: 10px; line-height: 1.4; border-radius: 6px; padding: 5px 8px;
+}
+
+/* Solo en contenedores realmente estrechos los filtros pasan a dos filas. */
+@container panel-lotes (max-width: 1000px) {
+    .seccion_vencimientos .filtros_lista_vencimientos {
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+    .filtros_lista_vencimientos > .campo_filtro_alertas:nth-child(1) { grid-column: span 3; }
+    .filtros_lista_vencimientos > .campo_filtro_alertas:nth-child(2) { grid-column: span 3; }
+    .filtros_lista_vencimientos > .campo_filtro_alertas:nth-child(3) { grid-column: span 6; }
+    .filtros_lista_vencimientos > .filtro_fechas_vencimientos { grid-column: span 9; }
+    .filtros_lista_vencimientos > .campo_boton_filtros_alertas { grid-column: span 3; justify-content: flex-end; }
+}
+
+/* Con menos espacio, usamos tarjetas de información legibles. */
+@container panel-lotes (max-width: 860px) {
+    .tabla_lotes_vencimiento .fila_encabezado_vencimientos.fila_lotes_vencimiento { display: none; }
+    .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 14px 16px;
+        min-height: 0;
+        padding: 16px;
+    }
+    .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento > [role="cell"] {
+        display: flex; flex-direction: column; gap: 5px;
+        padding: 0; min-width: 0;
+    }
+    .seccion_vencimientos .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento > [role="cell"]::before {
+        display: block; content: attr(data-etiqueta); margin-bottom: 3px;
+        color: #697a83; font: 700 11px Arial, sans-serif;
+    }
+    .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento > .celda_producto_lote { grid-column: 1 / -1; }
+    .seccion_vencimientos .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento > .acciones_lote_vencimiento {
+        grid-column: 1 / -1; justify-content: flex-start; flex-wrap: wrap;
+    }
+    .seccion_vencimientos .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento > .acciones_lote_vencimiento::before {
+        flex: 0 0 100%;
+    }
+    /* Se mantienen las filas anteriores mientras las celdas de lotes pasan a tarjetas. */
+}
+
+/* La tabla de alertas de stock también pasa a tarjetas en móviles. */
+@media (max-width: 900px) {
+    .tabla_alertas_stock { min-width: 0; }
+    .tabla_alertas_stock .fila_encabezado_vencimientos { display: none; }
+    .tabla_alertas_stock .fila_vencimiento.fila_stock_alertas {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px; padding: 16px;
+    }
+    .tabla_alertas_stock .fila_vencimiento.fila_stock_alertas > [role="cell"] {
+        display: flex; flex-direction: column; align-items: flex-start;
+        gap: 5px; padding: 0; min-width: 0;
+    }
+    .tabla_alertas_stock .fila_vencimiento.fila_stock_alertas > [role="cell"]::before {
+        display: block; content: attr(data-etiqueta);
+        color: #697a83; font: 700 11px Arial, sans-serif;
+    }
+    .tabla_alertas_stock .fila_vencimiento.fila_stock_alertas > [role="cell"]:first-child {
+        grid-column: 1 / -1; color: #0b3650; font-weight: 700;
+    }
+}
+@media (max-width: 500px) {
+    .tabla_alertas_stock .fila_vencimiento.fila_stock_alertas {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .tabla_alertas_stock .fila_vencimiento.fila_stock_alertas > [role="cell"]:first-child { grid-column: auto; }
+}
+
+@container panel-lotes (max-width: 530px) {
+    .seccion_vencimientos .filtros_lista_vencimientos { grid-template-columns: minmax(0, 1fr); }
+    .seccion_vencimientos .filtros_lista_vencimientos > .campo_filtro_alertas,
+    .seccion_vencimientos .filtros_lista_vencimientos > .filtro_fechas_vencimientos,
+    .seccion_vencimientos .filtros_lista_vencimientos > .campo_boton_filtros_alertas { grid-column: 1 / -1 !important; }
+    .filtros_lista_vencimientos .campo_boton_filtros_alertas button { width: 100%; }
+    .filtros_lista_vencimientos .filtro_fechas_vencimientos { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento {
+        grid-template-columns: minmax(0, 1fr) !important; gap: 12px; padding: 16px;
+    }
+    .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento > .celda_producto_lote,
+    .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento > .acciones_lote_vencimiento { grid-column: auto; }
+}
+
+/* ============================================================
+   FILTROS - SELECTORES DESPLEGABLES Y AJUSTES RESPONSIVE
+   ============================================================ */
+@container panel-lotes (max-width: 780px) and (min-width: 531px) {
+    .seccion_vencimientos .filtros_lista_vencimientos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .filtros_lista_vencimientos > .campo_filtro_alertas:nth-child(1),
+    .filtros_lista_vencimientos > .filtro_fechas_vencimientos,
+    .filtros_lista_vencimientos > .campo_boton_filtros_alertas { grid-column: 1 / -1; }
+    .filtros_lista_vencimientos > .campo_filtro_alertas:nth-child(2),
+    .filtros_lista_vencimientos > .campo_filtro_alertas:nth-child(3) { grid-column: auto; }
+    .filtros_lista_vencimientos .campo_boton_filtros_alertas button { width: 100%; }
+}
+/* El selector original continúa en DOM para preservar los listeners y valores de la API. */
+.seccion_vencimientos .selector_nativo_oculto_vencimientos {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    opacity: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    pointer-events: none !important;
+}
+.seccion_vencimientos .selector_visual_vencimientos { position: relative; width: 100%; min-width: 0; }
+.seccion_vencimientos .boton_selector_visual_vencimientos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    height: 42px;
+    padding: 0 12px;
+    border: 1px solid #ced9de;
+    border-radius: 6px;
+    background: #fff;
+    color: #37434b;
+    font: 13px Arial, sans-serif;
+    text-align: left;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+.seccion_vencimientos .boton_selector_visual_vencimientos:hover { border-color: #159ba3; }
+.seccion_vencimientos .boton_selector_visual_vencimientos:focus-visible {
+    outline: 2px solid #a6e0e2;
+    outline-offset: 1px;
+}
+.seccion_vencimientos .texto_selector_visual_vencimientos {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.seccion_vencimientos .boton_selector_visual_vencimientos svg { width: 16px; height: 16px; flex-shrink: 0; }
+.seccion_vencimientos .panel_selector_visual_vencimientos {
+    position: absolute;
+    left: 0;
+    top: calc(100% + 5px);
+    z-index: 100;
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #cbd9e0;
+    border-radius: 7px;
+    background: #fff;
+    box-shadow: 0 10px 26px rgba(11, 54, 80, .14);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    box-sizing: border-box;
+}
+.seccion_vencimientos .panel_selector_visual_vencimientos[hidden] { display: none !important; }
+.seccion_vencimientos .opcion_selector_visual_vencimientos {
+    display: block;
+    width: 100%;
+    padding: 9px 11px;
+    background: #fff;
+    border: 0;
+    border-radius: 5px;
+    color: #405762;
+    font: 12px/1.35 Arial, sans-serif;
+    text-align: left;
+    white-space: normal;
+    cursor: pointer;
+}
+.seccion_vencimientos .opcion_selector_visual_vencimientos:hover,
+.seccion_vencimientos .opcion_selector_visual_vencimientos:focus-visible { outline: 0; background: #e4f6f6; color: #0f858d; }
+.seccion_vencimientos .opcion_selector_visual_vencimientos[aria-selected="true"] { background: #dff2f3; color: #086f76; font-weight: 700; }
+
+/* ============================================================
+   PAGINADORES - IDENTICOS A LOS DE INVENTARIO
+   ============================================================ */
+.paginador_vencimientos {
+    width: 100%;
+    min-height: 70px;
+    padding: 15px 20px;
+    gap: 20px;
+    border-top: 1px solid #edf1f3;
+}
+.informacion_paginador_vencimientos { color: #536873; font-size: 13px; white-space: nowrap; }
+.controles_paginador_vencimientos,
+.numeros_paginas_vencimientos { gap: 6px; }
+.boton_pagina_vencimientos,
+.boton_numero_pagina_vencimientos {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    padding: 0;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    border: 1px solid #dce4e8;
+    border-radius: 6px;
+    color: #536873;
+    background: #fff;
+    font: 13px Arial, sans-serif;
+    transition: background-color .2s, border-color .2s;
+}
+.boton_numero_pagina_vencimientos.pagina_actual_vencimientos {
+    background: #159ba3;
+    border-color: #159ba3;
+    color: #fff;
+    font-weight: 700;
+}
+.boton_numero_pagina_vencimientos:hover { background: #e4f6f6; border-color: #159ba3; color: #0f858d; }
+.boton_numero_pagina_vencimientos.pagina_actual_vencimientos:hover { background: #0d6970; border-color: #0d6970; color: #fff; }
+.boton_pagina_vencimientos:hover:not([aria-disabled="true"]) { background: #e4f6f6; border-color: #159ba3; color: #0f858d; }
+.boton_pagina_vencimientos[aria-disabled="true"] { opacity: .45; cursor: not-allowed; background: #fff; border-color: #dce4e8; }
+.boton_numero_pagina_vencimientos:focus-visible,
+.boton_pagina_vencimientos:focus-visible { outline: 2px solid #159ba3; outline-offset: 2px; }
+.puntos_paginas_vencimientos { display: flex; align-items: center; justify-content: center; width: 30px; height: 40px; gap: 4px; padding: 0; }
+.punto_paginacion_vencimientos { display: block; width: 4px; height: 4px; background: #64748b; border-radius: 50%; }
+@media (max-width: 900px) {
+    .paginador_vencimientos { flex-direction: column; justify-content: center; gap: 15px; }
+    .controles_paginador_vencimientos { justify-content: center; }
+}
+@media (max-width: 600px) {
+    .boton_pagina_vencimientos,
+    .boton_numero_pagina_vencimientos { width: 34px; height: 34px; min-width: 34px; min-height: 34px; font-size: 12px; }
+    .numeros_paginas_vencimientos,
+    .controles_paginador_vencimientos { gap: 4px; }
+    .informacion_paginador_vencimientos { font-size: 12px; }
+}
+@media (max-width: 420px) {
+    .paginador_vencimientos { padding: 12px 8px; }
+    .controles_paginador_vencimientos,
+    .numeros_paginas_vencimientos { flex-wrap: wrap; justify-content: center; }
 }

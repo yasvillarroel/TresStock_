@@ -1,7 +1,57 @@
 <div class="contenedor_alertas_vencimientos">
     <div class="encabezado_alertas_vencimientos">
         <div class="titulo_alertas_vencimientos">Alertas</div>
-        <div class="descripcion_alertas_vencimientos">Revisa el estado del inventario y los lotes con vencimiento.</div>
+        <div class="descripcion_alertas_vencimientos">Identifica productos que requieren reposición y controla los vencimientos de mercadería.</div>
+    </div>
+
+    <!-- RESUMEN DE ALERTAS Y VENCIMIENTOS -->
+    <div class="resumen_alertas_vencimientos" aria-label="Resumen de alertas y vencimientos">
+
+        <!-- KPI 1: ALERTAS DE STOCK -->
+        <div class="tarjeta_resumen_alertas tarjeta_resumen_stock">
+
+            <div class="icono_resumen_alertas icono_resumen_stock">
+                <img src="./imagenes/inicio_sesion/cuerpo_pagina/secciones/package-x.svg" alt="">
+            </div>
+
+            <div class="contenido_resumen_alertas">
+                <div class="etiqueta_resumen_alertas">Alertas de stock</div>
+                <div class="valor_resumen_alertas" id="resumen_alertas_stock">0</div>
+                <div class="nota_resumen_alertas">Catálogo inventariable completo</div>
+            </div>
+
+        </div>
+
+        <!-- KPI 2: VENCIMIENTOS CRÍTICOS -->
+        <div class="tarjeta_resumen_alertas tarjeta_resumen_criticos">
+
+            <div class="icono_resumen_alertas icono_resumen_criticos">
+                <img src="./imagenes/inicio_sesion/cuerpo_pagina/secciones/calendar-clock.svg" alt="">
+            </div>
+
+            <div class="contenido_resumen_alertas">
+                <div class="etiqueta_resumen_alertas">Vencimientos críticos</div>
+                <div class="valor_resumen_alertas" id="resumen_lotes_criticos">0</div>
+                <div class="nota_resumen_alertas">Vencen dentro de 5 días</div>
+            </div>
+
+        </div>
+
+        <!-- KPI 3: LOTES ACTIVOS -->
+        <div class="tarjeta_resumen_alertas tarjeta_resumen_lotes">
+
+            <div class="icono_resumen_alertas icono_resumen_lotes">
+                <img src="./imagenes/inicio_sesion/cuerpo_pagina/secciones/package-check.svg" alt="">
+            </div>
+
+            <div class="contenido_resumen_alertas">
+                <div class="etiqueta_resumen_alertas">Lotes activos</div>
+                <div class="valor_resumen_alertas" id="resumen_lotes_activos">0</div>
+                <div class="nota_resumen_alertas">Incluye lotes vencidos sin dar de baja</div>
+            </div>
+
+        </div>
+
     </div>
 
     <div class="contenedor_tabla_vencimientos">
@@ -9,17 +59,37 @@
             <div class="titulo_tabla_vencimientos">Productos con alertas de stock</div>
         </div>
         <div class="filtros_alertas_vencimientos filtros_alertas_stock">
-            <input id="busqueda_alertas_inventario" type="search" placeholder="Buscar producto o código" aria-label="Buscar alertas de inventario por producto o código">
-            <select id="filtro_estado_alertas_inventario" aria-label="Filtrar alertas por estado">
-                <option value="">Todos los estados</option>
-                <option value="STOCK NEGATIVO">Stock negativo</option>
-                <option value="SIN STOCK">Sin stock</option>
-                <option value="STOCK BAJO">Stock bajo</option>
-            </select>
-            <select id="filtro_familia_alertas_inventario" aria-label="Filtrar alertas por familia">
-                <option value="">Todas las familias</option>
-            </select>
-            <button class="boton_limpiar_filtros_alertas" id="limpiar_filtros_alertas_inventario" type="button">Limpiar filtros</button>
+            <div class="campo_filtro_alertas">
+                <label class="etiqueta_filtro_alertas" for="busqueda_alertas_inventario">Buscar producto</label>
+                <input id="busqueda_alertas_inventario" type="search" placeholder="Código o descripción" aria-label="Buscar alertas de inventario por producto o código">
+            </div>
+            <div class="campo_filtro_alertas">
+                <label class="etiqueta_filtro_alertas" for="filtro_estado_alertas_inventario">Estado</label>
+                <select id="filtro_estado_alertas_inventario" aria-label="Filtrar alertas por estado">
+                    <option value="">Todos los estados</option>
+                    <option value="STOCK NEGATIVO">Stock negativo</option>
+                    <option value="SIN STOCK">Sin stock</option>
+                    <option value="STOCK BAJO">Stock bajo</option>
+                </select>
+            </div>
+            <div class="campo_filtro_alertas">
+                <label class="etiqueta_filtro_alertas" for="filtro_actividad_alertas_inventario">Actividad comercial</label>
+                <select id="filtro_actividad_alertas_inventario" aria-label="Filtrar alertas por actividad comercial">
+                    <option value="RECIENTES" selected>Ventas recientes</option>
+                    <option value="TODOS">Todos los productos</option>
+                    <option value="ANTIGUAS">Solo ventas antiguas</option>
+                    <option value="SIN_HISTORIAL">Sin historial de ventas</option>
+                </select>
+            </div>
+            <div class="campo_filtro_alertas">
+                <label class="etiqueta_filtro_alertas" for="filtro_familia_alertas_inventario">Familia</label>
+                <select id="filtro_familia_alertas_inventario" aria-label="Filtrar alertas por familia">
+                    <option value="">Todas las familias</option>
+                </select>
+            </div>
+            <div class="campo_boton_filtros_alertas">
+                <button class="boton_limpiar_filtros_alertas" id="limpiar_filtros_alertas_inventario" type="button">Limpiar filtros</button>
+            </div>
         </div>
         <div class="tabla_vencimientos_desplazable">
             <div class="tabla_vencimientos tabla_alertas_stock" role="table" aria-label="Productos con alertas de stock">
@@ -47,7 +117,10 @@
     </div>
 
     <div class="seccion_vencimientos">
-        <div class="titulo_seccion_vencimientos">Vencimientos</div>
+        <div class="encabezado_seccion_vencimientos">
+            <div class="titulo_seccion_vencimientos">Vencimientos</div>
+            <div class="descripcion_seccion_vencimientos">Supervisa las fechas de vencimiento y gestiona las bajas de mercadería.</div>
+        </div>
         <div class="pestanas_vencimientos" role="tablist" aria-label="Estado de los lotes">
             <div class="pestana_vencimientos pestana_vencimientos_activa" id="pestana_lotes_activos" role="tab" tabindex="0" aria-selected="true" data-estado="activos">
                 Activos <div class="contador_pestana_vencimientos" id="contador_lotes_activos">0</div>
@@ -62,40 +135,56 @@
                 <div class="titulo_tabla_vencimientos" id="titulo_tabla_vencimientos">Lotes activos</div>
             </div>
             <div class="filtros_alertas_vencimientos filtros_lista_vencimientos">
-                <input id="busqueda_vencimientos" type="search" placeholder="Producto, código, correo o motivo" aria-label="Buscar lotes por producto, código, correo o motivo">
-                <select id="filtro_estado_vencimientos" aria-label="Filtrar lotes por estado">
-                    <option value="">Todos los estados</option>
-                    <option value="VENCIMIENTO CRÍTICO">Vencimiento crítico</option>
-                    <option value="VENCIMIENTO EN RIESGO">Vencimiento en riesgo</option>
-                    <option value="PRÓXIMO A VENCER">Próximo a vencer</option>
-                    <option value="VENCIDO">Vencido</option>
-                    <option value="AGOTADO">Agotado</option>
-                    <option value="VENDIDO">Vendido</option>
-                    <option value="ELIMINADO">Eliminado</option>
-                    <option value="MERMA">Merma</option>
-                    <option value="OTRO">Otro</option>
-                </select>
-                <select id="orden_vencimientos" aria-label="Ordenar vencimientos por fecha">
-                    <option value="asc">Fecha ascendente · más próximos primero</option>
-                    <option value="desc">Fecha descendente · más lejanos primero</option>
-                </select>
-                <div class="filtro_fechas_vencimientos">
-                    <div class="campo_filtro_fecha_vencimiento"><div>Vencimiento desde</div><input id="fecha_desde_vencimientos" type="date" aria-label="Vencimiento desde"></div>
-                    <div class="campo_filtro_fecha_vencimiento"><div>Vencimiento hasta</div><input id="fecha_hasta_vencimientos" type="date" aria-label="Vencimiento hasta"></div>
+                <div class="campo_filtro_alertas">
+                    <label class="etiqueta_filtro_alertas" for="busqueda_vencimientos">Buscar lote</label>
+                    <input id="busqueda_vencimientos" type="search" placeholder="Producto, código, correo o motivo" aria-label="Buscar lotes por producto, código, correo o motivo">
                 </div>
-                <button class="boton_limpiar_filtros_alertas" id="limpiar_filtros_vencimientos" type="button">Limpiar filtros</button>
+                <div class="campo_filtro_alertas">
+                    <label class="etiqueta_filtro_alertas" for="filtro_estado_vencimientos">Estado</label>
+                    <select id="filtro_estado_vencimientos" aria-label="Filtrar lotes por estado">
+                        <option value="">Todos los estados</option>
+                        <option value="VENCIMIENTO CRÍTICO">Vencimiento crítico</option>
+                        <option value="VENCIMIENTO EN RIESGO">Vencimiento en riesgo</option>
+                        <option value="PRÓXIMO A VENCER">Próximo a vencer</option>
+                        <option value="VIGENTE">Vigente</option>
+                        <option value="VENCIDO">Vencido</option>
+                        <option value="AGOTADO">Agotado</option>
+                        <option value="VENDIDO">Vendido</option>
+                        <option value="ELIMINADO">Eliminado</option>
+                        <option value="MERMA">Merma</option>
+                        <option value="OTRO">Otro</option>
+                    </select>
+                </div>
+                <div class="campo_filtro_alertas">
+                    <label class="etiqueta_filtro_alertas" for="orden_vencimientos">Ordenar por</label>
+                    <select id="orden_vencimientos" aria-label="Ordenar vencimientos por fecha">
+                        <option value="asc">Más próximos primero</option>
+                        <option value="desc">Más lejanos primero</option>
+                    </select>
+                </div>
+                <div class="filtro_fechas_vencimientos">
+                    <div class="campo_filtro_fecha_vencimiento">
+                        <label class="etiqueta_filtro_alertas" for="fecha_desde_vencimientos">Vencimiento desde</label>
+                        <input id="fecha_desde_vencimientos" type="date" aria-label="Vencimiento desde">
+                    </div>
+                    <div class="campo_filtro_fecha_vencimiento">
+                        <label class="etiqueta_filtro_alertas" for="fecha_hasta_vencimientos">Vencimiento hasta</label>
+                        <input id="fecha_hasta_vencimientos" type="date" aria-label="Vencimiento hasta">
+                    </div>
+                </div>
+                <div class="campo_boton_filtros_alertas">
+                    <button class="boton_limpiar_filtros_alertas" id="limpiar_filtros_vencimientos" type="button">Limpiar filtros</button>
+                </div>
             </div>
             <div class="tabla_vencimientos_desplazable">
-                <div class="tabla_vencimientos tabla_lotes_vencimiento" role="table" aria-label="Lotes con vencimiento">
+                <div class="tabla_vencimientos tabla_lotes_vencimiento" role="table" aria-label="Lotes con vencimiento" data-modo="activos">
+                    <!-- Cabecera compacta: el modo activos/inactivos se ajusta desde JS -->
                     <div class="fila_encabezado_vencimientos fila_lotes_vencimiento" role="row">
                         <div class="celda_encabezado_vencimientos" role="columnheader">Producto</div>
-                        <div class="celda_encabezado_vencimientos" role="columnheader">Código</div>
-                        <div class="celda_encabezado_vencimientos" role="columnheader">Cantidad original del lote</div>
-                        <div class="celda_encabezado_vencimientos" role="columnheader">Cantidad afectada del lote</div>
-                        <div class="celda_encabezado_vencimientos" role="columnheader">Fecha de ingreso</div>
-                        <div class="celda_encabezado_vencimientos" role="columnheader">Fecha de vencimiento</div>
+                        <div class="celda_encabezado_vencimientos" role="columnheader" id="encabezado_cantidad_lote_vencimiento">Disponible</div>
+                        <div class="celda_encabezado_vencimientos" role="columnheader">Vencimiento</div>
                         <div class="celda_encabezado_vencimientos" role="columnheader">Estado</div>
-                        <div class="celda_encabezado_vencimientos" role="columnheader">Motivo</div>
+                        <div class="celda_encabezado_vencimientos" role="columnheader" id="encabezado_motivo_lote_vencimiento" hidden>Motivo de baja</div>
                         <div class="celda_encabezado_vencimientos" role="columnheader">Acciones</div>
                     </div>
                     <div class="filas_tabla_vencimientos" id="filas_vencimientos" role="rowgroup">
@@ -136,7 +225,7 @@
             <button class="cerrar_modal_baja_lote_vencimiento" id="cerrar_modal_baja_lote_vencimiento" type="button" aria-label="Cerrar">×</button>
             <div class="titulo_modal_baja_lote_vencimiento" id="titulo_modal_baja_lote_vencimiento">Dar de baja el lote</div>
             <div class="descripcion_modal_baja_lote_vencimiento" id="descripcion_modal_baja_lote_vencimiento"></div>
-            <div class="aviso_modal_baja_lote_vencimiento">El lote quedará en Inactivos. Esta acción solo archiva el lote y no modifica el stock general del producto.</div>
+            <div class="aviso_modal_baja_lote_vencimiento" id="aviso_modal_baja_lote_vencimiento" aria-live="polite">El lote pasará a Inactivos, sin modificar el stock general del producto.</div>
             <div class="campo_modal_baja_lote_vencimiento">
                 <div class="texto_modal_baja_lote_vencimiento">Estado del lote</div>
                 <select id="estado_baja_lote_vencimiento">
