@@ -1,13 +1,49 @@
+const CONTENIDO_COMPLETO_REPOSICION_ANALISIS = "\n<div class=\"cabecera_panel_analisis\">\n<div class=\"titulo_reposicion_analisis_pronostico\">\n    Reposición recomendada\n   </div>\n<div class=\"subtitulo_panel_analisis\">\n    Prioriza productos que necesitan reposición a partir del stock y las ventas recientes.\n   </div>\n<details class=\"detalles_calculo_analisis\">\n<summary><img alt=\"\" aria-hidden=\"true\" class=\"icono_boton_calculo_analisis\" src=\"./imagenes/inicio_sesion/cuerpo_pagina/secciones/circle-question-mark.svg\"/> ¿Cómo se calcula?</summary>\n<div class=\"descripcion_reposicion_analisis_pronostico\">\n<div>\n<strong>\n       Punto de reposición:\n      </strong>\n      stock mínimo + stock de seguridad.\n     </div>\n<div>\n<strong>\n       Cantidad sugerida:\n      </strong>\n      máximo entre 0 y (punto de reposición + pronóstico de 7 días − stock actual). Se redondea hacia arriba a unidades enteras o a 0,001 KG.\n     </div>\n<div>\n<strong>\n       Reponer:\n      </strong>\n      “Ahora” si el stock llegó al punto de reposición; si no, estima los días para alcanzarlo usando las ventas promedio diarias de los últimos 28 días. “No requerida” si la cantidad sugerida es 0.\n     </div>\n<div>\n<strong>\n       Alcance:\n      </strong>\n      no descuenta compras pendientes ni lotes próximos a vencer. Si el stock es negativo, solicita corregir el inventario antes de sugerir una compra.\n     </div>\n</div>\n</details>\n</div>\n<div class=\"area_filtros_analisis\">\n<div class=\"controles_filtro_reposicion_analisis\">\n<div class=\"campo_busqueda_reposicion_analisis\">\n<div class=\"etiqueta_busqueda_analisis_pronostico\">\n      Buscar producto\n     </div>\n<input autocomplete=\"off\" class=\"input_busqueda_analisis_pronostico\" id=\"buscar_producto_reposicion_analisis\" placeholder=\"Código, código de barras o descripción\" type=\"search\"/>\n</div>\n<div class=\"filtro_reposicion_analisis_pronostico\">\n<div class=\"etiqueta_busqueda_analisis_pronostico\">\n      Mostrar\n     </div>\n<select aria-hidden=\"true\" hidden=\"\" id=\"filtro_estado_reposicion_analisis\" tabindex=\"-1\">\n<option value=\"\">\n       Todas las recomendaciones\n      </option>\n<option selected=\"selected\" value=\"NECESARIA\">\n       Reposición necesaria\n      </option>\n<option value=\"NO_REQUERIDA\">\n       No requerida\n      </option>\n<option value=\"REVISAR_STOCK\">\n       Revisar stock negativo\n      </option>\n</select>\n<div class=\"contenedor_selector_inventario\" id=\"contenedor_selector_estado_reposicion_analisis\">\n<button aria-controls=\"lista_selector_estado_reposicion_analisis\" aria-expanded=\"false\" aria-haspopup=\"listbox\" class=\"boton_selector_inventario\" id=\"boton_selector_estado_reposicion_analisis\" type=\"button\">\n<span class=\"texto_selector_inventario\" id=\"texto_selector_estado_reposicion_analisis\">\n        Reposición necesaria\n       </span>\n<span aria-hidden=\"true\" class=\"flecha_selector_inventario\">\n        ▾\n       </span>\n</button>\n<div class=\"panel_selector_inventario\" hidden=\"\" id=\"panel_selector_estado_reposicion_analisis\">\n<div aria-label=\"Filtrar recomendaciones\" class=\"lista_opciones_selector_inventario\" id=\"lista_selector_estado_reposicion_analisis\" role=\"listbox\">\n</div>\n</div>\n</div>\n</div>\n<div class=\"grupo_boton_limpieza_analisis\">\n<button class=\"boton_limpiar_analisis\" id=\"limpiar_filtros_reposicion_analisis\" type=\"button\">\n      Limpiar filtros\n     </button>\n</div>\n</div>\n</div>\n<div class=\"contenedor_tabla_reposicion_analisis_pronostico\">\n<div aria-label=\"Reposición recomendada por producto\" class=\"tabla_reposicion_analisis_pronostico\" role=\"table\">\n<div class=\"encabezado_reposicion_analisis_pronostico\" role=\"row\">\n<div role=\"columnheader\">\n      Foto\n     </div>\n<div role=\"columnheader\">\n      Producto\n     </div>\n<div role=\"columnheader\">\n      Stock actual\n     </div>\n<div role=\"columnheader\" title=\"Stock mínimo más stock de seguridad\">\n      Punto de reposición\n     </div>\n<div role=\"columnheader\" title=\"Máximo entre 0 y punto de reposición + pronóstico de 7 días − stock actual\">\n      Cantidad sugerida\n     </div>\n<div role=\"columnheader\">\n      Reponer\n     </div>\n</div>\n<div class=\"cuerpo_reposicion_analisis_pronostico\" id=\"cuerpo_reposicion_analisis_pronostico\" role=\"rowgroup\">\n<div class=\"fila_vacia_analisis_pronostico\" role=\"row\">\n<div role=\"cell\">\n       Cargando recomendaciones...\n      </div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"paginacion_analisis_pronostico\" id=\"paginacion_reposicion_analisis\">\n<div class=\"resumen_paginacion_analisis_pronostico\" id=\"resumen_paginacion_reposicion_analisis\">\n    Mostrando 0 productos\n   </div>\n<div class=\"controles_paginacion_analisis_pronostico\" id=\"controles_paginacion_reposicion_analisis\">\n<button aria-label=\"Página anterior de reposición\" class=\"boton_pagina_analisis_pronostico\" id=\"pagina_anterior_reposicion_analisis\" type=\"button\">\n     ‹\n    </button>\n<div class=\"numeros_pagina_analisis_pronostico\" id=\"numeros_pagina_reposicion_analisis\">\n</div>\n<button aria-label=\"Página siguiente de reposición\" class=\"boton_pagina_analisis_pronostico\" id=\"pagina_siguiente_reposicion_analisis\" type=\"button\">\n     ›\n    </button>\n</div>\n</div>\n";
+
+// Repara exclusivamente la estructura de Reposición si el HTML recibido está incompleto.
+// No modifica los datos, los cálculos, las rutas ni el método LightGBM.
+function asegurarEstructuraReposicionAnalisis() {
+    const raiz = document.querySelector('.contenedor_analisis_pronostico');
+    if (!raiz) return;
+    const idsNecesarios = [
+        'filtro_estado_reposicion_analisis',
+        'contenedor_selector_estado_reposicion_analisis',
+        'boton_selector_estado_reposicion_analisis',
+        'cuerpo_reposicion_analisis_pronostico',
+        'resumen_paginacion_reposicion_analisis',
+        'pagina_anterior_reposicion_analisis',
+        'pagina_siguiente_reposicion_analisis'
+    ];
+    const panelExistente = document.getElementById('panel_reposicion_analisis');
+    const estaCompleto = panelExistente && idsNecesarios.every(id => panelExistente.querySelector('#' + id));
+    if (estaCompleto) return;
+    console.warn('TresStock Análisis: el panel de Reposición estaba incompleto; restaurando sus controles y su tabla.');
+    let panel = panelExistente;
+    if (!panel) {
+        panel = document.createElement('div');
+        panel.id = 'panel_reposicion_analisis';
+        panel.className = 'panel_analisis';
+        panel.setAttribute('role', 'tabpanel');
+        panel.setAttribute('aria-labelledby', 'pestana_reposicion_analisis');
+        panel.hidden = true;
+        raiz.appendChild(panel);
+    }
+    // Texto estático de la vista original. No se interpola contenido de usuarios.
+    panel.innerHTML = CONTENIDO_COMPLETO_REPOSICION_ANALISIS;
+}
+
 let productosPronosticoAnalisis = [];
 let productosPronosticoFiltradosAnalisis = [];
 let productosReposicionFiltradosAnalisis = [];
 let paginaPronosticoAnalisis = 1;
 let paginaReposicionAnalisis = 1;
-const productosPorPaginaAnalisis = 8;
+const productosPorPaginaPronosticoAnalisis = 8;
+const productosPorPaginaReposicionAnalisis = 120;
 let solicitudGraficoPronosticoAnalisis = 0;
 let pronosticosLightgbmAnalisisCargados = false;
 
 async function inicializarAnalisisPronostico() {
+    asegurarEstructuraReposicionAnalisis();
     const busqueda = document.getElementById('buscar_producto_analisis_pronostico');
     const filtroPronostico = document.getElementById('filtro_pronostico_analisis');
     const botonFiltro = document.getElementById('boton_selector_pronostico_analisis');
@@ -21,12 +57,53 @@ async function inicializarAnalisisPronostico() {
     const anteriorReposicion = document.getElementById('pagina_anterior_reposicion_analisis');
     const siguienteReposicion = document.getElementById('pagina_siguiente_reposicion_analisis');
     const metodoPronostico = document.getElementById('metodo_pronostico_analisis');
+    // Las pestañas solo cambian qué panel se muestra. Nunca desmontan las tablas ni interrumpen su carga.
+    const raizAnalisis = document.querySelector('.contenedor_analisis_pronostico');
+    if (raizAnalisis?.dataset.inicializado === 'true') return;
+    if (raizAnalisis) raizAnalisis.dataset.inicializado = 'true';
+    const mostrarPestanaAnalisis = tipo => {
+        document.querySelectorAll('[data-pestana-analisis]').forEach(boton => {
+            const activa = boton.dataset.pestanaAnalisis === tipo;
+            boton.classList.toggle('pestana_analisis_activa', activa);
+            boton.setAttribute('aria-selected', String(activa));
+        });
+        const panelPronostico = document.getElementById('panel_pronostico_analisis');
+        const panelReposicion = document.getElementById('panel_reposicion_analisis');
+        if (panelPronostico) panelPronostico.hidden = tipo !== 'pronostico';
+        if (panelReposicion) panelReposicion.hidden = tipo !== 'reposicion';
+        const ayuda = document.getElementById('area_grafico_pronostico_analisis');
+        if (ayuda) ayuda.hidden = tipo !== 'pronostico';
+    };
+    document.querySelectorAll('[data-pestana-analisis]').forEach(boton => {
+        boton.addEventListener('click', () => mostrarPestanaAnalisis(boton.dataset.pestanaAnalisis));
+    });
+    document.getElementById('limpiar_filtros_pronostico_analisis')?.addEventListener('click', () => {
+        busqueda.value = '';
+        filtroPronostico.value = 'CON_PRONOSTICO';
+        metodoPronostico.value = 'PROMEDIO';
+        actualizarSelectorMetodoAnalisis();
+        actualizarDescripcionMetodoPronosticoAnalisis();
+        paginaPronosticoAnalisis = 1;
+        actualizarSelectorPronosticoAnalisis();
+        ocultarGraficoPronosticoAnalisis();
+        filtrarProductosPronosticoAnalisis();
+    });
+    document.getElementById('limpiar_filtros_reposicion_analisis')?.addEventListener('click', () => {
+        busquedaReposicion.value = '';
+        filtroEstadoReposicion.value = 'NECESARIA';
+        paginaReposicionAnalisis = 1;
+        actualizarSelectorEstadoReposicionAnalisis();
+        filtrarProductosReposicionAnalisis();
+        mostrarProductosPronosticoAnalisis();
+    });
     if (!busqueda || !anterior || !siguiente) return;
 
     metodoPronostico?.addEventListener('change', async () => {
+        actualizarSelectorMetodoAnalisis();
         if (metodoPronostico.value === 'LIGHTGBM' && !pronosticosLightgbmAnalisisCargados) {
             await cargarPronosticosLightgbmAnalisis();
             if (!pronosticosLightgbmAnalisisCargados) {
+                actualizarSelectorMetodoAnalisis();
                 filtrarProductosPronosticoAnalisis();
                 return;
             }
@@ -84,6 +161,7 @@ async function inicializarAnalisisPronostico() {
     });
     actualizarSelectorPronosticoAnalisis();
     actualizarSelectorEstadoReposicionAnalisis();
+    configurarSelectorMetodoAnalisis();
     document.getElementById('cuerpo_tabla_analisis_pronostico')?.addEventListener('click', evento => {
         const fila = evento.target.closest('.fila_analisis_pronostico');
         if (!fila) return;
@@ -117,6 +195,10 @@ async function cargarProductosPronosticoAnalisis() {
         if (!respuesta.ok) throw new Error(datos.mensaje || 'No se pudieron cargar los pronósticos.');
 
         productosPronosticoAnalisis = Array.isArray(datos) ? datos : [];
+        // Al volver a abrir Análisis se recarga el catálogo: los pronósticos LightGBM
+        // adjuntos al catálogo anterior ya no están en el arreglo actual.
+        // Permite solicitarlos otra vez al elegir el método experimental.
+        pronosticosLightgbmAnalisisCargados = false;
         const fechaCorte = productosPronosticoAnalisis.find(producto => producto.fecha_corte_pronostico)?.fecha_corte_pronostico;
         const etiquetaFecha = document.getElementById('fecha_corte_analisis_pronostico');
         if (etiquetaFecha) {
@@ -124,8 +206,10 @@ async function cargarProductosPronosticoAnalisis() {
                 ? `Fecha de corte: ${new Date(`${String(fechaCorte).slice(0, 10)}T00:00:00`).toLocaleDateString('es-CL')}`
                 : 'Fecha de corte: sin ventas registradas';
         }
+        actualizarIndicadoresAnalisis();
         filtrarProductosPronosticoAnalisis();
     } catch (error) {
+        console.error('No se pudieron cargar los productos de Análisis:', error);
         cuerpo.innerHTML = '';
         const fila = document.createElement('div');
         fila.className = 'fila_vacia_analisis_pronostico';
@@ -147,7 +231,10 @@ async function cargarPronosticosLightgbmAnalisis() {
         const respuesta = await fetchConCsrf(`${URL_API}/api/inventario/pronostico-modelo`, { method: 'GET', credentials: 'include' });
         const datos = await respuesta.json();
         if (!respuesta.ok) throw new Error(datos.mensaje || 'No se pudieron obtener los pronósticos LightGBM.');
-        const porCodigo = new Map((datos.productos || []).map(producto => [String(producto.codigo), producto]));
+        if (!Array.isArray(datos.productos) || datos.productos.length === 0) {
+            throw new Error('El servidor no devolvió pronósticos LightGBM. Revisa la respuesta de /api/inventario/pronostico-modelo.');
+        }
+        const porCodigo = new Map(datos.productos.map(producto => [String(producto.codigo), producto]));
         productosPronosticoAnalisis.forEach(producto => {
             const prediccion = porCodigo.get(String(producto.codigo));
             producto.pronostico_lightgbm_disponible = Boolean(prediccion?.disponible);
@@ -160,9 +247,61 @@ async function cargarPronosticosLightgbmAnalisis() {
     } catch (error) {
         const metodo = document.getElementById('metodo_pronostico_analisis');
         if (metodo) metodo.value = 'PROMEDIO';
+        actualizarSelectorMetodoAnalisis();
         if (descripcion) descripcion.textContent = error.message || 'No se pudo cargar el modelo experimental.';
         pronosticosLightgbmAnalisisCargados = false;
     }
+}
+
+
+// Selector de método con el mismo estilo que los demás filtros.
+// Mantiene el <select id="metodo_pronostico_analisis"> como única fuente de verdad.
+function configurarSelectorMetodoAnalisis() {
+    const selector = document.getElementById('metodo_pronostico_analisis');
+    const boton = document.getElementById('boton_selector_metodo_analisis');
+    const panel = document.getElementById('panel_selector_metodo_analisis');
+    if (!selector || !boton || !panel) return;
+    if (boton.dataset.configurado === 'si') return;
+    boton.dataset.configurado = 'si';
+    boton.addEventListener('click', () => {
+        const abrir = panel.hidden;
+        panel.hidden = !abrir;
+        boton.setAttribute('aria-expanded', String(abrir));
+        if (abrir) actualizarSelectorMetodoAnalisis();
+    });
+    document.addEventListener('click', evento => {
+        if (!evento.target.closest('#contenedor_selector_metodo_analisis')) {
+            panel.hidden = true;
+            boton.setAttribute('aria-expanded', 'false');
+        }
+    });
+    actualizarSelectorMetodoAnalisis();
+}
+
+function actualizarSelectorMetodoAnalisis() {
+    const selector = document.getElementById('metodo_pronostico_analisis');
+    const etiqueta = document.getElementById('texto_selector_metodo_analisis');
+    const lista = document.getElementById('lista_selector_metodo_analisis');
+    if (!selector || !etiqueta || !lista) return;
+    const actual = Array.from(selector.options).find(opcion => opcion.value === selector.value);
+    etiqueta.textContent = actual?.textContent?.trim() || 'Seleccionar método';
+    lista.replaceChildren();
+    Array.from(selector.options).forEach(opcion => {
+        const botonOpcion = document.createElement('button');
+        botonOpcion.type = 'button';
+        botonOpcion.className = 'opcion_lista_selector_inventario';
+        botonOpcion.setAttribute('role', 'option');
+        botonOpcion.setAttribute('aria-selected', String(opcion.value === selector.value));
+        botonOpcion.textContent = opcion.textContent.trim();
+        botonOpcion.addEventListener('click', () => {
+            selector.value = opcion.value;
+            const panel = document.getElementById('panel_selector_metodo_analisis');
+            if (panel) panel.hidden = true;
+            document.getElementById('boton_selector_metodo_analisis')?.setAttribute('aria-expanded', 'false');
+            selector.dispatchEvent(new Event('change', { bubbles: true }));
+        });
+        lista.appendChild(botonOpcion);
+    });
 }
 
 function actualizarDescripcionMetodoPronosticoAnalisis() {
@@ -187,7 +326,12 @@ function filtrarProductosPronosticoAnalisis() {
             : filtroPronostico === 'SIN_PRONOSTICO' ? !tienePronostico : true;
         return coincideTexto && coincidePronostico;
     });
-    paginaReposicionAnalisis = 1;
+    // Primero los productos con mayor demanda estimada, para evitar miles de ceros al inicio.
+    productosPronosticoFiltradosAnalisis.sort((a, b) => {
+        const demanda = p => Number(obtenerValoresPronosticoAnalisis(p)[0]) || 0;
+        return demanda(b) - demanda(a) || String(a.descripcion || '').localeCompare(String(b.descripcion || ''), 'es');
+    });
+    // Reposición conserva su búsqueda y selección, independiente de los filtros de pronóstico.
     filtrarProductosReposicionAnalisis();
     mostrarProductosPronosticoAnalisis();
 }
@@ -201,7 +345,7 @@ function obtenerValoresPronosticoAnalisis(producto) {
 function filtrarProductosReposicionAnalisis() {
     const filtro = document.getElementById('filtro_estado_reposicion_analisis')?.value || '';
     const texto = (document.getElementById('buscar_producto_reposicion_analisis')?.value || '').trim().toLocaleLowerCase('es-CL');
-    productosReposicionFiltradosAnalisis = productosPronosticoFiltradosAnalisis.filter(producto => {
+    productosReposicionFiltradosAnalisis = productosPronosticoAnalisis.filter(producto => {
         const coincideBusqueda = String(producto.descripcion || '').toLocaleLowerCase('es-CL').includes(texto)
             || String(producto.codigo || '').toLocaleLowerCase('es-CL').includes(texto)
             || String(producto.cod_barra || '').toLocaleLowerCase('es-CL').includes(texto);
@@ -212,6 +356,15 @@ function filtrarProductosReposicionAnalisis() {
                 : filtro === 'REVISAR_STOCK' ? stockNegativo
                     : true;
         return coincideBusqueda && coincideEstado;
+    });
+    productosReposicionFiltradosAnalisis.sort((a, b) => {
+        const prioridad = p => {
+            const r = calcularReposicionRecomendadaAnalisis(p);
+            return r.momento === 'Ahora' ? 0 : r.cantidad > 0 ? 1 : 2;
+        };
+        return prioridad(a) - prioridad(b) ||
+            (calcularReposicionRecomendadaAnalisis(b).cantidad || 0) - (calcularReposicionRecomendadaAnalisis(a).cantidad || 0) ||
+            String(a.descripcion || '').localeCompare(String(b.descripcion || ''), 'es');
     });
 }
 
@@ -270,20 +423,26 @@ function actualizarSelectorEstadoReposicionAnalisis() {
 function mostrarProductosPronosticoAnalisis() {
     const cuerpo = document.getElementById('cuerpo_tabla_analisis_pronostico');
     const cuerpoReposicion = document.getElementById('cuerpo_reposicion_analisis_pronostico');
-    if (!cuerpo || !cuerpoReposicion) return;
+    if (!cuerpo) {
+        console.error('Análisis: falta el contenedor de la tabla de pronósticos en reportes_analitica.html.');
+        return;
+    }
+    if (!cuerpoReposicion) {
+        console.error('Análisis: falta el contenedor de la tabla de reposición. Comprueba que reportes_analitica.html se haya cargado completo.');
+    }
     cuerpo.replaceChildren();
-    cuerpoReposicion.replaceChildren();
+    if (cuerpoReposicion) cuerpoReposicion.replaceChildren();
 
     const total = productosPronosticoFiltradosAnalisis.length;
-    const totalPaginas = Math.ceil(total / productosPorPaginaAnalisis);
+    const totalPaginas = Math.ceil(total / productosPorPaginaPronosticoAnalisis);
     const totalReposicion = productosReposicionFiltradosAnalisis.length;
-    const totalPaginasReposicion = Math.ceil(totalReposicion / productosPorPaginaAnalisis);
+    const totalPaginasReposicion = Math.ceil(totalReposicion / productosPorPaginaReposicionAnalisis);
     paginaPronosticoAnalisis = Math.max(1, Math.min(paginaPronosticoAnalisis, totalPaginas || 1));
     paginaReposicionAnalisis = Math.max(1, Math.min(paginaReposicionAnalisis, totalPaginasReposicion || 1));
-    const desdePronostico = (paginaPronosticoAnalisis - 1) * productosPorPaginaAnalisis;
-    const paginaPronostico = productosPronosticoFiltradosAnalisis.slice(desdePronostico, desdePronostico + productosPorPaginaAnalisis);
-    const desdeReposicion = (paginaReposicionAnalisis - 1) * productosPorPaginaAnalisis;
-    const paginaReposicion = productosReposicionFiltradosAnalisis.slice(desdeReposicion, desdeReposicion + productosPorPaginaAnalisis);
+    const desdePronostico = (paginaPronosticoAnalisis - 1) * productosPorPaginaPronosticoAnalisis;
+    const paginaPronostico = productosPronosticoFiltradosAnalisis.slice(desdePronostico, desdePronostico + productosPorPaginaPronosticoAnalisis);
+    const desdeReposicion = (paginaReposicionAnalisis - 1) * productosPorPaginaReposicionAnalisis;
+    const paginaReposicion = productosReposicionFiltradosAnalisis.slice(desdeReposicion, desdeReposicion + productosPorPaginaReposicionAnalisis);
 
     if (!paginaPronostico.length) {
         const fila = document.createElement('div');
@@ -298,39 +457,37 @@ function mostrarProductosPronosticoAnalisis() {
         paginaPronostico.forEach(producto => cuerpo.appendChild(crearFilaPronosticoAnalisis(producto)));
     }
 
-    if (!paginaReposicion.length) {
-        const fila = document.createElement('div');
-        fila.className = 'fila_vacia_analisis_pronostico';
-        fila.setAttribute('role', 'row');
-        const mensaje = document.createElement('div');
-        mensaje.setAttribute('role', 'cell');
-        mensaje.textContent = document.getElementById('filtro_estado_reposicion_analisis')?.value
-            ? 'No hay productos con ese estado de reposición.'
-            : (document.getElementById('buscar_producto_reposicion_analisis')?.value || '').trim()
-                ? 'No hay productos que coincidan con la búsqueda.'
-                : 'No hay productos para mostrar.';
-        fila.appendChild(mensaje);
-        cuerpoReposicion.appendChild(fila);
-    } else {
-        paginaReposicion.forEach(producto => cuerpoReposicion.appendChild(crearFilaReposicionAnalisis(producto)));
+    if (cuerpoReposicion) {
+        if (!paginaReposicion.length) {
+            const fila = document.createElement('div');
+            fila.className = 'fila_vacia_analisis_pronostico';
+            fila.setAttribute('role', 'row');
+            const mensaje = document.createElement('div');
+            mensaje.setAttribute('role', 'cell');
+            mensaje.textContent = document.getElementById('filtro_estado_reposicion_analisis')?.value
+                ? 'No hay productos con ese estado de reposición.'
+                : (document.getElementById('buscar_producto_reposicion_analisis')?.value || '').trim()
+                    ? 'No hay productos que coincidan con la búsqueda.'
+                    : 'No hay productos para mostrar.';
+            fila.appendChild(mensaje);
+            cuerpoReposicion.appendChild(fila);
+        } else {
+            paginaReposicion.forEach(producto => cuerpoReposicion.appendChild(crearFilaReposicionAnalisis(producto)));
+        }
     }
 
     actualizarPaginacionPronosticoAnalisis(total, totalPaginas, 'pronostico');
-    actualizarPaginacionPronosticoAnalisis(totalReposicion, totalPaginasReposicion, 'reposicion');
+    if (cuerpoReposicion) actualizarPaginacionPronosticoAnalisis(totalReposicion, totalPaginasReposicion, 'reposicion');
 }
 
-function crearFilaPronosticoAnalisis(producto) {
-    const fila = document.createElement('div');
-    fila.className = 'fila_analisis_pronostico';
-    fila.setAttribute('role', 'row');
-    fila.tabIndex = 0;
-    fila.dataset.codigo = String(producto.codigo || '');
-    fila.dataset.descripcion = String(producto.descripcion || 'Producto');
-    fila.setAttribute('aria-label', `Ver ventas diarias de ${producto.descripcion || 'producto'}`);
 
+// Marco de miniatura compartido por Pronóstico y Reposición, como en Productos.
+function crearCeldaFotoAnalisis(producto) {
     const celdaFoto = document.createElement('div');
     celdaFoto.dataset.etiqueta = 'Foto';
     celdaFoto.setAttribute('role', 'cell');
+    const marco = document.createElement('div');
+    marco.className = 'marco_imagen_analisis_pronostico';
     const imagen = document.createElement('img');
     const rutaImagen = String(producto.imagen || '').trim();
     const imagenPredeterminada = './imagenes/inicio_sesion/cuerpo_pagina/secciones/package.svg';
@@ -343,13 +500,27 @@ function crearFilaPronosticoAnalisis(producto) {
         ? (rutaImagen.startsWith('/api/productos/imagenes/') ? `${URL_API}${rutaImagen}` : rutaImagen)
         : imagenPredeterminada;
     if (!rutaImagen) imagen.classList.add('imagen_producto_analisis_pronostico_vacia');
-    imagen.onerror = function() {
+    imagen.onerror = function () {
         this.onerror = null;
         this.src = imagenPredeterminada;
         this.alt = 'Producto sin fotografía';
         this.classList.add('imagen_producto_analisis_pronostico_vacia');
     };
-    celdaFoto.appendChild(imagen);
+    marco.appendChild(imagen);
+    celdaFoto.appendChild(marco);
+    return celdaFoto;
+}
+
+function crearFilaPronosticoAnalisis(producto) {
+    const fila = document.createElement('div');
+    fila.className = 'fila_analisis_pronostico';
+    fila.setAttribute('role', 'row');
+    fila.tabIndex = 0;
+    fila.dataset.codigo = String(producto.codigo || '');
+    fila.dataset.descripcion = String(producto.descripcion || 'Producto');
+    fila.setAttribute('aria-label', `Ver ventas diarias de ${producto.descripcion || 'producto'}`);
+
+    const celdaFoto = crearCeldaFotoAnalisis(producto);
 
     const celdaProducto = document.createElement('div');
     celdaProducto.dataset.etiqueta = 'Producto';
@@ -383,28 +554,7 @@ function crearFilaReposicionAnalisis(producto) {
     fila.className = 'fila_reposicion_analisis_pronostico';
     fila.setAttribute('role', 'row');
 
-    const celdaFoto = document.createElement('div');
-    celdaFoto.dataset.etiqueta = 'Foto';
-    celdaFoto.setAttribute('role', 'cell');
-    const imagen = document.createElement('img');
-    const rutaImagen = String(producto.imagen || '').trim();
-    const imagenPredeterminada = './imagenes/inicio_sesion/cuerpo_pagina/secciones/package.svg';
-    imagen.className = 'imagen_producto_analisis_pronostico';
-    imagen.alt = rutaImagen ? `Foto de ${producto.descripcion || 'producto'}` : 'Producto sin fotografía';
-    imagen.loading = 'lazy';
-    imagen.decoding = 'async';
-    imagen.draggable = false;
-    imagen.src = rutaImagen
-        ? (rutaImagen.startsWith('/api/productos/imagenes/') ? `${URL_API}${rutaImagen}` : rutaImagen)
-        : imagenPredeterminada;
-    if (!rutaImagen) imagen.classList.add('imagen_producto_analisis_pronostico_vacia');
-    imagen.onerror = function() {
-        this.onerror = null;
-        this.src = imagenPredeterminada;
-        this.alt = 'Producto sin fotografía';
-        this.classList.add('imagen_producto_analisis_pronostico_vacia');
-    };
-    celdaFoto.appendChild(imagen);
+    const celdaFoto = crearCeldaFotoAnalisis(producto);
 
     const celdaProducto = document.createElement('div');
     celdaProducto.dataset.etiqueta = 'Producto';
@@ -496,8 +646,9 @@ function actualizarPaginacionPronosticoAnalisis(total, totalPaginas, tipo) {
     const numeros = document.getElementById(tipo === 'reposicion' ? 'numeros_pagina_reposicion_analisis' : 'numeros_pagina_analisis_pronostico');
     if (!resumen || !anterior || !siguiente || !numeros) return;
 
-    const inicio = total ? (paginaActual - 1) * productosPorPaginaAnalisis + 1 : 0;
-    const fin = Math.min(paginaActual * productosPorPaginaAnalisis, total);
+    const tamanoPagina = tipo === 'reposicion' ? productosPorPaginaReposicionAnalisis : productosPorPaginaPronosticoAnalisis;
+    const inicio = total ? (paginaActual - 1) * tamanoPagina + 1 : 0;
+    const fin = Math.min(paginaActual * tamanoPagina, total);
     resumen.textContent = `Mostrando ${inicio.toLocaleString('es-CL')} a ${fin.toLocaleString('es-CL')} de ${total.toLocaleString('es-CL')} productos`;
     anterior.disabled = paginaActual <= 1;
     siguiente.disabled = paginaActual >= totalPaginas;
@@ -534,14 +685,14 @@ function actualizarPaginacionPronosticoAnalisis(total, totalPaginas, tipo) {
 }
 
 function cambiarPaginaPronosticoAnalisis(pagina) {
-    const totalPaginas = Math.ceil(productosPronosticoFiltradosAnalisis.length / productosPorPaginaAnalisis);
+    const totalPaginas = Math.ceil(productosPronosticoFiltradosAnalisis.length / productosPorPaginaPronosticoAnalisis);
     if (pagina < 1 || pagina > totalPaginas) return;
     paginaPronosticoAnalisis = pagina;
     mostrarProductosPronosticoAnalisis();
 }
 
 function cambiarPaginaReposicionAnalisis(pagina) {
-    const totalPaginas = Math.ceil(productosReposicionFiltradosAnalisis.length / productosPorPaginaAnalisis);
+    const totalPaginas = Math.ceil(productosReposicionFiltradosAnalisis.length / productosPorPaginaReposicionAnalisis);
     if (pagina < 1 || pagina > totalPaginas) return;
     paginaReposicionAnalisis = pagina;
     mostrarProductosPronosticoAnalisis();
@@ -562,6 +713,8 @@ async function seleccionarProductoPronosticoAnalisis(codigo, descripcion) {
     if (!contenedor || !titulo || !descripcionGrafico || !mensaje || !grafico) return;
 
     contenedor.hidden = false;
+    const ayudaGrafico = document.getElementById('ayuda_grafico_analisis');
+    if (ayudaGrafico) ayudaGrafico.hidden = true;
     titulo.textContent = `Ventas por día · ${descripcion || 'Producto'}`;
     descripcionGrafico.textContent = 'Últimos 28 días del historial, incluyendo días sin ventas.';
     mensaje.textContent = 'Cargando ventas diarias...';
@@ -629,9 +782,30 @@ function dibujarGraficoVentasDiariasAnalisis(dias) {
 function ocultarGraficoPronosticoAnalisis() {
     const contenedor = document.getElementById('contenedor_grafico_analisis_pronostico');
     if (contenedor) contenedor.hidden = true;
+    const ayudaGrafico = document.getElementById('ayuda_grafico_analisis');
+    if (ayudaGrafico) ayudaGrafico.hidden = false;
     solicitudGraficoPronosticoAnalisis++;
 }
 
 function textoBusquedaAnalisis() {
     return (document.getElementById('buscar_producto_analisis_pronostico')?.value || '').trim();
+}
+
+
+// Indicadores del catálogo completo; no dependen de los filtros de las pestañas.
+// Se cuentan productos, sin sumar unidades y kilos en una sola cifra.
+function actualizarIndicadoresAnalisis() {
+    const totalConPronostico = productosPronosticoAnalisis.filter(producto =>
+        [producto.pronostico_7_dias, producto.pronostico_14_dias, producto.pronostico_30_dias]
+            .some(valor => Number(valor) > 0)).length;
+    const recomendaciones = productosPronosticoAnalisis.map(calcularReposicionRecomendadaAnalisis);
+    const reponerAhora = recomendaciones.filter(recomendacion => recomendacion.momento === 'Ahora').length;
+    const reposicionesSugeridas = recomendaciones.filter(recomendacion => recomendacion.cantidad > 0).length;
+    const mostrar = (id, valor) => {
+        const elemento = document.getElementById(id);
+        if (elemento) elemento.textContent = valor.toLocaleString('es-CL');
+    };
+    mostrar('kpi_demanda_analisis', totalConPronostico);
+    mostrar('kpi_ahora_analisis', reponerAhora);
+    mostrar('kpi_sugeridas_analisis', reposicionesSugeridas);
 }
