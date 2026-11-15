@@ -24,6 +24,7 @@
                         <div class="texto_stock_actual_dashboard">Cantidad de productos</div>
 
                         <div class="valor_stock_actual_dashboard" id="valor_cantidad_productos_dashboard">0</div>
+                        <div class="nota_indicador_dashboard">Catálogo completo</div>
 
                     </div>
 
@@ -39,6 +40,7 @@
                         <div class="texto_stock_bajo_dashboard">Productos con bajo stock</div>
 
                         <div class="valor_stock_bajo_dashboard" id="valor_stock_bajo_dashboard">0</div>
+                        <div class="nota_indicador_dashboard">Requieren revisión</div>
 
                     </div>
 
@@ -54,6 +56,7 @@
                         <div class="texto_productos_agotados_dashboard">Productos agotados</div>
 
                         <div class="valor_productos_agotados_dashboard" id="valor_productos_agotados_dashboard">0</div>
+                        <div class="nota_indicador_dashboard">Existencias en cero</div>
 
                     </div>
 
@@ -66,9 +69,10 @@
 
                     <div class="contenido_ventas_mes_dashboard">
 
-                        <div class="texto_ventas_mes_dashboard">Ventas del mes actual</div>
+                        <div class="texto_ventas_mes_dashboard">Ventas del último mes registrado</div>
 
                         <div class="valor_ventas_mes_dashboard" id="valor_ventas_mes_dashboard">$0</div>
+                        <div class="nota_indicador_dashboard" id="periodo_ventas_mes_dashboard">Según última venta registrada</div>
 
                     </div>
 
@@ -76,31 +80,93 @@
 
             </div>
 
-            <!-- desplegable con los productos de mayor venta -->
-            <div class="contenedor_mas_vendidos_dashboard">
-                <button class="boton_mas_vendidos_dashboard" id="boton_mas_vendidos_dashboard" type="button" aria-expanded="false" aria-controls="panel_mas_vendidos_dashboard">
-                    Ver los 50 productos más vendidos <span class="flecha_mas_vendidos_dashboard" aria-hidden="true">⌄</span>
+        <!-- TITULO 3 ACCIONES RAPIDAS -->
+
+            <!-- contenedor que agrupa las principales acciones operativas -->
+            <div class="encabezado_seccion_dashboard">
+                <div class="titulo_seccion_dashboard">Acciones rápidas</div>
+                <div class="descripcion_seccion_dashboard">Accede a las operaciones frecuentes</div>
+            </div>
+
+            <div class="contenedor_acciones_dashboard">
+
+                <!-- opción para acceder a importación DimaSoft -->
+                <button class="boton_importar_dashboard" id="boton_importar_dashboard" type="button">
+
+                    <div class="icono_importar_dashboard"></div>
+
+                    <div class="texto_importar_dashboard">Importar Excel de ventas</div>
+
                 </button>
 
+                <!-- opción para registrar una entrada de inventario -->
+                <button class="boton_entrada_dashboard" id="boton_entrada_dashboard" type="button">
+
+                    <div class="icono_entrada_dashboard"></div>
+
+                    <div class="texto_entrada_dashboard">Registrar entrada</div>
+
+                </button>
+
+                <!-- opción para registrar una salida de inventario -->
+                <button class="boton_salida_dashboard" id="boton_salida_dashboard" type="button">
+
+                    <div class="icono_salida_dashboard"></div>
+
+                    <div class="texto_salida_dashboard">Registrar salida</div>
+
+                </button>
+
+            </div>
+
+        <!-- TITULO 4 GRAFICOS -->
+
+            <!-- contenedor que agrupa los gráficos principales del Dashboard -->
+            <div class="encabezado_seccion_dashboard">
+                <div class="titulo_seccion_dashboard">Análisis del negocio</div>
+                <div class="descripcion_seccion_dashboard">Gráficos e indicadores históricos</div>
+            </div>
+
+            <!-- ranking dentro de Análisis del negocio, separado de los KPI -->
+            <div class="contenedor_mas_vendidos_dashboard">
+                <div class="cabecera_mas_vendidos_dashboard">
+                    <div class="informacion_mas_vendidos_dashboard">
+                        <div class="titulo_mas_vendidos_dashboard">Productos más vendidos</div>
+                        <div class="descripcion_mas_vendidos_dashboard">Consulta los productos con más ventas registradas y administra las exclusiones del ranking.</div>
+                    </div>
+                    <button class="boton_mas_vendidos_dashboard" id="boton_mas_vendidos_dashboard" type="button" aria-expanded="false" aria-controls="panel_mas_vendidos_dashboard">
+                        Ver los 50 productos <span class="flecha_mas_vendidos_dashboard" aria-hidden="true">⌄</span>
+                    </button>
+                </div>
+                <div class="vista_previa_mas_vendidos_dashboard" id="vista_previa_mas_vendidos_dashboard" aria-live="polite">
+                    <div class="estado_previa_mas_vendidos_dashboard">Cargando los productos más vendidos...</div>
+                </div>
                 <div class="panel_mas_vendidos_dashboard" id="panel_mas_vendidos_dashboard" hidden>
                     <div class="filtros_mas_vendidos_dashboard">
-                        <input class="busqueda_mas_vendidos_dashboard" id="busqueda_mas_vendidos_dashboard" type="search" maxlength="150" placeholder="Filtrar por producto o código">
-                        <select class="periodo_mas_vendidos_dashboard" id="periodo_mas_vendidos_dashboard" aria-label="Periodo de ventas">
+                        <label class="campo_mas_vendidos_dashboard" for="busqueda_mas_vendidos_dashboard">
+                            <span>Buscar producto</span>
+                            <input class="busqueda_mas_vendidos_dashboard" id="busqueda_mas_vendidos_dashboard" type="search" maxlength="150" placeholder="Código o descripción">
+                        </label>
+                        <label class="campo_mas_vendidos_dashboard" for="periodo_mas_vendidos_dashboard">
+                            <span>Período</span>
+                            <select class="periodo_mas_vendidos_dashboard" id="periodo_mas_vendidos_dashboard">
                             <option value="todo">Todo el historial</option>
-                            <option value="mes">Mes actual</option>
-                            <option value="tres_meses">Últimos 3 meses</option>
-                        </select>
+                            <option value="mes">Último mes registrado</option>
+                            <option value="tres_meses">Últimos 3 meses registrados</option>
+                            </select>
+                        </label>
                     </div>
                     <div class="estado_mas_vendidos_dashboard" id="estado_mas_vendidos_dashboard">Abre el desplegable para cargar los productos.</div>
                     <div class="tabla_mas_vendidos_dashboard">
                         <table>
                             <thead>
-                                <tr><th>#</th><th>Producto</th><th>Código</th><th>Unidades vendidas</th><th>Acción</th></tr>
+                                <tr><th>#</th><th>Producto</th><th>Código</th><th>Cantidad vendida</th><th>Acción</th></tr>
                             </thead>
                             <tbody id="cuerpo_mas_vendidos_dashboard"></tbody>
                         </table>
                     </div>
 
+                    <div class="nota_unidades_ranking_dashboard">El ranking utiliza cantidades registradas; algunos productos se comercializan por unidad y otros por peso.</div>
                     <button class="boton_ver_excluidos_dashboard" id="boton_ver_excluidos_dashboard" type="button" aria-expanded="false" aria-controls="panel_excluidos_dashboard">
                         Ver lista de exclusión
                     </button>
@@ -119,52 +185,6 @@
                 </div>
             </div>
 
-        <!-- TITULO 3 ACCIONES RAPIDAS -->
-
-            <!-- contenedor que agrupa las principales acciones operativas -->
-            <div class="encabezado_seccion_dashboard">
-                <div class="titulo_seccion_dashboard">Acciones rápidas</div>
-                <div class="descripcion_seccion_dashboard">Accede a las operaciones frecuentes</div>
-            </div>
-
-            <div class="contenedor_acciones_dashboard">
-
-                <!-- opción para acceder a importación DimaSoft -->
-                <div class="boton_importar_dashboard" id="boton_importar_dashboard">
-
-                    <div class="icono_importar_dashboard"></div>
-
-                    <div class="texto_importar_dashboard">Importar Excel</div>
-
-                </div>
-
-                <!-- opción para registrar una entrada de inventario -->
-                <div class="boton_entrada_dashboard" id="boton_entrada_dashboard">
-
-                    <div class="icono_entrada_dashboard"></div>
-
-                    <div class="texto_entrada_dashboard">Registrar entrada</div>
-
-                </div>
-
-                <!-- opción para registrar una salida de inventario -->
-                <div class="boton_salida_dashboard" id="boton_salida_dashboard">
-
-                    <div class="icono_salida_dashboard"></div>
-
-                    <div class="texto_salida_dashboard">Registrar salida</div>
-
-                </div>
-
-            </div>
-
-        <!-- TITULO 4 GRAFICOS -->
-
-            <!-- contenedor que agrupa los gráficos principales del Dashboard -->
-            <div class="encabezado_seccion_dashboard">
-                <div class="titulo_seccion_dashboard">Análisis del negocio</div>
-                <div class="descripcion_seccion_dashboard">Gráficos e indicadores históricos</div>
-            </div>
 
             <div class="contenedor_graficos_dashboard">
 
@@ -172,11 +192,10 @@
                 <div class="tarjeta_ventas_seis_meses_dashboard">
 
                     <div class="titulo_ventas_seis_meses_dashboard">Ventas en los últimos 6 meses</div>
+                    <div class="subtitulo_ventas_dashboard" id="periodo_grafico_ventas_dashboard">Según el historial de ventas registrado</div>
 
-                    <div class="grafico_ventas_dashboard" id="grafico_ventas_dashboard">
-
-                        <div class="texto_grafico_pendiente_dashboard">Gráfico de ventas pendiente</div>
-
+                    <div class="grafico_ventas_dashboard" id="grafico_ventas_dashboard" aria-live="polite">
+                        <div class="texto_grafico_pendiente_dashboard">Cargando ventas mensuales...</div>
                     </div>
 
                 </div>
@@ -184,11 +203,11 @@
                 <!-- contenedor del gráfico de inventario por familia -->
                 <div class="tarjeta_inventario_familia_dashboard">
 
-                    <div class="titulo_inventario_familia_dashboard">Inventario por familia</div>
+                    <div class="titulo_inventario_familia_dashboard">Productos inventariables por familia</div>
 
                     <div class="grafico_inventario_dashboard" id="grafico_inventario_dashboard">
 
-                        <div class="texto_grafico_inventario_dashboard">Gráfico de inventario pendiente</div>
+                        <div class="texto_grafico_inventario_dashboard">Cargando distribución de productos...</div>
 
                     </div>
 
@@ -212,6 +231,7 @@
                     <div class="tarjeta_productos_stock_bajo_dashboard">
 
                         <div class="titulo_productos_stock_bajo_dashboard">Productos con bajo stock</div>
+                        <div class="ayuda_panel_dashboard">Existencias positivas iguales o inferiores a stock mínimo + stock de seguridad.</div>
 
                         <div class="contenedor_tabla_stock_bajo_dashboard">
 
@@ -227,7 +247,7 @@
 
                                         <th class="columna_stock_actual_dashboard">Stock actual</th>
 
-                                        <th class="columna_stock_minimo_dashboard">Stock mínimo</th>
+                                        <th class="columna_stock_minimo_dashboard">Punto de reposición</th>
 
                                         <th class="columna_estado_stock_dashboard">Estado</th>
 

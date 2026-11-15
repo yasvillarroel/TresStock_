@@ -7,6 +7,7 @@ const { autorizar } = require('../middleware/autenticacion');
 router.use(autorizar('dashboard', 'acceder'));
 
 router.get('/resumen', dashboardControlador.obtenerResumen);
+router.get('/ventas-ultimos-seis-meses', dashboardControlador.obtenerVentasUltimosSeisMeses);
 router.get('/productos-mas-vendidos', dashboardControlador.obtenerProductosMasVendidos);
 router.get('/productos-excluidos', dashboardControlador.obtenerProductosExcluidosRanking);
 router.post('/productos/:codigo/lista-negra', dashboardControlador.excluirProductoRanking);

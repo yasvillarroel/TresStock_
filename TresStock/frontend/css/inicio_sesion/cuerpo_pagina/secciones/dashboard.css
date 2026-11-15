@@ -554,3 +554,196 @@
 /* Oculta el icono de estado vacío cuando el JavaScript inyecta un gráfico */
 .grafico_ventas_dashboard:not(:has(.texto_grafico_pendiente_dashboard))::before,
 .grafico_inventario_dashboard:not(:has(.texto_grafico_inventario_dashboard))::before { display: none; }
+
+
+/* =============================================================
+   UNIFICACIÓN DASHBOARD CON LA VISTA PRODUCTOS — 15/11/2026
+   Preserva las clases y los IDs de los componentes originales.
+   ============================================================= */
+.contenedor_dashboard { padding:28px; font-family:Arial,sans-serif; }
+.contenedor_encabezado_dashboard { margin-bottom:22px; }
+.titulo_dashboard { font-size:24px; margin-bottom:5px; }
+.descripcion_dashboard { font-size:13px; }
+.contenedor_indicadores_dashboard { gap:16px; margin-bottom:24px; }
+.tarjeta_stock_actual_dashboard,.tarjeta_stock_bajo_dashboard,.tarjeta_productos_agotados_dashboard,.tarjeta_ventas_mes_dashboard {
+    min-height:105px; padding:18px; gap:14px; border-radius:8px; box-shadow:none;
+}
+.icono_stock_actual_dashboard,.icono_stock_bajo_dashboard,.icono_productos_agotados_dashboard,.icono_ventas_mes_dashboard {
+    width:46px; height:46px; min-width:46px; border-radius:8px;
+}
+.icono_stock_actual_dashboard::before,.icono_stock_bajo_dashboard::before,.icono_productos_agotados_dashboard::before,.icono_ventas_mes_dashboard::before {width:24px; height:24px;}
+.contenido_stock_actual_dashboard,.contenido_stock_bajo_dashboard,.contenido_productos_agotados_dashboard,.contenido_ventas_mes_dashboard {gap:5px;}
+.texto_stock_actual_dashboard,.texto_stock_bajo_dashboard,.texto_productos_agotados_dashboard,.texto_ventas_mes_dashboard {font-size:12px;}
+.valor_stock_actual_dashboard,.valor_stock_bajo_dashboard,.valor_productos_agotados_dashboard,.valor_ventas_mes_dashboard {font-size:23px;}
+.nota_indicador_dashboard {color:#71818a; font-size:11px; line-height:1.3;}
+.encabezado_seccion_dashboard {margin-top:8px; margin-bottom:13px;}
+.titulo_seccion_dashboard {font-size:16px;}
+.contenedor_acciones_dashboard {margin-bottom:26px;}
+.boton_importar_dashboard,.boton_entrada_dashboard,.boton_salida_dashboard {height:64px; border-radius:8px; text-align:left; font:inherit;}
+.boton_importar_dashboard:focus-visible,.boton_entrada_dashboard:focus-visible,.boton_salida_dashboard:focus-visible,
+.boton_mas_vendidos_dashboard:focus-visible,.boton_excluir_producto_dashboard:focus-visible,.boton_restaurar_producto_dashboard:focus-visible {outline:2px solid #159ba3; outline-offset:2px;}
+.contenedor_mas_vendidos_dashboard {
+    display:block; position:relative; background:#fff; margin:0 0 16px;
+    border:1px solid #dce4e8; border-radius:8px; overflow:visible;
+}
+.cabecera_mas_vendidos_dashboard {display:flex; align-items:center; justify-content:space-between; gap:18px; padding:18px; border-bottom:1px solid #e2e8eb;}
+.informacion_mas_vendidos_dashboard {min-width:0;}
+.titulo_mas_vendidos_dashboard {font-size:14px; font-weight:700; color:#0b3650;}
+.descripcion_mas_vendidos_dashboard {font-size:12px; color:#71818a; margin-top:5px; line-height:1.4;}
+.boton_mas_vendidos_dashboard {flex-shrink:0; border-radius:6px; min-height:40px; font-size:12px;}
+.boton_mas_vendidos_dashboard[aria-expanded="true"] .flecha_mas_vendidos_dashboard {transform:rotate(180deg);}
+.flecha_mas_vendidos_dashboard {transition:transform .16s ease;}
+.vista_previa_mas_vendidos_dashboard {padding:0 18px 12px;}
+.vista_previa_mas_vendidos_dashboard[hidden] {display:none !important;}
+.tabla_previa_mas_vendidos_dashboard {width:100%; border-collapse:collapse; table-layout:fixed;}
+.tabla_previa_mas_vendidos_dashboard th {font-size:12px; color:#536873; font-weight:700; padding:12px; text-align:left; background:#f4f7f8;}
+.tabla_previa_mas_vendidos_dashboard td {font-size:12px; color:#344b56; padding:12px; border-bottom:1px solid #e8edef; line-height:1.35;}
+.tabla_previa_mas_vendidos_dashboard tr:last-child td {border-bottom:0;}
+.tabla_previa_mas_vendidos_dashboard th:first-child,.tabla_previa_mas_vendidos_dashboard td:first-child {width:52px; text-align:center;}
+.tabla_previa_mas_vendidos_dashboard th:last-child,.tabla_previa_mas_vendidos_dashboard td:last-child {width:165px; text-align:right;}
+.nombre_previa_mas_vendidos_dashboard {font-weight:700; color:#0b3650;}
+.codigo_previa_mas_vendidos_dashboard {display:block; color:#71818a; font-size:11px; margin-top:3px;}
+.estado_previa_mas_vendidos_dashboard {padding:14px 0; color:#71818a; font-size:12px;}
+.panel_mas_vendidos_dashboard {position:static; z-index:auto; display:block; width:100%; box-shadow:none; border:0; padding:18px; border-radius:0 0 8px 8px; }
+#panel_mas_vendidos_dashboard[hidden] {display:none !important;}
+.filtros_mas_vendidos_dashboard {grid-template-columns:minmax(190px,2fr) minmax(190px,1fr); gap:12px; align-items:end;}
+.campo_mas_vendidos_dashboard {display:flex; flex-direction:column; min-width:0; gap:7px; color:#536873; font-size:12px; font-weight:700;}
+.busqueda_mas_vendidos_dashboard,.periodo_mas_vendidos_dashboard {height:40px; font-size:13px; font-weight:400;}
+.busqueda_mas_vendidos_dashboard:focus-visible,.periodo_mas_vendidos_dashboard:focus-visible {outline:2px solid #159ba3; outline-offset:1px;}
+.estado_mas_vendidos_dashboard {padding:8px 0 10px;}
+.nota_unidades_ranking_dashboard {color:#71818a; font-size:11px; line-height:1.5; margin-top:10px;}
+.boton_ver_excluidos_dashboard {border:1px solid #159ba3; padding:9px 13px; border-radius:6px; text-decoration:none; margin-top:15px; font-size:12px; background:#fff;}
+.boton_ver_excluidos_dashboard:hover {background:#e4f6f6;}
+.tarjeta_ventas_seis_meses_dashboard,.tarjeta_inventario_familia_dashboard,.tarjeta_productos_stock_bajo_dashboard,.tarjeta_alertas_actuales_dashboard,.tarjeta_recomendaciones_dashboard {border-radius:8px; padding:18px; box-shadow:none;}
+.grafico_inventario_dashboard:has(.familias_barras_dashboard) {justify-content:flex-start; align-items:stretch; background:#fff; border:0; padding:6px 0; min-height:220px;}
+.grafico_inventario_dashboard:has(.familias_barras_dashboard)::before {display:none !important;}
+.familias_barras_dashboard {display:grid; gap:13px; width:100%; padding:6px 0;}
+.fila_familia_dashboard {display:grid; grid-template-columns:minmax(85px,1fr) minmax(80px,2fr) 56px; align-items:center; gap:12px; font-size:12px; color:#536873;}
+.nombre_familia_dashboard {min-width:0; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
+.pista_familia_dashboard {height:10px; border-radius:10px; background:#edf3f5; overflow:hidden;}
+.barra_familia_dashboard {height:100%; background:#159ba3; border-radius:10px;}
+.cantidad_familia_dashboard {text-align:right; font-weight:700; color:#0b3650; font-variant-numeric:tabular-nums;}
+.leyenda_grafico_dashboard {font-size:11px; line-height:1.5; color:#71818a; margin-top:10px;}
+.ayuda_panel_dashboard {color:#71818a; font-size:11px; margin:-8px 0 13px; line-height:1.4;}
+.contenedor_graficos_dashboard {margin-bottom:26px;}
+.etiqueta_estado_bajo_dashboard {display:inline-block; padding:5px 9px; border-radius:14px; background:#fff1da; color:#b87913; font-size:11px; font-weight:700;}
+.lista_alertas_dashboard,.lista_recomendaciones_dashboard {gap:9px;}
+.enlace_resumen_dashboard {border:0; padding:2px; background:none; color:#0f858d; font-weight:700; font-size:12px; text-align:left; cursor:pointer;}
+.enlace_resumen_dashboard:hover {text-decoration:underline;}
+.contenedor_dashboard [hidden] {display:none !important;}
+@media (max-width:1350px) { .contenedor_indicadores_dashboard {grid-template-columns:repeat(4,minmax(0,1fr));} }
+@media (max-width:1200px) { .contenedor_indicadores_dashboard {grid-template-columns:repeat(2,minmax(0,1fr));} }
+@media (max-width:680px) {
+ .contenedor_dashboard {padding:18px;}
+ .cabecera_mas_vendidos_dashboard {flex-direction:column; align-items:stretch;}
+ .boton_mas_vendidos_dashboard {justify-content:center;}
+ .panel_mas_vendidos_dashboard,.vista_previa_mas_vendidos_dashboard {padding:12px;}
+ .filtros_mas_vendidos_dashboard {grid-template-columns:1fr;}
+ .tabla_previa_mas_vendidos_dashboard th:last-child,.tabla_previa_mas_vendidos_dashboard td:last-child {width:105px;}
+ .descripcion_seccion_dashboard {display:block;}
+}
+@media (max-width:480px) {
+ .contenedor_dashboard {padding:14px;}
+ .contenedor_indicadores_dashboard {grid-template-columns:1fr;}
+ .contenedor_graficos_dashboard {grid-template-columns:1fr;}
+ .fila_familia_dashboard {grid-template-columns:minmax(72px,1fr) minmax(70px,1.5fr) 38px; gap:6px;}
+ .tabla_previa_mas_vendidos_dashboard th,.tabla_previa_mas_vendidos_dashboard td {padding:10px 6px;}
+}
+
+
+/* ===== VENTAS HISTORICAS: GRAFICO DE SEIS MESES ===== */
+.subtitulo_ventas_dashboard {
+    color:#71818a; font-family:Arial,sans-serif; font-size:12px;
+    line-height:1.45; margin:-9px 0 14px;
+}
+.grafico_ventas_dashboard:has(.ventas_barras_dashboard) {
+    display:block; min-width:0; width:100%; min-height:245px;
+    background:#fff; border:0; border-radius:0; padding:6px 0 2px;
+}
+.grafico_ventas_dashboard:has(.ventas_barras_dashboard)::before {display:none !important;}
+.ventas_barras_dashboard {
+    display:grid; grid-template-columns:repeat(6,minmax(0,1fr));
+    width:100%; gap:12px; align-items:end; padding:6px 3px 0;
+    min-height:225px;
+}
+.ventas_columna_dashboard {
+    height:220px; min-width:0;
+    display:flex; flex-direction:column; gap:5px; align-items:center;
+    cursor:default; outline-offset:3px; border-radius:5px;
+}
+.ventas_columna_dashboard:focus-visible {outline:2px solid #159ba3;}
+.ventas_monto_dashboard {
+    font-size:11px; color:#536873; line-height:1.25;
+    white-space:nowrap; text-align:center; height:29px;
+    display:flex; align-items:flex-end;
+}
+.ventas_pista_dashboard {
+    display:flex; flex-direction:column; justify-content:flex-end; align-items:stretch;
+    height:158px; width:min(48px,78%);
+    border-bottom:1px solid #dbe6eb;
+}
+.ventas_barra_dashboard {
+    width:100%; min-height:0;
+    background:linear-gradient(180deg,#29b7b4 0%,#159ba3 100%);
+    border-radius:5px 5px 0 0;
+    transition:filter .18s ease;
+}
+.ventas_columna_dashboard:hover .ventas_barra_dashboard,
+.ventas_columna_dashboard:focus-visible .ventas_barra_dashboard {filter:brightness(.88);}
+.ventas_barra_cero_dashboard {background:#dae4e7; height:0 !important;}
+.ventas_mes_dashboard {font-size:12px; color:#536873; text-transform:capitalize; white-space:nowrap;}
+.ventas_leyenda_dashboard {margin-top:10px; text-align:left;}
+@media(max-width:560px) {
+    .ventas_barras_dashboard {gap:5px;}
+    .ventas_monto_dashboard {font-size:9px;}
+    .ventas_columna_dashboard {height:210px;}
+    .ventas_pista_dashboard {height:145px;}
+    .ventas_mes_dashboard {font-size:10px;}
+}
+
+
+/* ===== ACENTOS DE COLOR PARA LOS DOS GRAFICOS DEL DASHBOARD ===== */
+/* Destaca el mes con mayor venta; los demas conservan el turquesa original. */
+.ventas_columna_dashboard.ventas_mes_maximo_dashboard .ventas_barra_dashboard {
+    background: linear-gradient(180deg, #3869a8 0%, #0b3650 100%);
+}
+.ventas_columna_dashboard.ventas_mes_maximo_dashboard .ventas_monto_dashboard {
+    color: #0b3650;
+    font-weight: 700;
+}
+/* Siete familias con colores fijos, definidos por su nombre desde dashboard.js. */
+.barra_familia_dashboard { background-color: var(--color-familia-dashboard, #159ba3); }
+.fila_familia_dashboard .barra_familia_dashboard {
+    transition: filter .18s ease;
+}
+.fila_familia_dashboard:hover .barra_familia_dashboard { filter: brightness(.9); }
+
+
+
+/* ==========================================
+   ICONOS LUCIDE - KPI DASHBOARD
+   ========================================== */
+
+/* Cantidad de productos */
+.icono_stock_actual_dashboard::before {
+    -webkit-mask-image: url("../../../../imagenes/inicio_sesion/cuerpo_pagina/secciones/package.svg");
+    mask-image: url("../../../../imagenes/inicio_sesion/cuerpo_pagina/secciones/package.svg");
+}
+
+/* Productos con bajo stock */
+.icono_stock_bajo_dashboard::before {
+    -webkit-mask-image: url("../../../../imagenes/inicio_sesion/cuerpo_pagina/secciones/package-minus.svg");
+    mask-image: url("../../../../imagenes/inicio_sesion/cuerpo_pagina/secciones/package-minus.svg");
+}
+
+/* Productos agotados */
+.icono_productos_agotados_dashboard::before {
+    -webkit-mask-image: url("../../../../imagenes/inicio_sesion/cuerpo_pagina/secciones/package-x.svg");
+    mask-image: url("../../../../imagenes/inicio_sesion/cuerpo_pagina/secciones/package-x.svg");
+}
+
+/* Ventas del último mes registrado */
+.icono_ventas_mes_dashboard::before {
+    -webkit-mask-image: url("../../../../imagenes/inicio_sesion/cuerpo_pagina/secciones/chart-no-axes-column-increasing.svg");
+    mask-image: url("../../../../imagenes/inicio_sesion/cuerpo_pagina/secciones/chart-column.svg");
+}

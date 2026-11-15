@@ -9,6 +9,15 @@ const obtenerResumen = async (req, res) => {
     }
 };
 
+const obtenerVentasUltimosSeisMeses = async (req, res) => {
+    try {
+        return res.json(await dashboardServicio.obtenerVentasUltimosSeisMeses());
+    } catch (error) {
+        console.error('Error al obtener ventas mensuales del dashboard:', error);
+        return res.status(500).json({ mensaje: 'No se pudieron obtener las ventas mensuales' });
+    }
+};
+
 const obtenerProductosMasVendidos = async (req, res) => {
     try {
         const periodo = ['todo', 'mes', 'tres_meses'].includes(req.query.periodo)
@@ -64,6 +73,7 @@ const restaurarProductoRanking = async (req, res) => {
 
 module.exports = {
     obtenerResumen,
+    obtenerVentasUltimosSeisMeses,
     obtenerProductosMasVendidos,
     obtenerProductosExcluidosRanking,
     excluirProductoRanking,
