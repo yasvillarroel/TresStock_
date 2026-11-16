@@ -419,7 +419,8 @@ const importarProductos = async (archivo, confirmarReemplazoStock = false, corre
 
         // el stock solo se utiliza en Inventario, no en la tabla Productos
         const stockActualBruto = producto['STOCK ACTUAL'];
-        const stockActualNumero = Number(stockActualBruto);
+        const stockActualTexto = String(stockActualBruto ?? '').trim().replace(',', '.');
+        const stockActualNumero = Number(stockActualTexto);
 
         // verifica codigo vacio
         if (!codigo) {
@@ -478,16 +479,17 @@ const importarProductos = async (archivo, confirmarReemplazoStock = false, corre
             continue;
         }
 
-        // valida el stock simulado: solo enteros, cero permitido
-        // limite de INTEGER en PostgreSQL; evita errores por valores enormes
+        // Admite cero y hasta cuatro decimales, igual que NUMERIC(12,4) del inventario.
         if (
             stockActualBruto === undefined ||
             stockActualBruto === null ||
             typeof stockActualBruto === 'boolean' ||
             String(stockActualBruto).trim() === '' ||
-            !Number.isSafeInteger(stockActualNumero) ||
+            !/^\d+(?:\.\d{1,4})?$/.test(stockActualTexto) ||
+            !Number.isFinite(stockActualNumero) ||
             stockActualNumero < 0 ||
-            stockActualNumero > 2147483647
+            stockActualNumero > 99999999.9999 ||
+            Math.abs(stockActualNumero - Math.round(stockActualNumero * 10000) / 10000) >= 1e-9
         ) {
             stocksInvalidos.push({
                 fila,
@@ -742,7 +744,7 @@ const importarProductos = async (archivo, confirmarReemplazoStock = false, corre
                     $2
                  FROM jsonb_to_recordset($1::jsonb) AS datos(
                     codigo TEXT,
-                    "stockActual" INTEGER
+                    "stockActual" NUMERIC(12,4)
                  )
                  INNER JOIN base_datos.inventario AS inventario
                     ON inventario.codigo = datos.codigo
@@ -764,7 +766,7 @@ const importarProductos = async (archivo, confirmarReemplazoStock = false, corre
                     0
                  FROM jsonb_to_recordset($1::jsonb) AS datos(
                     codigo TEXT,
-                    "stockActual" INTEGER
+                    "stockActual" NUMERIC(12,4)
                  )
                  INNER JOIN base_datos.productos AS p
                     ON p.codigo = datos.codigo

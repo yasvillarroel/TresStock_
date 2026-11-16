@@ -10,8 +10,8 @@ const obtenerResumenDashboard = async () => {
             (SELECT COUNT(*) FROM base_datos.productos) AS cantidad_productos,
             COUNT(*) FILTER (
                 WHERE COALESCE(i.stock_actual, 0) > 0
-                    AND COALESCE(i.stock_minimo, 0) > 0
-                    AND i.stock_actual <= i.stock_minimo
+                    AND (COALESCE(i.stock_minimo, 0) + COALESCE(i.stock_seguridad, 0)) > 0
+                    AND i.stock_actual <= (COALESCE(i.stock_minimo, 0) + COALESCE(i.stock_seguridad, 0))
             ) AS productos_stock_bajo,
             COUNT(*) FILTER (
                 WHERE COALESCE(i.stock_actual, 0) = 0
@@ -25,7 +25,8 @@ const obtenerResumenDashboard = async () => {
             ), 0) AS ventas_mes_actual,
             TO_CHAR((SELECT inicio FROM ultimo_mes), 'YYYY-MM') AS mes_ventas_referencia
          FROM base_datos.productos p
-         LEFT JOIN base_datos.inventario i ON i.codigo = p.codigo`
+         LEFT JOIN base_datos.inventario i ON i.codigo = p.codigo
+         WHERE p.controla_stock = TRUE`
     );
 
     return resultado.rows[0];

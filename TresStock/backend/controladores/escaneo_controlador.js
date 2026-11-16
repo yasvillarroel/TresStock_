@@ -144,13 +144,13 @@ const asociarCodigoProducto = async (req, res) => {
 
     } catch (error) {
 
-        if (error.codigo === 'CODIGO_DUPLICADO') {
+        if (error.codigo === 'CODIGO_DUPLICADO' || error.code === '23505') {
             return res.status(409).json({
-                mensaje: error.message
+                mensaje: 'El código de barras ya está registrado'
             });
         }
 
-        if (error.codigo === 'PRODUCTO_NO_ENCONTRADO') {
+        if (error.codigo === 'PRODUCTO_NO_ENCONTRADO' || error.code === '23503') {
             return res.status(404).json({
                 mensaje: 'El producto seleccionado no existe'
             });

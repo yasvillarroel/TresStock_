@@ -37,7 +37,8 @@ const iniciarSesion = async (req, res) => {
         // crea el jwt con los datos necesarios del usuario
         const token = firmarToken({
             id: usuario.id_usuario,
-            rol: usuario.id_rol
+            rol: usuario.id_rol,
+            version_sesion: usuario.version_sesion
         });
 
         // Guarda el JWT en una cookie segura.
@@ -48,7 +49,8 @@ const iniciarSesion = async (req, res) => {
         const csrfToken = generateCsrfToken(req, res, { overwrite: true });
 
         // Envía los datos del usuario y el nuevo token CSRF.
-        return res.json({ ...usuario, csrfToken });
+        const { version_sesion, ...usuarioPublico } = usuario;
+        return res.json({ ...usuarioPublico, csrfToken });
 
     } catch (error) {
 

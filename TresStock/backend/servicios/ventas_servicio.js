@@ -813,6 +813,18 @@ const importarVentas = async (archivo, idUsuario, modalidad) => {
 
     }
 
+    // Impide guardar boletas parciales que luego se descartarían como duplicadas.
+    // Se valida todo el archivo antes de abrir una transacción o escribir ventas.
+    if (detallesSinProducto > 0) {
+        const ejemplos = [...new Set(productosNoEncontrados.map(producto => producto.codigo))].slice(0, 8).join(', ');
+        const error = new Error(
+            `Hay ${detallesSinProducto} líneas con productos no registrados (${ejemplos}). ` +
+            'Registra esos productos y vuelve a importar el archivo. No se guardó ninguna venta.'
+        );
+        error.status = 400;
+        throw error;
+    }
+
     // obtiene las boletas que ya existen
     const resultadoExistentes = await pool.query(
         `

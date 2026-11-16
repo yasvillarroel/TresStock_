@@ -110,7 +110,7 @@ const asociarCodigoProducto = async (
         `
         SELECT codigo
         FROM base_datos.productos
-        WHERE cod_barra = $1
+        WHERE codigo = $1 OR cod_barra = $1
 
         UNION ALL
 
@@ -167,27 +167,7 @@ const asociarCodigoProducto = async (
 // FUNCION ELIMINAR CODIGO ASOCIADO
 const eliminarCodigoAsociado = async (codigoBarras) => {
 
-    // verifica que el codigo no pertenezca a un producto principal
-    const producto = await pool.query(
-        `SELECT codigo
-         FROM base_datos.productos
-         WHERE codigo = $1
-            OR cod_barra = $1`,
-        [codigoBarras]
-    );
-
-    // impide eliminar codigos principales
-    if (producto.rowCount > 0) {
-        const error = new Error(
-            'No se pueden eliminar códigos de productos principales'
-        );
-
-        error.status = 400;
-
-        throw error;
-    }
-
-    // elimina exclusivamente el registro del codigo asociado
+    // Solo elimina asociaciones; permite limpiar una colisión antigua sin tocar el producto principal.
     const resultado = await pool.query(
         `DELETE FROM base_datos.codigos_asociados
          WHERE codigo_barras = $1
@@ -202,6 +182,15 @@ const eliminarCodigoAsociado = async (codigoBarras) => {
 
     // verifica que el codigo asociado exista
     if (resultado.rowCount === 0) {
+        const producto = await pool.query(
+            `SELECT codigo FROM base_datos.productos WHERE codigo = $1 OR cod_barra = $1`,
+            [codigoBarras]
+        );
+        if (producto.rowCount > 0) {
+            const error = new Error('No se pueden eliminar códigos de productos principales');
+            error.status = 400;
+            throw error;
+        }
         const error = new Error(
             'El código asociado no existe'
         );

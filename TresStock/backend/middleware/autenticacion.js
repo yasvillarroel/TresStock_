@@ -29,17 +29,18 @@ async function autenticacion(req, res, next) {
 
     const idUsuario = Number(datosToken?.id);
 
-    if (!Number.isSafeInteger(idUsuario) || idUsuario <= 0) {
+    if (!Number.isSafeInteger(idUsuario) || idUsuario <= 0 ||
+        typeof datosToken.version_sesion !== 'string' || !/^[a-f0-9]{64}$/.test(datosToken.version_sesion)) {
         return res.status(401).json({ mensaje: 'Sesión inválida' });
     }
 
     try {
 
         // consulta el estado y rol vigentes; no confia en el rol guardado en el JWT
-        const usuario = await autenticacionServicio.obtenerUsuarioPorId(idUsuario);
+        const usuario = await autenticacionServicio.obtenerUsuarioPorId(idUsuario, datosToken.version_sesion);
 
         if (!usuario) {
-            return res.status(401).json({ mensaje: 'La cuenta está desactivada o ya no existe' });
+            return res.status(401).json({ mensaje: 'La sesión ya no es válida. Inicia sesión nuevamente.' });
         }
 
         // entrega identidad y permisos actualizados a los controladores

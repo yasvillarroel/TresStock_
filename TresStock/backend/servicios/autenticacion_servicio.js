@@ -4,6 +4,7 @@ const nodemailer = require('nodemailer');
 const { randomInt, createHmac, timingSafeEqual } = require('node:crypto');
 const {contrasenaCumplePolitica, MENSAJE_POLITICA_CONTRASENA} = require('../utilidades/validacion_contrasena');
 const normalizarCorreo = correo => String(correo ?? '').trim().toLowerCase();
+const { crearVersionSesion, versionSesionValida } = require('../utilidades/version_sesion');
 
 const iniciarSesion = async (email, password, ip) => {
     email = normalizarCorreo(email);
@@ -34,6 +35,7 @@ const iniciarSesion = async (email, password, ip) => {
         [ip]
     );
 
+    usuario.version_sesion = crearVersionSesion(usuario.password_hash);
     delete usuario.password_hash;
     return usuario;
 };
@@ -93,9 +95,9 @@ const registrarFalloInicioSesion = async (ip) => {
     }
 };
 
-const obtenerUsuarioPorId = async (idUsuario) => {
+const obtenerUsuarioPorId = async (idUsuario, versionSesion) => {
     const resultado = await pool.query(
-        `SELECT u.id_usuario, u.nombre, u.email, u.id_rol, r.nombre AS nombre_rol
+        `SELECT u.id_usuario, u.nombre, u.email, u.id_rol, u.password_hash, r.nombre AS nombre_rol
          FROM base_datos.usuarios u
          JOIN base_datos.roles r ON r.id_rol = u.id_rol
          WHERE u.id_usuario = $1 AND u.activo = TRUE`,
@@ -104,6 +106,7 @@ const obtenerUsuarioPorId = async (idUsuario) => {
 
     const usuario = resultado.rows[0];
     if (!usuario) return null;
+    if (versionSesion !== undefined && !versionSesionValida(usuario.password_hash, versionSesion)) return null;
 
     return {
         id: usuario.id_usuario,
