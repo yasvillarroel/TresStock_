@@ -1,491 +1,472 @@
 /* TITULO 1 CONTENEDOR CABECERA */
 
-    /* clase para establecer la estructura principal de la cabecera */
     .contenedor_principal_cabecera {
-        width: 100%;
-        height: 72px;
-        display: grid;
-        grid-template-columns: 1fr auto;
-        align-items: center;
-        background-color: #ffffff;
-        border-bottom: 1px solid #d9e1e5;
-        padding: 0 28px;
-        box-sizing: border-box;
-        gap: 24px;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 72px; /* Define el alto del elemento. */
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: 1fr auto; /* Define la distribución y el ancho de las columnas. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border-bottom: 1px solid #d9e1e5; /* Define el borde inferior. */
+        padding: 0 28px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        gap: 24px; /* Define la separación entre los elementos. */
     }
-
 
 /* TITULO 2 SECCION IZQUIERDA CABECERA */
 
-    /* clase para organizar el menú responsive y el título de la vista */
     .contenedor_izquierdo_cabecera {
-        display: flex;
-        align-items: center;
-        gap: 18px;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 18px; /* Define la separación entre los elementos. */
     }
 
-    /* clase para establecer el diseño de la opción del menú responsive */
     .boton_menu_cabecera {
-        width: 24px;
-        height: 24px;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
+        width: 24px; /* Define el ancho del elemento. */
+        height: 24px; /* Define el alto del elemento. */
+        display: none; /* Oculta el elemento. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
     }
 
-    /* cambia el color de la opción del menú al posicionar el cursor */
     .boton_menu_cabecera:hover {
-        color: #159ba3;
+        color: #159ba3; /* Establece el color del texto. */
     }
 
-    /* clase para establecer el tamaño del icono de menú */
     .imagen_boton_menu_cabecera {
-        width: 22px;
-        height: 22px;
+        width: 22px; /* Define el ancho del elemento. */
+        height: 22px; /* Define el alto del elemento. */
     }
 
-    /* clase para establecer el diseño del nombre de la vista actual */
     .titulo_vista_cabecera {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 22px;
-        font-weight: bold;
-        white-space: nowrap;
+        color: #0b3650; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 22px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
 
+/* TITULO 3 OPCIONES USUARIO */
 
-/* TITULO 4 OPCIONES USUARIO */
-
-    /* clase para organizar las opciones del usuario conectado */
     .contenedor_usuario_cabecera {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        gap: 11px;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: flex-end; /* Define la distribución de los elementos en el eje principal. */
+        gap: 11px; /* Define la separación entre los elementos. */
     }
 
-    /* clase para establecer el espacio de notificaciones */
     .contenedor_notificaciones_cabecera {
-        position: relative;
-        width: 38px;
-        height: 38px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        border-radius: 50%;
+        position: relative; /* Define el sistema de posicionamiento del elemento. */
+        width: 38px; /* Define el ancho del elemento. */
+        height: 38px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        border-radius: 50%; /* Define el redondeado de las esquinas. */
     }
 
     .boton_notificaciones_cabecera {
-        position: relative;
-        width: 38px;
-        height: 38px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0;
-        border: 0;
-        border-radius: 50%;
-        background: transparent;
-        cursor: pointer;
+        position: relative; /* Define el sistema de posicionamiento del elemento. */
+        width: 38px; /* Define el ancho del elemento. */
+        height: 38px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        padding: 0; /* Define el espacio interior del elemento. */
+        border: 0; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 50%; /* Define el redondeado de las esquinas. */
+        background: transparent; /* Define el fondo del elemento. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
     }
 
-    .boton_notificaciones_cabecera:hover,
-    .boton_notificaciones_cabecera[aria-expanded="true"] {
-        background-color: #eef5f6;
+    .boton_notificaciones_cabecera:hover, .boton_notificaciones_cabecera[aria-expanded="true"] {
+        background-color: #eef5f6; /* Establece el color de fondo. */
     }
 
-    /* cambia el fondo de notificaciones al posicionar el cursor */
     .contenedor_notificaciones_cabecera:hover {
-        background-color: #eef5f6;
+        background-color: #eef5f6; /* Establece el color de fondo. */
     }
 
-    /* clase para establecer el diseño del icono de notificaciones */
     .icono_notificaciones_cabecera {
-        width: 22px;
-        height: 22px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        width: 22px; /* Define el ancho del elemento. */
+        height: 22px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
     }
 
-    /* clase para establecer el tamaño del icono de notificaciones */
     .imagen_notificaciones_cabecera {
-        width: 20px;
-        height: 20px;
+        width: 20px; /* Define el ancho del elemento. */
+        height: 20px; /* Define el alto del elemento. */
     }
 
     .contador_notificaciones_cabecera {
-        position: absolute;
-        top: -2px;
-        right: -3px;
-        min-width: 17px;
-        height: 17px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0 4px;
-        border: 2px solid #ffffff;
-        border-radius: 12px;
-        background: #e24b4b;
-        color: #ffffff;
-        font: 700 10px Arial, sans-serif;
-        box-sizing: border-box;
+        position: absolute; /* Define el sistema de posicionamiento del elemento. */
+        top: -2px; /* Define la posición respecto al borde superior. */
+        right: -3px; /* Define la posición respecto al borde derecho. */
+        min-width: 17px; /* Establece el ancho mínimo del elemento. */
+        height: 17px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        padding: 0 4px; /* Define el espacio interior del elemento. */
+        border: 2px solid #ffffff; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 12px; /* Define el redondeado de las esquinas. */
+        background: #e24b4b; /* Define el fondo del elemento. */
+        color: #ffffff; /* Establece el color del texto. */
+        font: 700 10px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    .contador_notificaciones_cabecera[hidden] { display: none; }
+    .contador_notificaciones_cabecera[hidden] {
+        display: none; /* Oculta el elemento. */
+    }
 
     .panel_notificaciones_cabecera {
-        position: absolute;
-        top: calc(100% + 12px);
-        right: -8px;
-        z-index: 1300;
-        width: 360px;
-        max-width: calc(100vw - 24px);
-        overflow: hidden;
-        border: 1px solid #dce4e8;
-        border-radius: 10px;
-        background: #ffffff;
-        box-shadow: 0 12px 30px rgba(5, 31, 45, 0.16);
+        position: absolute; /* Define el sistema de posicionamiento del elemento. */
+        top: calc(100% + 12px); /* Define la posición respecto al borde superior. */
+        right: -8px; /* Define la posición respecto al borde derecho. */
+        z-index: 1300; /* Define el orden de superposición del elemento. */
+        width: 360px; /* Define el ancho del elemento. */
+        max-width: calc(100vw - 24px); /* Limita el ancho máximo del elemento. */
+        overflow: hidden; /* Controla el contenido que supera las dimensiones del elemento. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 10px; /* Define el redondeado de las esquinas. */
+        background: #ffffff; /* Define el fondo del elemento. */
+        box-shadow: 0 12px 30px rgba(5, 31, 45, 0.16); /* Agrega o ajusta la sombra del elemento. */
     }
 
-    .panel_notificaciones_cabecera[hidden] { display: none; }
+    .panel_notificaciones_cabecera[hidden] {
+        display: none; /* Oculta el elemento. */
+    }
 
     .encabezado_notificaciones_cabecera {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        padding: 15px 16px;
-        border-bottom: 1px solid #e6ecef;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: space-between; /* Define la distribución de los elementos en el eje principal. */
+        gap: 12px; /* Define la separación entre los elementos. */
+        padding: 15px 16px; /* Define el espacio interior del elemento. */
+        border-bottom: 1px solid #e6ecef; /* Define el borde inferior. */
     }
 
     .titulo_notificaciones_cabecera {
-        color: #0b3650;
-        font: 700 14px Arial, sans-serif;
+        color: #0b3650; /* Establece el color del texto. */
+        font: 700 14px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
     }
 
     .pestanas_notificaciones_cabecera {
-        display: flex;
-        gap: 6px;
-        padding: 9px 12px 0;
-        border-bottom: 1px solid #e6ecef;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        gap: 6px; /* Define la separación entre los elementos. */
+        padding: 9px 12px 0; /* Define el espacio interior del elemento. */
+        border-bottom: 1px solid #e6ecef; /* Define el borde inferior. */
     }
 
     .pestana_notificaciones_cabecera {
-        padding: 8px 10px;
-        border: 0;
-        border-bottom: 2px solid transparent;
-        background: transparent;
-        color: #627782;
-        font: 700 11px Arial, sans-serif;
-        cursor: pointer;
+        padding: 8px 10px; /* Define el espacio interior del elemento. */
+        border: 0; /* Define el grosor, el estilo y el color del borde. */
+        border-bottom: 2px solid transparent; /* Define el borde inferior. */
+        background: transparent; /* Define el fondo del elemento. */
+        color: #627782; /* Establece el color del texto. */
+        font: 700 11px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
     }
 
-    .pestana_notificaciones_cabecera:hover,
-    .pestana_notificaciones_cabecera.pestana_notificaciones_activa {
-        border-bottom-color: #159ba3;
-        color: #0f858d;
+    .pestana_notificaciones_cabecera:hover, .pestana_notificaciones_cabecera.pestana_notificaciones_activa {
+        border-bottom-color: #159ba3; /* Define el color del borde inferior. */
+        color: #0f858d; /* Establece el color del texto. */
     }
 
     .boton_actualizar_notificaciones_cabecera {
-        padding: 6px 8px;
-        border: 0;
-        border-radius: 5px;
-        background: #effafb;
-        color: #0f858d;
-        font: 700 11px Arial, sans-serif;
-        cursor: pointer;
+        padding: 6px 8px; /* Define el espacio interior del elemento. */
+        border: 0; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 5px; /* Define el redondeado de las esquinas. */
+        background: #effafb; /* Define el fondo del elemento. */
+        color: #0f858d; /* Establece el color del texto. */
+        font: 700 11px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
     }
 
     .lista_notificaciones_cabecera {
-        max-height: min(420px, calc(100vh - 150px));
-        overflow-y: auto;
+        max-height: min(420px, calc(100vh - 150px)); /* Limita el alto máximo del elemento. */
+        overflow-y: auto; /* Controla el contenido que desborda verticalmente. */
     }
 
     .estado_notificaciones_cabecera {
-        padding: 22px 16px;
-        color: #71818a;
-        font: 12px Arial, sans-serif;
-        text-align: center;
+        padding: 22px 16px; /* Define el espacio interior del elemento. */
+        color: #71818a; /* Establece el color del texto. */
+        font: 12px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        text-align: center; /* Define la alineación horizontal del texto. */
     }
 
-    .error_notificaciones_cabecera { color: #b54735; }
+    .error_notificaciones_cabecera {
+        color: #b54735; /* Establece el color del texto. */
+    }
 
     .item_notificacion_cabecera {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        padding: 12px 14px;
-        border: 0;
-        border-bottom: 1px solid #edf1f3;
-        background: #ffffff;
-        text-align: left;
-        cursor: pointer;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: space-between; /* Define la distribución de los elementos en el eje principal. */
+        gap: 12px; /* Define la separación entre los elementos. */
+        padding: 12px 14px; /* Define el espacio interior del elemento. */
+        border: 0; /* Define el grosor, el estilo y el color del borde. */
+        border-bottom: 1px solid #edf1f3; /* Define el borde inferior. */
+        background: #ffffff; /* Define el fondo del elemento. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
     }
 
-    .item_notificacion_cabecera:hover { background: #f7fafb; }
-    .notificacion_stock_negativo { box-shadow: inset 3px 0 #d94848; }
-    .notificacion_sin_stock { box-shadow: inset 3px 0 #e79a31; }
-    .notificacion_stock_bajo { box-shadow: inset 3px 0 #e5b83b; }
-    .notificacion_vencimiento_critico { box-shadow: inset 3px 0 #d94848; }
-    .notificacion_vencimiento_riesgo { box-shadow: inset 3px 0 #e5b83b; }
+    .item_notificacion_cabecera:hover {
+        background: #f7fafb; /* Define el fondo del elemento. */
+    }
+
+    .notificacion_stock_negativo {
+        box-shadow: inset 3px 0 #d94848; /* Agrega o ajusta la sombra del elemento. */
+    }
+
+    .notificacion_sin_stock {
+        box-shadow: inset 3px 0 #e79a31; /* Agrega o ajusta la sombra del elemento. */
+    }
+
+    .notificacion_stock_bajo {
+        box-shadow: inset 3px 0 #e5b83b; /* Agrega o ajusta la sombra del elemento. */
+    }
+
+    .notificacion_vencimiento_critico {
+        box-shadow: inset 3px 0 #d94848; /* Agrega o ajusta la sombra del elemento. */
+    }
+
+    .notificacion_vencimiento_riesgo {
+        box-shadow: inset 3px 0 #e5b83b; /* Agrega o ajusta la sombra del elemento. */
+    }
 
     .contenido_item_notificacion_cabecera {
-        min-width: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        gap: 5px; /* Define la separación entre los elementos. */
     }
 
     .titulo_item_notificacion_cabecera {
-        overflow: hidden;
-        color: #263a45;
-        font: 700 12px Arial, sans-serif;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        overflow: hidden; /* Controla el contenido que supera las dimensiones del elemento. */
+        color: #263a45; /* Establece el color del texto. */
+        font: 700 12px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        text-overflow: ellipsis; /* Define cómo se indica el texto que no cabe. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
 
     .detalle_item_notificacion_cabecera {
-        color: #71818a;
-        font: 11px Arial, sans-serif;
+        color: #71818a; /* Establece el color del texto. */
+        font: 11px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
     }
 
     .flecha_item_notificacion_cabecera {
-        color: #80919a;
-        font: 24px Arial, sans-serif;
-        flex-shrink: 0;
+        color: #80919a; /* Establece el color del texto. */
+        font: 24px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        flex-shrink: 0; /* Define cuánto puede reducirse el elemento en Flexbox. */
     }
 
-    /* clase para establecer el diseño del icono del usuario conectado */
     .icono_usuario_cabecera {
-        width: 42px;
-        height: 42px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #e4f6f6;
-        border-radius: 50%;
-        box-sizing: border-box;
+        width: 42px; /* Define el ancho del elemento. */
+        height: 42px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        background-color: #e4f6f6; /* Establece el color de fondo. */
+        border-radius: 50%; /* Define el redondeado de las esquinas. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para establecer el tamaño del icono de usuario */
     .imagen_usuario_cabecera {
-        width: 20px;
-        height: 20px;
+        width: 20px; /* Define el ancho del elemento. */
+        height: 20px; /* Define el alto del elemento. */
     }
 
-    /* clase para organizar el nombre y correo del usuario */
     .contenedor_datos_usuario_cabecera {
-        display: flex;
-        flex-direction: column;
-        min-width: 130px;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        min-width: 130px; /* Establece el ancho mínimo del elemento. */
     }
 
-    /* clase para establecer el diseño del nombre del usuario */
     .nombre_usuario_cabecera {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        font-weight: bold;
+        color: #0b3650; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
     }
 
-    /* clase para establecer el diseño del correo del usuario */
     .email_usuario_cabecera {
-        color: #7b8b94;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        margin-top: 2px;
+        color: #7b8b94; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        margin-top: 2px; /* Define el margen superior. */
     }
 
-    /* clase para establecer la opción de acciones del usuario */
     .boton_usuario_cabecera {
-        color: #415865;
-        font-family: Arial, sans-serif;
-        font-size: 16px;
-        cursor: pointer;
-        padding: 7px;
+        color: #415865; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 16px; /* Define un tamaño de texto legible para el campo en teléfonos. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        padding: 7px; /* Define el espacio interior del elemento. */
     }
 
-    /* cambia el color de la opción de usuario al posicionar el cursor */
     .boton_usuario_cabecera:hover {
-        color: #159ba3;
+        color: #159ba3; /* Establece el color del texto. */
     }
-
 
 /* SUBTITULO 1 PERFIL Y MENU DESPLEGABLE */
 
-    /* posiciona el menu debajo del perfil */
     .contenedor_perfil_usuario_cabecera {
-        position: relative;
-        min-width: 0;
+        position: relative; /* Define el sistema de posicionamiento del elemento. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
     }
 
-    /* permite abrir el menu desde el icono, nombre, correo o flecha */
     .boton_perfil_usuario_cabecera {
-        display: flex;
-        align-items: center;
-        gap: 11px;
-        border: none;
-        border-radius: 8px;
-        background-color: transparent;
-        padding: 5px 7px;
-        cursor: pointer;
-        text-align: left;
-        font-family: Arial, sans-serif;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 11px; /* Define la separación entre los elementos. */
+        border: none; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        background-color: transparent; /* Establece el color de fondo. */
+        padding: 5px 7px; /* Define el espacio interior del elemento. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
     }
 
     .boton_perfil_usuario_cabecera:hover {
-        background-color: #f1f7f8;
+        background-color: #f1f7f8; /* Establece el color de fondo. */
     }
 
-    /* mantiene el icono redondo sin encogerse */
     .boton_perfil_usuario_cabecera .icono_usuario_cabecera {
-        flex-shrink: 0;
+        flex-shrink: 0; /* Define cuánto puede reducirse el elemento en Flexbox. */
     }
 
-    /* evita que correos largos ensanchen la cabecera */
     .boton_perfil_usuario_cabecera .contenedor_datos_usuario_cabecera {
-        max-width: 190px;
-        min-width: 0;
+        max-width: 190px; /* Limita el ancho máximo del elemento. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
     }
 
-    .boton_perfil_usuario_cabecera .nombre_usuario_cabecera,
-    .boton_perfil_usuario_cabecera .email_usuario_cabecera {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+    .boton_perfil_usuario_cabecera .nombre_usuario_cabecera, .boton_perfil_usuario_cabecera .email_usuario_cabecera {
+        overflow: hidden; /* Controla el contenido que supera las dimensiones del elemento. */
+        text-overflow: ellipsis; /* Define cómo se indica el texto que no cabe. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
 
-    /* menu desplegado debajo del perfil */
     .menu_desplegable_usuario_cabecera {
-        position: absolute;
-        top: calc(100% + 7px);
-        right: 0;
-        width: 194px;
-        max-width: calc(100vw - 24px);
-        padding: 6px;
-        background-color: #ffffff;
-        border: 1px solid #dce4e8;
-        border-radius: 8px;
-        box-shadow: 0 10px 28px rgba(5, 31, 45, 0.13);
-        box-sizing: border-box;
-        z-index: 1200;
+        position: absolute; /* Define el sistema de posicionamiento del elemento. */
+        top: calc(100% + 7px); /* Define la posición respecto al borde superior. */
+        right: 0; /* Define la posición respecto al borde derecho. */
+        width: 194px; /* Define el ancho del elemento. */
+        max-width: calc(100vw - 24px); /* Limita el ancho máximo del elemento. */
+        padding: 6px; /* Define el espacio interior del elemento. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        box-shadow: 0 10px 28px rgba(5, 31, 45, 0.13); /* Agrega o ajusta la sombra del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        z-index: 1200; /* Define el orden de superposición del elemento. */
     }
 
-    /* respeta el atributo hidden cuando el menu se cierra */
     .menu_desplegable_usuario_cabecera[hidden] {
-        display: none;
+        display: none; /* Oculta el elemento. */
     }
 
-    /* boton de cierre de sesion */
     .boton_cerrar_sesion_cabecera {
-        display: flex;
-        align-items: center;
-        width: 100%;
-        min-height: 39px;
-        padding: 0 12px;
-        border: none;
-        border-radius: 5px;
-        color: #dc2626;
-        background-color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        font-weight: bold;
-        text-align: left;
-        cursor: pointer;
-        justify-content: flex-start;
-        gap: 10px;
-
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-height: 39px; /* Establece el alto mínimo del elemento. */
+        padding: 0 12px; /* Define el espacio interior del elemento. */
+        border: none; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 5px; /* Define el redondeado de las esquinas. */
+        color: #dc2626; /* Establece el color del texto. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        justify-content: flex-start; /* Define la distribución de los elementos en el eje principal. */
+        gap: 10px; /* Define la separación entre los elementos. */
     }
 
     .boton_cerrar_sesion_cabecera:hover {
-        background-color: #fff0f0;
+        background-color: #fff0f0; /* Establece el color de fondo. */
     }
 
     .boton_cerrar_sesion_cabecera:disabled {
-        opacity: 0.65;
-        cursor: not-allowed;
+        opacity: 0.65; /* Define el nivel de opacidad. */
+        cursor: not-allowed; /* Define el cursor al situarlo sobre el elemento. */
     }
 
-
-    /* imagen del boton cerrar sesion */
     .imagen_cerrar_sesion_cabecera {
-        width: 18px;
-        height: 18px;
-        flex-shrink: 0;
+        width: 18px; /* Define el ancho del elemento. */
+        height: 18px; /* Define el alto del elemento. */
+        flex-shrink: 0; /* Define cuánto puede reducirse el elemento en Flexbox. */
     }
 
+/* TITULO 4 RESPONSIVE CABECERA */
 
-/* TITULO 5 RESPONSIVE CABECERA */
-
-    /* adapta la cabecera para tablets */
     @media (max-width: 1024px) {
-
         .boton_menu_cabecera {
-            display: flex;
+            display: flex; /* Activa Flexbox para organizar el contenido. */
         }
-
     }
 
+/* TITULO 5 RESPONSIVE (MAX-WIDTH: 768PX) */
 
-    /* adapta la información del usuario para dispositivos pequeños */
-    @media (max-width: 700px) {
-
+    @media (max-width: 768px) {
         .contenedor_principal_cabecera {
-            height: 64px;
-            padding: 0 16px;
-            gap: 12px;
+            height: 64px; /* Define el alto del elemento. */
+            padding: 0 16px; /* Define el espacio interior del elemento. */
+            gap: 12px; /* Define la separación entre los elementos. */
         }
 
         .contenedor_izquierdo_cabecera {
-            gap: 12px;
+            gap: 12px; /* Define la separación entre los elementos. */
         }
 
         .contenedor_datos_usuario_cabecera {
-            display: none;
+            display: none; /* Oculta el elemento. */
         }
 
         .titulo_vista_cabecera {
-            font-size: 19px;
+            font-size: 19px; /* Define el tamaño del texto. */
         }
 
         .contenedor_usuario_cabecera {
-            gap: 6px;
+            gap: 6px; /* Define la separación entre los elementos. */
         }
 
         .icono_usuario_cabecera {
-            width: 38px;
-            height: 38px;
+            width: 38px; /* Define el ancho del elemento. */
+            height: 38px; /* Define el alto del elemento. */
         }
 
         .contenedor_notificaciones_cabecera {
-            width: 36px;
-            height: 36px;
+            width: 36px; /* Define el ancho del elemento. */
+            height: 36px; /* Define el alto del elemento. */
         }
-
     }
 
+/* TITULO 6 RESPONSIVE (MAX-WIDTH: 480PX) */
 
-    /* adapta la cabecera para dispositivos móviles pequeños */
-    @media (max-width: 430px) {
-
+    @media (max-width: 480px) {
         .contenedor_principal_cabecera {
-            padding: 0 12px;
+            padding: 0 12px; /* Define el espacio interior del elemento. */
         }
 
         .titulo_vista_cabecera {
-            max-width: 135px;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
+            max-width: 135px; /* Limita el ancho máximo del elemento. */
+            overflow: hidden; /* Controla el contenido que supera las dimensiones del elemento. */
+            white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
+            text-overflow: ellipsis; /* Define cómo se indica el texto que no cabe. */
         }
 
         .boton_usuario_cabecera {
-            display: none;
+            display: none; /* Oculta el elemento. */
         }
-
     }

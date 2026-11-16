@@ -1,210 +1,965 @@
-/* TresStock · Análisis — diseño sobre la versión funcional original.
-   No modifica estilos globales de Inventario, Productos o Alertas. */
-.contenedor_analisis_pronostico {
-    width: 100%; min-width: 0; padding: 28px;
-    background: transparent; box-sizing: border-box;
-    font-family: Arial, sans-serif; color: #0b3650;
-}
-.contenedor_analisis_pronostico *, .contenedor_analisis_pronostico *::before, .contenedor_analisis_pronostico *::after { box-sizing: border-box; }
-.encabezado_general_analisis { margin: 0 0 22px; }
-.titulo_general_analisis { font-size: 24px; font-weight: 700; line-height: 1.15; color: #0b3650; }
-.descripcion_general_analisis { margin-top: 5px; color: #71818a; font-size: 13px; line-height: 1.55; }
-/* Indicadores */
-.resumen_kpi_analisis { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; margin-bottom: 22px; }
-.tarjeta_kpi_analisis { display: flex; align-items: center; gap: 16px; min-height: 105px; padding: 18px; border: 1px solid #dce4e8; border-radius: 8px; background: #fff; }
-.icono_kpi_analisis { width: 46px; height: 46px; flex: none; border-radius: 8px; display: grid; place-items: center; }
-.icono_kpi_analisis svg { width: 27px; height: 27px; }
-.icono_demanda_analisis { background: #e3f6f5; color: #138e9a; }
-.icono_ahora_analisis { background: #fff1da; color: #cd7e13; }
-.icono_sugeridas_analisis { background: #e8f0fd; color: #346aab; }
-.contenido_kpi_analisis { min-width: 0; }
-.etiqueta_kpi_analisis { color: #5d7486; font-size: 12px; line-height: 1.3; }
-.valor_kpi_analisis { margin: 5px 0; font-size: 23px; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
-.valor_demanda_analisis { color: #148c98; }.valor_ahora_analisis { color: #cb7d16; }.valor_sugeridas_analisis { color: #3269ad; }
-.nota_kpi_analisis { color: #718293; font-size: 11px; line-height: 1.4; }
-/* Pestañas */
-.pestanas_analisis { display: flex; gap: 23px; align-items: stretch; border-bottom: 2px solid #dce5e9; margin-bottom: 0; }
-.pestana_analisis { margin: 0 0 -2px; padding: 15px 6px; border: 0; border-bottom: 3px solid transparent; border-radius: 0; background: transparent; font: 500 14px Arial,sans-serif; color: #526b7c; cursor: pointer; white-space: nowrap; }
-.pestana_analisis:hover { color: #159ba3; }
-.pestana_analisis.pestana_analisis_activa { color: #008d98; border-bottom-color: #159ba3; font-weight: 700; }
-.pestana_analisis:focus-visible { outline: 2px solid #159ba3; outline-offset: -3px; }
-.panel_analisis { min-width: 0; overflow: visible; background: #fff; border: 1px solid #d9e3e8; border-radius: 0 0 8px 8px; box-shadow: 0 3px 8px rgba(15,42,61,.03); }
-.panel_analisis[hidden], .area_grafico_pronostico_analisis[hidden] { display: none !important; }
-.cabecera_panel_analisis { padding: 18px 18px 16px; border-bottom: 1px solid #e0e8ed; }
-.titulo_analisis_pronostico, .titulo_reposicion_analisis_pronostico { font: 700 16px Arial,sans-serif; color: #0b3650; }
-.subtitulo_panel_analisis { margin-top: 7px; font-size: 13px; line-height: 1.5; color: #71818a; }
-.fecha_corte_analisis_pronostico { display: inline-flex; margin-top: 12px; min-height: 32px; padding: 7px 12px; border: 1px solid #e2eaed; background: #f4f8f9; border-radius: 6px; color: #566e80; font-size: 12px; align-items: center; }
-/* Filtros con etiquetas superiores, consistentes con Productos */
-.area_filtros_analisis { padding: 18px; border-bottom: 1px solid #e0e8ed; }
-.filtros_analisis_pronostico { display: grid; grid-template-columns: minmax(180px,1.4fr) minmax(170px,.9fr) minmax(210px,1.1fr) auto; gap: 12px; align-items: end; }
-.campo_busqueda_analisis_pronostico, .campo_filtro_pronostico_analisis, .campo_metodo_pronostico_analisis, .campo_busqueda_reposicion_analisis, .filtro_reposicion_analisis_pronostico { min-width: 0; width: 100%; }
-.etiqueta_busqueda_analisis_pronostico { display: block; margin-bottom: 7px; font-size: 12px; color: #536873; font-weight: 700; }
-.input_busqueda_analisis_pronostico, .selector_metodo_pronostico_analisis, .contenedor_analisis_pronostico .boton_selector_inventario { height: 40px; width: 100%; min-width: 0; padding: 0 12px; border: 1px solid #ced9de; border-radius: 6px; background: #fff; color: #37434b; font: 13px Arial,sans-serif; }
-.input_busqueda_analisis_pronostico::placeholder { color: #8193a1; }
-.contenedor_analisis_pronostico .boton_selector_inventario { display: flex; align-items: center; justify-content: space-between; gap: 12px; cursor: pointer; text-align: left; }
-.contenedor_analisis_pronostico .texto_selector_inventario { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.contenedor_analisis_pronostico .flecha_selector_inventario { color: #4a6377; flex: none; }
-.contenedor_analisis_pronostico .contenedor_selector_inventario { position: relative; width: 100%; min-width: 0; }
-.contenedor_analisis_pronostico .panel_selector_inventario { position: absolute; z-index: 60; top: calc(100% + 5px); left: 0; right: 0; max-height: 260px; overflow: auto; border: 1px solid #c9d9e2; border-radius: 8px; background: #fff; box-shadow: 0 8px 22px rgba(16,46,67,.13); }
-.contenedor_analisis_pronostico .panel_selector_inventario[hidden], #filtro_pronostico_analisis[hidden], #filtro_estado_reposicion_analisis[hidden] { display: none !important; }
-.contenedor_analisis_pronostico .opcion_lista_selector_inventario { display: block; width: 100%; border: 0; padding: 12px 14px; background: #fff; font: 13px Arial,sans-serif; text-align: left; color: #28465a; cursor: pointer; }
-.contenedor_analisis_pronostico .opcion_lista_selector_inventario:hover, .contenedor_analisis_pronostico .opcion_lista_selector_inventario[aria-selected="true"] { background: #e7f6f7; color: #007b88; }
-.input_busqueda_analisis_pronostico:focus-visible, .selector_metodo_pronostico_analisis:focus-visible, .contenedor_analisis_pronostico .boton_selector_inventario:focus-visible { outline: 2px solid #159ba3; outline-offset: 1px; }
-.grupo_boton_limpieza_analisis { align-self: end; min-width: 0; }
-.boton_limpiar_analisis { height: 40px; padding: 0 13px; white-space: nowrap; border: 1px solid #159ba3; border-radius: 6px; background: #fff; color: #0f858d; font: 700 12px Arial,sans-serif; cursor: pointer; }
-.boton_limpiar_analisis:hover { background: #eaf7f8; }
-.explicacion_metodo_analisis { margin-top: 17px; padding: 0; }
-.descripcion_analisis_pronostico { color: #627889; font: 12px/1.6 Arial,sans-serif; }
-/* Tablas: la carga de contenido y los IDs conservan las funciones originales */
-.contenedor_tabla_analisis_pronostico, .contenedor_tabla_reposicion_analisis_pronostico { min-width: 0; width: 100%; overflow-x: auto; }
-.tabla_analisis_pronostico, .tabla_reposicion_analisis_pronostico { min-width: 780px; }
-.encabezado_tabla_analisis_pronostico, .fila_analisis_pronostico { display: grid; grid-template-columns: 62px minmax(190px,2fr) repeat(4,minmax(98px,1fr)); align-items: center; }
-.encabezado_reposicion_analisis_pronostico, .fila_reposicion_analisis_pronostico { display: grid; grid-template-columns: 62px minmax(190px,2fr) repeat(4,minmax(98px,1fr)); align-items: center; }
-.encabezado_tabla_analisis_pronostico, .encabezado_reposicion_analisis_pronostico { background: #f3f7f9; border-bottom: 1px solid #dce5ea; }
-.encabezado_tabla_analisis_pronostico > div, .encabezado_reposicion_analisis_pronostico > div { padding: 15px 9px; color: #5f7687; font: 700 12px Arial,sans-serif; text-align: center; }
-.encabezado_tabla_analisis_pronostico > div:nth-child(2), .encabezado_reposicion_analisis_pronostico > div:nth-child(2) { text-align: left; }
-.fila_analisis_pronostico, .fila_reposicion_analisis_pronostico { min-height: 66px; border-bottom: 1px solid #e9eef1; }
-.fila_analisis_pronostico:last-child, .fila_reposicion_analisis_pronostico:last-child { border-bottom: 0; }
-.fila_analisis_pronostico > div, .fila_reposicion_analisis_pronostico > div { min-width: 0; padding: 10px 9px; color: #425e70; font: 13px/1.4 Arial,sans-serif; overflow-wrap: anywhere; text-align: center; }
-.fila_analisis_pronostico > div:nth-child(2), .fila_reposicion_analisis_pronostico > div:nth-child(2) { font-weight: 700; color: #0d3650; text-align: left; }
-.fila_analisis_pronostico[tabindex] { cursor: pointer; }
-.fila_analisis_pronostico[tabindex]:hover, .fila_analisis_pronostico.seleccionada { background: #eaf8f9; }
-.fila_analisis_pronostico[tabindex]:focus-visible { outline: 2px solid #159ba3; outline-offset: -2px; }
-.imagen_producto_analisis_pronostico { display: block; width: 42px; height: 42px; object-fit: contain; border-radius: 7px; user-select: none; }
-.imagen_producto_analisis_pronostico_vacia { padding: 5px; background: #f3f7f8; }
-.cantidad_analisis_pronostico { font-variant-numeric: tabular-nums; }
-.cantidad_sugerida_analisis_pronostico { color: #008f84 !important; font-weight: 700 !important; }
-.fila_vacia_analisis_pronostico > div { padding: 30px 14px; text-align: center; font: 13px Arial,sans-serif; color: #728697; }
-.fila_revisar_stock_analisis_pronostico { background: #fff6f3; }
-.stock_negativo_analisis_pronostico { color: #c53534 !important; font-weight: 700 !important; }
-/* Paginadores coherentes con Inventario */
-.paginacion_analisis_pronostico { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; padding: 16px 18px; border-top: 1px solid #e0e8ed; }
-.resumen_paginacion_analisis_pronostico { color: #627889; font: 13px Arial,sans-serif; }
-.controles_paginacion_analisis_pronostico, .numeros_pagina_analisis_pronostico { display: flex; align-items: center; gap: 6px; }
-.boton_pagina_analisis_pronostico, .boton_numero_analisis_pronostico { display: inline-grid; place-items: center; height: 40px; min-width: 40px; padding: 0 10px; border: 1px solid #d4e0e6; border-radius: 8px; background: #fff; color: #355469; font: 13px Arial,sans-serif; cursor: pointer; }
-.boton_pagina_analisis_pronostico { font-size: 20px; }
-.boton_pagina_analisis_pronostico:hover:not(:disabled), .boton_numero_analisis_pronostico:hover { border-color: #159ba3; background: #f0f9fa; }
-.boton_pagina_analisis_pronostico:disabled { opacity: .45; cursor: not-allowed; }
-.boton_numero_analisis_pronostico.activa { background: #159ba3; color: #fff; border-color: #159ba3; font-weight: 700; }
-.puntos_pagina_analisis_pronostico { padding: 0 4px; color: #738899; font-size: 14px; }
-/* Reposición y explicación */
-.controles_filtro_reposicion_analisis { display: grid; grid-template-columns: minmax(210px,1.3fr) minmax(220px,1fr) auto; gap: 12px; align-items: end; }
-.detalles_calculo_analisis { margin-top: 13px; color: #537084; font-size: 12px; }
-.detalles_calculo_analisis summary { display: inline-block; cursor: pointer; color: #008d9c; font-weight: 700; }
-.detalles_calculo_analisis[open] summary { margin-bottom: 12px; }
-.descripcion_reposicion_analisis_pronostico { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 9px 18px; color: #64798a; font: 12px/1.5 Arial,sans-serif; }
-/* Gráfico que ya existía: conservar interactividad */
-.area_grafico_pronostico_analisis { margin-top: 14px; }
-.instruccion_grafico_analisis { padding: 16px 20px; border: 1px dashed #bfdee2; border-radius: 9px; background: #f5fafb; color: #52728a; font-size: 13px; line-height: 1.45; }
-.instruccion_grafico_analisis span { margin-right: 8px; color: #0696a2; }
-.instruccion_grafico_analisis[hidden] { display:none !important; }
-.contenedor_grafico_analisis_pronostico { margin-top: 12px; padding: 18px 20px; border: 1px solid #dbe5e9; border-radius: 10px; background: #fff; overflow-x: auto; }
-.contenedor_grafico_analisis_pronostico[hidden] { display: none !important; }
-.titulo_grafico_analisis_pronostico { color: #0b3650; font: 700 17px Arial,sans-serif; }
-.descripcion_grafico_analisis_pronostico, .mensaje_grafico_analisis_pronostico { margin-top: 6px; color: #687f8d; font: 12px/1.5 Arial,sans-serif; }
-.grafico_barras_analisis_pronostico { display: grid; grid-template-columns: repeat(28,minmax(0,1fr)); gap: 5px; min-width: 650px; height: 190px; margin-top: 14px; padding-top: 8px; border-bottom: 1px solid #dce5ea; }
-.columna_dia_analisis_pronostico { min-width: 0; display: grid; grid-template-rows: minmax(0,1fr) 18px 16px; align-items: end; text-align: center; }
-.area_barra_dia_analisis_pronostico { height: 100%; display: flex; justify-content: center; align-items: flex-end; }
-.barra_dia_analisis_pronostico { width: 72%; min-height: 2px; border-radius: 3px 3px 0 0; background: linear-gradient(180deg,#2bbbad,#118f96); }
-.barra_dia_sin_ventas_analisis_pronostico { background: #d4dfe4; }
-.valor_dia_analisis_pronostico, .fecha_dia_analisis_pronostico { font: 9px Arial,sans-serif; color: #607887; white-space: nowrap; }
-/* Adaptación a espacios estrechos */
-@media (max-width: 1150px) {
-    .resumen_kpi_analisis { gap: 12px; }
-    .tarjeta_kpi_analisis { gap: 10px; padding: 14px; }
-    .filtros_analisis_pronostico { grid-template-columns: minmax(0,1fr) minmax(0,.85fr); }
-    .controles_filtro_reposicion_analisis { grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
-    .grupo_boton_limpieza_analisis { justify-self: start; }
-    .tabla_analisis_pronostico, .tabla_reposicion_analisis_pronostico { min-width: 0; }
-    .encabezado_tabla_analisis_pronostico, .encabezado_reposicion_analisis_pronostico { display: none; }
-    .fila_analisis_pronostico, .fila_reposicion_analisis_pronostico { display: grid; grid-template-columns: 54px minmax(0,1fr) minmax(0,1fr); padding: 10px 14px; gap: 2px 10px; }
-    .fila_analisis_pronostico > div, .fila_reposicion_analisis_pronostico > div { text-align: left; padding: 6px 2px; }
-    .fila_analisis_pronostico > div:first-child, .fila_reposicion_analisis_pronostico > div:first-child { grid-column:1;grid-row: 1 / 4; }
-    .fila_analisis_pronostico > div:nth-child(2), .fila_reposicion_analisis_pronostico > div:nth-child(2) { grid-column:2 / 4; }
-    .fila_analisis_pronostico > div:nth-child(n+3), .fila_reposicion_analisis_pronostico > div:nth-child(n+3) { grid-column: auto; }
-    .fila_analisis_pronostico > div[data-etiqueta]:nth-child(n+3)::before,
-    .fila_reposicion_analisis_pronostico > div[data-etiqueta]:nth-child(n+3)::before { content: attr(data-etiqueta); display: block; margin-bottom: 3px; color: #7a8f9b; font: 11px Arial,sans-serif; }
-}
-@media (max-width: 770px) {
-    .contenedor_analisis_pronostico { padding: 16px 10px 22px; }
-    .titulo_general_analisis { font-size: 24px; }
-    .resumen_kpi_analisis { grid-template-columns: minmax(0,1fr); gap: 10px; }
-    .tarjeta_kpi_analisis { min-height: 94px; }
-    .pestanas_analisis { gap: 16px; overflow-x: auto; }
-    .pestana_analisis { font-size: 13px; }
-    .cabecera_panel_analisis { padding: 16px; }
-    .area_filtros_analisis { padding: 16px; }
-    .filtros_analisis_pronostico, .controles_filtro_reposicion_analisis { grid-template-columns: 1fr; gap: 12px; }
-    .grupo_boton_limpieza_analisis, .boton_limpiar_analisis { width: 100%; }
-    .paginacion_analisis_pronostico { flex-direction: column; align-items: flex-start; padding: 14px 16px; }
-    .controles_paginacion_analisis_pronostico { max-width:100%;flex-wrap:wrap; }
-    .descripcion_reposicion_analisis_pronostico { grid-template-columns: 1fr; }
-}
-@media (max-width: 490px) {
-    .fila_analisis_pronostico, .fila_reposicion_analisis_pronostico { grid-template-columns: 48px minmax(0,1fr); }
-    .fila_analisis_pronostico > div:first-child, .fila_reposicion_analisis_pronostico > div:first-child { grid-row: 1 / 6; }
-    .fila_analisis_pronostico > div:nth-child(2), .fila_reposicion_analisis_pronostico > div:nth-child(2) { grid-column: 2; }
-    .fila_analisis_pronostico > div:nth-child(n+3), .fila_reposicion_analisis_pronostico > div:nth-child(n+3) { grid-column: 2; }
-    .imagen_producto_analisis_pronostico { width: 38px; height: 38px; }
-    .boton_pagina_analisis_pronostico, .boton_numero_analisis_pronostico { min-width: 38px; height: 38px; }
-}
+/* TITULO 1 ESTILOS REPORTES ANALITICA */
 
+    .contenedor_analisis_pronostico {
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        padding: 28px; /* Define el espacio interior del elemento. */
+        background: transparent; /* Define el fondo del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        color: #0b3650; /* Establece el color del texto. */
+    }
 
-/* ===== Ajustes de uniformidad con Productos (15-11-2026) ===== */
-.contenedor_analisis_pronostico .imagen_icono_kpi_analisis {
-    display: block; width: 24px; height: 24px; object-fit: contain;
-}
-.contenedor_analisis_pronostico .icono_demanda_analisis { background: #e4f6f6; }
-.contenedor_analisis_pronostico .icono_ahora_analisis { background: #fff0df; }
-.contenedor_analisis_pronostico .icono_sugeridas_analisis { background: #e9f0fb; }
-.contenedor_analisis_pronostico .nota_kpi_analisis { font-size: 11px; }
-.contenedor_analisis_pronostico .titulo_general_analisis { margin: 0; }
-.contenedor_analisis_pronostico .pestanas_analisis { margin-top: 2px; }
-.contenedor_analisis_pronostico .selector_metodo_pronostico_analisis[hidden] { display: none !important; }
-/* Mismo aspecto que las miniaturas de Productos */
-.contenedor_analisis_pronostico .marco_imagen_analisis_pronostico {
-    width: 52px; height: 52px; display: flex; align-items: center;
-    justify-content: center; padding: 3px; background: #f8fafb;
-    border: 1px solid #dce4e8; border-radius: 7px;
-}
-.contenedor_analisis_pronostico .marco_imagen_analisis_pronostico .imagen_producto_analisis_pronostico {
-    display: block; width: 100%; height: 100%; object-fit: contain;
-    border-radius: 4px; padding: 0; background: transparent;
-}
-.contenedor_analisis_pronostico .marco_imagen_analisis_pronostico .imagen_producto_analisis_pronostico_vacia {
-    width: 25px; height: 25px; opacity: .55; background: transparent;
-}
-/* Aviso arriba de la tabla, sin perder el gráfico debajo. */
-.contenedor_analisis_pronostico .instruccion_grafico_analisis {
-    display: flex; align-items: center; gap: 10px; margin: 14px 18px;
-    padding: 11px 13px; border: 1px solid #d4e7e9;
-    border-radius: 6px; background: #f3fafb; color: #536873;
-    font-size: 12px;
-}
-.contenedor_analisis_pronostico .instruccion_grafico_analisis > span { display: flex; align-items: center; flex: none; margin: 0; }
-.contenedor_analisis_pronostico .icono_ayuda_grafico_analisis { width: 17px; height: 17px; }
-/* Botón de fórmula: claro, visible y sin cambiar el comportamiento nativo de details */
-.contenedor_analisis_pronostico .detalles_calculo_analisis { margin-top: 14px; }
-.contenedor_analisis_pronostico .detalles_calculo_analisis summary {
-    display: inline-flex; align-items: center; gap: 8px;
-    min-height: 38px; padding: 0 13px;
-    border: 1px solid #159ba3; border-radius: 6px;
-    color: #0f858d; background: #f0fafb;
-    font: 700 12px Arial,sans-serif; cursor: pointer;
-    list-style: none; transition: background .15s ease;
-}
-.contenedor_analisis_pronostico .detalles_calculo_analisis summary::-webkit-details-marker { display: none; }
-.contenedor_analisis_pronostico .detalles_calculo_analisis summary:hover { background: #e4f6f6; }
-.contenedor_analisis_pronostico .detalles_calculo_analisis summary:focus-visible { outline: 2px solid #159ba3; outline-offset: 2px; }
-.contenedor_analisis_pronostico .icono_boton_calculo_analisis { width: 17px; height: 17px; flex: none; }
-.contenedor_analisis_pronostico .descripcion_reposicion_analisis_pronostico { margin-top: 12px; }
-/* Dropdown Método idéntico al resto de Análisis; se alimenta del select original. */
-.contenedor_analisis_pronostico .contenedor_selector_inventario .boton_selector_inventario[aria-expanded="true"] { border-color: #159ba3; }
-@media (max-width: 1100px) {
- .contenedor_analisis_pronostico .marco_imagen_analisis_pronostico { width: 40px; height: 40px; }
-}
-@media (max-width: 770px) {
- .contenedor_analisis_pronostico { padding: 18px 12px 26px; }
- .contenedor_analisis_pronostico .titulo_general_analisis { font-size: 22px; }
- .contenedor_analisis_pronostico .instruccion_grafico_analisis { margin: 12px 14px; }
-}
+    .contenedor_analisis_pronostico *, .contenedor_analisis_pronostico *::before, .contenedor_analisis_pronostico *::after {
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
+
+    .encabezado_general_analisis {
+        margin: 0 0 22px; /* Define el margen exterior del elemento. */
+    }
+
+    .titulo_general_analisis {
+        font-size: 24px; /* Define el tamaño del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+        line-height: 1.15; /* Define la separación entre líneas de texto. */
+        color: #0b3650; /* Establece el color del texto. */
+    }
+
+    .descripcion_general_analisis {
+        margin-top: 5px; /* Define el margen superior. */
+        color: #71818a; /* Establece el color del texto. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        line-height: 1.55; /* Define la separación entre líneas de texto. */
+    }
+
+/* TITULO 2 INDICADORES */
+
+    .resumen_kpi_analisis {
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: repeat(3,minmax(0,1fr)); /* Define la distribución y el ancho de las columnas. */
+        gap: 16px; /* Define la separación entre los elementos. */
+        margin-bottom: 22px; /* Define el margen inferior. */
+    }
+
+    .tarjeta_kpi_analisis {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 16px; /* Define la separación entre los elementos. */
+        min-height: 105px; /* Establece el alto mínimo del elemento. */
+        padding: 18px; /* Define el espacio interior del elemento. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        background: #fff; /* Define el fondo del elemento. */
+    }
+
+    .icono_kpi_analisis {
+        width: 46px; /* Define el ancho del elemento. */
+        height: 46px; /* Define el alto del elemento. */
+        flex: none; /* Define cómo el elemento ocupa el espacio disponible en Flexbox. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        place-items: center; /* Define la alineación de los elementos en ambos ejes. */
+    }
+
+    .icono_kpi_analisis svg {
+        width: 27px; /* Define el ancho del elemento. */
+        height: 27px; /* Define el alto del elemento. */
+    }
+
+    .icono_demanda_analisis {
+        background: #e3f6f5; /* Define el fondo del elemento. */
+        color: #138e9a; /* Establece el color del texto. */
+    }
+
+    .icono_ahora_analisis {
+        background: #fff1da; /* Define el fondo del elemento. */
+        color: #cd7e13; /* Establece el color del texto. */
+    }
+
+    .icono_sugeridas_analisis {
+        background: #e8f0fd; /* Define el fondo del elemento. */
+        color: #346aab; /* Establece el color del texto. */
+    }
+
+    .contenido_kpi_analisis {
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+    }
+
+    .etiqueta_kpi_analisis {
+        color: #5d7486; /* Establece el color del texto. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        line-height: 1.3; /* Define la separación entre líneas de texto. */
+    }
+
+    .valor_kpi_analisis {
+        margin: 5px 0; /* Define el margen exterior del elemento. */
+        font-size: 23px; /* Define el tamaño del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+        line-height: 1; /* Define la separación entre líneas de texto. */
+        font-variant-numeric: tabular-nums; /* Define cómo se representan los números. */
+    }
+
+    .valor_demanda_analisis {
+        color: #148c98; /* Establece el color del texto. */
+    }
+
+    .valor_ahora_analisis {
+        color: #cb7d16; /* Establece el color del texto. */
+    }
+
+    .valor_sugeridas_analisis {
+        color: #3269ad; /* Establece el color del texto. */
+    }
+
+    .nota_kpi_analisis {
+        color: #718293; /* Establece el color del texto. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        line-height: 1.4; /* Define la separación entre líneas de texto. */
+    }
+
+/* TITULO 3 PESTAÑAS */
+
+    .pestanas_analisis {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        gap: 23px; /* Define la separación entre los elementos. */
+        align-items: stretch; /* Define la alineación de los elementos en el eje transversal. */
+        border-bottom: 2px solid #dce5e9; /* Define el borde inferior. */
+        margin-bottom: 0; /* Define el margen inferior. */
+    }
+
+    .pestana_analisis {
+        margin: 0 0 -2px; /* Define el margen exterior del elemento. */
+        padding: 15px 6px; /* Define el espacio interior del elemento. */
+        border: 0; /* Define el grosor, el estilo y el color del borde. */
+        border-bottom: 3px solid transparent; /* Define el borde inferior. */
+        border-radius: 0; /* Define el redondeado de las esquinas. */
+        background: transparent; /* Define el fondo del elemento. */
+        font: 500 14px Arial,sans-serif; /* Define la tipografía y sus dimensiones. */
+        color: #526b7c; /* Establece el color del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
+    }
+
+    .pestana_analisis:hover {
+        color: #159ba3; /* Establece el color del texto. */
+    }
+
+    .pestana_analisis.pestana_analisis_activa {
+        color: #008d98; /* Establece el color del texto. */
+        border-bottom-color: #159ba3; /* Define el color del borde inferior. */
+        font-weight: 700; /* Define el grosor del texto. */
+    }
+
+    .pestana_analisis:focus-visible {
+        outline: 2px solid #159ba3; /* Define el contorno visual del elemento. */
+        outline-offset: -3px; /* Define la separación entre el contorno y el borde. */
+    }
+
+    .panel_analisis {
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        overflow: visible; /* Controla el contenido que supera las dimensiones del elemento. */
+        background: #fff; /* Define el fondo del elemento. */
+        border: 1px solid #d9e3e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 0 0 8px 8px; /* Define el redondeado de las esquinas. */
+        box-shadow: 0 3px 8px rgba(15,42,61,.03); /* Agrega o ajusta la sombra del elemento. */
+    }
+
+    .panel_analisis[hidden], .area_grafico_pronostico_analisis[hidden] {
+        display: none !important; /* Define cómo se muestra y distribuye el elemento. */
+    }
+
+    .cabecera_panel_analisis {
+        padding: 18px 18px 16px; /* Define el espacio interior del elemento. */
+        border-bottom: 1px solid #e0e8ed; /* Define el borde inferior. */
+    }
+
+    .titulo_analisis_pronostico, .titulo_reposicion_analisis_pronostico {
+        font: 700 16px Arial,sans-serif; /* Define la tipografía y sus dimensiones. */
+        color: #0b3650; /* Establece el color del texto. */
+    }
+
+    .subtitulo_panel_analisis {
+        margin-top: 7px; /* Define el margen superior. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        line-height: 1.5; /* Define la separación entre líneas de texto. */
+        color: #71818a; /* Establece el color del texto. */
+    }
+
+    .fecha_corte_analisis_pronostico {
+        display: inline-flex; /* Organiza el contenido con Flexbox dentro de la línea. */
+        margin-top: 12px; /* Define el margen superior. */
+        min-height: 32px; /* Establece el alto mínimo del elemento. */
+        padding: 7px 12px; /* Define el espacio interior del elemento. */
+        border: 1px solid #e2eaed; /* Define el grosor, el estilo y el color del borde. */
+        background: #f4f8f9; /* Define el fondo del elemento. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        color: #566e80; /* Establece el color del texto. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+    }
+
+/* TITULO 4 FILTROS CON ETIQUETAS SUPERIORES, CONSISTENTES CON PRODUCTOS */
+
+    .area_filtros_analisis {
+        padding: 18px; /* Define el espacio interior del elemento. */
+        border-bottom: 1px solid #e0e8ed; /* Define el borde inferior. */
+    }
+
+    .filtros_analisis_pronostico {
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: minmax(180px,1.4fr) minmax(170px,.9fr) minmax(210px,1.1fr) auto; /* Define la distribución y el ancho de las columnas. */
+        gap: 12px; /* Define la separación entre los elementos. */
+        align-items: end; /* Define la alineación de los elementos en el eje transversal. */
+    }
+
+    .campo_busqueda_analisis_pronostico, .campo_filtro_pronostico_analisis, .campo_metodo_pronostico_analisis, .campo_busqueda_reposicion_analisis, .filtro_reposicion_analisis_pronostico {
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+    }
+
+    .etiqueta_busqueda_analisis_pronostico {
+        display: block; /* Muestra el elemento como un bloque. */
+        margin-bottom: 7px; /* Define el margen inferior. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        color: #536873; /* Establece el color del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+    }
+
+    .input_busqueda_analisis_pronostico, .selector_metodo_pronostico_analisis, .contenedor_analisis_pronostico .boton_selector_inventario {
+        height: 40px; /* Define el alto del elemento. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        padding: 0 12px; /* Define el espacio interior del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        background: #fff; /* Define el fondo del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font: 13px Arial,sans-serif; /* Define la tipografía y sus dimensiones. */
+    }
+
+    .input_busqueda_analisis_pronostico::placeholder {
+        color: #8193a1; /* Establece el color del texto. */
+    }
+
+    .contenedor_analisis_pronostico .boton_selector_inventario {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: space-between; /* Define la distribución de los elementos en el eje principal. */
+        gap: 12px; /* Define la separación entre los elementos. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+    }
+
+    .contenedor_analisis_pronostico .texto_selector_inventario {
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        overflow: hidden; /* Controla el contenido que supera las dimensiones del elemento. */
+        text-overflow: ellipsis; /* Define cómo se indica el texto que no cabe. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
+    }
+
+    .contenedor_analisis_pronostico .flecha_selector_inventario {
+        color: #4a6377; /* Establece el color del texto. */
+        flex: none; /* Define cómo el elemento ocupa el espacio disponible en Flexbox. */
+    }
+
+    .contenedor_analisis_pronostico .contenedor_selector_inventario {
+        position: relative; /* Define el sistema de posicionamiento del elemento. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+    }
+
+    .contenedor_analisis_pronostico .panel_selector_inventario {
+        position: absolute; /* Define el sistema de posicionamiento del elemento. */
+        z-index: 60; /* Define el orden de superposición del elemento. */
+        top: calc(100% + 5px); /* Define la posición respecto al borde superior. */
+        left: 0; /* Define la posición respecto al borde izquierdo. */
+        right: 0; /* Define la posición respecto al borde derecho. */
+        max-height: 260px; /* Limita el alto máximo del elemento. */
+        overflow: auto; /* Controla el contenido que supera las dimensiones del elemento. */
+        border: 1px solid #c9d9e2; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        background: #fff; /* Define el fondo del elemento. */
+        box-shadow: 0 8px 22px rgba(16,46,67,.13); /* Agrega o ajusta la sombra del elemento. */
+    }
+
+    .contenedor_analisis_pronostico .panel_selector_inventario[hidden], #filtro_pronostico_analisis[hidden], #filtro_estado_reposicion_analisis[hidden] {
+        display: none !important; /* Define cómo se muestra y distribuye el elemento. */
+    }
+
+    .contenedor_analisis_pronostico .opcion_lista_selector_inventario {
+        display: block; /* Muestra el elemento como un bloque. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        border: 0; /* Define el grosor, el estilo y el color del borde. */
+        padding: 12px 14px; /* Define el espacio interior del elemento. */
+        background: #fff; /* Define el fondo del elemento. */
+        font: 13px Arial,sans-serif; /* Define la tipografía y sus dimensiones. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        color: #28465a; /* Establece el color del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+    }
+
+    .contenedor_analisis_pronostico .opcion_lista_selector_inventario:hover, .contenedor_analisis_pronostico .opcion_lista_selector_inventario[aria-selected="true"] {
+        background: #e7f6f7; /* Define el fondo del elemento. */
+        color: #007b88; /* Establece el color del texto. */
+    }
+
+    .input_busqueda_analisis_pronostico:focus-visible, .selector_metodo_pronostico_analisis:focus-visible, .contenedor_analisis_pronostico .boton_selector_inventario:focus-visible {
+        outline: 2px solid #159ba3; /* Define el contorno visual del elemento. */
+        outline-offset: 1px; /* Define la separación entre el contorno y el borde. */
+    }
+
+    .grupo_boton_limpieza_analisis {
+        align-self: end; /* Define la alineación de este elemento en su contenedor. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+    }
+
+    .boton_limpiar_analisis {
+        height: 40px; /* Define el alto del elemento. */
+        padding: 0 13px; /* Define el espacio interior del elemento. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
+        border: 1px solid #159ba3; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        background: #fff; /* Define el fondo del elemento. */
+        color: #0f858d; /* Establece el color del texto. */
+        font: 700 12px Arial,sans-serif; /* Define la tipografía y sus dimensiones. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+    }
+
+    .boton_limpiar_analisis:hover {
+        background: #eaf7f8; /* Define el fondo del elemento. */
+    }
+
+    .explicacion_metodo_analisis {
+        margin-top: 17px; /* Define el margen superior. */
+        padding: 0; /* Define el espacio interior del elemento. */
+    }
+
+    .descripcion_analisis_pronostico {
+        color: #627889; /* Establece el color del texto. */
+        font: 12px/1.6 Arial,sans-serif; /* Define la tipografía y sus dimensiones. */
+    }
+
+/* TITULO 5 TABLAS */
+
+    .contenedor_tabla_analisis_pronostico, .contenedor_tabla_reposicion_analisis_pronostico {
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        overflow-x: auto; /* Permite desplazar horizontalmente el contenido cuando no cabe. */
+    }
+
+    .tabla_analisis_pronostico, .tabla_reposicion_analisis_pronostico {
+        min-width: 780px; /* Establece el ancho mínimo del elemento. */
+    }
+
+    .encabezado_tabla_analisis_pronostico, .fila_analisis_pronostico {
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: 62px minmax(190px,2fr) repeat(4,minmax(98px,1fr)); /* Define la distribución y el ancho de las columnas. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+    }
+
+    .encabezado_reposicion_analisis_pronostico, .fila_reposicion_analisis_pronostico {
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: 62px minmax(190px,2fr) repeat(4,minmax(98px,1fr)); /* Define la distribución y el ancho de las columnas. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+    }
+
+    .encabezado_tabla_analisis_pronostico, .encabezado_reposicion_analisis_pronostico {
+        background: #f3f7f9; /* Define el fondo del elemento. */
+        border-bottom: 1px solid #dce5ea; /* Define el borde inferior. */
+    }
+
+    .encabezado_tabla_analisis_pronostico > div, .encabezado_reposicion_analisis_pronostico > div {
+        padding: 15px 9px; /* Define el espacio interior del elemento. */
+        color: #5f7687; /* Establece el color del texto. */
+        font: 700 12px Arial,sans-serif; /* Define la tipografía y sus dimensiones. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+    }
+
+    .encabezado_tabla_analisis_pronostico > div:nth-child(2), .encabezado_reposicion_analisis_pronostico > div:nth-child(2) {
+        text-align: left; /* Define la alineación horizontal del texto. */
+    }
+
+    .fila_analisis_pronostico, .fila_reposicion_analisis_pronostico {
+        min-height: 66px; /* Establece el alto mínimo del elemento. */
+        border-bottom: 1px solid #e9eef1; /* Define el borde inferior. */
+    }
+
+    .fila_analisis_pronostico:last-child, .fila_reposicion_analisis_pronostico:last-child {
+        border-bottom: 0; /* Define el borde inferior. */
+    }
+
+    .fila_analisis_pronostico > div, .fila_reposicion_analisis_pronostico > div {
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        padding: 10px 9px; /* Define el espacio interior del elemento. */
+        color: #425e70; /* Establece el color del texto. */
+        font: 13px/1.4 Arial,sans-serif; /* Define la tipografía y sus dimensiones. */
+        overflow-wrap: anywhere; /* Permite controlar el salto de palabras largas. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+    }
+
+    .fila_analisis_pronostico > div:nth-child(2), .fila_reposicion_analisis_pronostico > div:nth-child(2) {
+        font-weight: 700; /* Define el grosor del texto. */
+        color: #0d3650; /* Establece el color del texto. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+    }
+
+    .fila_analisis_pronostico[tabindex] {
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+    }
+
+    .fila_analisis_pronostico[tabindex]:hover, .fila_analisis_pronostico.seleccionada {
+        background: #eaf8f9; /* Define el fondo del elemento. */
+    }
+
+    .fila_analisis_pronostico[tabindex]:focus-visible {
+        outline: 2px solid #159ba3; /* Define el contorno visual del elemento. */
+        outline-offset: -2px; /* Define la separación entre el contorno y el borde. */
+    }
+
+    .imagen_producto_analisis_pronostico {
+        display: block; /* Muestra el elemento como un bloque. */
+        width: 42px; /* Define el ancho del elemento. */
+        height: 42px; /* Define el alto del elemento. */
+        object-fit: contain; /* Define cómo se ajusta la imagen dentro de sus dimensiones. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        user-select: none; /* Define si el usuario puede seleccionar el contenido. */
+    }
+
+    .imagen_producto_analisis_pronostico_vacia {
+        padding: 5px; /* Define el espacio interior del elemento. */
+        background: #f3f7f8; /* Define el fondo del elemento. */
+    }
+
+    .cantidad_analisis_pronostico {
+        font-variant-numeric: tabular-nums; /* Define cómo se representan los números. */
+    }
+
+    .cantidad_sugerida_analisis_pronostico {
+        color: #008f84 !important; /* Establece el color del texto. */
+        font-weight: 700 !important; /* Define el grosor del texto. */
+    }
+
+    .fila_vacia_analisis_pronostico > div {
+        padding: 30px 14px; /* Define el espacio interior del elemento. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        font: 13px Arial,sans-serif; /* Define la tipografía y sus dimensiones. */
+        color: #728697; /* Establece el color del texto. */
+    }
+
+    .fila_revisar_stock_analisis_pronostico {
+        background: #fff6f3; /* Define el fondo del elemento. */
+    }
+
+    .stock_negativo_analisis_pronostico {
+        color: #c53534 !important; /* Establece el color del texto. */
+        font-weight: 700 !important; /* Define el grosor del texto. */
+    }
+
+/* TITULO 6 PAGINADORES COHERENTES CON INVENTARIO */
+
+    .paginacion_analisis_pronostico {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: space-between; /* Define la distribución de los elementos en el eje principal. */
+        flex-wrap: wrap; /* Define si los elementos pueden pasar a otra línea. */
+        gap: 14px; /* Define la separación entre los elementos. */
+        padding: 16px 18px; /* Define el espacio interior del elemento. */
+        border-top: 1px solid #e0e8ed; /* Define el borde superior. */
+    }
+
+    .resumen_paginacion_analisis_pronostico {
+        color: #627889; /* Establece el color del texto. */
+        font: 13px Arial,sans-serif; /* Define la tipografía y sus dimensiones. */
+    }
+
+    .controles_paginacion_analisis_pronostico, .numeros_pagina_analisis_pronostico {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 6px; /* Define la separación entre los elementos. */
+    }
+
+    .boton_pagina_analisis_pronostico, .boton_numero_analisis_pronostico {
+        display: inline-grid; /* Organiza el contenido con CSS Grid dentro de la línea. */
+        place-items: center; /* Define la alineación de los elementos en ambos ejes. */
+        height: 40px; /* Define el alto del elemento. */
+        min-width: 40px; /* Establece el ancho mínimo del elemento. */
+        padding: 0 10px; /* Define el espacio interior del elemento. */
+        border: 1px solid #d4e0e6; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        background: #fff; /* Define el fondo del elemento. */
+        color: #355469; /* Establece el color del texto. */
+        font: 13px Arial,sans-serif; /* Define la tipografía y sus dimensiones. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+    }
+
+    .boton_pagina_analisis_pronostico {
+        font-size: 20px; /* Define el tamaño del texto. */
+    }
+
+    .boton_pagina_analisis_pronostico:hover:not(:disabled), .boton_numero_analisis_pronostico:hover {
+        border-color: #159ba3; /* Establece el color del borde. */
+        background: #f0f9fa; /* Define el fondo del elemento. */
+    }
+
+    .boton_pagina_analisis_pronostico:disabled {
+        opacity: .45; /* Define el nivel de opacidad. */
+        cursor: not-allowed; /* Define el cursor al situarlo sobre el elemento. */
+    }
+
+    .boton_numero_analisis_pronostico.activa {
+        background: #159ba3; /* Define el fondo del elemento. */
+        color: #fff; /* Establece el color del texto. */
+        border-color: #159ba3; /* Establece el color del borde. */
+        font-weight: 700; /* Define el grosor del texto. */
+    }
+
+    .puntos_pagina_analisis_pronostico {
+        padding: 0 4px; /* Define el espacio interior del elemento. */
+        color: #738899; /* Establece el color del texto. */
+        font-size: 14px; /* Define el tamaño del texto. */
+    }
+
+/* TITULO 7 REPOSICIÓN Y EXPLICACIÓN */
+
+    .controles_filtro_reposicion_analisis {
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: minmax(210px,1.3fr) minmax(220px,1fr) auto; /* Define la distribución y el ancho de las columnas. */
+        gap: 12px; /* Define la separación entre los elementos. */
+        align-items: end; /* Define la alineación de los elementos en el eje transversal. */
+    }
+
+    .detalles_calculo_analisis {
+        margin-top: 13px; /* Define el margen superior. */
+        color: #537084; /* Establece el color del texto. */
+        font-size: 12px; /* Define el tamaño del texto. */
+    }
+
+    .detalles_calculo_analisis summary {
+        display: inline-block; /* Define cómo se muestra y distribuye el elemento. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        color: #008d9c; /* Establece el color del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+    }
+
+    .detalles_calculo_analisis[open] summary {
+        margin-bottom: 12px; /* Define el margen inferior. */
+    }
+
+    .descripcion_reposicion_analisis_pronostico {
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: repeat(2,minmax(0,1fr)); /* Define la distribución y el ancho de las columnas. */
+        gap: 9px 18px; /* Define la separación entre los elementos. */
+        color: #64798a; /* Establece el color del texto. */
+        font: 12px/1.5 Arial,sans-serif; /* Define la tipografía y sus dimensiones. */
+    }
+
+/* TITULO 8 GRÁFICO QUE YA EXISTÍA */
+
+    .area_grafico_pronostico_analisis {
+        margin-top: 14px; /* Define el margen superior. */
+    }
+
+    .instruccion_grafico_analisis {
+        padding: 16px 20px; /* Define el espacio interior del elemento. */
+        border: 1px dashed #bfdee2; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 9px; /* Define el redondeado de las esquinas. */
+        background: #f5fafb; /* Define el fondo del elemento. */
+        color: #52728a; /* Establece el color del texto. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        line-height: 1.45; /* Define la separación entre líneas de texto. */
+    }
+
+    .instruccion_grafico_analisis span {
+        margin-right: 8px; /* Define el margen derecho. */
+        color: #0696a2; /* Establece el color del texto. */
+    }
+
+    .instruccion_grafico_analisis[hidden] {
+        display: none !important; /* Define cómo se muestra y distribuye el elemento. */
+    }
+
+    .contenedor_grafico_analisis_pronostico {
+        margin-top: 12px; /* Define el margen superior. */
+        padding: 18px 20px; /* Define el espacio interior del elemento. */
+        border: 1px solid #dbe5e9; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 10px; /* Define el redondeado de las esquinas. */
+        background: #fff; /* Define el fondo del elemento. */
+        overflow-x: auto; /* Permite desplazar horizontalmente el contenido cuando no cabe. */
+    }
+
+    .contenedor_grafico_analisis_pronostico[hidden] {
+        display: none !important; /* Define cómo se muestra y distribuye el elemento. */
+    }
+
+    .titulo_grafico_analisis_pronostico {
+        color: #0b3650; /* Establece el color del texto. */
+        font: 700 17px Arial,sans-serif; /* Define la tipografía y sus dimensiones. */
+    }
+
+    .descripcion_grafico_analisis_pronostico, .mensaje_grafico_analisis_pronostico {
+        margin-top: 6px; /* Define el margen superior. */
+        color: #687f8d; /* Establece el color del texto. */
+        font: 12px/1.5 Arial,sans-serif; /* Define la tipografía y sus dimensiones. */
+    }
+
+    .grafico_barras_analisis_pronostico {
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: repeat(28,minmax(0,1fr)); /* Define la distribución y el ancho de las columnas. */
+        gap: 5px; /* Define la separación entre los elementos. */
+        min-width: 650px; /* Establece el ancho mínimo del elemento. */
+        height: 190px; /* Define el alto del elemento. */
+        margin-top: 14px; /* Define el margen superior. */
+        padding-top: 8px; /* Define el espacio interior superior. */
+        border-bottom: 1px solid #dce5ea; /* Define el borde inferior. */
+    }
+
+    .columna_dia_analisis_pronostico {
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-rows: minmax(0,1fr) 18px 16px; /* Define la distribución y el alto de las filas. */
+        align-items: end; /* Define la alineación de los elementos en el eje transversal. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+    }
+
+    .area_barra_dia_analisis_pronostico {
+        height: 100%; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        align-items: flex-end; /* Define la alineación de los elementos en el eje transversal. */
+    }
+
+    .barra_dia_analisis_pronostico {
+        width: 72%; /* Define el ancho del elemento. */
+        min-height: 2px; /* Establece el alto mínimo del elemento. */
+        border-radius: 3px 3px 0 0; /* Define el redondeado de las esquinas. */
+        background: linear-gradient(180deg,#2bbbad,#118f96); /* Define el fondo del elemento. */
+    }
+
+    .barra_dia_sin_ventas_analisis_pronostico {
+        background: #d4dfe4; /* Define el fondo del elemento. */
+    }
+
+    .valor_dia_analisis_pronostico, .fecha_dia_analisis_pronostico {
+        font: 9px Arial,sans-serif; /* Define la tipografía y sus dimensiones. */
+        color: #607887; /* Establece el color del texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
+    }
+
+/* TITULO 9 RESPONSIVE (MAX-WIDTH: 1200PX) */
+
+    @media (max-width: 1200px) {
+        .resumen_kpi_analisis {
+            gap: 12px; /* Define la separación entre los elementos. */
+        }
+
+        .tarjeta_kpi_analisis {
+            gap: 10px; /* Define la separación entre los elementos. */
+            padding: 14px; /* Define el espacio interior del elemento. */
+        }
+
+        .filtros_analisis_pronostico {
+            grid-template-columns: minmax(0,1fr) minmax(0,.85fr); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .controles_filtro_reposicion_analisis {
+            grid-template-columns: minmax(0,1fr) minmax(0,1fr); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .grupo_boton_limpieza_analisis {
+            justify-self: start; /* Define la alineación del elemento dentro de su celda. */
+        }
+
+        .tabla_analisis_pronostico, .tabla_reposicion_analisis_pronostico {
+            min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        }
+
+        .encabezado_tabla_analisis_pronostico, .encabezado_reposicion_analisis_pronostico {
+            display: none; /* Oculta el elemento. */
+        }
+
+        .fila_analisis_pronostico, .fila_reposicion_analisis_pronostico {
+            display: grid; /* Activa CSS Grid para distribuir el contenido. */
+            grid-template-columns: 54px minmax(0,1fr) minmax(0,1fr); /* Define la distribución y el ancho de las columnas. */
+            padding: 10px 14px; /* Define el espacio interior del elemento. */
+            gap: 2px 10px; /* Define la separación entre los elementos. */
+        }
+
+        .fila_analisis_pronostico > div, .fila_reposicion_analisis_pronostico > div {
+            text-align: left; /* Define la alineación horizontal del texto. */
+            padding: 6px 2px; /* Define el espacio interior del elemento. */
+        }
+
+        .fila_analisis_pronostico > div:first-child, .fila_reposicion_analisis_pronostico > div:first-child {
+            grid-column: 1; /* Define las columnas que ocupa el elemento. */
+            grid-row: 1 / 4; /* Define las filas que ocupa el elemento. */
+        }
+
+        .fila_analisis_pronostico > div:nth-child(2), .fila_reposicion_analisis_pronostico > div:nth-child(2) {
+            grid-column: 2 / 4; /* Define las columnas que ocupa el elemento. */
+        }
+
+        .fila_analisis_pronostico > div:nth-child(n+3), .fila_reposicion_analisis_pronostico > div:nth-child(n+3) {
+            grid-column: auto; /* Define las columnas que ocupa el elemento. */
+        }
+
+        .fila_analisis_pronostico > div[data-etiqueta]:nth-child(n+3)::before, .fila_reposicion_analisis_pronostico > div[data-etiqueta]:nth-child(n+3)::before {
+            content: attr(data-etiqueta); /* Define el contenido generado por el pseudoelemento. */
+            display: block; /* Muestra el elemento como un bloque. */
+            margin-bottom: 3px; /* Define el margen inferior. */
+            color: #7a8f9b; /* Establece el color del texto. */
+            font: 11px Arial,sans-serif; /* Define la tipografía y sus dimensiones. */
+        }
+    }
+
+/* TITULO 10 RESPONSIVE (MAX-WIDTH: 768PX) */
+
+    @media (max-width: 768px) {
+        .contenedor_analisis_pronostico {
+            padding: 16px 10px 22px; /* Define el espacio interior del elemento. */
+        }
+
+        .titulo_general_analisis {
+            font-size: 24px; /* Define el tamaño del texto. */
+        }
+
+        .resumen_kpi_analisis {
+            grid-template-columns: minmax(0,1fr); /* Define la distribución y el ancho de las columnas. */
+            gap: 10px; /* Define la separación entre los elementos. */
+        }
+
+        .tarjeta_kpi_analisis {
+            min-height: 94px; /* Establece el alto mínimo del elemento. */
+        }
+
+        .pestanas_analisis {
+            gap: 16px; /* Define la separación entre los elementos. */
+            overflow-x: auto; /* Permite desplazar horizontalmente el contenido cuando no cabe. */
+        }
+
+        .pestana_analisis {
+            font-size: 13px; /* Define el tamaño del texto. */
+        }
+
+        .cabecera_panel_analisis {
+            padding: 16px; /* Define el espacio interior del elemento. */
+        }
+
+        .area_filtros_analisis {
+            padding: 16px; /* Define el espacio interior del elemento. */
+        }
+
+        .filtros_analisis_pronostico, .controles_filtro_reposicion_analisis {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+            gap: 12px; /* Define la separación entre los elementos. */
+        }
+
+        .grupo_boton_limpieza_analisis, .boton_limpiar_analisis {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+        }
+
+        .paginacion_analisis_pronostico {
+            flex-direction: column; /* Organiza los elementos en una columna. */
+            align-items: flex-start; /* Define la alineación de los elementos en el eje transversal. */
+            padding: 14px 16px; /* Define el espacio interior del elemento. */
+        }
+
+        .controles_paginacion_analisis_pronostico {
+            max-width: 100%; /* Evita que el elemento supere el ancho disponible. */
+            flex-wrap: wrap; /* Define si los elementos pueden pasar a otra línea. */
+        }
+
+        .descripcion_reposicion_analisis_pronostico {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+        }
+    }
+
+/* TITULO 11 RESPONSIVE (MAX-WIDTH: 480PX) */
+
+    @media (max-width: 480px) {
+        .fila_analisis_pronostico, .fila_reposicion_analisis_pronostico {
+            grid-template-columns: 48px minmax(0,1fr); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .fila_analisis_pronostico > div:first-child, .fila_reposicion_analisis_pronostico > div:first-child {
+            grid-row: 1 / 6; /* Define las filas que ocupa el elemento. */
+        }
+
+        .fila_analisis_pronostico > div:nth-child(2), .fila_reposicion_analisis_pronostico > div:nth-child(2) {
+            grid-column: 2; /* Define las columnas que ocupa el elemento. */
+        }
+
+        .fila_analisis_pronostico > div:nth-child(n+3), .fila_reposicion_analisis_pronostico > div:nth-child(n+3) {
+            grid-column: 2; /* Define las columnas que ocupa el elemento. */
+        }
+
+        .imagen_producto_analisis_pronostico {
+            width: 38px; /* Define el ancho del elemento. */
+            height: 38px; /* Define el alto del elemento. */
+        }
+
+        .boton_pagina_analisis_pronostico, .boton_numero_analisis_pronostico {
+            min-width: 38px; /* Establece el ancho mínimo del elemento. */
+            height: 38px; /* Define el alto del elemento. */
+        }
+    }
+
+    .contenedor_analisis_pronostico .imagen_icono_kpi_analisis {
+        display: block; /* Muestra el elemento como un bloque. */
+        width: 24px; /* Define el ancho del elemento. */
+        height: 24px; /* Define el alto del elemento. */
+        object-fit: contain; /* Define cómo se ajusta la imagen dentro de sus dimensiones. */
+    }
+
+    .contenedor_analisis_pronostico .icono_demanda_analisis {
+        background: #e4f6f6; /* Define el fondo del elemento. */
+    }
+
+    .contenedor_analisis_pronostico .icono_ahora_analisis {
+        background: #fff0df; /* Define el fondo del elemento. */
+    }
+
+    .contenedor_analisis_pronostico .icono_sugeridas_analisis {
+        background: #e9f0fb; /* Define el fondo del elemento. */
+    }
+
+    .contenedor_analisis_pronostico .nota_kpi_analisis {
+        font-size: 11px; /* Define el tamaño del texto. */
+    }
+
+    .contenedor_analisis_pronostico .titulo_general_analisis {
+        margin: 0; /* Define el margen exterior del elemento. */
+    }
+
+    .contenedor_analisis_pronostico .pestanas_analisis {
+        margin-top: 2px; /* Define el margen superior. */
+    }
+
+    .contenedor_analisis_pronostico .selector_metodo_pronostico_analisis[hidden] {
+        display: none !important; /* Define cómo se muestra y distribuye el elemento. */
+    }
+
+    .contenedor_analisis_pronostico .marco_imagen_analisis_pronostico {
+        width: 52px; /* Define el ancho del elemento. */
+        height: 52px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        padding: 3px; /* Define el espacio interior del elemento. */
+        background: #f8fafb; /* Define el fondo del elemento. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+    }
+
+    .contenedor_analisis_pronostico .marco_imagen_analisis_pronostico .imagen_producto_analisis_pronostico {
+        display: block; /* Muestra el elemento como un bloque. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 100%; /* Define el alto del elemento. */
+        object-fit: contain; /* Define cómo se ajusta la imagen dentro de sus dimensiones. */
+        border-radius: 4px; /* Define el redondeado de las esquinas. */
+        padding: 0; /* Define el espacio interior del elemento. */
+        background: transparent; /* Define el fondo del elemento. */
+    }
+
+    .contenedor_analisis_pronostico .marco_imagen_analisis_pronostico .imagen_producto_analisis_pronostico_vacia {
+        width: 25px; /* Define el ancho del elemento. */
+        height: 25px; /* Define el alto del elemento. */
+        opacity: .55; /* Define el nivel de opacidad. */
+        background: transparent; /* Define el fondo del elemento. */
+    }
+
+    .contenedor_analisis_pronostico .instruccion_grafico_analisis {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 10px; /* Define la separación entre los elementos. */
+        margin: 14px 18px; /* Define el margen exterior del elemento. */
+        padding: 11px 13px; /* Define el espacio interior del elemento. */
+        border: 1px solid #d4e7e9; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        background: #f3fafb; /* Define el fondo del elemento. */
+        color: #536873; /* Establece el color del texto. */
+        font-size: 12px; /* Define el tamaño del texto. */
+    }
+
+    .contenedor_analisis_pronostico .instruccion_grafico_analisis > span {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        flex: none; /* Define cómo el elemento ocupa el espacio disponible en Flexbox. */
+        margin: 0; /* Define el margen exterior del elemento. */
+    }
+
+    .contenedor_analisis_pronostico .icono_ayuda_grafico_analisis {
+        width: 17px; /* Define el ancho del elemento. */
+        height: 17px; /* Define el alto del elemento. */
+    }
+
+    .contenedor_analisis_pronostico .detalles_calculo_analisis {
+        margin-top: 14px; /* Define el margen superior. */
+    }
+
+    .contenedor_analisis_pronostico .detalles_calculo_analisis summary {
+        display: inline-flex; /* Organiza el contenido con Flexbox dentro de la línea. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 8px; /* Define la separación entre los elementos. */
+        min-height: 38px; /* Establece el alto mínimo del elemento. */
+        padding: 0 13px; /* Define el espacio interior del elemento. */
+        border: 1px solid #159ba3; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        color: #0f858d; /* Establece el color del texto. */
+        background: #f0fafb; /* Define el fondo del elemento. */
+        font: 700 12px Arial,sans-serif; /* Define la tipografía y sus dimensiones. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        list-style: none; /* Define el marcador y la presentación de la lista. */
+        transition: background .15s ease; /* Define la transición entre los cambios de estilo. */
+    }
+
+    .contenedor_analisis_pronostico .detalles_calculo_analisis summary::-webkit-details-marker {
+        display: none; /* Oculta el elemento. */
+    }
+
+    .contenedor_analisis_pronostico .detalles_calculo_analisis summary:hover {
+        background: #e4f6f6; /* Define el fondo del elemento. */
+    }
+
+    .contenedor_analisis_pronostico .detalles_calculo_analisis summary:focus-visible {
+        outline: 2px solid #159ba3; /* Define el contorno visual del elemento. */
+        outline-offset: 2px; /* Define la separación entre el contorno y el borde. */
+    }
+
+    .contenedor_analisis_pronostico .icono_boton_calculo_analisis {
+        width: 17px; /* Define el ancho del elemento. */
+        height: 17px; /* Define el alto del elemento. */
+        flex: none; /* Define cómo el elemento ocupa el espacio disponible en Flexbox. */
+    }
+
+    .contenedor_analisis_pronostico .descripcion_reposicion_analisis_pronostico {
+        margin-top: 12px; /* Define el margen superior. */
+    }
+
+    .contenedor_analisis_pronostico .contenedor_selector_inventario .boton_selector_inventario[aria-expanded="true"] {
+        border-color: #159ba3; /* Establece el color del borde. */
+    }
+
+/* TITULO 12 RESPONSIVE (MAX-WIDTH: 1200PX) */
+
+    @media (max-width: 1200px) {
+        .contenedor_analisis_pronostico .marco_imagen_analisis_pronostico {
+            width: 40px; /* Define el ancho del elemento. */
+            height: 40px; /* Define el alto del elemento. */
+        }
+    }
+
+/* TITULO 13 RESPONSIVE (MAX-WIDTH: 768PX) */
+
+    @media (max-width: 768px) {
+        .contenedor_analisis_pronostico {
+            padding: 18px 12px 26px; /* Define el espacio interior del elemento. */
+        }
+
+        .contenedor_analisis_pronostico .titulo_general_analisis {
+            font-size: 22px; /* Define el tamaño del texto. */
+        }
+
+        .contenedor_analisis_pronostico .instruccion_grafico_analisis {
+            margin: 12px 14px; /* Define el margen exterior del elemento. */
+        }
+    }

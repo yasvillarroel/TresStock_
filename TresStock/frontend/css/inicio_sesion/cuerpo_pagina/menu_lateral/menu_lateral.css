@@ -1,475 +1,411 @@
 /* TITULO 1 CONTENEDOR MENU LATERAL */
 
-    /* clase para establecer el tamaño, posición y color principal del menú lateral */
     .contenedor_menu_lateral {
-        width: 240px;
-        height: 100vh;
-        background-color: #062d44;
-        padding: 1px 15px;
-        box-sizing: border-box;
-        position: fixed;
-        top: 0;
-        left: 0;
-        overflow-y: auto;
+        width: 240px; /* Define el ancho del elemento. */
+        height: 100vh; /* Define el alto del elemento. */
+        background-color: #062d44; /* Establece el color de fondo. */
+        padding: 1px 15px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        position: fixed; /* Define el sistema de posicionamiento del elemento. */
+        top: 0; /* Define la posición respecto al borde superior. */
+        left: 0; /* Define la posición respecto al borde izquierdo. */
+        overflow-y: auto; /* Controla el contenido que desborda verticalmente. */
     }
-
 
 /* TITULO 2 IDENTIDAD TRESSTOCK */
 
-    /* clase para organizar el logo y la descripción principal de TresStock */
     .contenedor_identidad_menu_lateral {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
     }
 
-    /* clase para establecer el tamaño de la imagen del logo de TresStock */
     .imagen_logo_menu_lateral {
-        width: 155px;
-        height: auto;
+        width: 155px; /* Define el ancho del elemento. */
+        height: auto; /* Define el alto del elemento. */
     }
-
 
 /* TITULO 3 CONTENEDOR OPCIONES MENU */
 
-    /* clase para organizar verticalmente las opciones del menú lateral */
     .contenedor_opciones_menu_lateral {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        gap: 5px; /* Define la separación entre los elementos. */
     }
-
 
 /* TITULO 4 OPCION DASHBOARD */
 
-    /* clase para establecer el diseño de la opción Dashboard */
     .opcion_dashboard_menu {
-        width: 100%;
-        height: 48px;
-        display: flex;
-        align-items: center;
-        background-color: transparent;
-        border: 1px solid transparent;
-        border-radius: 7px;
-        cursor: pointer;
-        box-sizing: border-box;
-        padding: 0 13px;
-        user-select: none;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 48px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        background-color: transparent; /* Establece el color de fondo. */
+        border: 1px solid transparent; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        padding: 0 13px; /* Define el espacio interior del elemento. */
+        user-select: none; /* Define si el usuario puede seleccionar el contenido. */
     }
 
-    /* cambia el fondo de la opción Dashboard al posicionar el cursor */
     .opcion_dashboard_menu:hover {
-        background-color: #0b455f;
+        background-color: #0b455f; /* Establece el color de fondo. */
     }
 
-    /* clase para organizar el icono de Dashboard */
     .icono_dashboard_menu {
-        width: 21px;
-        height: 21px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 13px;
+        width: 21px; /* Define el ancho del elemento. */
+        height: 21px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        margin-right: 13px; /* Define el margen derecho. */
     }
 
-    /* clase para establecer el tamaño del icono de Dashboard */
     .imagen_icono_dashboard_menu {
-        width: 21px;
-        height: 21px;
-        filter: brightness(0) invert(1);
+        width: 21px; /* Define el ancho del elemento. */
+        height: 21px; /* Define el alto del elemento. */
+        filter: brightness(0) invert(1); /* Aplica efectos visuales al elemento. */
     }
 
-    /* clase para establecer el texto de la opción Dashboard */
     .texto_dashboard_menu {
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
+        color: #ffffff; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 14px; /* Define el tamaño del texto. */
     }
-
 
 /* TITULO 5 OPCION INVENTARIO */
 
-    /* clase para establecer el diseño de la opción Inventario */
     .opcion_inventario_menu {
-        width: 100%;
-        height: 48px;
-        display: flex;
-        align-items: center;
-        background-color: transparent;
-        border: 1px solid transparent;
-        border-radius: 7px;
-        cursor: pointer;
-        box-sizing: border-box;
-        padding: 0 13px;
-        user-select: none;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 48px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        background-color: transparent; /* Establece el color de fondo. */
+        border: 1px solid transparent; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        padding: 0 13px; /* Define el espacio interior del elemento. */
+        user-select: none; /* Define si el usuario puede seleccionar el contenido. */
     }
 
-    /* cambia el fondo de la opción Inventario al posicionar el cursor */
     .opcion_inventario_menu:hover {
-        background-color: #0b455f;
+        background-color: #0b455f; /* Establece el color de fondo. */
     }
 
-    /* clase para organizar el icono de Inventario */
     .icono_inventario_menu {
-        width: 21px;
-        height: 21px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 13px;
+        width: 21px; /* Define el ancho del elemento. */
+        height: 21px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        margin-right: 13px; /* Define el margen derecho. */
     }
 
-    /* clase para establecer el tamaño del icono de Inventario */
     .imagen_icono_inventario_menu {
-        width: 21px;
-        height: 21px;
-        filter: brightness(0) invert(1);
+        width: 21px; /* Define el ancho del elemento. */
+        height: 21px; /* Define el alto del elemento. */
+        filter: brightness(0) invert(1); /* Aplica efectos visuales al elemento. */
     }
 
-    /* clase para establecer el texto de la opción Inventario */
     .texto_inventario_menu {
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
+        color: #ffffff; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 14px; /* Define el tamaño del texto. */
     }
-
 
 /* TITULO 6 OPCION PRODUCTOS */
 
-    /* clase para establecer el diseño de la opción Productos */
     .opcion_productos_menu {
-        width: 100%;
-        height: 48px;
-        display: flex;
-        align-items: center;
-        background-color: transparent;
-        border: 1px solid transparent;
-        border-radius: 7px;
-        cursor: pointer;
-        box-sizing: border-box;
-        padding: 0 13px;
-        user-select: none;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 48px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        background-color: transparent; /* Establece el color de fondo. */
+        border: 1px solid transparent; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        padding: 0 13px; /* Define el espacio interior del elemento. */
+        user-select: none; /* Define si el usuario puede seleccionar el contenido. */
     }
 
-    /* cambia el fondo de la opción Productos al posicionar el cursor */
     .opcion_productos_menu:hover {
-        background-color: #0b455f;
+        background-color: #0b455f; /* Establece el color de fondo. */
     }
 
-    /* clase para organizar el icono de Productos */
     .icono_productos_menu {
-        width: 21px;
-        height: 21px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 13px;
+        width: 21px; /* Define el ancho del elemento. */
+        height: 21px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        margin-right: 13px; /* Define el margen derecho. */
     }
 
-    /* clase para establecer el tamaño del icono de Productos */
     .imagen_icono_productos_menu {
-        width: 21px;
-        height: 21px;
-        filter: brightness(0) invert(1);
+        width: 21px; /* Define el ancho del elemento. */
+        height: 21px; /* Define el alto del elemento. */
+        filter: brightness(0) invert(1); /* Aplica efectos visuales al elemento. */
     }
 
-    /* clase para establecer el texto de la opción Productos */
     .texto_productos_menu {
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
+        color: #ffffff; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 14px; /* Define el tamaño del texto. */
     }
-
 
 /* TITULO 7 OPCION VENTAS */
 
-    /* clase para establecer el diseño de la opción Ventas */
     .opcion_ventas_menu {
-        width: 100%;
-        height: 48px;
-        display: flex;
-        align-items: center;
-        background-color: transparent;
-        border: 1px solid transparent;
-        border-radius: 7px;
-        cursor: pointer;
-        box-sizing: border-box;
-        padding: 0 13px;
-        user-select: none;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 48px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        background-color: transparent; /* Establece el color de fondo. */
+        border: 1px solid transparent; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        padding: 0 13px; /* Define el espacio interior del elemento. */
+        user-select: none; /* Define si el usuario puede seleccionar el contenido. */
     }
 
-    /* cambia el fondo de la opción Ventas al posicionar el cursor */
     .opcion_ventas_menu:hover {
-        background-color: #0b455f;
+        background-color: #0b455f; /* Establece el color de fondo. */
     }
 
-    /* clase para organizar el icono de Ventas */
     .icono_ventas_menu {
-        width: 21px;
-        height: 21px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 13px;
+        width: 21px; /* Define el ancho del elemento. */
+        height: 21px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        margin-right: 13px; /* Define el margen derecho. */
     }
 
-    /* clase para establecer el tamaño del icono de Ventas */
     .imagen_icono_ventas_menu {
-        width: 21px;
-        height: 21px;
-        filter: brightness(0) invert(1);
+        width: 21px; /* Define el ancho del elemento. */
+        height: 21px; /* Define el alto del elemento. */
+        filter: brightness(0) invert(1); /* Aplica efectos visuales al elemento. */
     }
 
-    /* clase para establecer el texto de la opción Ventas */
     .texto_ventas_menu {
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
+        color: #ffffff; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 14px; /* Define el tamaño del texto. */
     }
-
 
 /* TITULO 8 OPCION PROVEEDORES */
 
-    /* clase para establecer el diseño de la opción Proveedores */
     .opcion_proveedores_menu {
-        width: 100%;
-        height: 48px;
-        display: flex;
-        align-items: center;
-        background-color: transparent;
-        border: 1px solid transparent;
-        border-radius: 7px;
-        cursor: pointer;
-        box-sizing: border-box;
-        padding: 0 13px;
-        user-select: none;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 48px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        background-color: transparent; /* Establece el color de fondo. */
+        border: 1px solid transparent; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        padding: 0 13px; /* Define el espacio interior del elemento. */
+        user-select: none; /* Define si el usuario puede seleccionar el contenido. */
     }
 
-    /* cambia el fondo de la opción Proveedores al posicionar el cursor */
     .opcion_proveedores_menu:hover {
-        background-color: #0b455f;
+        background-color: #0b455f; /* Establece el color de fondo. */
     }
 
-    /* clase para organizar el icono de Proveedores */
     .icono_proveedores_menu {
-        width: 21px;
-        height: 21px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 13px;
+        width: 21px; /* Define el ancho del elemento. */
+        height: 21px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        margin-right: 13px; /* Define el margen derecho. */
     }
 
-    /* clase para establecer el tamaño del icono de Proveedores */
     .imagen_icono_proveedores_menu {
-        width: 21px;
-        height: 21px;
-        filter: brightness(0) invert(1);
+        width: 21px; /* Define el ancho del elemento. */
+        height: 21px; /* Define el alto del elemento. */
+        filter: brightness(0) invert(1); /* Aplica efectos visuales al elemento. */
     }
 
-    /* clase para establecer el texto de la opción Proveedores */
     .texto_proveedores_menu {
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
+        color: #ffffff; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 14px; /* Define el tamaño del texto. */
     }
 
+/* TITULO 9 OPCION ALERTAS */
 
-/* TITULO 10 OPCION ALERTAS */
-
-    /* clase para establecer el diseño de la opción Alertas */
     .opcion_alertas_menu {
-        width: 100%;
-        height: 48px;
-        display: flex;
-        align-items: center;
-        background-color: transparent;
-        border: 1px solid transparent;
-        border-radius: 7px;
-        cursor: pointer;
-        box-sizing: border-box;
-        padding: 0 13px;
-        user-select: none;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 48px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        background-color: transparent; /* Establece el color de fondo. */
+        border: 1px solid transparent; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        padding: 0 13px; /* Define el espacio interior del elemento. */
+        user-select: none; /* Define si el usuario puede seleccionar el contenido. */
     }
 
-    /* cambia el fondo de la opción Alertas al posicionar el cursor */
     .opcion_alertas_menu:hover {
-        background-color: #0b455f;
+        background-color: #0b455f; /* Establece el color de fondo. */
     }
 
-    /* clase para organizar el icono de Alertas */
     .icono_alertas_menu {
-        width: 21px;
-        height: 21px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 13px;
+        width: 21px; /* Define el ancho del elemento. */
+        height: 21px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        margin-right: 13px; /* Define el margen derecho. */
     }
 
-    /* clase para establecer el tamaño del icono de Alertas */
     .imagen_icono_alertas_menu {
-        width: 21px;
-        height: 21px;
-        filter: brightness(0) invert(1);
+        width: 21px; /* Define el ancho del elemento. */
+        height: 21px; /* Define el alto del elemento. */
+        filter: brightness(0) invert(1); /* Aplica efectos visuales al elemento. */
     }
 
-
-    /* clase para establecer el texto de la opción Alertas */
     .texto_alertas_menu {
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
+        color: #ffffff; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 14px; /* Define el tamaño del texto. */
     }
 
+/* TITULO 10 OPCION ANALISIS */
 
-/* TITULO 11 OPCION ANALISIS */
-
-    /* clase para establecer el diseño de la opción Análisis */
     .opcion_analisis_menu {
-        width: 100%;
-        height: 48px;
-        display: flex;
-        align-items: center;
-        background-color: transparent;
-        border: 1px solid transparent;
-        border-radius: 7px;
-        cursor: pointer;
-        box-sizing: border-box;
-        padding: 0 13px;
-        user-select: none;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 48px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        background-color: transparent; /* Establece el color de fondo. */
+        border: 1px solid transparent; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        padding: 0 13px; /* Define el espacio interior del elemento. */
+        user-select: none; /* Define si el usuario puede seleccionar el contenido. */
     }
 
-    /* cambia el fondo de la opción Análisis al posicionar el cursor */
     .opcion_analisis_menu:hover {
-        background-color: #0b455f;
+        background-color: #0b455f; /* Establece el color de fondo. */
     }
 
-    /* clase para organizar el icono de Análisis */
     .icono_analisis_menu {
-        width: 21px;
-        height: 21px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 13px;
+        width: 21px; /* Define el ancho del elemento. */
+        height: 21px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        margin-right: 13px; /* Define el margen derecho. */
     }
 
-    /* clase para establecer el tamaño del icono de Análisis */
     .imagen_icono_analisis_menu {
-        width: 21px;
-        height: 21px;
-        filter: brightness(0) invert(1);
+        width: 21px; /* Define el ancho del elemento. */
+        height: 21px; /* Define el alto del elemento. */
+        filter: brightness(0) invert(1); /* Aplica efectos visuales al elemento. */
     }
 
-    /* clase para establecer el texto de la opción Análisis */
     .texto_analisis_menu {
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
+        color: #ffffff; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 14px; /* Define el tamaño del texto. */
     }
 
+/* TITULO 11 OPCION ADMINISTRACION */
 
-/* TITULO 12 OPCION ADMINISTRACION */
-
-    /* clase para establecer el diseño de la opción Administración */
     .opcion_administracion_menu {
-        width: 100%;
-        height: 48px;
-        display: flex;
-        align-items: center;
-        background-color: transparent;
-        border: 1px solid transparent;
-        border-radius: 7px;
-        cursor: pointer;
-        box-sizing: border-box;
-        padding: 0 13px;
-        user-select: none;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 48px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        background-color: transparent; /* Establece el color de fondo. */
+        border: 1px solid transparent; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        padding: 0 13px; /* Define el espacio interior del elemento. */
+        user-select: none; /* Define si el usuario puede seleccionar el contenido. */
     }
 
-    /* cambia el fondo de la opción Administración al posicionar el cursor */
     .opcion_administracion_menu:hover {
-        background-color: #0b455f;
+        background-color: #0b455f; /* Establece el color de fondo. */
     }
 
-    /* clase para organizar el icono de Administración */
     .icono_administracion_menu {
-        width: 21px;
-        height: 21px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 13px;
+        width: 21px; /* Define el ancho del elemento. */
+        height: 21px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        margin-right: 13px; /* Define el margen derecho. */
     }
 
-    /* clase para establecer el tamaño del icono de Administración */
     .imagen_icono_administracion_menu {
-        width: 21px;
-        height: 21px;
-        filter: brightness(0) invert(1);
+        width: 21px; /* Define el ancho del elemento. */
+        height: 21px; /* Define el alto del elemento. */
+        filter: brightness(0) invert(1); /* Aplica efectos visuales al elemento. */
     }
 
-    /* clase para establecer el texto de la opción Administración */
     .texto_administracion_menu {
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
+        color: #ffffff; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 14px; /* Define el tamaño del texto. */
     }
 
+/* TITULO 12 OPCION ACTIVA */
 
-/* TITULO 13 OPCION ACTIVA */
-
-    /* clase para destacar visualmente la opción actualmente seleccionada */
     .opcion_menu_activa {
-        background-color: #1299a3;
-        border-color: #1299a3;
+        background-color: #1299a3; /* Establece el color de fondo. */
+        border-color: #1299a3; /* Establece el color del borde. */
     }
 
-    /* mantiene el diseño de la opción activa al posicionar el cursor */
     .opcion_menu_activa:hover {
-        background-color: #1299a3;
-        border-color: #1299a3;
+        background-color: #1299a3; /* Establece el color de fondo. */
+        border-color: #1299a3; /* Establece el color del borde. */
     }
 
-
-    .icono_escanear_producto{
-        background-color: #ffffff;
-        padding: 0 10px;
+    .icono_escanear_producto {
+        background-color: #ffffff; /* Establece el color de fondo. */
+        padding: 0 10px; /* Define el espacio interior del elemento. */
     }
 
-/* TITULO 14 RESPONSIVE MENU LATERAL */
+/* TITULO 13 RESPONSIVE MENU LATERAL */
 
-    /* adapta el menú lateral para tablets y dispositivos móviles */
     @media (max-width: 1024px) {
-
         .contenedor_menu_lateral {
-            width: 260px;
-            height: 100dvh;
-            left: -260px;
-            z-index: 1200;
+            width: 260px; /* Define el ancho del elemento. */
+            height: 100dvh; /* Define el alto del elemento. */
+            left: -260px; /* Define la posición respecto al borde izquierdo. */
+            z-index: 1200; /* Define el orden de superposición del elemento. */
         }
 
         .contenedor_menu_lateral_abierto {
-            left: 0;
+            left: 0; /* Define la posición respecto al borde izquierdo. */
         }
-
     }
 
+/* TITULO 14 RESPONSIVE (MAX-WIDTH: 480PX) */
 
-    /* adapta el menú lateral para dispositivos móviles */
-    @media (max-width: 500px) {
-
+    @media (max-width: 480px) {
         .contenedor_menu_lateral {
-            width: 82%;
-            max-width: 280px;
-            left: -82%;
-            padding: 20px 12px;
+            width: 82%; /* Define el ancho del elemento. */
+            max-width: 280px; /* Limita el ancho máximo del elemento. */
+            left: -82%; /* Define la posición respecto al borde izquierdo. */
+            padding: 20px 12px; /* Define el espacio interior del elemento. */
         }
 
         .contenedor_menu_lateral_abierto {
-            left: 0;
+            left: 0; /* Define la posición respecto al borde izquierdo. */
         }
-
     }

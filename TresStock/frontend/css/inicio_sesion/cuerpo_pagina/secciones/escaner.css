@@ -1,403 +1,1036 @@
 /* TITULO 1 ESTILOS GENERALES DEL ESCANER */
 
-/* mantiene la paleta utilizada por las otras vistas de TresStock */
-.contenedor_contenido.contenedor_contenido_escaner {
-    background-color: #f4f7f8;
-}
+    .contenedor_contenido.contenedor_contenido_escaner {
+        background-color: #f4f7f8; /* Establece el color de fondo. */
+    }
 
-/* boton de acceso al escaner desde Inventario (se conserva su clase) */
-.boton_escanear_producto {
-    background-color: #159ba3;
-    margin: 20px;
-    text-align: center;
-    padding: 15px;
-    border-radius: 10px;
-    cursor: pointer;
-    user-select: none;
-    transition: background-color .2s ease;
-}
-.boton_escanear_producto:hover { background-color: #117f85; }
-.icono_escanear_producto {
-    display: inline-block;
-    font-size: 28px;
-    font-weight: 400;
-}
-.texto_escanear_producto {
-    color: #ffffff;
-    margin-top: 10px;
-    font-size: 15px;
-    font-weight: 700;
-}
+    .boton_escanear_producto {
+        background-color: #159ba3; /* Establece el color de fondo. */
+        margin: 20px; /* Define el margen exterior del elemento. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        padding: 15px; /* Define el espacio interior del elemento. */
+        border-radius: 10px; /* Define el redondeado de las esquinas. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        user-select: none; /* Define si el usuario puede seleccionar el contenido. */
+        transition: background-color .2s ease; /* Define la transición entre los cambios de estilo. */
+    }
 
-.contenedor_escaner_producto {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 26px 22px 38px;
-    font-family: Arial, sans-serif;
-    color: #0b3650;
-}
-.contenedor_escaner_producto.contenedor_escaner_producto_oculto { display: none !important; }
-.contenedor_escaner_producto [hidden] { display: none !important; }
-.contenido_escaner_producto { width: min(100%, 790px); min-width: 0; }
-.tarjeta_escaner_producto {
-    width: 100%;
-    background-color: #ffffff;
-    border: 1px solid #dce4e8;
-    border-radius: 12px;
-    box-sizing: border-box;
-    padding: 28px 30px;
-    box-shadow: 0 4px 16px rgba(11, 54, 80, .045);
-}
-.cabecera_tarjeta_escaner { display: flex; justify-content: space-between; align-items: flex-start; gap: 15px; margin-bottom: 22px; }
-.titulo_escaner_producto { color: #0b3650; font-size: 25px; font-weight: 700; margin-bottom: 6px; }
-.descripcion_escaner_producto { color: #6b7d88; font-size: 13px; line-height: 1.5; }
-.subtitulo_escaner_producto { color: #0b3650; font-size: 15px; font-weight: 700; margin-bottom: 12px; }
+    .boton_escanear_producto:hover {
+        background-color: #117f85; /* Establece el color de fondo. */
+    }
+
+    .icono_escanear_producto {
+        display: inline-block; /* Define cómo se muestra y distribuye el elemento. */
+        font-size: 28px; /* Define el tamaño del texto. */
+        font-weight: 400; /* Define el grosor del texto. */
+    }
+
+    .texto_escanear_producto {
+        color: #ffffff; /* Establece el color del texto. */
+        margin-top: 10px; /* Define el margen superior. */
+        font-size: 15px; /* Define el tamaño del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+    }
+
+    .contenedor_escaner_producto {
+        position: relative; /* Define el sistema de posicionamiento del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        padding: 26px 22px 38px; /* Define el espacio interior del elemento. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        color: #0b3650; /* Establece el color del texto. */
+    }
+
+    .contenedor_escaner_producto.contenedor_escaner_producto_oculto {
+        display: none !important; /* Define cómo se muestra y distribuye el elemento. */
+    }
+
+    .contenedor_escaner_producto [hidden] {
+        display: none !important; /* Define cómo se muestra y distribuye el elemento. */
+    }
+
+    .contenido_escaner_producto {
+        width: min(100%, 790px); /* Define el ancho del elemento. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+    }
+
+    .tarjeta_escaner_producto {
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 12px; /* Define el redondeado de las esquinas. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        padding: 28px 30px; /* Define el espacio interior del elemento. */
+        box-shadow: 0 4px 16px rgba(11, 54, 80, .045); /* Agrega o ajusta la sombra del elemento. */
+    }
+
+    .cabecera_tarjeta_escaner {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        justify-content: space-between; /* Define la distribución de los elementos en el eje principal. */
+        align-items: flex-start; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 15px; /* Define la separación entre los elementos. */
+        margin-bottom: 22px; /* Define el margen inferior. */
+    }
+
+    .titulo_escaner_producto {
+        color: #0b3650; /* Establece el color del texto. */
+        font-size: 25px; /* Define el tamaño del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
+    }
+
+    .descripcion_escaner_producto {
+        color: #6b7d88; /* Establece el color del texto. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        line-height: 1.5; /* Define la separación entre líneas de texto. */
+    }
+
+    .subtitulo_escaner_producto {
+        color: #0b3650; /* Establece el color del texto. */
+        font-size: 15px; /* Define el tamaño del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+        margin-bottom: 12px; /* Define el margen inferior. */
+    }
 
 /* TITULO 2 LECTOR Y CAMARA */
-.marco_camara_escaner {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    background: #142b36;
-    border-radius: 10px;
-    overflow: hidden;
-    isolation: isolate;
-}
-.lector_codigo_barras,
-.contenedor_escaner_producto video {
-    display: block;
-    width: 100%;
-    height: 100%;
-    max-width: 100%;
-    object-fit: cover;
-    background-color: #142b36;
-    box-sizing: border-box;
-}
-.guia_lectura_escaner {
-    position: absolute;
-    inset: 21% 15%;
-    border: 2px solid rgba(117, 238, 232, .85);
-    border-radius: 12px;
-    pointer-events: none;
-    box-shadow: 0 0 0 400px rgba(10, 29, 40, .10);
-}
-.pie_lector_escaner { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 20px; }
-.indicador_camara_escaner { display: flex; align-items: center; gap: 8px; color: #647987; font-size: 13px; }
-.punto_camara_escaner { flex: 0 0 8px; height: 8px; border-radius: 50%; background: #159ba3; }
+
+    .marco_camara_escaner {
+        position: relative; /* Define el sistema de posicionamiento del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        aspect-ratio: 16 / 9; /* Define la proporción entre el ancho y el alto. */
+        background: #142b36; /* Define el fondo del elemento. */
+        border-radius: 10px; /* Define el redondeado de las esquinas. */
+        overflow: hidden; /* Controla el contenido que supera las dimensiones del elemento. */
+        isolation: isolate; /* Define si el elemento crea su propio contexto de apilamiento. */
+    }
+
+    .lector_codigo_barras, .contenedor_escaner_producto video {
+        display: block; /* Muestra el elemento como un bloque. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 100%; /* Define el alto del elemento. */
+        max-width: 100%; /* Evita que el elemento supere el ancho disponible. */
+        object-fit: cover; /* Define cómo se ajusta la imagen dentro de sus dimensiones. */
+        background-color: #142b36; /* Establece el color de fondo. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
+
+    .guia_lectura_escaner {
+        position: absolute; /* Define el sistema de posicionamiento del elemento. */
+        inset: 21% 15%; /* Define las distancias respecto a los bordes del contenedor. */
+        border: 2px solid rgba(117, 238, 232, .85); /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 12px; /* Define el redondeado de las esquinas. */
+        pointer-events: none; /* Define si el elemento puede recibir eventos del puntero. */
+        box-shadow: 0 0 0 400px rgba(10, 29, 40, .10); /* Agrega o ajusta la sombra del elemento. */
+    }
+
+    .pie_lector_escaner {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: space-between; /* Define la distribución de los elementos en el eje principal. */
+        gap: 14px; /* Define la separación entre los elementos. */
+        margin-top: 20px; /* Define el margen superior. */
+    }
+
+    .indicador_camara_escaner {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 8px; /* Define la separación entre los elementos. */
+        color: #647987; /* Establece el color del texto. */
+        font-size: 13px; /* Define el tamaño del texto. */
+    }
+
+    .punto_camara_escaner {
+        flex: 0 0 8px; /* Define cómo el elemento ocupa el espacio disponible en Flexbox. */
+        height: 8px; /* Define el alto del elemento. */
+        border-radius: 50%; /* Define el redondeado de las esquinas. */
+        background: #159ba3; /* Define el fondo del elemento. */
+    }
 
 /* TITULO 3 BOTONES Y ESTADOS */
-.contenedor_escaner_producto button { font-family: inherit; }
-.contenedor_escaner_producto .boton_principal_escaner,
-.contenedor_escaner_producto .boton_secundario_escaner,
-.contenedor_escaner_producto .boton_peligro_escaner,
-.contenedor_escaner_producto .boton_texto_escaner {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 12px 17px;
-    min-height: 43px;
-    font-size: 13px;
-    font-weight: 700;
-    border-radius: 7px;
-    cursor: pointer;
-    box-sizing: border-box;
-    transition: background-color .2s ease, border-color .2s ease;
-}
-.contenedor_escaner_producto .boton_principal_escaner { color: #fff; background: #159ba3; border: 1px solid #159ba3; }
-.contenedor_escaner_producto .boton_principal_escaner:hover { background-color: #117f85; border-color: #117f85; }
-.contenedor_escaner_producto .boton_secundario_escaner { color: #536873; background: #fff; border: 1px solid #d3dfe5; }
-.contenedor_escaner_producto .boton_secundario_escaner:hover { background: #edf6f7; border-color: #159ba3; }
-.contenedor_escaner_producto .boton_peligro_escaner { color: #dc2626; background: #fff; border: 1px solid #f4c6c6; }
-.contenedor_escaner_producto .boton_peligro_escaner:hover { background: #fff0f0; }
-.contenedor_escaner_producto .boton_texto_escaner { color: #526672; background: transparent; border: 1px solid transparent; }
-.contenedor_escaner_producto .boton_texto_escaner:hover { background: #f1f5f7; }
-.contenedor_escaner_producto button:disabled { opacity: .5; cursor: not-allowed; }
-.codigo_estado_escaner {
-    width: 100%;
-    padding: 12px 15px;
-    margin-bottom: 20px;
-    background: #e5f6f6;
-    border: 1px solid #c6e8e9;
-    border-radius: 8px;
-    box-sizing: border-box;
-    color: #0e6970;
-    font-size: 13px;
-    font-weight: 700;
-    overflow-wrap: anywhere;
-}
-.acciones_gestion_escaner { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: flex-end; margin-top: 22px; padding-top: 20px; border-top: 1px solid #e4ecef; }
-.acciones_gestion_escaner .boton_principal_escaner { margin-right: auto; }
+
+    .contenedor_escaner_producto button {
+        font-family: inherit; /* Define la familia tipográfica. */
+    }
+
+    .contenedor_escaner_producto .boton_principal_escaner, .contenedor_escaner_producto .boton_secundario_escaner, .contenedor_escaner_producto .boton_peligro_escaner, .contenedor_escaner_producto .boton_texto_escaner {
+        display: inline-flex; /* Organiza el contenido con Flexbox dentro de la línea. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        gap: 8px; /* Define la separación entre los elementos. */
+        padding: 12px 17px; /* Define el espacio interior del elemento. */
+        min-height: 43px; /* Establece el alto mínimo del elemento. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        transition: background-color .2s ease, border-color .2s ease; /* Define la transición entre los cambios de estilo. */
+    }
+
+    .contenedor_escaner_producto .boton_principal_escaner {
+        color: #fff; /* Establece el color del texto. */
+        background: #159ba3; /* Define el fondo del elemento. */
+        border: 1px solid #159ba3; /* Define el grosor, el estilo y el color del borde. */
+    }
+
+    .contenedor_escaner_producto .boton_principal_escaner:hover {
+        background-color: #117f85; /* Establece el color de fondo. */
+        border-color: #117f85; /* Establece el color del borde. */
+    }
+
+    .contenedor_escaner_producto .boton_secundario_escaner {
+        color: #536873; /* Establece el color del texto. */
+        background: #fff; /* Define el fondo del elemento. */
+        border: 1px solid #d3dfe5; /* Define el grosor, el estilo y el color del borde. */
+    }
+
+    .contenedor_escaner_producto .boton_secundario_escaner:hover {
+        background: #edf6f7; /* Define el fondo del elemento. */
+        border-color: #159ba3; /* Establece el color del borde. */
+    }
+
+    .contenedor_escaner_producto .boton_peligro_escaner {
+        color: #dc2626; /* Establece el color del texto. */
+        background: #fff; /* Define el fondo del elemento. */
+        border: 1px solid #f4c6c6; /* Define el grosor, el estilo y el color del borde. */
+    }
+
+    .contenedor_escaner_producto .boton_peligro_escaner:hover {
+        background: #fff0f0; /* Define el fondo del elemento. */
+    }
+
+    .contenedor_escaner_producto .boton_texto_escaner {
+        color: #526672; /* Establece el color del texto. */
+        background: transparent; /* Define el fondo del elemento. */
+        border: 1px solid transparent; /* Define el grosor, el estilo y el color del borde. */
+    }
+
+    .contenedor_escaner_producto .boton_texto_escaner:hover {
+        background: #f1f5f7; /* Define el fondo del elemento. */
+    }
+
+    .contenedor_escaner_producto button:disabled {
+        opacity: .5; /* Define el nivel de opacidad. */
+        cursor: not-allowed; /* Define el cursor al situarlo sobre el elemento. */
+    }
+
+    .codigo_estado_escaner {
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        padding: 12px 15px; /* Define el espacio interior del elemento. */
+        margin-bottom: 20px; /* Define el margen inferior. */
+        background: #e5f6f6; /* Define el fondo del elemento. */
+        border: 1px solid #c6e8e9; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        color: #0e6970; /* Establece el color del texto. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+        overflow-wrap: anywhere; /* Permite controlar el salto de palabras largas. */
+    }
+
+    .acciones_gestion_escaner {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-wrap: wrap; /* Define si los elementos pueden pasar a otra línea. */
+        gap: 10px; /* Define la separación entre los elementos. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: flex-end; /* Define la distribución de los elementos en el eje principal. */
+        margin-top: 22px; /* Define el margen superior. */
+        padding-top: 20px; /* Define el espacio interior superior. */
+        border-top: 1px solid #e4ecef; /* Define el borde superior. */
+    }
+
+    .acciones_gestion_escaner .boton_principal_escaner {
+        margin-right: auto; /* Define el margen derecho. */
+    }
 
 /* TITULO 4 FICHA DEL PRODUCTO ENCONTRADO */
-.datos_producto_escaneado { width: 100%; }
-.ficha_producto_escaner { display: grid; grid-template-columns: 138px minmax(0, 1fr); gap: 20px; align-items: center; }
-.imagen_ficha_escaner { width: 138px; height: 140px; border-radius: 9px; border: 1px solid #dce4e8; background: #f7f9fa; overflow: hidden; box-sizing: border-box; display: flex; justify-content: center; align-items: center; }
-.imagen_ficha_escaner img { width: 100%; height: 100%; object-fit: contain; }
-.imagen_ficha_escaner .sin_imagen_ficha_escaner { color: #8a989f; font-size: 12px; text-align: center; }
-.detalles_ficha_escaner { min-width: 0; }
-.nombre_ficha_escaner { font-size: 17px; line-height: 1.4; color: #0b3650; font-weight: 700; margin: 0 0 9px; overflow-wrap: anywhere; }
-.dato_ficha_escaner { color: #5a6d79; font-size: 13px; margin: 5px 0; overflow-wrap: anywhere; }
-.dato_ficha_escaner strong { color: #29495a; }
-.precio_ficha_escaner { font-size: 20px; font-weight: 700; margin-top: 10px; color: #0b3650; }
-.atribucion_ficha_escaner { font-size: 11px; color: #6b7d88; margin-top: 9px; }
-.atribucion_ficha_escaner a { color: #0d858b; }
-.indicadores_ficha_escaner { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 20px; }
-.indicador_ficha_escaner { border-radius: 9px; background: #f4f7f8; border: 1px solid #e3e9ed; padding: 14px 12px; box-sizing: border-box; }
-.etiqueta_indicador_ficha { color: #687a86; font-size: 12px; line-height: 1.3; margin-bottom: 8px; }
-.valor_indicador_ficha { color: #0b3650; font-size: 21px; font-weight: 700; }
-.mensaje_sin_producto_escaner { padding: 20px; border-radius: 8px; color: #657985; background: #f4f7f8; line-height: 1.5; }
+
+    .datos_producto_escaneado {
+        width: 100%; /* Ocupa todo el ancho disponible. */
+    }
+
+    .ficha_producto_escaner {
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: 138px minmax(0, 1fr); /* Define la distribución y el ancho de las columnas. */
+        gap: 20px; /* Define la separación entre los elementos. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+    }
+
+    .imagen_ficha_escaner {
+        width: 138px; /* Define el ancho del elemento. */
+        height: 140px; /* Define el alto del elemento. */
+        border-radius: 9px; /* Define el redondeado de las esquinas. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        background: #f7f9fa; /* Define el fondo del elemento. */
+        overflow: hidden; /* Controla el contenido que supera las dimensiones del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+    }
+
+    .imagen_ficha_escaner img {
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 100%; /* Define el alto del elemento. */
+        object-fit: contain; /* Define cómo se ajusta la imagen dentro de sus dimensiones. */
+    }
+
+    .imagen_ficha_escaner .sin_imagen_ficha_escaner {
+        color: #8a989f; /* Establece el color del texto. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+    }
+
+    .detalles_ficha_escaner {
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+    }
+
+    .nombre_ficha_escaner {
+        font-size: 17px; /* Define el tamaño del texto. */
+        line-height: 1.4; /* Define la separación entre líneas de texto. */
+        color: #0b3650; /* Establece el color del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+        margin: 0 0 9px; /* Define el margen exterior del elemento. */
+        overflow-wrap: anywhere; /* Permite controlar el salto de palabras largas. */
+    }
+
+    .dato_ficha_escaner {
+        color: #5a6d79; /* Establece el color del texto. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        margin: 5px 0; /* Define el margen exterior del elemento. */
+        overflow-wrap: anywhere; /* Permite controlar el salto de palabras largas. */
+    }
+
+    .dato_ficha_escaner strong {
+        color: #29495a; /* Establece el color del texto. */
+    }
+
+    .precio_ficha_escaner {
+        font-size: 20px; /* Define el tamaño del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+        margin-top: 10px; /* Define el margen superior. */
+        color: #0b3650; /* Establece el color del texto. */
+    }
+
+    .atribucion_ficha_escaner {
+        font-size: 11px; /* Define el tamaño del texto. */
+        color: #6b7d88; /* Establece el color del texto. */
+        margin-top: 9px; /* Define el margen superior. */
+    }
+
+    .atribucion_ficha_escaner a {
+        color: #0d858b; /* Establece el color del texto. */
+    }
+
+    .indicadores_ficha_escaner {
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: repeat(3, minmax(0, 1fr)); /* Define la distribución y el ancho de las columnas. */
+        gap: 12px; /* Define la separación entre los elementos. */
+        margin-top: 20px; /* Define el margen superior. */
+    }
+
+    .indicador_ficha_escaner {
+        border-radius: 9px; /* Define el redondeado de las esquinas. */
+        background: #f4f7f8; /* Define el fondo del elemento. */
+        border: 1px solid #e3e9ed; /* Define el grosor, el estilo y el color del borde. */
+        padding: 14px 12px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
+
+    .etiqueta_indicador_ficha {
+        color: #687a86; /* Establece el color del texto. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        line-height: 1.3; /* Define la separación entre líneas de texto. */
+        margin-bottom: 8px; /* Define el margen inferior. */
+    }
+
+    .valor_indicador_ficha {
+        color: #0b3650; /* Establece el color del texto. */
+        font-size: 21px; /* Define el tamaño del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+    }
+
+    .mensaje_sin_producto_escaner {
+        padding: 20px; /* Define el espacio interior del elemento. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        color: #657985; /* Establece el color del texto. */
+        background: #f4f7f8; /* Define el fondo del elemento. */
+        line-height: 1.5; /* Define la separación entre líneas de texto. */
+    }
 
 /* TITULO 5 ASOCIAR CODIGOS */
-.campo_asociar_escaner { display: flex; flex-direction: column; gap: 7px; margin-bottom: 16px; }
-.campo_asociar_escaner label { font-size: 13px; color: #3d5868; font-weight: 700; }
-.campo_asociar_escaner input { width: 100%; min-height: 44px; padding: 10px 12px; box-sizing: border-box; border: 1px solid #cfdce2; border-radius: 7px; font-size: 14px; color: #2d4654; background: white; }
-.campo_asociar_escaner input:focus { outline: 2px solid #a6e0e2; border-color: #159ba3; }
-.resultados_productos_asociar { max-height: 235px; overflow: auto; display: flex; flex-direction: column; gap: 7px; margin-bottom: 15px; }
-.resultados_productos_asociar button { display: block; width: 100%; text-align: left; padding: 12px; font-size: 13px; color: #405968; background: #fff; border: 1px solid #d9e4e9; border-radius: 7px; cursor: pointer; }
-.resultados_productos_asociar button:hover { background: #eff9f9; }
-.resultados_productos_asociar button[aria-pressed="true"] { background: #e6f6f7; border: 1px solid #159ba3; }
-.producto_seleccionado_escaner { padding: 17px; background: #f5f9fa; border: 1px solid #d8e9eb; border-radius: 8px; margin: 8px 0 18px; }
-.producto_seleccionado_escaner p { font-size: 13px; color: #566b77; margin: 8px 0; overflow-wrap: anywhere; }
-.producto_seleccionado_escaner p strong { color: #29495a; }
+
+    .campo_asociar_escaner {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        gap: 7px; /* Define la separación entre los elementos. */
+        margin-bottom: 16px; /* Define el margen inferior. */
+    }
+
+    .campo_asociar_escaner label {
+        font-size: 13px; /* Define el tamaño del texto. */
+        color: #3d5868; /* Establece el color del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+    }
+
+    .campo_asociar_escaner input {
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-height: 44px; /* Establece el alto mínimo del elemento. */
+        padding: 10px 12px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        border: 1px solid #cfdce2; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        font-size: 14px; /* Define el tamaño del texto. */
+        color: #2d4654; /* Establece el color del texto. */
+        background: white; /* Define el fondo del elemento. */
+    }
+
+    .campo_asociar_escaner input:focus {
+        outline: 2px solid #a6e0e2; /* Define el contorno visual del elemento. */
+        border-color: #159ba3; /* Establece el color del borde. */
+    }
+
+    .resultados_productos_asociar {
+        max-height: 235px; /* Limita el alto máximo del elemento. */
+        overflow: auto; /* Controla el contenido que supera las dimensiones del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        gap: 7px; /* Define la separación entre los elementos. */
+        margin-bottom: 15px; /* Define el margen inferior. */
+    }
+
+    .resultados_productos_asociar button {
+        display: block; /* Muestra el elemento como un bloque. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        padding: 12px; /* Define el espacio interior del elemento. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        color: #405968; /* Establece el color del texto. */
+        background: #fff; /* Define el fondo del elemento. */
+        border: 1px solid #d9e4e9; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+    }
+
+    .resultados_productos_asociar button:hover {
+        background: #eff9f9; /* Define el fondo del elemento. */
+    }
+
+    .resultados_productos_asociar button[aria-pressed="true"] {
+        background: #e6f6f7; /* Define el fondo del elemento. */
+        border: 1px solid #159ba3; /* Define el grosor, el estilo y el color del borde. */
+    }
+
+    .producto_seleccionado_escaner {
+        padding: 17px; /* Define el espacio interior del elemento. */
+        background: #f5f9fa; /* Define el fondo del elemento. */
+        border: 1px solid #d8e9eb; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        margin: 8px 0 18px; /* Define el margen exterior del elemento. */
+    }
+
+    .producto_seleccionado_escaner p {
+        font-size: 13px; /* Define el tamaño del texto. */
+        color: #566b77; /* Establece el color del texto. */
+        margin: 8px 0; /* Define el margen exterior del elemento. */
+        overflow-wrap: anywhere; /* Permite controlar el salto de palabras largas. */
+    }
+
+    .producto_seleccionado_escaner p strong {
+        color: #29495a; /* Establece el color del texto. */
+    }
 
 /* TITULO 6 MODAL DE AJUSTE CENTRADO EN PANTALLA */
-.superposicion_ajuste_escaner {
-    position: fixed;
-    inset: 0;
-    z-index: 5000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(10, 35, 49, .56);
-    padding: 20px;
-    box-sizing: border-box;
-}
-.modal_ajuste_escaner {
-    width: min(100%, 500px);
-    max-height: calc(100dvh - 40px);
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    background: #ffffff;
-    border-radius: 12px;
-    border: 1px solid #dce4e8;
-    box-shadow: 0 18px 48px rgba(0,0,0,.22);
-    color: #0b3650;
-    box-sizing: border-box;
-}
-.cabecera_modal_ajuste_escaner { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; padding: 23px 25px 16px; }
-.titulo_modal_ajuste_escaner { color: #0b3650; font-size: 21px; font-weight: 700; margin-bottom: 5px; }
-.boton_cerrar_modal_ajuste_escaner { width: 32px; height: 32px; color: #637682; font-size: 25px; border: none; background: transparent; border-radius: 5px; cursor: pointer; line-height: 1; }
-.boton_cerrar_modal_ajuste_escaner:hover { background: #f1f5f7; }
-.cuerpo_modal_ajuste_escaner { padding: 0 25px 20px; }
-.etiqueta_opciones_escaner { font-size: 13px; font-weight: 700; color: #3d5868; margin: 15px 0 10px; }
-.opciones_operacion_ajuste { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
-.opciones_operacion_ajuste label { display: flex; align-items: center; justify-content: center; gap: 7px; padding: 7px; min-height: 43px; border: 1px solid #cbd9e0; border-radius: 7px; background: #ffffff; color: #385365; font-size: 13px; text-align: center; cursor: pointer; box-sizing: border-box; }
-.opciones_operacion_ajuste label:has(input:checked) { background: #e7f7f7; border-color: #159ba3; color: #0e6970; }
-.opcion_vencimiento_escaner { margin-top: 12px; }
-.opcion_vencimiento_escaner[hidden], .campo_fecha_vencimiento_escaner[hidden] { display: none !important; }
-.boton_toggle_vencimiento_escaner { min-height: 44px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 12px; border: 1px solid #cbd9e0; border-radius: 7px; background: #f8fafb; color: #385365; font-size: 13px; font-weight: 700; cursor: pointer; user-select: none; box-sizing: border-box; }
-.boton_toggle_vencimiento_escaner:focus-visible { outline: 2px solid #159ba3; outline-offset: 2px; }
-.boton_toggle_vencimiento_escaner[aria-pressed="true"] { border-color: #159ba3; background: #e7f7f7; color: #0e6970; }
-.estado_toggle_vencimiento_escaner { min-width: 42px; padding: 5px 9px; border-radius: 999px; background: #e8edef; color: #526873; text-align: center; }
-.boton_toggle_vencimiento_escaner[aria-pressed="true"] .estado_toggle_vencimiento_escaner { background: #159ba3; color: #fff; }
-.campo_fecha_vencimiento_escaner { display: flex; flex-direction: column; gap: 7px; margin-top: 11px; }
-.texto_fecha_vencimiento_escaner { color: #3d5868; font-size: 12px; font-weight: 700; }
-.campo_fecha_vencimiento_escaner input { width: 100%; height: 42px; padding: 9px 12px; border: 1px solid #cbd9e0; border-radius: 7px; box-sizing: border-box; color: #1d3f50; font: inherit; }
-.campo_fecha_vencimiento_escaner input:focus { outline: 2px solid #a6e0e2; border-color: #159ba3; }
-.opciones_tipo_cantidad { display: flex; flex-direction: column; gap: 13px; margin: 3px 0 16px; }
-.opciones_tipo_cantidad label { color: #3d5868; font-size: 13px; display: flex; align-items: center; gap: 9px; cursor: pointer; }
-.opciones_operacion_ajuste input, .opciones_tipo_cantidad input { accent-color: #159ba3; cursor: pointer; }
-.campos_ajuste_escaner { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 13px; }
-.campo_cantidad_ajuste, .campo_unidades_codigo { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
-.campo_cantidad_ajuste label, .campo_unidades_codigo label { color: #3d5868; font-size: 12px; font-weight: 700; }
-.campo_cantidad_ajuste input, .campo_unidades_codigo input { width: 100%; height: 42px; border: 1px solid #cbd9e0; border-radius: 7px; box-sizing: border-box; padding: 9px 12px; font-size: 14px; color: #1d3f50; }
-.campo_cantidad_ajuste input:focus { outline: 2px solid #a6e0e2; border-color: #159ba3; }
-.campo_unidades_codigo input { background: #f1f4f6; color: #647782; }
-.campo_motivo_ajuste_escaner { display: flex; flex-direction: column; gap: 7px; margin-top: 16px; }
-.campo_motivo_ajuste_escaner label { color: #3d5868; font-size: 12px; font-weight: 700; }
-.campo_motivo_ajuste_escaner select { width: 100%; height: 42px; padding: 8px 12px; background: #fff; color: #1d3f50; border: 1px solid #cbd9e0; border-radius: 7px; font: inherit; font-size: 13px; }
-.campo_motivo_ajuste_escaner select:focus { outline: 2px solid #a6e0e2; border-color: #159ba3; }
-.resumen_ajuste_escaner { background: #f4f7f8; border: 1px solid #e3e9ed; border-radius: 8px; margin-top: 20px; padding: 4px 14px; }
-.resultado_cantidad_ajuste, .inventario_actual_ajuste, .inventario_resultante_ajuste { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 1px; font-size: 13px; color: #536873; }
-.resultado_cantidad_ajuste, .inventario_actual_ajuste { border-bottom: 1px solid #e0e7ea; }
-.resumen_ajuste_escaner strong { color: #173d53; font-size: 16px; }
-.inventario_resultante_ajuste { color: #0d767d; font-weight: 700; }
-.inventario_resultante_ajuste strong { color: #0d767d; font-size: 20px; }
-.pie_modal_ajuste_escaner { display: flex; justify-content: flex-end; gap: 10px; padding: 16px 25px 23px; border-top: 1px solid #e7ecef; }
 
+    .superposicion_ajuste_escaner {
+        position: fixed; /* Define el sistema de posicionamiento del elemento. */
+        inset: 0; /* Define las distancias respecto a los bordes del contenedor. */
+        z-index: 5000; /* Define el orden de superposición del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        background: rgba(10, 35, 49, .56); /* Define el fondo del elemento. */
+        padding: 20px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
+
+    .modal_ajuste_escaner {
+        width: min(100%, 500px); /* Define el ancho del elemento. */
+        max-height: calc(100dvh - 40px); /* Limita el alto máximo del elemento. */
+        overflow-y: auto; /* Controla el contenido que desborda verticalmente. */
+        overscroll-behavior: contain; /* Controla la propagación del desplazamiento al llegar al borde. */
+        background: #ffffff; /* Define el fondo del elemento. */
+        border-radius: 12px; /* Define el redondeado de las esquinas. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        box-shadow: 0 18px 48px rgba(0,0,0,.22); /* Agrega o ajusta la sombra del elemento. */
+        color: #0b3650; /* Establece el color del texto. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
+
+    .cabecera_modal_ajuste_escaner {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        justify-content: space-between; /* Define la distribución de los elementos en el eje principal. */
+        align-items: flex-start; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 14px; /* Define la separación entre los elementos. */
+        padding: 23px 25px 16px; /* Define el espacio interior del elemento. */
+    }
+
+    .titulo_modal_ajuste_escaner {
+        color: #0b3650; /* Establece el color del texto. */
+        font-size: 21px; /* Define el tamaño del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+        margin-bottom: 5px; /* Define el margen inferior. */
+    }
+
+    .boton_cerrar_modal_ajuste_escaner {
+        width: 32px; /* Define el ancho del elemento. */
+        height: 32px; /* Define el alto del elemento. */
+        color: #637682; /* Establece el color del texto. */
+        font-size: 25px; /* Define el tamaño del texto. */
+        border: none; /* Define el grosor, el estilo y el color del borde. */
+        background: transparent; /* Define el fondo del elemento. */
+        border-radius: 5px; /* Define el redondeado de las esquinas. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        line-height: 1; /* Define la separación entre líneas de texto. */
+    }
+
+    .boton_cerrar_modal_ajuste_escaner:hover {
+        background: #f1f5f7; /* Define el fondo del elemento. */
+    }
+
+    .cuerpo_modal_ajuste_escaner {
+        padding: 0 25px 20px; /* Define el espacio interior del elemento. */
+    }
+
+    .etiqueta_opciones_escaner {
+        font-size: 13px; /* Define el tamaño del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+        color: #3d5868; /* Establece el color del texto. */
+        margin: 15px 0 10px; /* Define el margen exterior del elemento. */
+    }
+
+    .opciones_operacion_ajuste {
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: repeat(3, minmax(0, 1fr)); /* Define la distribución y el ancho de las columnas. */
+        gap: 10px; /* Define la separación entre los elementos. */
+    }
+
+    .opciones_operacion_ajuste label {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        gap: 7px; /* Define la separación entre los elementos. */
+        padding: 7px; /* Define el espacio interior del elemento. */
+        min-height: 43px; /* Establece el alto mínimo del elemento. */
+        border: 1px solid #cbd9e0; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        background: #ffffff; /* Define el fondo del elemento. */
+        color: #385365; /* Establece el color del texto. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
+
+    .opciones_operacion_ajuste label:has(input:checked) {
+        background: #e7f7f7; /* Define el fondo del elemento. */
+        border-color: #159ba3; /* Establece el color del borde. */
+        color: #0e6970; /* Establece el color del texto. */
+    }
+
+    .opcion_vencimiento_escaner {
+        margin-top: 12px; /* Define el margen superior. */
+    }
+
+    .opcion_vencimiento_escaner[hidden], .campo_fecha_vencimiento_escaner[hidden] {
+        display: none !important; /* Define cómo se muestra y distribuye el elemento. */
+    }
+
+    .boton_toggle_vencimiento_escaner {
+        min-height: 44px; /* Establece el alto mínimo del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: space-between; /* Define la distribución de los elementos en el eje principal. */
+        gap: 12px; /* Define la separación entre los elementos. */
+        padding: 8px 12px; /* Define el espacio interior del elemento. */
+        border: 1px solid #cbd9e0; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        background: #f8fafb; /* Define el fondo del elemento. */
+        color: #385365; /* Establece el color del texto. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        user-select: none; /* Define si el usuario puede seleccionar el contenido. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
+
+    .boton_toggle_vencimiento_escaner:focus-visible {
+        outline: 2px solid #159ba3; /* Define el contorno visual del elemento. */
+        outline-offset: 2px; /* Define la separación entre el contorno y el borde. */
+    }
+
+    .boton_toggle_vencimiento_escaner[aria-pressed="true"] {
+        border-color: #159ba3; /* Establece el color del borde. */
+        background: #e7f7f7; /* Define el fondo del elemento. */
+        color: #0e6970; /* Establece el color del texto. */
+    }
+
+    .estado_toggle_vencimiento_escaner {
+        min-width: 42px; /* Establece el ancho mínimo del elemento. */
+        padding: 5px 9px; /* Define el espacio interior del elemento. */
+        border-radius: 999px; /* Define el redondeado de las esquinas. */
+        background: #e8edef; /* Define el fondo del elemento. */
+        color: #526873; /* Establece el color del texto. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+    }
+
+    .boton_toggle_vencimiento_escaner[aria-pressed="true"] .estado_toggle_vencimiento_escaner {
+        background: #159ba3; /* Define el fondo del elemento. */
+        color: #fff; /* Establece el color del texto. */
+    }
+
+    .campo_fecha_vencimiento_escaner {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        gap: 7px; /* Define la separación entre los elementos. */
+        margin-top: 11px; /* Define el margen superior. */
+    }
+
+    .texto_fecha_vencimiento_escaner {
+        color: #3d5868; /* Establece el color del texto. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+    }
+
+    .campo_fecha_vencimiento_escaner input {
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 42px; /* Define el alto del elemento. */
+        padding: 9px 12px; /* Define el espacio interior del elemento. */
+        border: 1px solid #cbd9e0; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        color: #1d3f50; /* Establece el color del texto. */
+        font: inherit; /* Define la tipografía y sus dimensiones. */
+    }
+
+    .campo_fecha_vencimiento_escaner input:focus {
+        outline: 2px solid #a6e0e2; /* Define el contorno visual del elemento. */
+        border-color: #159ba3; /* Establece el color del borde. */
+    }
+
+    .opciones_tipo_cantidad {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        gap: 13px; /* Define la separación entre los elementos. */
+        margin: 3px 0 16px; /* Define el margen exterior del elemento. */
+    }
+
+    .opciones_tipo_cantidad label {
+        color: #3d5868; /* Establece el color del texto. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 9px; /* Define la separación entre los elementos. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+    }
+
+    .opciones_operacion_ajuste input, .opciones_tipo_cantidad input {
+        accent-color: #159ba3; /* Establece el color de los controles nativos. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+    }
+
+    .campos_ajuste_escaner {
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: 1fr 1fr; /* Define la distribución y el ancho de las columnas. */
+        gap: 12px; /* Define la separación entre los elementos. */
+        margin-top: 13px; /* Define el margen superior. */
+    }
+
+    .campo_cantidad_ajuste, .campo_unidades_codigo {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        gap: 7px; /* Define la separación entre los elementos. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+    }
+
+    .campo_cantidad_ajuste label, .campo_unidades_codigo label {
+        color: #3d5868; /* Establece el color del texto. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+    }
+
+    .campo_cantidad_ajuste input, .campo_unidades_codigo input {
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 42px; /* Define el alto del elemento. */
+        border: 1px solid #cbd9e0; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        padding: 9px 12px; /* Define el espacio interior del elemento. */
+        font-size: 14px; /* Define el tamaño del texto. */
+        color: #1d3f50; /* Establece el color del texto. */
+    }
+
+    .campo_cantidad_ajuste input:focus {
+        outline: 2px solid #a6e0e2; /* Define el contorno visual del elemento. */
+        border-color: #159ba3; /* Establece el color del borde. */
+    }
+
+    .campo_unidades_codigo input {
+        background: #f1f4f6; /* Define el fondo del elemento. */
+        color: #647782; /* Establece el color del texto. */
+    }
+
+    .campo_motivo_ajuste_escaner {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        gap: 7px; /* Define la separación entre los elementos. */
+        margin-top: 16px; /* Define el margen superior. */
+    }
+
+    .campo_motivo_ajuste_escaner label {
+        color: #3d5868; /* Establece el color del texto. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+    }
+
+    .campo_motivo_ajuste_escaner select {
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 42px; /* Define el alto del elemento. */
+        padding: 8px 12px; /* Define el espacio interior del elemento. */
+        background: #fff; /* Define el fondo del elemento. */
+        color: #1d3f50; /* Establece el color del texto. */
+        border: 1px solid #cbd9e0; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        font: inherit; /* Define la tipografía y sus dimensiones. */
+        font-size: 13px; /* Define el tamaño del texto. */
+    }
+
+    .campo_motivo_ajuste_escaner select:focus {
+        outline: 2px solid #a6e0e2; /* Define el contorno visual del elemento. */
+        border-color: #159ba3; /* Establece el color del borde. */
+    }
+
+    .resumen_ajuste_escaner {
+        background: #f4f7f8; /* Define el fondo del elemento. */
+        border: 1px solid #e3e9ed; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        margin-top: 20px; /* Define el margen superior. */
+        padding: 4px 14px; /* Define el espacio interior del elemento. */
+    }
+
+    .resultado_cantidad_ajuste, .inventario_actual_ajuste, .inventario_resultante_ajuste {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: space-between; /* Define la distribución de los elementos en el eje principal. */
+        gap: 10px; /* Define la separación entre los elementos. */
+        padding: 12px 1px; /* Define el espacio interior del elemento. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        color: #536873; /* Establece el color del texto. */
+    }
+
+    .resultado_cantidad_ajuste, .inventario_actual_ajuste {
+        border-bottom: 1px solid #e0e7ea; /* Define el borde inferior. */
+    }
+
+    .resumen_ajuste_escaner strong {
+        color: #173d53; /* Establece el color del texto. */
+        font-size: 16px; /* Define un tamaño de texto legible para el campo en teléfonos. */
+    }
+
+    .inventario_resultante_ajuste {
+        color: #0d767d; /* Establece el color del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+    }
+
+    .inventario_resultante_ajuste strong {
+        color: #0d767d; /* Establece el color del texto. */
+        font-size: 20px; /* Define el tamaño del texto. */
+    }
+
+    .pie_modal_ajuste_escaner {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        justify-content: flex-end; /* Define la distribución de los elementos en el eje principal. */
+        gap: 10px; /* Define la separación entre los elementos. */
+        padding: 16px 25px 23px; /* Define el espacio interior del elemento. */
+        border-top: 1px solid #e7ecef; /* Define el borde superior. */
+    }
 
 /* TITULO 7 MODAL DE MENSAJES Y CONFIRMACIONES */
-/* estilos equivalentes a los avisos personalizados de Productos */
-.contenedor_alerta_escaner {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100vh;
-    height: 100dvh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 18px;
-    background-color: rgba(5, 31, 45, 0.58);
-    z-index: 6000;
-    box-sizing: border-box;
-}
 
-.contenedor_alerta_escaner[hidden] { display: none !important; }
+    .contenedor_alerta_escaner {
+        position: fixed; /* Define el sistema de posicionamiento del elemento. */
+        inset: 0; /* Define las distancias respecto a los bordes del contenedor. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 100vh; /* Define el alto del elemento. */
+        height: 100dvh; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        padding: 18px; /* Define el espacio interior del elemento. */
+        background-color: rgba(5, 31, 45, 0.58); /* Establece el color de fondo. */
+        z-index: 6000; /* Define el orden de superposición del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
 
-.modal_alerta_escaner {
-    --color_alerta_escaner: #159ba3;
-    --fondo_alerta_escaner: #e4f6f6;
-    width: 420px;
-    max-width: 100%;
-    max-height: calc(100dvh - 36px);
-    overflow-y: auto;
-    padding: 28px;
-    background: #fff;
-    border: 1px solid #dce4e8;
-    border-radius: 12px;
-    box-shadow: 0 18px 50px rgba(5, 31, 45, .22);
-    box-sizing: border-box;
-    text-align: center;
-    font-family: Arial, sans-serif;
-}
+    .contenedor_alerta_escaner[hidden] {
+        display: none !important; /* Define cómo se muestra y distribuye el elemento. */
+    }
 
-.modal_alerta_escaner[data-tipo="error"] {
-    --color_alerta_escaner: #dc2626;
-    --fondo_alerta_escaner: #fee8e8;
-}
+    .modal_alerta_escaner {
+        --color_alerta_escaner: #159ba3; /* Define una variable de estilo reutilizable. */
+        --fondo_alerta_escaner: #e4f6f6; /* Define una variable de estilo reutilizable. */
+        width: 420px; /* Define el ancho del elemento. */
+        max-width: 100%; /* Evita que el elemento supere el ancho disponible. */
+        max-height: calc(100dvh - 36px); /* Limita el alto máximo del elemento. */
+        overflow-y: auto; /* Controla el contenido que desborda verticalmente. */
+        padding: 28px; /* Define el espacio interior del elemento. */
+        background: #fff; /* Define el fondo del elemento. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 12px; /* Define el redondeado de las esquinas. */
+        box-shadow: 0 18px 50px rgba(5, 31, 45, .22); /* Agrega o ajusta la sombra del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+    }
 
-.modal_alerta_escaner[data-tipo="advertencia"] {
-    --color_alerta_escaner: #d58226;
-    --fondo_alerta_escaner: #fff0df;
-}
+    .modal_alerta_escaner[data-tipo="error"] {
+        --color_alerta_escaner: #dc2626; /* Define una variable de estilo reutilizable. */
+        --fondo_alerta_escaner: #fee8e8; /* Define una variable de estilo reutilizable. */
+    }
 
-.modal_alerta_escaner[data-tipo="informacion"] {
-    --color_alerta_escaner: #0b6572;
-    --fondo_alerta_escaner: #e4f6f6;
-}
+    .modal_alerta_escaner[data-tipo="advertencia"] {
+        --color_alerta_escaner: #d58226; /* Define una variable de estilo reutilizable. */
+        --fondo_alerta_escaner: #fff0df; /* Define una variable de estilo reutilizable. */
+    }
 
-.icono_alerta_escaner {
-    width: 56px;
-    height: 56px;
-    margin: 0 auto 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    color: var(--color_alerta_escaner);
-    background-color: var(--fondo_alerta_escaner);
-    font-size: 27px;
-    font-weight: bold;
-}
+    .modal_alerta_escaner[data-tipo="informacion"] {
+        --color_alerta_escaner: #0b6572; /* Define una variable de estilo reutilizable. */
+        --fondo_alerta_escaner: #e4f6f6; /* Define una variable de estilo reutilizable. */
+    }
 
-.titulo_alerta_escaner {
-    margin-bottom: 10px;
-    color: #0b3650;
-    font-size: 20px;
-    font-weight: bold;
-    line-height: 1.3;
-}
+    .icono_alerta_escaner {
+        width: 56px; /* Define el ancho del elemento. */
+        height: 56px; /* Define el alto del elemento. */
+        margin: 0 auto 18px; /* Define el margen exterior del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        border-radius: 50%; /* Define el redondeado de las esquinas. */
+        color: var(--color_alerta_escaner); /* Establece el color del texto. */
+        background-color: var(--fondo_alerta_escaner); /* Establece el color de fondo. */
+        font-size: 27px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+    }
 
-.mensaje_alerta_escaner {
-    color: #536873;
-    font-size: 14px;
-    line-height: 1.55;
-    white-space: pre-line;
-    overflow-wrap: anywhere;
-}
+    .titulo_alerta_escaner {
+        margin-bottom: 10px; /* Define el margen inferior. */
+        color: #0b3650; /* Establece el color del texto. */
+        font-size: 20px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        line-height: 1.3; /* Define la separación entre líneas de texto. */
+    }
 
-.acciones_alerta_escaner {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 25px;
-}
+    .mensaje_alerta_escaner {
+        color: #536873; /* Establece el color del texto. */
+        font-size: 14px; /* Define el tamaño del texto. */
+        line-height: 1.55; /* Define la separación entre líneas de texto. */
+        white-space: pre-line; /* Define cómo se conservan los espacios y los saltos de línea. */
+        overflow-wrap: anywhere; /* Permite controlar el salto de palabras largas. */
+    }
 
-.contenedor_escaner_producto .boton_cancelar_alerta_escaner,
-.contenedor_escaner_producto .boton_aceptar_alerta_escaner {
-    min-width: 122px;
-    min-height: 42px;
-    padding: 0 17px;
-    border-radius: 6px;
-    font-family: Arial, sans-serif;
-    font-size: 13px;
-    font-weight: bold;
-    cursor: pointer;
-    box-sizing: border-box;
-}
+    .acciones_alerta_escaner {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        flex-wrap: wrap; /* Define si los elementos pueden pasar a otra línea. */
+        gap: 10px; /* Define la separación entre los elementos. */
+        margin-top: 25px; /* Define el margen superior. */
+    }
 
-.contenedor_escaner_producto .boton_cancelar_alerta_escaner {
-    border: 1px solid #dce4e8;
-    background: #edf1f3;
-    color: #44515a;
-}
-.contenedor_escaner_producto .boton_cancelar_alerta_escaner:hover { background: #dfe6e9; }
-.contenedor_escaner_producto .boton_aceptar_alerta_escaner {
-    border: 1px solid #159ba3;
-    background: #159ba3;
-    color: #fff;
-}
-.contenedor_escaner_producto .boton_aceptar_alerta_escaner:hover {
-    background: #0f858d;
-    border-color: #0f858d;
-}
+    .contenedor_escaner_producto .boton_cancelar_alerta_escaner, .contenedor_escaner_producto .boton_aceptar_alerta_escaner {
+        min-width: 122px; /* Establece el ancho mínimo del elemento. */
+        min-height: 42px; /* Establece el alto mínimo del elemento. */
+        padding: 0 17px; /* Define el espacio interior del elemento. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
 
-.contenedor_escaner_producto .boton_cancelar_alerta_escaner:focus-visible,
-.contenedor_escaner_producto .boton_aceptar_alerta_escaner:focus-visible {
-    outline: 2px solid #159ba3;
-    outline-offset: 3px;
-}
+    .contenedor_escaner_producto .boton_cancelar_alerta_escaner {
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        background: #edf1f3; /* Define el fondo del elemento. */
+        color: #44515a; /* Establece el color del texto. */
+    }
 
-.contenedor_escaner_producto .boton_cancelar_alerta_escaner[hidden] { display: none !important; }
+    .contenedor_escaner_producto .boton_cancelar_alerta_escaner:hover {
+        background: #dfe6e9; /* Define el fondo del elemento. */
+    }
 
-@media (max-width: 430px) {
-    .modal_alerta_escaner { padding: 24px 18px; }
-    .titulo_alerta_escaner { font-size: 18px; }
-    .contenedor_escaner_producto .boton_cancelar_alerta_escaner,
-    .contenedor_escaner_producto .boton_aceptar_alerta_escaner { flex: 1; min-width: 0; }
-}
+    .contenedor_escaner_producto .boton_aceptar_alerta_escaner {
+        border: 1px solid #159ba3; /* Define el grosor, el estilo y el color del borde. */
+        background: #159ba3; /* Define el fondo del elemento. */
+        color: #fff; /* Establece el color del texto. */
+    }
 
-/* TITULO 8 RESPONSIVE */
-@media (max-width: 768px) {
-    .contenedor_escaner_producto { padding: 18px 10px 28px; }
-    .tarjeta_escaner_producto { padding: 22px 18px; }
-    .titulo_escaner_producto { font-size: 22px; }
-    .ficha_producto_escaner { grid-template-columns: 112px minmax(0,1fr); gap: 14px; }
-    .imagen_ficha_escaner { width: 112px; height: 124px; }
-}
-@media (max-width: 576px) {
-    .opciones_operacion_ajuste { grid-template-columns: 1fr; }
+    .contenedor_escaner_producto .boton_aceptar_alerta_escaner:hover {
+        background: #0f858d; /* Define el fondo del elemento. */
+        border-color: #0f858d; /* Establece el color del borde. */
+    }
 
-    .pie_lector_escaner { flex-direction: column; align-items: stretch; }
-    .pie_lector_escaner .boton_secundario_escaner { width: 100%; }
-    .marco_camara_escaner { aspect-ratio: 4 / 3; }
-    .guia_lectura_escaner { inset: 25% 11%; }
-    .ficha_producto_escaner { grid-template-columns: 92px minmax(0,1fr); }
-    .imagen_ficha_escaner { width: 92px; height: 110px; }
-    .nombre_ficha_escaner { font-size: 15px; }
-    .indicadores_ficha_escaner { gap: 7px; }
-    .indicador_ficha_escaner { padding: 12px 9px; }
-    .etiqueta_indicador_ficha { font-size: 11px; }
-    .valor_indicador_ficha { font-size: 18px; }
-    .acciones_gestion_escaner { flex-direction: column; align-items: stretch; }
-    .acciones_gestion_escaner button, .acciones_gestion_escaner .boton_principal_escaner { width: 100%; }
-    .superposicion_ajuste_escaner { padding: 12px; }
-    .modal_ajuste_escaner { max-height: calc(100dvh - 24px); }
-    .cabecera_modal_ajuste_escaner { padding: 20px 18px 14px; }
-    .cuerpo_modal_ajuste_escaner { padding: 0 18px 18px; }
-    .pie_modal_ajuste_escaner { padding: 15px 18px 20px; }
-}
-@media (max-width: 390px) {
-    .campos_ajuste_escaner { grid-template-columns: 1fr; }
-    .titulo_escaner_producto { font-size: 20px; }
-    .indicadores_ficha_escaner { grid-template-columns: 1fr 1fr; }
-}
+    .contenedor_escaner_producto .boton_cancelar_alerta_escaner:focus-visible, .contenedor_escaner_producto .boton_aceptar_alerta_escaner:focus-visible {
+        outline: 2px solid #159ba3; /* Define el contorno visual del elemento. */
+        outline-offset: 3px; /* Define la separación entre el contorno y el borde. */
+    }
+
+    .contenedor_escaner_producto .boton_cancelar_alerta_escaner[hidden] {
+        display: none !important; /* Define cómo se muestra y distribuye el elemento. */
+    }
+
+/* TITULO 8 RESPONSIVE (MAX-WIDTH: 480PX) */
+
+    @media (max-width: 480px) {
+        .modal_alerta_escaner {
+            padding: 24px 18px; /* Define el espacio interior del elemento. */
+        }
+
+        .titulo_alerta_escaner {
+            font-size: 18px; /* Define el tamaño del texto. */
+        }
+
+        .contenedor_escaner_producto .boton_cancelar_alerta_escaner, .contenedor_escaner_producto .boton_aceptar_alerta_escaner {
+            flex: 1; /* Define cómo el elemento ocupa el espacio disponible en Flexbox. */
+            min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        }
+    }
+
+/* TITULO 9 RESPONSIVE */
+
+    @media (max-width: 768px) {
+        .contenedor_escaner_producto {
+            padding: 18px 10px 28px; /* Define el espacio interior del elemento. */
+        }
+
+        .tarjeta_escaner_producto {
+            padding: 22px 18px; /* Define el espacio interior del elemento. */
+        }
+
+        .titulo_escaner_producto {
+            font-size: 22px; /* Define el tamaño del texto. */
+        }
+
+        .ficha_producto_escaner {
+            grid-template-columns: 112px minmax(0,1fr); /* Define la distribución y el ancho de las columnas. */
+            gap: 14px; /* Define la separación entre los elementos. */
+        }
+
+        .imagen_ficha_escaner {
+            width: 112px; /* Define el ancho del elemento. */
+            height: 124px; /* Define el alto del elemento. */
+        }
+    }
+
+/* TITULO 10 RESPONSIVE (MAX-WIDTH: 600PX) */
+
+    @media (max-width: 600px) {
+        .opciones_operacion_ajuste {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .pie_lector_escaner {
+            flex-direction: column; /* Organiza los elementos en una columna. */
+            align-items: stretch; /* Define la alineación de los elementos en el eje transversal. */
+        }
+
+        .pie_lector_escaner .boton_secundario_escaner {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+        }
+
+        .marco_camara_escaner {
+            aspect-ratio: 4 / 3; /* Define la proporción entre el ancho y el alto. */
+        }
+
+        .guia_lectura_escaner {
+            inset: 25% 11%; /* Define las distancias respecto a los bordes del contenedor. */
+        }
+
+        .ficha_producto_escaner {
+            grid-template-columns: 92px minmax(0,1fr); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .imagen_ficha_escaner {
+            width: 92px; /* Define el ancho del elemento. */
+            height: 110px; /* Define el alto del elemento. */
+        }
+
+        .nombre_ficha_escaner {
+            font-size: 15px; /* Define el tamaño del texto. */
+        }
+
+        .indicadores_ficha_escaner {
+            gap: 7px; /* Define la separación entre los elementos. */
+        }
+
+        .indicador_ficha_escaner {
+            padding: 12px 9px; /* Define el espacio interior del elemento. */
+        }
+
+        .etiqueta_indicador_ficha {
+            font-size: 11px; /* Define el tamaño del texto. */
+        }
+
+        .valor_indicador_ficha {
+            font-size: 18px; /* Define el tamaño del texto. */
+        }
+
+        .acciones_gestion_escaner {
+            flex-direction: column; /* Organiza los elementos en una columna. */
+            align-items: stretch; /* Define la alineación de los elementos en el eje transversal. */
+        }
+
+        .acciones_gestion_escaner button, .acciones_gestion_escaner .boton_principal_escaner {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+        }
+
+        .superposicion_ajuste_escaner {
+            padding: 12px; /* Define el espacio interior del elemento. */
+        }
+
+        .modal_ajuste_escaner {
+            max-height: calc(100dvh - 24px); /* Limita el alto máximo del elemento. */
+        }
+
+        .cabecera_modal_ajuste_escaner {
+            padding: 20px 18px 14px; /* Define el espacio interior del elemento. */
+        }
+
+        .cuerpo_modal_ajuste_escaner {
+            padding: 0 18px 18px; /* Define el espacio interior del elemento. */
+        }
+
+        .pie_modal_ajuste_escaner {
+            padding: 15px 18px 20px; /* Define el espacio interior del elemento. */
+        }
+    }
+
+/* TITULO 11 RESPONSIVE (MAX-WIDTH: 480PX) */
+
+    @media (max-width: 480px) {
+        .campos_ajuste_escaner {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .titulo_escaner_producto {
+            font-size: 20px; /* Define el tamaño del texto. */
+        }
+
+        .indicadores_ficha_escaner {
+            grid-template-columns: 1fr 1fr; /* Define la distribución y el ancho de las columnas. */
+        }
+    }

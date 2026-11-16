@@ -1,749 +1,1297 @@
-/* ============================================================
-   TRESSTOCK - DASHBOARD
-   Mejora visual: tarjetas, acciones, tablas y responsive.
-   Conserva las clases e ID usados por el JavaScript.
-   ============================================================ */
-
 /* TITULO 1 CONTENEDOR DASHBOARD */
-.contenedor_dashboard {
-    width: 100%;
-    min-width: 0;
-    padding: 28px;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-    color: #0b3650;
-}
-
-.contenedor_dashboard * { box-sizing: border-box; }
-
-/* TITULO 1.1 ENCABEZADO */
-.contenedor_encabezado_dashboard { margin-bottom: 24px; }
-.titulo_dashboard { color: #0b3650; font-size: 24px; font-weight: 700; margin-bottom: 6px; }
-.descripcion_dashboard { color: #71818a; font-size: 13px; line-height: 1.5; }
-
-/* TITULO 2 INDICADORES PRINCIPALES */
-.contenedor_indicadores_dashboard {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 16px;
-    margin-bottom: 28px;
-}
-
-.tarjeta_stock_actual_dashboard,
-.tarjeta_stock_bajo_dashboard,
-.tarjeta_productos_agotados_dashboard,
-.tarjeta_ventas_mes_dashboard {
-    min-width: 0;
-    min-height: 122px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    background: #ffffff;
-    border: 1px solid #dce4e8;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 2px 8px rgba(11, 54, 80, 0.025);
-}
-
-.icono_stock_actual_dashboard,
-.icono_stock_bajo_dashboard,
-.icono_productos_agotados_dashboard,
-.icono_ventas_mes_dashboard {
-    width: 54px;
-    height: 54px;
-    min-width: 54px;
-    border-radius: 11px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.icono_stock_actual_dashboard { background: #e4f5f4; color: #107f85; }
-.icono_stock_bajo_dashboard { background: #fff3dc; color: #b87913; }
-.icono_productos_agotados_dashboard { background: #ffebeb; color: #d44848; }
-.icono_ventas_mes_dashboard { background: #e8f2fc; color: #236aab; }
-
-.icono_stock_actual_dashboard::before,
-.icono_stock_bajo_dashboard::before,
-.icono_productos_agotados_dashboard::before,
-.icono_ventas_mes_dashboard::before,
-.icono_importar_dashboard::before,
-.icono_entrada_dashboard::before,
-.icono_salida_dashboard::before {
-    content: "";
-    display: block;
-    width: 27px;
-    height: 27px;
-    background-color: currentColor;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
-}
-
-.contenido_stock_actual_dashboard,
-.contenido_stock_bajo_dashboard,
-.contenido_productos_agotados_dashboard,
-.contenido_ventas_mes_dashboard {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    gap: 8px;
-}
-
-.texto_stock_actual_dashboard,
-.texto_stock_bajo_dashboard,
-.texto_productos_agotados_dashboard,
-.texto_ventas_mes_dashboard {
-    color: #647781;
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 1.35;
-}
-
-.valor_stock_actual_dashboard,
-.valor_stock_bajo_dashboard,
-.valor_productos_agotados_dashboard,
-.valor_ventas_mes_dashboard {
-    color: #0b3650;
-    font-size: clamp(23px, 2vw, 29px);
-    font-weight: 700;
-    line-height: 1.1;
-    overflow-wrap: anywhere;
-    font-variant-numeric: tabular-nums;
-}
-.valor_stock_bajo_dashboard { color: #bd7d17; }
-.valor_productos_agotados_dashboard { color: #d44848; }
-
-.contenedor_mas_vendidos_dashboard {
-    position: relative;
-    display: flex;
-    justify-content: flex-end;
-    margin: -8px 0 28px;
-}
-
-.boton_mas_vendidos_dashboard {
-    min-height: 42px;
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    padding: 0 15px;
-    border: 1px solid #159ba3;
-    border-radius: 7px;
-    background: #ffffff;
-    color: #0f858d;
-    font: 700 13px Arial, sans-serif;
-    cursor: pointer;
-}
-
-.boton_mas_vendidos_dashboard:hover { background: #eaf8f8; }
-.flecha_mas_vendidos_dashboard { font-size: 18px; line-height: 1; }
-
-.panel_mas_vendidos_dashboard {
-    position: absolute;
-    z-index: 10;
-    top: calc(100% + 8px);
-    right: 0;
-    width: min(760px, 100%);
-    padding: 16px;
-    border: 1px solid #dce4e8;
-    border-radius: 10px;
-    background: #ffffff;
-    box-shadow: 0 12px 32px rgba(11, 54, 80, 0.16);
-}
-
-#panel_mas_vendidos_dashboard[hidden] { display: none; }
-#panel_excluidos_dashboard[hidden] { display: none; }
-
-.boton_ver_excluidos_dashboard {
-    margin: 12px 0 0;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    color: #0f858d;
-    font: 700 12px Arial, sans-serif;
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-.panel_excluidos_dashboard {
-    margin-top: 10px;
-    padding-top: 10px;
-    border-top: 1px solid #e5ecef;
-}
-
-.tabla_excluidos_dashboard { max-height: 250px; }
-
-.boton_excluir_producto_dashboard,
-.boton_restaurar_producto_dashboard {
-    padding: 6px 9px;
-    border: 1px solid #cbd8dd;
-    border-radius: 5px;
-    background: #ffffff;
-    color: #536873;
-    font: 700 11px Arial, sans-serif;
-    white-space: nowrap;
-    cursor: pointer;
-}
-
-.boton_excluir_producto_dashboard:hover {
-    border-color: #e1a1a1;
-    background: #fff3f3;
-    color: #b33a3a;
-}
-
-.boton_restaurar_producto_dashboard:hover {
-    border-color: #85c7c9;
-    background: #effafa;
-    color: #0f858d;
-}
-
-.boton_excluir_producto_dashboard:disabled,
-.boton_restaurar_producto_dashboard:disabled {
-    opacity: .55;
-    cursor: wait;
-}
-
-.filtros_mas_vendidos_dashboard {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 190px;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-.busqueda_mas_vendidos_dashboard,
-.periodo_mas_vendidos_dashboard {
-    width: 100%;
-    min-height: 40px;
-    padding: 0 11px;
-    border: 1px solid #ced9de;
-    border-radius: 6px;
-    background: #ffffff;
-    color: #37434b;
-    font: 13px Arial, sans-serif;
-}
-
-.estado_mas_vendidos_dashboard {
-    padding: 7px 0 10px;
-    color: #71818a;
-    font-size: 12px;
-}
-
-.tabla_mas_vendidos_dashboard {
-    max-height: 390px;
-    overflow: auto;
-}
-
-.tabla_mas_vendidos_dashboard table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
-}
-
-.tabla_mas_vendidos_dashboard th,
-.tabla_mas_vendidos_dashboard td {
-    padding: 9px 10px;
-    border-bottom: 1px solid #e8edef;
-    font-size: 12px;
-}
-
-.tabla_mas_vendidos_dashboard th {
-    position: sticky;
-    top: 0;
-    background: #f4f7f8;
-    color: #536873;
-    font-weight: 700;
-}
-
-.tabla_mas_vendidos_dashboard td { color: #344b56; }
-.tabla_mas_vendidos_dashboard td:last-child,
-.tabla_mas_vendidos_dashboard th:last-child { text-align: right; }
-
-/* TITULO 3 ENCABEZADOS Y ACCIONES RAPIDAS */
-.encabezado_seccion_dashboard {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: baseline;
-    column-gap: 15px;
-    row-gap: 5px;
-    margin-bottom: 13px;
-}
-.titulo_seccion_dashboard { color: #0b3650; font-size: 17px; font-weight: 700; }
-.descripcion_seccion_dashboard { color: #829098; font-size: 12px; }
-
-.contenedor_acciones_dashboard {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 16px;
-    margin-bottom: 28px;
-}
-
-.boton_importar_dashboard,
-.boton_entrada_dashboard,
-.boton_salida_dashboard {
-    display: flex;
-    align-items: center;
-    min-width: 0;
-    height: 68px;
-    padding: 12px 18px;
-    background: #ffffff;
-    border: 1px solid #dce4e8;
-    border-radius: 9px;
-    cursor: pointer;
-    transition: background-color .18s ease, border-color .18s ease, transform .18s ease;
-}
-
-.boton_importar_dashboard:hover,
-.boton_entrada_dashboard:hover,
-.boton_salida_dashboard:hover {
-    background: #f0fafa;
-    border-color: #8ccbd0;
-    transform: translateY(-2px);
-}
-
-.icono_importar_dashboard,
-.icono_entrada_dashboard,
-.icono_salida_dashboard {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex: 0 0 39px;
-    width: 39px;
-    height: 39px;
-    border-radius: 9px;
-    background: #e6f6f6;
-    color: #159ba3;
-    margin-right: 13px;
-}
-
-.icono_importar_dashboard::before,
-.icono_entrada_dashboard::before,
-.icono_salida_dashboard::before { width: 22px; height: 22px; }
-
-.texto_importar_dashboard,
-.texto_entrada_dashboard,
-.texto_salida_dashboard { color: #0b3650; font-weight: 700; font-size: 13px; line-height: 1.4; }
-
-/* TITULO 4 GRAFICOS */
-.contenedor_graficos_dashboard {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
-    margin-bottom: 28px;
-}
-
-.tarjeta_ventas_seis_meses_dashboard,
-.tarjeta_inventario_familia_dashboard,
-.tarjeta_productos_stock_bajo_dashboard,
-.tarjeta_alertas_actuales_dashboard,
-.tarjeta_recomendaciones_dashboard {
-    min-width: 0;
-    background: #ffffff;
-    border: 1px solid #dce4e8;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 2px 8px rgba(11,54,80,.025);
-}
-
-.titulo_ventas_seis_meses_dashboard,
-.titulo_inventario_familia_dashboard,
-.titulo_productos_stock_bajo_dashboard,
-.titulo_alertas_actuales_dashboard,
-.titulo_recomendaciones_dashboard {
-    color: #0b3650;
-    font-size: 15px;
-    font-weight: 700;
-    line-height: 1.4;
-    margin-bottom: 16px;
-}
-
-.grafico_ventas_dashboard,
-.grafico_inventario_dashboard {
-    min-width: 0;
-    width: 100%;
-    min-height: 220px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    border-radius: 8px;
-    border: 1px dashed #d6e3e8;
-    background-color: #f8fafb;
-    padding: 20px;
-}
-
-.grafico_ventas_dashboard::before,
-.grafico_inventario_dashboard::before {
-    content: "";
-    display: block;
-    width: 43px;
-    height: 43px;
-    opacity: .42;
-    background: currentColor;
-    color: #7b9da8;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
-}
-
-.texto_grafico_pendiente_dashboard,
-.texto_grafico_inventario_dashboard {
-    color: #7c8c95;
-    font-size: 13px;
-    text-align: center;
-    line-height: 1.5;
-}
-
-/* TITULO 5 INFORMACION INFERIOR */
-.contenedor_informacion_dashboard {
-    display: grid;
-    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
-    gap: 16px;
-    align-items: start;
-}
-
-.tarjeta_productos_stock_bajo_dashboard { min-height: 318px; }
-.contenedor_tabla_stock_bajo_dashboard { width: 100%; overflow-x: auto; }
-.cuerpo_tabla_stock_bajo_dashboard { background: #ffffff; }
-.tabla_stock_bajo_dashboard { width: 100%; min-width: 530px; border-collapse: collapse; font-size: 12px; }
-.encabezado_tabla_stock_bajo_dashboard { background: #f4f7f9; }
-.fila_encabezado_stock_bajo_dashboard { border-bottom: 1px solid #e1e8ec; }
-.fila_stock_bajo_dashboard { border-bottom: 1px solid #ecf0f3; }
-.fila_stock_bajo_dashboard:last-child { border-bottom: 0; }
-
-.columna_producto_stock_bajo_dashboard,
-.columna_familia_stock_bajo_dashboard,
-.columna_stock_actual_dashboard,
-.columna_stock_minimo_dashboard,
-.columna_estado_stock_dashboard {
-    padding: 13px 10px;
-    text-align: left;
-    font-size: 12px;
-    font-weight: 700;
-    color: #5b6e79;
-    white-space: nowrap;
-}
-
-.dato_producto_stock_bajo_dashboard,
-.dato_familia_stock_bajo_dashboard,
-.dato_stock_actual_dashboard,
-.dato_stock_minimo_dashboard,
-.dato_estado_stock_dashboard {
-    padding: 13px 10px;
-    color: #415563;
-    line-height: 1.45;
-    vertical-align: middle;
-}
-
-.columna_stock_actual_dashboard,
-.columna_stock_minimo_dashboard,
-.columna_estado_stock_dashboard,
-.dato_stock_actual_dashboard,
-.dato_stock_minimo_dashboard,
-.dato_estado_stock_dashboard { text-align: center; }
-
-/* TITULO 6 ALERTAS Y RECOMENDACIONES */
-.contenedor_lateral_dashboard { display: flex; flex-direction: column; min-width: 0; gap: 16px; }
-.tarjeta_alertas_actuales_dashboard,
-.tarjeta_recomendaciones_dashboard { min-height: 151px; }
-.lista_alertas_dashboard,
-.lista_recomendaciones_dashboard { display: flex; flex-direction: column; gap: 9px; }
-.alerta_dashboard,
-.recomendacion_dashboard {
-    border-radius: 7px;
-    padding: 12px 14px;
-    font-size: 12px;
-    line-height: 1.5;
-    color: #70818b;
-    background: #f6f9fa;
-    border-left: 3px solid #d9e6eb;
-}
-.alerta_dashboard { border-left-color: #e3ab4f; }
-.recomendacion_dashboard { border-left-color: #159ba3; }
-
-/* TITULO 7 RESPONSIVE */
-@media (max-width: 1350px) {
-    .contenedor_indicadores_dashboard { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-@media (max-width: 1100px) {
-    .contenedor_informacion_dashboard { grid-template-columns: minmax(0, 1fr); }
-    .contenedor_lateral_dashboard { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-@media (max-width: 900px) {
-    .contenedor_dashboard { padding: 22px; }
-    .contenedor_graficos_dashboard { grid-template-columns: minmax(0, 1fr); }
-    .contenedor_acciones_dashboard { gap: 10px; }
-    .boton_importar_dashboard,
-    .boton_entrada_dashboard,
-    .boton_salida_dashboard { padding: 12px; }
-}
-@media (max-width: 680px) {
-    .contenedor_dashboard { padding: 18px; }
-    .contenedor_acciones_dashboard { grid-template-columns: 1fr; gap: 10px; }
-    .contenedor_lateral_dashboard { grid-template-columns: 1fr; }
-    .descripcion_seccion_dashboard { display: none; }
-    .contenedor_mas_vendidos_dashboard { display: block; }
-    .boton_mas_vendidos_dashboard { width: 100%; justify-content: space-between; }
-    .panel_mas_vendidos_dashboard { position: static; width: 100%; margin-top: 8px; }
-}
-@media (max-width: 480px) {
-    .contenedor_dashboard { padding: 14px; }
-    .contenedor_indicadores_dashboard { grid-template-columns: minmax(0, 1fr); gap: 11px; }
-    .tarjeta_stock_actual_dashboard,
-    .tarjeta_stock_bajo_dashboard,
-    .tarjeta_productos_agotados_dashboard,
-    .tarjeta_ventas_mes_dashboard { min-height: 97px; padding: 15px; }
-    .titulo_dashboard { font-size: 21px; }
-    .filtros_mas_vendidos_dashboard { grid-template-columns: 1fr; }
-    .tarjeta_ventas_seis_meses_dashboard,
-    .tarjeta_inventario_familia_dashboard,
-    .tarjeta_productos_stock_bajo_dashboard,
-    .tarjeta_alertas_actuales_dashboard,
-    .tarjeta_recomendaciones_dashboard { padding: 15px; }
-}
-
-.icono_stock_actual_dashboard::before {
-    -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%223%22%20y%3D%227%22%20width%3D%227%22%20height%3D%2213%22%20rx%3D%221%22%2F%3E%3Crect%20x%3D%2214%22%20y%3D%224%22%20width%3D%227%22%20height%3D%2216%22%20rx%3D%221%22%2F%3E%3Cpath%20d%3D%22M3%2011h7M14%209h7M1%2020h22%22%2F%3E%3C%2Fsvg%3E");
-    mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%223%22%20y%3D%227%22%20width%3D%227%22%20height%3D%2213%22%20rx%3D%221%22%2F%3E%3Crect%20x%3D%2214%22%20y%3D%224%22%20width%3D%227%22%20height%3D%2216%22%20rx%3D%221%22%2F%3E%3Cpath%20d%3D%22M3%2011h7M14%209h7M1%2020h22%22%2F%3E%3C%2Fsvg%3E");
-}
-
-.icono_stock_bajo_dashboard::before {
-    -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M3%204h18v12H3zM3%2010h18M8%2019h8M12%2016v3%22%2F%3E%3Cpath%20d%3D%22m9%207%203%203%203-3%22%2F%3E%3C%2Fsvg%3E");
-    mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M3%204h18v12H3zM3%2010h18M8%2019h8M12%2016v3%22%2F%3E%3Cpath%20d%3D%22m9%207%203%203%203-3%22%2F%3E%3C%2Fsvg%3E");
-}
-
-.icono_productos_agotados_dashboard::before {
-    -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m12%203%2010%2018H2L12%203Z%22%2F%3E%3Cpath%20d%3D%22M12%209v5M12%2017h.01%22%2F%3E%3C%2Fsvg%3E");
-    mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m12%203%2010%2018H2L12%203Z%22%2F%3E%3Cpath%20d%3D%22M12%209v5M12%2017h.01%22%2F%3E%3C%2Fsvg%3E");
-}
-
-.icono_ventas_mes_dashboard::before {
-    -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%223%22%20y%3D%224%22%20width%3D%2218%22%20height%3D%2216%22%20rx%3D%222%22%2F%3E%3Cpath%20d%3D%22M7%2016V12M12%2016V8M17%2016v-5%22%2F%3E%3C%2Fsvg%3E");
-    mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%223%22%20y%3D%224%22%20width%3D%2218%22%20height%3D%2216%22%20rx%3D%222%22%2F%3E%3Cpath%20d%3D%22M7%2016V12M12%2016V8M17%2016v-5%22%2F%3E%3C%2Fsvg%3E");
-}
-
-.icono_importar_dashboard::before {
-    -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%203v13m0%200-4-4m4%204%204-4%22%2F%3E%3Cpath%20d%3D%22M4%2016v4h16v-4%22%2F%3E%3C%2Fsvg%3E");
-    mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%203v13m0%200-4-4m4%204%204-4%22%2F%3E%3Cpath%20d%3D%22M4%2016v4h16v-4%22%2F%3E%3C%2Fsvg%3E");
-}
-
-.icono_entrada_dashboard::before {
-    -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M3%208%2012%203l9%205v10l-9%205-9-5V8Z%22%2F%3E%3Cpath%20d%3D%22M3%208l9%205%209-5M12%2013v10M17%2015h5m-2.5-2.5v5%22%2F%3E%3C%2Fsvg%3E");
-    mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M3%208%2012%203l9%205v10l-9%205-9-5V8Z%22%2F%3E%3Cpath%20d%3D%22M3%208l9%205%209-5M12%2013v10M17%2015h5m-2.5-2.5v5%22%2F%3E%3C%2Fsvg%3E");
-}
-
-.icono_salida_dashboard::before {
-    -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M3%208%2012%203l9%205v10l-9%205-9-5V8Z%22%2F%3E%3Cpath%20d%3D%22M3%208l9%205%209-5M12%2013v10M17%2015h5%22%2F%3E%3C%2Fsvg%3E");
-    mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M3%208%2012%203l9%205v10l-9%205-9-5V8Z%22%2F%3E%3Cpath%20d%3D%22M3%208l9%205%209-5M12%2013v10M17%2015h5%22%2F%3E%3C%2Fsvg%3E");
-}
-
-.grafico_ventas_dashboard::before,
-.grafico_inventario_dashboard::before {
-    -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%2020V5m0%2015h16M7%2015l4-5%203%203%206-7%22%2F%3E%3C%2Fsvg%3E");
-    mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%2020V5m0%2015h16M7%2015l4-5%203%203%206-7%22%2F%3E%3C%2Fsvg%3E");
-}
-
-/* Oculta el icono de estado vacío cuando el JavaScript inyecta un gráfico */
-.grafico_ventas_dashboard:not(:has(.texto_grafico_pendiente_dashboard))::before,
-.grafico_inventario_dashboard:not(:has(.texto_grafico_inventario_dashboard))::before { display: none; }
-
-
-/* =============================================================
-   UNIFICACIÓN DASHBOARD CON LA VISTA PRODUCTOS — 15/11/2026
-   Preserva las clases y los IDs de los componentes originales.
-   ============================================================= */
-.contenedor_dashboard { padding:28px; font-family:Arial,sans-serif; }
-.contenedor_encabezado_dashboard { margin-bottom:22px; }
-.titulo_dashboard { font-size:24px; margin-bottom:5px; }
-.descripcion_dashboard { font-size:13px; }
-.contenedor_indicadores_dashboard { gap:16px; margin-bottom:24px; }
-.tarjeta_stock_actual_dashboard,.tarjeta_stock_bajo_dashboard,.tarjeta_productos_agotados_dashboard,.tarjeta_ventas_mes_dashboard {
-    min-height:105px; padding:18px; gap:14px; border-radius:8px; box-shadow:none;
-}
-.icono_stock_actual_dashboard,.icono_stock_bajo_dashboard,.icono_productos_agotados_dashboard,.icono_ventas_mes_dashboard {
-    width:46px; height:46px; min-width:46px; border-radius:8px;
-}
-.icono_stock_actual_dashboard::before,.icono_stock_bajo_dashboard::before,.icono_productos_agotados_dashboard::before,.icono_ventas_mes_dashboard::before {width:24px; height:24px;}
-.contenido_stock_actual_dashboard,.contenido_stock_bajo_dashboard,.contenido_productos_agotados_dashboard,.contenido_ventas_mes_dashboard {gap:5px;}
-.texto_stock_actual_dashboard,.texto_stock_bajo_dashboard,.texto_productos_agotados_dashboard,.texto_ventas_mes_dashboard {font-size:12px;}
-.valor_stock_actual_dashboard,.valor_stock_bajo_dashboard,.valor_productos_agotados_dashboard,.valor_ventas_mes_dashboard {font-size:23px;}
-.nota_indicador_dashboard {color:#71818a; font-size:11px; line-height:1.3;}
-.encabezado_seccion_dashboard {margin-top:8px; margin-bottom:13px;}
-.titulo_seccion_dashboard {font-size:16px;}
-.contenedor_acciones_dashboard {margin-bottom:26px;}
-.boton_importar_dashboard,.boton_entrada_dashboard,.boton_salida_dashboard {height:64px; border-radius:8px; text-align:left; font:inherit;}
-.boton_importar_dashboard:focus-visible,.boton_entrada_dashboard:focus-visible,.boton_salida_dashboard:focus-visible,
-.boton_mas_vendidos_dashboard:focus-visible,.boton_excluir_producto_dashboard:focus-visible,.boton_restaurar_producto_dashboard:focus-visible {outline:2px solid #159ba3; outline-offset:2px;}
-.contenedor_mas_vendidos_dashboard {
-    display:block; position:relative; background:#fff; margin:0 0 16px;
-    border:1px solid #dce4e8; border-radius:8px; overflow:visible;
-}
-.cabecera_mas_vendidos_dashboard {display:flex; align-items:center; justify-content:space-between; gap:18px; padding:18px; border-bottom:1px solid #e2e8eb;}
-.informacion_mas_vendidos_dashboard {min-width:0;}
-.titulo_mas_vendidos_dashboard {font-size:14px; font-weight:700; color:#0b3650;}
-.descripcion_mas_vendidos_dashboard {font-size:12px; color:#71818a; margin-top:5px; line-height:1.4;}
-.boton_mas_vendidos_dashboard {flex-shrink:0; border-radius:6px; min-height:40px; font-size:12px;}
-.boton_mas_vendidos_dashboard[aria-expanded="true"] .flecha_mas_vendidos_dashboard {transform:rotate(180deg);}
-.flecha_mas_vendidos_dashboard {transition:transform .16s ease;}
-.vista_previa_mas_vendidos_dashboard {padding:0 18px 12px;}
-.vista_previa_mas_vendidos_dashboard[hidden] {display:none !important;}
-.tabla_previa_mas_vendidos_dashboard {width:100%; border-collapse:collapse; table-layout:fixed;}
-.tabla_previa_mas_vendidos_dashboard th {font-size:12px; color:#536873; font-weight:700; padding:12px; text-align:left; background:#f4f7f8;}
-.tabla_previa_mas_vendidos_dashboard td {font-size:12px; color:#344b56; padding:12px; border-bottom:1px solid #e8edef; line-height:1.35;}
-.tabla_previa_mas_vendidos_dashboard tr:last-child td {border-bottom:0;}
-.tabla_previa_mas_vendidos_dashboard th:first-child,.tabla_previa_mas_vendidos_dashboard td:first-child {width:52px; text-align:center;}
-.tabla_previa_mas_vendidos_dashboard th:last-child,.tabla_previa_mas_vendidos_dashboard td:last-child {width:165px; text-align:right;}
-.nombre_previa_mas_vendidos_dashboard {font-weight:700; color:#0b3650;}
-.codigo_previa_mas_vendidos_dashboard {display:block; color:#71818a; font-size:11px; margin-top:3px;}
-.estado_previa_mas_vendidos_dashboard {padding:14px 0; color:#71818a; font-size:12px;}
-.panel_mas_vendidos_dashboard {position:static; z-index:auto; display:block; width:100%; box-shadow:none; border:0; padding:18px; border-radius:0 0 8px 8px; }
-#panel_mas_vendidos_dashboard[hidden] {display:none !important;}
-.filtros_mas_vendidos_dashboard {grid-template-columns:minmax(190px,2fr) minmax(190px,1fr); gap:12px; align-items:end;}
-.campo_mas_vendidos_dashboard {display:flex; flex-direction:column; min-width:0; gap:7px; color:#536873; font-size:12px; font-weight:700;}
-.busqueda_mas_vendidos_dashboard,.periodo_mas_vendidos_dashboard {height:40px; font-size:13px; font-weight:400;}
-.busqueda_mas_vendidos_dashboard:focus-visible,.periodo_mas_vendidos_dashboard:focus-visible {outline:2px solid #159ba3; outline-offset:1px;}
-.estado_mas_vendidos_dashboard {padding:8px 0 10px;}
-.nota_unidades_ranking_dashboard {color:#71818a; font-size:11px; line-height:1.5; margin-top:10px;}
-.boton_ver_excluidos_dashboard {border:1px solid #159ba3; padding:9px 13px; border-radius:6px; text-decoration:none; margin-top:15px; font-size:12px; background:#fff;}
-.boton_ver_excluidos_dashboard:hover {background:#e4f6f6;}
-.tarjeta_ventas_seis_meses_dashboard,.tarjeta_inventario_familia_dashboard,.tarjeta_productos_stock_bajo_dashboard,.tarjeta_alertas_actuales_dashboard,.tarjeta_recomendaciones_dashboard {border-radius:8px; padding:18px; box-shadow:none;}
-.grafico_inventario_dashboard:has(.familias_barras_dashboard) {justify-content:flex-start; align-items:stretch; background:#fff; border:0; padding:6px 0; min-height:220px;}
-.grafico_inventario_dashboard:has(.familias_barras_dashboard)::before {display:none !important;}
-.familias_barras_dashboard {display:grid; gap:13px; width:100%; padding:6px 0;}
-.fila_familia_dashboard {display:grid; grid-template-columns:minmax(85px,1fr) minmax(80px,2fr) 56px; align-items:center; gap:12px; font-size:12px; color:#536873;}
-.nombre_familia_dashboard {min-width:0; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
-.pista_familia_dashboard {height:10px; border-radius:10px; background:#edf3f5; overflow:hidden;}
-.barra_familia_dashboard {height:100%; background:#159ba3; border-radius:10px;}
-.cantidad_familia_dashboard {text-align:right; font-weight:700; color:#0b3650; font-variant-numeric:tabular-nums;}
-.leyenda_grafico_dashboard {font-size:11px; line-height:1.5; color:#71818a; margin-top:10px;}
-.ayuda_panel_dashboard {color:#71818a; font-size:11px; margin:-8px 0 13px; line-height:1.4;}
-.contenedor_graficos_dashboard {margin-bottom:26px;}
-.etiqueta_estado_bajo_dashboard {display:inline-block; padding:5px 9px; border-radius:14px; background:#fff1da; color:#b87913; font-size:11px; font-weight:700;}
-.lista_alertas_dashboard,.lista_recomendaciones_dashboard {gap:9px;}
-.enlace_resumen_dashboard {border:0; padding:2px; background:none; color:#0f858d; font-weight:700; font-size:12px; text-align:left; cursor:pointer;}
-.enlace_resumen_dashboard:hover {text-decoration:underline;}
-.contenedor_dashboard [hidden] {display:none !important;}
-@media (max-width:1350px) { .contenedor_indicadores_dashboard {grid-template-columns:repeat(4,minmax(0,1fr));} }
-@media (max-width:1200px) { .contenedor_indicadores_dashboard {grid-template-columns:repeat(2,minmax(0,1fr));} }
-@media (max-width:680px) {
- .contenedor_dashboard {padding:18px;}
- .cabecera_mas_vendidos_dashboard {flex-direction:column; align-items:stretch;}
- .boton_mas_vendidos_dashboard {justify-content:center;}
- .panel_mas_vendidos_dashboard,.vista_previa_mas_vendidos_dashboard {padding:12px;}
- .filtros_mas_vendidos_dashboard {grid-template-columns:1fr;}
- .tabla_previa_mas_vendidos_dashboard th:last-child,.tabla_previa_mas_vendidos_dashboard td:last-child {width:105px;}
- .descripcion_seccion_dashboard {display:block;}
-}
-@media (max-width:480px) {
- .contenedor_dashboard {padding:14px;}
- .contenedor_indicadores_dashboard {grid-template-columns:1fr;}
- .contenedor_graficos_dashboard {grid-template-columns:1fr;}
- .fila_familia_dashboard {grid-template-columns:minmax(72px,1fr) minmax(70px,1.5fr) 38px; gap:6px;}
- .tabla_previa_mas_vendidos_dashboard th,.tabla_previa_mas_vendidos_dashboard td {padding:10px 6px;}
-}
-
-
-/* ===== VENTAS HISTORICAS: GRAFICO DE SEIS MESES ===== */
-.subtitulo_ventas_dashboard {
-    color:#71818a; font-family:Arial,sans-serif; font-size:12px;
-    line-height:1.45; margin:-9px 0 14px;
-}
-.grafico_ventas_dashboard:has(.ventas_barras_dashboard) {
-    display:block; min-width:0; width:100%; min-height:245px;
-    background:#fff; border:0; border-radius:0; padding:6px 0 2px;
-}
-.grafico_ventas_dashboard:has(.ventas_barras_dashboard)::before {display:none !important;}
-.ventas_barras_dashboard {
-    display:grid; grid-template-columns:repeat(6,minmax(0,1fr));
-    width:100%; gap:12px; align-items:end; padding:6px 3px 0;
-    min-height:225px;
-}
-.ventas_columna_dashboard {
-    height:220px; min-width:0;
-    display:flex; flex-direction:column; gap:5px; align-items:center;
-    cursor:default; outline-offset:3px; border-radius:5px;
-}
-.ventas_columna_dashboard:focus-visible {outline:2px solid #159ba3;}
-.ventas_monto_dashboard {
-    font-size:11px; color:#536873; line-height:1.25;
-    white-space:nowrap; text-align:center; height:29px;
-    display:flex; align-items:flex-end;
-}
-.ventas_pista_dashboard {
-    display:flex; flex-direction:column; justify-content:flex-end; align-items:stretch;
-    height:158px; width:min(48px,78%);
-    border-bottom:1px solid #dbe6eb;
-}
-.ventas_barra_dashboard {
-    width:100%; min-height:0;
-    background:linear-gradient(180deg,#29b7b4 0%,#159ba3 100%);
-    border-radius:5px 5px 0 0;
-    transition:filter .18s ease;
-}
-.ventas_columna_dashboard:hover .ventas_barra_dashboard,
-.ventas_columna_dashboard:focus-visible .ventas_barra_dashboard {filter:brightness(.88);}
-.ventas_barra_cero_dashboard {background:#dae4e7; height:0 !important;}
-.ventas_mes_dashboard {font-size:12px; color:#536873; text-transform:capitalize; white-space:nowrap;}
-.ventas_leyenda_dashboard {margin-top:10px; text-align:left;}
-@media(max-width:560px) {
-    .ventas_barras_dashboard {gap:5px;}
-    .ventas_monto_dashboard {font-size:9px;}
-    .ventas_columna_dashboard {height:210px;}
-    .ventas_pista_dashboard {height:145px;}
-    .ventas_mes_dashboard {font-size:10px;}
-}
-
-
-/* ===== ACENTOS DE COLOR PARA LOS DOS GRAFICOS DEL DASHBOARD ===== */
-/* Destaca el mes con mayor venta; los demas conservan el turquesa original. */
-.ventas_columna_dashboard.ventas_mes_maximo_dashboard .ventas_barra_dashboard {
-    background: linear-gradient(180deg, #3869a8 0%, #0b3650 100%);
-}
-.ventas_columna_dashboard.ventas_mes_maximo_dashboard .ventas_monto_dashboard {
-    color: #0b3650;
-    font-weight: 700;
-}
-/* Siete familias con colores fijos, definidos por su nombre desde dashboard.js. */
-.barra_familia_dashboard { background-color: var(--color-familia-dashboard, #159ba3); }
-.fila_familia_dashboard .barra_familia_dashboard {
-    transition: filter .18s ease;
-}
-.fila_familia_dashboard:hover .barra_familia_dashboard { filter: brightness(.9); }
-
-
-
-/* ==========================================
-   ICONOS LUCIDE - KPI DASHBOARD
-   ========================================== */
-
-/* Cantidad de productos */
-.icono_stock_actual_dashboard::before {
-    -webkit-mask-image: url("../../../../imagenes/inicio_sesion/cuerpo_pagina/secciones/package.svg");
-    mask-image: url("../../../../imagenes/inicio_sesion/cuerpo_pagina/secciones/package.svg");
-}
-
-/* Productos con bajo stock */
-.icono_stock_bajo_dashboard::before {
-    -webkit-mask-image: url("../../../../imagenes/inicio_sesion/cuerpo_pagina/secciones/package-minus.svg");
-    mask-image: url("../../../../imagenes/inicio_sesion/cuerpo_pagina/secciones/package-minus.svg");
-}
-
-/* Productos agotados */
-.icono_productos_agotados_dashboard::before {
-    -webkit-mask-image: url("../../../../imagenes/inicio_sesion/cuerpo_pagina/secciones/package-x.svg");
-    mask-image: url("../../../../imagenes/inicio_sesion/cuerpo_pagina/secciones/package-x.svg");
-}
-
-/* Ventas del último mes registrado */
-.icono_ventas_mes_dashboard::before {
-    -webkit-mask-image: url("../../../../imagenes/inicio_sesion/cuerpo_pagina/secciones/chart-no-axes-column-increasing.svg");
-    mask-image: url("../../../../imagenes/inicio_sesion/cuerpo_pagina/secciones/chart-column.svg");
-}
+
+    .contenedor_dashboard {
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        padding: 28px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        color: #0b3650; /* Establece el color del texto. */
+    }
+
+    .contenedor_dashboard * {
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
+
+/* TITULO 2 ENCABEZADO */
+
+    .contenedor_encabezado_dashboard {
+        margin-bottom: 24px; /* Define el margen inferior. */
+    }
+
+    .titulo_dashboard {
+        color: #0b3650; /* Establece el color del texto. */
+        font-size: 24px; /* Define el tamaño del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
+    }
+
+    .descripcion_dashboard {
+        color: #71818a; /* Establece el color del texto. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        line-height: 1.5; /* Define la separación entre líneas de texto. */
+    }
+
+/* TITULO 3 INDICADORES PRINCIPALES */
+
+    .contenedor_indicadores_dashboard {
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: repeat(4, minmax(0, 1fr)); /* Define la distribución y el ancho de las columnas. */
+        gap: 16px; /* Define la separación entre los elementos. */
+        margin-bottom: 28px; /* Define el margen inferior. */
+    }
+
+    .tarjeta_stock_actual_dashboard, .tarjeta_stock_bajo_dashboard, .tarjeta_productos_agotados_dashboard, .tarjeta_ventas_mes_dashboard {
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        min-height: 122px; /* Establece el alto mínimo del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 16px; /* Define la separación entre los elementos. */
+        background: #ffffff; /* Define el fondo del elemento. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 10px; /* Define el redondeado de las esquinas. */
+        padding: 20px; /* Define el espacio interior del elemento. */
+        box-shadow: 0 2px 8px rgba(11, 54, 80, 0.025); /* Agrega o ajusta la sombra del elemento. */
+    }
+
+    .icono_stock_actual_dashboard, .icono_stock_bajo_dashboard, .icono_productos_agotados_dashboard, .icono_ventas_mes_dashboard {
+        width: 54px; /* Define el ancho del elemento. */
+        height: 54px; /* Define el alto del elemento. */
+        min-width: 54px; /* Establece el ancho mínimo del elemento. */
+        border-radius: 11px; /* Define el redondeado de las esquinas. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+    }
+
+    .icono_stock_actual_dashboard {
+        background: #e4f5f4; /* Define el fondo del elemento. */
+        color: #107f85; /* Establece el color del texto. */
+    }
+
+    .icono_stock_bajo_dashboard {
+        background: #fff3dc; /* Define el fondo del elemento. */
+        color: #b87913; /* Establece el color del texto. */
+    }
+
+    .icono_productos_agotados_dashboard {
+        background: #ffebeb; /* Define el fondo del elemento. */
+        color: #d44848; /* Establece el color del texto. */
+    }
+
+    .icono_ventas_mes_dashboard {
+        background: #e8f2fc; /* Define el fondo del elemento. */
+        color: #236aab; /* Establece el color del texto. */
+    }
+
+    .icono_stock_actual_dashboard::before, .icono_stock_bajo_dashboard::before, .icono_productos_agotados_dashboard::before, .icono_ventas_mes_dashboard::before, .icono_importar_dashboard::before, .icono_entrada_dashboard::before, .icono_salida_dashboard::before {
+        content: ""; /* Define el contenido generado por el pseudoelemento. */
+        display: block; /* Muestra el elemento como un bloque. */
+        width: 27px; /* Define el ancho del elemento. */
+        height: 27px; /* Define el alto del elemento. */
+        background-color: currentColor; /* Establece el color de fondo. */
+        -webkit-mask-position: center; /* Define la posición de la máscara. */
+        mask-position: center; /* Define la posición de la máscara. */
+        -webkit-mask-repeat: no-repeat; /* Define si se repite la máscara. */
+        mask-repeat: no-repeat; /* Define si se repite la máscara. */
+        -webkit-mask-size: contain; /* Define el tamaño de la máscara. */
+        mask-size: contain; /* Define el tamaño de la máscara. */
+    }
+
+    .contenido_stock_actual_dashboard, .contenido_stock_bajo_dashboard, .contenido_productos_agotados_dashboard, .contenido_ventas_mes_dashboard {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        gap: 8px; /* Define la separación entre los elementos. */
+    }
+
+    .texto_stock_actual_dashboard, .texto_stock_bajo_dashboard, .texto_productos_agotados_dashboard, .texto_ventas_mes_dashboard {
+        color: #647781; /* Establece el color del texto. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        font-weight: 400; /* Define el grosor del texto. */
+        line-height: 1.35; /* Define la separación entre líneas de texto. */
+    }
+
+    .valor_stock_actual_dashboard, .valor_stock_bajo_dashboard, .valor_productos_agotados_dashboard, .valor_ventas_mes_dashboard {
+        color: #0b3650; /* Establece el color del texto. */
+        font-size: clamp(23px, 2vw, 29px); /* Define el tamaño del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+        line-height: 1.1; /* Define la separación entre líneas de texto. */
+        overflow-wrap: anywhere; /* Permite controlar el salto de palabras largas. */
+        font-variant-numeric: tabular-nums; /* Define cómo se representan los números. */
+    }
+
+    .valor_stock_bajo_dashboard {
+        color: #bd7d17; /* Establece el color del texto. */
+    }
+
+    .valor_productos_agotados_dashboard {
+        color: #d44848; /* Establece el color del texto. */
+    }
+
+    .contenedor_mas_vendidos_dashboard {
+        position: relative; /* Define el sistema de posicionamiento del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        justify-content: flex-end; /* Define la distribución de los elementos en el eje principal. */
+        margin: -8px 0 28px; /* Define el margen exterior del elemento. */
+    }
+
+    .boton_mas_vendidos_dashboard {
+        min-height: 42px; /* Establece el alto mínimo del elemento. */
+        display: inline-flex; /* Organiza el contenido con Flexbox dentro de la línea. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 12px; /* Define la separación entre los elementos. */
+        padding: 0 15px; /* Define el espacio interior del elemento. */
+        border: 1px solid #159ba3; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        background: #ffffff; /* Define el fondo del elemento. */
+        color: #0f858d; /* Establece el color del texto. */
+        font: 700 13px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+    }
+
+    .boton_mas_vendidos_dashboard:hover {
+        background: #eaf8f8; /* Define el fondo del elemento. */
+    }
+
+    .flecha_mas_vendidos_dashboard {
+        font-size: 18px; /* Define el tamaño del texto. */
+        line-height: 1; /* Define la separación entre líneas de texto. */
+    }
+
+    .panel_mas_vendidos_dashboard {
+        position: absolute; /* Define el sistema de posicionamiento del elemento. */
+        z-index: 10; /* Define el orden de superposición del elemento. */
+        top: calc(100% + 8px); /* Define la posición respecto al borde superior. */
+        right: 0; /* Define la posición respecto al borde derecho. */
+        width: min(760px, 100%); /* Define el ancho del elemento. */
+        padding: 16px; /* Define el espacio interior del elemento. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 10px; /* Define el redondeado de las esquinas. */
+        background: #ffffff; /* Define el fondo del elemento. */
+        box-shadow: 0 12px 32px rgba(11, 54, 80, 0.16); /* Agrega o ajusta la sombra del elemento. */
+    }
+
+    #panel_mas_vendidos_dashboard[hidden] {
+        display: none; /* Oculta el elemento. */
+    }
+
+    #panel_excluidos_dashboard[hidden] {
+        display: none; /* Oculta el elemento. */
+    }
+
+    .boton_ver_excluidos_dashboard {
+        margin: 12px 0 0; /* Define el margen exterior del elemento. */
+        padding: 0; /* Define el espacio interior del elemento. */
+        border: 0; /* Define el grosor, el estilo y el color del borde. */
+        background: transparent; /* Define el fondo del elemento. */
+        color: #0f858d; /* Establece el color del texto. */
+        font: 700 12px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        text-decoration: underline; /* Define la decoración del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+    }
+
+    .panel_excluidos_dashboard {
+        margin-top: 10px; /* Define el margen superior. */
+        padding-top: 10px; /* Define el espacio interior superior. */
+        border-top: 1px solid #e5ecef; /* Define el borde superior. */
+    }
+
+    .tabla_excluidos_dashboard {
+        max-height: 250px; /* Limita el alto máximo del elemento. */
+    }
+
+    .boton_excluir_producto_dashboard, .boton_restaurar_producto_dashboard {
+        padding: 6px 9px; /* Define el espacio interior del elemento. */
+        border: 1px solid #cbd8dd; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 5px; /* Define el redondeado de las esquinas. */
+        background: #ffffff; /* Define el fondo del elemento. */
+        color: #536873; /* Establece el color del texto. */
+        font: 700 11px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+    }
+
+    .boton_excluir_producto_dashboard:hover {
+        border-color: #e1a1a1; /* Establece el color del borde. */
+        background: #fff3f3; /* Define el fondo del elemento. */
+        color: #b33a3a; /* Establece el color del texto. */
+    }
+
+    .boton_restaurar_producto_dashboard:hover {
+        border-color: #85c7c9; /* Establece el color del borde. */
+        background: #effafa; /* Define el fondo del elemento. */
+        color: #0f858d; /* Establece el color del texto. */
+    }
+
+    .boton_excluir_producto_dashboard:disabled, .boton_restaurar_producto_dashboard:disabled {
+        opacity: .55; /* Define el nivel de opacidad. */
+        cursor: wait; /* Define el cursor al situarlo sobre el elemento. */
+    }
+
+    .filtros_mas_vendidos_dashboard {
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: minmax(0, 1fr) 190px; /* Define la distribución y el ancho de las columnas. */
+        gap: 10px; /* Define la separación entre los elementos. */
+        margin-bottom: 10px; /* Define el margen inferior. */
+    }
+
+    .busqueda_mas_vendidos_dashboard, .periodo_mas_vendidos_dashboard {
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-height: 40px; /* Establece el alto mínimo del elemento. */
+        padding: 0 11px; /* Define el espacio interior del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        background: #ffffff; /* Define el fondo del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font: 13px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+    }
+
+    .estado_mas_vendidos_dashboard {
+        padding: 7px 0 10px; /* Define el espacio interior del elemento. */
+        color: #71818a; /* Establece el color del texto. */
+        font-size: 12px; /* Define el tamaño del texto. */
+    }
+
+    .tabla_mas_vendidos_dashboard {
+        max-height: 390px; /* Limita el alto máximo del elemento. */
+        overflow: auto; /* Controla el contenido que supera las dimensiones del elemento. */
+    }
+
+    .tabla_mas_vendidos_dashboard table {
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        border-collapse: collapse; /* Define cómo se combinan los bordes de las celdas. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+    }
+
+    .tabla_mas_vendidos_dashboard th, .tabla_mas_vendidos_dashboard td {
+        padding: 9px 10px; /* Define el espacio interior del elemento. */
+        border-bottom: 1px solid #e8edef; /* Define el borde inferior. */
+        font-size: 12px; /* Define el tamaño del texto. */
+    }
+
+    .tabla_mas_vendidos_dashboard th {
+        position: sticky; /* Define el sistema de posicionamiento del elemento. */
+        top: 0; /* Define la posición respecto al borde superior. */
+        background: #f4f7f8; /* Define el fondo del elemento. */
+        color: #536873; /* Establece el color del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+    }
+
+    .tabla_mas_vendidos_dashboard td {
+        color: #344b56; /* Establece el color del texto. */
+    }
+
+    .tabla_mas_vendidos_dashboard td:last-child, .tabla_mas_vendidos_dashboard th:last-child {
+        text-align: right; /* Define la alineación horizontal del texto. */
+    }
+
+/* TITULO 4 ENCABEZADOS Y ACCIONES RAPIDAS */
+
+    .encabezado_seccion_dashboard {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-wrap: wrap; /* Define si los elementos pueden pasar a otra línea. */
+        justify-content: space-between; /* Define la distribución de los elementos en el eje principal. */
+        align-items: baseline; /* Define la alineación de los elementos en el eje transversal. */
+        column-gap: 15px; /* Define la separación entre columnas. */
+        row-gap: 5px; /* Define la separación entre filas. */
+        margin-bottom: 13px; /* Define el margen inferior. */
+    }
+
+    .titulo_seccion_dashboard {
+        color: #0b3650; /* Establece el color del texto. */
+        font-size: 17px; /* Define el tamaño del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+    }
+
+    .descripcion_seccion_dashboard {
+        color: #829098; /* Establece el color del texto. */
+        font-size: 12px; /* Define el tamaño del texto. */
+    }
+
+    .contenedor_acciones_dashboard {
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: repeat(3, minmax(0, 1fr)); /* Define la distribución y el ancho de las columnas. */
+        gap: 16px; /* Define la separación entre los elementos. */
+        margin-bottom: 28px; /* Define el margen inferior. */
+    }
+
+    .boton_importar_dashboard, .boton_entrada_dashboard, .boton_salida_dashboard {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        height: 68px; /* Define el alto del elemento. */
+        padding: 12px 18px; /* Define el espacio interior del elemento. */
+        background: #ffffff; /* Define el fondo del elemento. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 9px; /* Define el redondeado de las esquinas. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        transition: background-color .18s ease, border-color .18s ease, transform .18s ease; /* Define la transición entre los cambios de estilo. */
+    }
+
+    .boton_importar_dashboard:hover, .boton_entrada_dashboard:hover, .boton_salida_dashboard:hover {
+        background: #f0fafa; /* Define el fondo del elemento. */
+        border-color: #8ccbd0; /* Establece el color del borde. */
+        transform: translateY(-2px); /* Aplica una transformación visual al elemento. */
+    }
+
+    .icono_importar_dashboard, .icono_entrada_dashboard, .icono_salida_dashboard {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        flex: 0 0 39px; /* Define cómo el elemento ocupa el espacio disponible en Flexbox. */
+        width: 39px; /* Define el ancho del elemento. */
+        height: 39px; /* Define el alto del elemento. */
+        border-radius: 9px; /* Define el redondeado de las esquinas. */
+        background: #e6f6f6; /* Define el fondo del elemento. */
+        color: #159ba3; /* Establece el color del texto. */
+        margin-right: 13px; /* Define el margen derecho. */
+    }
+
+    .icono_importar_dashboard::before, .icono_entrada_dashboard::before, .icono_salida_dashboard::before {
+        width: 22px; /* Define el ancho del elemento. */
+        height: 22px; /* Define el alto del elemento. */
+    }
+
+    .texto_importar_dashboard, .texto_entrada_dashboard, .texto_salida_dashboard {
+        color: #0b3650; /* Establece el color del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        line-height: 1.4; /* Define la separación entre líneas de texto. */
+    }
+
+/* TITULO 5 GRAFICOS */
+
+    .contenedor_graficos_dashboard {
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: repeat(2, minmax(0, 1fr)); /* Define la distribución y el ancho de las columnas. */
+        gap: 16px; /* Define la separación entre los elementos. */
+        margin-bottom: 28px; /* Define el margen inferior. */
+    }
+
+    .tarjeta_ventas_seis_meses_dashboard, .tarjeta_inventario_familia_dashboard, .tarjeta_productos_stock_bajo_dashboard, .tarjeta_alertas_actuales_dashboard, .tarjeta_recomendaciones_dashboard {
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        background: #ffffff; /* Define el fondo del elemento. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 10px; /* Define el redondeado de las esquinas. */
+        padding: 20px; /* Define el espacio interior del elemento. */
+        box-shadow: 0 2px 8px rgba(11,54,80,.025); /* Agrega o ajusta la sombra del elemento. */
+    }
+
+    .titulo_ventas_seis_meses_dashboard, .titulo_inventario_familia_dashboard, .titulo_productos_stock_bajo_dashboard, .titulo_alertas_actuales_dashboard, .titulo_recomendaciones_dashboard {
+        color: #0b3650; /* Establece el color del texto. */
+        font-size: 15px; /* Define el tamaño del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+        line-height: 1.4; /* Define la separación entre líneas de texto. */
+        margin-bottom: 16px; /* Define el margen inferior. */
+    }
+
+    .grafico_ventas_dashboard, .grafico_inventario_dashboard {
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-height: 220px; /* Establece el alto mínimo del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        gap: 12px; /* Define la separación entre los elementos. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        border: 1px dashed #d6e3e8; /* Define el grosor, el estilo y el color del borde. */
+        background-color: #f8fafb; /* Establece el color de fondo. */
+        padding: 20px; /* Define el espacio interior del elemento. */
+    }
+
+    .grafico_ventas_dashboard::before, .grafico_inventario_dashboard::before {
+        content: ""; /* Define el contenido generado por el pseudoelemento. */
+        display: block; /* Muestra el elemento como un bloque. */
+        width: 43px; /* Define el ancho del elemento. */
+        height: 43px; /* Define el alto del elemento. */
+        opacity: .42; /* Define el nivel de opacidad. */
+        background: currentColor; /* Define el fondo del elemento. */
+        color: #7b9da8; /* Establece el color del texto. */
+        -webkit-mask-position: center; /* Define la posición de la máscara. */
+        mask-position: center; /* Define la posición de la máscara. */
+        -webkit-mask-repeat: no-repeat; /* Define si se repite la máscara. */
+        mask-repeat: no-repeat; /* Define si se repite la máscara. */
+        -webkit-mask-size: contain; /* Define el tamaño de la máscara. */
+        mask-size: contain; /* Define el tamaño de la máscara. */
+    }
+
+    .texto_grafico_pendiente_dashboard, .texto_grafico_inventario_dashboard {
+        color: #7c8c95; /* Establece el color del texto. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        line-height: 1.5; /* Define la separación entre líneas de texto. */
+    }
+
+/* TITULO 6 INFORMACION INFERIOR */
+
+    .contenedor_informacion_dashboard {
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); /* Define la distribución y el ancho de las columnas. */
+        gap: 16px; /* Define la separación entre los elementos. */
+        align-items: start; /* Define la alineación de los elementos en el eje transversal. */
+    }
+
+    .tarjeta_productos_stock_bajo_dashboard {
+        min-height: 318px; /* Establece el alto mínimo del elemento. */
+    }
+
+    .contenedor_tabla_stock_bajo_dashboard {
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        overflow-x: auto; /* Permite desplazar horizontalmente el contenido cuando no cabe. */
+    }
+
+    .cuerpo_tabla_stock_bajo_dashboard {
+        background: #ffffff; /* Define el fondo del elemento. */
+    }
+
+    .tabla_stock_bajo_dashboard {
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-width: 530px; /* Establece el ancho mínimo del elemento. */
+        border-collapse: collapse; /* Define cómo se combinan los bordes de las celdas. */
+        font-size: 12px; /* Define el tamaño del texto. */
+    }
+
+    .encabezado_tabla_stock_bajo_dashboard {
+        background: #f4f7f9; /* Define el fondo del elemento. */
+    }
+
+    .fila_encabezado_stock_bajo_dashboard {
+        border-bottom: 1px solid #e1e8ec; /* Define el borde inferior. */
+    }
+
+    .fila_stock_bajo_dashboard {
+        border-bottom: 1px solid #ecf0f3; /* Define el borde inferior. */
+    }
+
+    .fila_stock_bajo_dashboard:last-child {
+        border-bottom: 0; /* Define el borde inferior. */
+    }
+
+    .columna_producto_stock_bajo_dashboard, .columna_familia_stock_bajo_dashboard, .columna_stock_actual_dashboard, .columna_stock_minimo_dashboard, .columna_estado_stock_dashboard {
+        padding: 13px 10px; /* Define el espacio interior del elemento. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+        color: #5b6e79; /* Establece el color del texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
+    }
+
+    .dato_producto_stock_bajo_dashboard, .dato_familia_stock_bajo_dashboard, .dato_stock_actual_dashboard, .dato_stock_minimo_dashboard, .dato_estado_stock_dashboard {
+        padding: 13px 10px; /* Define el espacio interior del elemento. */
+        color: #415563; /* Establece el color del texto. */
+        line-height: 1.45; /* Define la separación entre líneas de texto. */
+        vertical-align: middle; /* Define la alineación vertical del contenido. */
+    }
+
+    .columna_stock_actual_dashboard, .columna_stock_minimo_dashboard, .columna_estado_stock_dashboard, .dato_stock_actual_dashboard, .dato_stock_minimo_dashboard, .dato_estado_stock_dashboard {
+        text-align: center; /* Define la alineación horizontal del texto. */
+    }
+
+/* TITULO 7 ALERTAS Y RECOMENDACIONES */
+
+    .contenedor_lateral_dashboard {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        gap: 16px; /* Define la separación entre los elementos. */
+    }
+
+    .tarjeta_alertas_actuales_dashboard, .tarjeta_recomendaciones_dashboard {
+        min-height: 151px; /* Establece el alto mínimo del elemento. */
+    }
+
+    .lista_alertas_dashboard, .lista_recomendaciones_dashboard {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        gap: 9px; /* Define la separación entre los elementos. */
+    }
+
+    .alerta_dashboard, .recomendacion_dashboard {
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        padding: 12px 14px; /* Define el espacio interior del elemento. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        line-height: 1.5; /* Define la separación entre líneas de texto. */
+        color: #70818b; /* Establece el color del texto. */
+        background: #f6f9fa; /* Define el fondo del elemento. */
+        border-left: 3px solid #d9e6eb; /* Define el borde izquierdo. */
+    }
+
+    .alerta_dashboard {
+        border-left-color: #e3ab4f; /* Define el color del borde izquierdo. */
+    }
+
+    .recomendacion_dashboard {
+        border-left-color: #159ba3; /* Define el color del borde izquierdo. */
+    }
+
+/* TITULO 8 RESPONSIVE */
+
+    @media (max-width: 1440px) {
+        .contenedor_indicadores_dashboard {
+            grid-template-columns: repeat(2, minmax(0, 1fr)); /* Define la distribución y el ancho de las columnas. */
+        }
+    }
+
+/* TITULO 9 RESPONSIVE (MAX-WIDTH: 1200PX) */
+
+    @media (max-width: 1200px) {
+        .contenedor_informacion_dashboard {
+            grid-template-columns: minmax(0, 1fr); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .contenedor_lateral_dashboard {
+            display: grid; /* Activa CSS Grid para distribuir el contenido. */
+            grid-template-columns: repeat(2, minmax(0, 1fr)); /* Define la distribución y el ancho de las columnas. */
+        }
+    }
+
+/* TITULO 10 RESPONSIVE (MAX-WIDTH: 1024PX) */
+
+    @media (max-width: 1024px) {
+        .contenedor_dashboard {
+            padding: 22px; /* Define el espacio interior del elemento. */
+        }
+
+        .contenedor_graficos_dashboard {
+            grid-template-columns: minmax(0, 1fr); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .contenedor_acciones_dashboard {
+            gap: 10px; /* Define la separación entre los elementos. */
+        }
+
+        .boton_importar_dashboard, .boton_entrada_dashboard, .boton_salida_dashboard {
+            padding: 12px; /* Define el espacio interior del elemento. */
+        }
+    }
+
+/* TITULO 11 RESPONSIVE (MAX-WIDTH: 768PX) */
+
+    @media (max-width: 768px) {
+        .contenedor_dashboard {
+            padding: 18px; /* Define el espacio interior del elemento. */
+        }
+
+        .contenedor_acciones_dashboard {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+            gap: 10px; /* Define la separación entre los elementos. */
+        }
+
+        .contenedor_lateral_dashboard {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .descripcion_seccion_dashboard {
+            display: none; /* Oculta el elemento. */
+        }
+
+        .contenedor_mas_vendidos_dashboard {
+            display: block; /* Muestra el elemento como un bloque. */
+        }
+
+        .boton_mas_vendidos_dashboard {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+            justify-content: space-between; /* Define la distribución de los elementos en el eje principal. */
+        }
+
+        .panel_mas_vendidos_dashboard {
+            position: static; /* Define el sistema de posicionamiento del elemento. */
+            width: 100%; /* Ocupa todo el ancho disponible. */
+            margin-top: 8px; /* Define el margen superior. */
+        }
+    }
+
+/* TITULO 12 RESPONSIVE (MAX-WIDTH: 480PX) */
+
+    @media (max-width: 480px) {
+        .contenedor_dashboard {
+            padding: 14px; /* Define el espacio interior del elemento. */
+        }
+
+        .contenedor_indicadores_dashboard {
+            grid-template-columns: minmax(0, 1fr); /* Define la distribución y el ancho de las columnas. */
+            gap: 11px; /* Define la separación entre los elementos. */
+        }
+
+        .tarjeta_stock_actual_dashboard, .tarjeta_stock_bajo_dashboard, .tarjeta_productos_agotados_dashboard, .tarjeta_ventas_mes_dashboard {
+            min-height: 97px; /* Establece el alto mínimo del elemento. */
+            padding: 15px; /* Define el espacio interior del elemento. */
+        }
+
+        .titulo_dashboard {
+            font-size: 21px; /* Define el tamaño del texto. */
+        }
+
+        .filtros_mas_vendidos_dashboard {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .tarjeta_ventas_seis_meses_dashboard, .tarjeta_inventario_familia_dashboard, .tarjeta_productos_stock_bajo_dashboard, .tarjeta_alertas_actuales_dashboard, .tarjeta_recomendaciones_dashboard {
+            padding: 15px; /* Define el espacio interior del elemento. */
+        }
+    }
+
+    .icono_stock_actual_dashboard::before {
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%223%22%20y%3D%227%22%20width%3D%227%22%20height%3D%2213%22%20rx%3D%221%22%2F%3E%3Crect%20x%3D%2214%22%20y%3D%224%22%20width%3D%227%22%20height%3D%2216%22%20rx%3D%221%22%2F%3E%3Cpath%20d%3D%22M3%2011h7M14%209h7M1%2020h22%22%2F%3E%3C%2Fsvg%3E"); /* Define la imagen usada como máscara visual. */
+        mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%223%22%20y%3D%227%22%20width%3D%227%22%20height%3D%2213%22%20rx%3D%221%22%2F%3E%3Crect%20x%3D%2214%22%20y%3D%224%22%20width%3D%227%22%20height%3D%2216%22%20rx%3D%221%22%2F%3E%3Cpath%20d%3D%22M3%2011h7M14%209h7M1%2020h22%22%2F%3E%3C%2Fsvg%3E"); /* Define la imagen usada como máscara visual. */
+    }
+
+    .icono_stock_bajo_dashboard::before {
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M3%204h18v12H3zM3%2010h18M8%2019h8M12%2016v3%22%2F%3E%3Cpath%20d%3D%22m9%207%203%203%203-3%22%2F%3E%3C%2Fsvg%3E"); /* Define la imagen usada como máscara visual. */
+        mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M3%204h18v12H3zM3%2010h18M8%2019h8M12%2016v3%22%2F%3E%3Cpath%20d%3D%22m9%207%203%203%203-3%22%2F%3E%3C%2Fsvg%3E"); /* Define la imagen usada como máscara visual. */
+    }
+
+    .icono_productos_agotados_dashboard::before {
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m12%203%2010%2018H2L12%203Z%22%2F%3E%3Cpath%20d%3D%22M12%209v5M12%2017h.01%22%2F%3E%3C%2Fsvg%3E"); /* Define la imagen usada como máscara visual. */
+        mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m12%203%2010%2018H2L12%203Z%22%2F%3E%3Cpath%20d%3D%22M12%209v5M12%2017h.01%22%2F%3E%3C%2Fsvg%3E"); /* Define la imagen usada como máscara visual. */
+    }
+
+    .icono_ventas_mes_dashboard::before {
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%223%22%20y%3D%224%22%20width%3D%2218%22%20height%3D%2216%22%20rx%3D%222%22%2F%3E%3Cpath%20d%3D%22M7%2016V12M12%2016V8M17%2016v-5%22%2F%3E%3C%2Fsvg%3E"); /* Define la imagen usada como máscara visual. */
+        mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%223%22%20y%3D%224%22%20width%3D%2218%22%20height%3D%2216%22%20rx%3D%222%22%2F%3E%3Cpath%20d%3D%22M7%2016V12M12%2016V8M17%2016v-5%22%2F%3E%3C%2Fsvg%3E"); /* Define la imagen usada como máscara visual. */
+    }
+
+    .icono_importar_dashboard::before {
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%203v13m0%200-4-4m4%204%204-4%22%2F%3E%3Cpath%20d%3D%22M4%2016v4h16v-4%22%2F%3E%3C%2Fsvg%3E"); /* Define la imagen usada como máscara visual. */
+        mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%203v13m0%200-4-4m4%204%204-4%22%2F%3E%3Cpath%20d%3D%22M4%2016v4h16v-4%22%2F%3E%3C%2Fsvg%3E"); /* Define la imagen usada como máscara visual. */
+    }
+
+    .icono_entrada_dashboard::before {
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M3%208%2012%203l9%205v10l-9%205-9-5V8Z%22%2F%3E%3Cpath%20d%3D%22M3%208l9%205%209-5M12%2013v10M17%2015h5m-2.5-2.5v5%22%2F%3E%3C%2Fsvg%3E"); /* Define la imagen usada como máscara visual. */
+        mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M3%208%2012%203l9%205v10l-9%205-9-5V8Z%22%2F%3E%3Cpath%20d%3D%22M3%208l9%205%209-5M12%2013v10M17%2015h5m-2.5-2.5v5%22%2F%3E%3C%2Fsvg%3E"); /* Define la imagen usada como máscara visual. */
+    }
+
+    .icono_salida_dashboard::before {
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M3%208%2012%203l9%205v10l-9%205-9-5V8Z%22%2F%3E%3Cpath%20d%3D%22M3%208l9%205%209-5M12%2013v10M17%2015h5%22%2F%3E%3C%2Fsvg%3E"); /* Define la imagen usada como máscara visual. */
+        mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M3%208%2012%203l9%205v10l-9%205-9-5V8Z%22%2F%3E%3Cpath%20d%3D%22M3%208l9%205%209-5M12%2013v10M17%2015h5%22%2F%3E%3C%2Fsvg%3E"); /* Define la imagen usada como máscara visual. */
+    }
+
+    .grafico_ventas_dashboard::before, .grafico_inventario_dashboard::before {
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%2020V5m0%2015h16M7%2015l4-5%203%203%206-7%22%2F%3E%3C%2Fsvg%3E"); /* Define la imagen usada como máscara visual. */
+        mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%2020V5m0%2015h16M7%2015l4-5%203%203%206-7%22%2F%3E%3C%2Fsvg%3E"); /* Define la imagen usada como máscara visual. */
+    }
+
+    .grafico_ventas_dashboard:not(:has(.texto_grafico_pendiente_dashboard))::before, .grafico_inventario_dashboard:not(:has(.texto_grafico_inventario_dashboard))::before {
+        display: none; /* Oculta el elemento. */
+    }
+
+    .contenedor_dashboard {
+        padding: 28px; /* Define el espacio interior del elemento. */
+        font-family: Arial,sans-serif; /* Define la familia tipográfica. */
+    }
+
+    .contenedor_encabezado_dashboard {
+        margin-bottom: 22px; /* Define el margen inferior. */
+    }
+
+    .titulo_dashboard {
+        font-size: 24px; /* Define el tamaño del texto. */
+        margin-bottom: 5px; /* Define el margen inferior. */
+    }
+
+    .descripcion_dashboard {
+        font-size: 13px; /* Define el tamaño del texto. */
+    }
+
+    .contenedor_indicadores_dashboard {
+        gap: 16px; /* Define la separación entre los elementos. */
+        margin-bottom: 24px; /* Define el margen inferior. */
+    }
+
+    .tarjeta_stock_actual_dashboard,.tarjeta_stock_bajo_dashboard,.tarjeta_productos_agotados_dashboard,.tarjeta_ventas_mes_dashboard {
+        min-height: 105px; /* Establece el alto mínimo del elemento. */
+        padding: 18px; /* Define el espacio interior del elemento. */
+        gap: 14px; /* Define la separación entre los elementos. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        box-shadow: none; /* Agrega o ajusta la sombra del elemento. */
+    }
+
+    .icono_stock_actual_dashboard,.icono_stock_bajo_dashboard,.icono_productos_agotados_dashboard,.icono_ventas_mes_dashboard {
+        width: 46px; /* Define el ancho del elemento. */
+        height: 46px; /* Define el alto del elemento. */
+        min-width: 46px; /* Establece el ancho mínimo del elemento. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+    }
+
+    .icono_stock_actual_dashboard::before,.icono_stock_bajo_dashboard::before,.icono_productos_agotados_dashboard::before,.icono_ventas_mes_dashboard::before {
+        width: 24px; /* Define el ancho del elemento. */
+        height: 24px; /* Define el alto del elemento. */
+    }
+
+    .contenido_stock_actual_dashboard,.contenido_stock_bajo_dashboard,.contenido_productos_agotados_dashboard,.contenido_ventas_mes_dashboard {
+        gap: 5px; /* Define la separación entre los elementos. */
+    }
+
+    .texto_stock_actual_dashboard,.texto_stock_bajo_dashboard,.texto_productos_agotados_dashboard,.texto_ventas_mes_dashboard {
+        font-size: 12px; /* Define el tamaño del texto. */
+    }
+
+    .valor_stock_actual_dashboard,.valor_stock_bajo_dashboard,.valor_productos_agotados_dashboard,.valor_ventas_mes_dashboard {
+        font-size: 23px; /* Define el tamaño del texto. */
+    }
+
+    .nota_indicador_dashboard {
+        color: #71818a; /* Establece el color del texto. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        line-height: 1.3; /* Define la separación entre líneas de texto. */
+    }
+
+    .encabezado_seccion_dashboard {
+        margin-top: 8px; /* Define el margen superior. */
+        margin-bottom: 13px; /* Define el margen inferior. */
+    }
+
+    .titulo_seccion_dashboard {
+        font-size: 16px; /* Define un tamaño de texto legible para el campo en teléfonos. */
+    }
+
+    .contenedor_acciones_dashboard {
+        margin-bottom: 26px; /* Define el margen inferior. */
+    }
+
+    .boton_importar_dashboard,.boton_entrada_dashboard,.boton_salida_dashboard {
+        height: 64px; /* Define el alto del elemento. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        font: inherit; /* Define la tipografía y sus dimensiones. */
+    }
+
+    .boton_importar_dashboard:focus-visible,.boton_entrada_dashboard:focus-visible,.boton_salida_dashboard:focus-visible, .boton_mas_vendidos_dashboard:focus-visible,.boton_excluir_producto_dashboard:focus-visible,.boton_restaurar_producto_dashboard:focus-visible {
+        outline: 2px solid #159ba3; /* Define el contorno visual del elemento. */
+        outline-offset: 2px; /* Define la separación entre el contorno y el borde. */
+    }
+
+    .contenedor_mas_vendidos_dashboard {
+        display: block; /* Muestra el elemento como un bloque. */
+        position: relative; /* Define el sistema de posicionamiento del elemento. */
+        background: #fff; /* Define el fondo del elemento. */
+        margin: 0 0 16px; /* Define el margen exterior del elemento. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        overflow: visible; /* Controla el contenido que supera las dimensiones del elemento. */
+    }
+
+    .cabecera_mas_vendidos_dashboard {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: space-between; /* Define la distribución de los elementos en el eje principal. */
+        gap: 18px; /* Define la separación entre los elementos. */
+        padding: 18px; /* Define el espacio interior del elemento. */
+        border-bottom: 1px solid #e2e8eb; /* Define el borde inferior. */
+    }
+
+    .informacion_mas_vendidos_dashboard {
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+    }
+
+    .titulo_mas_vendidos_dashboard {
+        font-size: 14px; /* Define el tamaño del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+        color: #0b3650; /* Establece el color del texto. */
+    }
+
+    .descripcion_mas_vendidos_dashboard {
+        font-size: 12px; /* Define el tamaño del texto. */
+        color: #71818a; /* Establece el color del texto. */
+        margin-top: 5px; /* Define el margen superior. */
+        line-height: 1.4; /* Define la separación entre líneas de texto. */
+    }
+
+    .boton_mas_vendidos_dashboard {
+        flex-shrink: 0; /* Define cuánto puede reducirse el elemento en Flexbox. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        min-height: 40px; /* Establece el alto mínimo del elemento. */
+        font-size: 12px; /* Define el tamaño del texto. */
+    }
+
+    .boton_mas_vendidos_dashboard[aria-expanded="true"] .flecha_mas_vendidos_dashboard {
+        transform: rotate(180deg); /* Aplica una transformación visual al elemento. */
+    }
+
+    .flecha_mas_vendidos_dashboard {
+        transition: transform .16s ease; /* Define la transición entre los cambios de estilo. */
+    }
+
+    .vista_previa_mas_vendidos_dashboard {
+        padding: 0 18px 12px; /* Define el espacio interior del elemento. */
+    }
+
+    .vista_previa_mas_vendidos_dashboard[hidden] {
+        display: none !important; /* Define cómo se muestra y distribuye el elemento. */
+    }
+
+    .tabla_previa_mas_vendidos_dashboard {
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        border-collapse: collapse; /* Define cómo se combinan los bordes de las celdas. */
+        table-layout: fixed; /* Define cómo se calcula el ancho de las columnas de la tabla. */
+    }
+
+    .tabla_previa_mas_vendidos_dashboard th {
+        font-size: 12px; /* Define el tamaño del texto. */
+        color: #536873; /* Establece el color del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+        padding: 12px; /* Define el espacio interior del elemento. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        background: #f4f7f8; /* Define el fondo del elemento. */
+    }
+
+    .tabla_previa_mas_vendidos_dashboard td {
+        font-size: 12px; /* Define el tamaño del texto. */
+        color: #344b56; /* Establece el color del texto. */
+        padding: 12px; /* Define el espacio interior del elemento. */
+        border-bottom: 1px solid #e8edef; /* Define el borde inferior. */
+        line-height: 1.35; /* Define la separación entre líneas de texto. */
+    }
+
+    .tabla_previa_mas_vendidos_dashboard tr:last-child td {
+        border-bottom: 0; /* Define el borde inferior. */
+    }
+
+    .tabla_previa_mas_vendidos_dashboard th:first-child,.tabla_previa_mas_vendidos_dashboard td:first-child {
+        width: 52px; /* Define el ancho del elemento. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+    }
+
+    .tabla_previa_mas_vendidos_dashboard th:last-child,.tabla_previa_mas_vendidos_dashboard td:last-child {
+        width: 165px; /* Define el ancho del elemento. */
+        text-align: right; /* Define la alineación horizontal del texto. */
+    }
+
+    .nombre_previa_mas_vendidos_dashboard {
+        font-weight: 700; /* Define el grosor del texto. */
+        color: #0b3650; /* Establece el color del texto. */
+    }
+
+    .codigo_previa_mas_vendidos_dashboard {
+        display: block; /* Muestra el elemento como un bloque. */
+        color: #71818a; /* Establece el color del texto. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        margin-top: 3px; /* Define el margen superior. */
+    }
+
+    .estado_previa_mas_vendidos_dashboard {
+        padding: 14px 0; /* Define el espacio interior del elemento. */
+        color: #71818a; /* Establece el color del texto. */
+        font-size: 12px; /* Define el tamaño del texto. */
+    }
+
+    .panel_mas_vendidos_dashboard {
+        position: static; /* Define el sistema de posicionamiento del elemento. */
+        z-index: auto; /* Define el orden de superposición del elemento. */
+        display: block; /* Muestra el elemento como un bloque. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        box-shadow: none; /* Agrega o ajusta la sombra del elemento. */
+        border: 0; /* Define el grosor, el estilo y el color del borde. */
+        padding: 18px; /* Define el espacio interior del elemento. */
+        border-radius: 0 0 8px 8px; /* Define el redondeado de las esquinas. */
+    }
+
+    #panel_mas_vendidos_dashboard[hidden] {
+        display: none !important; /* Define cómo se muestra y distribuye el elemento. */
+    }
+
+    .filtros_mas_vendidos_dashboard {
+        grid-template-columns: minmax(190px,2fr) minmax(190px,1fr); /* Define la distribución y el ancho de las columnas. */
+        gap: 12px; /* Define la separación entre los elementos. */
+        align-items: end; /* Define la alineación de los elementos en el eje transversal. */
+    }
+
+    .campo_mas_vendidos_dashboard {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        gap: 7px; /* Define la separación entre los elementos. */
+        color: #536873; /* Establece el color del texto. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+    }
+
+    .busqueda_mas_vendidos_dashboard,.periodo_mas_vendidos_dashboard {
+        height: 40px; /* Define el alto del elemento. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        font-weight: 400; /* Define el grosor del texto. */
+    }
+
+    .busqueda_mas_vendidos_dashboard:focus-visible,.periodo_mas_vendidos_dashboard:focus-visible {
+        outline: 2px solid #159ba3; /* Define el contorno visual del elemento. */
+        outline-offset: 1px; /* Define la separación entre el contorno y el borde. */
+    }
+
+    .estado_mas_vendidos_dashboard {
+        padding: 8px 0 10px; /* Define el espacio interior del elemento. */
+    }
+
+    .nota_unidades_ranking_dashboard {
+        color: #71818a; /* Establece el color del texto. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        line-height: 1.5; /* Define la separación entre líneas de texto. */
+        margin-top: 10px; /* Define el margen superior. */
+    }
+
+    .boton_ver_excluidos_dashboard {
+        border: 1px solid #159ba3; /* Define el grosor, el estilo y el color del borde. */
+        padding: 9px 13px; /* Define el espacio interior del elemento. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        text-decoration: none; /* Define la decoración del texto. */
+        margin-top: 15px; /* Define el margen superior. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        background: #fff; /* Define el fondo del elemento. */
+    }
+
+    .boton_ver_excluidos_dashboard:hover {
+        background: #e4f6f6; /* Define el fondo del elemento. */
+    }
+
+    .tarjeta_ventas_seis_meses_dashboard,.tarjeta_inventario_familia_dashboard,.tarjeta_productos_stock_bajo_dashboard,.tarjeta_alertas_actuales_dashboard,.tarjeta_recomendaciones_dashboard {
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        padding: 18px; /* Define el espacio interior del elemento. */
+        box-shadow: none; /* Agrega o ajusta la sombra del elemento. */
+    }
+
+    .grafico_inventario_dashboard:has(.familias_barras_dashboard) {
+        justify-content: flex-start; /* Define la distribución de los elementos en el eje principal. */
+        align-items: stretch; /* Define la alineación de los elementos en el eje transversal. */
+        background: #fff; /* Define el fondo del elemento. */
+        border: 0; /* Define el grosor, el estilo y el color del borde. */
+        padding: 6px 0; /* Define el espacio interior del elemento. */
+        min-height: 220px; /* Establece el alto mínimo del elemento. */
+    }
+
+    .grafico_inventario_dashboard:has(.familias_barras_dashboard)::before {
+        display: none !important; /* Define cómo se muestra y distribuye el elemento. */
+    }
+
+    .familias_barras_dashboard {
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        gap: 13px; /* Define la separación entre los elementos. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        padding: 6px 0; /* Define el espacio interior del elemento. */
+    }
+
+    .fila_familia_dashboard {
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: minmax(85px,1fr) minmax(80px,2fr) 56px; /* Define la distribución y el ancho de las columnas. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 12px; /* Define la separación entre los elementos. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        color: #536873; /* Establece el color del texto. */
+    }
+
+    .nombre_familia_dashboard {
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        overflow: hidden; /* Controla el contenido que supera las dimensiones del elemento. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
+        text-overflow: ellipsis; /* Define cómo se indica el texto que no cabe. */
+    }
+
+    .pista_familia_dashboard {
+        height: 10px; /* Define el alto del elemento. */
+        border-radius: 10px; /* Define el redondeado de las esquinas. */
+        background: #edf3f5; /* Define el fondo del elemento. */
+        overflow: hidden; /* Controla el contenido que supera las dimensiones del elemento. */
+    }
+
+    .barra_familia_dashboard {
+        height: 100%; /* Define el alto del elemento. */
+        background: #159ba3; /* Define el fondo del elemento. */
+        border-radius: 10px; /* Define el redondeado de las esquinas. */
+    }
+
+    .cantidad_familia_dashboard {
+        text-align: right; /* Define la alineación horizontal del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+        color: #0b3650; /* Establece el color del texto. */
+        font-variant-numeric: tabular-nums; /* Define cómo se representan los números. */
+    }
+
+    .leyenda_grafico_dashboard {
+        font-size: 11px; /* Define el tamaño del texto. */
+        line-height: 1.5; /* Define la separación entre líneas de texto. */
+        color: #71818a; /* Establece el color del texto. */
+        margin-top: 10px; /* Define el margen superior. */
+    }
+
+    .ayuda_panel_dashboard {
+        color: #71818a; /* Establece el color del texto. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        margin: -8px 0 13px; /* Define el margen exterior del elemento. */
+        line-height: 1.4; /* Define la separación entre líneas de texto. */
+    }
+
+    .contenedor_graficos_dashboard {
+        margin-bottom: 26px; /* Define el margen inferior. */
+    }
+
+    .etiqueta_estado_bajo_dashboard {
+        display: inline-block; /* Define cómo se muestra y distribuye el elemento. */
+        padding: 5px 9px; /* Define el espacio interior del elemento. */
+        border-radius: 14px; /* Define el redondeado de las esquinas. */
+        background: #fff1da; /* Define el fondo del elemento. */
+        color: #b87913; /* Establece el color del texto. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+    }
+
+    .lista_alertas_dashboard,.lista_recomendaciones_dashboard {
+        gap: 9px; /* Define la separación entre los elementos. */
+    }
+
+    .enlace_resumen_dashboard {
+        border: 0; /* Define el grosor, el estilo y el color del borde. */
+        padding: 2px; /* Define el espacio interior del elemento. */
+        background: none; /* Define el fondo del elemento. */
+        color: #0f858d; /* Establece el color del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+    }
+
+    .enlace_resumen_dashboard:hover {
+        text-decoration: underline; /* Define la decoración del texto. */
+    }
+
+    .contenedor_dashboard [hidden] {
+        display: none !important; /* Define cómo se muestra y distribuye el elemento. */
+    }
+
+/* TITULO 13 RESPONSIVE (MAX-WIDTH: 1440PX) */
+
+    @media (max-width: 1440px) {
+        .contenedor_indicadores_dashboard {
+            grid-template-columns: repeat(4,minmax(0,1fr)); /* Define la distribución y el ancho de las columnas. */
+        }
+    }
+
+/* TITULO 14 RESPONSIVE (MAX-WIDTH: 1200PX) */
+
+    @media (max-width: 1200px) {
+        .contenedor_indicadores_dashboard {
+            grid-template-columns: repeat(2,minmax(0,1fr)); /* Define la distribución y el ancho de las columnas. */
+        }
+    }
+
+/* TITULO 15 RESPONSIVE (MAX-WIDTH: 768PX) */
+
+    @media (max-width: 768px) {
+        .contenedor_dashboard {
+            padding: 18px; /* Define el espacio interior del elemento. */
+        }
+
+        .cabecera_mas_vendidos_dashboard {
+            flex-direction: column; /* Organiza los elementos en una columna. */
+            align-items: stretch; /* Define la alineación de los elementos en el eje transversal. */
+        }
+
+        .boton_mas_vendidos_dashboard {
+            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        }
+
+        .panel_mas_vendidos_dashboard,.vista_previa_mas_vendidos_dashboard {
+            padding: 12px; /* Define el espacio interior del elemento. */
+        }
+
+        .filtros_mas_vendidos_dashboard {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .tabla_previa_mas_vendidos_dashboard th:last-child,.tabla_previa_mas_vendidos_dashboard td:last-child {
+            width: 105px; /* Define el ancho del elemento. */
+        }
+
+        .descripcion_seccion_dashboard {
+            display: block; /* Muestra el elemento como un bloque. */
+        }
+    }
+
+/* TITULO 16 RESPONSIVE (MAX-WIDTH: 480PX) */
+
+    @media (max-width: 480px) {
+        .contenedor_dashboard {
+            padding: 14px; /* Define el espacio interior del elemento. */
+        }
+
+        .contenedor_indicadores_dashboard {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .contenedor_graficos_dashboard {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .fila_familia_dashboard {
+            grid-template-columns: minmax(72px,1fr) minmax(70px,1.5fr) 38px; /* Define la distribución y el ancho de las columnas. */
+            gap: 6px; /* Define la separación entre los elementos. */
+        }
+
+        .tabla_previa_mas_vendidos_dashboard th,.tabla_previa_mas_vendidos_dashboard td {
+            padding: 10px 6px; /* Define el espacio interior del elemento. */
+        }
+    }
+
+    .subtitulo_ventas_dashboard {
+        color: #71818a; /* Establece el color del texto. */
+        font-family: Arial,sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        line-height: 1.45; /* Define la separación entre líneas de texto. */
+        margin: -9px 0 14px; /* Define el margen exterior del elemento. */
+    }
+
+    .grafico_ventas_dashboard:has(.ventas_barras_dashboard) {
+        display: block; /* Muestra el elemento como un bloque. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-height: 245px; /* Establece el alto mínimo del elemento. */
+        background: #fff; /* Define el fondo del elemento. */
+        border: 0; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 0; /* Define el redondeado de las esquinas. */
+        padding: 6px 0 2px; /* Define el espacio interior del elemento. */
+    }
+
+    .grafico_ventas_dashboard:has(.ventas_barras_dashboard)::before {
+        display: none !important; /* Define cómo se muestra y distribuye el elemento. */
+    }
+
+    .ventas_barras_dashboard {
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: repeat(6,minmax(0,1fr)); /* Define la distribución y el ancho de las columnas. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        gap: 12px; /* Define la separación entre los elementos. */
+        align-items: end; /* Define la alineación de los elementos en el eje transversal. */
+        padding: 6px 3px 0; /* Define el espacio interior del elemento. */
+        min-height: 225px; /* Establece el alto mínimo del elemento. */
+    }
+
+    .ventas_columna_dashboard {
+        height: 220px; /* Define el alto del elemento. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        gap: 5px; /* Define la separación entre los elementos. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        cursor: default; /* Define el cursor al situarlo sobre el elemento. */
+        outline-offset: 3px; /* Define la separación entre el contorno y el borde. */
+        border-radius: 5px; /* Define el redondeado de las esquinas. */
+    }
+
+    .ventas_columna_dashboard:focus-visible {
+        outline: 2px solid #159ba3; /* Define el contorno visual del elemento. */
+    }
+
+    .ventas_monto_dashboard {
+        font-size: 11px; /* Define el tamaño del texto. */
+        color: #536873; /* Establece el color del texto. */
+        line-height: 1.25; /* Define la separación entre líneas de texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        height: 29px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: flex-end; /* Define la alineación de los elementos en el eje transversal. */
+    }
+
+    .ventas_pista_dashboard {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        justify-content: flex-end; /* Define la distribución de los elementos en el eje principal. */
+        align-items: stretch; /* Define la alineación de los elementos en el eje transversal. */
+        height: 158px; /* Define el alto del elemento. */
+        width: min(48px,78%); /* Define el ancho del elemento. */
+        border-bottom: 1px solid #dbe6eb; /* Define el borde inferior. */
+    }
+
+    .ventas_barra_dashboard {
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-height: 0; /* Establece el alto mínimo del elemento. */
+        background: linear-gradient(180deg,#29b7b4 0%,#159ba3 100%); /* Define el fondo del elemento. */
+        border-radius: 5px 5px 0 0; /* Define el redondeado de las esquinas. */
+        transition: filter .18s ease; /* Define la transición entre los cambios de estilo. */
+    }
+
+    .ventas_columna_dashboard:hover .ventas_barra_dashboard, .ventas_columna_dashboard:focus-visible .ventas_barra_dashboard {
+        filter: brightness(.88); /* Aplica efectos visuales al elemento. */
+    }
+
+    .ventas_barra_cero_dashboard {
+        background: #dae4e7; /* Define el fondo del elemento. */
+        height: 0 !important; /* Define el alto del elemento. */
+    }
+
+    .ventas_mes_dashboard {
+        font-size: 12px; /* Define el tamaño del texto. */
+        color: #536873; /* Establece el color del texto. */
+        text-transform: capitalize; /* Define el uso de mayúsculas y minúsculas. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
+    }
+
+    .ventas_leyenda_dashboard {
+        margin-top: 10px; /* Define el margen superior. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+    }
+
+/* TITULO 17 RESPONSIVE (MAX-WIDTH: 600PX) */
+
+    @media(max-width: 600px) {
+        .ventas_barras_dashboard {
+            gap: 5px; /* Define la separación entre los elementos. */
+        }
+
+        .ventas_monto_dashboard {
+            font-size: 9px; /* Define el tamaño del texto. */
+        }
+
+        .ventas_columna_dashboard {
+            height: 210px; /* Define el alto del elemento. */
+        }
+
+        .ventas_pista_dashboard {
+            height: 145px; /* Define el alto del elemento. */
+        }
+
+        .ventas_mes_dashboard {
+            font-size: 10px; /* Define el tamaño del texto. */
+        }
+    }
+
+    .ventas_columna_dashboard.ventas_mes_maximo_dashboard .ventas_barra_dashboard {
+        background: linear-gradient(180deg, #3869a8 0%, #0b3650 100%); /* Define el fondo del elemento. */
+    }
+
+    .ventas_columna_dashboard.ventas_mes_maximo_dashboard .ventas_monto_dashboard {
+        color: #0b3650; /* Establece el color del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+    }
+
+    .barra_familia_dashboard {
+        background-color: var(--color-familia-dashboard, #159ba3); /* Establece el color de fondo. */
+    }
+
+    .fila_familia_dashboard .barra_familia_dashboard {
+        transition: filter .18s ease; /* Define la transición entre los cambios de estilo. */
+    }
+
+    .fila_familia_dashboard:hover .barra_familia_dashboard {
+        filter: brightness(.9); /* Aplica efectos visuales al elemento. */
+    }
+
+    .icono_stock_actual_dashboard::before {
+        -webkit-mask-image: url("../../../../imagenes/inicio_sesion/cuerpo_pagina/secciones/package.svg"); /* Define la imagen usada como máscara visual. */
+        mask-image: url("../../../../imagenes/inicio_sesion/cuerpo_pagina/secciones/package.svg"); /* Define la imagen usada como máscara visual. */
+    }
+
+    .icono_stock_bajo_dashboard::before {
+        -webkit-mask-image: url("../../../../imagenes/inicio_sesion/cuerpo_pagina/secciones/package-minus.svg"); /* Define la imagen usada como máscara visual. */
+        mask-image: url("../../../../imagenes/inicio_sesion/cuerpo_pagina/secciones/package-minus.svg"); /* Define la imagen usada como máscara visual. */
+    }
+
+    .icono_productos_agotados_dashboard::before {
+        -webkit-mask-image: url("../../../../imagenes/inicio_sesion/cuerpo_pagina/secciones/package-x.svg"); /* Define la imagen usada como máscara visual. */
+        mask-image: url("../../../../imagenes/inicio_sesion/cuerpo_pagina/secciones/package-x.svg"); /* Define la imagen usada como máscara visual. */
+    }
+
+    .icono_ventas_mes_dashboard::before {
+        -webkit-mask-image: url("../../../../imagenes/inicio_sesion/cuerpo_pagina/secciones/chart-no-axes-column-increasing.svg"); /* Define la imagen usada como máscara visual. */
+        mask-image: url("../../../../imagenes/inicio_sesion/cuerpo_pagina/secciones/chart-column.svg"); /* Define la imagen usada como máscara visual. */
+    }

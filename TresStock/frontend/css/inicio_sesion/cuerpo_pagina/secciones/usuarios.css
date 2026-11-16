@@ -1,1234 +1,1483 @@
 /* TITULO 1 CONTENEDOR USUARIOS */
 
-    /* clase para establecer el espacio general de la vista de usuarios */
     .contenedor_usuarios {
-        width: 100%;
-        padding: 28px;
-        box-sizing: border-box;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        padding: 28px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
-
 
 /* TITULO 2 ENCABEZADO USUARIOS */
 
-    /* clase para organizar el encabezado principal de la vista */
     .contenedor_encabezado_usuarios {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 22px;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: space-between; /* Define la distribución de los elementos en el eje principal. */
+        margin-bottom: 22px; /* Define el margen inferior. */
     }
 
-    /* clase para organizar el título y descripción */
     .contenedor_informacion_usuarios {
-        display: flex;
-        flex-direction: column;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
-    /* clase para establecer el título de usuarios */
     .titulo_usuarios {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 5px;
+        color: #0b3650; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 24px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-bottom: 5px; /* Define el margen inferior. */
     }
 
-    /* clase para establecer la descripción */
     .descripcion_usuarios {
-        color: #71818a;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
+        color: #71818a; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
     }
 
-    /* clase para establecer la opción nuevo usuario */
     .boton_nuevo_usuario {
-        height: 42px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #159ba3;
-        padding: 0 17px;
-        border-radius: 6px;
-        cursor: pointer;
-        box-sizing: border-box;
+        height: 42px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        background-color: #159ba3; /* Establece el color de fondo. */
+        padding: 0 17px; /* Define el espacio interior del elemento. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* cambia el fondo de nuevo usuario al posicionar el cursor */
     .boton_nuevo_usuario:hover {
-        background-color: #0f858d;
+        background-color: #0f858d; /* Establece el color de fondo. */
     }
 
-    /* clase para establecer el icono de nuevo usuario */
     .icono_nuevo_usuario {
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size: 21px;
-        font-weight: bold;
-        margin-right: 8px;
+        color: #ffffff; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 21px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-right: 8px; /* Define el margen derecho. */
     }
 
-    /* clase para establecer el texto de nuevo usuario */
     .texto_nuevo_usuario {
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        font-weight: bold;
-        white-space: nowrap;
+        color: #ffffff; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
-
 
 /* TITULO 3 INDICADORES USUARIOS */
 
-    /* clase para distribuir los indicadores principales de usuarios */
     .contenedor_indicadores_usuarios {
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 16px;
-        margin-bottom: 22px;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: repeat(4, 1fr); /* Define la distribución y el ancho de las columnas. */
+        gap: 16px; /* Define la separación entre los elementos. */
+        margin-bottom: 22px; /* Define el margen inferior. */
     }
 
+/* SUBTITULO 1 TOTAL USUARIOS */
 
-    /* SUBTITULO 1 TOTAL USUARIOS */
+    .tarjeta_total_usuarios {
+        min-height: 105px; /* Establece el alto mínimo del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        padding: 18px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
 
-        /* clase para establecer la tarjeta total usuarios */
-        .tarjeta_total_usuarios {
-            min-height: 105px;
-            display: flex;
-            align-items: center;
-            background-color: #ffffff;
-            border: 1px solid #dce4e8;
-            border-radius: 8px;
-            padding: 18px;
-            box-sizing: border-box;
-        }
+    .icono_total_usuarios {
+        width: 46px; /* Define el ancho del elemento. */
+        height: 46px; /* Define el alto del elemento. */
+        min-width: 46px; /* Establece el ancho mínimo del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        background-color: #e4f6f6; /* Establece el color de fondo. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        margin-right: 14px; /* Define el margen derecho. */
+    }
 
-        /* clase para establecer el icono total usuarios */
-        .icono_total_usuarios {
-            width: 46px;
-            height: 46px;
-            min-width: 46px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #e4f6f6;
-            border-radius: 8px;
-            margin-right: 14px;
-        }
+    .imagen_icono_total_usuarios {
+        width: 24px; /* Define el ancho del elemento. */
+        height: 24px; /* Define el alto del elemento. */
+    }
 
-        /* clase para establecer la imagen del icono total usuarios */
-        .imagen_icono_total_usuarios {
-            width: 24px;
-            height: 24px;
-        }
+    .contenido_total_usuarios {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+    }
 
-        /* clase para organizar el contenido total usuarios */
-        .contenido_total_usuarios {
-            display: flex;
-            flex-direction: column;
-        }
+    .texto_total_usuarios {
+        color: #697a83; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
+    }
 
-        /* clase para establecer el texto total usuarios */
-        .texto_total_usuarios {
-            color: #697a83;
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            margin-bottom: 6px;
-        }
+    .valor_total_usuarios {
+        color: #0B3650; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 23px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+    }
 
-        /* clase para establecer el valor total usuarios */
-        .valor_total_usuarios {
-            color: #0B3650;
-            font-family: Arial, sans-serif;
-            font-size: 23px;
-            font-weight: bold;
-        }
+/* SUBTITULO 2 USUARIOS ACTIVOS */
 
+    .tarjeta_usuarios_activos {
+        min-height: 105px; /* Establece el alto mínimo del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        padding: 18px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
 
-    /* SUBTITULO 2 USUARIOS ACTIVOS */
+    .icono_usuarios_activos {
+        width: 46px; /* Define el ancho del elemento. */
+        height: 46px; /* Define el alto del elemento. */
+        min-width: 46px; /* Establece el ancho mínimo del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        background-color: #e5f5ed; /* Establece el color de fondo. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        margin-right: 14px; /* Define el margen derecho. */
+    }
 
-        /* clase para establecer la tarjeta usuarios activos */
-        .tarjeta_usuarios_activos {
-            min-height: 105px;
-            display: flex;
-            align-items: center;
-            background-color: #ffffff;
-            border: 1px solid #dce4e8;
-            border-radius: 8px;
-            padding: 18px;
-            box-sizing: border-box;
-        }
+    .imagen_icono_usuarios_activos {
+        width: 24px; /* Define el ancho del elemento. */
+        height: 24px; /* Define el alto del elemento. */
+    }
 
-        /* clase para establecer el icono usuarios activos */
-        .icono_usuarios_activos {
-            width: 46px;
-            height: 46px;
-            min-width: 46px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #e5f5ed;
-            border-radius: 8px;
-            margin-right: 14px;
-        }
+    .contenido_usuarios_activos {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+    }
 
-        /* clase para establecer la imagen del icono usuarios activos */
-        .imagen_icono_usuarios_activos {
-            width: 24px;
-            height: 24px;
-        }
+    .texto_usuarios_activos {
+        color: #697a83; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
+    }
 
-        /* clase para organizar el contenido usuarios activos */
-        .contenido_usuarios_activos {
-            display: flex;
-            flex-direction: column;
-        }
+    .valor_usuarios_activos {
+        color: #288447; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 23px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+    }
 
-        /* clase para establecer el texto usuarios activos */
-        .texto_usuarios_activos {
-            color: #697a83;
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            margin-bottom: 6px;
-        }
+/* SUBTITULO 3 USUARIOS INACTIVOS */
 
-        /* clase para establecer el valor usuarios activos */
-        .valor_usuarios_activos {
-            color: #288447;
-            font-family: Arial, sans-serif;
-            font-size: 23px;
-            font-weight: bold;
-        }
+    .tarjeta_usuarios_inactivos {
+        min-height: 105px; /* Establece el alto mínimo del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        padding: 18px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
 
+    .icono_usuarios_inactivos {
+        width: 46px; /* Define el ancho del elemento. */
+        height: 46px; /* Define el alto del elemento. */
+        min-width: 46px; /* Establece el ancho mínimo del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        background-color: #fceaea; /* Establece el color de fondo. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        margin-right: 14px; /* Define el margen derecho. */
+    }
 
-    /* SUBTITULO 3 USUARIOS INACTIVOS */
+    .imagen_icono_usuarios_inactivos {
+        width: 24px; /* Define el ancho del elemento. */
+        height: 24px; /* Define el alto del elemento. */
+    }
 
-        /* clase para establecer la tarjeta usuarios inactivos */
-        .tarjeta_usuarios_inactivos {
-            min-height: 105px;
-            display: flex;
-            align-items: center;
-            background-color: #ffffff;
-            border: 1px solid #dce4e8;
-            border-radius: 8px;
-            padding: 18px;
-            box-sizing: border-box;
-        }
+    .contenido_usuarios_inactivos {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+    }
 
-        /* clase para establecer el icono usuarios inactivos */
-        .icono_usuarios_inactivos {
-            width: 46px;
-            height: 46px;
-            min-width: 46px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #fceaea;
-            border-radius: 8px;
-            margin-right: 14px;
-        }
+    .texto_usuarios_inactivos {
+        color: #697a83; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
+    }
 
-        /* clase para establecer la imagen del icono usuarios inactivos */
-        .imagen_icono_usuarios_inactivos {
-            width: 24px;
-            height: 24px;
-        }
+    .valor_usuarios_inactivos {
+        color: #D94B4B; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 23px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+    }
 
-        /* clase para organizar el contenido usuarios inactivos */
-        .contenido_usuarios_inactivos {
-            display: flex;
-            flex-direction: column;
-        }
+/* SUBTITULO 4 ADMINISTRADORES */
 
-        /* clase para establecer el texto usuarios inactivos */
-        .texto_usuarios_inactivos {
-            color: #697a83;
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            margin-bottom: 6px;
-        }
+    .tarjeta_administradores_usuarios {
+        min-height: 105px; /* Establece el alto mínimo del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        padding: 18px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
 
-        /* clase para establecer el valor usuarios inactivos */
-        .valor_usuarios_inactivos {
-            color: #D94B4B;
-            font-family: Arial, sans-serif;
-            font-size: 23px;
-            font-weight: bold;
-        }
+    .icono_administradores_usuarios {
+        width: 46px; /* Define el ancho del elemento. */
+        height: 46px; /* Define el alto del elemento. */
+        min-width: 46px; /* Establece el ancho mínimo del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        background-color: #eef0fa; /* Establece el color de fondo. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        margin-right: 14px; /* Define el margen derecho. */
+    }
 
+    .imagen_icono_administradores_usuarios {
+        width: 24px; /* Define el ancho del elemento. */
+        height: 24px; /* Define el alto del elemento. */
+    }
 
-    /* SUBTITULO 4 ADMINISTRADORES */
+    .contenido_administradores_usuarios {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+    }
 
-        /* clase para establecer la tarjeta administradores */
-        .tarjeta_administradores_usuarios {
-            min-height: 105px;
-            display: flex;
-            align-items: center;
-            background-color: #ffffff;
-            border: 1px solid #dce4e8;
-            border-radius: 8px;
-            padding: 18px;
-            box-sizing: border-box;
-        }
+    .texto_administradores_usuarios {
+        color: #697a83; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
+    }
 
-        /* clase para establecer el icono administradores */
-        .icono_administradores_usuarios {
-            width: 46px;
-            height: 46px;
-            min-width: 46px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #eef0fa;
-            border-radius: 8px;
-            margin-right: 14px;
-        }
-
-        /* clase para establecer la imagen del icono administradores */
-        .imagen_icono_administradores_usuarios {
-            width: 24px;
-            height: 24px;
-        }
-
-        /* clase para organizar el contenido administradores */
-        .contenido_administradores_usuarios {
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* clase para establecer el texto administradores */
-        .texto_administradores_usuarios {
-            color: #697a83;
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            margin-bottom: 6px;
-        }
-
-        /* clase para establecer el valor administradores */
-        .valor_administradores_usuarios {
-            color: #3869A8;
-            font-family: Arial, sans-serif;
-            font-size: 23px;
-            font-weight: bold;
-        }
-
+    .valor_administradores_usuarios {
+        color: #3869A8; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 23px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+    }
 
 /* TITULO 4 FILTROS USUARIOS */
 
-    /* clase para organizar las opciones de búsqueda y filtrado */
     .contenedor_filtros_usuarios {
-        width: 100%;
-        display: grid;
-        grid-template-columns: 2fr 1fr 1fr;
-        gap: 18px;
-        background-color: #ffffff;
-        border: 1px solid #dce4e8;
-        border-radius: 8px;
-        padding: 18px;
-        margin-bottom: 20px;
-        box-sizing: border-box;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: 2fr 1fr 1fr; /* Define la distribución y el ancho de las columnas. */
+        gap: 18px; /* Define la separación entre los elementos. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        padding: 18px; /* Define el espacio interior del elemento. */
+        margin-bottom: 20px; /* Define el margen inferior. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para organizar el campo de búsqueda */
     .contenedor_busqueda_usuarios {
-        display: flex;
-        flex-direction: column;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
-    /* clase para establecer el texto del buscador */
     .texto_busqueda_usuarios {
-        color: #536873;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 7px;
+        color: #536873; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-bottom: 7px; /* Define el margen inferior. */
     }
 
-    /* clase para establecer el campo de búsqueda */
     .input_busqueda_usuarios {
-        width: 100%;
-        height: 40px;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        padding: 0 12px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        box-sizing: border-box;
-        outline: none;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 40px; /* Define el alto del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        padding: 0 12px; /* Define el espacio interior del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        outline: none; /* Define el contorno visual del elemento. */
     }
 
-    /* clase para organizar el filtro por rol */
     .contenedor_rol_usuarios {
-        display: flex;
-        flex-direction: column;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
-    /* clase para establecer el texto del filtro por rol */
     .texto_rol_usuarios {
-        color: #536873;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 7px;
+        color: #536873; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-bottom: 7px; /* Define el margen inferior. */
     }
 
-    /* clase para establecer el selector de rol */
     .select_rol_usuarios {
-        width: 100%;
-        height: 40px;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        padding: 0 10px;
-        background-color: #ffffff;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        box-sizing: border-box;
-        outline: none;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 40px; /* Define el alto del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        padding: 0 10px; /* Define el espacio interior del elemento. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        outline: none; /* Define el contorno visual del elemento. */
     }
 
-    /* clase para establecer las opciones de rol */
     .opcion_rol_usuarios {
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
     }
 
-    /* clase para organizar el filtro por estado */
     .contenedor_estado_usuarios {
-        display: flex;
-        flex-direction: column;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
-    /* clase para establecer el texto del filtro por estado */
     .texto_estado_usuarios {
-        color: #536873;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 7px;
+        color: #536873; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-bottom: 7px; /* Define el margen inferior. */
     }
 
-    /* clase para establecer el selector de estado */
     .select_estado_usuarios {
-        width: 100%;
-        height: 40px;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        padding: 0 10px;
-        background-color: #ffffff;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        box-sizing: border-box;
-        outline: none;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 40px; /* Define el alto del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        padding: 0 10px; /* Define el espacio interior del elemento. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        outline: none; /* Define el contorno visual del elemento. */
     }
 
-    /* clase para establecer las opciones de estado */
     .opcion_estado_usuarios {
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
     }
-
 
 /* TITULO 5 TABLA USUARIOS */
 
-    /* clase para establecer el contenedor visual de la tabla */
     .contenedor_tabla_usuarios {
-        width: 100%;
-        background-color: #ffffff;
-        border: 1px solid #dce4e8;
-        border-radius: 8px;
-        overflow-x: auto;
-        box-sizing: border-box;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        overflow-x: auto; /* Permite desplazar horizontalmente el contenido cuando no cabe. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para establecer la cabecera visual de la tabla */
     .cabecera_contenedor_tabla_usuarios {
-        min-width: 900px;
-        padding: 17px 18px;
-        border-bottom: 1px solid #e2e8eb;
-        box-sizing: border-box;
+        min-width: 900px; /* Establece el ancho mínimo del elemento. */
+        padding: 17px 18px; /* Define el espacio interior del elemento. */
+        border-bottom: 1px solid #e2e8eb; /* Define el borde inferior. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para establecer el título de la tabla */
     .titulo_tabla_usuarios {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        font-weight: bold;
+        color: #0b3650; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 14px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
     }
 
-    /* clase para establecer la estructura general de la tabla */
     .tabla_usuarios {
-        width: 100%;
-        min-width: 900px;
-        table-layout: fixed;
-        border-collapse: collapse;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-width: 900px; /* Establece el ancho mínimo del elemento. */
+        table-layout: fixed; /* Define cómo se calcula el ancho de las columnas de la tabla. */
+        border-collapse: collapse; /* Define cómo se combinan los bordes de las celdas. */
     }
 
-    /* clase para establecer el encabezado de la tabla */
     .encabezado_tabla_usuarios {
-        background-color: #f4f7f8;
+        background-color: #f4f7f8; /* Establece el color de fondo. */
     }
 
-    /* clase para establecer la fila del encabezado */
     .fila_encabezado_usuarios {
-        border-bottom: 1px solid #dce4e8;
+        border-bottom: 1px solid #dce4e8; /* Define el borde inferior. */
     }
 
+/* SUBTITULO 1 COLUMNAS TABLA */
 
-    /* SUBTITULO 1 COLUMNAS TABLA */
+    .columna_nombre_usuarios {
+        width: 18%; /* Define el ancho del elemento. */
+        padding: 13px 14px; /* Define el espacio interior del elemento. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        color: #667881; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
 
-        /* clase para establecer la columna nombre */
-        .columna_nombre_usuarios {
-            width: 18%;
-            padding: 13px 14px;
-            text-align: left;
-            color: #667881;
-            font-family: Arial, sans-serif;
-            font-size: 11px;
-            font-weight: bold;
-            box-sizing: border-box;
-        }
+    .columna_email_usuarios {
+        width: 26%; /* Define el ancho del elemento. */
+        padding: 13px 14px; /* Define el espacio interior del elemento. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        color: #667881; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
 
-        /* clase para establecer la columna email */
-        .columna_email_usuarios {
-            width: 26%;
-            padding: 13px 14px;
-            text-align: left;
-            color: #667881;
-            font-family: Arial, sans-serif;
-            font-size: 11px;
-            font-weight: bold;
-            box-sizing: border-box;
-        }
+    .columna_rol_tabla_usuarios {
+        width: 15%; /* Define el ancho del elemento. */
+        padding: 13px 14px; /* Define el espacio interior del elemento. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        color: #667881; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
 
-        /* clase para establecer la columna rol */
-        .columna_rol_tabla_usuarios {
-            width: 15%;
-            padding: 13px 14px;
-            text-align: center;
-            color: #667881;
-            font-family: Arial, sans-serif;
-            font-size: 11px;
-            font-weight: bold;
-            box-sizing: border-box;
-        }
+    .columna_estado_tabla_usuarios {
+        width: 12%; /* Define el ancho del elemento. */
+        padding: 13px 14px; /* Define el espacio interior del elemento. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        color: #667881; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
 
-        /* clase para establecer la columna estado */
-        .columna_estado_tabla_usuarios {
-            width: 12%;
-            padding: 13px 14px;
-            text-align: center;
-            color: #667881;
-            font-family: Arial, sans-serif;
-            font-size: 11px;
-            font-weight: bold;
-            box-sizing: border-box;
-        }
+    .columna_fecha_creacion_usuarios {
+        width: 17%; /* Define el ancho del elemento. */
+        padding: 13px 14px; /* Define el espacio interior del elemento. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        color: #667881; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
 
-        /* clase para establecer la columna fecha de creación */
-        .columna_fecha_creacion_usuarios {
-            width: 17%;
-            padding: 13px 14px;
-            text-align: center;
-            color: #667881;
-            font-family: Arial, sans-serif;
-            font-size: 11px;
-            font-weight: bold;
-            box-sizing: border-box;
-        }
-
-        /* clase para establecer la columna acciones */
-        .columna_acciones_usuarios {
-            width: 12%;
-            padding: 13px 14px;
-            text-align: center;
-            color: #667881;
-            font-family: Arial, sans-serif;
-            font-size: 11px;
-            font-weight: bold;
-            box-sizing: border-box;
-        }
-
+    .columna_acciones_usuarios {
+        width: 12%; /* Define el ancho del elemento. */
+        padding: 13px 14px; /* Define el espacio interior del elemento. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        color: #667881; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
 
 /* TITULO 6 DATOS TABLA USUARIOS */
 
-    /* clase para establecer cada fila de usuario */
     .fila_usuario {
-        height: 56px;
-        border-bottom: 1px solid #edf1f3;
+        height: 56px; /* Define el alto del elemento. */
+        border-bottom: 1px solid #edf1f3; /* Define el borde inferior. */
     }
 
-    /* cambia el fondo de la fila al posicionar el cursor */
     .fila_usuario:hover {
-        background-color: #f8fafb;
+        background-color: #f8fafb; /* Establece el color de fondo. */
     }
 
-    /* clase para establecer el dato nombre */
     .dato_nombre_usuarios {
-        padding: 14px;
-        color: #263a45;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        font-weight: bold;
-        text-align: left;
-        vertical-align: middle;
-        box-sizing: border-box;
+        padding: 14px; /* Define el espacio interior del elemento. */
+        color: #263a45; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        vertical-align: middle; /* Define la alineación vertical del contenido. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para establecer el dato email */
     .dato_email_usuarios {
-        padding: 14px;
-        color: #647782;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        text-align: left;
-        vertical-align: middle;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        box-sizing: border-box;
+        padding: 14px; /* Define el espacio interior del elemento. */
+        color: #647782; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        vertical-align: middle; /* Define la alineación vertical del contenido. */
+        overflow: hidden; /* Controla el contenido que supera las dimensiones del elemento. */
+        text-overflow: ellipsis; /* Define cómo se indica el texto que no cabe. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para establecer el dato rol */
     .dato_rol_usuarios {
-        padding: 14px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        text-align: center;
-        vertical-align: middle;
-        box-sizing: border-box;
+        padding: 14px; /* Define el espacio interior del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        vertical-align: middle; /* Define la alineación vertical del contenido. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para establecer el dato estado */
     .dato_estado_usuarios {
-        padding: 14px;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        text-align: center;
-        vertical-align: middle;
-        box-sizing: border-box;
+        padding: 14px; /* Define el espacio interior del elemento. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        vertical-align: middle; /* Define la alineación vertical del contenido. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para establecer un usuario activo */
     .estado_usuario_activo {
-        min-width: 62px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 5px 10px;
-        background-color: #e5f5ed;
-        color: #2f9164;
-        border-radius: 14px;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        font-weight: bold;
-        box-sizing: border-box;
+        min-width: 62px; /* Establece el ancho mínimo del elemento. */
+        display: inline-flex; /* Organiza el contenido con Flexbox dentro de la línea. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        padding: 5px 10px; /* Define el espacio interior del elemento. */
+        background-color: #e5f5ed; /* Establece el color de fondo. */
+        color: #2f9164; /* Establece el color del texto. */
+        border-radius: 14px; /* Define el redondeado de las esquinas. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para establecer un usuario inactivo */
     .estado_usuario_inactivo {
-        min-width: 62px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 5px 10px;
-        background-color: #fceaea;
-        color: #c75b5b;
-        border-radius: 14px;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        font-weight: bold;
-        box-sizing: border-box;
+        min-width: 62px; /* Establece el ancho mínimo del elemento. */
+        display: inline-flex; /* Organiza el contenido con Flexbox dentro de la línea. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        padding: 5px 10px; /* Define el espacio interior del elemento. */
+        background-color: #fceaea; /* Establece el color de fondo. */
+        color: #c75b5b; /* Establece el color del texto. */
+        border-radius: 14px; /* Define el redondeado de las esquinas. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para establecer la fecha de creación */
     .dato_fecha_creacion_usuarios {
-        padding: 14px;
-        color: #536873;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        text-align: center;
-        vertical-align: middle;
-        white-space: nowrap;
-        box-sizing: border-box;
+        padding: 14px; /* Define el espacio interior del elemento. */
+        color: #536873; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        vertical-align: middle; /* Define la alineación vertical del contenido. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para establecer las acciones */
     .dato_acciones_usuarios {
-        padding: 14px;
-        color: #536873;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        text-align: center;
-        vertical-align: middle;
-        box-sizing: border-box;
+        padding: 14px; /* Define el espacio interior del elemento. */
+        color: #536873; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        vertical-align: middle; /* Define la alineación vertical del contenido. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para establecer la fila temporal sin usuarios */
     .fila_sin_usuarios {
-        border-bottom: 1px solid #edf1f3;
+        border-bottom: 1px solid #edf1f3; /* Define el borde inferior. */
     }
 
-    /* clase para establecer el mensaje cuando no existen usuarios */
     .dato_sin_usuarios {
-        padding: 38px 15px;
-        text-align: center;
-        color: #84939a;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
+        padding: 38px 15px; /* Define el espacio interior del elemento. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        color: #84939a; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
     }
-
 
 /* TITULO 7 FORMULARIO USUARIO */
 
-    /* clase para establecer el fondo superpuesto del formulario */
     .contenedor_formulario_usuario {
-        width: 100%;
-        min-height: 100vh;
-        min-height: 100dvh;
-        height: auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: fixed;
-        inset: 0;
-        padding: 16px;
-        overflow-y: auto;
-        background-color: rgba(5, 31, 45, 0.55);
-        z-index: 1100;
-        box-sizing: border-box;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-height: 100vh; /* Establece el alto mínimo del elemento. */
+        min-height: 100dvh; /* Establece el alto mínimo del elemento. */
+        height: auto; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        position: fixed; /* Define el sistema de posicionamiento del elemento. */
+        inset: 0; /* Define las distancias respecto a los bordes del contenedor. */
+        padding: 16px; /* Define el espacio interior del elemento. */
+        overflow-y: auto; /* Controla el contenido que desborda verticalmente. */
+        background-color: rgba(5, 31, 45, 0.55); /* Establece el color de fondo. */
+        z-index: 1100; /* Define el orden de superposición del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para ocultar el formulario */
     .contenedor_formulario_usuario_oculto {
-        display: none;
+        display: none; /* Oculta el elemento. */
     }
 
-    /* clase para establecer el diseño principal del formulario */
     .formulario_usuario {
-        width: 620px;
-        max-width: calc(100% - 40px);
-        max-height: none;
-        height: auto;
-        flex: 0 0 auto;
-        background-color: #ffffff;
-        border-radius: 8px;
-        padding: 23px;
-        box-sizing: border-box;
+        width: 620px; /* Define el ancho del elemento. */
+        max-width: calc(100% - 40px); /* Limita el ancho máximo del elemento. */
+        max-height: none; /* Limita el alto máximo del elemento. */
+        height: auto; /* Define el alto del elemento. */
+        flex: 0 0 auto; /* Define cómo el elemento ocupa el espacio disponible en Flexbox. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        padding: 23px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
-
 
 /* TITULO 8 CABECERA FORMULARIO */
 
-    /* clase para organizar el título y cierre */
     .cabecera_formulario_usuario {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 22px;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: space-between; /* Define la distribución de los elementos en el eje principal. */
+        margin-bottom: 22px; /* Define el margen inferior. */
     }
 
-    /* clase para establecer el título del formulario */
     .titulo_formulario_usuario {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 20px;
-        font-weight: bold;
+        color: #0b3650; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 20px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
     }
 
-    /* clase para establecer la opción de cierre */
     .boton_cerrar_formulario_usuario {
-        width: 32px;
-        height: 32px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #64727a;
-        font-family: Arial, sans-serif;
-        font-size: 25px;
-        cursor: pointer;
-        border-radius: 5px;
+        width: 32px; /* Define el ancho del elemento. */
+        height: 32px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        color: #64727a; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 25px; /* Define el tamaño del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        border-radius: 5px; /* Define el redondeado de las esquinas. */
     }
 
-    /* cambia el fondo del cierre al posicionar el cursor */
     .boton_cerrar_formulario_usuario:hover {
-        background-color: #edf1f3;
+        background-color: #edf1f3; /* Establece el color de fondo. */
     }
-
 
 /* TITULO 9 CAMPOS FORMULARIO */
 
-    /* clase para distribuir los campos del usuario */
     .contenedor_campos_usuario {
-        width: 100%;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 17px;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: 1fr 1fr; /* Define la distribución y el ancho de las columnas. */
+        gap: 17px; /* Define la separación entre los elementos. */
     }
 
-    /* clase para organizar el campo nombre */
     .campo_nombre_usuario {
-        display: flex;
-        flex-direction: column;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
-    /* clase para establecer el texto del campo nombre */
     .texto_campo_nombre_usuario {
-        color: #425966;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 6px;
+        color: #425966; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
     }
 
-    /* clase para establecer el campo nombre */
     .input_nombre_usuario {
-        height: 40px;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        padding: 0 10px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        outline: none;
-        box-sizing: border-box;
+        height: 40px; /* Define el alto del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        padding: 0 10px; /* Define el espacio interior del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        outline: none; /* Define el contorno visual del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para organizar el campo email */
     .campo_email_usuario {
-        display: flex;
-        flex-direction: column;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
-    /* clase para establecer el texto del campo email */
     .texto_campo_email_usuario {
-        color: #425966;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 6px;
+        color: #425966; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
     }
 
-    /* clase para establecer el campo email */
     .input_email_usuario {
-        height: 40px;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        padding: 0 10px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        outline: none;
-        box-sizing: border-box;
+        height: 40px; /* Define el alto del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        padding: 0 10px; /* Define el espacio interior del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        outline: none; /* Define el contorno visual del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para organizar el campo contraseña */
     .campo_password_usuario {
-        display: flex;
-        flex-direction: column;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
-    .contenedor_password_usuario { position: relative; width: 100%; }
-    .contenedor_password_usuario input { width: 100%; padding-right: 42px; }
-    .boton_ver_contrasena_usuario { position: absolute; top: 2px; right: 2px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 5px; background: transparent; cursor: pointer; }
-    .boton_ver_contrasena_usuario:hover { background: #effafb; }
-    .boton_ver_contrasena_usuario:focus-visible { outline: 2px solid #159ba3; outline-offset: -2px; }
-    .icono_ojo_usuario { width: 18px; height: 18px; object-fit: contain; }
+    .contenedor_password_usuario {
+        position: relative; /* Define el sistema de posicionamiento del elemento. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+    }
 
-    /* clase para establecer el texto del campo contraseña */
+    .contenedor_password_usuario input {
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        padding-right: 42px; /* Define el espacio interior derecho. */
+    }
+
+    .boton_ver_contrasena_usuario {
+        position: absolute; /* Define el sistema de posicionamiento del elemento. */
+        top: 2px; /* Define la posición respecto al borde superior. */
+        right: 2px; /* Define la posición respecto al borde derecho. */
+        width: 36px; /* Define el ancho del elemento. */
+        height: 36px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        padding: 0; /* Define el espacio interior del elemento. */
+        border: 0; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 5px; /* Define el redondeado de las esquinas. */
+        background: transparent; /* Define el fondo del elemento. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+    }
+
+    .boton_ver_contrasena_usuario:hover {
+        background: #effafb; /* Define el fondo del elemento. */
+    }
+
+    .boton_ver_contrasena_usuario:focus-visible {
+        outline: 2px solid #159ba3; /* Define el contorno visual del elemento. */
+        outline-offset: -2px; /* Define la separación entre el contorno y el borde. */
+    }
+
+    .icono_ojo_usuario {
+        width: 18px; /* Define el ancho del elemento. */
+        height: 18px; /* Define el alto del elemento. */
+        object-fit: contain; /* Define cómo se ajusta la imagen dentro de sus dimensiones. */
+    }
+
     .texto_campo_password_usuario {
-        color: #425966;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 6px;
+        color: #425966; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
     }
 
-    /* clase para establecer el campo contraseña */
     .input_password_usuario {
-        height: 40px;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        padding: 0 10px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        outline: none;
-        box-sizing: border-box;
+        height: 40px; /* Define el alto del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        padding: 0 10px; /* Define el espacio interior del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        outline: none; /* Define el contorno visual del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    .ayuda_politica_contrasena_usuario { margin-top: 5px; color: #71818a; font: 11px/1.4 Arial, sans-serif; }
+    .ayuda_politica_contrasena_usuario {
+        margin-top: 5px; /* Define el margen superior. */
+        color: #71818a; /* Establece el color del texto. */
+        font: 11px/1.4 Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+    }
 
-    /* clase para organizar el campo confirmar contraseña */
     .campo_confirmar_password_usuario {
-        display: flex;
-        flex-direction: column;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
-    /* clase para establecer el texto del campo confirmar contraseña */
     .texto_campo_confirmar_password_usuario {
-        color: #425966;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 6px;
+        color: #425966; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
     }
 
-    /* clase para establecer el campo confirmar contraseña */
     .input_confirmar_password_usuario {
-        height: 40px;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        padding: 0 10px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        outline: none;
-        box-sizing: border-box;
+        height: 40px; /* Define el alto del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        padding: 0 10px; /* Define el espacio interior del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        outline: none; /* Define el contorno visual del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para organizar el campo rol */
     .campo_rol_usuario {
-        display: flex;
-        flex-direction: column;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
-    /* clase para establecer el texto del campo rol */
     .texto_campo_rol_usuario {
-        color: #425966;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 6px;
+        color: #425966; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
     }
 
-    /* clase para establecer el selector de rol */
     .select_rol_usuario {
-        height: 40px;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        padding: 0 10px;
-        background-color: #ffffff;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        outline: none;
-        box-sizing: border-box;
+        height: 40px; /* Define el alto del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        padding: 0 10px; /* Define el espacio interior del elemento. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        outline: none; /* Define el contorno visual del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para establecer las opciones de rol */
     .opcion_rol_usuario {
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
     }
-
 
 /* TITULO 10 ACCIONES FORMULARIO */
 
-    /* clase para organizar las opciones inferiores */
     .contenedor_acciones_formulario_usuario {
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;
-        gap: 10px;
-        margin-top: 24px;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        justify-content: flex-end; /* Define la distribución de los elementos en el eje principal. */
+        gap: 10px; /* Define la separación entre los elementos. */
+        margin-top: 24px; /* Define el margen superior. */
     }
 
-    /* clase para establecer la opción cancelar */
     .boton_cancelar_usuario {
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0 16px;
-        background-color: #edf1f3;
-        color: #44515a;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        font-weight: bold;
-        border-radius: 5px;
-        cursor: pointer;
-        box-sizing: border-box;
+        height: 40px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        padding: 0 16px; /* Define el espacio interior del elemento. */
+        background-color: #edf1f3; /* Establece el color de fondo. */
+        color: #44515a; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        border-radius: 5px; /* Define el redondeado de las esquinas. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* cambia el fondo de cancelar al posicionar el cursor */
     .boton_cancelar_usuario:hover {
-        background-color: #dfe6e9;
+        background-color: #dfe6e9; /* Establece el color de fondo. */
     }
 
-    /* clase para establecer la opción guardar usuario */
     .boton_guardar_usuario {
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0 16px;
-        background-color: #159ba3;
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        font-weight: bold;
-        border-radius: 5px;
-        cursor: pointer;
-        box-sizing: border-box;
+        height: 40px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        padding: 0 16px; /* Define el espacio interior del elemento. */
+        background-color: #159ba3; /* Establece el color de fondo. */
+        color: #ffffff; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        border-radius: 5px; /* Define el redondeado de las esquinas. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    .boton_guardar_usuario[hidden] { display: none !important; }
+    .boton_guardar_usuario[hidden] {
+        display: none !important; /* Define cómo se muestra y distribuye el elemento. */
+    }
 
-    /* cambia el fondo de guardar usuario al posicionar el cursor */
     .boton_guardar_usuario:hover {
-        background-color: #0f858d;
+        background-color: #0f858d; /* Establece el color de fondo. */
     }
-
 
 /* TITULO 11 RESPONSIVE USUARIOS */
 
-    /* adapta los indicadores para pantallas medianas */
-    @media (max-width: 1100px) {
-
+    @media (max-width: 1200px) {
         .contenedor_indicadores_usuarios {
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(2, 1fr); /* Define la distribución y el ancho de las columnas. */
         }
-
     }
 
+/* TITULO 12 RESPONSIVE (MAX-WIDTH: 1024PX) */
 
-    /* adapta filtros y formulario para tablets */
-    @media (max-width: 900px) {
-
+    @media (max-width: 1024px) {
         .contenedor_filtros_usuarios {
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
         }
 
         .contenedor_campos_usuario {
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
         }
-
     }
 
+/* TITULO 13 RESPONSIVE (MAX-WIDTH: 600PX) */
 
-    /* adapta la vista para dispositivos móviles */
     @media (max-width: 600px) {
-
         .contenedor_usuarios {
-            padding: 18px;
+            padding: 18px; /* Define el espacio interior del elemento. */
         }
 
         .contenedor_encabezado_usuarios {
-            align-items: flex-start;
-            flex-direction: column;
-            gap: 16px;
+            align-items: flex-start; /* Define la alineación de los elementos en el eje transversal. */
+            flex-direction: column; /* Organiza los elementos en una columna. */
+            gap: 16px; /* Define la separación entre los elementos. */
         }
 
         .boton_nuevo_usuario {
-            width: 100%;
+            width: 100%; /* Ocupa todo el ancho disponible. */
         }
 
         .contenedor_indicadores_usuarios {
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
         }
 
         .formulario_usuario {
-            max-width: calc(100% - 24px);
-            padding: 20px;
+            max-width: calc(100% - 24px); /* Limita el ancho máximo del elemento. */
+            padding: 20px; /* Define el espacio interior del elemento. */
         }
 
         .contenedor_acciones_formulario_usuario {
-            flex-direction: column;
+            flex-direction: column; /* Organiza los elementos en una columna. */
         }
 
         .boton_cancelar_usuario {
-            width: 100%;
+            width: 100%; /* Ocupa todo el ancho disponible. */
         }
 
         .boton_guardar_usuario {
-            width: 100%;
+            width: 100%; /* Ocupa todo el ancho disponible. */
         }
-
     }
 
-/* TITULO 12 FILTROS Y SELECTORES PERSONALIZADOS */
+/* TITULO 14 FILTROS Y SELECTORES PERSONALIZADOS */
 
-    /* mantiene el diseño de filtros de la vista Productos */
     .contenedor_filtros_usuarios {
-        grid-template-columns: minmax(190px, 2fr) repeat(2, minmax(130px, 1fr)) auto;
-        gap: 12px;
-        align-items: end;
-        overflow: visible;
+        grid-template-columns: minmax(190px, 2fr) repeat(2, minmax(130px, 1fr)) auto; /* Define la distribución y el ancho de las columnas. */
+        gap: 12px; /* Define la separación entre los elementos. */
+        align-items: end; /* Define la alineación de los elementos en el eje transversal. */
+        overflow: visible; /* Controla el contenido que supera las dimensiones del elemento. */
     }
 
-    .contenedor_busqueda_usuarios,
-    .contenedor_rol_usuarios,
-    .contenedor_estado_usuarios,
-    .campo_rol_usuario { min-width: 0; }
+    .contenedor_busqueda_usuarios, .contenedor_rol_usuarios, .contenedor_estado_usuarios, .campo_rol_usuario {
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+    }
 
-    .selector_personalizado_usuarios { position: relative; width: 100%; min-width: 0; }
+    .selector_personalizado_usuarios {
+        position: relative; /* Define el sistema de posicionamiento del elemento. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+    }
 
     .boton_selector_usuarios {
-        display: flex; align-items: center; justify-content: space-between;
-        width: 100%; height: 40px; gap: 9px; padding: 0 12px;
-        border: 1px solid #ced9de; border-radius: 6px; box-sizing: border-box;
-        background: #ffffff; color: #37434b; font: 13px Arial, sans-serif;
-        text-align: left; cursor: pointer;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: space-between; /* Define la distribución de los elementos en el eje principal. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 40px; /* Define el alto del elemento. */
+        gap: 9px; /* Define la separación entre los elementos. */
+        padding: 0 12px; /* Define el espacio interior del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        background: #ffffff; /* Define el fondo del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font: 13px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
     }
+
     .boton_selector_usuarios > span:first-child {
-        overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+        overflow: hidden; /* Controla el contenido que supera las dimensiones del elemento. */
+        text-overflow: ellipsis; /* Define cómo se indica el texto que no cabe. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
-    .boton_selector_usuarios > span:last-child { flex-shrink: 0; color: #415865; }
-    .boton_selector_usuarios:hover { border-color: #159ba3; }
+
+    .boton_selector_usuarios > span:last-child {
+        flex-shrink: 0; /* Define cuánto puede reducirse el elemento en Flexbox. */
+        color: #415865; /* Establece el color del texto. */
+    }
+
+    .boton_selector_usuarios:hover {
+        border-color: #159ba3; /* Establece el color del borde. */
+    }
+
     .boton_selector_usuarios[aria-expanded="true"] {
-        border-color: #159ba3; box-shadow: 0 0 0 2px #e4f6f6;
+        border-color: #159ba3; /* Establece el color del borde. */
+        box-shadow: 0 0 0 2px #e4f6f6; /* Agrega o ajusta la sombra del elemento. */
     }
-    .boton_selector_usuarios:disabled { opacity: .68; cursor: not-allowed; background: #f4f7f8; }
 
-    /* lista anclada debajo del control, sin extenderse a otra columna */
+    .boton_selector_usuarios:disabled {
+        opacity: .68; /* Define el nivel de opacidad. */
+        cursor: not-allowed; /* Define el cursor al situarlo sobre el elemento. */
+        background: #f4f7f8; /* Define el fondo del elemento. */
+    }
+
     .panel_selector_usuarios {
-        position: absolute; left: 0; top: calc(100% + 5px);
-        width: 100%; max-width: 100%; padding: 7px;
-        border: 1px solid #ced9de; border-radius: 7px;
-        background: #ffffff; box-shadow: 0 8px 24px rgba(5,31,45,.15);
-        z-index: 1300; box-sizing: border-box;
+        position: absolute; /* Define el sistema de posicionamiento del elemento. */
+        left: 0; /* Define la posición respecto al borde izquierdo. */
+        top: calc(100% + 5px); /* Define la posición respecto al borde superior. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        max-width: 100%; /* Evita que el elemento supere el ancho disponible. */
+        padding: 7px; /* Define el espacio interior del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        background: #ffffff; /* Define el fondo del elemento. */
+        box-shadow: 0 8px 24px rgba(5,31,45,.15); /* Agrega o ajusta la sombra del elemento. */
+        z-index: 1300; /* Define el orden de superposición del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
-    .panel_selector_usuarios[hidden] { display: none !important; }
-    .lista_selector_usuarios { max-height: 220px; overflow-y: auto; }
+
+    .panel_selector_usuarios[hidden] {
+        display: none !important; /* Define cómo se muestra y distribuye el elemento. */
+    }
+
+    .lista_selector_usuarios {
+        max-height: 220px; /* Limita el alto máximo del elemento. */
+        overflow-y: auto; /* Controla el contenido que desborda verticalmente. */
+    }
+
     .opcion_selector_usuarios {
-        display: block; width: 100%; border: 0; padding: 10px 12px;
-        border-radius: 5px; background: #ffffff; color: #37434b;
-        font: 13px Arial, sans-serif; text-align: left; cursor: pointer;
+        display: block; /* Muestra el elemento como un bloque. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        border: 0; /* Define el grosor, el estilo y el color del borde. */
+        padding: 10px 12px; /* Define el espacio interior del elemento. */
+        border-radius: 5px; /* Define el redondeado de las esquinas. */
+        background: #ffffff; /* Define el fondo del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font: 13px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
     }
-    .opcion_selector_usuarios:hover,
+
+    .opcion_selector_usuarios:hover, .opcion_selector_usuarios[aria-selected="true"] {
+        background: #e4f6f6; /* Define el fondo del elemento. */
+        color: #0f858d; /* Establece el color del texto. */
+    }
+
     .opcion_selector_usuarios[aria-selected="true"] {
-        background: #e4f6f6; color: #0f858d;
+        font-weight: bold; /* Define el grosor del texto. */
     }
-    .opcion_selector_usuarios[aria-selected="true"] { font-weight: bold; }
 
-    /* evita mostrar los select nativos utilizados solo para guardar el valor */
-    .select_rol_usuario[hidden] { display: none !important; }
+    .select_rol_usuario[hidden] {
+        display: none !important; /* Define cómo se muestra y distribuye el elemento. */
+    }
 
-    .contenedor_limpiar_filtros_usuarios { display: flex; align-items: end; min-width: 0; }
+    .contenedor_limpiar_filtros_usuarios {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: end; /* Define la alineación de los elementos en el eje transversal. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+    }
+
     .boton_limpiar_filtros_usuarios {
-        height: 40px; padding: 0 14px; border: 1px solid #159ba3;
-        border-radius: 6px; background: #ffffff; color: #0f858d;
-        font: bold 12px Arial, sans-serif; white-space: nowrap;
-        cursor: pointer; box-sizing: border-box;
+        height: 40px; /* Define el alto del elemento. */
+        padding: 0 14px; /* Define el espacio interior del elemento. */
+        border: 1px solid #159ba3; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        background: #ffffff; /* Define el fondo del elemento. */
+        color: #0f858d; /* Establece el color del texto. */
+        font: bold 12px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
-    .boton_limpiar_filtros_usuarios:hover { background: #e4f6f6; }
 
-/* TITULO 13 BOTONES DE ACCIONES USUARIOS */
+    .boton_limpiar_filtros_usuarios:hover {
+        background: #e4f6f6; /* Define el fondo del elemento. */
+    }
 
-    .contenedor_acciones_usuario { display: flex; justify-content: center; align-items: center; gap: 7px; }
+/* TITULO 15 BOTONES DE ACCIONES USUARIOS */
+
+    .contenedor_acciones_usuario {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 7px; /* Define la separación entre los elementos. */
+    }
+
     .boton_accion_usuario {
-        width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center;
-        background: #ffffff; border: 1px solid #dce4e8; border-radius: 8px;
-        color: #159ba3; cursor: pointer; flex-shrink: 0;
+        width: 32px; /* Define el ancho del elemento. */
+        height: 32px; /* Define el alto del elemento. */
+        display: inline-flex; /* Organiza el contenido con Flexbox dentro de la línea. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        background: #ffffff; /* Define el fondo del elemento. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        color: #159ba3; /* Establece el color del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        flex-shrink: 0; /* Define cuánto puede reducirse el elemento en Flexbox. */
     }
-    .contenedor_acciones_usuario { gap: 4px; }
-    .boton_accion_usuario svg { width: 17px; height: 17px; }
-    .boton_accion_usuario:hover { background: #e4f6f6; border-color: #159ba3; }
-    .boton_desactivar_usuario { color: #d58226; border-color: #f5c892; }
-    .boton_desactivar_usuario:hover { background: #fff4e7; border-color: #d58226; }
-    .boton_activar_usuario { color: #159ba3; }
-    .boton_accion_usuario:disabled { opacity: .45; cursor: not-allowed; }
-    .columna_acciones_usuarios { width: 16%; }
-    .columna_nombre_usuarios { width: 17%; }
-    .columna_email_usuarios { width: 25%; }
-    .columna_rol_tabla_usuarios { width: 14%; }
-    .columna_estado_tabla_usuarios { width: 10%; }
-    .columna_fecha_creacion_usuarios { width: 18%; }
-    .dato_acciones_usuarios { padding: 6px 2px; }
-    .fila_usuario_inactivo { opacity: .78; }
-    .tabla_usuarios { min-width: 0; width: 100%; }
-    .cabecera_contenedor_tabla_usuarios { min-width: 0; }
-    .columna_nombre_usuarios { width: 17%; }
-    .columna_email_usuarios { width: 24%; }
-    .columna_rol_tabla_usuarios { width: 14%; }
-    .columna_estado_tabla_usuarios { width: 11%; }
-    .columna_fecha_creacion_usuarios { width: 18%; }
-    .columna_acciones_usuarios { width: 16%; padding-left: 4px; padding-right: 4px; }
 
-/* TITULO 14 FORMULARIO USUARIO */
+    .contenedor_acciones_usuario {
+        gap: 4px; /* Define la separación entre los elementos. */
+    }
 
-    .contenedor_formulario_usuario:not(.contenedor_formulario_usuario_oculto) { display: flex; align-items: center; justify-content: center; overflow-y: auto; padding: 16px; }
-    .formulario_usuario { display: block; width: min(620px, 100%); max-width: 100%; max-height: none; height: auto; flex: 0 0 auto; margin: auto; overflow: visible; }
-    .contenedor_campos_usuario { display: grid !important; overflow: visible !important; }
-    .campo_rol_usuario { display: flex !important; visibility: visible !important; }
-    .contenedor_acciones_formulario_usuario { display: flex !important; visibility: visible !important; min-height: 40px; }
-    #boton_cancelar_usuario, #boton_guardar_usuario:not([hidden]) { display: flex !important; visibility: visible !important; }
-    .boton_guardar_usuario, .boton_cancelar_usuario { border: none; }
-    .boton_guardar_usuario:disabled { opacity: .6; cursor: not-allowed; }
-    .contenedor_campos_usuario > div { min-width: 0; }
-    .contenedor_campos_usuario input { width: 100%; }
-    .campo_password_usuario[hidden], .campo_confirmar_password_usuario[hidden],
-    .contenedor_acciones_formulario_usuario [hidden] { display: none !important; }
+    .boton_accion_usuario svg {
+        width: 17px; /* Define el ancho del elemento. */
+        height: 17px; /* Define el alto del elemento. */
+    }
+
+    .boton_accion_usuario:hover {
+        background: #e4f6f6; /* Define el fondo del elemento. */
+        border-color: #159ba3; /* Establece el color del borde. */
+    }
+
+    .boton_desactivar_usuario {
+        color: #d58226; /* Establece el color del texto. */
+        border-color: #f5c892; /* Establece el color del borde. */
+    }
+
+    .boton_desactivar_usuario:hover {
+        background: #fff4e7; /* Define el fondo del elemento. */
+        border-color: #d58226; /* Establece el color del borde. */
+    }
+
+    .boton_activar_usuario {
+        color: #159ba3; /* Establece el color del texto. */
+    }
+
+    .boton_accion_usuario:disabled {
+        opacity: .45; /* Define el nivel de opacidad. */
+        cursor: not-allowed; /* Define el cursor al situarlo sobre el elemento. */
+    }
+
+    .columna_acciones_usuarios {
+        width: 16%; /* Define el ancho del elemento. */
+    }
+
+    .columna_nombre_usuarios {
+        width: 17%; /* Define el ancho del elemento. */
+    }
+
+    .columna_email_usuarios {
+        width: 25%; /* Define el ancho del elemento. */
+    }
+
+    .columna_rol_tabla_usuarios {
+        width: 14%; /* Define el ancho del elemento. */
+    }
+
+    .columna_estado_tabla_usuarios {
+        width: 10%; /* Define el ancho del elemento. */
+    }
+
+    .columna_fecha_creacion_usuarios {
+        width: 18%; /* Define el ancho del elemento. */
+    }
+
+    .dato_acciones_usuarios {
+        padding: 6px 2px; /* Define el espacio interior del elemento. */
+    }
+
+    .fila_usuario_inactivo {
+        opacity: .78; /* Define el nivel de opacidad. */
+    }
+
+    .tabla_usuarios {
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+    }
+
+    .cabecera_contenedor_tabla_usuarios {
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+    }
+
+    .columna_nombre_usuarios {
+        width: 17%; /* Define el ancho del elemento. */
+    }
+
+    .columna_email_usuarios {
+        width: 24%; /* Define el ancho del elemento. */
+    }
+
+    .columna_rol_tabla_usuarios {
+        width: 14%; /* Define el ancho del elemento. */
+    }
+
+    .columna_estado_tabla_usuarios {
+        width: 11%; /* Define el ancho del elemento. */
+    }
+
+    .columna_fecha_creacion_usuarios {
+        width: 18%; /* Define el ancho del elemento. */
+    }
+
+    .columna_acciones_usuarios {
+        width: 16%; /* Define el ancho del elemento. */
+        padding-left: 4px; /* Define el espacio interior izquierdo. */
+        padding-right: 4px; /* Define el espacio interior derecho. */
+    }
+
+/* TITULO 16 FORMULARIO USUARIO */
+
+    .contenedor_formulario_usuario:not(.contenedor_formulario_usuario_oculto) {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        overflow-y: auto; /* Controla el contenido que desborda verticalmente. */
+        padding: 16px; /* Define el espacio interior del elemento. */
+    }
+
+    .formulario_usuario {
+        display: block; /* Muestra el elemento como un bloque. */
+        width: min(620px, 100%); /* Define el ancho del elemento. */
+        max-width: 100%; /* Evita que el elemento supere el ancho disponible. */
+        max-height: none; /* Limita el alto máximo del elemento. */
+        height: auto; /* Define el alto del elemento. */
+        flex: 0 0 auto; /* Define cómo el elemento ocupa el espacio disponible en Flexbox. */
+        margin: auto; /* Define el margen exterior del elemento. */
+        overflow: visible; /* Controla el contenido que supera las dimensiones del elemento. */
+    }
+
+    .contenedor_campos_usuario {
+        display: grid !important; /* Define cómo se muestra y distribuye el elemento. */
+        overflow: visible !important; /* Controla el contenido que supera las dimensiones del elemento. */
+    }
+
+    .campo_rol_usuario {
+        display: flex !important; /* Define cómo se muestra y distribuye el elemento. */
+        visibility: visible !important; /* Define la visibilidad conservando su espacio. */
+    }
+
+    .contenedor_acciones_formulario_usuario {
+        display: flex !important; /* Define cómo se muestra y distribuye el elemento. */
+        visibility: visible !important; /* Define la visibilidad conservando su espacio. */
+        min-height: 40px; /* Establece el alto mínimo del elemento. */
+    }
+
+    #boton_cancelar_usuario, #boton_guardar_usuario:not([hidden]) {
+        display: flex !important; /* Define cómo se muestra y distribuye el elemento. */
+        visibility: visible !important; /* Define la visibilidad conservando su espacio. */
+    }
+
+    .boton_guardar_usuario, .boton_cancelar_usuario {
+        border: none; /* Define el grosor, el estilo y el color del borde. */
+    }
+
+    .boton_guardar_usuario:disabled {
+        opacity: .6; /* Define el nivel de opacidad. */
+        cursor: not-allowed; /* Define el cursor al situarlo sobre el elemento. */
+    }
+
+    .contenedor_campos_usuario > div {
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+    }
+
+    .contenedor_campos_usuario input {
+        width: 100%; /* Ocupa todo el ancho disponible. */
+    }
+
+    .campo_password_usuario[hidden], .campo_confirmar_password_usuario[hidden], .contenedor_acciones_formulario_usuario [hidden] {
+        display: none !important; /* Define cómo se muestra y distribuye el elemento. */
+    }
+
+/* TITULO 17 RESPONSIVE (MAX-HEIGHT: 700PX) */
 
     @media (max-height: 700px) {
-        .contenedor_formulario_usuario { padding-top: 10px; padding-bottom: 10px; }
-        .formulario_usuario { padding: 18px; }
-        .cabecera_formulario_usuario { margin-bottom: 14px; }
-        .contenedor_campos_usuario { gap: 12px; }
-        .contenedor_acciones_formulario_usuario { margin-top: 16px; }
+        .contenedor_formulario_usuario {
+            padding-top: 10px; /* Define el espacio interior superior. */
+            padding-bottom: 10px; /* Define el espacio interior inferior. */
+        }
+
+        .formulario_usuario {
+            padding: 18px; /* Define el espacio interior del elemento. */
+        }
+
+        .cabecera_formulario_usuario {
+            margin-bottom: 14px; /* Define el margen inferior. */
+        }
+
+        .contenedor_campos_usuario {
+            gap: 12px; /* Define la separación entre los elementos. */
+        }
+
+        .contenedor_acciones_formulario_usuario {
+            margin-top: 16px; /* Define el margen superior. */
+        }
     }
 
-/* TITULO 15 MODAL CENTRADO DE ALERTAS Y CONFIRMACIONES */
+/* TITULO 18 MODAL CENTRADO DE ALERTAS Y CONFIRMACIONES */
 
     .contenedor_alerta_usuarios {
-        position: fixed; inset: 0; height: 100vh; height: 100dvh; width: 100%;
-        display: flex; align-items: center; justify-content: center;
-        padding: 18px; box-sizing: border-box; background: rgba(5,31,45,.58); z-index: 3000;
-    }
-    .contenedor_alerta_usuarios[hidden] { display: none !important; }
-    .modal_alerta_usuarios {
-        --color_alerta: #159ba3; --fondo_alerta: #e4f6f6;
-        width: 420px; max-width: 100%; max-height: calc(100dvh - 36px); overflow-y: auto;
-        padding: 28px; border: 1px solid #dce4e8; border-radius: 12px;
-        background: #ffffff; box-shadow: 0 18px 50px rgba(5,31,45,.22);
-        box-sizing: border-box; font-family: Arial, sans-serif; text-align: center;
-    }
-    .modal_alerta_usuarios[data-tipo="error"] { --color_alerta: #dc2626; --fondo_alerta: #fee8e8; }
-    .modal_alerta_usuarios[data-tipo="advertencia"] { --color_alerta: #d58226; --fondo_alerta: #fff0df; }
-    .modal_alerta_usuarios[data-tipo="informacion"] { --color_alerta: #0b6572; --fondo_alerta: #e4f6f6; }
-    .icono_alerta_usuarios {
-        width: 56px; height: 56px; display: flex; align-items: center; justify-content: center;
-        margin: 0 auto 18px; border-radius: 50%; color: var(--color_alerta);
-        background: var(--fondo_alerta); font-size: 27px; font-weight: bold;
-    }
-    .titulo_alerta_usuarios { margin-bottom: 10px; color: #0b3650; font-size: 20px; font-weight: bold; }
-    .mensaje_alerta_usuarios { color: #536873; font-size: 14px; line-height: 1.55;
-        white-space: pre-line; overflow-wrap: anywhere; }
-    .acciones_alerta_usuarios { display: flex; justify-content: center; flex-wrap: wrap;
-        gap: 10px; margin-top: 25px; }
-    .boton_cancelar_alerta_usuarios, .boton_aceptar_alerta_usuarios {
-        min-width: 122px; min-height: 42px; padding: 0 17px; border-radius: 6px;
-        font: bold 13px Arial, sans-serif; cursor: pointer;
-    }
-    .boton_cancelar_alerta_usuarios { border: 1px solid #dce4e8; background: #edf1f3; color: #44515a; }
-    .boton_cancelar_alerta_usuarios:hover { background: #dfe6e9; }
-    .boton_aceptar_alerta_usuarios { border: 1px solid #159ba3; background: #159ba3; color: white; }
-    .boton_aceptar_alerta_usuarios:hover { background: #0f858d; }
-    .boton_selector_usuarios:focus-visible, .opcion_selector_usuarios:focus-visible,
-    .boton_accion_usuario:focus-visible, .boton_limpiar_filtros_usuarios:focus-visible,
-    .boton_aceptar_alerta_usuarios:focus-visible, .boton_cancelar_alerta_usuarios:focus-visible,
-    .boton_guardar_usuario:focus-visible, .input_busqueda_usuarios:focus-visible {
-        outline: 2px solid #159ba3; outline-offset: 2px;
+        position: fixed; /* Define el sistema de posicionamiento del elemento. */
+        inset: 0; /* Define las distancias respecto a los bordes del contenedor. */
+        height: 100vh; /* Define el alto del elemento. */
+        height: 100dvh; /* Define el alto del elemento. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        padding: 18px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        background: rgba(5,31,45,.58); /* Define el fondo del elemento. */
+        z-index: 3000; /* Define el orden de superposición del elemento. */
     }
 
-/* TITULO 16 RESPONSIVE EXTRA */
-    @media (max-width: 1200px) and (min-width: 901px) {
-        .contenedor_filtros_usuarios { grid-template-columns: repeat(2, minmax(0,1fr)); }
-        .contenedor_busqueda_usuarios { grid-column: 1 / -1; }
+    .contenedor_alerta_usuarios[hidden] {
+        display: none !important; /* Define cómo se muestra y distribuye el elemento. */
     }
-    @media (max-width: 900px) { .contenedor_filtros_usuarios { grid-template-columns: 1fr; } }
+
+    .modal_alerta_usuarios {
+        --color_alerta: #159ba3; /* Define una variable de estilo reutilizable. */
+        --fondo_alerta: #e4f6f6; /* Define una variable de estilo reutilizable. */
+        width: 420px; /* Define el ancho del elemento. */
+        max-width: 100%; /* Evita que el elemento supere el ancho disponible. */
+        max-height: calc(100dvh - 36px); /* Limita el alto máximo del elemento. */
+        overflow-y: auto; /* Controla el contenido que desborda verticalmente. */
+        padding: 28px; /* Define el espacio interior del elemento. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 12px; /* Define el redondeado de las esquinas. */
+        background: #ffffff; /* Define el fondo del elemento. */
+        box-shadow: 0 18px 50px rgba(5,31,45,.22); /* Agrega o ajusta la sombra del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+    }
+
+    .modal_alerta_usuarios[data-tipo="error"] {
+        --color_alerta: #dc2626; /* Define una variable de estilo reutilizable. */
+        --fondo_alerta: #fee8e8; /* Define una variable de estilo reutilizable. */
+    }
+
+    .modal_alerta_usuarios[data-tipo="advertencia"] {
+        --color_alerta: #d58226; /* Define una variable de estilo reutilizable. */
+        --fondo_alerta: #fff0df; /* Define una variable de estilo reutilizable. */
+    }
+
+    .modal_alerta_usuarios[data-tipo="informacion"] {
+        --color_alerta: #0b6572; /* Define una variable de estilo reutilizable. */
+        --fondo_alerta: #e4f6f6; /* Define una variable de estilo reutilizable. */
+    }
+
+    .icono_alerta_usuarios {
+        width: 56px; /* Define el ancho del elemento. */
+        height: 56px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        margin: 0 auto 18px; /* Define el margen exterior del elemento. */
+        border-radius: 50%; /* Define el redondeado de las esquinas. */
+        color: var(--color_alerta); /* Establece el color del texto. */
+        background: var(--fondo_alerta); /* Define el fondo del elemento. */
+        font-size: 27px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+    }
+
+    .titulo_alerta_usuarios {
+        margin-bottom: 10px; /* Define el margen inferior. */
+        color: #0b3650; /* Establece el color del texto. */
+        font-size: 20px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+    }
+
+    .mensaje_alerta_usuarios {
+        color: #536873; /* Establece el color del texto. */
+        font-size: 14px; /* Define el tamaño del texto. */
+        line-height: 1.55; /* Define la separación entre líneas de texto. */
+        white-space: pre-line; /* Define cómo se conservan los espacios y los saltos de línea. */
+        overflow-wrap: anywhere; /* Permite controlar el salto de palabras largas. */
+    }
+
+    .acciones_alerta_usuarios {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        flex-wrap: wrap; /* Define si los elementos pueden pasar a otra línea. */
+        gap: 10px; /* Define la separación entre los elementos. */
+        margin-top: 25px; /* Define el margen superior. */
+    }
+
+    .boton_cancelar_alerta_usuarios, .boton_aceptar_alerta_usuarios {
+        min-width: 122px; /* Establece el ancho mínimo del elemento. */
+        min-height: 42px; /* Establece el alto mínimo del elemento. */
+        padding: 0 17px; /* Define el espacio interior del elemento. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        font: bold 13px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+    }
+
+    .boton_cancelar_alerta_usuarios {
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        background: #edf1f3; /* Define el fondo del elemento. */
+        color: #44515a; /* Establece el color del texto. */
+    }
+
+    .boton_cancelar_alerta_usuarios:hover {
+        background: #dfe6e9; /* Define el fondo del elemento. */
+    }
+
+    .boton_aceptar_alerta_usuarios {
+        border: 1px solid #159ba3; /* Define el grosor, el estilo y el color del borde. */
+        background: #159ba3; /* Define el fondo del elemento. */
+        color: white; /* Establece el color del texto. */
+    }
+
+    .boton_aceptar_alerta_usuarios:hover {
+        background: #0f858d; /* Define el fondo del elemento. */
+    }
+
+    .boton_selector_usuarios:focus-visible, .opcion_selector_usuarios:focus-visible, .boton_accion_usuario:focus-visible, .boton_limpiar_filtros_usuarios:focus-visible, .boton_aceptar_alerta_usuarios:focus-visible, .boton_cancelar_alerta_usuarios:focus-visible, .boton_guardar_usuario:focus-visible, .input_busqueda_usuarios:focus-visible {
+        outline: 2px solid #159ba3; /* Define el contorno visual del elemento. */
+        outline-offset: 2px; /* Define la separación entre el contorno y el borde. */
+    }
+
+/* TITULO 19 RESPONSIVE EXTRA */
+
+    @media (max-width: 1200px) and (min-width: 1025px) {
+        .contenedor_filtros_usuarios {
+            grid-template-columns: repeat(2, minmax(0,1fr)); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .contenedor_busqueda_usuarios {
+            grid-column: 1 / -1; /* Define las columnas que ocupa el elemento. */
+        }
+    }
+
+/* TITULO 20 RESPONSIVE (MAX-WIDTH: 1024PX) */
+
+    @media (max-width: 1024px) {
+        .contenedor_filtros_usuarios {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+        }
+    }
+
+/* TITULO 21 RESPONSIVE (MAX-WIDTH: 600PX) */
+
     @media (max-width: 600px) {
-        .contenedor_limpiar_filtros_usuarios, .boton_limpiar_filtros_usuarios { width: 100%; }
-        .contenedor_formulario_usuario { padding: 12px; }
-        .formulario_usuario { max-width: 100%; }
+        .contenedor_limpiar_filtros_usuarios, .boton_limpiar_filtros_usuarios {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+        }
+
+        .contenedor_formulario_usuario {
+            padding: 12px; /* Define el espacio interior del elemento. */
+        }
+
+        .formulario_usuario {
+            max-width: 100%; /* Evita que el elemento supere el ancho disponible. */
+        }
     }

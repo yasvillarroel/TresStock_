@@ -1,1503 +1,1475 @@
 /* TITULO 1 CONTENEDOR PROVEEDORES */
 
-    /* clase para establecer el espacio general de la vista de proveedores */
     .contenedor_proveedores {
-        width: 100%;
-        padding: 28px;
-        box-sizing: border-box;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        padding: 28px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
-
 
 /* TITULO 2 ENCABEZADO PROVEEDORES */
 
-    /* clase para organizar el encabezado principal de la vista */
     .contenedor_encabezado_proveedores {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 22px;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: space-between; /* Define la distribución de los elementos en el eje principal. */
+        margin-bottom: 22px; /* Define el margen inferior. */
     }
 
-    /* clase para organizar el título y descripción */
     .contenedor_informacion_proveedores {
-        display: flex;
-        flex-direction: column;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
-    /* clase para establecer el título de proveedores */
     .titulo_proveedores {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 5px;
+        color: #0b3650; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 24px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-bottom: 5px; /* Define el margen inferior. */
     }
 
-    /* clase para establecer la descripción */
     .descripcion_proveedores {
-        color: #71818a;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
+        color: #71818a; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
     }
 
-    /* clase para establecer la opción nuevo proveedor */
     .boton_nuevo_proveedor {
-        height: 42px;
-        display: flex;
-        align-items: center;
-        background-color: #159ba3;
-        padding: 0 17px;
-        border-radius: 6px;
-        cursor: pointer;
-        box-sizing: border-box;
+        height: 42px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        background-color: #159ba3; /* Establece el color de fondo. */
+        padding: 0 17px; /* Define el espacio interior del elemento. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* cambia el fondo de nuevo proveedor al posicionar el cursor */
     .boton_nuevo_proveedor:hover {
-        background-color: #0f858d;
+        background-color: #0f858d; /* Establece el color de fondo. */
     }
 
-    /* clase para establecer el icono de nuevo proveedor */
     .icono_nuevo_proveedor {
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size: 21px;
-        font-weight: bold;
-        margin-right: 8px;
+        color: #ffffff; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 21px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-right: 8px; /* Define el margen derecho. */
     }
 
-    /* clase para establecer el texto de nuevo proveedor */
     .texto_nuevo_proveedor {
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        font-weight: bold;
+        color: #ffffff; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
     }
-
 
 /* TITULO 3 INDICADORES PROVEEDORES */
 
-    /* clase para distribuir los indicadores de proveedores */
     .contenedor_indicadores_proveedores {
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 16px;
-        margin-bottom: 22px;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: repeat(4, 1fr); /* Define la distribución y el ancho de las columnas. */
+        gap: 16px; /* Define la separación entre los elementos. */
+        margin-bottom: 22px; /* Define el margen inferior. */
     }
 
-    /* clase para establecer la tarjeta total proveedores */
     .tarjeta_total_proveedores {
-        min-height: 105px;
-        display: flex;
-        align-items: center;
-        background-color: #ffffff;
-        border: 1px solid #dce4e8;
-        border-radius: 8px;
-        padding: 18px;
-        box-sizing: border-box;
+        min-height: 105px; /* Establece el alto mínimo del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        padding: 18px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para establecer el tamaño de los iconos de los indicadores */
     .imagen_icono_indicador_proveedores {
-        width: 24px;
-        height: 24px;
+        width: 24px; /* Define el ancho del elemento. */
+        height: 24px; /* Define el alto del elemento. */
     }
 
-    /* clase para establecer el icono total proveedores */
     .icono_total_proveedores {
-        width: 46px;
-        height: 46px;
-        background-color: #E4F6F6;
-        border-radius: 8px;
-        margin-right: 14px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        width: 46px; /* Define el ancho del elemento. */
+        height: 46px; /* Define el alto del elemento. */
+        background-color: #E4F6F6; /* Establece el color de fondo. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        margin-right: 14px; /* Define el margen derecho. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
     }
 
-    /* clase para organizar el contenido total proveedores */
     .contenido_total_proveedores {
-        display: flex;
-        flex-direction: column;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
-    /* clase para establecer el texto total proveedores */
     .texto_total_proveedores {
-        color: #0B3650;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        margin-bottom: 6px;
+        color: #0B3650; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
     }
 
-    /* clase para establecer el valor total proveedores */
     .valor_total_proveedores {
-        color: #0B3650;
-        font-family: Arial, sans-serif;
-        font-size: 23px;
-        font-weight: bold;
+        color: #0B3650; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 23px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
     }
 
-
-    /* clase para establecer la tarjeta proveedores asociados */
     .tarjeta_proveedores_asociados {
-        min-height: 105px;
-        display: flex;
-        align-items: center;
-        background-color: #ffffff;
-        border: 1px solid #dce4e8;
-        border-radius: 8px;
-        padding: 18px;
-        box-sizing: border-box;
+        min-height: 105px; /* Establece el alto mínimo del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        padding: 18px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para establecer el icono proveedores asociados */
     .icono_proveedores_asociados {
-        width: 46px;
-        height: 46px;
-        background-color: #E8F1FC;
-        border-radius: 8px;
-        margin-right: 14px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        width: 46px; /* Define el ancho del elemento. */
+        height: 46px; /* Define el alto del elemento. */
+        background-color: #E8F1FC; /* Establece el color de fondo. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        margin-right: 14px; /* Define el margen derecho. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
     }
 
-    /* clase para organizar el contenido proveedores asociados */
     .contenido_proveedores_asociados {
-        display: flex;
-        flex-direction: column;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
-    /* clase para establecer el texto proveedores asociados */
     .texto_proveedores_asociados {
-        color: #697a83;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        margin-bottom: 6px;
+        color: #697a83; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
     }
 
-    /* clase para establecer el valor proveedores asociados */
     .valor_proveedores_asociados {
-        color: #3869A8;
-        font-family: Arial, sans-serif;
-        font-size: 23px;
-        font-weight: bold;
+        color: #3869A8; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 23px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
     }
 
-
-    /* clase para establecer la tarjeta productos asociados */
     .tarjeta_productos_asociados_proveedores {
-        min-height: 105px;
-        display: flex;
-        align-items: center;
-        background-color: #ffffff;
-        border: 1px solid #dce4e8;
-        border-radius: 8px;
-        padding: 18px;
-        box-sizing: border-box;
+        min-height: 105px; /* Establece el alto mínimo del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        padding: 18px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para establecer el icono productos asociados */
     .icono_productos_asociados_proveedores {
-        width: 46px;
-        height: 46px;
-        background-color: #FFF2DC;
-        border-radius: 8px;
-        margin-right: 14px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        width: 46px; /* Define el ancho del elemento. */
+        height: 46px; /* Define el alto del elemento. */
+        background-color: #FFF2DC; /* Establece el color de fondo. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        margin-right: 14px; /* Define el margen derecho. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
     }
 
-    /* clase para organizar el contenido productos asociados */
     .contenido_productos_asociados_proveedores {
-        display: flex;
-        flex-direction: column;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
-    /* clase para establecer el texto productos asociados */
     .texto_productos_asociados_proveedores {
-        color: #697a83;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        margin-bottom: 6px;
+        color: #697a83; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
     }
 
-    /* clase para establecer el valor productos asociados */
     .valor_productos_asociados_proveedores {
-        color: #D58226;
-        font-family: Arial, sans-serif;
-        font-size: 23px;
-        font-weight: bold;
+        color: #D58226; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 23px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
     }
 
-
-    /* clase para establecer la tarjeta productos sin proveedor */
     .tarjeta_productos_sin_proveedor {
-        min-height: 105px;
-        display: flex;
-        align-items: center;
-        background-color: #ffffff;
-        border: 1px solid #dce4e8;
-        border-radius: 8px;
-        padding: 18px;
-        box-sizing: border-box;
+        min-height: 105px; /* Establece el alto mínimo del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        padding: 18px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para establecer el icono productos sin proveedor */
     .icono_productos_sin_proveedor {
-        width: 46px;
-        height: 46px;
-        background-color: #FBE7E7;
-        border-radius: 8px;
-        margin-right: 14px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        width: 46px; /* Define el ancho del elemento. */
+        height: 46px; /* Define el alto del elemento. */
+        background-color: #FBE7E7; /* Establece el color de fondo. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        margin-right: 14px; /* Define el margen derecho. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
     }
 
-    /* clase para organizar el contenido productos sin proveedor */
     .contenido_productos_sin_proveedor {
-        display: flex;
-        flex-direction: column;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
-    /* clase para establecer el texto productos sin proveedor */
     .texto_productos_sin_proveedor {
-        color: #697a83;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        margin-bottom: 6px;
+        color: #697a83; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
     }
 
-    /* clase para establecer el valor productos sin proveedor */
     .valor_productos_sin_proveedor {
-        color: #D94B4B;
-        font-family: Arial, sans-serif;
-        font-size: 23px;
-        font-weight: bold;
+        color: #D94B4B; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 23px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
     }
-
 
 /* SUBTITULO 1 INDICADORES DE ABASTECIMIENTO */
 
-    /* evita que nombres largos ensanchen las tarjetas */
     .contenido_proveedores_asociados {
-        min-width: 0;
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
     }
 
-    /* nombre del proveedor que abastece más productos */
     .detalle_proveedor_mas_productos {
-        color: #697a83;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        line-height: 15px;
-        margin-top: 4px;
-        overflow-wrap: anywhere;
+        color: #697a83; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        line-height: 15px; /* Define la separación entre líneas de texto. */
+        margin-top: 4px; /* Define el margen superior. */
+        overflow-wrap: anywhere; /* Permite controlar el salto de palabras largas. */
     }
 
-    /* distingue visualmente los proveedores con información incompleta */
     .valor_productos_asociados_proveedores {
-        color: #d58226;
+        color: #d58226; /* Establece el color del texto. */
     }
 
-    /* alerta de proveedores con productos agotados */
     .valor_productos_sin_proveedor {
-        color: #d94b4b;
+        color: #d94b4b; /* Establece el color del texto. */
     }
-
 
 /* TITULO 4 BUSQUEDA PROVEEDORES */
 
-    /* clase para establecer el contenedor del buscador */
     .contenedor_busqueda_proveedores {
-        width: 100%;
-        background-color: #ffffff;
-        border: 1px solid #dce4e8;
-        border-radius: 8px;
-        padding: 18px;
-        margin-bottom: 20px;
-        box-sizing: border-box;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        padding: 18px; /* Define el espacio interior del elemento. */
+        margin-bottom: 20px; /* Define el margen inferior. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para organizar el campo de búsqueda */
     .campo_busqueda_proveedores {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
-    /* clase para establecer el texto del buscador */
     .texto_busqueda_proveedores {
-        color: #536873;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 7px;
+        color: #536873; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-bottom: 7px; /* Define el margen inferior. */
     }
 
-    /* clase para establecer el campo de búsqueda */
     .input_busqueda_proveedores {
-        width: 100%;
-        height: 40px;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        padding: 0 12px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        box-sizing: border-box;
-        outline: none;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 40px; /* Define el alto del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        padding: 0 12px; /* Define el espacio interior del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        outline: none; /* Define el contorno visual del elemento. */
     }
-
 
 /* TITULO 5 TABLA PROVEEDORES */
 
-    /* clase para establecer el contenedor visual de la tabla */
     .contenedor_tabla_proveedores {
-        width: 100%;
-        background-color: #ffffff;
-        border: 1px solid #dce4e8;
-        border-radius: 8px;
-        overflow-x: auto;
-        box-sizing: border-box;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        overflow-x: auto; /* Permite desplazar horizontalmente el contenido cuando no cabe. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para establecer la cabecera visual de la tabla */
     .cabecera_contenedor_tabla_proveedores {
-        min-width: 0;
-        padding: 17px 18px;
-        border-bottom: 1px solid #e2e8eb;
-        box-sizing: border-box;
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        padding: 17px 18px; /* Define el espacio interior del elemento. */
+        border-bottom: 1px solid #e2e8eb; /* Define el borde inferior. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para establecer el título de la tabla */
     .titulo_tabla_proveedores {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        font-weight: bold;
+        color: #0b3650; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 14px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
     }
 
-    /* clase para establecer la estructura general de la tabla */
     .tabla_proveedores {
-        width: 100%;
-        min-width: 0;
-        border-collapse: collapse;
-        table-layout: fixed;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        border-collapse: collapse; /* Define cómo se combinan los bordes de las celdas. */
+        table-layout: fixed; /* Define cómo se calcula el ancho de las columnas de la tabla. */
     }
 
-    /* clase para establecer el encabezado de la tabla */
     .encabezado_tabla_proveedores {
-        background-color: #f4f7f8;
+        background-color: #f4f7f8; /* Establece el color de fondo. */
     }
 
-    /* clase para establecer la fila del encabezado */
     .fila_encabezado_proveedores {
-        border-bottom: 1px solid #dce4e8;
+        border-bottom: 1px solid #dce4e8; /* Define el borde inferior. */
     }
 
-    /* clase para establecer la columna nombre comercial */
     .columna_nombre_proveedores {
-        width: 13%;
-        padding: 13px 12px;
-        text-align: left;
-        color: #667881;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        box-sizing: border-box;
+        width: 13%; /* Define el ancho del elemento. */
+        padding: 13px 12px; /* Define el espacio interior del elemento. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        color: #667881; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-
-    /* clase para establecer la columna razón social */
     .columna_razon_social_proveedores {
-        width: 18%;
-        padding: 13px 12px;
-        text-align: left;
-        color: #667881;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        box-sizing: border-box;
+        width: 18%; /* Define el ancho del elemento. */
+        padding: 13px 12px; /* Define el espacio interior del elemento. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        color: #667881; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-
-    /* clase para establecer la columna RUT */
     .columna_rut_proveedores {
-        width: 9%;
-        padding: 13px 12px;
-        text-align: center;
-        color: #667881;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        box-sizing: border-box;
+        width: 9%; /* Define el ancho del elemento. */
+        padding: 13px 12px; /* Define el espacio interior del elemento. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        color: #667881; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-
-    /* clase para establecer la columna teléfono */
     .columna_telefono_proveedores {
-        width: 9%;
-        padding: 13px 12px;
-        text-align: center;
-        color: #667881;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        box-sizing: border-box;
+        width: 9%; /* Define el ancho del elemento. */
+        padding: 13px 12px; /* Define el espacio interior del elemento. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        color: #667881; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-
-    /* clase para establecer la columna email */
     .columna_email_proveedores {
-        width: 14%;
-        padding: 13px 12px;
-        text-align: left;
-        color: #667881;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        box-sizing: border-box;
+        width: 14%; /* Define el ancho del elemento. */
+        padding: 13px 12px; /* Define el espacio interior del elemento. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        color: #667881; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-
-    /* clase para establecer la columna dirección */
     .columna_direccion_proveedores {
-        width: 14%;
-        padding: 13px 12px;
-        text-align: left;
-        color: #667881;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        box-sizing: border-box;
+        width: 14%; /* Define el ancho del elemento. */
+        padding: 13px 12px; /* Define el espacio interior del elemento. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        color: #667881; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-
-    /* clase para establecer la columna tiempo de entrega */
     .columna_tiempo_entrega_proveedores {
-        width: 11%;
-        padding: 13px 8px;
-        text-align: center;
-        color: #667881;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        box-sizing: border-box;
+        width: 11%; /* Define el ancho del elemento. */
+        padding: 13px 8px; /* Define el espacio interior del elemento. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        color: #667881; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-
-    /* clase para establecer la columna acciones */
     .columna_acciones_proveedores {
-        width: 12%;
-        padding: 13px 12px;
-        text-align: center;
-        color: #667881;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        box-sizing: border-box;
+        width: 12%; /* Define el ancho del elemento. */
+        padding: 13px 12px; /* Define el espacio interior del elemento. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        color: #667881; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-
-    /* clase para establecer las filas de proveedores */
     .fila_proveedor {
-        min-height: 56px;
-        border-bottom: 1px solid #edf1f3;
+        min-height: 56px; /* Establece el alto mínimo del elemento. */
+        border-bottom: 1px solid #edf1f3; /* Define el borde inferior. */
     }
 
-
-    /* cambia el fondo de una fila al posicionar el cursor */
     .fila_proveedor:hover {
-        background-color: #f8fafb;
+        background-color: #f8fafb; /* Establece el color de fondo. */
     }
 
-
-    /* clase para establecer el nombre comercial */
     .dato_nombre_proveedores {
-        padding: 14px 12px;
-        color: #263a45;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        text-align: left;
-        vertical-align: middle;
-        box-sizing: border-box;
+        padding: 14px 12px; /* Define el espacio interior del elemento. */
+        color: #263a45; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        vertical-align: middle; /* Define la alineación vertical del contenido. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-
-    /* clase para establecer la razón social */
     .dato_razon_social_proveedores {
-        padding: 14px 12px;
-        color: #536873;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        text-align: left;
-        vertical-align: middle;
-        box-sizing: border-box;
+        padding: 14px 12px; /* Define el espacio interior del elemento. */
+        color: #536873; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        vertical-align: middle; /* Define la alineación vertical del contenido. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-
-    /* clase para establecer el RUT */
     .dato_rut_proveedores {
-        padding: 14px 12px;
-        color: #536873;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        text-align: center;
-        vertical-align: middle;
-        white-space: nowrap;
-        box-sizing: border-box;
+        padding: 14px 12px; /* Define el espacio interior del elemento. */
+        color: #536873; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        vertical-align: middle; /* Define la alineación vertical del contenido. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-
-    /* clase para establecer el teléfono */
     .dato_telefono_proveedores {
-        padding: 14px 12px;
-        color: #536873;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        text-align: center;
-        vertical-align: middle;
-        white-space: nowrap;
-        box-sizing: border-box;
+        padding: 14px 12px; /* Define el espacio interior del elemento. */
+        color: #536873; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        vertical-align: middle; /* Define la alineación vertical del contenido. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-
-    /* clase para establecer el correo */
     .dato_email_proveedores {
-        padding: 14px 12px;
-        color: #536873;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        text-align: left;
-        vertical-align: middle;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        box-sizing: border-box;
+        padding: 14px 12px; /* Define el espacio interior del elemento. */
+        color: #536873; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        vertical-align: middle; /* Define la alineación vertical del contenido. */
+        overflow: hidden; /* Controla el contenido que supera las dimensiones del elemento. */
+        text-overflow: ellipsis; /* Define cómo se indica el texto que no cabe. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-
-    /* clase para establecer la dirección */
     .dato_direccion_proveedores {
-        padding: 14px 12px;
-        color: #536873;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        text-align: left;
-        vertical-align: middle;
-        box-sizing: border-box;
+        padding: 14px 12px; /* Define el espacio interior del elemento. */
+        color: #536873; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        vertical-align: middle; /* Define la alineación vertical del contenido. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-
-    /* clase para establecer el tiempo de entrega */
     .dato_tiempo_entrega_proveedores {
-        padding: 14px 8px;
-        color: #536873;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        text-align: center;
-        vertical-align: middle;
-        white-space: nowrap;
-        box-sizing: border-box;
+        padding: 14px 8px; /* Define el espacio interior del elemento. */
+        color: #536873; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        vertical-align: middle; /* Define la alineación vertical del contenido. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-
-    /* clase para organizar las acciones */
     .dato_acciones_proveedores {
-        padding: 10px 8px;
-        text-align: center;
-        vertical-align: middle;
-        box-sizing: border-box;
+        padding: 10px 8px; /* Define el espacio interior del elemento. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        vertical-align: middle; /* Define la alineación vertical del contenido. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-
-    /* mantiene los botones de acciones ordenados en una sola fila */
     .contenedor_acciones_proveedores {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-        white-space: nowrap;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        gap: 6px; /* Define la separación entre los elementos. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
 
-
-    /* mismo tamaño y apariencia de los botones de productos */
-    .boton_editar_proveedor,
-    .boton_eliminar_proveedor {
-        width: 36px;
-        height: 36px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        background-color: #ffffff;
-        border: 1px solid #dce4e8;
-        border-radius: 7px;
-        padding: 7px;
-        cursor: pointer;
-        box-sizing: border-box;
-        transition: background-color 0.2s, border-color 0.2s;
+    .boton_editar_proveedor, .boton_eliminar_proveedor {
+        width: 36px; /* Define el ancho del elemento. */
+        height: 36px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        flex-shrink: 0; /* Define cuánto puede reducirse el elemento en Flexbox. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        padding: 7px; /* Define el espacio interior del elemento. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        transition: background-color 0.2s, border-color 0.2s; /* Define la transición entre los cambios de estilo. */
     }
 
-
-    /* establece el tamaño de los iconos */
-    .boton_editar_proveedor svg,
-    .boton_eliminar_proveedor svg {
-        width: 20px;
-        height: 20px;
+    .boton_editar_proveedor svg, .boton_eliminar_proveedor svg {
+        width: 20px; /* Define el ancho del elemento. */
+        height: 20px; /* Define el alto del elemento. */
     }
 
-
-    /* color del botón editar */
     .boton_editar_proveedor {
-        color: #159ba3;
+        color: #159ba3; /* Establece el color del texto. */
     }
 
-
-    /* cambia el fondo de editar al posicionar el cursor */
     .boton_editar_proveedor:hover {
-        background-color: #e4f6f6;
-        border-color: #159ba3;
+        background-color: #e4f6f6; /* Establece el color de fondo. */
+        border-color: #159ba3; /* Establece el color del borde. */
     }
 
-
-    /* color del botón eliminar */
     .boton_eliminar_proveedor {
-        color: #ef4444;
-        border-color: #ffdddd;
+        color: #ef4444; /* Establece el color del texto. */
+        border-color: #ffdddd; /* Establece el color del borde. */
     }
 
-
-    /* cambia el fondo de eliminar al posicionar el cursor */
     .boton_eliminar_proveedor:hover {
-        background-color: #fff0f0;
-        border-color: #ef4444;
+        background-color: #fff0f0; /* Establece el color de fondo. */
+        border-color: #ef4444; /* Establece el color del borde. */
     }
 
-    /* clase para establecer la fila temporal sin proveedores */
     .fila_sin_proveedores {
-        border-bottom: 1px solid #edf1f3;
+        border-bottom: 1px solid #edf1f3; /* Define el borde inferior. */
     }
 
-    /* clase para establecer el mensaje cuando no existen proveedores */
     .dato_sin_proveedores {
-        padding: 38px 15px;
-        text-align: center;
-        color: #84939a;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
+        padding: 38px 15px; /* Define el espacio interior del elemento. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        color: #84939a; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
     }
-
 
 /* TITULO 6 FORMULARIO PROVEEDOR */
 
-    /* clase para establecer el fondo superpuesto del formulario */
     .contenedor_formulario_proveedor {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: fixed;
-        top: 0;
-        left: 0;
-        background-color: rgba(5, 31, 45, 0.55);
-        z-index: 1100;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 100%; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        position: fixed; /* Define el sistema de posicionamiento del elemento. */
+        top: 0; /* Define la posición respecto al borde superior. */
+        left: 0; /* Define la posición respecto al borde izquierdo. */
+        background-color: rgba(5, 31, 45, 0.55); /* Establece el color de fondo. */
+        z-index: 1100; /* Define el orden de superposición del elemento. */
     }
 
-    /* clase para ocultar el formulario */
     .contenedor_formulario_proveedor_oculto {
-        display: none;
+        display: none; /* Oculta el elemento. */
     }
 
-    /* clase para establecer el diseño principal del formulario */
     .formulario_proveedor {
-        width: 620px;
-        max-width: calc(100% - 40px);
-        max-height: calc(100vh - 40px);
-        overflow-y: auto;
-        background-color: #ffffff;
-        border-radius: 8px;
-        padding: 23px;
-        box-sizing: border-box;
+        width: 620px; /* Define el ancho del elemento. */
+        max-width: calc(100% - 40px); /* Limita el ancho máximo del elemento. */
+        max-height: calc(100vh - 40px); /* Limita el alto máximo del elemento. */
+        overflow-y: auto; /* Controla el contenido que desborda verticalmente. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        padding: 23px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
-
 
 /* TITULO 7 CABECERA FORMULARIO */
 
-    /* clase para organizar el título y cierre */
     .cabecera_formulario_proveedor {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 22px;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: space-between; /* Define la distribución de los elementos en el eje principal. */
+        margin-bottom: 22px; /* Define el margen inferior. */
     }
 
-    /* clase para establecer el título del formulario */
     .titulo_formulario_proveedor {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 20px;
-        font-weight: bold;
+        color: #0b3650; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 20px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
     }
 
-    /* clase para establecer la opción de cierre */
     .boton_cerrar_formulario_proveedor {
-        width: 32px;
-        height: 32px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #64727a;
-        font-family: Arial, sans-serif;
-        font-size: 25px;
-        cursor: pointer;
-        border-radius: 5px;
+        width: 32px; /* Define el ancho del elemento. */
+        height: 32px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        color: #64727a; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 25px; /* Define el tamaño del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        border-radius: 5px; /* Define el redondeado de las esquinas. */
     }
 
-    /* cambia el fondo del cierre al posicionar el cursor */
     .boton_cerrar_formulario_proveedor:hover {
-        background-color: #edf1f3;
+        background-color: #edf1f3; /* Establece el color de fondo. */
     }
-
 
 /* TITULO 8 CAMPOS FORMULARIO */
 
-    /* clase para distribuir los campos del proveedor */
     .contenedor_campos_proveedor {
-        width: 100%;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 17px;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: 1fr 1fr; /* Define la distribución y el ancho de las columnas. */
+        gap: 17px; /* Define la separación entre los elementos. */
     }
 
-    /* clase para organizar el campo nombre */
     .campo_nombre_proveedor {
-        display: flex;
-        flex-direction: column;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
-    /* clase para establecer el texto del campo nombre */
     .texto_campo_nombre_proveedor {
-        color: #425966;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 6px;
+        color: #425966; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
     }
 
-    /* clase para establecer el campo nombre */
     .input_nombre_proveedor {
-        height: 40px;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        padding: 0 10px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        outline: none;
-        box-sizing: border-box;
+        height: 40px; /* Define el alto del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        padding: 0 10px; /* Define el espacio interior del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        outline: none; /* Define el contorno visual del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para organizar el campo teléfono */
     .campo_telefono_proveedor {
-        display: flex;
-        flex-direction: column;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
-    /* clase para establecer el texto del campo teléfono */
     .texto_campo_telefono_proveedor {
-        color: #425966;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 6px;
+        color: #425966; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
     }
 
-    /* clase para establecer el campo teléfono */
     .input_telefono_proveedor {
-        height: 40px;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        padding: 0 10px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        outline: none;
-        box-sizing: border-box;
+        height: 40px; /* Define el alto del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        padding: 0 10px; /* Define el espacio interior del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        outline: none; /* Define el contorno visual del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para organizar el campo email */
     .campo_email_proveedor {
-        display: flex;
-        flex-direction: column;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
-    /* clase para establecer el texto del campo email */
     .texto_campo_email_proveedor {
-        color: #425966;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 6px;
+        color: #425966; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
     }
 
-    /* clase para establecer el campo email */
     .input_email_proveedor {
-        height: 40px;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        padding: 0 10px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        outline: none;
-        box-sizing: border-box;
+        height: 40px; /* Define el alto del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        padding: 0 10px; /* Define el espacio interior del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        outline: none; /* Define el contorno visual del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para organizar el campo dirección */
     .campo_direccion_proveedor {
-        display: flex;
-        flex-direction: column;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
-    /* clase para establecer el texto del campo dirección */
     .texto_campo_direccion_proveedor {
-        color: #425966;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 6px;
+        color: #425966; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
     }
 
-    /* clase para establecer el campo dirección */
     .input_direccion_proveedor {
-        height: 40px;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        padding: 0 10px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        outline: none;
-        box-sizing: border-box;
+        height: 40px; /* Define el alto del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        padding: 0 10px; /* Define el espacio interior del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        outline: none; /* Define el contorno visual del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-        /* clase para organizar el campo razón social */
     .campo_razon_social_proveedor {
-        display: flex;
-        flex-direction: column;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
-
-    /* clase para establecer el texto del campo razón social */
     .texto_campo_razon_social_proveedor {
-        color: #425966;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 6px;
+        color: #425966; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
     }
 
-
-    /* clase para establecer el campo razón social */
     .input_razon_social_proveedor {
-        height: 40px;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        padding: 0 10px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        outline: none;
-        box-sizing: border-box;
+        height: 40px; /* Define el alto del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        padding: 0 10px; /* Define el espacio interior del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        outline: none; /* Define el contorno visual del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-
-    /* clase para organizar el campo RUT */
     .campo_rut_proveedor {
-        display: flex;
-        flex-direction: column;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
-
-    /* clase para establecer el texto del campo RUT */
     .texto_campo_rut_proveedor {
-        color: #425966;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 6px;
+        color: #425966; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
     }
 
-
-    /* clase para establecer el campo RUT */
     .input_rut_proveedor {
-        height: 40px;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        padding: 0 10px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        outline: none;
-        box-sizing: border-box;
+        height: 40px; /* Define el alto del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        padding: 0 10px; /* Define el espacio interior del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        outline: none; /* Define el contorno visual del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-
-    /* clase para organizar el campo tiempo de entrega */
     .campo_tiempo_entrega_proveedor {
-        display: flex;
-        flex-direction: column;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
-    /* clase para establecer el texto del campo tiempo de entrega */
     .texto_campo_tiempo_entrega_proveedor {
-        color: #425966;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 6px;
+        color: #425966; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
     }
 
-    /* clase para establecer el campo tiempo de entrega */
     .input_tiempo_entrega_proveedor {
-        height: 40px;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        padding: 0 10px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        outline: none;
-        box-sizing: border-box;
+        height: 40px; /* Define el alto del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        padding: 0 10px; /* Define el espacio interior del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        outline: none; /* Define el contorno visual del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
-
 
 /* TITULO 9 ACCIONES FORMULARIO */
 
-    /* clase para organizar las opciones inferiores del formulario */
     .contenedor_acciones_formulario_proveedor {
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;
-        gap: 10px;
-        margin-top: 24px;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        justify-content: flex-end; /* Define la distribución de los elementos en el eje principal. */
+        gap: 10px; /* Define la separación entre los elementos. */
+        margin-top: 24px; /* Define el margen superior. */
     }
 
-    /* clase para establecer la opción cancelar */
     .boton_cancelar_proveedor {
-        height: 40px;
-        display: flex;
-        align-items: center;
-        padding: 0 16px;
-        background-color: #edf1f3;
-        color: #44515a;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        font-weight: bold;
-        border-radius: 5px;
-        cursor: pointer;
-        box-sizing: border-box;
+        height: 40px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        padding: 0 16px; /* Define el espacio interior del elemento. */
+        background-color: #edf1f3; /* Establece el color de fondo. */
+        color: #44515a; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        border-radius: 5px; /* Define el redondeado de las esquinas. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* cambia el fondo de cancelar al posicionar el cursor */
     .boton_cancelar_proveedor:hover {
-        background-color: #dfe6e9;
+        background-color: #dfe6e9; /* Establece el color de fondo. */
     }
 
-    /* clase para establecer la opción guardar proveedor */
     .boton_guardar_proveedor {
-        height: 40px;
-        display: flex;
-        align-items: center;
-        padding: 0 16px;
-        background-color: #159ba3;
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        font-weight: bold;
-        border-radius: 5px;
-        cursor: pointer;
-        box-sizing: border-box;
+        height: 40px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        padding: 0 16px; /* Define el espacio interior del elemento. */
+        background-color: #159ba3; /* Establece el color de fondo. */
+        color: #ffffff; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        border-radius: 5px; /* Define el redondeado de las esquinas. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* cambia el fondo de guardar proveedor al posicionar el cursor */
     .boton_guardar_proveedor:hover {
-        background-color: #0f858d;
+        background-color: #0f858d; /* Establece el color de fondo. */
     }
-
 
 /* TITULO 10 RESPONSIVE PROVEEDORES */
 
-    /* adapta los indicadores para pantallas medianas */
-    @media (max-width: 1100px) {
-
+    @media (max-width: 1200px) {
         .contenedor_indicadores_proveedores {
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(2, 1fr); /* Define la distribución y el ancho de las columnas. */
         }
-
     }
 
-    /* adapta el formulario para tablets */
-    @media (max-width: 900px) {
+/* TITULO 11 RESPONSIVE (MAX-WIDTH: 1024PX) */
 
+    @media (max-width: 1024px) {
         .contenedor_campos_proveedor {
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
         }
-
     }
 
-    /* adapta la vista para dispositivos móviles */
-    @media (max-width: 600px) {
+/* TITULO 12 RESPONSIVE (MAX-WIDTH: 600PX) */
 
+    @media (max-width: 600px) {
         .contenedor_proveedores {
-            padding: 18px;
+            padding: 18px; /* Define el espacio interior del elemento. */
         }
 
         .contenedor_encabezado_proveedores {
-            align-items: flex-start;
-            flex-direction: column;
-            gap: 16px;
+            align-items: flex-start; /* Define la alineación de los elementos en el eje transversal. */
+            flex-direction: column; /* Organiza los elementos en una columna. */
+            gap: 16px; /* Define la separación entre los elementos. */
         }
 
         .contenedor_indicadores_proveedores {
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
         }
-
     }
 
-/* TITULO 11 FILTROS PERSONALIZADOS DE PROVEEDORES */
+/* TITULO 13 FILTROS PERSONALIZADOS DE PROVEEDORES */
 
-    /* distribuye búsqueda, Estado, Información y botón como en Productos */
     .contenedor_filtros_proveedores {
-        width: 100%;
-        display: grid;
-        grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr) auto;
-        gap: 16px;
-        align-items: end;
-        background-color: #ffffff;
-        border: 1px solid #dce4e8;
-        border-radius: 8px;
-        padding: 18px;
-        margin-bottom: 20px;
-        box-sizing: border-box;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr) auto; /* Define la distribución y el ancho de las columnas. */
+        gap: 16px; /* Define la separación entre los elementos. */
+        align-items: end; /* Define la alineación de los elementos en el eje transversal. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        padding: 18px; /* Define el espacio interior del elemento. */
+        margin-bottom: 20px; /* Define el margen inferior. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* los campos se adaptan sin ensanchar la grilla */
-    .campo_busqueda_proveedores,
-    .campo_filtro_proveedores {
-        display: flex;
-        flex-direction: column;
-        min-width: 0;
+    .campo_busqueda_proveedores, .campo_filtro_proveedores {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
     }
 
-    /* texto que identifica cada desplegable */
     .texto_filtro_proveedores {
-        color: #536873;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 7px;
+        color: #536873; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-bottom: 7px; /* Define el margen inferior. */
     }
 
-    /* contiene el desplegable, siempre bajo su botón */
     .selector_proveedores_personalizado {
-        width: 100%;
-        position: relative;
-        min-width: 0;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        position: relative; /* Define el sistema de posicionamiento del elemento. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
     }
 
-    /* mismo aspecto de los filtros de Productos */
     .boton_selector_proveedores {
-        width: 100%;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 8px;
-        padding: 0 10px;
-        background: #ffffff;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        text-align: left;
-        cursor: pointer;
-        box-sizing: border-box;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 40px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: space-between; /* Define la distribución de los elementos en el eje principal. */
+        gap: 8px; /* Define la separación entre los elementos. */
+        padding: 0 10px; /* Define el espacio interior del elemento. */
+        background: #ffffff; /* Define el fondo del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
     .boton_selector_proveedores > span:first-child {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        overflow: hidden; /* Controla el contenido que supera las dimensiones del elemento. */
+        text-overflow: ellipsis; /* Define cómo se indica el texto que no cabe. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
 
-    /* muestra el selector activo con borde turquesa */
     .boton_selector_proveedores[aria-expanded="true"] {
-        border-color: #159ba3;
+        border-color: #159ba3; /* Establece el color del borde. */
     }
 
     .flecha_selector_proveedores {
-        color: #536873;
-        flex-shrink: 0;
-        font-size: 15px;
+        color: #536873; /* Establece el color del texto. */
+        flex-shrink: 0; /* Define cuánto puede reducirse el elemento en Flexbox. */
+        font-size: 15px; /* Define el tamaño del texto. */
     }
 
-    /* panel anclado bajo el botón, no sobre él */
     .panel_selector_proveedores {
-        position: absolute;
-        top: calc(100% + 5px);
-        left: 0;
-        width: 100%;
-        max-width: 100%;
-        padding: 8px;
-        border: 1px solid #ced9de;
-        border-radius: 7px;
-        background-color: #ffffff;
-        box-shadow: 0 8px 24px rgba(5, 31, 45, 0.15);
-        z-index: 60;
-        box-sizing: border-box;
+        position: absolute; /* Define el sistema de posicionamiento del elemento. */
+        top: calc(100% + 5px); /* Define la posición respecto al borde superior. */
+        left: 0; /* Define la posición respecto al borde izquierdo. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        max-width: 100%; /* Evita que el elemento supere el ancho disponible. */
+        padding: 8px; /* Define el espacio interior del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        box-shadow: 0 8px 24px rgba(5, 31, 45, 0.15); /* Agrega o ajusta la sombra del elemento. */
+        z-index: 60; /* Define el orden de superposición del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* el atributo hidden debe funcionar aunque haya reglas display */
-    .panel_selector_proveedores[hidden] { display: none; }
+    .panel_selector_proveedores[hidden] {
+        display: none; /* Oculta el elemento. */
+    }
 
     .lista_selector_proveedores {
-        max-height: 220px;
-        overflow-y: auto;
-        overscroll-behavior: contain;
+        max-height: 220px; /* Limita el alto máximo del elemento. */
+        overflow-y: auto; /* Controla el contenido que desborda verticalmente. */
+        overscroll-behavior: contain; /* Controla la propagación del desplazamiento al llegar al borde. */
     }
 
-    /* opciones de Estado e Información */
     .opcion_selector_proveedores {
-        width: 100%;
-        min-height: 34px;
-        display: block;
-        padding: 8px 10px;
-        border: 0;
-        border-radius: 4px;
-        background: #ffffff;
-        color: #37434b;
-        text-align: left;
-        font: 12px Arial, sans-serif;
-        cursor: pointer;
-        box-sizing: border-box;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-height: 34px; /* Establece el alto mínimo del elemento. */
+        display: block; /* Muestra el elemento como un bloque. */
+        padding: 8px 10px; /* Define el espacio interior del elemento. */
+        border: 0; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 4px; /* Define el redondeado de las esquinas. */
+        background: #ffffff; /* Define el fondo del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        font: 12px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    .opcion_selector_proveedores:hover,
-    .opcion_selector_proveedores:focus-visible,
+    .opcion_selector_proveedores:hover, .opcion_selector_proveedores:focus-visible, .opcion_selector_proveedores[aria-selected="true"] {
+        background-color: #e4f6f6; /* Establece el color de fondo. */
+        color: #0f858d; /* Establece el color del texto. */
+    }
+
     .opcion_selector_proveedores[aria-selected="true"] {
-        background-color: #e4f6f6;
-        color: #0f858d;
+        font-weight: bold; /* Define el grosor del texto. */
     }
 
-    .opcion_selector_proveedores[aria-selected="true"] { font-weight: bold; }
-
-    /* mantiene la altura del botón limpiar igual a los selectores */
     .contenedor_limpiar_filtros_proveedores {
-        display: flex;
-        align-items: end;
-        justify-content: flex-end;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: end; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: flex-end; /* Define la distribución de los elementos en el eje principal. */
     }
 
     .boton_limpiar_filtros_proveedores {
-        min-height: 40px;
-        padding: 0 13px;
-        border: 1px solid #159ba3;
-        border-radius: 6px;
-        background-color: #ffffff;
-        color: #0f858d;
-        font: bold 12px Arial, sans-serif;
-        white-space: nowrap;
-        cursor: pointer;
-        box-sizing: border-box;
+        min-height: 40px; /* Establece el alto mínimo del elemento. */
+        padding: 0 13px; /* Define el espacio interior del elemento. */
+        border: 1px solid #159ba3; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        color: #0f858d; /* Establece el color del texto. */
+        font: bold 12px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    .boton_limpiar_filtros_proveedores:hover { background-color: #e4f6f6; }
-
-    .boton_selector_proveedores:focus-visible,
-    .boton_limpiar_filtros_proveedores:focus-visible,
-    .input_busqueda_proveedores:focus-visible {
-        outline: 2px solid #159ba3;
-        outline-offset: 2px;
+    .boton_limpiar_filtros_proveedores:hover {
+        background-color: #e4f6f6; /* Establece el color de fondo. */
     }
 
+    .boton_selector_proveedores:focus-visible, .boton_limpiar_filtros_proveedores:focus-visible, .input_busqueda_proveedores:focus-visible {
+        outline: 2px solid #159ba3; /* Define el contorno visual del elemento. */
+        outline-offset: 2px; /* Define la separación entre el contorno y el borde. */
+    }
 
-/* TITULO 12 ESTADO Y ACCIONES DE LA TABLA DE PROVEEDORES */
+/* TITULO 14 ESTADO Y ACCIONES DE LA TABLA DE PROVEEDORES */
 
-    /* ajusta los anchos para agregar Estado sin desplazamiento horizontal */
-    .contenedor_tabla_proveedores { overflow-x: hidden; }
-    .tabla_proveedores { table-layout: fixed; min-width: 0; }
+    .contenedor_tabla_proveedores {
+        overflow-x: hidden; /* Controla el contenido que desborda horizontalmente. */
+    }
 
-    .columna_nombre_proveedores { width: 13%; }
-    .columna_razon_social_proveedores { width: 14%; }
-    .columna_rut_proveedores { width: 10%; }
-    .columna_telefono_proveedores { width: 10%; }
-    .columna_email_proveedores { width: 13%; }
-    .columna_direccion_proveedores { width: 12%; }
-    .columna_tiempo_entrega_proveedores { width: 8%; }
-    .columna_estado_proveedores { width: 9%; }
-    .columna_acciones_proveedores { width: 11%; }
+    .tabla_proveedores {
+        table-layout: fixed; /* Define cómo se calcula el ancho de las columnas de la tabla. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+    }
+
+    .columna_nombre_proveedores {
+        width: 13%; /* Define el ancho del elemento. */
+    }
+
+    .columna_razon_social_proveedores {
+        width: 14%; /* Define el ancho del elemento. */
+    }
+
+    .columna_rut_proveedores {
+        width: 10%; /* Define el ancho del elemento. */
+    }
+
+    .columna_telefono_proveedores {
+        width: 10%; /* Define el ancho del elemento. */
+    }
+
+    .columna_email_proveedores {
+        width: 13%; /* Define el ancho del elemento. */
+    }
+
+    .columna_direccion_proveedores {
+        width: 12%; /* Define el ancho del elemento. */
+    }
+
+    .columna_tiempo_entrega_proveedores {
+        width: 8%; /* Define el ancho del elemento. */
+    }
 
     .columna_estado_proveedores {
-        padding: 13px 6px;
-        text-align: center;
-        color: #667881;
-        font: 11px Arial, sans-serif;
-        box-sizing: border-box;
-        font-weight: bold;
+        width: 9%; /* Define el ancho del elemento. */
     }
 
-    /* limita los nombres y datos extensos sin crear scroll horizontal */
-    .dato_nombre_proveedores,
-    .dato_razon_social_proveedores,
-    .dato_rut_proveedores,
-    .dato_telefono_proveedores,
-    .dato_email_proveedores,
-    .dato_direccion_proveedores {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        overflow-wrap: anywhere;
+    .columna_acciones_proveedores {
+        width: 11%; /* Define el ancho del elemento. */
     }
 
-    .dato_nombre_proveedores,
-    .dato_razon_social_proveedores,
-    .dato_direccion_proveedores {
-        padding-left: 9px;
-        padding-right: 9px;
+    .columna_estado_proveedores {
+        padding: 13px 6px; /* Define el espacio interior del elemento. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        color: #667881; /* Establece el color del texto. */
+        font: 11px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        font-weight: bold; /* Define el grosor del texto. */
     }
 
-    /* marca el estado del proveedor como en Productos */
+    .dato_nombre_proveedores, .dato_razon_social_proveedores, .dato_rut_proveedores, .dato_telefono_proveedores, .dato_email_proveedores, .dato_direccion_proveedores {
+        overflow: hidden; /* Controla el contenido que supera las dimensiones del elemento. */
+        text-overflow: ellipsis; /* Define cómo se indica el texto que no cabe. */
+        overflow-wrap: anywhere; /* Permite controlar el salto de palabras largas. */
+    }
+
+    .dato_nombre_proveedores, .dato_razon_social_proveedores, .dato_direccion_proveedores {
+        padding-left: 9px; /* Define el espacio interior izquierdo. */
+        padding-right: 9px; /* Define el espacio interior derecho. */
+    }
+
     .dato_estado_proveedores {
-        padding: 12px 5px;
-        text-align: center;
-        vertical-align: middle;
+        padding: 12px 5px; /* Define el espacio interior del elemento. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        vertical-align: middle; /* Define la alineación vertical del contenido. */
     }
 
     .etiqueta_estado_proveedor {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 62px;
-        padding: 5px 9px;
-        border-radius: 14px;
-        font: bold 11px Arial, sans-serif;
-        box-sizing: border-box;
+        display: inline-flex; /* Organiza el contenido con Flexbox dentro de la línea. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        min-width: 62px; /* Establece el ancho mínimo del elemento. */
+        padding: 5px 9px; /* Define el espacio interior del elemento. */
+        border-radius: 14px; /* Define el redondeado de las esquinas. */
+        font: bold 11px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    .etiqueta_proveedor_activo { color: #2f9164; background: #e5f5ed; }
-    .etiqueta_proveedor_inactivo { color: #6b7280; background: #edf1f3; }
-    .fila_proveedor_inactivo { background: #fafbfc; }
-
-    /* tres botones de acción con el estilo de Productos */
-    .boton_ver_proveedor,
-    .boton_editar_proveedor,
-    .boton_desactivar_proveedor,
-    .boton_activar_proveedor {
-        width: 32px;
-        height: 32px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        background-color: #ffffff;
-        border: 1px solid #dce4e8;
-        border-radius: 7px;
-        padding: 6px;
-        color: #159ba3;
-        cursor: pointer;
-        box-sizing: border-box;
-        transition: background-color .2s, border-color .2s;
+    .etiqueta_proveedor_activo {
+        color: #2f9164; /* Establece el color del texto. */
+        background: #e5f5ed; /* Define el fondo del elemento. */
     }
 
-    .boton_ver_proveedor svg,
-    .boton_editar_proveedor svg,
-    .boton_desactivar_proveedor svg,
-    .boton_activar_proveedor svg { width: 19px; height: 19px; }
-
-    .boton_ver_proveedor:hover,
-    .boton_editar_proveedor:hover,
-    .boton_activar_proveedor:hover {
-        background: #e4f6f6;
-        border-color: #159ba3;
+    .etiqueta_proveedor_inactivo {
+        color: #6b7280; /* Establece el color del texto. */
+        background: #edf1f3; /* Define el fondo del elemento. */
     }
 
-    .boton_desactivar_proveedor { color: #d58226; border-color: #f0d7bb; }
-    .boton_desactivar_proveedor:hover { background: #fff0df; border-color: #d58226; }
-    .contenedor_acciones_proveedores { gap: 5px; }
-    .dato_acciones_proveedores { padding: 9px 5px; }
-
-    /* evita que se desborde la tabla en pantallas menores */
-    @media (max-width: 1450px) {
-        .columna_direccion_proveedores,
-        .dato_direccion_proveedores { display: none; }
-        .columna_nombre_proveedores { width: 15%; }
-        .columna_razon_social_proveedores { width: 17%; }
-        .columna_rut_proveedores { width: 12%; }
-        .columna_telefono_proveedores { width: 11%; }
-        .columna_email_proveedores { width: 14%; }
-        .columna_tiempo_entrega_proveedores { width: 9%; }
-        .columna_estado_proveedores { width: 10%; }
-        .columna_acciones_proveedores { width: 12%; }
+    .fila_proveedor_inactivo {
+        background: #fafbfc; /* Define el fondo del elemento. */
     }
 
-    @media (max-width: 1150px) {
-        .columna_razon_social_proveedores,
-        .dato_razon_social_proveedores,
-        .columna_email_proveedores,
-        .dato_email_proveedores { display: none; }
-        .columna_nombre_proveedores { width: 28%; }
-        .columna_rut_proveedores { width: 18%; }
-        .columna_telefono_proveedores { width: 18%; }
-        .columna_tiempo_entrega_proveedores { width: 12%; }
-        .columna_estado_proveedores { width: 12%; }
-        .columna_acciones_proveedores { width: 12%; }
+    .boton_ver_proveedor, .boton_editar_proveedor, .boton_desactivar_proveedor, .boton_activar_proveedor {
+        width: 32px; /* Define el ancho del elemento. */
+        height: 32px; /* Define el alto del elemento. */
+        display: inline-flex; /* Organiza el contenido con Flexbox dentro de la línea. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        flex-shrink: 0; /* Define cuánto puede reducirse el elemento en Flexbox. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        padding: 6px; /* Define el espacio interior del elemento. */
+        color: #159ba3; /* Establece el color del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        transition: background-color .2s, border-color .2s; /* Define la transición entre los cambios de estilo. */
     }
 
-    @media (max-width: 690px) {
-        .columna_rut_proveedores, .dato_rut_proveedores,
-        .columna_telefono_proveedores, .dato_telefono_proveedores { display: none; }
-        .columna_nombre_proveedores { width: 40%; }
-        .columna_tiempo_entrega_proveedores { width: 18%; }
-        .columna_estado_proveedores { width: 18%; }
-        .columna_acciones_proveedores { width: 24%; }
-        .boton_ver_proveedor, .boton_editar_proveedor,
-        .boton_desactivar_proveedor, .boton_activar_proveedor { width: 29px; height: 29px; padding: 5px; }
-        .contenedor_acciones_proveedores { gap: 3px; }
+    .boton_ver_proveedor svg, .boton_editar_proveedor svg, .boton_desactivar_proveedor svg, .boton_activar_proveedor svg {
+        width: 19px; /* Define el ancho del elemento. */
+        height: 19px; /* Define el alto del elemento. */
     }
 
+    .boton_ver_proveedor:hover, .boton_editar_proveedor:hover, .boton_activar_proveedor:hover {
+        background: #e4f6f6; /* Define el fondo del elemento. */
+        border-color: #159ba3; /* Establece el color del borde. */
+    }
 
-/* TITULO 13 MODAL DE MENSAJES DE PROVEEDORES */
+    .boton_desactivar_proveedor {
+        color: #d58226; /* Establece el color del texto. */
+        border-color: #f0d7bb; /* Establece el color del borde. */
+    }
 
-    /* ventana centrada que sustituye alert() y confirm() */
+    .boton_desactivar_proveedor:hover {
+        background: #fff0df; /* Define el fondo del elemento. */
+        border-color: #d58226; /* Establece el color del borde. */
+    }
+
+    .contenedor_acciones_proveedores {
+        gap: 5px; /* Define la separación entre los elementos. */
+    }
+
+    .dato_acciones_proveedores {
+        padding: 9px 5px; /* Define el espacio interior del elemento. */
+    }
+
+/* TITULO 15 RESPONSIVE (MAX-WIDTH: 1440PX) */
+
+    @media (max-width: 1440px) {
+        .columna_direccion_proveedores, .dato_direccion_proveedores {
+            display: none; /* Oculta el elemento. */
+        }
+
+        .columna_nombre_proveedores {
+            width: 15%; /* Define el ancho del elemento. */
+        }
+
+        .columna_razon_social_proveedores {
+            width: 17%; /* Define el ancho del elemento. */
+        }
+
+        .columna_rut_proveedores {
+            width: 12%; /* Define el ancho del elemento. */
+        }
+
+        .columna_telefono_proveedores {
+            width: 11%; /* Define el ancho del elemento. */
+        }
+
+        .columna_email_proveedores {
+            width: 14%; /* Define el ancho del elemento. */
+        }
+
+        .columna_tiempo_entrega_proveedores {
+            width: 9%; /* Define el ancho del elemento. */
+        }
+
+        .columna_estado_proveedores {
+            width: 10%; /* Define el ancho del elemento. */
+        }
+
+        .columna_acciones_proveedores {
+            width: 12%; /* Define el ancho del elemento. */
+        }
+    }
+
+/* TITULO 16 RESPONSIVE (MAX-WIDTH: 1200PX) */
+
+    @media (max-width: 1200px) {
+        .columna_razon_social_proveedores, .dato_razon_social_proveedores, .columna_email_proveedores, .dato_email_proveedores {
+            display: none; /* Oculta el elemento. */
+        }
+
+        .columna_nombre_proveedores {
+            width: 28%; /* Define el ancho del elemento. */
+        }
+
+        .columna_rut_proveedores {
+            width: 18%; /* Define el ancho del elemento. */
+        }
+
+        .columna_telefono_proveedores {
+            width: 18%; /* Define el ancho del elemento. */
+        }
+
+        .columna_tiempo_entrega_proveedores {
+            width: 12%; /* Define el ancho del elemento. */
+        }
+
+        .columna_estado_proveedores {
+            width: 12%; /* Define el ancho del elemento. */
+        }
+
+        .columna_acciones_proveedores {
+            width: 12%; /* Define el ancho del elemento. */
+        }
+    }
+
+/* TITULO 17 RESPONSIVE (MAX-WIDTH: 768PX) */
+
+    @media (max-width: 768px) {
+        .columna_rut_proveedores, .dato_rut_proveedores, .columna_telefono_proveedores, .dato_telefono_proveedores {
+            display: none; /* Oculta el elemento. */
+        }
+
+        .columna_nombre_proveedores {
+            width: 40%; /* Define el ancho del elemento. */
+        }
+
+        .columna_tiempo_entrega_proveedores {
+            width: 18%; /* Define el ancho del elemento. */
+        }
+
+        .columna_estado_proveedores {
+            width: 18%; /* Define el ancho del elemento. */
+        }
+
+        .columna_acciones_proveedores {
+            width: 24%; /* Define el ancho del elemento. */
+        }
+
+        .boton_ver_proveedor, .boton_editar_proveedor, .boton_desactivar_proveedor, .boton_activar_proveedor {
+            width: 29px; /* Define el ancho del elemento. */
+            height: 29px; /* Define el alto del elemento. */
+            padding: 5px; /* Define el espacio interior del elemento. */
+        }
+
+        .contenedor_acciones_proveedores {
+            gap: 3px; /* Define la separación entre los elementos. */
+        }
+    }
+
+/* TITULO 18 MODAL DE MENSAJES DE PROVEEDORES */
+
     .contenedor_alerta_proveedores {
-        position: fixed;
-        inset: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 18px;
-        background-color: rgba(5, 31, 45, .58);
-        z-index: 3000;
-        box-sizing: border-box;
+        position: fixed; /* Define el sistema de posicionamiento del elemento. */
+        inset: 0; /* Define las distancias respecto a los bordes del contenedor. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        padding: 18px; /* Define el espacio interior del elemento. */
+        background-color: rgba(5, 31, 45, .58); /* Establece el color de fondo. */
+        z-index: 3000; /* Define el orden de superposición del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    .contenedor_alerta_proveedores[hidden] { display: none; }
+    .contenedor_alerta_proveedores[hidden] {
+        display: none; /* Oculta el elemento. */
+    }
 
     .modal_alerta_proveedores {
-        --color_alerta_proveedor: #159ba3;
-        --fondo_alerta_proveedor: #e4f6f6;
-        width: 420px;
-        max-width: 100%;
-        max-height: calc(100dvh - 36px);
-        overflow-y: auto;
-        padding: 28px;
-        background: #ffffff;
-        border: 1px solid #dce4e8;
-        border-radius: 12px;
-        box-shadow: 0 18px 50px rgba(5, 31, 45, .22);
-        text-align: center;
-        font-family: Arial, sans-serif;
-        box-sizing: border-box;
+        --color_alerta_proveedor: #159ba3; /* Define una variable de estilo reutilizable. */
+        --fondo_alerta_proveedor: #e4f6f6; /* Define una variable de estilo reutilizable. */
+        width: 420px; /* Define el ancho del elemento. */
+        max-width: 100%; /* Evita que el elemento supere el ancho disponible. */
+        max-height: calc(100dvh - 36px); /* Limita el alto máximo del elemento. */
+        overflow-y: auto; /* Controla el contenido que desborda verticalmente. */
+        padding: 28px; /* Define el espacio interior del elemento. */
+        background: #ffffff; /* Define el fondo del elemento. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 12px; /* Define el redondeado de las esquinas. */
+        box-shadow: 0 18px 50px rgba(5, 31, 45, .22); /* Agrega o ajusta la sombra del elemento. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
     .modal_alerta_proveedores[data-tipo="error"] {
-        --color_alerta_proveedor: #dc2626;
-        --fondo_alerta_proveedor: #fee8e8;
+        --color_alerta_proveedor: #dc2626; /* Define una variable de estilo reutilizable. */
+        --fondo_alerta_proveedor: #fee8e8; /* Define una variable de estilo reutilizable. */
     }
 
     .modal_alerta_proveedores[data-tipo="advertencia"] {
-        --color_alerta_proveedor: #d58226;
-        --fondo_alerta_proveedor: #fff0df;
+        --color_alerta_proveedor: #d58226; /* Define una variable de estilo reutilizable. */
+        --fondo_alerta_proveedor: #fff0df; /* Define una variable de estilo reutilizable. */
     }
 
     .icono_alerta_proveedores {
-        width: 56px;
-        height: 56px;
-        margin: 0 auto 18px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        color: var(--color_alerta_proveedor);
-        background-color: var(--fondo_alerta_proveedor);
-        font-size: 27px;
-        font-weight: bold;
+        width: 56px; /* Define el ancho del elemento. */
+        height: 56px; /* Define el alto del elemento. */
+        margin: 0 auto 18px; /* Define el margen exterior del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        border-radius: 50%; /* Define el redondeado de las esquinas. */
+        color: var(--color_alerta_proveedor); /* Establece el color del texto. */
+        background-color: var(--fondo_alerta_proveedor); /* Establece el color de fondo. */
+        font-size: 27px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
     }
 
     .titulo_alerta_proveedores {
-        margin-bottom: 10px;
-        color: #0b3650;
-        font-size: 20px;
-        font-weight: bold;
+        margin-bottom: 10px; /* Define el margen inferior. */
+        color: #0b3650; /* Establece el color del texto. */
+        font-size: 20px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
     }
 
     .mensaje_alerta_proveedores {
-        color: #536873;
-        font-size: 14px;
-        line-height: 1.55;
-        white-space: pre-line;
-        overflow-wrap: anywhere;
+        color: #536873; /* Establece el color del texto. */
+        font-size: 14px; /* Define el tamaño del texto. */
+        line-height: 1.55; /* Define la separación entre líneas de texto. */
+        white-space: pre-line; /* Define cómo se conservan los espacios y los saltos de línea. */
+        overflow-wrap: anywhere; /* Permite controlar el salto de palabras largas. */
     }
 
     .acciones_alerta_proveedores {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        flex-wrap: wrap;
-        margin-top: 25px;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        gap: 10px; /* Define la separación entre los elementos. */
+        flex-wrap: wrap; /* Define si los elementos pueden pasar a otra línea. */
+        margin-top: 25px; /* Define el margen superior. */
     }
 
-    .boton_cancelar_alerta_proveedores,
-    .boton_aceptar_alerta_proveedores {
-        min-width: 122px;
-        min-height: 42px;
-        padding: 0 17px;
-        border-radius: 6px;
-        font: bold 13px Arial, sans-serif;
-        cursor: pointer;
-        box-sizing: border-box;
+    .boton_cancelar_alerta_proveedores, .boton_aceptar_alerta_proveedores {
+        min-width: 122px; /* Establece el ancho mínimo del elemento. */
+        min-height: 42px; /* Establece el alto mínimo del elemento. */
+        padding: 0 17px; /* Define el espacio interior del elemento. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        font: bold 13px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
     .boton_cancelar_alerta_proveedores {
-        background: #edf1f3;
-        color: #44515a;
-        border: 1px solid #dce4e8;
+        background: #edf1f3; /* Define el fondo del elemento. */
+        color: #44515a; /* Establece el color del texto. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
     }
 
     .boton_aceptar_alerta_proveedores {
-        background: #159ba3;
-        color: #ffffff;
-        border: 1px solid #159ba3;
+        background: #159ba3; /* Define el fondo del elemento. */
+        color: #ffffff; /* Establece el color del texto. */
+        border: 1px solid #159ba3; /* Define el grosor, el estilo y el color del borde. */
     }
 
-    .boton_cancelar_alerta_proveedores[hidden] { display: none; }
-    .boton_cancelar_alerta_proveedores:hover { background: #dfe6e9; }
-    .boton_aceptar_alerta_proveedores:hover { background: #0f858d; }
+    .boton_cancelar_alerta_proveedores[hidden] {
+        display: none; /* Oculta el elemento. */
+    }
 
-    /* el modal Ver solo muestra información; el botón Guardar queda oculto */
-    .boton_guardar_proveedor[hidden] { display: none; }
+    .boton_cancelar_alerta_proveedores:hover {
+        background: #dfe6e9; /* Define el fondo del elemento. */
+    }
+
+    .boton_aceptar_alerta_proveedores:hover {
+        background: #0f858d; /* Define el fondo del elemento. */
+    }
+
+    .boton_guardar_proveedor[hidden] {
+        display: none; /* Oculta el elemento. */
+    }
+
     .formulario_proveedor input:disabled {
-        background-color: #f5f7f9;
-        color: #536873;
-        cursor: default;
+        background-color: #f5f7f9; /* Establece el color de fondo. */
+        color: #536873; /* Establece el color del texto. */
+        cursor: default; /* Define el cursor al situarlo sobre el elemento. */
     }
 
+/* TITULO 19 RESPONSIVE FILTROS PROVEEDORES */
 
-/* TITULO 14 RESPONSIVE FILTROS PROVEEDORES */
+    @media (max-width: 1200px) {
+        .contenedor_filtros_proveedores {
+            grid-template-columns: repeat(2, minmax(0, 1fr)); /* Define la distribución y el ancho de las columnas. */
+        }
 
-    @media (max-width: 1100px) {
-        .contenedor_filtros_proveedores { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-        .contenedor_limpiar_filtros_proveedores { grid-column: 1 / -1; }
+        .contenedor_limpiar_filtros_proveedores {
+            grid-column: 1 / -1; /* Define las columnas que ocupa el elemento. */
+        }
     }
+
+/* TITULO 20 RESPONSIVE (MAX-WIDTH: 600PX) */
 
     @media (max-width: 600px) {
-        .contenedor_filtros_proveedores { grid-template-columns: 1fr; }
-        .contenedor_limpiar_filtros_proveedores { grid-column: auto; }
-        .boton_limpiar_filtros_proveedores { width: 100%; }
-        .formulario_proveedor { max-width: calc(100% - 24px); padding: 18px; }
-        .contenedor_acciones_formulario_proveedor { flex-direction: column; }
+        .contenedor_filtros_proveedores {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .contenedor_limpiar_filtros_proveedores {
+            grid-column: auto; /* Define las columnas que ocupa el elemento. */
+        }
+
+        .boton_limpiar_filtros_proveedores {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+        }
+
+        .formulario_proveedor {
+            max-width: calc(100% - 24px); /* Limita el ancho máximo del elemento. */
+            padding: 18px; /* Define el espacio interior del elemento. */
+        }
+
+        .contenedor_acciones_formulario_proveedor {
+            flex-direction: column; /* Organiza los elementos en una columna. */
+        }
+
         .boton_cancelar_proveedor, .boton_guardar_proveedor {
-            width: 100%; justify-content: center;
+            width: 100%; /* Ocupa todo el ancho disponible. */
+            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
         }
     }

@@ -1,2593 +1,2343 @@
 /* TITULO 1 CONTENEDOR PRODUCTOS */
 
-    /* clase para establecer el espacio general de la vista de productos */
     .contenedor_productos {
-        width: 100%;
-        padding: 28px;
-        box-sizing: border-box;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        padding: 28px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
-
 
 /* TITULO 2 ENCABEZADO PRODUCTOS */
 
-    /* clase para organizar el encabezado principal de la vista */
     .contenedor_encabezado_productos {
-        width: 100%;
-        display: grid;
-        grid-template-columns: 1fr auto auto;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 22px;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: 1fr auto auto; /* Define la distribución y el ancho de las columnas. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 12px; /* Define la separación entre los elementos. */
+        margin-bottom: 22px; /* Define el margen inferior. */
     }
 
-    /* clase para organizar el título y descripción */
     .contenedor_informacion_productos {
-        display: flex;
-        flex-direction: column;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
-    /* clase para establecer el título principal */
     .titulo_productos {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 5px;
+        color: #0b3650; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 24px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-bottom: 5px; /* Define el margen inferior. */
     }
 
-    /* clase para establecer la descripción de la vista */
     .descripcion_productos {
-        color: #71818a;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
+        color: #71818a; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
     }
 
+/* SUBTITULO 1 BOTON IMPORTAR PRODUCTOS */
 
-    /* SUBTITULO 1 BOTON IMPORTAR PRODUCTOS */
+    .boton_importar_productos {
+        height: 42px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        background-color: #159ba3; /* Establece el color de fondo. */
+        padding: 0 17px; /* Define el espacio interior del elemento. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
 
-        /* clase para establecer la opción importar excel */
-        .boton_importar_productos {
-            height: 42px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #159ba3;
-            padding: 0 17px;
-            border-radius: 6px;
-            cursor: pointer;
-            box-sizing: border-box;
-        }
+    .boton_importar_productos:hover {
+        background-color: #0f858d; /* Establece el color de fondo. */
+    }
 
-        /* cambia el fondo de importar productos al posicionar el cursor */
-        .boton_importar_productos:hover {
-            background-color: #0f858d;
-        }
+    .icono_importar_productos {
+        color: #ffffff; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 21px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-right: 8px; /* Define el margen derecho. */
+    }
 
-        /* clase para establecer el icono de importar productos */
-        .icono_importar_productos {
-            color: #ffffff;
-            font-family: Arial, sans-serif;
-            font-size: 21px;
-            font-weight: bold;
-            margin-right: 8px;
-        }
+    .texto_importar_productos {
+        color: #ffffff; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
+    }
 
-        /* clase para establecer el texto de importar productos */
-        .texto_importar_productos {
-            color: #ffffff;
-            font-family: Arial, sans-serif;
-            font-size: 13px;
-            font-weight: bold;
-            white-space: nowrap;
-        }
+/* SUBTITULO 2 BOTON NUEVO PRODUCTO */
 
+    .boton_nuevo_producto {
+        height: 42px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        background-color: #159ba3; /* Establece el color de fondo. */
+        padding: 0 17px; /* Define el espacio interior del elemento. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
 
-    /* SUBTITULO 2 BOTON NUEVO PRODUCTO */
+    .boton_nuevo_producto:hover {
+        background-color: #0f858d; /* Establece el color de fondo. */
+    }
 
-        /* clase para establecer la opción nuevo producto */
-        .boton_nuevo_producto {
-            height: 42px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #159ba3;
-            padding: 0 17px;
-            border-radius: 6px;
-            cursor: pointer;
-            box-sizing: border-box;
-        }
+    .icono_nuevo_producto {
+        color: #ffffff; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 21px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-right: 8px; /* Define el margen derecho. */
+    }
 
-        /* cambia el fondo de nuevo producto al posicionar el cursor */
-        .boton_nuevo_producto:hover {
-            background-color: #0f858d;
-        }
-
-        /* clase para establecer el icono de nuevo producto */
-        .icono_nuevo_producto {
-            color: #ffffff;
-            font-family: Arial, sans-serif;
-            font-size: 21px;
-            font-weight: bold;
-            margin-right: 8px;
-        }
-
-        /* clase para establecer el texto de nuevo producto */
-        .texto_nuevo_producto {
-            color: #ffffff;
-            font-family: Arial, sans-serif;
-            font-size: 13px;
-            font-weight: bold;
-            white-space: nowrap;
-        }
-
+    .texto_nuevo_producto {
+        color: #ffffff; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
+    }
 
 /* TITULO 3 INDICADORES PRODUCTOS */
 
-    /* clase para distribuir los indicadores principales */
     .contenedor_indicadores_productos {
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 16px;
-        margin-bottom: 22px;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: repeat(4, 1fr); /* Define la distribución y el ancho de las columnas. */
+        gap: 16px; /* Define la separación entre los elementos. */
+        margin-bottom: 22px; /* Define el margen inferior. */
     }
 
+/* SUBTITULO 1 TOTAL PRODUCTOS */
 
-    /* SUBTITULO 1 TOTAL PRODUCTOS */
+    .tarjeta_total_productos {
+        min-height: 105px; /* Establece el alto mínimo del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        padding: 18px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
 
-        /* clase para establecer el diseño del indicador total productos */
-        .tarjeta_total_productos {
-            min-height: 105px;
-            display: flex;
-            align-items: center;
-            background-color: #ffffff;
-            border: 1px solid #dce4e8;
-            border-radius: 8px;
-            padding: 18px;
-            box-sizing: border-box;
-        }
+    .icono_total_productos {
+        width: 46px; /* Define el ancho del elemento. */
+        height: 46px; /* Define el alto del elemento. */
+        min-width: 46px; /* Establece el ancho mínimo del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        background-color: #e4f6f6; /* Establece el color de fondo. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        margin-right: 14px; /* Define el margen derecho. */
+    }
 
-        /* clase para establecer el icono del indicador total productos */
-        .icono_total_productos {
-            width: 46px;
-            height: 46px;
-            min-width: 46px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #e4f6f6;
-            border-radius: 8px;
-            margin-right: 14px;
-        }
+    .imagen_icono_total_productos {
+        width: 24px; /* Define el ancho del elemento. */
+        height: 24px; /* Define el alto del elemento. */
+    }
 
-        /* clase para establecer la imagen del icono total productos */
-        .imagen_icono_total_productos {
-            width: 24px;
-            height: 24px;
-        }
+    .contenido_total_productos {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+    }
 
-        /* clase para organizar el contenido de total productos */
-        .contenido_total_productos {
-            display: flex;
-            flex-direction: column;
-        }
+    .texto_total_productos {
+        color: #697a83; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
+    }
 
-        /* clase para establecer el texto total productos */
-        .texto_total_productos {
-            color: #697a83;
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            margin-bottom: 6px;
-        }
+    .valor_total_productos {
+        color: #0B3650; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 23px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+    }
 
-        /* clase para establecer el valor total productos */
-        .valor_total_productos {
-            color: #0B3650;
-            font-family: Arial, sans-serif;
-            font-size: 23px;
-            font-weight: bold;
-        }
+/* SUBTITULO 2 FAMILIAS */
 
+    .tarjeta_familias_productos {
+        min-height: 105px; /* Establece el alto mínimo del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        padding: 18px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
 
-    /* SUBTITULO 2 FAMILIAS */
+    .icono_familias_productos {
+        width: 46px; /* Define el ancho del elemento. */
+        height: 46px; /* Define el alto del elemento. */
+        min-width: 46px; /* Establece el ancho mínimo del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        background-color: #e9f0fb; /* Establece el color de fondo. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        margin-right: 14px; /* Define el margen derecho. */
+    }
 
-        /* clase para establecer el diseño del indicador familias */
-        .tarjeta_familias_productos {
-            min-height: 105px;
-            display: flex;
-            align-items: center;
-            background-color: #ffffff;
-            border: 1px solid #dce4e8;
-            border-radius: 8px;
-            padding: 18px;
-            box-sizing: border-box;
-        }
+    .imagen_icono_familias_productos {
+        width: 24px; /* Define el ancho del elemento. */
+        height: 24px; /* Define el alto del elemento. */
+    }
 
-        /* clase para establecer el icono del indicador familias */
-        .icono_familias_productos {
-            width: 46px;
-            height: 46px;
-            min-width: 46px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #e9f0fb;
-            border-radius: 8px;
-            margin-right: 14px;
-        }
+    .contenido_familias_productos {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+    }
 
-        /* clase para establecer la imagen del icono familias */
-        .imagen_icono_familias_productos {
-            width: 24px;
-            height: 24px;
-        }
+    .texto_familias_productos {
+        color: #697a83; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
+    }
 
-        /* clase para organizar el contenido del indicador familias */
-        .contenido_familias_productos {
-            display: flex;
-            flex-direction: column;
-        }
+    .valor_familias_productos {
+        color: #3869A8; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 23px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+    }
 
-        /* clase para establecer el texto familias */
-        .texto_familias_productos {
-            color: #697a83;
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            margin-bottom: 6px;
-        }
+/* SUBTITULO 3 PROVEEDORES */
 
-        /* clase para establecer el valor familias */
-        .valor_familias_productos {
-            color: #3869A8;
-            font-family: Arial, sans-serif;
-            font-size: 23px;
-            font-weight: bold;
-        }
+    .tarjeta_proveedores_productos {
+        min-height: 105px; /* Establece el alto mínimo del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        padding: 18px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
 
+    .icono_proveedores_productos {
+        width: 46px; /* Define el ancho del elemento. */
+        height: 46px; /* Define el alto del elemento. */
+        min-width: 46px; /* Establece el ancho mínimo del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        background-color: #eef0fa; /* Establece el color de fondo. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        margin-right: 14px; /* Define el margen derecho. */
+    }
 
-    /* SUBTITULO 3 PROVEEDORES */
+    .imagen_icono_proveedores_productos {
+        width: 24px; /* Define el ancho del elemento. */
+        height: 24px; /* Define el alto del elemento. */
+    }
 
-        /* clase para establecer el diseño del indicador proveedores */
-        .tarjeta_proveedores_productos {
-            min-height: 105px;
-            display: flex;
-            align-items: center;
-            background-color: #ffffff;
-            border: 1px solid #dce4e8;
-            border-radius: 8px;
-            padding: 18px;
-            box-sizing: border-box;
-        }
+    .contenido_proveedores_productos {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+    }
 
-        /* clase para establecer el icono del indicador proveedores */
-        .icono_proveedores_productos {
-            width: 46px;
-            height: 46px;
-            min-width: 46px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #eef0fa;
-            border-radius: 8px;
-            margin-right: 14px;
-        }
+    .texto_proveedores_productos {
+        color: #697a83; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
+    }
 
-        /* clase para establecer la imagen del icono proveedores */
-        .imagen_icono_proveedores_productos {
-            width: 24px;
-            height: 24px;
-        }
+    .valor_proveedores_productos {
+        color: #5364A5; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 23px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+    }
 
-        /* clase para organizar el contenido del indicador proveedores */
-        .contenido_proveedores_productos {
-            display: flex;
-            flex-direction: column;
-        }
+/* SUBTITULO 4 STOCK BAJO */
 
-        /* clase para establecer el texto proveedores */
-        .texto_proveedores_productos {
-            color: #697a83;
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            margin-bottom: 6px;
-        }
+    .tarjeta_stock_bajo_productos {
+        min-height: 105px; /* Establece el alto mínimo del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        padding: 18px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
 
-        /* clase para establecer el valor proveedores */
-        .valor_proveedores_productos {
-            color: #5364A5;
-            font-family: Arial, sans-serif;
-            font-size: 23px;
-            font-weight: bold;
-        }
+    .icono_stock_bajo_productos {
+        width: 46px; /* Define el ancho del elemento. */
+        height: 46px; /* Define el alto del elemento. */
+        min-width: 46px; /* Establece el ancho mínimo del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        background-color: #fff0df; /* Establece el color de fondo. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        margin-right: 14px; /* Define el margen derecho. */
+    }
 
+    .imagen_icono_stock_bajo_productos {
+        width: 24px; /* Define el ancho del elemento. */
+        height: 24px; /* Define el alto del elemento. */
+    }
 
-    /* SUBTITULO 4 STOCK BAJO */
+    .contenido_stock_bajo_productos {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+    }
 
-        /* clase para establecer el diseño del indicador stock bajo */
-        .tarjeta_stock_bajo_productos {
-            min-height: 105px;
-            display: flex;
-            align-items: center;
-            background-color: #ffffff;
-            border: 1px solid #dce4e8;
-            border-radius: 8px;
-            padding: 18px;
-            box-sizing: border-box;
-        }
+    .texto_stock_bajo_productos {
+        color: #697a83; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
+    }
 
-        /* clase para establecer el icono del indicador stock bajo */
-        .icono_stock_bajo_productos {
-            width: 46px;
-            height: 46px;
-            min-width: 46px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #fff0df;
-            border-radius: 8px;
-            margin-right: 14px;
-        }
-
-        /* clase para establecer la imagen del icono stock bajo */
-        .imagen_icono_stock_bajo_productos {
-            width: 24px;
-            height: 24px;
-        }
-
-        /* clase para organizar el contenido de stock bajo */
-        .contenido_stock_bajo_productos {
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* clase para establecer el texto stock bajo */
-        .texto_stock_bajo_productos {
-            color: #697a83;
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            margin-bottom: 6px;
-        }
-
-        /* clase para establecer el valor stock bajo */
-        .valor_stock_bajo_productos {
-            color: #D58226;
-            font-family: Arial, sans-serif;
-            font-size: 23px;
-            font-weight: bold;
-        }
-
+    .valor_stock_bajo_productos {
+        color: #D58226; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 23px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+    }
 
 /* TITULO 4 FILTROS PRODUCTOS */
 
-    /* distribuye el buscador, tres filtros y el botón limpiar */
     .contenedor_filtros_productos {
-        position: relative;
-        z-index: 5;
-        width: 100%;
-        display: grid;
-        grid-template-columns: minmax(190px, 2fr) repeat(3, minmax(110px, 1fr)) auto;
-        gap: 12px;
-        align-items: end;
-        background-color: #ffffff;
-        border: 1px solid #dce4e8;
-        border-radius: 8px;
-        padding: 18px;
-        margin-bottom: 20px;
-        box-sizing: border-box;
+        position: relative; /* Define el sistema de posicionamiento del elemento. */
+        z-index: 5; /* Define el orden de superposición del elemento. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: minmax(190px, 2fr) repeat(3, minmax(110px, 1fr)) auto; /* Define la distribución y el ancho de las columnas. */
+        gap: 12px; /* Define la separación entre los elementos. */
+        align-items: end; /* Define la alineación de los elementos en el eje transversal. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        padding: 18px; /* Define el espacio interior del elemento. */
+        margin-bottom: 20px; /* Define el margen inferior. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* organiza los campos sin desbordar la grilla */
-    .contenedor_busqueda_productos,
-    .contenedor_familia_productos,
-    .contenedor_proveedor_filtro_productos,
-    .contenedor_estado_productos {
-        display: flex;
-        flex-direction: column;
-        min-width: 0;
+    .contenedor_busqueda_productos, .contenedor_familia_productos, .contenedor_proveedor_filtro_productos, .contenedor_estado_productos {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
     }
 
-    /* textos superiores iguales para todos los filtros */
-    .texto_busqueda_productos,
-    .texto_familia_productos,
-    .texto_proveedor_filtro_productos,
-    .texto_estado_productos {
-        color: #536873;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 7px;
+    .texto_busqueda_productos, .texto_familia_productos, .texto_proveedor_filtro_productos, .texto_estado_productos {
+        color: #536873; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-bottom: 7px; /* Define el margen inferior. */
     }
 
-    /* buscador principal de productos */
     .input_busqueda_productos {
-        width: 100%;
-        height: 40px;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        padding: 0 12px;
-        background-color: #ffffff;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        box-sizing: border-box;
-        outline: none;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 40px; /* Define el alto del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        padding: 0 12px; /* Define el espacio interior del elemento. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        outline: none; /* Define el contorno visual del elemento. */
     }
 
-    /* mantiene el formato de opciones del formulario de edición */
     .opcion_familia_productos {
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
     }
 
 /* SUBTITULO 1 SELECTORES PERSONALIZADOS DE FAMILIA, PROVEEDOR Y ESTADO */
 
-    /* todos los desplegables quedan anclados a su campo */
-    .contenedor_selector_familia_productos,
-    .contenedor_selector_proveedor_productos,
-    .contenedor_selector_estado_productos {
-        position: relative;
-        width: 100%;
-        min-width: 0;
+    .contenedor_selector_familia_productos, .contenedor_selector_proveedor_productos, .contenedor_selector_estado_productos {
+        position: relative; /* Define el sistema de posicionamiento del elemento. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
     }
 
-    /* botones exactamente iguales para los tres filtros */
-    .boton_selector_familia_productos,
-    .boton_selector_proveedor_productos,
-    .boton_selector_estado_productos {
-        width: 100%;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 8px;
-        padding: 0 10px;
-        background-color: #ffffff;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        text-align: left;
-        cursor: pointer;
-        box-sizing: border-box;
+    .boton_selector_familia_productos, .boton_selector_proveedor_productos, .boton_selector_estado_productos {
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 40px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: space-between; /* Define la distribución de los elementos en el eje principal. */
+        gap: 8px; /* Define la separación entre los elementos. */
+        padding: 0 10px; /* Define el espacio interior del elemento. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* evita que los nombres largos modifiquen las dimensiones */
-    .texto_selector_familia_productos,
-    .texto_selector_proveedor_productos,
-    .texto_selector_estado_productos {
-        min-width: 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+    .texto_selector_familia_productos, .texto_selector_proveedor_productos, .texto_selector_estado_productos {
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        overflow: hidden; /* Controla el contenido que supera las dimensiones del elemento. */
+        text-overflow: ellipsis; /* Define cómo se indica el texto que no cabe. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
 
-    /* flechas coherentes con el selector de proveedores */
-    .flecha_selector_familia_productos,
-    .flecha_selector_proveedor_productos,
-    .flecha_selector_estado_productos {
-        flex-shrink: 0;
-        color: #536873;
-        font-size: 15px;
+    .flecha_selector_familia_productos, .flecha_selector_proveedor_productos, .flecha_selector_estado_productos {
+        flex-shrink: 0; /* Define cuánto puede reducirse el elemento en Flexbox. */
+        color: #536873; /* Establece el color del texto. */
+        font-size: 15px; /* Define el tamaño del texto. */
     }
 
-    /* borde turquesa cuando el desplegable está abierto */
-    .boton_selector_familia_productos[aria-expanded="true"],
-    .boton_selector_proveedor_productos[aria-expanded="true"],
-    .boton_selector_estado_productos[aria-expanded="true"] {
-        border-color: #159ba3;
+    .boton_selector_familia_productos[aria-expanded="true"], .boton_selector_proveedor_productos[aria-expanded="true"], .boton_selector_estado_productos[aria-expanded="true"] {
+        border-color: #159ba3; /* Establece el color del borde. */
     }
 
-    /* paneles idénticos, siempre debajo y alineados con el botón */
-    .panel_selector_familia_productos,
-    .panel_selector_proveedor_productos,
-    .panel_selector_estado_productos {
-        position: absolute;
-        top: calc(100% + 5px);
-        left: 0;
-        width: 100%;
-        max-width: 100%;
-        padding: 8px;
-        background-color: #ffffff;
-        border: 1px solid #ced9de;
-        border-radius: 7px;
-        box-shadow: 0 8px 24px rgba(5, 31, 45, 0.15);
-        box-sizing: border-box;
-        z-index: 60;
+    .panel_selector_familia_productos, .panel_selector_proveedor_productos, .panel_selector_estado_productos {
+        position: absolute; /* Define el sistema de posicionamiento del elemento. */
+        top: calc(100% + 5px); /* Define la posición respecto al borde superior. */
+        left: 0; /* Define la posición respecto al borde izquierdo. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        max-width: 100%; /* Evita que el elemento supere el ancho disponible. */
+        padding: 8px; /* Define el espacio interior del elemento. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        box-shadow: 0 8px 24px rgba(5, 31, 45, 0.15); /* Agrega o ajusta la sombra del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        z-index: 60; /* Define el orden de superposición del elemento. */
     }
 
-    /* oculta los paneles cerrados */
-    .panel_selector_familia_productos[hidden],
-    .panel_selector_proveedor_productos[hidden],
-    .panel_selector_estado_productos[hidden] {
-        display: none;
+    .panel_selector_familia_productos[hidden], .panel_selector_proveedor_productos[hidden], .panel_selector_estado_productos[hidden] {
+        display: none; /* Oculta el elemento. */
     }
 
-    /* buscadores interiores de Familia y Proveedor */
-    .input_buscar_familia_productos,
-    .input_buscar_proveedor_productos {
-        display: block;
-        width: 100%;
-        height: 36px;
-        padding: 0 10px;
-        margin-bottom: 7px;
-        background-color: #ffffff;
-        border: 1px solid #ced9de;
-        border-radius: 5px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        box-sizing: border-box;
+    .input_buscar_familia_productos, .input_buscar_proveedor_productos {
+        display: block; /* Muestra el elemento como un bloque. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 36px; /* Define el alto del elemento. */
+        padding: 0 10px; /* Define el espacio interior del elemento. */
+        margin-bottom: 7px; /* Define el margen inferior. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 5px; /* Define el redondeado de las esquinas. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* limita la altura para desplazar las opciones sin agrandar el menú */
-    .lista_opciones_familia_productos,
-    .lista_opciones_proveedor_productos,
-    .lista_opciones_estado_productos {
-        max-height: 224px;
-        overflow-y: auto;
-        overscroll-behavior: contain;
+    .lista_opciones_familia_productos, .lista_opciones_proveedor_productos, .lista_opciones_estado_productos {
+        max-height: 224px; /* Limita el alto máximo del elemento. */
+        overflow-y: auto; /* Controla el contenido que desborda verticalmente. */
+        overscroll-behavior: contain; /* Controla la propagación del desplazamiento al llegar al borde. */
     }
 
-    /* opciones de los tres desplegables */
-    .opcion_lista_familia_productos,
-    .opcion_lista_proveedor_productos,
-    .opcion_lista_estado_productos {
-        display: block;
-        width: 100%;
-        min-height: 34px;
-        padding: 8px 10px;
-        border: none;
-        border-radius: 4px;
-        background-color: #ffffff;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        text-align: left;
-        overflow-wrap: anywhere;
-        cursor: pointer;
-        box-sizing: border-box;
+    .opcion_lista_familia_productos, .opcion_lista_proveedor_productos, .opcion_lista_estado_productos {
+        display: block; /* Muestra el elemento como un bloque. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-height: 34px; /* Establece el alto mínimo del elemento. */
+        padding: 8px 10px; /* Define el espacio interior del elemento. */
+        border: none; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 4px; /* Define el redondeado de las esquinas. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        overflow-wrap: anywhere; /* Permite controlar el salto de palabras largas. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* turquesa suave al pasar el cursor o enfocar con teclado */
-    .opcion_lista_familia_productos:hover,
-    .opcion_lista_proveedor_productos:hover,
-    .opcion_lista_estado_productos:hover,
-    .opcion_lista_familia_productos:focus-visible,
-    .opcion_lista_proveedor_productos:focus-visible,
-    .opcion_lista_estado_productos:focus-visible {
-        background-color: #e4f6f6;
+    .opcion_lista_familia_productos:hover, .opcion_lista_proveedor_productos:hover, .opcion_lista_estado_productos:hover, .opcion_lista_familia_productos:focus-visible, .opcion_lista_proveedor_productos:focus-visible, .opcion_lista_estado_productos:focus-visible {
+        background-color: #e4f6f6; /* Establece el color de fondo. */
     }
 
-    /* mismo resaltado para la opción elegida */
-    .opcion_lista_familia_productos[aria-selected="true"],
-    .opcion_lista_proveedor_productos[aria-selected="true"],
-    .opcion_lista_estado_productos[aria-selected="true"] {
-        background-color: #e4f6f6;
-        color: #0f858d;
-        font-weight: bold;
+    .opcion_lista_familia_productos[aria-selected="true"], .opcion_lista_proveedor_productos[aria-selected="true"], .opcion_lista_estado_productos[aria-selected="true"] {
+        background-color: #e4f6f6; /* Establece el color de fondo. */
+        color: #0f858d; /* Establece el color del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
     }
 
-    /* aviso al buscar un nombre inexistente */
-    .mensaje_lista_familia_productos,
-    .mensaje_lista_proveedor_productos {
-        padding: 12px 8px;
-        color: #697a83;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
+    .mensaje_lista_familia_productos, .mensaje_lista_proveedor_productos {
+        padding: 12px 8px; /* Define el espacio interior del elemento. */
+        color: #697a83; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
     }
 
 /* SUBTITULO 2 LIMPIAR FILTROS */
 
     .contenedor_limpiar_filtros_productos {
-        display: flex;
-        align-items: flex-end;
-        justify-content: flex-end;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: flex-end; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: flex-end; /* Define la distribución de los elementos en el eje principal. */
     }
 
     .boton_limpiar_filtros_productos {
-        min-height: 40px;
-        padding: 0 13px;
-        border: 1px solid #159ba3;
-        border-radius: 6px;
-        background-color: #ffffff;
-        color: #0f858d;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        white-space: nowrap;
-        cursor: pointer;
-        transition: background-color 0.2s;
+        min-height: 40px; /* Establece el alto mínimo del elemento. */
+        padding: 0 13px; /* Define el espacio interior del elemento. */
+        border: 1px solid #159ba3; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        color: #0f858d; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        transition: background-color 0.2s; /* Define la transición entre los cambios de estilo. */
     }
 
     .boton_limpiar_filtros_productos:hover {
-        background-color: #e4f6f6;
+        background-color: #e4f6f6; /* Establece el color de fondo. */
     }
 
-    /* indicadores de foco para teclado */
-    .boton_limpiar_filtros_productos:focus-visible,
-    .boton_selector_familia_productos:focus-visible,
-    .boton_selector_proveedor_productos:focus-visible,
-    .boton_selector_estado_productos:focus-visible,
-    .input_buscar_familia_productos:focus-visible,
-    .input_buscar_proveedor_productos:focus-visible,
-    .input_busqueda_productos:focus-visible {
-        outline: 2px solid #159ba3;
-        outline-offset: 2px;
+    .boton_limpiar_filtros_productos:focus-visible, .boton_selector_familia_productos:focus-visible, .boton_selector_proveedor_productos:focus-visible, .boton_selector_estado_productos:focus-visible, .input_buscar_familia_productos:focus-visible, .input_buscar_proveedor_productos:focus-visible, .input_busqueda_productos:focus-visible {
+        outline: 2px solid #159ba3; /* Define el contorno visual del elemento. */
+        outline-offset: 2px; /* Define la separación entre el contorno y el borde. */
     }
 
 /* SUBTITULO 3 RESPONSIVE FILTROS */
 
+/* TITULO 5 RESPONSIVE (MAX-WIDTH: 1200PX) */
+
     @media (max-width: 1200px) {
         .contenedor_filtros_productos {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-columns: repeat(2, minmax(0, 1fr)); /* Define la distribución y el ancho de las columnas. */
         }
+
         .contenedor_limpiar_filtros_productos {
-            grid-column: 1 / -1;
+            grid-column: 1 / -1; /* Define las columnas que ocupa el elemento. */
         }
     }
 
-/* TITULO 5 TABLA PRODUCTOS */
+/* TITULO 6 TABLA PRODUCTOS */
 
-    /* clase para establecer el contenedor principal de la tabla */
     .contenedor_tabla_productos {
-        width: 100%;
-        background-color: #ffffff;
-        border: 1px solid #dce4e8;
-        border-radius: 8px;
-        overflow-x: auto;
-        box-sizing: border-box;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        overflow-x: auto; /* Permite desplazar horizontalmente el contenido cuando no cabe. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para establecer la cabecera visual del contenedor de la tabla */
     .cabecera_contenedor_tabla_productos {
-        min-width: 0;
-        padding: 17px 18px;
-        border-bottom: 1px solid #e2e8eb;
-        box-sizing: border-box;
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        padding: 17px 18px; /* Define el espacio interior del elemento. */
+        border-bottom: 1px solid #e2e8eb; /* Define el borde inferior. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para establecer el título de la tabla */
     .titulo_tabla_productos {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        font-weight: bold;
+        color: #0b3650; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 14px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
     }
 
-    /* clase para establecer la estructura general de la tabla */
     .tabla_productos {
-        width: 100%;
-        min-width: 0;
-        table-layout: fixed;
-        border-collapse: collapse;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        table-layout: fixed; /* Define cómo se calcula el ancho de las columnas de la tabla. */
+        border-collapse: collapse; /* Define cómo se combinan los bordes de las celdas. */
     }
 
-    /* ancho de la columna codigo */
     .columna_codigo_productos {
-        width: 10%;
+        width: 10%; /* Define el ancho del elemento. */
     }
 
-    /* ancho de la columna codigo de barras */
     .columna_codigo_barra_productos {
-        width: 14%;
+        width: 14%; /* Define el ancho del elemento. */
     }
 
-    /* ancho de la columna descripcion */
     .columna_descripcion_productos {
-        width: 27%;
-        min-width: 0;
+        width: 27%; /* Define el ancho del elemento. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
     }
 
-    /* ancho de la columna familia */
     .columna_familia_productos {
-        width: 12%;
+        width: 12%; /* Define el ancho del elemento. */
     }
 
-    /* ancho de la columna precio publico */
     .columna_precio_productos {
-        width: 9%;
+        width: 9%; /* Define el ancho del elemento. */
     }
 
-    /* ancho de la columna proveedor */
     .columna_proveedor_productos {
-        width: 14%;
-        max-width: none;
+        width: 14%; /* Define el ancho del elemento. */
+        max-width: none; /* Limita el ancho máximo del elemento. */
     }
 
-    /* ancho de la columna acciones */
     .columna_acciones_productos {
-        width: 14%;
+        width: 14%; /* Define el ancho del elemento. */
     }
 
-
-    /* clase para establecer el fondo del encabezado */
     .encabezado_tabla_productos {
-        background-color: #f4f7f8;
+        background-color: #f4f7f8; /* Establece el color de fondo. */
     }
 
-    /* clase para establecer la fila del encabezado */
     .fila_encabezado_productos {
-        border-bottom: 1px solid #dce4e8;
+        border-bottom: 1px solid #dce4e8; /* Define el borde inferior. */
     }
 
-    /* clase para establecer la columna código */
     .columna_codigo_productos {
-        padding: 13px 12px;
-        text-align: left;
-        color: #667881;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        white-space: nowrap;
+        padding: 13px 12px; /* Define el espacio interior del elemento. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        color: #667881; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
 
-    /* clase para establecer la columna código de barras */
     .columna_codigo_barra_productos {
-        padding: 13px 12px;
-        text-align: left;
-        color: #667881;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        white-space: nowrap;
+        padding: 13px 12px; /* Define el espacio interior del elemento. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        color: #667881; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
 
-    /* clase para establecer la columna descripción */
     .columna_descripcion_productos {
-        min-width: 280px;
-        padding: 13px 12px;
-        text-align: left;
-        color: #667881;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
+        min-width: 280px; /* Establece el ancho mínimo del elemento. */
+        padding: 13px 12px; /* Define el espacio interior del elemento. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        color: #667881; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 11px; /* Define el tamaño del texto. */
     }
 
-    /* clase para establecer la columna familia */
     .columna_familia_productos {
-        padding: 13px 12px;
-        text-align: left;
-        color: #667881;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        white-space: nowrap;
+        padding: 13px 12px; /* Define el espacio interior del elemento. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        color: #667881; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
 
-    /* clase para establecer la columna precio */
     .columna_precio_productos {
-        padding: 13px 12px;
-        text-align: right;
-        color: #667881;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        white-space: nowrap;
+        padding: 13px 12px; /* Define el espacio interior del elemento. */
+        text-align: right; /* Define la alineación horizontal del texto. */
+        color: #667881; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
 
-    /* clase para establecer la columna stock actual */
     .columna_stock_actual_productos {
-        padding: 13px 12px;
-        text-align: center;
-        color: #667881;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        white-space: nowrap;
+        padding: 13px 12px; /* Define el espacio interior del elemento. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        color: #667881; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
 
-    /* clase para establecer la columna stock mínimo */
     .columna_stock_minimo_productos {
-        padding: 13px 12px;
-        text-align: center;
-        color: #667881;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        white-space: nowrap;
+        padding: 13px 12px; /* Define el espacio interior del elemento. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        color: #667881; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
 
-    /* clase para establecer la columna proveedor */
     .columna_proveedor_productos {
-        width: 140px;
-        max-width: 140px;
-        padding: 13px 12px;
-        text-align: left;
-        color: #667881;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        white-space: nowrap;
+        width: 140px; /* Define el ancho del elemento. */
+        max-width: 140px; /* Limita el ancho máximo del elemento. */
+        padding: 13px 12px; /* Define el espacio interior del elemento. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        color: #667881; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
 
-
-    /* clase para establecer la columna acciones */
     .columna_acciones_productos {
-        padding: 13px 12px;
-        text-align: center;
-        color: #667881;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        white-space: nowrap;
+        padding: 13px 12px; /* Define el espacio interior del elemento. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        color: #667881; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
-
 
 /* SUBTITULO 1 PAGINACION PRODUCTOS */
 
-    /* contenedor principal de la paginacion */
     .contenedor_paginacion_productos {
-        width: 100%;
-        min-height: 70px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 20px;
-        padding: 15px 20px;
-        border-top: 1px solid #edf1f3;
-        box-sizing: border-box;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-height: 70px; /* Establece el alto mínimo del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: space-between; /* Define la distribución de los elementos en el eje principal. */
+        gap: 20px; /* Define la separación entre los elementos. */
+        padding: 15px 20px; /* Define el espacio interior del elemento. */
+        border-top: 1px solid #edf1f3; /* Define el borde superior. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* informacion de los productos mostrados */
     .informacion_paginacion_productos {
-        color: #536873;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        white-space: nowrap;
+        color: #536873; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
 
-    /* contenedor de los controles de paginacion */
     .controles_paginacion_productos {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        gap: 6px;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: flex-end; /* Define la distribución de los elementos en el eje principal. */
+        gap: 6px; /* Define la separación entre los elementos. */
     }
 
-    /* contenedor de los numeros de pagina */
     .numeros_paginas_productos {
-        display: flex;
-        align-items: center;
-        gap: 6px;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 6px; /* Define la separación entre los elementos. */
     }
 
-    /* diseño general de los botones de paginacion */
-    .boton_numero_pagina_productos,
-    .boton_pagina_anterior_productos,
-    .boton_pagina_siguiente_productos {
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        background-color: #ffffff;
-        border: 1px solid #dce4e8;
-        border-radius: 6px;
-        color: #536873;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        cursor: pointer;
-        padding: 0;
-        box-sizing: border-box;
-        transition: background-color 0.2s, border-color 0.2s;
+    .boton_numero_pagina_productos, .boton_pagina_anterior_productos, .boton_pagina_siguiente_productos {
+        width: 40px; /* Define el ancho del elemento. */
+        height: 40px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        flex-shrink: 0; /* Define cuánto puede reducirse el elemento en Flexbox. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        color: #536873; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        padding: 0; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        transition: background-color 0.2s, border-color 0.2s; /* Define la transición entre los cambios de estilo. */
     }
 
-    /* pagina seleccionada actualmente */
     .pagina_actual_productos {
-        background-color: #159BA3;
-        border-color: #159BA3;
-        color: #ffffff;
-        font-weight: bold;
+        background-color: #159BA3; /* Establece el color de fondo. */
+        border-color: #159BA3; /* Establece el color del borde. */
+        color: #ffffff; /* Establece el color del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
     }
 
-    /* efecto al pasar el cursor sobre los botones */
-    .boton_numero_pagina_productos:hover,
-    .boton_pagina_anterior_productos:hover,
-    .boton_pagina_siguiente_productos:hover {
-        background-color: #e4f6f6;
-        border-color: #159BA3;
+    .boton_numero_pagina_productos:hover, .boton_pagina_anterior_productos:hover, .boton_pagina_siguiente_productos:hover {
+        background-color: #e4f6f6; /* Establece el color de fondo. */
+        border-color: #159BA3; /* Establece el color del borde. */
     }
 
-    /* mantiene el color de la pagina seleccionada */
     .pagina_actual_productos:hover {
-        background-color: #0D6970;
-        border-color: #0D6970;
-        color: #ffffff;
+        background-color: #0D6970; /* Establece el color de fondo. */
+        border-color: #0D6970; /* Establece el color del borde. */
+        color: #ffffff; /* Establece el color del texto. */
     }
 
-    /* botones de navegacion deshabilitados */
-    .boton_pagina_anterior_productos:disabled,
-    .boton_pagina_siguiente_productos:disabled {
-        opacity: 0.45;
-        cursor: not-allowed;
-        background-color: #ffffff;
-        border-color: #dce4e8;
+    .boton_pagina_anterior_productos:disabled, .boton_pagina_siguiente_productos:disabled {
+        opacity: 0.45; /* Define el nivel de opacidad. */
+        cursor: not-allowed; /* Define el cursor al situarlo sobre el elemento. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border-color: #dce4e8; /* Establece el color del borde. */
     }
 
-    /* contenedor de los puntos suspensivos */
     .puntos_paginacion_productos {
-        width: 30px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 4px;
-        color: #64748b;
+        width: 30px; /* Define el ancho del elemento. */
+        height: 40px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        gap: 4px; /* Define la separación entre los elementos. */
+        color: #64748b; /* Establece el color del texto. */
     }
 
-    /* diseño de los puntos suspensivos */
     .punto_paginacion {
-        width: 4px;
-        height: 4px;
-        background-color: currentColor;
-        border-radius: 50%;
+        width: 4px; /* Define el ancho del elemento. */
+        height: 4px; /* Define el alto del elemento. */
+        background-color: currentColor; /* Establece el color de fondo. */
+        border-radius: 50%; /* Define el redondeado de las esquinas. */
     }
-
 
 /* SUBTITULO 2 RESPONSIVE PAGINACION */
 
-    /* adapta la paginacion para tablets */
-    @media (max-width: 900px) {
+/* TITULO 7 RESPONSIVE (MAX-WIDTH: 1024PX) */
 
+    @media (max-width: 1024px) {
         .contenedor_paginacion_productos {
-            flex-direction: column;
-            justify-content: center;
-            gap: 15px;
+            flex-direction: column; /* Organiza los elementos en una columna. */
+            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+            gap: 15px; /* Define la separación entre los elementos. */
         }
 
         .controles_paginacion_productos {
-            justify-content: center;
+            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
         }
-
     }
 
-    /* adapta la paginacion para dispositivos moviles */
-    @media (max-width: 600px) {
+/* TITULO 8 RESPONSIVE (MAX-WIDTH: 600PX) */
 
-        .boton_numero_pagina_productos,
-        .boton_pagina_anterior_productos,
-        .boton_pagina_siguiente_productos {
-            width: 34px;
-            height: 34px;
-            font-size: 12px;
+    @media (max-width: 600px) {
+        .boton_numero_pagina_productos, .boton_pagina_anterior_productos, .boton_pagina_siguiente_productos {
+            width: 34px; /* Define el ancho del elemento. */
+            height: 34px; /* Define el alto del elemento. */
+            font-size: 12px; /* Define el tamaño del texto. */
         }
 
         .numeros_paginas_productos {
-            gap: 4px;
+            gap: 4px; /* Define la separación entre los elementos. */
         }
 
         .controles_paginacion_productos {
-            gap: 4px;
+            gap: 4px; /* Define la separación entre los elementos. */
         }
 
         .informacion_paginacion_productos {
-            font-size: 12px;
+            font-size: 12px; /* Define el tamaño del texto. */
         }
-
     }
 
+/* TITULO 9 DATOS TABLA PRODUCTOS */
 
-
-/* TITULO 6 DATOS TABLA PRODUCTOS */
-
-    /* clase para establecer el diseño de cada fila de producto */
     .fila_producto {
-        border-bottom: 1px solid #edf1f3;
+        border-bottom: 1px solid #edf1f3; /* Define el borde inferior. */
     }
 
-    /* cambia el fondo de la fila al posicionar el cursor */
     .fila_producto:hover {
-        background-color: #f8fafb;
+        background-color: #f8fafb; /* Establece el color de fondo. */
     }
 
-    /* clase para establecer el dato código */
     .dato_codigo_productos {
-        padding: 14px 12px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        text-align: left;
-        white-space: nowrap;
+        padding: 14px 12px; /* Define el espacio interior del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
 
-    /* clase para establecer el dato código de barras */
     .dato_codigo_barra_productos {
-        padding: 14px 12px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        text-align: left;
-        white-space: nowrap;
+        padding: 14px 12px; /* Define el espacio interior del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
 
-    /* clase para establecer el dato descripción */
     .dato_descripcion_productos {
-        min-width: 280px;
-        max-width: 380px;
-        padding: 14px 12px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        line-height: 17px;
-        text-align: left;
+        min-width: 280px; /* Establece el ancho mínimo del elemento. */
+        max-width: 380px; /* Limita el ancho máximo del elemento. */
+        padding: 14px 12px; /* Define el espacio interior del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        line-height: 17px; /* Define la separación entre líneas de texto. */
+        text-align: left; /* Define la alineación horizontal del texto. */
     }
 
-    /* clase para establecer el dato familia */
     .dato_familia_productos {
-        padding: 14px 12px;
-        color: #536873;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        text-align: left;
-        white-space: nowrap;
+        padding: 14px 12px; /* Define el espacio interior del elemento. */
+        color: #536873; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
 
-    /* clase para establecer el dato precio */
     .dato_precio_productos {
-        padding: 14px 12px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        text-align: right;
-        white-space: nowrap;
+        padding: 14px 12px; /* Define el espacio interior del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        text-align: right; /* Define la alineación horizontal del texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
 
-    /* clase para establecer el dato stock actual */
     .dato_stock_actual_productos {
-        padding: 14px 12px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        text-align: center;
-        white-space: nowrap;
+        padding: 14px 12px; /* Define el espacio interior del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
 
-    /* clase para establecer el dato stock mínimo */
     .dato_stock_minimo_productos {
-        padding: 14px 12px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        text-align: center;
-        white-space: nowrap;
+        padding: 14px 12px; /* Define el espacio interior del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
 
-    /* clase para establecer el dato proveedor */
     .dato_proveedor_productos {
-        width: 140px;
-        max-width: 140px;
-        padding: 14px 12px;
-        color: #536873;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        text-align: left;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        width: 140px; /* Define el ancho del elemento. */
+        max-width: 140px; /* Limita el ancho máximo del elemento. */
+        padding: 14px 12px; /* Define el espacio interior del elemento. */
+        color: #536873; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
+        overflow: hidden; /* Controla el contenido que supera las dimensiones del elemento. */
+        text-overflow: ellipsis; /* Define cómo se indica el texto que no cabe. */
     }
 
-    /* clase para establecer el dato acciones */
     .dato_acciones_productos {
-        padding: 14px 12px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        text-align: center;
-        white-space: nowrap;
+        padding: 14px 12px; /* Define el espacio interior del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
-    
-    /* contenedor para organizar las acciones de cada producto */
+
     .contenedor_acciones_producto {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        white-space: nowrap;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        gap: 8px; /* Define la separación entre los elementos. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
 
-    /* diseño general de los botones de acciones */
     .boton_accion_producto {
-        width: 38px;
-        height: 38px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        background-color: #ffffff;
-        border: 1px solid #dce4e8;
-        border-radius: 7px;
-        cursor: pointer;
-        padding: 8px;
-        box-sizing: border-box;
-        transition: background-color 0.2s, border-color 0.2s;
+        width: 38px; /* Define el ancho del elemento. */
+        height: 38px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        flex-shrink: 0; /* Define cuánto puede reducirse el elemento en Flexbox. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        padding: 8px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        transition: background-color 0.2s, border-color 0.2s; /* Define la transición entre los cambios de estilo. */
     }
 
-    /* tamaño de los iconos de acciones */
     .boton_accion_producto svg {
-        width: 20px;
-        height: 20px;
+        width: 20px; /* Define el ancho del elemento. */
+        height: 20px; /* Define el alto del elemento. */
     }
 
-    /* color del boton ver */
     .boton_ver_producto {
-        color: #159ba3;
+        color: #159ba3; /* Establece el color del texto. */
     }
 
-    /* efecto al pasar el cursor sobre ver */
     .boton_ver_producto:hover {
-        background-color: #e4f6f6;
-        border-color: #159ba3;
+        background-color: #e4f6f6; /* Establece el color de fondo. */
+        border-color: #159ba3; /* Establece el color del borde. */
     }
 
-    /* color del boton editar */
     .boton_editar_producto {
-        color: #159ba3;
+        color: #159ba3; /* Establece el color del texto. */
     }
 
-    /* efecto al pasar el cursor sobre editar */
     .boton_editar_producto:hover {
-        background-color: #e4f6f6;
-        border-color: #159ba3;
+        background-color: #e4f6f6; /* Establece el color de fondo. */
+        border-color: #159ba3; /* Establece el color del borde. */
     }
 
-    /* desactivar un producto: mantiene la acción visible sin eliminar registros */
     .boton_desactivar_producto {
-        color: #d97706;
-        border-color: #f5d6a2;
+        color: #d97706; /* Establece el color del texto. */
+        border-color: #f5d6a2; /* Establece el color del borde. */
     }
 
     .boton_desactivar_producto:hover {
-        background-color: #fff7ed;
-        border-color: #d97706;
+        background-color: #fff7ed; /* Establece el color de fondo. */
+        border-color: #d97706; /* Establece el color del borde. */
     }
 
-    /* reactivar un producto que estaba inactivo */
     .boton_activar_producto {
-        color: #168451;
-        border-color: #bee6d0;
+        color: #168451; /* Establece el color del texto. */
+        border-color: #bee6d0; /* Establece el color del borde. */
     }
 
     .boton_activar_producto:hover {
-        background-color: #e9f8ef;
-        border-color: #168451;
+        background-color: #e9f8ef; /* Establece el color de fondo. */
+        border-color: #168451; /* Establece el color del borde. */
     }
 
-    /* distingue visualmente un producto inactivo sin ocultar sus datos */
     .fila_producto_inactivo {
-        background-color: #f8fafb;
+        background-color: #f8fafb; /* Establece el color de fondo. */
     }
 
     .fila_producto_inactivo .dato_descripcion_productos {
-        color: #64727a;
+        color: #64727a; /* Establece el color del texto. */
     }
 
-    /* etiqueta de estado en su propia columna */
     .etiqueta_estado_producto {
-        display: inline-block;
-        padding: 3px 6px;
-        margin-top: 0;
-        border-radius: 4px;
-        font-family: Arial, sans-serif;
-        font-size: 10px;
-        font-weight: bold;
-        white-space: nowrap;
+        display: inline-block; /* Define cómo se muestra y distribuye el elemento. */
+        padding: 3px 6px; /* Define el espacio interior del elemento. */
+        margin-top: 0; /* Define el margen superior. */
+        border-radius: 4px; /* Define el redondeado de las esquinas. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 10px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
 
-    /* centra el estado sin alterar el espacio de la descripción */
     .columna_estado_productos {
-        padding: 13px 5px;
-        text-align: center;
-        color: #667881;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        white-space: nowrap;
+        padding: 13px 5px; /* Define el espacio interior del elemento. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        color: #667881; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
 
     .dato_estado_productos {
-        padding: 14px 5px;
-        text-align: center;
-        vertical-align: middle;
+        padding: 14px 5px; /* Define el espacio interior del elemento. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        vertical-align: middle; /* Define la alineación vertical del contenido. */
     }
 
     .etiqueta_producto_activo {
-        background-color: #e7f6ef;
-        color: #147746;
+        background-color: #e7f6ef; /* Establece el color de fondo. */
+        color: #147746; /* Establece el color del texto. */
     }
 
     .etiqueta_producto_inactivo {
-        background-color: #edf1f3;
-        color: #65737a;
+        background-color: #edf1f3; /* Establece el color de fondo. */
+        color: #65737a; /* Establece el color del texto. */
     }
 
-
-    /* clase para establecer la fila temporal sin productos */
     .fila_sin_productos {
-        border-bottom: 1px solid #edf1f3;
+        border-bottom: 1px solid #edf1f3; /* Define el borde inferior. */
     }
 
-    /* clase para establecer el mensaje cuando no existen productos */
     .dato_sin_productos {
-        padding: 38px 15px;
-        text-align: center;
-        color: #84939a;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
+        padding: 38px 15px; /* Define el espacio interior del elemento. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        color: #84939a; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
     }
 
+/* TITULO 10 FORMULARIO PRODUCTO */
 
-/* TITULO 7 FORMULARIO PRODUCTO */
-
-    /* clase para establecer el fondo superpuesto del formulario */
     .contenedor_formulario_producto {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: fixed;
-        top: 0;
-        left: 0;
-        background-color: rgba(5, 31, 45, 0.55);
-        z-index: 1100;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 100%; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        position: fixed; /* Define el sistema de posicionamiento del elemento. */
+        top: 0; /* Define la posición respecto al borde superior. */
+        left: 0; /* Define la posición respecto al borde izquierdo. */
+        background-color: rgba(5, 31, 45, 0.55); /* Establece el color de fondo. */
+        z-index: 1100; /* Define el orden de superposición del elemento. */
     }
 
-    /* clase para ocultar el formulario cuando no se está utilizando */
     .contenedor_formulario_producto_oculto {
-        display: none;
+        display: none; /* Oculta el elemento. */
     }
 
-    /* clase para establecer el diseño principal del formulario */
     .formulario_producto {
-        width: 620px;
-        max-width: calc(100% - 40px);
-        background-color: #ffffff;
-        border-radius: 8px;
-        padding: 23px;
-        box-sizing: border-box;
-        max-height: calc(100vh - 36px);
-        overflow-y: auto;
+        width: 620px; /* Define el ancho del elemento. */
+        max-width: calc(100% - 40px); /* Limita el ancho máximo del elemento. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        padding: 23px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        max-height: calc(100vh - 36px); /* Limita el alto máximo del elemento. */
+        overflow-y: auto; /* Controla el contenido que desborda verticalmente. */
     }
 
+/* TITULO 11 CABECERA FORMULARIO */
 
-/* TITULO 8 CABECERA FORMULARIO */
-
-    /* clase para organizar el título y cierre del formulario */
     .cabecera_formulario_producto {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 22px;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: space-between; /* Define la distribución de los elementos en el eje principal. */
+        margin-bottom: 22px; /* Define el margen inferior. */
     }
 
-    /* clase para establecer el título del formulario */
     .titulo_formulario_producto {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 20px;
-        font-weight: bold;
+        color: #0b3650; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 20px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
     }
 
-    /* clase para establecer la opción de cierre */
     .boton_cerrar_formulario_producto {
-        width: 32px;
-        height: 32px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #64727a;
-        font-family: Arial, sans-serif;
-        font-size: 25px;
-        cursor: pointer;
-        border-radius: 5px;
+        width: 32px; /* Define el ancho del elemento. */
+        height: 32px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        color: #64727a; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 25px; /* Define el tamaño del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        border-radius: 5px; /* Define el redondeado de las esquinas. */
     }
 
-    /* cambia el fondo del cierre al posicionar el cursor */
     .boton_cerrar_formulario_producto:hover {
-        background-color: #edf1f3;
+        background-color: #edf1f3; /* Establece el color de fondo. */
     }
 
+/* TITULO 12 CAMPOS FORMULARIO */
 
-/* TITULO 9 CAMPOS FORMULARIO */
-
-    /* clase para distribuir los campos del formulario */
     .contenedor_campos_producto {
-        width: 100%;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 17px;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: 1fr 1fr; /* Define la distribución y el ancho de las columnas. */
+        gap: 17px; /* Define la separación entre los elementos. */
     }
 
-    /* clase para organizar el campo código */
     .campo_codigo_producto {
-        display: flex;
-        flex-direction: column;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
-    /* clase para establecer el texto del campo código */
     .texto_campo_codigo_producto {
-        color: #425966;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 6px;
+        color: #425966; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
     }
 
-    /* clase para establecer el campo código */
     .input_codigo_producto {
-        height: 40px;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        padding: 0 10px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        outline: none;
-        box-sizing: border-box;
+        height: 40px; /* Define el alto del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        padding: 0 10px; /* Define el espacio interior del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        outline: none; /* Define el contorno visual del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para organizar el campo código de barras */
     .campo_codigo_barra_producto {
-        display: flex;
-        flex-direction: column;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
-    /* clase para establecer el texto del campo código de barras */
     .texto_campo_codigo_barra_producto {
-        color: #425966;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 6px;
+        color: #425966; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
     }
 
-    /* clase para establecer el campo código de barras */
     .input_codigo_barra_producto {
-        height: 40px;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        padding: 0 10px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        outline: none;
-        box-sizing: border-box;
+        height: 40px; /* Define el alto del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        padding: 0 10px; /* Define el espacio interior del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        outline: none; /* Define el contorno visual del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para organizar el campo descripción */
     .campo_descripcion_producto {
-        display: flex;
-        flex-direction: column;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
-    /* clase para establecer el texto del campo descripción */
     .texto_campo_descripcion_producto {
-        color: #425966;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 6px;
+        color: #425966; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
     }
 
-    /* clase para establecer el campo descripción */
     .input_descripcion_producto {
-        height: 40px;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        padding: 0 10px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        outline: none;
-        box-sizing: border-box;
+        height: 40px; /* Define el alto del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        padding: 0 10px; /* Define el espacio interior del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        outline: none; /* Define el contorno visual del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para organizar el campo familia */
     .campo_familia_producto {
-        display: flex;
-        flex-direction: column;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
-    /* clase para establecer el texto del campo familia */
     .texto_campo_familia_producto {
-        color: #425966;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 6px;
+        color: #425966; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
     }
 
-
-    /* clase para establecer el selector de familia */
     .input_familia_producto {
-        width: 100%;
-        height: 40px;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        padding: 0 10px;
-        background-color: #ffffff;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        outline: none;
-        box-sizing: border-box;
-        cursor: pointer;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 40px; /* Define el alto del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        padding: 0 10px; /* Define el espacio interior del elemento. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        outline: none; /* Define el contorno visual del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
     }
 
-
-    /* clase para organizar el campo precio */
     .campo_precio_producto {
-        display: flex;
-        flex-direction: column;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
-    /* clase para establecer el texto del campo precio */
     .texto_campo_precio_producto {
-        color: #425966;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 6px;
+        color: #425966; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
     }
 
-    /* clase para establecer el campo precio */
     .input_precio_producto {
-        height: 40px;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        padding: 0 10px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        outline: none;
-        box-sizing: border-box;
+        height: 40px; /* Define el alto del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        padding: 0 10px; /* Define el espacio interior del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        outline: none; /* Define el contorno visual del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para organizar el campo proveedor */
     .campo_proveedor_producto {
-        display: flex;
-        flex-direction: column;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
-    /* clase para establecer el texto del campo proveedor */
     .texto_campo_proveedor_producto {
-        color: #425966;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 6px;
+        color: #425966; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
     }
 
-    /* clase para establecer el selector de proveedor */
     .select_proveedor_producto {
-        height: 40px;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        padding: 0 10px;
-        background-color: #ffffff;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        outline: none;
-        box-sizing: border-box;
+        height: 40px; /* Define el alto del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        padding: 0 10px; /* Define el espacio interior del elemento. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        outline: none; /* Define el contorno visual del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para establecer las opciones de proveedor */
     .opcion_proveedor_producto {
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
     }
-
 
 /* SUBTITULO 1 SELECTORES PERSONALIZADOS DEL FORMULARIO */
 
-    /* la lista se superpone a la sección de imagen sin cambiar el tamaño del modal */
     .contenedor_campos_producto {
-        position: relative;
-        z-index: 5;
+        position: relative; /* Define el sistema de posicionamiento del elemento. */
+        z-index: 5; /* Define el orden de superposición del elemento. */
     }
 
-    .campo_familia_producto,
-    .campo_proveedor_producto {
-        min-width: 0;
+    .campo_familia_producto, .campo_proveedor_producto {
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
     }
 
-    /* conserva la funcionalidad de los select originales sin mostrarlos */
-    .input_familia_producto[hidden],
-    .select_proveedor_producto[hidden] {
-        display: none;
+    .input_familia_producto[hidden], .select_proveedor_producto[hidden] {
+        display: none; /* Oculta el elemento. */
     }
 
-    /* ancla cada desplegable al ancho de su propio campo */
     .contenedor_selector_formulario_producto {
-        position: relative;
-        width: 100%;
-        min-width: 0;
+        position: relative; /* Define el sistema de posicionamiento del elemento. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
     }
 
-    /* apariencia idéntica a los filtros principales de Productos */
     .boton_selector_formulario_producto {
-        width: 100%;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 8px;
-        padding: 0 10px;
-        background-color: #ffffff;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        text-align: left;
-        cursor: pointer;
-        box-sizing: border-box;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 40px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: space-between; /* Define la distribución de los elementos en el eje principal. */
+        gap: 8px; /* Define la separación entre los elementos. */
+        padding: 0 10px; /* Define el espacio interior del elemento. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
     .texto_selector_formulario_producto {
-        min-width: 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        overflow: hidden; /* Controla el contenido que supera las dimensiones del elemento. */
+        text-overflow: ellipsis; /* Define cómo se indica el texto que no cabe. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
 
     .flecha_selector_formulario_producto {
-        flex-shrink: 0;
-        color: #536873;
-        font-size: 15px;
+        flex-shrink: 0; /* Define cuánto puede reducirse el elemento en Flexbox. */
+        color: #536873; /* Establece el color del texto. */
+        font-size: 15px; /* Define el tamaño del texto. */
     }
 
     .boton_selector_formulario_producto[aria-expanded="true"] {
-        border-color: #159ba3;
+        border-color: #159ba3; /* Establece el color del borde. */
     }
 
-    .boton_selector_formulario_producto:focus-visible,
-    .input_buscar_selector_formulario_producto:focus-visible {
-        outline: 2px solid #159ba3;
-        outline-offset: 2px;
+    .boton_selector_formulario_producto:focus-visible, .input_buscar_selector_formulario_producto:focus-visible {
+        outline: 2px solid #159ba3; /* Define el contorno visual del elemento. */
+        outline-offset: 2px; /* Define la separación entre el contorno y el borde. */
     }
 
     .boton_selector_formulario_producto:disabled {
-        background-color: #f5f8fa;
-        color: #60727d;
-        cursor: default;
+        background-color: #f5f8fa; /* Establece el color de fondo. */
+        color: #60727d; /* Establece el color del texto. */
+        cursor: default; /* Define el cursor al situarlo sobre el elemento. */
     }
 
-    /* el panel aparece debajo del campo, con borde y sombra uniformes */
     .panel_selector_formulario_producto {
-        position: absolute;
-        top: calc(100% + 5px);
-        left: 0;
-        width: 100%;
-        max-width: 100%;
-        padding: 8px;
-        background-color: #ffffff;
-        border: 1px solid #ced9de;
-        border-radius: 7px;
-        box-shadow: 0 8px 24px rgba(5, 31, 45, 0.15);
-        box-sizing: border-box;
-        z-index: 100;
+        position: absolute; /* Define el sistema de posicionamiento del elemento. */
+        top: calc(100% + 5px); /* Define la posición respecto al borde superior. */
+        left: 0; /* Define la posición respecto al borde izquierdo. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        max-width: 100%; /* Evita que el elemento supere el ancho disponible. */
+        padding: 8px; /* Define el espacio interior del elemento. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        box-shadow: 0 8px 24px rgba(5, 31, 45, 0.15); /* Agrega o ajusta la sombra del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        z-index: 100; /* Define el orden de superposición del elemento. */
     }
 
     .panel_selector_formulario_producto[hidden] {
-        display: none;
+        display: none; /* Oculta el elemento. */
     }
 
     .input_buscar_selector_formulario_producto {
-        width: 100%;
-        height: 36px;
-        display: block;
-        margin-bottom: 7px;
-        padding: 0 10px;
-        background-color: #ffffff;
-        border: 1px solid #ced9de;
-        border-radius: 5px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        box-sizing: border-box;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 36px; /* Define el alto del elemento. */
+        display: block; /* Muestra el elemento como un bloque. */
+        margin-bottom: 7px; /* Define el margen inferior. */
+        padding: 0 10px; /* Define el espacio interior del elemento. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 5px; /* Define el redondeado de las esquinas. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* aprox. cinco opciones visibles antes de desplazar la lista */
     .lista_selector_formulario_producto {
-        max-height: 190px;
-        overflow-y: auto;
-        overscroll-behavior: contain;
+        max-height: 190px; /* Limita el alto máximo del elemento. */
+        overflow-y: auto; /* Controla el contenido que desborda verticalmente. */
+        overscroll-behavior: contain; /* Controla la propagación del desplazamiento al llegar al borde. */
     }
 
     .opcion_selector_formulario_producto {
-        display: block;
-        width: 100%;
-        min-height: 34px;
-        padding: 8px 10px;
-        border: none;
-        border-radius: 4px;
-        background-color: #ffffff;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        text-align: left;
-        overflow-wrap: anywhere;
-        cursor: pointer;
-        box-sizing: border-box;
+        display: block; /* Muestra el elemento como un bloque. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-height: 34px; /* Establece el alto mínimo del elemento. */
+        padding: 8px 10px; /* Define el espacio interior del elemento. */
+        border: none; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 4px; /* Define el redondeado de las esquinas. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        overflow-wrap: anywhere; /* Permite controlar el salto de palabras largas. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    .opcion_selector_formulario_producto:hover,
-    .opcion_selector_formulario_producto:focus-visible {
-        background-color: #e4f6f6;
+    .opcion_selector_formulario_producto:hover, .opcion_selector_formulario_producto:focus-visible {
+        background-color: #e4f6f6; /* Establece el color de fondo. */
     }
 
     .opcion_selector_formulario_producto[aria-selected="true"] {
-        background-color: #e4f6f6;
-        color: #0f858d;
-        font-weight: bold;
+        background-color: #e4f6f6; /* Establece el color de fondo. */
+        color: #0f858d; /* Establece el color del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
     }
 
     .mensaje_selector_formulario_producto {
-        padding: 12px 8px;
-        color: #697a83;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
+        padding: 12px 8px; /* Define el espacio interior del elemento. */
+        color: #697a83; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
     }
 
+/* TITULO 13 ACCIONES FORMULARIO */
 
-/* TITULO 10 ACCIONES FORMULARIO */
-
-    /* clase para organizar las opciones inferiores del formulario */
     .contenedor_acciones_formulario_producto {
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;
-        gap: 10px;
-        margin-top: 24px;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        justify-content: flex-end; /* Define la distribución de los elementos en el eje principal. */
+        gap: 10px; /* Define la separación entre los elementos. */
+        margin-top: 24px; /* Define el margen superior. */
     }
 
-    /* clase para establecer la opción cancelar */
     .boton_cancelar_producto {
-        height: 40px;
-        display: flex;
-        align-items: center;
-        padding: 0 16px;
-        background-color: #edf1f3;
-        color: #44515a;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        font-weight: bold;
-        border-radius: 5px;
-        cursor: pointer;
-        box-sizing: border-box;
+        height: 40px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        padding: 0 16px; /* Define el espacio interior del elemento. */
+        background-color: #edf1f3; /* Establece el color de fondo. */
+        color: #44515a; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        border-radius: 5px; /* Define el redondeado de las esquinas. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* cambia el fondo de cancelar al posicionar el cursor */
     .boton_cancelar_producto:hover {
-        background-color: #dfe6e9;
+        background-color: #dfe6e9; /* Establece el color de fondo. */
     }
 
-    /* clase para establecer la opción guardar producto */
     .boton_guardar_producto {
-        height: 40px;
-        display: flex;
-        align-items: center;
-        padding: 0 16px;
-        background-color: #159ba3;
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        font-weight: bold;
-        border-radius: 5px;
-        cursor: pointer;
-        box-sizing: border-box;
+        height: 40px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        padding: 0 16px; /* Define el espacio interior del elemento. */
+        background-color: #159ba3; /* Establece el color de fondo. */
+        color: #ffffff; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        border-radius: 5px; /* Define el redondeado de las esquinas. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* cambia el fondo de guardar producto al posicionar el cursor */
     .boton_guardardar_producto:hover {
-        background-color: #0f858d;
+        background-color: #0f858d; /* Establece el color de fondo. */
     }
 
+/* TITULO 14 FORMULARIO IMPORTACION PRODUCTOS */
 
-/* TITULO 11 FORMULARIO IMPORTACION PRODUCTOS */
-
-    /* clase para establecer el fondo superpuesto de la importación */
     .contenedor_importacion_productos {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: fixed;
-        top: 0;
-        left: 0;
-        background-color: rgba(5, 31, 45, 0.55);
-        z-index: 1100;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 100%; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        position: fixed; /* Define el sistema de posicionamiento del elemento. */
+        top: 0; /* Define la posición respecto al borde superior. */
+        left: 0; /* Define la posición respecto al borde izquierdo. */
+        background-color: rgba(5, 31, 45, 0.55); /* Establece el color de fondo. */
+        z-index: 1100; /* Define el orden de superposición del elemento. */
     }
 
-    /* clase para ocultar la ventana de importación */
     .contenedor_importacion_productos_oculto {
-        display: none;
+        display: none; /* Oculta el elemento. */
     }
 
-    /* clase para establecer el formulario de importación */
     .formulario_importacion_productos {
-        width: 500px;
-        max-width: calc(100% - 40px);
-        background-color: #ffffff;
-        border-radius: 8px;
-        padding: 23px;
-        box-sizing: border-box;
+        width: 500px; /* Define el ancho del elemento. */
+        max-width: calc(100% - 40px); /* Limita el ancho máximo del elemento. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        padding: 23px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* clase para organizar el título y cierre de la importación */
     .cabecera_importacion_productos {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 22px;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: space-between; /* Define la distribución de los elementos en el eje principal. */
+        margin-bottom: 22px; /* Define el margen inferior. */
     }
 
-    /* clase para establecer el título de la importación */
     .titulo_importacion_productos {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 20px;
-        font-weight: bold;
+        color: #0b3650; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 20px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
     }
 
-    /* clase para establecer la opción para cerrar la importación */
     .boton_cerrar_importacion_productos {
-        width: 32px;
-        height: 32px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #64727a;
-        font-family: Arial, sans-serif;
-        font-size: 25px;
-        cursor: pointer;
-        border-radius: 5px;
+        width: 32px; /* Define el ancho del elemento. */
+        height: 32px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        color: #64727a; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 25px; /* Define el tamaño del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        border-radius: 5px; /* Define el redondeado de las esquinas. */
     }
 
-    /* cambia el fondo del cierre al posicionar el cursor */
     .boton_cerrar_importacion_productos:hover {
-        background-color: #edf1f3;
+        background-color: #edf1f3; /* Establece el color de fondo. */
     }
 
-    /* clase para establecer el contenido principal */
     .contenido_importacion_productos {
-        width: 100%;
+        width: 100%; /* Ocupa todo el ancho disponible. */
     }
 
-    /* clase para establecer la descripción de la importación */
     .descripcion_importacion_productos {
-        color: #71818a;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        line-height: 19px;
-        margin-bottom: 20px;
+        color: #71818a; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        line-height: 19px; /* Define la separación entre líneas de texto. */
+        margin-bottom: 20px; /* Define el margen inferior. */
     }
 
-    /* clase para establecer la zona de selección del archivo */
     .zona_seleccion_archivo_productos {
-        width: 100%;
-        padding: 38px 20px;
-        border: 2px dashed #b8c7ce;
-        border-radius: 8px;
-        text-align: center;
-        cursor: pointer;
-        box-sizing: border-box;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        padding: 38px 20px; /* Define el espacio interior del elemento. */
+        border: 2px dashed #b8c7ce; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* cambia el fondo de la selección de archivo al posicionar el cursor */
     .zona_seleccion_archivo_productos:hover {
-        background-color: #f6fafb;
-        border-color: #159ba3;
+        background-color: #f6fafb; /* Establece el color de fondo. */
+        border-color: #159ba3; /* Establece el color del borde. */
     }
 
-    /* clase para establecer el icono de archivo */
     .icono_archivo_productos {
-        color: #159ba3;
-        font-family: Arial, sans-serif;
-        font-size: 35px;
-        font-weight: bold;
+        color: #159ba3; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 35px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
     }
 
-    /* clase para establecer el texto principal de selección */
     .texto_seleccion_archivo_productos {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        font-weight: bold;
-        margin-top: 10px;
+        color: #0b3650; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 14px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-top: 10px; /* Define el margen superior. */
     }
 
-    /* clase para establecer los formatos permitidos */
     .formatos_archivo_productos {
-        color: #84939a;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        margin-top: 8px;
+        color: #84939a; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        margin-top: 8px; /* Define el margen superior. */
     }
 
-    /* clase para establecer la información del archivo */
     .informacion_archivo_productos {
-        color: #536873;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        line-height: 18px;
-        margin-top: 15px;
-        white-space: pre-line;
+        color: #536873; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        line-height: 18px; /* Define la separación entre líneas de texto. */
+        margin-top: 15px; /* Define el margen superior. */
+        white-space: pre-line; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
 
-    /* clase para organizar las opciones de importación */
     .contenedor_acciones_importacion_productos {
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;
-        gap: 10px;
-        margin-top: 25px;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        justify-content: flex-end; /* Define la distribución de los elementos en el eje principal. */
+        gap: 10px; /* Define la separación entre los elementos. */
+        margin-top: 25px; /* Define el margen superior. */
     }
 
-    /* clase para establecer la opción cancelar importación */
     .boton_cancelar_importacion_productos {
-        height: 40px;
-        display: flex;
-        align-items: center;
-        padding: 0 16px;
-        background-color: #edf1f3;
-        color: #44515a;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        font-weight: bold;
-        border-radius: 5px;
-        cursor: pointer;
-        box-sizing: border-box;
+        height: 40px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        padding: 0 16px; /* Define el espacio interior del elemento. */
+        background-color: #edf1f3; /* Establece el color de fondo. */
+        color: #44515a; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        border-radius: 5px; /* Define el redondeado de las esquinas. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* cambia el fondo de cancelar importación al posicionar el cursor */
     .boton_cancelar_importacion_productos:hover {
-        background-color: #dfe6e9;
+        background-color: #dfe6e9; /* Establece el color de fondo. */
     }
 
-    /* clase para establecer la opción confirmar importación */
     .boton_confirmar_importacion_productos {
-        height: 40px;
-        display: flex;
-        align-items: center;
-        padding: 0 16px;
-        background-color: #159ba3;
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        font-weight: bold;
-        border-radius: 5px;
-        cursor: pointer;
-        box-sizing: border-box;
+        height: 40px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        padding: 0 16px; /* Define el espacio interior del elemento. */
+        background-color: #159ba3; /* Establece el color de fondo. */
+        color: #ffffff; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        border-radius: 5px; /* Define el redondeado de las esquinas. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* cambia el fondo de confirmar importación al posicionar el cursor */
     .boton_confirmar_importacion_productos:hover {
-        background-color: #0f858d;
+        background-color: #0f858d; /* Establece el color de fondo. */
     }
 
+/* TITULO 15 RESPONSIVE PRODUCTOS */
 
-/* TITULO 12 RESPONSIVE PRODUCTOS */
-
-    /* adapta los indicadores para pantallas medianas */
-    @media (max-width: 1100px) {
-
+    @media (max-width: 1200px) {
         .contenedor_indicadores_productos {
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(2, 1fr); /* Define la distribución y el ancho de las columnas. */
         }
-
     }
 
+/* TITULO 16 RESPONSIVE (MAX-WIDTH: 1024PX) */
 
-    /* adapta la vista para tablets */
-    @media (max-width: 900px) {
-
+    @media (max-width: 1024px) {
         .contenedor_encabezado_productos {
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr; /* Define la distribución y el ancho de las columnas. */
         }
 
         .contenedor_informacion_productos {
-            grid-column: 1 / 3;
+            grid-column: 1 / 3; /* Define las columnas que ocupa el elemento. */
         }
 
         .boton_importar_productos {
-            width: 100%;
+            width: 100%; /* Ocupa todo el ancho disponible. */
         }
 
         .boton_nuevo_producto {
-            width: 100%;
+            width: 100%; /* Ocupa todo el ancho disponible. */
         }
 
         .contenedor_filtros_productos {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-columns: repeat(2, minmax(0, 1fr)); /* Define la distribución y el ancho de las columnas. */
         }
 
         .contenedor_campos_producto {
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
         }
-
     }
 
+/* TITULO 17 RESPONSIVE (MAX-WIDTH: 600PX) */
 
-    /* adapta la vista para dispositivos móviles */
     @media (max-width: 600px) {
-
         .contenedor_productos {
-            padding: 18px;
+            padding: 18px; /* Define el espacio interior del elemento. */
         }
 
         .contenedor_encabezado_productos {
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
         }
 
         .contenedor_informacion_productos {
-            grid-column: auto;
+            grid-column: auto; /* Define las columnas que ocupa el elemento. */
         }
 
         .boton_importar_productos {
-            width: 100%;
+            width: 100%; /* Ocupa todo el ancho disponible. */
         }
 
         .boton_nuevo_producto {
-            width: 100%;
+            width: 100%; /* Ocupa todo el ancho disponible. */
         }
 
         .contenedor_indicadores_productos {
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
         }
 
         .formulario_producto {
-            max-width: calc(100% - 24px);
-            padding: 20px;
+            max-width: calc(100% - 24px); /* Limita el ancho máximo del elemento. */
+            padding: 20px; /* Define el espacio interior del elemento. */
         }
 
         .formulario_importacion_productos {
-            max-width: calc(100% - 24px);
-            padding: 20px;
+            max-width: calc(100% - 24px); /* Limita el ancho máximo del elemento. */
+            padding: 20px; /* Define el espacio interior del elemento. */
         }
 
         .contenedor_acciones_formulario_producto {
-            flex-direction: column;
+            flex-direction: column; /* Organiza los elementos en una columna. */
         }
 
         .boton_cancelar_producto {
-            justify-content: center;
+            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
         }
 
         .boton_guardar_producto {
-            justify-content: center;
+            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
         }
 
         .contenedor_acciones_importacion_productos {
-            flex-direction: column;
+            flex-direction: column; /* Organiza los elementos en una columna. */
         }
 
         .boton_cancelar_importacion_productos {
-            justify-content: center;
+            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
         }
 
         .boton_confirmar_importacion_productos {
-            justify-content: center;
+            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
         }
-
     }
 
-    
-/* evita que los datos obliguen a ensanchar la tabla */
-.tabla_productos th,
-.tabla_productos td {
-    box-sizing: border-box;
-}
+    .tabla_productos th, .tabla_productos td {
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
 
-/* permite ajustar descripciones largas */
-.dato_descripcion_productos {
-    min-width: 0;
-    max-width: none;
-    overflow-wrap: anywhere;
-}
+    .dato_descripcion_productos {
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        max-width: none; /* Limita el ancho máximo del elemento. */
+        overflow-wrap: anywhere; /* Permite controlar el salto de palabras largas. */
+    }
 
-/* ajusta los nombres de proveedores */
-.dato_proveedor_productos {
-    width: auto;
-    max-width: none;
-    white-space: normal;
-    overflow-wrap: anywhere;
-}
+    .dato_proveedor_productos {
+        width: auto; /* Define el ancho del elemento. */
+        max-width: none; /* Limita el ancho máximo del elemento. */
+        white-space: normal; /* Define cómo se conservan los espacios y los saltos de línea. */
+        overflow-wrap: anywhere; /* Permite controlar el salto de palabras largas. */
+    }
 
-/* mantiene los botones de acciones ordenados */
-.contenedor_acciones_producto {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-}
+    .contenedor_acciones_producto {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        gap: 6px; /* Define la separación entre los elementos. */
+    }
 
-/* ajusta ligeramente el tamaño de los botones */
-.boton_accion_producto {
-    width: 36px;
-    height: 36px;
-}
+    .boton_accion_producto {
+        width: 36px; /* Define el ancho del elemento. */
+        height: 36px; /* Define el alto del elemento. */
+    }
 
+/* TITULO 18 IMAGEN DEL PRODUCTO */
 
-/* TITULO 13 IMAGEN DEL PRODUCTO */
-
-    /* seccion de fotografia dentro del formulario */
     .contenedor_imagen_producto {
-        margin-top: 21px;
-        padding-top: 18px;
-        border-top: 1px solid #e2e8eb;
+        margin-top: 21px; /* Define el margen superior. */
+        padding-top: 18px; /* Define el espacio interior superior. */
+        border-top: 1px solid #e2e8eb; /* Define el borde superior. */
     }
 
-    /* titulo del campo imagen */
     .texto_campo_imagen_producto {
-        color: #425966;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 10px;
+        color: #425966; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-bottom: 10px; /* Define el margen inferior. */
     }
 
-    /* distribucion de la fotografia y sus controles */
     .contenido_imagen_producto {
-        display: flex;
-        align-items: flex-start;
-        gap: 18px;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: flex-start; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 18px; /* Define la separación entre los elementos. */
     }
 
-    /* marco donde se muestra la fotografia */
     .marco_imagen_producto {
-        width: 138px;
-        height: 138px;
-        min-width: 138px;
-        border: 1px solid #dce4e8;
-        border-radius: 7px;
-        background-color: #f8fafb;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        box-sizing: border-box;
+        width: 138px; /* Define el ancho del elemento. */
+        height: 138px; /* Define el alto del elemento. */
+        min-width: 138px; /* Establece el ancho mínimo del elemento. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        background-color: #f8fafb; /* Establece el color de fondo. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        overflow: hidden; /* Controla el contenido que supera las dimensiones del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* fotografia del producto */
     .imagen_vista_previa_producto {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
+        display: block; /* Muestra el elemento como un bloque. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 100%; /* Define el alto del elemento. */
+        object-fit: contain; /* Define cómo se ajusta la imagen dentro de sus dimensiones. */
     }
 
-    /* oculta la fotografia si no existe */
     .imagen_vista_previa_producto[hidden] {
-        display: none;
+        display: none; /* Oculta el elemento. */
     }
 
-    /* texto que aparece cuando no existe fotografia */
     .mensaje_sin_imagen_producto {
-        padding: 10px;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        color: #84939a;
-        text-align: center;
+        padding: 10px; /* Define el espacio interior del elemento. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        color: #84939a; /* Establece el color del texto. */
+        text-align: center; /* Define la alineación horizontal del texto. */
     }
 
     .mensaje_sin_imagen_producto[hidden] {
-        display: none;
+        display: none; /* Oculta el elemento. */
     }
 
-    /* area con las opciones de fotografia */
     .controles_imagen_producto {
-        display: flex;
-        flex: 1;
-        min-width: 0;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex: 1; /* Define cómo el elemento ocupa el espacio disponible en Flexbox. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        align-items: flex-start; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 10px; /* Define la separación entre los elementos. */
     }
 
-    /* organiza los botones */
     .botones_imagen_producto {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-wrap: wrap; /* Define si los elementos pueden pasar a otra línea. */
+        gap: 8px; /* Define la separación entre los elementos. */
     }
 
-    /* diseño de buscar imagen */
     .boton_buscar_imagen_producto {
-        min-height: 39px;
-        background-color: #159ba3;
-        color: #ffffff;
-        border: 1px solid #159ba3;
-        border-radius: 6px;
-        padding: 0 13px;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        cursor: pointer;
+        min-height: 39px; /* Establece el alto mínimo del elemento. */
+        background-color: #159ba3; /* Establece el color de fondo. */
+        color: #ffffff; /* Establece el color del texto. */
+        border: 1px solid #159ba3; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        padding: 0 13px; /* Define el espacio interior del elemento. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
     }
 
     .boton_buscar_imagen_producto:hover {
-        background-color: #0f858d;
-        border-color: #0f858d;
+        background-color: #0f858d; /* Establece el color de fondo. */
+        border-color: #0f858d; /* Establece el color del borde. */
     }
 
-    /* diseño de subir imagen */
     .boton_subir_imagen_producto {
-        min-height: 39px;
-        background-color: #ffffff;
-        color: #0f858d;
-        border: 1px solid #159ba3;
-        border-radius: 6px;
-        padding: 0 13px;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        cursor: pointer;
+        min-height: 39px; /* Establece el alto mínimo del elemento. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        color: #0f858d; /* Establece el color del texto. */
+        border: 1px solid #159ba3; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        padding: 0 13px; /* Define el espacio interior del elemento. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
     }
 
     .boton_subir_imagen_producto:hover {
-        background-color: #e4f6f6;
+        background-color: #e4f6f6; /* Establece el color de fondo. */
     }
 
-    /* diseño de quitar imagen */
     .boton_quitar_imagen_producto {
-        min-height: 39px;
-        background-color: #ffffff;
-        color: #536873;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        padding: 0 13px;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        cursor: pointer;
+        min-height: 39px; /* Establece el alto mínimo del elemento. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        color: #536873; /* Establece el color del texto. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        padding: 0 13px; /* Define el espacio interior del elemento. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
     }
 
     .boton_quitar_imagen_producto:hover {
-        background-color: #edf1f3;
+        background-color: #edf1f3; /* Establece el color de fondo. */
     }
 
-    /* controles inactivos */
-    .boton_buscar_imagen_producto:disabled,
-    .boton_subir_imagen_producto:disabled,
-    .boton_quitar_imagen_producto:disabled {
-        opacity: 0.55;
-        cursor: not-allowed;
+    .boton_buscar_imagen_producto:disabled, .boton_subir_imagen_producto:disabled, .boton_quitar_imagen_producto:disabled {
+        opacity: 0.55; /* Define el nivel de opacidad. */
+        cursor: not-allowed; /* Define el cursor al situarlo sobre el elemento. */
     }
 
-    /* mensaje sobre el resultado de la busqueda */
     .texto_estado_imagen_producto {
-        color: #697a83;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        line-height: 18px;
+        color: #697a83; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        line-height: 18px; /* Define la separación entre líneas de texto. */
     }
 
-    /* indica la fuente de la fotografia */
     .enlace_fuente_imagen_producto {
-        color: #0f858d;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        text-decoration: underline;
-        overflow-wrap: anywhere;
+        color: #0f858d; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        text-decoration: underline; /* Define la decoración del texto. */
+        overflow-wrap: anywhere; /* Permite controlar el salto de palabras largas. */
     }
 
     .enlace_fuente_imagen_producto[hidden] {
-        display: none;
+        display: none; /* Oculta el elemento. */
     }
 
-    /* organiza el campo de imagen en pantallas pequeñas */
-    @media (max-width: 600px) {
+/* TITULO 19 RESPONSIVE (MAX-WIDTH: 600PX) */
 
+    @media (max-width: 600px) {
         .contenido_imagen_producto {
-            flex-direction: column;
+            flex-direction: column; /* Organiza los elementos en una columna. */
         }
 
         .marco_imagen_producto {
-            width: 120px;
-            height: 120px;
-            min-width: 120px;
+            width: 120px; /* Define el ancho del elemento. */
+            height: 120px; /* Define el alto del elemento. */
+            min-width: 120px; /* Establece el ancho mínimo del elemento. */
         }
-
     }
 
-/* TITULO 14 MINIATURAS DE PRODUCTOS EN LA TABLA */
+/* TITULO 20 MINIATURAS DE PRODUCTOS EN LA TABLA */
 
-    /* distribuye las nueve columnas sin forzar un ancho minimo */
     .tabla_productos .columna_imagen_productos {
-        width: 6%;
-        padding: 12px 5px;
-        text-align: center;
-        color: #667881;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
+        width: 6%; /* Define el ancho del elemento. */
+        padding: 12px 5px; /* Define el espacio interior del elemento. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        color: #667881; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 11px; /* Define el tamaño del texto. */
     }
 
     .tabla_productos .columna_codigo_productos {
-        width: 9%;
+        width: 9%; /* Define el ancho del elemento. */
     }
 
     .tabla_productos .columna_codigo_barra_productos {
-        width: 12%;
+        width: 12%; /* Define el ancho del elemento. */
     }
 
     .tabla_productos .columna_descripcion_productos {
-        width: 23%;
-        min-width: 0;
+        width: 23%; /* Define el ancho del elemento. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
     }
 
     .tabla_productos .columna_familia_productos {
-        width: 11%;
+        width: 11%; /* Define el ancho del elemento. */
     }
 
     .tabla_productos .columna_precio_productos {
-        width: 9%;
+        width: 9%; /* Define el ancho del elemento. */
     }
 
     .tabla_productos .columna_proveedor_productos {
-        width: 11%;
-        max-width: none;
+        width: 11%; /* Define el ancho del elemento. */
+        max-width: none; /* Limita el ancho máximo del elemento. */
     }
 
     .tabla_productos .columna_estado_productos {
-        width: 7%;
+        width: 7%; /* Define el ancho del elemento. */
     }
 
     .tabla_productos .columna_acciones_productos {
-        width: 12%;
+        width: 12%; /* Define el ancho del elemento. */
     }
 
-    /* centra la miniatura en su columna */
     .dato_imagen_productos {
-        padding: 9px 5px;
-        text-align: center;
-        vertical-align: middle;
+        padding: 9px 5px; /* Define el espacio interior del elemento. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        vertical-align: middle; /* Define la alineación vertical del contenido. */
     }
 
-    /* boton que permite abrir el detalle desde la miniatura */
     .boton_imagen_producto {
-        width: 52px;
-        height: 52px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 3px;
-        background-color: #f8fafb;
-        border: 1px solid #dce4e8;
-        border-radius: 7px;
+        width: 52px; /* Define el ancho del elemento. */
+        height: 52px; /* Define el alto del elemento. */
+        display: inline-flex; /* Organiza el contenido con Flexbox dentro de la línea. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        padding: 3px; /* Define el espacio interior del elemento. */
+        background-color: #f8fafb; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
     }
 
-    /* muestra la foto completa sin deformarla */
     .imagen_miniatura_producto {
-        width: 100%;
-        height: 100%;
-        display: block;
-        object-fit: contain;
-        border-radius: 4px;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 100%; /* Define el alto del elemento. */
+        display: block; /* Muestra el elemento como un bloque. */
+        object-fit: contain; /* Define cómo se ajusta la imagen dentro de sus dimensiones. */
+        border-radius: 4px; /* Define el redondeado de las esquinas. */
     }
 
-    /* icono generico de los productos sin foto */
     .imagen_miniatura_producto_vacia {
-        width: 25px;
-        height: 25px;
-        opacity: 0.55;
+        width: 25px; /* Define el ancho del elemento. */
+        height: 25px; /* Define el alto del elemento. */
+        opacity: 0.55; /* Define el nivel de opacidad. */
     }
 
-    /* evita desbordes en pantallas medianas */
-    @media (max-width: 1100px) {
+/* TITULO 21 RESPONSIVE (MAX-WIDTH: 1200PX) */
 
+    @media (max-width: 1200px) {
         .boton_imagen_producto {
-            width: 40px;
-            height: 40px;
+            width: 40px; /* Define el ancho del elemento. */
+            height: 40px; /* Define el alto del elemento. */
         }
 
         .tabla_productos .dato_acciones_productos {
-            padding: 8px 4px;
+            padding: 8px 4px; /* Define el espacio interior del elemento. */
         }
 
         .contenedor_acciones_producto {
-            gap: 3px;
+            gap: 3px; /* Define la separación entre los elementos. */
         }
 
         .dato_acciones_productos .boton_accion_producto {
-            width: 30px;
-            height: 30px;
-            padding: 5px;
+            width: 30px; /* Define el ancho del elemento. */
+            height: 30px; /* Define el alto del elemento. */
+            padding: 5px; /* Define el espacio interior del elemento. */
         }
-
     }
 
 /* TITULO FINAL RESPONSIVE FILTROS PRODUCTOS */
-@media (max-width: 600px) {
-    .contenedor_filtros_productos {
-        grid-template-columns: 1fr;
-    }
-    .contenedor_limpiar_filtros_productos {
-        grid-column: auto;
-    }
-    .boton_limpiar_filtros_productos {
-        width: 100%;
-    }
-}
 
+    @media (max-width: 600px) {
+        .contenedor_filtros_productos {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+        }
 
-/* TITULO 15 MODAL DE MENSAJES Y CONFIRMACIONES */
+        .contenedor_limpiar_filtros_productos {
+            grid-column: auto; /* Define las columnas que ocupa el elemento. */
+        }
 
-    /* fondo oscuro y ventana centrada en la pantalla */
+        .boton_limpiar_filtros_productos {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+        }
+    }
+
+/* TITULO 22 MODAL DE MENSAJES Y CONFIRMACIONES */
+
     .contenedor_alerta_productos {
-        position: fixed;
-        inset: 0;
-        width: 100%;
-        height: 100vh;
-        height: 100dvh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 18px;
-        background-color: rgba(5, 31, 45, 0.58);
-        z-index: 3000;
-        box-sizing: border-box;
+        position: fixed; /* Define el sistema de posicionamiento del elemento. */
+        inset: 0; /* Define las distancias respecto a los bordes del contenedor. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 100vh; /* Define el alto del elemento. */
+        height: 100dvh; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        padding: 18px; /* Define el espacio interior del elemento. */
+        background-color: rgba(5, 31, 45, 0.58); /* Establece el color de fondo. */
+        z-index: 3000; /* Define el orden de superposición del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* el atributo hidden debe prevalecer sobre display:flex */
     .contenedor_alerta_productos[hidden] {
-        display: none;
+        display: none; /* Oculta el elemento. */
     }
 
-    /* ventana principal de la alerta */
     .modal_alerta_productos {
-        --color_alerta_producto: #159ba3;
-        --fondo_alerta_producto: #e4f6f6;
-        width: 420px;
-        max-width: 100%;
-        max-height: calc(100dvh - 36px);
-        overflow-y: auto;
-        padding: 28px;
-        background-color: #ffffff;
-        border: 1px solid #dce4e8;
-        border-radius: 12px;
-        box-shadow: 0 18px 50px rgba(5, 31, 45, 0.22);
-        box-sizing: border-box;
-        text-align: center;
-        font-family: Arial, sans-serif;
+        --color_alerta_producto: #159ba3; /* Define una variable de estilo reutilizable. */
+        --fondo_alerta_producto: #e4f6f6; /* Define una variable de estilo reutilizable. */
+        width: 420px; /* Define el ancho del elemento. */
+        max-width: 100%; /* Evita que el elemento supere el ancho disponible. */
+        max-height: calc(100dvh - 36px); /* Limita el alto máximo del elemento. */
+        overflow-y: auto; /* Controla el contenido que desborda verticalmente. */
+        padding: 28px; /* Define el espacio interior del elemento. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 12px; /* Define el redondeado de las esquinas. */
+        box-shadow: 0 18px 50px rgba(5, 31, 45, 0.22); /* Agrega o ajusta la sombra del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
     }
 
-    /* colores según el tipo de mensaje */
     .modal_alerta_productos[data-tipo="error"] {
-        --color_alerta_producto: #dc2626;
-        --fondo_alerta_producto: #fee8e8;
+        --color_alerta_producto: #dc2626; /* Define una variable de estilo reutilizable. */
+        --fondo_alerta_producto: #fee8e8; /* Define una variable de estilo reutilizable. */
     }
 
     .modal_alerta_productos[data-tipo="advertencia"] {
-        --color_alerta_producto: #d58226;
-        --fondo_alerta_producto: #fff0df;
+        --color_alerta_producto: #d58226; /* Define una variable de estilo reutilizable. */
+        --fondo_alerta_producto: #fff0df; /* Define una variable de estilo reutilizable. */
     }
 
     .modal_alerta_productos[data-tipo="informacion"] {
-        --color_alerta_producto: #0b6572;
-        --fondo_alerta_producto: #e4f6f6;
+        --color_alerta_producto: #0b6572; /* Define una variable de estilo reutilizable. */
+        --fondo_alerta_producto: #e4f6f6; /* Define una variable de estilo reutilizable. */
     }
 
-    /* círculo e icono del aviso */
     .icono_alerta_productos {
-        width: 56px;
-        height: 56px;
-        margin: 0 auto 18px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        color: var(--color_alerta_producto);
-        background-color: var(--fondo_alerta_producto);
-        font-size: 27px;
-        font-weight: bold;
+        width: 56px; /* Define el ancho del elemento. */
+        height: 56px; /* Define el alto del elemento. */
+        margin: 0 auto 18px; /* Define el margen exterior del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        border-radius: 50%; /* Define el redondeado de las esquinas. */
+        color: var(--color_alerta_producto); /* Establece el color del texto. */
+        background-color: var(--fondo_alerta_producto); /* Establece el color de fondo. */
+        font-size: 27px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
     }
 
-    /* título y descripción */
     .titulo_alerta_productos {
-        margin-bottom: 10px;
-        color: #0b3650;
-        font-size: 20px;
-        font-weight: bold;
-        line-height: 1.3;
+        margin-bottom: 10px; /* Define el margen inferior. */
+        color: #0b3650; /* Establece el color del texto. */
+        font-size: 20px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        line-height: 1.3; /* Define la separación entre líneas de texto. */
     }
 
     .mensaje_alerta_productos {
-        color: #536873;
-        font-size: 14px;
-        line-height: 1.55;
-        white-space: pre-line;
-        overflow-wrap: anywhere;
+        color: #536873; /* Establece el color del texto. */
+        font-size: 14px; /* Define el tamaño del texto. */
+        line-height: 1.55; /* Define la separación entre líneas de texto. */
+        white-space: pre-line; /* Define cómo se conservan los espacios y los saltos de línea. */
+        overflow-wrap: anywhere; /* Permite controlar el salto de palabras largas. */
     }
 
-    /* acciones en la parte inferior de la ventana */
     .acciones_alerta_productos {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 25px;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        flex-wrap: wrap; /* Define si los elementos pueden pasar a otra línea. */
+        gap: 10px; /* Define la separación entre los elementos. */
+        margin-top: 25px; /* Define el margen superior. */
     }
 
-    .boton_cancelar_alerta_productos,
-    .boton_aceptar_alerta_productos {
-        min-width: 122px;
-        min-height: 42px;
-        padding: 0 17px;
-        border-radius: 6px;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        font-weight: bold;
-        cursor: pointer;
-        box-sizing: border-box;
+    .boton_cancelar_alerta_productos, .boton_aceptar_alerta_productos {
+        min-width: 122px; /* Establece el ancho mínimo del elemento. */
+        min-height: 42px; /* Establece el alto mínimo del elemento. */
+        padding: 0 17px; /* Define el espacio interior del elemento. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
     .boton_cancelar_alerta_productos {
-        border: 1px solid #dce4e8;
-        background-color: #edf1f3;
-        color: #44515a;
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        background-color: #edf1f3; /* Establece el color de fondo. */
+        color: #44515a; /* Establece el color del texto. */
     }
 
     .boton_cancelar_alerta_productos:hover {
-        background-color: #dfe6e9;
+        background-color: #dfe6e9; /* Establece el color de fondo. */
     }
 
     .boton_aceptar_alerta_productos {
-        border: 1px solid #159ba3;
-        background-color: #159ba3;
-        color: #ffffff;
+        border: 1px solid #159ba3; /* Define el grosor, el estilo y el color del borde. */
+        background-color: #159ba3; /* Establece el color de fondo. */
+        color: #ffffff; /* Establece el color del texto. */
     }
 
     .boton_aceptar_alerta_productos:hover {
-        background-color: #0f858d;
-        border-color: #0f858d;
+        background-color: #0f858d; /* Establece el color de fondo. */
+        border-color: #0f858d; /* Establece el color del borde. */
     }
 
-    /* destaca los focos de teclado */
-    .boton_cancelar_alerta_productos:focus-visible,
-    .boton_aceptar_alerta_productos:focus-visible {
-        outline: 2px solid #159ba3;
-        outline-offset: 3px;
+    .boton_cancelar_alerta_productos:focus-visible, .boton_aceptar_alerta_productos:focus-visible {
+        outline: 2px solid #159ba3; /* Define el contorno visual del elemento. */
+        outline-offset: 3px; /* Define la separación entre el contorno y el borde. */
     }
 
     .boton_cancelar_alerta_productos[hidden] {
-        display: none;
+        display: none; /* Oculta el elemento. */
     }
 
-    @media (max-width: 430px) {
+/* TITULO 23 RESPONSIVE (MAX-WIDTH: 480PX) */
+
+    @media (max-width: 480px) {
         .modal_alerta_productos {
-            padding: 24px 18px;
+            padding: 24px 18px; /* Define el espacio interior del elemento. */
         }
 
         .titulo_alerta_productos {
-            font-size: 18px;
+            font-size: 18px; /* Define el tamaño del texto. */
         }
 
-        .boton_cancelar_alerta_productos,
-        .boton_aceptar_alerta_productos {
-            flex: 1;
-            min-width: 0;
+        .boton_cancelar_alerta_productos, .boton_aceptar_alerta_productos {
+            flex: 1; /* Define cómo el elemento ocupa el espacio disponible en Flexbox. */
+            min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
         }
     }
-
 
 /* SUBTITULO RESPONSIVE DE LA TABLA DE PRODUCTOS */
 
-/* conserva el estado visible y evita el desplazamiento horizontal en tablets */
-@media (max-width: 900px) {
-    .tabla_productos .columna_codigo_barra_productos,
-    .tabla_productos .dato_codigo_barra_productos,
-    .tabla_productos .columna_familia_productos,
-    .tabla_productos .dato_familia_productos {
-        display: none;
+/* TITULO 24 RESPONSIVE (MAX-WIDTH: 1024PX) */
+
+    @media (max-width: 1024px) {
+        .tabla_productos .columna_codigo_barra_productos, .tabla_productos .dato_codigo_barra_productos, .tabla_productos .columna_familia_productos, .tabla_productos .dato_familia_productos {
+            display: none; /* Oculta el elemento. */
+        }
+
+        .tabla_productos .columna_imagen_productos {
+            width: 9%; /* Define el ancho del elemento. */
+        }
+
+        .tabla_productos .columna_codigo_productos {
+            width: 12%; /* Define el ancho del elemento. */
+        }
+
+        .tabla_productos .columna_descripcion_productos {
+            width: 30%; /* Define el ancho del elemento. */
+        }
+
+        .tabla_productos .columna_precio_productos {
+            width: 12%; /* Define el ancho del elemento. */
+        }
+
+        .tabla_productos .columna_proveedor_productos {
+            width: 14%; /* Define el ancho del elemento. */
+        }
+
+        .tabla_productos .columna_estado_productos {
+            width: 9%; /* Define el ancho del elemento. */
+        }
+
+        .tabla_productos .columna_acciones_productos {
+            width: 14%; /* Define el ancho del elemento. */
+        }
+
+        .tabla_productos th, .tabla_productos td {
+            padding-left: 5px; /* Define el espacio interior izquierdo. */
+            padding-right: 5px; /* Define el espacio interior derecho. */
+        }
     }
 
-    .tabla_productos .columna_imagen_productos { width: 9%; }
-    .tabla_productos .columna_codigo_productos { width: 12%; }
-    .tabla_productos .columna_descripcion_productos { width: 30%; }
-    .tabla_productos .columna_precio_productos { width: 12%; }
-    .tabla_productos .columna_proveedor_productos { width: 14%; }
-    .tabla_productos .columna_estado_productos { width: 9%; }
-    .tabla_productos .columna_acciones_productos { width: 14%; }
+/* TITULO 25 RESPONSIVE (MAX-WIDTH: 600PX) */
 
-    .tabla_productos th,
-    .tabla_productos td { padding-left: 5px; padding-right: 5px; }
-}
+    @media (max-width: 600px) {
+        .tabla_productos {
+            min-width: 900px; /* Establece el ancho mínimo del elemento. */
+        }
 
-/* en móvil, conserva imagen y proveedor y permite recorrer la tabla horizontalmente */
-@media (max-width: 600px) {
-    .tabla_productos {
-        min-width: 900px;
+        .tabla_productos .columna_imagen_productos {
+            width: 8%; /* Define el ancho del elemento. */
+        }
+
+        .tabla_productos .columna_codigo_productos {
+            width: 13%; /* Define el ancho del elemento. */
+        }
+
+        .tabla_productos .columna_descripcion_productos {
+            width: 28%; /* Define el ancho del elemento. */
+        }
+
+        .tabla_productos .columna_precio_productos {
+            width: 12%; /* Define el ancho del elemento. */
+        }
+
+        .tabla_productos .columna_proveedor_productos {
+            width: 17%; /* Define el ancho del elemento. */
+        }
+
+        .tabla_productos .columna_estado_productos {
+            width: 10%; /* Define el ancho del elemento. */
+        }
+
+        .tabla_productos .columna_acciones_productos {
+            width: 12%; /* Define el ancho del elemento. */
+        }
+
+        .tabla_productos .dato_codigo_productos {
+            white-space: normal; /* Define cómo se conservan los espacios y los saltos de línea. */
+            overflow-wrap: anywhere; /* Permite controlar el salto de palabras largas. */
+        }
+
+        .dato_estado_productos .etiqueta_estado_producto {
+            padding: 3px 4px; /* Define el espacio interior del elemento. */
+            font-size: 9px; /* Define el tamaño del texto. */
+        }
+
+        .tabla_productos .dato_acciones_productos .contenedor_acciones_producto {
+            flex-wrap: wrap; /* Define si los elementos pueden pasar a otra línea. */
+            gap: 3px; /* Define la separación entre los elementos. */
+        }
     }
-
-    .tabla_productos .columna_imagen_productos { width: 8%; }
-    .tabla_productos .columna_codigo_productos { width: 13%; }
-    .tabla_productos .columna_descripcion_productos { width: 28%; }
-    .tabla_productos .columna_precio_productos { width: 12%; }
-    .tabla_productos .columna_proveedor_productos { width: 17%; }
-    .tabla_productos .columna_estado_productos { width: 10%; }
-    .tabla_productos .columna_acciones_productos { width: 12%; }
-
-    .tabla_productos .dato_codigo_productos {
-        white-space: normal;
-        overflow-wrap: anywhere;
-    }
-
-    .dato_estado_productos .etiqueta_estado_producto {
-        padding: 3px 4px;
-        font-size: 9px;
-    }
-
-    .tabla_productos .dato_acciones_productos .contenedor_acciones_producto {
-        flex-wrap: wrap;
-        gap: 3px;
-    }
-}
-
 
 /* SUBTITULO 2 CONTROL DE INVENTARIO EN FORMULARIO */
 
     .campo_control_stock_producto {
-        grid-column: 1 / -1;
-        display: flex;
-        flex-direction: column;
-        min-width: 0;
+        grid-column: 1 / -1; /* Define las columnas que ocupa el elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
     }
 
     .texto_campo_control_stock_producto {
-        color: #425966;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 8px;
+        color: #425966; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-bottom: 8px; /* Define el margen inferior. */
     }
 
     .opciones_control_stock_producto {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px;
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: repeat(2, minmax(0, 1fr)); /* Define la distribución y el ancho de las columnas. */
+        gap: 10px; /* Define la separación entre los elementos. */
     }
 
     .opcion_control_stock_producto {
-        display: flex;
-        align-items: center;
-        gap: 9px;
-        min-height: 42px;
-        padding: 9px 12px;
-        color: #425966;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        background: #ffffff;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        box-sizing: border-box;
-        cursor: pointer;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 9px; /* Define la separación entre los elementos. */
+        min-height: 42px; /* Establece el alto mínimo del elemento. */
+        padding: 9px 12px; /* Define el espacio interior del elemento. */
+        color: #425966; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        background: #ffffff; /* Define el fondo del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
     }
 
     .opcion_control_stock_producto:has(input:checked) {
-        border-color: #159ba3;
-        background: #e4f6f6;
-        color: #0f858d;
+        border-color: #159ba3; /* Establece el color del borde. */
+        background: #e4f6f6; /* Define el fondo del elemento. */
+        color: #0f858d; /* Establece el color del texto. */
     }
 
     .opcion_control_stock_producto input {
-        margin: 0;
-        accent-color: #159ba3;
-        flex-shrink: 0;
+        margin: 0; /* Define el margen exterior del elemento. */
+        accent-color: #159ba3; /* Establece el color de los controles nativos. */
+        flex-shrink: 0; /* Define cuánto puede reducirse el elemento en Flexbox. */
     }
 
     .opcion_control_stock_producto:has(input:disabled) {
-        cursor: default;
-        opacity: 0.76;
+        cursor: default; /* Define el cursor al situarlo sobre el elemento. */
+        opacity: 0.76; /* Define el nivel de opacidad. */
     }
 
     .ayuda_control_stock_producto {
-        margin-top: 8px;
-        color: #71818a;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        line-height: 1.45;
+        margin-top: 8px; /* Define el margen superior. */
+        color: #71818a; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        line-height: 1.45; /* Define la separación entre líneas de texto. */
     }
 
+/* TITULO 26 RESPONSIVE (MAX-WIDTH: 600PX) */
+
     @media (max-width: 600px) {
-        .opciones_control_stock_producto { grid-template-columns: 1fr; }
+        .opciones_control_stock_producto {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+        }
     }

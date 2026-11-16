@@ -1,952 +1,1534 @@
-.contenedor_alertas_vencimientos {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    padding: 26px;
-    box-sizing: border-box;
-}
-
-.encabezado_alertas_vencimientos {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-}
-
-.titulo_alertas_vencimientos {
-    color: #0b3650;
-    font: 700 25px Arial, sans-serif;
-}
-
-.descripcion_alertas_vencimientos {
-    color: #71818a;
-    font: 13px Arial, sans-serif;
-}
-
-.seccion_vencimientos {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    min-width: 0;
-    margin-top: 10px;
-}
-.encabezado_seccion_vencimientos {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-    padding: 3px 0 0;
-}
-.titulo_seccion_vencimientos {
-    margin: 0;
-    color: #0b3650;
-    font: 700 25px Arial, sans-serif;
-}
-.descripcion_seccion_vencimientos {
-    color: #71818a;
-    font: 13px/1.45 Arial, sans-serif;
-}
-
-.pestanas_vencimientos {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    overflow-x: auto;
-    border-bottom: 1px solid #dce4e8;
-}
-
-.pestana_vencimientos {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 13px 5px;
-    border-bottom: 2px solid transparent;
-    color: #536873;
-    font: 13px Arial, sans-serif;
-    white-space: nowrap;
-    cursor: pointer;
-}
-
-.pestana_vencimientos:hover,
-.pestana_vencimientos_activa {
-    border-bottom-color: #159ba3;
-    color: #138b92;
-    font-weight: 700;
-}
-
-.contador_pestana_vencimientos {
-    min-width: 22px;
-    padding: 3px 6px;
-    border-radius: 12px;
-    background: #edf3f4;
-    color: #536873;
-    font: 700 10px Arial, sans-serif;
-    text-align: center;
-}
-
-.pestana_vencimientos_activa .contador_pestana_vencimientos {
-    background: #e4f6f6;
-    color: #0f858d;
-}
-
-.contenedor_tabla_vencimientos {
-    width: 100%;
-    overflow: hidden;
-    border: 1px solid #dce4e8;
-    border-radius: 9px;
-    background: #ffffff;
-    box-shadow: 0 3px 12px rgba(16, 47, 61, 0.04);
-}
-
-.encabezado_tabla_vencimientos {
-    padding: 16px 18px;
-    border-bottom: 1px solid #e4eaed;
-}
-
-.titulo_tabla_vencimientos {
-    color: #0b3650;
-    font: 700 14px Arial, sans-serif;
-}
-
-.filtros_alertas_vencimientos {
-    display: grid;
-    align-items: end;
-    gap: 12px;
-    padding: 17px 16px;
-    border-bottom: 1px solid #e4eaed;
-    box-sizing: border-box;
-}
-
-.filtros_alertas_stock { grid-template-columns: minmax(180px, 2fr) repeat(3, minmax(120px, 1fr)) auto; }
-.filtros_lista_vencimientos { grid-template-columns: minmax(190px, 2fr) minmax(145px, 1fr) minmax(205px, 1.5fr) minmax(240px, 1.5fr) auto; }
-.filtros_alertas_vencimientos input,
-.filtros_alertas_vencimientos select {
-    width: 100%;
-    min-width: 0;
-    height: 42px;
-    padding: 8px 12px;
-    border: 1px solid #ced9de;
-    border-radius: 6px;
-    background: #ffffff;
-    color: #37434b;
-    font: 13px Arial, sans-serif;
-    box-sizing: border-box;
-}
-
-.filtros_alertas_vencimientos input:focus,
-.filtros_alertas_vencimientos select:focus { outline: 2px solid #a6e0e2; border-color: #159ba3; }
-.filtro_fechas_vencimientos { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
-.campo_filtro_fecha_vencimiento,
-.campo_filtro_alertas {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-    min-width: 0;
-}
-.etiqueta_filtro_alertas {
-    display: block;
-    margin: 0;
-    color: #536873;
-    font: 700 12px Arial, sans-serif;
-    line-height: 16px;
-}
-.campo_boton_filtros_alertas {
-    min-width: 0;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-}
-.campo_boton_filtros_alertas .boton_limpiar_filtros_alertas {
-    height: 42px;
-    min-height: 42px;
-    padding: 0 13px;
-    border: 1px solid #159ba3;
-    background: #ffffff;
-    color: #0f858d;
-    font: 700 12px Arial, sans-serif;
-}
-.campo_boton_filtros_alertas .boton_limpiar_filtros_alertas:hover { background: #e4f6f6; }
-.filtros_alertas_vencimientos input:focus-visible,
-.filtros_alertas_vencimientos select:focus-visible,
-.boton_limpiar_filtros_alertas:focus-visible { outline: 2px solid #159ba3; outline-offset: 2px; }
-.boton_limpiar_filtros_alertas { min-height: 38px; padding: 8px 11px; border: 1px solid #cbd9e0; border-radius: 6px; background: #ffffff; color: #435b69; font: 700 11px Arial, sans-serif; white-space: nowrap; cursor: pointer; }
-.boton_limpiar_filtros_alertas:hover { border-color: #159ba3; background: #effafb; color: #0f858d; }
-
-.tabla_vencimientos_desplazable {
-    width: 100%;
-    overflow-x: auto;
-}
-
-.tabla_vencimientos {
-    width: 100%;
-    min-width: 850px;
-}
-
-.tabla_lotes_vencimiento { min-width: 0; }
-.tabla_alertas_stock { min-width: 760px; }
-
-.fila_encabezado_vencimientos,
-.fila_vencimiento {
-    display: grid;
-    align-items: stretch;
-}
-
-.fila_lotes_vencimiento,
-.fila_encabezado_vencimientos.fila_lotes_vencimiento {
-    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1.2fr) minmax(0, 1.3fr) minmax(0, 1.5fr) 96px;
-}
-
-.fila_stock_alertas,
-.fila_encabezado_vencimientos.fila_stock_alertas {
-    grid-template-columns: 28% 15% 14% 15% 14% 14%;
-}
-
-.fila_encabezado_vencimientos {
-    background: #f4f7f8;
-}
-
-.celda_encabezado_vencimientos {
-    min-width: 0;
-    padding: 13px 12px;
-    color: #667881;
-    font: 700 11px Arial, sans-serif;
-    overflow-wrap: anywhere;
-}
-
-.fila_vencimiento {
-    border-top: 1px solid #edf1f3;
-}
-
-.fila_vencimiento > [role="cell"] {
-    min-width: 0;
-    display: flex;
-    align-items: center;
-    padding: 14px 12px;
-    color: #405762;
-    font: 12px Arial, sans-serif;
-    overflow-wrap: anywhere;
-    box-sizing: border-box;
-}
-
-.fila_mensaje_vencimiento {
-    grid-template-columns: minmax(0, 1fr);
-}
-
-.fila_mensaje_vencimiento .mensaje_tabla_vencimientos {
-    min-height: 90px;
-    justify-content: center;
-    color: #788993;
-    text-align: center;
-}
-
-.etiqueta_estado_vencimiento {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 6px 9px;
-    border-radius: 15px;
-    font: 700 10px Arial, sans-serif;
-    white-space: nowrap;
-}
-
-.estado_lote_vigente { background: #e8f7f0; color: #18845d; }
-.estado_lote_critico { background: #fde2e2; color: #b42318; }
-.estado_lote_riesgo { background: #fff4cc; color: #9a6700; }
-.estado_lote_proximo { background: #e8f7f0; color: #18845d; }
-.estado_lote_vendido { background: #e8f7f0; color: #18845d; }
-.estado_lote_inactivo { background: #fdeaea; color: #b54747; }
-
-/* Acciones de lotes: iconos tipo Inventario (Lucide inline). */
-.acciones_lote_vencimiento {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    min-width: 0;
-}
-.boton_editar_vencimiento,
-.boton_baja_lote_vencimiento {
-    flex: 0 0 36px;
-    width: 36px;
-    height: 36px;
-    min-width: 36px;
-    min-height: 36px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 7px;
-    border-radius: 7px;
-    border: 1px solid #dce4e8;
-    background: #ffffff;
-    cursor: pointer;
-    box-sizing: border-box;
-    transition: background-color .18s, border-color .18s;
-}
-.boton_editar_vencimiento { color: #159ba3; }
-.boton_editar_vencimiento:hover { border-color: #159ba3; background: #e4f6f6; }
-.boton_baja_lote_vencimiento { color: #c04e4e; }
-.boton_baja_lote_vencimiento:hover { border-color: #d99e9e; background: #fce9e9; }
-.acciones_lote_vencimiento button:focus-visible { outline: 2px solid #159ba3; outline-offset: 2px; }
-.acciones_lote_vencimiento button svg { width: 19px; height: 19px; display: block; pointer-events: none; }
-
-.modal_editar_vencimiento {
-    position: fixed;
-    inset: 0;
-    z-index: 1800;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background: rgba(5, 31, 45, .58);
-    box-sizing: border-box;
-}
-
-.modal_editar_vencimiento[hidden] { display: none !important; }
-
-.contenido_modal_editar_vencimiento {
-    position: relative;
-    width: min(100%, 440px);
-    padding: 26px;
-    border: 1px solid #dce4e8;
-    border-radius: 12px;
-    background: #ffffff;
-    box-shadow: 0 18px 48px rgba(0, 0, 0, .22);
-    box-sizing: border-box;
-}
-
-.cerrar_modal_editar_vencimiento {
-    position: absolute;
-    top: 12px;
-    right: 14px;
-    width: 32px;
-    height: 32px;
-    border: 0;
-    border-radius: 5px;
-    background: transparent;
-    color: #637682;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-.cerrar_modal_editar_vencimiento:hover { background: #f1f5f7; }
-
-.titulo_modal_editar_vencimiento {
-    padding-right: 36px;
-    color: #0b3650;
-    font: 700 19px Arial, sans-serif;
-}
-
-.descripcion_modal_editar_vencimiento {
-    margin-top: 9px;
-    color: #71818a;
-    font: 13px/1.5 Arial, sans-serif;
-}
-
-.campo_modal_editar_vencimiento { display: flex; flex-direction: column; gap: 7px; margin-top: 19px; }
-.texto_modal_editar_vencimiento { color: #3d5868; font: 700 12px Arial, sans-serif; }
-.campo_modal_editar_vencimiento input { width: 100%; height: 42px; padding: 9px 12px; border: 1px solid #cbd9e0; border-radius: 7px; color: #1d3f50; font: 14px Arial, sans-serif; box-sizing: border-box; }
-.campo_modal_editar_vencimiento input:focus { outline: 2px solid #a6e0e2; border-color: #159ba3; }
-.mensaje_modal_editar_vencimiento { min-height: 18px; margin-top: 10px; color: #b54747; font: 12px Arial, sans-serif; }
-
-.acciones_modal_editar_vencimiento { display: flex; justify-content: flex-end; gap: 9px; margin-top: 12px; }
-.acciones_modal_editar_vencimiento button { min-height: 38px; padding: 8px 13px; border: 1px solid #cbd9e0; border-radius: 6px; background: #ffffff; color: #405762; font: 700 12px Arial, sans-serif; cursor: pointer; }
-.acciones_modal_editar_vencimiento .boton_guardar_editar_vencimiento { border-color: #159ba3; background: #159ba3; color: #ffffff; }
-.acciones_modal_editar_vencimiento button:disabled { opacity: .55; cursor: wait; }
-
-.modal_baja_lote_vencimiento { position: fixed; inset: 0; z-index: 1801; display: flex; align-items: center; justify-content: center; padding: 20px; background: rgba(5, 31, 45, .58); box-sizing: border-box; }
-.modal_baja_lote_vencimiento[hidden] { display: none !important; }
-.contenido_modal_baja_lote_vencimiento { position: relative; width: min(100%, 460px); padding: 26px; border: 1px solid #dce4e8; border-radius: 12px; background: #ffffff; box-shadow: 0 18px 48px rgba(0, 0, 0, .22); box-sizing: border-box; }
-.cerrar_modal_baja_lote_vencimiento { position: absolute; top: 12px; right: 14px; width: 32px; height: 32px; border: 0; border-radius: 5px; background: transparent; color: #637682; font-size: 24px; cursor: pointer; }
-.cerrar_modal_baja_lote_vencimiento:hover { background: #f1f5f7; }
-.titulo_modal_baja_lote_vencimiento { padding-right: 36px; color: #0b3650; font: 700 19px Arial, sans-serif; }
-.descripcion_modal_baja_lote_vencimiento { margin-top: 9px; color: #71818a; font: 13px/1.5 Arial, sans-serif; }
-.aviso_modal_baja_lote_vencimiento { margin-top: 14px; padding: 10px 12px; border-radius: 7px; background: #fff7e8; color: #805415; font: 12px/1.45 Arial, sans-serif; }
-.campo_modal_baja_lote_vencimiento { display: flex; flex-direction: column; gap: 7px; margin-top: 16px; }
-.campo_modal_baja_lote_vencimiento[hidden] { display: none !important; }
-.texto_modal_baja_lote_vencimiento { color: #3d5868; font: 700 12px Arial, sans-serif; }
-.campo_modal_baja_lote_vencimiento select,
-.campo_modal_baja_lote_vencimiento input { width: 100%; height: 42px; padding: 9px 12px; border: 1px solid #cbd9e0; border-radius: 7px; background: #ffffff; color: #1d3f50; font: 14px Arial, sans-serif; box-sizing: border-box; }
-.campo_modal_baja_lote_vencimiento :focus { outline: 2px solid #a6e0e2; border-color: #159ba3; }
-.opcion_descuento_merma_lote { display: grid; grid-template-columns: 20px 1fr; align-items: start; gap: 10px; margin-top: 14px; padding: 12px; border: 1px solid #dce4e8; border-radius: 7px; background: #f8fafb; }
-.opcion_descuento_merma_lote[hidden] { display: none !important; }
-.opcion_descuento_merma_lote input { width: 17px; height: 17px; margin: 1px 0 0; accent-color: #159ba3; cursor: pointer; }
-.contenido_opcion_descuento_merma_lote { display: flex; flex-direction: column; gap: 5px; }
-.ayuda_opcion_descuento_merma_lote { color: #71818a; font: 11px/1.45 Arial, sans-serif; }
-.mensaje_modal_baja_lote_vencimiento { min-height: 18px; margin-top: 10px; color: #b54747; font: 12px Arial, sans-serif; }
-.acciones_modal_baja_lote_vencimiento { display: flex; justify-content: flex-end; gap: 9px; margin-top: 12px; }
-.acciones_modal_baja_lote_vencimiento button { min-height: 38px; padding: 8px 13px; border: 1px solid #cbd9e0; border-radius: 6px; background: #ffffff; color: #405762; font: 700 12px Arial, sans-serif; cursor: pointer; }
-.acciones_modal_baja_lote_vencimiento .boton_confirmar_baja_lote_vencimiento { border-color: #c65353; background: #b54747; color: #ffffff; }
-.acciones_modal_baja_lote_vencimiento button:disabled { opacity: .55; cursor: wait; }
-
-.paginador_vencimientos {
-    min-height: 64px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 14px;
-    padding: 12px 16px;
-    border-top: 1px solid #e4eaed;
-    box-sizing: border-box;
-}
-
-.informacion_paginador_vencimientos {
-    color: #71818a;
-    font: 12px Arial, sans-serif;
-}
-
-.controles_paginador_vencimientos,
-.numeros_paginas_vencimientos {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.boton_pagina_vencimientos,
-.boton_numero_pagina_vencimientos {
-    min-width: 34px;
-    min-height: 34px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 9px;
-    border: 1px solid #dce4e8;
-    border-radius: 6px;
-    background: #ffffff;
-    color: #43545d;
-    font: 12px Arial, sans-serif;
-    cursor: pointer;
-    user-select: none;
-}
-
-.boton_pagina_vencimientos:hover:not([aria-disabled="true"]),
-.boton_numero_pagina_vencimientos:hover {
-    border-color: #159ba3;
-    color: #0f858d;
-}
-
-.boton_pagina_vencimientos[aria-disabled="true"] {
-    opacity: 0.45;
-    cursor: default;
-}
-
-.boton_numero_pagina_vencimientos.pagina_actual_vencimientos {
-    border-color: #159ba3;
-    background: #159ba3;
-    color: #ffffff;
-    font-weight: 700;
-}
-
-.puntos_paginas_vencimientos {
-    padding: 0 3px;
-    color: #71818a;
-}
-
-@media (max-width: 700px) {
-    .contenedor_alertas_vencimientos { padding: 18px; }
-    .paginador_vencimientos { align-items: flex-start; flex-direction: column; }
-    .controles_paginador_vencimientos { width: 100%; justify-content: center; flex-wrap: wrap; }
-    .contenido_modal_editar_vencimiento { padding: 22px 18px; }
-    .filtros_alertas_stock,
-    .filtros_lista_vencimientos { grid-template-columns: minmax(0, 1fr); }
-}
-
-/* Alertas de stock: filtros y estados visuales. */
-.aviso_datos_alertas_stock { margin-top: 6px; color: #71818a; font: 11px/1.45 Arial, sans-serif; }
-.filtros_alertas_stock { grid-template-columns: minmax(180px, 2fr) repeat(3, minmax(130px, 1fr)) auto; }
-.estado_alerta_sin_stock { background: #fde8e8; color: #b42318; }
-.estado_alerta_stock_bajo { background: #fff2dc; color: #a35a11; }
-@media (max-width: 1100px) {
-    .filtros_alertas_stock { grid-template-columns: repeat(2, minmax(0,1fr)); }
-    .filtros_alertas_stock > .campo_filtro_alertas:first-child { grid-column: 1 / -1; }
-}
-@media (max-width: 700px) {
-    .filtros_alertas_stock { grid-template-columns: minmax(0,1fr); }
-    .filtros_alertas_stock > .campo_filtro_alertas:first-child { grid-column: auto; }
-    .filtros_alertas_stock .campo_boton_filtros_alertas button { width: 100%; }
-}
-
-/* ====================================
-   INDICADORES DE ALERTAS Y VENCIMIENTOS
-   ==================================== */
-
-.resumen_alertas_vencimientos {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 16px;
-    width: 100%;
-}
-
-/* Tarjetas */
-.tarjeta_resumen_alertas {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    min-height: 105px;
-    padding: 18px;
-    background: #ffffff;
-    border: 1px solid #dce4e8;
-    border-radius: 8px;
-    box-sizing: border-box;
-}
-
-/* Contenedor del icono */
-.icono_resumen_alertas {
-    width: 46px;
-    height: 46px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-}
-
-/* Tamaño de los SVG */
-.icono_resumen_alertas img {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
-}
-
-/* Colores de fondo de cada icono */
-.icono_resumen_stock {
-    background-color: #fde8e8;
-}
-
-.icono_resumen_criticos {
-    background-color: #fff4df;
-}
-
-.icono_resumen_lotes {
-    background-color: #e4f6f6;
-}
-
-/* Información del KPI */
-.contenido_resumen_alertas {
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.etiqueta_resumen_alertas {
-    color: #697a83;
-    font-family: Arial, sans-serif;
-    font-size: 12px;
-}
-
-.valor_resumen_alertas {
-    color: #0b3650;
-    font-family: Arial, sans-serif;
-    font-size: 23px;
-    font-weight: bold;
-}
-
-.tarjeta_resumen_stock .valor_resumen_alertas {
-    color: #d94b4b;
-}
-
-.tarjeta_resumen_criticos .valor_resumen_alertas {
-    color: #d58226;
-}
-
-.tarjeta_resumen_lotes .valor_resumen_alertas {
-    color: #159ba3;
-}
-
-.nota_resumen_alertas {
-    color: #71818a;
-    font-family: Arial, sans-serif;
-    font-size: 11px;
-    line-height: 1.4;
-}
-
-/* Responsive */
-@media (max-width: 1000px) {
-    .resumen_alertas_vencimientos {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+/* TITULO 1 ESTILOS ALERTAS VENCIMIENTOS */
+
+    .contenedor_alertas_vencimientos {
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        gap: 18px; /* Define la separación entre los elementos. */
+        padding: 26px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
-}
 
-@media (max-width: 650px) {
-    .resumen_alertas_vencimientos {
-        grid-template-columns: 1fr;
+    .encabezado_alertas_vencimientos {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        gap: 7px; /* Define la separación entre los elementos. */
     }
-}
 
-@media (max-width: 1100px) {
-    .filtros_alertas_stock { grid-template-columns: repeat(2, minmax(0,1fr)); }
-    .filtros_alertas_stock > .campo_filtro_alertas:first-child { grid-column: 1 / -1; }
-}
-@media (max-width: 700px) {
-    .resumen_alertas_vencimientos { grid-template-columns: 1fr; }
-    .filtros_alertas_stock { grid-template-columns: minmax(0,1fr); }
-    .filtros_alertas_stock > .campo_filtro_alertas:first-child { grid-column: auto; }
-    .filtros_alertas_stock .campo_boton_filtros_alertas button { width: 100%; }
-}
+    .titulo_alertas_vencimientos {
+        color: #0b3650; /* Establece el color del texto. */
+        font: 700 25px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+    }
 
-/* ==============================================================
-   TITULO - TABLA DE LOTES (DISEÑO FINAL, SIN SCROLL HORIZONTAL)
-   Mantener estas reglas en el archivo principal. No agregar parches.
-   ============================================================== */
+    .descripcion_alertas_vencimientos {
+        color: #71818a; /* Establece el color del texto. */
+        font: 13px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+    }
 
-/* La vista se adapta al ancho DISPONIBLE junto al menú lateral. */
-.seccion_vencimientos .contenedor_tabla_vencimientos {
-    min-width: 0;
-    overflow: visible; /* Permite desplegables por debajo de los filtros. */
-    container: panel-lotes / inline-size;
-}
-.seccion_vencimientos .tabla_vencimientos_desplazable {
-    width: 100%;
-    overflow: hidden;
-}
-.seccion_vencimientos .tabla_lotes_vencimiento {
-    width: 100%;
-    min-width: 0;
-}
+    .seccion_vencimientos {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        gap: 14px; /* Define la separación entre los elementos. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        margin-top: 10px; /* Define el margen superior. */
+    }
 
-/* Filtros compactos y alineados: no estiran el ancho de la tabla. */
-.seccion_vencimientos .filtros_lista_vencimientos {
-    /* Buscar ocupa menos que Ordenar, para mostrar completo el valor elegido. */
-    grid-template-columns: minmax(185px, 1.08fr) minmax(170px, .92fr) minmax(190px, 1fr) minmax(275px, 1.75fr) auto;
-    align-items: end;
-    gap: 10px;
-    position: relative;
-    z-index: 4;
-}
-.seccion_vencimientos .filtros_lista_vencimientos > * { min-width: 0; }
-.seccion_vencimientos .filtros_lista_vencimientos input,
-.seccion_vencimientos .filtros_lista_vencimientos select { height: 42px; }
-.seccion_vencimientos .filtros_lista_vencimientos .boton_limpiar_filtros_alertas {
-    min-height: 42px;
-    border-color: #159ba3;
-    color: #0f858d;
-    font-size: 12px;
-}
+    .encabezado_seccion_vencimientos {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        gap: 7px; /* Define la separación entre los elementos. */
+        padding: 3px 0 0; /* Define el espacio interior del elemento. */
+    }
 
-/* Activos: cinco columnas. Inactivos: seis, incluyendo motivo. */
-.seccion_vencimientos .tabla_lotes_vencimiento[data-modo="activos"] .fila_lotes_vencimiento {
-    grid-template-columns: minmax(0, 2.4fr) minmax(0, 1.05fr) minmax(0, 1.3fr) minmax(0, 1.4fr) 104px;
-}
-.seccion_vencimientos .tabla_lotes_vencimiento[data-modo="inactivos"] .fila_lotes_vencimiento {
-    grid-template-columns: minmax(0, 2.1fr) minmax(0, 1fr) minmax(0, 1.2fr) minmax(0, 1.3fr) minmax(0, 1.5fr) 104px;
-}
-.seccion_vencimientos .tabla_lotes_vencimiento [role="columnheader"][hidden] { display: none !important; }
-.seccion_vencimientos .tabla_lotes_vencimiento .fila_encabezado_vencimientos.fila_lotes_vencimiento,
-.seccion_vencimientos .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento {
-    min-width: 0;
-    align-items: center;
-    gap: 0;
-}
-.seccion_vencimientos .tabla_lotes_vencimiento .fila_encabezado_vencimientos.fila_lotes_vencimiento > [role="columnheader"] {
-    min-width: 0;
-    padding: 14px 12px;
-    font: 700 11px/1.3 Arial, sans-serif;
-    color: #667881;
-    box-sizing: border-box;
-}
-.seccion_vencimientos .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento {
-    min-height: 86px;
-    padding: 0;
-    border-top: 1px solid #edf1f3;
-}
-.seccion_vencimientos .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento:hover { background-color: #f8fafb; }
-.seccion_vencimientos .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento > [role="cell"] {
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 5px;
-    padding: 14px 12px;
-    color: #405762;
-    font: 12px/1.4 Arial, sans-serif;
-    box-sizing: border-box;
-    overflow-wrap: anywhere;
-}
-.seccion_vencimientos .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento > [role="cell"]::before { display: none; }
-.seccion_vencimientos .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento > .acciones_lote_vencimiento {
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 7px;
-}
-.nombre_producto_lote { font-weight: 700; color: #0b3650; font-size: 12px; line-height: 1.4; }
-.dato_principal_lote { color: #324b57; font-weight: 600; font-size: 12px; }
-.dato_secundario_lote { display: block; color: #71818a; font-size: 11px; line-height: 1.4; }
-.dato_motivo_lote { color: #405762; font-size: 12px; line-height: 1.45; }
-.seccion_vencimientos .tabla_lotes_vencimiento .etiqueta_estado_vencimiento {
-    max-width: 100%; white-space: normal; text-align: center;
-    font-size: 10px; line-height: 1.4; border-radius: 6px; padding: 5px 8px;
-}
+    .titulo_seccion_vencimientos {
+        margin: 0; /* Define el margen exterior del elemento. */
+        color: #0b3650; /* Establece el color del texto. */
+        font: 700 25px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+    }
 
-/* Solo en contenedores realmente estrechos los filtros pasan a dos filas. */
-@container panel-lotes (max-width: 1000px) {
+    .descripcion_seccion_vencimientos {
+        color: #71818a; /* Establece el color del texto. */
+        font: 13px/1.45 Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+    }
+
+    .pestanas_vencimientos {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 24px; /* Define la separación entre los elementos. */
+        overflow-x: auto; /* Permite desplazar horizontalmente el contenido cuando no cabe. */
+        border-bottom: 1px solid #dce4e8; /* Define el borde inferior. */
+    }
+
+    .pestana_vencimientos {
+        display: inline-flex; /* Organiza el contenido con Flexbox dentro de la línea. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 8px; /* Define la separación entre los elementos. */
+        padding: 13px 5px; /* Define el espacio interior del elemento. */
+        border-bottom: 2px solid transparent; /* Define el borde inferior. */
+        color: #536873; /* Establece el color del texto. */
+        font: 13px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+    }
+
+    .pestana_vencimientos:hover, .pestana_vencimientos_activa {
+        border-bottom-color: #159ba3; /* Define el color del borde inferior. */
+        color: #138b92; /* Establece el color del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+    }
+
+    .contador_pestana_vencimientos {
+        min-width: 22px; /* Establece el ancho mínimo del elemento. */
+        padding: 3px 6px; /* Define el espacio interior del elemento. */
+        border-radius: 12px; /* Define el redondeado de las esquinas. */
+        background: #edf3f4; /* Define el fondo del elemento. */
+        color: #536873; /* Establece el color del texto. */
+        font: 700 10px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+    }
+
+    .pestana_vencimientos_activa .contador_pestana_vencimientos {
+        background: #e4f6f6; /* Define el fondo del elemento. */
+        color: #0f858d; /* Establece el color del texto. */
+    }
+
+    .contenedor_tabla_vencimientos {
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        overflow: hidden; /* Controla el contenido que supera las dimensiones del elemento. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 9px; /* Define el redondeado de las esquinas. */
+        background: #ffffff; /* Define el fondo del elemento. */
+        box-shadow: 0 3px 12px rgba(16, 47, 61, 0.04); /* Agrega o ajusta la sombra del elemento. */
+    }
+
+    .encabezado_tabla_vencimientos {
+        padding: 16px 18px; /* Define el espacio interior del elemento. */
+        border-bottom: 1px solid #e4eaed; /* Define el borde inferior. */
+    }
+
+    .titulo_tabla_vencimientos {
+        color: #0b3650; /* Establece el color del texto. */
+        font: 700 14px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+    }
+
+    .filtros_alertas_vencimientos {
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        align-items: end; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 12px; /* Define la separación entre los elementos. */
+        padding: 17px 16px; /* Define el espacio interior del elemento. */
+        border-bottom: 1px solid #e4eaed; /* Define el borde inferior. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
+
+    .filtros_alertas_stock {
+        grid-template-columns: minmax(180px, 2fr) repeat(3, minmax(120px, 1fr)) auto; /* Define la distribución y el ancho de las columnas. */
+    }
+
+    .filtros_lista_vencimientos {
+        grid-template-columns: minmax(190px, 2fr) minmax(145px, 1fr) minmax(205px, 1.5fr) minmax(240px, 1.5fr) auto; /* Define la distribución y el ancho de las columnas. */
+    }
+
+    .filtros_alertas_vencimientos input, .filtros_alertas_vencimientos select {
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        height: 42px; /* Define el alto del elemento. */
+        padding: 8px 12px; /* Define el espacio interior del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        background: #ffffff; /* Define el fondo del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font: 13px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
+
+    .filtros_alertas_vencimientos input:focus, .filtros_alertas_vencimientos select:focus {
+        outline: 2px solid #a6e0e2; /* Define el contorno visual del elemento. */
+        border-color: #159ba3; /* Establece el color del borde. */
+    }
+
+    .filtro_fechas_vencimientos {
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: 1fr 1fr; /* Define la distribución y el ancho de las columnas. */
+        gap: 7px; /* Define la separación entre los elementos. */
+    }
+
+    .campo_filtro_fecha_vencimiento, .campo_filtro_alertas {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        gap: 7px; /* Define la separación entre los elementos. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+    }
+
+    .etiqueta_filtro_alertas {
+        display: block; /* Muestra el elemento como un bloque. */
+        margin: 0; /* Define el margen exterior del elemento. */
+        color: #536873; /* Establece el color del texto. */
+        font: 700 12px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        line-height: 16px; /* Define la separación entre líneas de texto. */
+    }
+
+    .campo_boton_filtros_alertas {
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: flex-end; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: flex-end; /* Define la distribución de los elementos en el eje principal. */
+    }
+
+    .campo_boton_filtros_alertas .boton_limpiar_filtros_alertas {
+        height: 42px; /* Define el alto del elemento. */
+        min-height: 42px; /* Establece el alto mínimo del elemento. */
+        padding: 0 13px; /* Define el espacio interior del elemento. */
+        border: 1px solid #159ba3; /* Define el grosor, el estilo y el color del borde. */
+        background: #ffffff; /* Define el fondo del elemento. */
+        color: #0f858d; /* Establece el color del texto. */
+        font: 700 12px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+    }
+
+    .campo_boton_filtros_alertas .boton_limpiar_filtros_alertas:hover {
+        background: #e4f6f6; /* Define el fondo del elemento. */
+    }
+
+    .filtros_alertas_vencimientos input:focus-visible, .filtros_alertas_vencimientos select:focus-visible, .boton_limpiar_filtros_alertas:focus-visible {
+        outline: 2px solid #159ba3; /* Define el contorno visual del elemento. */
+        outline-offset: 2px; /* Define la separación entre el contorno y el borde. */
+    }
+
+    .boton_limpiar_filtros_alertas {
+        min-height: 38px; /* Establece el alto mínimo del elemento. */
+        padding: 8px 11px; /* Define el espacio interior del elemento. */
+        border: 1px solid #cbd9e0; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        background: #ffffff; /* Define el fondo del elemento. */
+        color: #435b69; /* Establece el color del texto. */
+        font: 700 11px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+    }
+
+    .boton_limpiar_filtros_alertas:hover {
+        border-color: #159ba3; /* Establece el color del borde. */
+        background: #effafb; /* Define el fondo del elemento. */
+        color: #0f858d; /* Establece el color del texto. */
+    }
+
+    .tabla_vencimientos_desplazable {
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        overflow-x: auto; /* Permite desplazar horizontalmente el contenido cuando no cabe. */
+    }
+
+    .tabla_vencimientos {
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-width: 850px; /* Establece el ancho mínimo del elemento. */
+    }
+
+    .tabla_lotes_vencimiento {
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+    }
+
+    .tabla_alertas_stock {
+        min-width: 760px; /* Establece el ancho mínimo del elemento. */
+    }
+
+    .fila_encabezado_vencimientos, .fila_vencimiento {
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        align-items: stretch; /* Define la alineación de los elementos en el eje transversal. */
+    }
+
+    .fila_lotes_vencimiento, .fila_encabezado_vencimientos.fila_lotes_vencimiento {
+        grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1.2fr) minmax(0, 1.3fr) minmax(0, 1.5fr) 96px; /* Define la distribución y el ancho de las columnas. */
+    }
+
+    .fila_stock_alertas, .fila_encabezado_vencimientos.fila_stock_alertas {
+        grid-template-columns: 28% 15% 14% 15% 14% 14%; /* Define la distribución y el ancho de las columnas. */
+    }
+
+    .fila_encabezado_vencimientos {
+        background: #f4f7f8; /* Define el fondo del elemento. */
+    }
+
+    .celda_encabezado_vencimientos {
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        padding: 13px 12px; /* Define el espacio interior del elemento. */
+        color: #667881; /* Establece el color del texto. */
+        font: 700 11px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        overflow-wrap: anywhere; /* Permite controlar el salto de palabras largas. */
+    }
+
+    .fila_vencimiento {
+        border-top: 1px solid #edf1f3; /* Define el borde superior. */
+    }
+
+    .fila_vencimiento > [role="cell"] {
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        padding: 14px 12px; /* Define el espacio interior del elemento. */
+        color: #405762; /* Establece el color del texto. */
+        font: 12px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        overflow-wrap: anywhere; /* Permite controlar el salto de palabras largas. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
+
+    .fila_mensaje_vencimiento {
+        grid-template-columns: minmax(0, 1fr); /* Define la distribución y el ancho de las columnas. */
+    }
+
+    .fila_mensaje_vencimiento .mensaje_tabla_vencimientos {
+        min-height: 90px; /* Establece el alto mínimo del elemento. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        color: #788993; /* Establece el color del texto. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+    }
+
+    .etiqueta_estado_vencimiento {
+        display: inline-flex; /* Organiza el contenido con Flexbox dentro de la línea. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        padding: 6px 9px; /* Define el espacio interior del elemento. */
+        border-radius: 15px; /* Define el redondeado de las esquinas. */
+        font: 700 10px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
+    }
+
+    .estado_lote_vigente {
+        background: #e8f7f0; /* Define el fondo del elemento. */
+        color: #18845d; /* Establece el color del texto. */
+    }
+
+    .estado_lote_critico {
+        background: #fde2e2; /* Define el fondo del elemento. */
+        color: #b42318; /* Establece el color del texto. */
+    }
+
+    .estado_lote_riesgo {
+        background: #fff4cc; /* Define el fondo del elemento. */
+        color: #9a6700; /* Establece el color del texto. */
+    }
+
+    .estado_lote_proximo {
+        background: #e8f7f0; /* Define el fondo del elemento. */
+        color: #18845d; /* Establece el color del texto. */
+    }
+
+    .estado_lote_vendido {
+        background: #e8f7f0; /* Define el fondo del elemento. */
+        color: #18845d; /* Establece el color del texto. */
+    }
+
+    .estado_lote_inactivo {
+        background: #fdeaea; /* Define el fondo del elemento. */
+        color: #b54747; /* Establece el color del texto. */
+    }
+
+    .acciones_lote_vencimiento {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: row; /* Organiza los elementos en una fila. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        gap: 8px; /* Define la separación entre los elementos. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+    }
+
+    .boton_editar_vencimiento, .boton_baja_lote_vencimiento {
+        flex: 0 0 36px; /* Define cómo el elemento ocupa el espacio disponible en Flexbox. */
+        width: 36px; /* Define el ancho del elemento. */
+        height: 36px; /* Define el alto del elemento. */
+        min-width: 36px; /* Establece el ancho mínimo del elemento. */
+        min-height: 36px; /* Establece el alto mínimo del elemento. */
+        display: inline-flex; /* Organiza el contenido con Flexbox dentro de la línea. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        padding: 7px; /* Define el espacio interior del elemento. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        background: #ffffff; /* Define el fondo del elemento. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        transition: background-color .18s, border-color .18s; /* Define la transición entre los cambios de estilo. */
+    }
+
+    .boton_editar_vencimiento {
+        color: #159ba3; /* Establece el color del texto. */
+    }
+
+    .boton_editar_vencimiento:hover {
+        border-color: #159ba3; /* Establece el color del borde. */
+        background: #e4f6f6; /* Define el fondo del elemento. */
+    }
+
+    .boton_baja_lote_vencimiento {
+        color: #c04e4e; /* Establece el color del texto. */
+    }
+
+    .boton_baja_lote_vencimiento:hover {
+        border-color: #d99e9e; /* Establece el color del borde. */
+        background: #fce9e9; /* Define el fondo del elemento. */
+    }
+
+    .acciones_lote_vencimiento button:focus-visible {
+        outline: 2px solid #159ba3; /* Define el contorno visual del elemento. */
+        outline-offset: 2px; /* Define la separación entre el contorno y el borde. */
+    }
+
+    .acciones_lote_vencimiento button svg {
+        width: 19px; /* Define el ancho del elemento. */
+        height: 19px; /* Define el alto del elemento. */
+        display: block; /* Muestra el elemento como un bloque. */
+        pointer-events: none; /* Define si el elemento puede recibir eventos del puntero. */
+    }
+
+    .modal_editar_vencimiento {
+        position: fixed; /* Define el sistema de posicionamiento del elemento. */
+        inset: 0; /* Define las distancias respecto a los bordes del contenedor. */
+        z-index: 1800; /* Define el orden de superposición del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        padding: 20px; /* Define el espacio interior del elemento. */
+        background: rgba(5, 31, 45, .58); /* Define el fondo del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
+
+    .modal_editar_vencimiento[hidden] {
+        display: none !important; /* Define cómo se muestra y distribuye el elemento. */
+    }
+
+    .contenido_modal_editar_vencimiento {
+        position: relative; /* Define el sistema de posicionamiento del elemento. */
+        width: min(100%, 440px); /* Define el ancho del elemento. */
+        padding: 26px; /* Define el espacio interior del elemento. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 12px; /* Define el redondeado de las esquinas. */
+        background: #ffffff; /* Define el fondo del elemento. */
+        box-shadow: 0 18px 48px rgba(0, 0, 0, .22); /* Agrega o ajusta la sombra del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
+
+    .cerrar_modal_editar_vencimiento {
+        position: absolute; /* Define el sistema de posicionamiento del elemento. */
+        top: 12px; /* Define la posición respecto al borde superior. */
+        right: 14px; /* Define la posición respecto al borde derecho. */
+        width: 32px; /* Define el ancho del elemento. */
+        height: 32px; /* Define el alto del elemento. */
+        border: 0; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 5px; /* Define el redondeado de las esquinas. */
+        background: transparent; /* Define el fondo del elemento. */
+        color: #637682; /* Establece el color del texto. */
+        font-size: 24px; /* Define el tamaño del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+    }
+
+    .cerrar_modal_editar_vencimiento:hover {
+        background: #f1f5f7; /* Define el fondo del elemento. */
+    }
+
+    .titulo_modal_editar_vencimiento {
+        padding-right: 36px; /* Define el espacio interior derecho. */
+        color: #0b3650; /* Establece el color del texto. */
+        font: 700 19px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+    }
+
+    .descripcion_modal_editar_vencimiento {
+        margin-top: 9px; /* Define el margen superior. */
+        color: #71818a; /* Establece el color del texto. */
+        font: 13px/1.5 Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+    }
+
+    .campo_modal_editar_vencimiento {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        gap: 7px; /* Define la separación entre los elementos. */
+        margin-top: 19px; /* Define el margen superior. */
+    }
+
+    .texto_modal_editar_vencimiento {
+        color: #3d5868; /* Establece el color del texto. */
+        font: 700 12px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+    }
+
+    .campo_modal_editar_vencimiento input {
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 42px; /* Define el alto del elemento. */
+        padding: 9px 12px; /* Define el espacio interior del elemento. */
+        border: 1px solid #cbd9e0; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        color: #1d3f50; /* Establece el color del texto. */
+        font: 14px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
+
+    .campo_modal_editar_vencimiento input:focus {
+        outline: 2px solid #a6e0e2; /* Define el contorno visual del elemento. */
+        border-color: #159ba3; /* Establece el color del borde. */
+    }
+
+    .mensaje_modal_editar_vencimiento {
+        min-height: 18px; /* Establece el alto mínimo del elemento. */
+        margin-top: 10px; /* Define el margen superior. */
+        color: #b54747; /* Establece el color del texto. */
+        font: 12px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+    }
+
+    .acciones_modal_editar_vencimiento {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        justify-content: flex-end; /* Define la distribución de los elementos en el eje principal. */
+        gap: 9px; /* Define la separación entre los elementos. */
+        margin-top: 12px; /* Define el margen superior. */
+    }
+
+    .acciones_modal_editar_vencimiento button {
+        min-height: 38px; /* Establece el alto mínimo del elemento. */
+        padding: 8px 13px; /* Define el espacio interior del elemento. */
+        border: 1px solid #cbd9e0; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        background: #ffffff; /* Define el fondo del elemento. */
+        color: #405762; /* Establece el color del texto. */
+        font: 700 12px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+    }
+
+    .acciones_modal_editar_vencimiento .boton_guardar_editar_vencimiento {
+        border-color: #159ba3; /* Establece el color del borde. */
+        background: #159ba3; /* Define el fondo del elemento. */
+        color: #ffffff; /* Establece el color del texto. */
+    }
+
+    .acciones_modal_editar_vencimiento button:disabled {
+        opacity: .55; /* Define el nivel de opacidad. */
+        cursor: wait; /* Define el cursor al situarlo sobre el elemento. */
+    }
+
+    .modal_baja_lote_vencimiento {
+        position: fixed; /* Define el sistema de posicionamiento del elemento. */
+        inset: 0; /* Define las distancias respecto a los bordes del contenedor. */
+        z-index: 1801; /* Define el orden de superposición del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        padding: 20px; /* Define el espacio interior del elemento. */
+        background: rgba(5, 31, 45, .58); /* Define el fondo del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
+
+    .modal_baja_lote_vencimiento[hidden] {
+        display: none !important; /* Define cómo se muestra y distribuye el elemento. */
+    }
+
+    .contenido_modal_baja_lote_vencimiento {
+        position: relative; /* Define el sistema de posicionamiento del elemento. */
+        width: min(100%, 460px); /* Define el ancho del elemento. */
+        padding: 26px; /* Define el espacio interior del elemento. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 12px; /* Define el redondeado de las esquinas. */
+        background: #ffffff; /* Define el fondo del elemento. */
+        box-shadow: 0 18px 48px rgba(0, 0, 0, .22); /* Agrega o ajusta la sombra del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
+
+    .cerrar_modal_baja_lote_vencimiento {
+        position: absolute; /* Define el sistema de posicionamiento del elemento. */
+        top: 12px; /* Define la posición respecto al borde superior. */
+        right: 14px; /* Define la posición respecto al borde derecho. */
+        width: 32px; /* Define el ancho del elemento. */
+        height: 32px; /* Define el alto del elemento. */
+        border: 0; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 5px; /* Define el redondeado de las esquinas. */
+        background: transparent; /* Define el fondo del elemento. */
+        color: #637682; /* Establece el color del texto. */
+        font-size: 24px; /* Define el tamaño del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+    }
+
+    .cerrar_modal_baja_lote_vencimiento:hover {
+        background: #f1f5f7; /* Define el fondo del elemento. */
+    }
+
+    .titulo_modal_baja_lote_vencimiento {
+        padding-right: 36px; /* Define el espacio interior derecho. */
+        color: #0b3650; /* Establece el color del texto. */
+        font: 700 19px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+    }
+
+    .descripcion_modal_baja_lote_vencimiento {
+        margin-top: 9px; /* Define el margen superior. */
+        color: #71818a; /* Establece el color del texto. */
+        font: 13px/1.5 Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+    }
+
+    .aviso_modal_baja_lote_vencimiento {
+        margin-top: 14px; /* Define el margen superior. */
+        padding: 10px 12px; /* Define el espacio interior del elemento. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        background: #fff7e8; /* Define el fondo del elemento. */
+        color: #805415; /* Establece el color del texto. */
+        font: 12px/1.45 Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+    }
+
+    .campo_modal_baja_lote_vencimiento {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        gap: 7px; /* Define la separación entre los elementos. */
+        margin-top: 16px; /* Define el margen superior. */
+    }
+
+    .campo_modal_baja_lote_vencimiento[hidden] {
+        display: none !important; /* Define cómo se muestra y distribuye el elemento. */
+    }
+
+    .texto_modal_baja_lote_vencimiento {
+        color: #3d5868; /* Establece el color del texto. */
+        font: 700 12px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+    }
+
+    .campo_modal_baja_lote_vencimiento select, .campo_modal_baja_lote_vencimiento input {
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 42px; /* Define el alto del elemento. */
+        padding: 9px 12px; /* Define el espacio interior del elemento. */
+        border: 1px solid #cbd9e0; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        background: #ffffff; /* Define el fondo del elemento. */
+        color: #1d3f50; /* Establece el color del texto. */
+        font: 14px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
+
+    .campo_modal_baja_lote_vencimiento :focus {
+        outline: 2px solid #a6e0e2; /* Define el contorno visual del elemento. */
+        border-color: #159ba3; /* Establece el color del borde. */
+    }
+
+    .opcion_descuento_merma_lote {
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: 20px 1fr; /* Define la distribución y el ancho de las columnas. */
+        align-items: start; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 10px; /* Define la separación entre los elementos. */
+        margin-top: 14px; /* Define el margen superior. */
+        padding: 12px; /* Define el espacio interior del elemento. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        background: #f8fafb; /* Define el fondo del elemento. */
+    }
+
+    .opcion_descuento_merma_lote[hidden] {
+        display: none !important; /* Define cómo se muestra y distribuye el elemento. */
+    }
+
+    .opcion_descuento_merma_lote input {
+        width: 17px; /* Define el ancho del elemento. */
+        height: 17px; /* Define el alto del elemento. */
+        margin: 1px 0 0; /* Define el margen exterior del elemento. */
+        accent-color: #159ba3; /* Establece el color de los controles nativos. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+    }
+
+    .contenido_opcion_descuento_merma_lote {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        gap: 5px; /* Define la separación entre los elementos. */
+    }
+
+    .ayuda_opcion_descuento_merma_lote {
+        color: #71818a; /* Establece el color del texto. */
+        font: 11px/1.45 Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+    }
+
+    .mensaje_modal_baja_lote_vencimiento {
+        min-height: 18px; /* Establece el alto mínimo del elemento. */
+        margin-top: 10px; /* Define el margen superior. */
+        color: #b54747; /* Establece el color del texto. */
+        font: 12px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+    }
+
+    .acciones_modal_baja_lote_vencimiento {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        justify-content: flex-end; /* Define la distribución de los elementos en el eje principal. */
+        gap: 9px; /* Define la separación entre los elementos. */
+        margin-top: 12px; /* Define el margen superior. */
+    }
+
+    .acciones_modal_baja_lote_vencimiento button {
+        min-height: 38px; /* Establece el alto mínimo del elemento. */
+        padding: 8px 13px; /* Define el espacio interior del elemento. */
+        border: 1px solid #cbd9e0; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        background: #ffffff; /* Define el fondo del elemento. */
+        color: #405762; /* Establece el color del texto. */
+        font: 700 12px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+    }
+
+    .acciones_modal_baja_lote_vencimiento .boton_confirmar_baja_lote_vencimiento {
+        border-color: #c65353; /* Establece el color del borde. */
+        background: #b54747; /* Define el fondo del elemento. */
+        color: #ffffff; /* Establece el color del texto. */
+    }
+
+    .acciones_modal_baja_lote_vencimiento button:disabled {
+        opacity: .55; /* Define el nivel de opacidad. */
+        cursor: wait; /* Define el cursor al situarlo sobre el elemento. */
+    }
+
+    .paginador_vencimientos {
+        min-height: 64px; /* Establece el alto mínimo del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: space-between; /* Define la distribución de los elementos en el eje principal. */
+        gap: 14px; /* Define la separación entre los elementos. */
+        padding: 12px 16px; /* Define el espacio interior del elemento. */
+        border-top: 1px solid #e4eaed; /* Define el borde superior. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
+
+    .informacion_paginador_vencimientos {
+        color: #71818a; /* Establece el color del texto. */
+        font: 12px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+    }
+
+    .controles_paginador_vencimientos, .numeros_paginas_vencimientos {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 5px; /* Define la separación entre los elementos. */
+    }
+
+    .boton_pagina_vencimientos, .boton_numero_pagina_vencimientos {
+        min-width: 34px; /* Establece el ancho mínimo del elemento. */
+        min-height: 34px; /* Establece el alto mínimo del elemento. */
+        display: inline-flex; /* Organiza el contenido con Flexbox dentro de la línea. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        padding: 0 9px; /* Define el espacio interior del elemento. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        background: #ffffff; /* Define el fondo del elemento. */
+        color: #43545d; /* Establece el color del texto. */
+        font: 12px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        user-select: none; /* Define si el usuario puede seleccionar el contenido. */
+    }
+
+    .boton_pagina_vencimientos:hover:not([aria-disabled="true"]), .boton_numero_pagina_vencimientos:hover {
+        border-color: #159ba3; /* Establece el color del borde. */
+        color: #0f858d; /* Establece el color del texto. */
+    }
+
+    .boton_pagina_vencimientos[aria-disabled="true"] {
+        opacity: 0.45; /* Define el nivel de opacidad. */
+        cursor: default; /* Define el cursor al situarlo sobre el elemento. */
+    }
+
+    .boton_numero_pagina_vencimientos.pagina_actual_vencimientos {
+        border-color: #159ba3; /* Establece el color del borde. */
+        background: #159ba3; /* Define el fondo del elemento. */
+        color: #ffffff; /* Establece el color del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+    }
+
+    .puntos_paginas_vencimientos {
+        padding: 0 3px; /* Define el espacio interior del elemento. */
+        color: #71818a; /* Establece el color del texto. */
+    }
+
+/* TITULO 2 RESPONSIVE (MAX-WIDTH: 768PX) */
+
+    @media (max-width: 768px) {
+        .contenedor_alertas_vencimientos {
+            padding: 18px; /* Define el espacio interior del elemento. */
+        }
+
+        .paginador_vencimientos {
+            align-items: flex-start; /* Define la alineación de los elementos en el eje transversal. */
+            flex-direction: column; /* Organiza los elementos en una columna. */
+        }
+
+        .controles_paginador_vencimientos {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+            flex-wrap: wrap; /* Define si los elementos pueden pasar a otra línea. */
+        }
+
+        .contenido_modal_editar_vencimiento {
+            padding: 22px 18px; /* Define el espacio interior del elemento. */
+        }
+
+        .filtros_alertas_stock, .filtros_lista_vencimientos {
+            grid-template-columns: minmax(0, 1fr); /* Define la distribución y el ancho de las columnas. */
+        }
+    }
+
+    .aviso_datos_alertas_stock {
+        margin-top: 6px; /* Define el margen superior. */
+        color: #71818a; /* Establece el color del texto. */
+        font: 11px/1.45 Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+    }
+
+    .filtros_alertas_stock {
+        grid-template-columns: minmax(180px, 2fr) repeat(3, minmax(130px, 1fr)) auto; /* Define la distribución y el ancho de las columnas. */
+    }
+
+    .estado_alerta_sin_stock {
+        background: #fde8e8; /* Define el fondo del elemento. */
+        color: #b42318; /* Establece el color del texto. */
+    }
+
+    .estado_alerta_stock_bajo {
+        background: #fff2dc; /* Define el fondo del elemento. */
+        color: #a35a11; /* Establece el color del texto. */
+    }
+
+/* TITULO 3 RESPONSIVE (MAX-WIDTH: 1200PX) */
+
+    @media (max-width: 1200px) {
+        .filtros_alertas_stock {
+            grid-template-columns: repeat(2, minmax(0,1fr)); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .filtros_alertas_stock > .campo_filtro_alertas:first-child {
+            grid-column: 1 / -1; /* Define las columnas que ocupa el elemento. */
+        }
+    }
+
+/* TITULO 4 RESPONSIVE (MAX-WIDTH: 768PX) */
+
+    @media (max-width: 768px) {
+        .filtros_alertas_stock {
+            grid-template-columns: minmax(0,1fr); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .filtros_alertas_stock > .campo_filtro_alertas:first-child {
+            grid-column: auto; /* Define las columnas que ocupa el elemento. */
+        }
+
+        .filtros_alertas_stock .campo_boton_filtros_alertas button {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+        }
+    }
+
+    .resumen_alertas_vencimientos {
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: repeat(3, minmax(0, 1fr)); /* Define la distribución y el ancho de las columnas. */
+        gap: 16px; /* Define la separación entre los elementos. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+    }
+
+    .tarjeta_resumen_alertas {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 14px; /* Define la separación entre los elementos. */
+        min-height: 105px; /* Establece el alto mínimo del elemento. */
+        padding: 18px; /* Define el espacio interior del elemento. */
+        background: #ffffff; /* Define el fondo del elemento. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
+
+    .icono_resumen_alertas {
+        width: 46px; /* Define el ancho del elemento. */
+        height: 46px; /* Define el alto del elemento. */
+        flex-shrink: 0; /* Define cuánto puede reducirse el elemento en Flexbox. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+    }
+
+    .icono_resumen_alertas img {
+        width: 24px; /* Define el ancho del elemento. */
+        height: 24px; /* Define el alto del elemento. */
+        object-fit: contain; /* Define cómo se ajusta la imagen dentro de sus dimensiones. */
+    }
+
+    .icono_resumen_stock {
+        background-color: #fde8e8; /* Establece el color de fondo. */
+    }
+
+    .icono_resumen_criticos {
+        background-color: #fff4df; /* Establece el color de fondo. */
+    }
+
+    .icono_resumen_lotes {
+        background-color: #e4f6f6; /* Establece el color de fondo. */
+    }
+
+    .contenido_resumen_alertas {
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        gap: 5px; /* Define la separación entre los elementos. */
+    }
+
+    .etiqueta_resumen_alertas {
+        color: #697a83; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+    }
+
+    .valor_resumen_alertas {
+        color: #0b3650; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 23px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+    }
+
+    .tarjeta_resumen_stock .valor_resumen_alertas {
+        color: #d94b4b; /* Establece el color del texto. */
+    }
+
+    .tarjeta_resumen_criticos .valor_resumen_alertas {
+        color: #d58226; /* Establece el color del texto. */
+    }
+
+    .tarjeta_resumen_lotes .valor_resumen_alertas {
+        color: #159ba3; /* Establece el color del texto. */
+    }
+
+    .nota_resumen_alertas {
+        color: #71818a; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        line-height: 1.4; /* Define la separación entre líneas de texto. */
+    }
+
+/* TITULO 5 RESPONSIVE (MAX-WIDTH: 1024PX) */
+
+    @media (max-width: 1024px) {
+        .resumen_alertas_vencimientos {
+            grid-template-columns: repeat(2, minmax(0, 1fr)); /* Define la distribución y el ancho de las columnas. */
+        }
+    }
+
+/* TITULO 6 RESPONSIVE (MAX-WIDTH: 768PX) */
+
+    @media (max-width: 768px) {
+        .resumen_alertas_vencimientos {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+        }
+    }
+
+/* TITULO 7 RESPONSIVE (MAX-WIDTH: 1200PX) */
+
+    @media (max-width: 1200px) {
+        .filtros_alertas_stock {
+            grid-template-columns: repeat(2, minmax(0,1fr)); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .filtros_alertas_stock > .campo_filtro_alertas:first-child {
+            grid-column: 1 / -1; /* Define las columnas que ocupa el elemento. */
+        }
+    }
+
+/* TITULO 8 RESPONSIVE (MAX-WIDTH: 768PX) */
+
+    @media (max-width: 768px) {
+        .resumen_alertas_vencimientos {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .filtros_alertas_stock {
+            grid-template-columns: minmax(0,1fr); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .filtros_alertas_stock > .campo_filtro_alertas:first-child {
+            grid-column: auto; /* Define las columnas que ocupa el elemento. */
+        }
+
+        .filtros_alertas_stock .campo_boton_filtros_alertas button {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+        }
+    }
+
+    .seccion_vencimientos .contenedor_tabla_vencimientos {
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        overflow: visible; /* Permite desplegables por debajo de los filtros. */
+        container: panel-lotes / inline-size; /* Define el contenedor usado por las consultas de tamaño. */
+    }
+
+    .seccion_vencimientos .tabla_vencimientos_desplazable {
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        overflow: hidden; /* Controla el contenido que supera las dimensiones del elemento. */
+    }
+
+    .seccion_vencimientos .tabla_lotes_vencimiento {
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+    }
+
     .seccion_vencimientos .filtros_lista_vencimientos {
-        grid-template-columns: repeat(12, minmax(0, 1fr));
+        /* Buscar ocupa menos que Ordenar, para mostrar completo el valor elegido. */
+        grid-template-columns: minmax(185px, 1.08fr) minmax(170px, .92fr) minmax(190px, 1fr) minmax(275px, 1.75fr) auto; /* Define la distribución y el ancho de las columnas. */
+        align-items: end; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 10px; /* Define la separación entre los elementos. */
+        position: relative; /* Define el sistema de posicionamiento del elemento. */
+        z-index: 4; /* Define el orden de superposición del elemento. */
     }
-    .filtros_lista_vencimientos > .campo_filtro_alertas:nth-child(1) { grid-column: span 3; }
-    .filtros_lista_vencimientos > .campo_filtro_alertas:nth-child(2) { grid-column: span 3; }
-    .filtros_lista_vencimientos > .campo_filtro_alertas:nth-child(3) { grid-column: span 6; }
-    .filtros_lista_vencimientos > .filtro_fechas_vencimientos { grid-column: span 9; }
-    .filtros_lista_vencimientos > .campo_boton_filtros_alertas { grid-column: span 3; justify-content: flex-end; }
-}
 
-/* Con menos espacio, usamos tarjetas de información legibles. */
-@container panel-lotes (max-width: 860px) {
-    .tabla_lotes_vencimiento .fila_encabezado_vencimientos.fila_lotes_vencimiento { display: none; }
-    .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-        gap: 14px 16px;
-        min-height: 0;
-        padding: 16px;
+    .seccion_vencimientos .filtros_lista_vencimientos > * {
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
     }
-    .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento > [role="cell"] {
-        display: flex; flex-direction: column; gap: 5px;
-        padding: 0; min-width: 0;
+
+    .seccion_vencimientos .filtros_lista_vencimientos input, .seccion_vencimientos .filtros_lista_vencimientos select {
+        height: 42px; /* Define el alto del elemento. */
     }
+
+    .seccion_vencimientos .filtros_lista_vencimientos .boton_limpiar_filtros_alertas {
+        min-height: 42px; /* Establece el alto mínimo del elemento. */
+        border-color: #159ba3; /* Establece el color del borde. */
+        color: #0f858d; /* Establece el color del texto. */
+        font-size: 12px; /* Define el tamaño del texto. */
+    }
+
+    .seccion_vencimientos .tabla_lotes_vencimiento[data-modo="activos"] .fila_lotes_vencimiento {
+        grid-template-columns: minmax(0, 2.4fr) minmax(0, 1.05fr) minmax(0, 1.3fr) minmax(0, 1.4fr) 104px; /* Define la distribución y el ancho de las columnas. */
+    }
+
+    .seccion_vencimientos .tabla_lotes_vencimiento[data-modo="inactivos"] .fila_lotes_vencimiento {
+        grid-template-columns: minmax(0, 2.1fr) minmax(0, 1fr) minmax(0, 1.2fr) minmax(0, 1.3fr) minmax(0, 1.5fr) 104px; /* Define la distribución y el ancho de las columnas. */
+    }
+
+    .seccion_vencimientos .tabla_lotes_vencimiento [role="columnheader"][hidden] {
+        display: none !important; /* Define cómo se muestra y distribuye el elemento. */
+    }
+
+    .seccion_vencimientos .tabla_lotes_vencimiento .fila_encabezado_vencimientos.fila_lotes_vencimiento, .seccion_vencimientos .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento {
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 0; /* Define la separación entre los elementos. */
+    }
+
+    .seccion_vencimientos .tabla_lotes_vencimiento .fila_encabezado_vencimientos.fila_lotes_vencimiento > [role="columnheader"] {
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        padding: 14px 12px; /* Define el espacio interior del elemento. */
+        font: 700 11px/1.3 Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        color: #667881; /* Establece el color del texto. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
+
+    .seccion_vencimientos .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento {
+        min-height: 86px; /* Establece el alto mínimo del elemento. */
+        padding: 0; /* Define el espacio interior del elemento. */
+        border-top: 1px solid #edf1f3; /* Define el borde superior. */
+    }
+
+    .seccion_vencimientos .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento:hover {
+        background-color: #f8fafb; /* Establece el color de fondo. */
+    }
+
+    .seccion_vencimientos .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento > [role="cell"] {
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        align-items: flex-start; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 5px; /* Define la separación entre los elementos. */
+        padding: 14px 12px; /* Define el espacio interior del elemento. */
+        color: #405762; /* Establece el color del texto. */
+        font: 12px/1.4 Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        overflow-wrap: anywhere; /* Permite controlar el salto de palabras largas. */
+    }
+
     .seccion_vencimientos .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento > [role="cell"]::before {
-        display: block; content: attr(data-etiqueta); margin-bottom: 3px;
-        color: #697a83; font: 700 11px Arial, sans-serif;
+        display: none; /* Oculta el elemento. */
     }
-    .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento > .celda_producto_lote { grid-column: 1 / -1; }
+
     .seccion_vencimientos .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento > .acciones_lote_vencimiento {
-        grid-column: 1 / -1; justify-content: flex-start; flex-wrap: wrap;
+        flex-direction: row; /* Organiza los elementos en una fila. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 7px; /* Define la separación entre los elementos. */
     }
-    .seccion_vencimientos .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento > .acciones_lote_vencimiento::before {
-        flex: 0 0 100%;
-    }
-    /* Se mantienen las filas anteriores mientras las celdas de lotes pasan a tarjetas. */
-}
 
-/* La tabla de alertas de stock también pasa a tarjetas en móviles. */
-@media (max-width: 900px) {
-    .tabla_alertas_stock { min-width: 0; }
-    .tabla_alertas_stock .fila_encabezado_vencimientos { display: none; }
-    .tabla_alertas_stock .fila_vencimiento.fila_stock_alertas {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 12px; padding: 16px;
+    .nombre_producto_lote {
+        font-weight: 700; /* Define el grosor del texto. */
+        color: #0b3650; /* Establece el color del texto. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        line-height: 1.4; /* Define la separación entre líneas de texto. */
     }
-    .tabla_alertas_stock .fila_vencimiento.fila_stock_alertas > [role="cell"] {
-        display: flex; flex-direction: column; align-items: flex-start;
-        gap: 5px; padding: 0; min-width: 0;
-    }
-    .tabla_alertas_stock .fila_vencimiento.fila_stock_alertas > [role="cell"]::before {
-        display: block; content: attr(data-etiqueta);
-        color: #697a83; font: 700 11px Arial, sans-serif;
-    }
-    .tabla_alertas_stock .fila_vencimiento.fila_stock_alertas > [role="cell"]:first-child {
-        grid-column: 1 / -1; color: #0b3650; font-weight: 700;
-    }
-}
-@media (max-width: 500px) {
-    .tabla_alertas_stock .fila_vencimiento.fila_stock_alertas {
-        grid-template-columns: minmax(0, 1fr);
-    }
-    .tabla_alertas_stock .fila_vencimiento.fila_stock_alertas > [role="cell"]:first-child { grid-column: auto; }
-}
 
-@container panel-lotes (max-width: 530px) {
-    .seccion_vencimientos .filtros_lista_vencimientos { grid-template-columns: minmax(0, 1fr); }
-    .seccion_vencimientos .filtros_lista_vencimientos > .campo_filtro_alertas,
-    .seccion_vencimientos .filtros_lista_vencimientos > .filtro_fechas_vencimientos,
-    .seccion_vencimientos .filtros_lista_vencimientos > .campo_boton_filtros_alertas { grid-column: 1 / -1 !important; }
-    .filtros_lista_vencimientos .campo_boton_filtros_alertas button { width: 100%; }
-    .filtros_lista_vencimientos .filtro_fechas_vencimientos { grid-template-columns: repeat(2, minmax(0,1fr)); }
-    .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento {
-        grid-template-columns: minmax(0, 1fr) !important; gap: 12px; padding: 16px;
+    .dato_principal_lote {
+        color: #324b57; /* Establece el color del texto. */
+        font-weight: 600; /* Define el grosor del texto. */
+        font-size: 12px; /* Define el tamaño del texto. */
     }
-    .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento > .celda_producto_lote,
-    .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento > .acciones_lote_vencimiento { grid-column: auto; }
-}
 
-/* ============================================================
-   FILTROS - SELECTORES DESPLEGABLES Y AJUSTES RESPONSIVE
-   ============================================================ */
-@container panel-lotes (max-width: 780px) and (min-width: 531px) {
-    .seccion_vencimientos .filtros_lista_vencimientos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .filtros_lista_vencimientos > .campo_filtro_alertas:nth-child(1),
-    .filtros_lista_vencimientos > .filtro_fechas_vencimientos,
-    .filtros_lista_vencimientos > .campo_boton_filtros_alertas { grid-column: 1 / -1; }
-    .filtros_lista_vencimientos > .campo_filtro_alertas:nth-child(2),
-    .filtros_lista_vencimientos > .campo_filtro_alertas:nth-child(3) { grid-column: auto; }
-    .filtros_lista_vencimientos .campo_boton_filtros_alertas button { width: 100%; }
-}
-/* El selector original continúa en DOM para preservar los listeners y valores de la API. */
-.contenedor_alertas_vencimientos .selector_nativo_oculto_vencimientos {
-    position: absolute !important;
-    width: 1px !important;
-    height: 1px !important;
-    opacity: 0 !important;
-    padding: 0 !important;
-    border: 0 !important;
-    pointer-events: none !important;
-}
-.contenedor_alertas_vencimientos .selector_visual_vencimientos { position: relative; width: 100%; min-width: 0; }
-.contenedor_alertas_vencimientos .boton_selector_visual_vencimientos {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    height: 42px;
-    padding: 0 12px;
-    border: 1px solid #ced9de;
-    border-radius: 6px;
-    background: #fff;
-    color: #37434b;
-    font: 13px Arial, sans-serif;
-    text-align: left;
-    cursor: pointer;
-    box-sizing: border-box;
-}
-.contenedor_alertas_vencimientos .boton_selector_visual_vencimientos:hover { border-color: #159ba3; }
-.contenedor_alertas_vencimientos .boton_selector_visual_vencimientos:focus-visible {
-    outline: 2px solid #a6e0e2;
-    outline-offset: 1px;
-}
-.contenedor_alertas_vencimientos .texto_selector_visual_vencimientos {
-    flex: 1;
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-.contenedor_alertas_vencimientos .boton_selector_visual_vencimientos svg { width: 16px; height: 16px; flex-shrink: 0; }
-.contenedor_alertas_vencimientos .panel_selector_visual_vencimientos {
-    position: absolute;
-    left: 0;
-    top: calc(100% + 5px);
-    z-index: 100;
-    width: 100%;
-    padding: 5px;
-    border: 1px solid #cbd9e0;
-    border-radius: 7px;
-    background: #fff;
-    box-shadow: 0 10px 26px rgba(11, 54, 80, .14);
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    box-sizing: border-box;
-}
-.contenedor_alertas_vencimientos .panel_selector_visual_vencimientos[hidden] { display: none !important; }
-.contenedor_alertas_vencimientos .opcion_selector_visual_vencimientos {
-    display: block;
-    width: 100%;
-    padding: 9px 11px;
-    background: #fff;
-    border: 0;
-    border-radius: 5px;
-    color: #405762;
-    font: 12px/1.35 Arial, sans-serif;
-    text-align: left;
-    white-space: normal;
-    cursor: pointer;
-}
-.contenedor_alertas_vencimientos .opcion_selector_visual_vencimientos:hover,
-.contenedor_alertas_vencimientos .opcion_selector_visual_vencimientos:focus-visible { outline: 0; background: #e4f6f6; color: #0f858d; }
-.contenedor_alertas_vencimientos .opcion_selector_visual_vencimientos[aria-selected="true"] { background: #dff2f3; color: #086f76; font-weight: 700; }
+    .dato_secundario_lote {
+        display: block; /* Muestra el elemento como un bloque. */
+        color: #71818a; /* Establece el color del texto. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        line-height: 1.4; /* Define la separación entre líneas de texto. */
+    }
 
-/* ============================================================
-   PAGINADORES - IDENTICOS A LOS DE INVENTARIO
-   ============================================================ */
-.paginador_vencimientos {
-    width: 100%;
-    min-height: 70px;
-    padding: 15px 20px;
-    gap: 20px;
-    border-top: 1px solid #edf1f3;
-}
-.informacion_paginador_vencimientos { color: #536873; font-size: 13px; white-space: nowrap; }
-.controles_paginador_vencimientos,
-.numeros_paginas_vencimientos { gap: 6px; }
-.boton_pagina_vencimientos,
-.boton_numero_pagina_vencimientos {
-    width: 40px;
-    height: 40px;
-    min-width: 40px;
-    min-height: 40px;
-    padding: 0;
-    flex-shrink: 0;
-    box-sizing: border-box;
-    border: 1px solid #dce4e8;
-    border-radius: 6px;
-    color: #536873;
-    background: #fff;
-    font: 13px Arial, sans-serif;
-    transition: background-color .2s, border-color .2s;
-}
-.boton_numero_pagina_vencimientos.pagina_actual_vencimientos {
-    background: #159ba3;
-    border-color: #159ba3;
-    color: #fff;
-    font-weight: 700;
-}
-.boton_numero_pagina_vencimientos:hover { background: #e4f6f6; border-color: #159ba3; color: #0f858d; }
-.boton_numero_pagina_vencimientos.pagina_actual_vencimientos:hover { background: #0d6970; border-color: #0d6970; color: #fff; }
-.boton_pagina_vencimientos:hover:not([aria-disabled="true"]) { background: #e4f6f6; border-color: #159ba3; color: #0f858d; }
-.boton_pagina_vencimientos[aria-disabled="true"] { opacity: .45; cursor: not-allowed; background: #fff; border-color: #dce4e8; }
-.boton_numero_pagina_vencimientos:focus-visible,
-.boton_pagina_vencimientos:focus-visible { outline: 2px solid #159ba3; outline-offset: 2px; }
-.puntos_paginas_vencimientos { display: flex; align-items: center; justify-content: center; width: 30px; height: 40px; gap: 4px; padding: 0; }
-.punto_paginacion_vencimientos { display: block; width: 4px; height: 4px; background: #64748b; border-radius: 50%; }
-@media (max-width: 900px) {
-    .paginador_vencimientos { flex-direction: column; justify-content: center; gap: 15px; }
-    .controles_paginador_vencimientos { justify-content: center; }
-}
-@media (max-width: 600px) {
-    .boton_pagina_vencimientos,
-    .boton_numero_pagina_vencimientos { width: 34px; height: 34px; min-width: 34px; min-height: 34px; font-size: 12px; }
-    .numeros_paginas_vencimientos,
-    .controles_paginador_vencimientos { gap: 4px; }
-    .informacion_paginador_vencimientos { font-size: 12px; }
-}
-@media (max-width: 420px) {
-    .paginador_vencimientos { padding: 12px 8px; }
-    .controles_paginador_vencimientos,
-    .numeros_paginas_vencimientos { flex-wrap: wrap; justify-content: center; }
-}
+    .dato_motivo_lote {
+        color: #405762; /* Establece el color del texto. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        line-height: 1.45; /* Define la separación entre líneas de texto. */
+    }
 
+    .seccion_vencimientos .tabla_lotes_vencimiento .etiqueta_estado_vencimiento {
+        max-width: 100%; /* Evita que el elemento supere el ancho disponible. */
+        white-space: normal; /* Define cómo se conservan los espacios y los saltos de línea. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        font-size: 10px; /* Define el tamaño del texto. */
+        line-height: 1.4; /* Define la separación entre líneas de texto. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        padding: 5px 8px; /* Define el espacio interior del elemento. */
+    }
 
-/* ============================================================
-   ALERTAS DE STOCK: MISMOS SELECTORES QUE VENCIMIENTOS
-   Los select nativos se conservan para los filtros del JS.
-   ============================================================ */
-.contenedor_alertas_vencimientos > .contenedor_tabla_vencimientos {
-    overflow: visible;
-    min-width: 0;
-    container: panel-alertas / inline-size;
-}
-.contenedor_alertas_vencimientos .filtros_alertas_stock {
-    position: relative;
-    z-index: 5;
-    grid-template-columns: minmax(180px, 1.9fr) minmax(130px, 1fr) minmax(155px, 1.15fr) minmax(145px, 1.05fr) auto;
-    align-items: end;
-    gap: 10px;
-}
-.contenedor_alertas_vencimientos .filtros_alertas_stock > * { min-width: 0; }
-/* Paneles desplegables con el mismo comportamiento, estilos y altura que Vencimientos. */
-.contenedor_alertas_vencimientos .filtros_alertas_stock .selector_visual_vencimientos {
-    min-width: 0;
-}
-@container panel-alertas (max-width: 860px) {
+    @container panel-lotes (max-width: 1000px) {
+        .seccion_vencimientos .filtros_lista_vencimientos {
+            grid-template-columns: repeat(12, minmax(0, 1fr)); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .filtros_lista_vencimientos > .campo_filtro_alertas:nth-child(1) {
+            grid-column: span 3; /* Define las columnas que ocupa el elemento. */
+        }
+
+        .filtros_lista_vencimientos > .campo_filtro_alertas:nth-child(2) {
+            grid-column: span 3; /* Define las columnas que ocupa el elemento. */
+        }
+
+        .filtros_lista_vencimientos > .campo_filtro_alertas:nth-child(3) {
+            grid-column: span 6; /* Define las columnas que ocupa el elemento. */
+        }
+
+        .filtros_lista_vencimientos > .filtro_fechas_vencimientos {
+            grid-column: span 9; /* Define las columnas que ocupa el elemento. */
+        }
+
+        .filtros_lista_vencimientos > .campo_boton_filtros_alertas {
+            grid-column: span 3; /* Define las columnas que ocupa el elemento. */
+            justify-content: flex-end; /* Define la distribución de los elementos en el eje principal. */
+        }
+    }
+
+    @container panel-lotes (max-width: 860px) {
+        .tabla_lotes_vencimiento .fila_encabezado_vencimientos.fila_lotes_vencimiento {
+            display: none; /* Oculta el elemento. */
+        }
+
+        .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento {
+            display: grid; /* Activa CSS Grid para distribuir el contenido. */
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important; /* Define la distribución y el ancho de las columnas. */
+            gap: 14px 16px; /* Define la separación entre los elementos. */
+            min-height: 0; /* Establece el alto mínimo del elemento. */
+            padding: 16px; /* Define el espacio interior del elemento. */
+        }
+
+        .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento > [role="cell"] {
+            display: flex; /* Activa Flexbox para organizar el contenido. */
+            flex-direction: column; /* Organiza los elementos en una columna. */
+            gap: 5px; /* Define la separación entre los elementos. */
+            padding: 0; /* Define el espacio interior del elemento. */
+            min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        }
+
+        .seccion_vencimientos .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento > [role="cell"]::before {
+            display: block; /* Muestra el elemento como un bloque. */
+            content: attr(data-etiqueta); /* Define el contenido generado por el pseudoelemento. */
+            margin-bottom: 3px; /* Define el margen inferior. */
+            color: #697a83; /* Establece el color del texto. */
+            font: 700 11px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        }
+
+        .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento > .celda_producto_lote {
+            grid-column: 1 / -1; /* Define las columnas que ocupa el elemento. */
+        }
+
+        .seccion_vencimientos .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento > .acciones_lote_vencimiento {
+            grid-column: 1 / -1; /* Define las columnas que ocupa el elemento. */
+            justify-content: flex-start; /* Define la distribución de los elementos en el eje principal. */
+            flex-wrap: wrap; /* Define si los elementos pueden pasar a otra línea. */
+        }
+
+        .seccion_vencimientos .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento > .acciones_lote_vencimiento::before {
+            flex: 0 0 100%; /* Define cómo el elemento ocupa el espacio disponible en Flexbox. */
+        }
+    }
+
+/* TITULO 9 RESPONSIVE (MAX-WIDTH: 1024PX) */
+
+    @media (max-width: 1024px) {
+        .tabla_alertas_stock {
+            min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        }
+
+        .tabla_alertas_stock .fila_encabezado_vencimientos {
+            display: none; /* Oculta el elemento. */
+        }
+
+        .tabla_alertas_stock .fila_vencimiento.fila_stock_alertas {
+            grid-template-columns: repeat(2, minmax(0, 1fr)); /* Define la distribución y el ancho de las columnas. */
+            gap: 12px; /* Define la separación entre los elementos. */
+            padding: 16px; /* Define el espacio interior del elemento. */
+        }
+
+        .tabla_alertas_stock .fila_vencimiento.fila_stock_alertas > [role="cell"] {
+            display: flex; /* Activa Flexbox para organizar el contenido. */
+            flex-direction: column; /* Organiza los elementos en una columna. */
+            align-items: flex-start; /* Define la alineación de los elementos en el eje transversal. */
+            gap: 5px; /* Define la separación entre los elementos. */
+            padding: 0; /* Define el espacio interior del elemento. */
+            min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        }
+
+        .tabla_alertas_stock .fila_vencimiento.fila_stock_alertas > [role="cell"]::before {
+            display: block; /* Muestra el elemento como un bloque. */
+            content: attr(data-etiqueta); /* Define el contenido generado por el pseudoelemento. */
+            color: #697a83; /* Establece el color del texto. */
+            font: 700 11px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        }
+
+        .tabla_alertas_stock .fila_vencimiento.fila_stock_alertas > [role="cell"]:first-child {
+            grid-column: 1 / -1; /* Define las columnas que ocupa el elemento. */
+            color: #0b3650; /* Establece el color del texto. */
+            font-weight: 700; /* Define el grosor del texto. */
+        }
+    }
+
+/* TITULO 10 RESPONSIVE (MAX-WIDTH: 480PX) */
+
+    @media (max-width: 480px) {
+        .tabla_alertas_stock .fila_vencimiento.fila_stock_alertas {
+            grid-template-columns: minmax(0, 1fr); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .tabla_alertas_stock .fila_vencimiento.fila_stock_alertas > [role="cell"]:first-child {
+            grid-column: auto; /* Define las columnas que ocupa el elemento. */
+        }
+    }
+
+    @container panel-lotes (max-width: 530px) {
+        .seccion_vencimientos .filtros_lista_vencimientos {
+            grid-template-columns: minmax(0, 1fr); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .seccion_vencimientos .filtros_lista_vencimientos > .campo_filtro_alertas, .seccion_vencimientos .filtros_lista_vencimientos > .filtro_fechas_vencimientos, .seccion_vencimientos .filtros_lista_vencimientos > .campo_boton_filtros_alertas {
+            grid-column: 1 / -1 !important; /* Define las columnas que ocupa el elemento. */
+        }
+
+        .filtros_lista_vencimientos .campo_boton_filtros_alertas button {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+        }
+
+        .filtros_lista_vencimientos .filtro_fechas_vencimientos {
+            grid-template-columns: repeat(2, minmax(0,1fr)); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento {
+            grid-template-columns: minmax(0, 1fr) !important; /* Define la distribución y el ancho de las columnas. */
+            gap: 12px; /* Define la separación entre los elementos. */
+            padding: 16px; /* Define el espacio interior del elemento. */
+        }
+
+        .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento > .celda_producto_lote, .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento > .acciones_lote_vencimiento {
+            grid-column: auto; /* Define las columnas que ocupa el elemento. */
+        }
+    }
+
+    @container panel-lotes (max-width: 780px) and (min-width: 531px) {
+        .seccion_vencimientos .filtros_lista_vencimientos {
+            grid-template-columns: repeat(2, minmax(0, 1fr)); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .filtros_lista_vencimientos > .campo_filtro_alertas:nth-child(1), .filtros_lista_vencimientos > .filtro_fechas_vencimientos, .filtros_lista_vencimientos > .campo_boton_filtros_alertas {
+            grid-column: 1 / -1; /* Define las columnas que ocupa el elemento. */
+        }
+
+        .filtros_lista_vencimientos > .campo_filtro_alertas:nth-child(2), .filtros_lista_vencimientos > .campo_filtro_alertas:nth-child(3) {
+            grid-column: auto; /* Define las columnas que ocupa el elemento. */
+        }
+
+        .filtros_lista_vencimientos .campo_boton_filtros_alertas button {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+        }
+    }
+
+    .contenedor_alertas_vencimientos .selector_nativo_oculto_vencimientos {
+        position: absolute !important; /* Define el sistema de posicionamiento del elemento. */
+        width: 1px !important; /* Define el ancho del elemento. */
+        height: 1px !important; /* Define el alto del elemento. */
+        opacity: 0 !important; /* Define el nivel de opacidad. */
+        padding: 0 !important; /* Define el espacio interior del elemento. */
+        border: 0 !important; /* Define el grosor, el estilo y el color del borde. */
+        pointer-events: none !important; /* Define si el elemento puede recibir eventos del puntero. */
+    }
+
+    .contenedor_alertas_vencimientos .selector_visual_vencimientos {
+        position: relative; /* Define el sistema de posicionamiento del elemento. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+    }
+
+    .contenedor_alertas_vencimientos .boton_selector_visual_vencimientos {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        justify-content: space-between; /* Define la distribución de los elementos en el eje principal. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 10px; /* Define la separación entre los elementos. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 42px; /* Define el alto del elemento. */
+        padding: 0 12px; /* Define el espacio interior del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        background: #fff; /* Define el fondo del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font: 13px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
+
+    .contenedor_alertas_vencimientos .boton_selector_visual_vencimientos:hover {
+        border-color: #159ba3; /* Establece el color del borde. */
+    }
+
+    .contenedor_alertas_vencimientos .boton_selector_visual_vencimientos:focus-visible {
+        outline: 2px solid #a6e0e2; /* Define el contorno visual del elemento. */
+        outline-offset: 1px; /* Define la separación entre el contorno y el borde. */
+    }
+
+    .contenedor_alertas_vencimientos .texto_selector_visual_vencimientos {
+        flex: 1; /* Define cómo el elemento ocupa el espacio disponible en Flexbox. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        overflow: hidden; /* Controla el contenido que supera las dimensiones del elemento. */
+        text-overflow: ellipsis; /* Define cómo se indica el texto que no cabe. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
+    }
+
+    .contenedor_alertas_vencimientos .boton_selector_visual_vencimientos svg {
+        width: 16px; /* Define el ancho del elemento. */
+        height: 16px; /* Define el alto del elemento. */
+        flex-shrink: 0; /* Define cuánto puede reducirse el elemento en Flexbox. */
+    }
+
+    .contenedor_alertas_vencimientos .panel_selector_visual_vencimientos {
+        position: absolute; /* Define el sistema de posicionamiento del elemento. */
+        left: 0; /* Define la posición respecto al borde izquierdo. */
+        top: calc(100% + 5px); /* Define la posición respecto al borde superior. */
+        z-index: 100; /* Define el orden de superposición del elemento. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        padding: 5px; /* Define el espacio interior del elemento. */
+        border: 1px solid #cbd9e0; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        background: #fff; /* Define el fondo del elemento. */
+        box-shadow: 0 10px 26px rgba(11, 54, 80, .14); /* Agrega o ajusta la sombra del elemento. */
+        overflow-y: auto; /* Controla el contenido que desborda verticalmente. */
+        overscroll-behavior: contain; /* Controla la propagación del desplazamiento al llegar al borde. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
+
+    .contenedor_alertas_vencimientos .panel_selector_visual_vencimientos[hidden] {
+        display: none !important; /* Define cómo se muestra y distribuye el elemento. */
+    }
+
+    .contenedor_alertas_vencimientos .opcion_selector_visual_vencimientos {
+        display: block; /* Muestra el elemento como un bloque. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        padding: 9px 11px; /* Define el espacio interior del elemento. */
+        background: #fff; /* Define el fondo del elemento. */
+        border: 0; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 5px; /* Define el redondeado de las esquinas. */
+        color: #405762; /* Establece el color del texto. */
+        font: 12px/1.35 Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        white-space: normal; /* Define cómo se conservan los espacios y los saltos de línea. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+    }
+
+    .contenedor_alertas_vencimientos .opcion_selector_visual_vencimientos:hover, .contenedor_alertas_vencimientos .opcion_selector_visual_vencimientos:focus-visible {
+        outline: 0; /* Define el contorno visual del elemento. */
+        background: #e4f6f6; /* Define el fondo del elemento. */
+        color: #0f858d; /* Establece el color del texto. */
+    }
+
+    .contenedor_alertas_vencimientos .opcion_selector_visual_vencimientos[aria-selected="true"] {
+        background: #dff2f3; /* Define el fondo del elemento. */
+        color: #086f76; /* Establece el color del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+    }
+
+    .paginador_vencimientos {
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-height: 70px; /* Establece el alto mínimo del elemento. */
+        padding: 15px 20px; /* Define el espacio interior del elemento. */
+        gap: 20px; /* Define la separación entre los elementos. */
+        border-top: 1px solid #edf1f3; /* Define el borde superior. */
+    }
+
+    .informacion_paginador_vencimientos {
+        color: #536873; /* Establece el color del texto. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
+    }
+
+    .controles_paginador_vencimientos, .numeros_paginas_vencimientos {
+        gap: 6px; /* Define la separación entre los elementos. */
+    }
+
+    .boton_pagina_vencimientos, .boton_numero_pagina_vencimientos {
+        width: 40px; /* Define el ancho del elemento. */
+        height: 40px; /* Define el alto del elemento. */
+        min-width: 40px; /* Establece el ancho mínimo del elemento. */
+        min-height: 40px; /* Establece el alto mínimo del elemento. */
+        padding: 0; /* Define el espacio interior del elemento. */
+        flex-shrink: 0; /* Define cuánto puede reducirse el elemento en Flexbox. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        color: #536873; /* Establece el color del texto. */
+        background: #fff; /* Define el fondo del elemento. */
+        font: 13px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        transition: background-color .2s, border-color .2s; /* Define la transición entre los cambios de estilo. */
+    }
+
+    .boton_numero_pagina_vencimientos.pagina_actual_vencimientos {
+        background: #159ba3; /* Define el fondo del elemento. */
+        border-color: #159ba3; /* Establece el color del borde. */
+        color: #fff; /* Establece el color del texto. */
+        font-weight: 700; /* Define el grosor del texto. */
+    }
+
+    .boton_numero_pagina_vencimientos:hover {
+        background: #e4f6f6; /* Define el fondo del elemento. */
+        border-color: #159ba3; /* Establece el color del borde. */
+        color: #0f858d; /* Establece el color del texto. */
+    }
+
+    .boton_numero_pagina_vencimientos.pagina_actual_vencimientos:hover {
+        background: #0d6970; /* Define el fondo del elemento. */
+        border-color: #0d6970; /* Establece el color del borde. */
+        color: #fff; /* Establece el color del texto. */
+    }
+
+    .boton_pagina_vencimientos:hover:not([aria-disabled="true"]) {
+        background: #e4f6f6; /* Define el fondo del elemento. */
+        border-color: #159ba3; /* Establece el color del borde. */
+        color: #0f858d; /* Establece el color del texto. */
+    }
+
+    .boton_pagina_vencimientos[aria-disabled="true"] {
+        opacity: .45; /* Define el nivel de opacidad. */
+        cursor: not-allowed; /* Define el cursor al situarlo sobre el elemento. */
+        background: #fff; /* Define el fondo del elemento. */
+        border-color: #dce4e8; /* Establece el color del borde. */
+    }
+
+    .boton_numero_pagina_vencimientos:focus-visible, .boton_pagina_vencimientos:focus-visible {
+        outline: 2px solid #159ba3; /* Define el contorno visual del elemento. */
+        outline-offset: 2px; /* Define la separación entre el contorno y el borde. */
+    }
+
+    .puntos_paginas_vencimientos {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        width: 30px; /* Define el ancho del elemento. */
+        height: 40px; /* Define el alto del elemento. */
+        gap: 4px; /* Define la separación entre los elementos. */
+        padding: 0; /* Define el espacio interior del elemento. */
+    }
+
+    .punto_paginacion_vencimientos {
+        display: block; /* Muestra el elemento como un bloque. */
+        width: 4px; /* Define el ancho del elemento. */
+        height: 4px; /* Define el alto del elemento. */
+        background: #64748b; /* Define el fondo del elemento. */
+        border-radius: 50%; /* Define el redondeado de las esquinas. */
+    }
+
+/* TITULO 11 RESPONSIVE (MAX-WIDTH: 1024PX) */
+
+    @media (max-width: 1024px) {
+        .paginador_vencimientos {
+            flex-direction: column; /* Organiza los elementos en una columna. */
+            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+            gap: 15px; /* Define la separación entre los elementos. */
+        }
+
+        .controles_paginador_vencimientos {
+            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        }
+    }
+
+/* TITULO 12 RESPONSIVE (MAX-WIDTH: 600PX) */
+
+    @media (max-width: 600px) {
+        .boton_pagina_vencimientos, .boton_numero_pagina_vencimientos {
+            width: 34px; /* Define el ancho del elemento. */
+            height: 34px; /* Define el alto del elemento. */
+            min-width: 34px; /* Establece el ancho mínimo del elemento. */
+            min-height: 34px; /* Establece el alto mínimo del elemento. */
+            font-size: 12px; /* Define el tamaño del texto. */
+        }
+
+        .numeros_paginas_vencimientos, .controles_paginador_vencimientos {
+            gap: 4px; /* Define la separación entre los elementos. */
+        }
+
+        .informacion_paginador_vencimientos {
+            font-size: 12px; /* Define el tamaño del texto. */
+        }
+    }
+
+/* TITULO 13 RESPONSIVE (MAX-WIDTH: 480PX) */
+
+    @media (max-width: 480px) {
+        .paginador_vencimientos {
+            padding: 12px 8px; /* Define el espacio interior del elemento. */
+        }
+
+        .controles_paginador_vencimientos, .numeros_paginas_vencimientos {
+            flex-wrap: wrap; /* Define si los elementos pueden pasar a otra línea. */
+            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        }
+    }
+
+    .contenedor_alertas_vencimientos > .contenedor_tabla_vencimientos {
+        overflow: visible; /* Controla el contenido que supera las dimensiones del elemento. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        container: panel-alertas / inline-size; /* Define el contenedor usado por las consultas de tamaño. */
+    }
+
     .contenedor_alertas_vencimientos .filtros_alertas_stock {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        position: relative; /* Define el sistema de posicionamiento del elemento. */
+        z-index: 5; /* Define el orden de superposición del elemento. */
+        grid-template-columns: minmax(180px, 1.9fr) minmax(130px, 1fr) minmax(155px, 1.15fr) minmax(145px, 1.05fr) auto; /* Define la distribución y el ancho de las columnas. */
+        align-items: end; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 10px; /* Define la separación entre los elementos. */
     }
-    .contenedor_alertas_vencimientos .filtros_alertas_stock > .campo_filtro_alertas:first-child {
-        grid-column: 1 / -1;
+
+    .contenedor_alertas_vencimientos .filtros_alertas_stock > * {
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
     }
-    .contenedor_alertas_vencimientos .filtros_alertas_stock > .campo_boton_filtros_alertas {
-        grid-column: 1 / -1;
-        justify-content: flex-end;
+
+    .contenedor_alertas_vencimientos .filtros_alertas_stock .selector_visual_vencimientos {
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
     }
-}
-@container panel-alertas (max-width: 480px) {
-    .contenedor_alertas_vencimientos .filtros_alertas_stock {
-        grid-template-columns: minmax(0, 1fr);
+
+    @container panel-alertas (max-width: 860px) {
+        .contenedor_alertas_vencimientos .filtros_alertas_stock {
+            grid-template-columns: repeat(2, minmax(0, 1fr)); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .contenedor_alertas_vencimientos .filtros_alertas_stock > .campo_filtro_alertas:first-child {
+            grid-column: 1 / -1; /* Define las columnas que ocupa el elemento. */
+        }
+
+        .contenedor_alertas_vencimientos .filtros_alertas_stock > .campo_boton_filtros_alertas {
+            grid-column: 1 / -1; /* Define las columnas que ocupa el elemento. */
+            justify-content: flex-end; /* Define la distribución de los elementos en el eje principal. */
+        }
     }
-    .contenedor_alertas_vencimientos .filtros_alertas_stock > .campo_filtro_alertas:first-child,
-    .contenedor_alertas_vencimientos .filtros_alertas_stock > .campo_boton_filtros_alertas {
-        grid-column: auto;
+
+    @container panel-alertas (max-width: 480px) {
+        .contenedor_alertas_vencimientos .filtros_alertas_stock {
+            grid-template-columns: minmax(0, 1fr); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .contenedor_alertas_vencimientos .filtros_alertas_stock > .campo_filtro_alertas:first-child, .contenedor_alertas_vencimientos .filtros_alertas_stock > .campo_boton_filtros_alertas {
+            grid-column: auto; /* Define las columnas que ocupa el elemento. */
+        }
+
+        .contenedor_alertas_vencimientos .filtros_alertas_stock .campo_boton_filtros_alertas button {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+        }
     }
-    .contenedor_alertas_vencimientos .filtros_alertas_stock .campo_boton_filtros_alertas button { width: 100%; }
-}

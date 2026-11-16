@@ -1,89 +1,82 @@
 /* TITULO 1 BODY INDEX */
 
-    /* clase para establecer la configuración general del cuerpo principal del sistema */
     .body_index {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        min-height: 100vh;
-        background-color: #f5f7f9;
-        font-family: Arial, sans-serif;
-        box-sizing: border-box;
-        overflow-x: hidden;
+        margin: 0; /* Define el margen exterior del elemento. */
+        padding: 0; /* Define el espacio interior del elemento. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-height: 100vh; /* Establece el alto mínimo del elemento. */
+        background-color: #f5f7f9; /* Establece el color de fondo. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        overflow-x: hidden; /* Controla el contenido que desborda horizontalmente. */
     }
-
 
 /* TITULO 2 CONTENEDOR PRINCIPAL */
 
-    /* clase para organizar el menú lateral y el área principal del sistema */
     .contenedor_principal {
-        width: 100%;
-        min-height: 100vh;
-        display: flex;
-        box-sizing: border-box;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-height: 100vh; /* Establece el alto mínimo del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
-
 
 /* TITULO 3 CONTENEDOR MENU */
 
-    /* clase para reservar el espacio correspondiente al menú lateral */
     .contenedor_menu {
-        width: 240px;
-        min-width: 240px;
-        min-height: 100vh;
-        box-sizing: border-box;
+        width: 240px; /* Define el ancho del elemento. */
+        min-width: 240px; /* Establece el ancho mínimo del elemento. */
+        min-height: 100vh; /* Establece el alto mínimo del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
-
 
 /* TITULO 4 CONTENEDOR AREA PRINCIPAL */
 
-    /* clase para organizar la cabecera y el contenido principal del sistema */
     .contenedor_area_principal {
-        min-width: 0;
-        min-height: 100vh;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        box-sizing: border-box;
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        min-height: 100vh; /* Establece el alto mínimo del elemento. */
+        flex: 1; /* Define cómo el elemento ocupa el espacio disponible en Flexbox. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
-
 
 /* TITULO 5 CONTENEDOR CABECERA */
 
-    /* clase para establecer el espacio donde se cargará la cabecera del sistema */
     .contenedor_cabecera {
-        width: 100%;
-        min-width: 0;
-        box-sizing: border-box;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
-
 
 /* TITULO 6 CONTENEDOR CONTENIDO */
 
-    /* clase para establecer el espacio donde se cargarán las diferentes vistas del sistema */
     .contenedor_contenido {
-        width: 100%;
-        min-width: 0;
-        flex: 1;
-        box-sizing: border-box;
-        transition: background-color 0.6s ease;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        flex: 1; /* Define cómo el elemento ocupa el espacio disponible en Flexbox. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        transition: background-color 0.6s ease; /* Define la transición entre los cambios de estilo. */
     }
-
 
 /* TITULO 7 RESPONSIVE INDEX */
 
-    /* adapta la estructura principal para tablets y dispositivos móviles */
     @media (max-width: 1024px) {
-
         .contenedor_menu {
-            width: 0;
-            min-width: 0;
-            min-height: 0;
+            width: 0; /* Define el ancho del elemento. */
+            min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+            min-height: 0; /* Establece el alto mínimo del elemento. */
         }
 
         .contenedor_area_principal {
-            width: 100%;
-            min-height: 100dvh;
+            width: 100%; /* Ocupa todo el ancho disponible. */
+            min-height: 100dvh; /* Establece el alto mínimo del elemento. */
         }
+    }
 
+/* TITULO 8 CAMPOS LEGIBLES EN TELEFONOS */
+
+    @media (max-width: 768px) {
+        .body_index input:not([type="checkbox"]):not([type="radio"]), .body_index select, .body_index textarea {
+            font-size: 16px; /* Define un tamaño de texto legible para el campo en teléfonos. */
+        }
     }

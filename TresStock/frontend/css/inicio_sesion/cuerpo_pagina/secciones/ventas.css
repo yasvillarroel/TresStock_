@@ -1,1413 +1,1327 @@
 /* TITULO 1 CONTENEDOR VENTAS */
 
-    /* espacio general de la vista */
     .contenedor_ventas {
-        width: 100%;
-        padding: 28px;
-        box-sizing: border-box;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        padding: 28px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
-
 
 /* TITULO 2 ENCABEZADO VENTAS */
 
-    /* organiza el encabezado */
     .contenedor_encabezado_ventas {
-        width: 100%;
-        display: grid;
-        grid-template-columns: 1fr auto;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 22px;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: 1fr auto; /* Define la distribución y el ancho de las columnas. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 12px; /* Define la separación entre los elementos. */
+        margin-bottom: 22px; /* Define el margen inferior. */
     }
 
-    /* organiza título y descripción */
     .contenedor_informacion_ventas {
-        display: flex;
-        flex-direction: column;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
-    /* título principal */
     .titulo_ventas {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 5px;
+        color: #0b3650; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 24px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-bottom: 5px; /* Define el margen inferior. */
     }
 
-    /* descripción */
     .descripcion_ventas {
-        color: #71818a;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
+        color: #71818a; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
     }
 
+/* SUBTITULO 1 BOTON IMPORTAR */
 
-    /* SUBTITULO 1 BOTON IMPORTAR */
+    .boton_importar_ventas {
+        height: 42px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        background-color: #159ba3; /* Establece el color de fondo. */
+        padding: 0 17px; /* Define el espacio interior del elemento. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
 
-        /* botón importar ventas */
-        .boton_importar_ventas {
-            height: 42px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #159ba3;
-            padding: 0 17px;
-            border-radius: 6px;
-            cursor: pointer;
-            box-sizing: border-box;
-        }
+    .boton_importar_ventas:hover {
+        background-color: #0f858d; /* Establece el color de fondo. */
+    }
 
-        /* efecto hover */
-        .boton_importar_ventas:hover {
-            background-color: #0f858d;
-        }
+    .icono_importar_ventas {
+        color: #ffffff; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 21px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-right: 8px; /* Define el margen derecho. */
+    }
 
-        /* icono */
-        .icono_importar_ventas {
-            color: #ffffff;
-            font-family: Arial, sans-serif;
-            font-size: 21px;
-            font-weight: bold;
-            margin-right: 8px;
-        }
-
-
-
-        /* texto */
-        .texto_importar_ventas {
-            color: #ffffff;
-            font-family: Arial, sans-serif;
-            font-size: 13px;
-            font-weight: bold;
-            white-space: nowrap;
-        }
-
+    .texto_importar_ventas {
+        color: #ffffff; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
+    }
 
 /* TITULO 3 INDICADORES VENTAS */
 
-    /* distribuye los indicadores */
     .contenedor_indicadores_ventas {
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
-        margin-bottom: 22px;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: repeat(3, 1fr); /* Define la distribución y el ancho de las columnas. */
+        gap: 16px; /* Define la separación entre los elementos. */
+        margin-bottom: 22px; /* Define el margen inferior. */
     }
 
+/* SUBTITULO 1 TOTAL VENTAS */
 
-    /* SUBTITULO 1 TOTAL VENTAS */
+    .tarjeta_total_ventas {
+        min-height: 105px; /* Establece el alto mínimo del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        padding: 18px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
 
-        .tarjeta_total_ventas {
-            min-height: 105px;
-            display: flex;
-            align-items: center;
-            background-color: #ffffff;
-            border: 1px solid #dce4e8;
-            border-radius: 8px;
-            padding: 18px;
-            box-sizing: border-box;
-        }
+    .icono_total_ventas {
+        width: 46px; /* Define el ancho del elemento. */
+        height: 46px; /* Define el alto del elemento. */
+        min-width: 46px; /* Establece el ancho mínimo del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        background-color: #e4f6f6; /* Establece el color de fondo. */
+        color: #159ba3; /* Establece el color del texto. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        margin-right: 14px; /* Define el margen derecho. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 23px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+    }
 
-        .icono_total_ventas {
-            width: 46px;
-            height: 46px;
-            min-width: 46px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #e4f6f6;
-            color: #159ba3;
-            border-radius: 8px;
-            margin-right: 14px;
-            font-family: Arial, sans-serif;
-            font-size: 23px;
-            font-weight: bold;
-        }
+    .imagen_icono_indicador_ventas {
+        width: 24px; /* Define el ancho del elemento. */
+        height: 24px; /* Define el alto del elemento. */
+        display: block; /* Muestra el elemento como un bloque. */
+        object-fit: contain; /* Define cómo se ajusta la imagen dentro de sus dimensiones. */
+    }
 
-        .imagen_icono_indicador_ventas{
-            width: 24px;
-            height: 24px;
-            display: block;
-            object-fit: contain;
-        }
+    .contenido_total_ventas {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+    }
 
-        .contenido_total_ventas {
-            display: flex;
-            flex-direction: column;
-        }
+    .texto_total_ventas {
+        color: #697a83; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
+    }
 
-        .texto_total_ventas {
-            color: #697a83;
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            margin-bottom: 6px;
-        }
+    .valor_total_ventas {
+        color: #0F858D; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 23px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+    }
 
-        .valor_total_ventas {
-            color: #0F858D;
-            font-family: Arial, sans-serif;
-            font-size: 23px;
-            font-weight: bold;
-        }
+/* SUBTITULO 2 VENTAS DEL DIA */
 
+    .tarjeta_ventas_dia {
+        min-height: 105px; /* Establece el alto mínimo del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        padding: 18px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
 
-    /* SUBTITULO 2 VENTAS DEL DIA */
+    .icono_ventas_dia {
+        width: 46px; /* Define el ancho del elemento. */
+        height: 46px; /* Define el alto del elemento. */
+        min-width: 46px; /* Establece el ancho mínimo del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        background-color: #e9f0fb; /* Establece el color de fondo. */
+        color: #3869a8; /* Establece el color del texto. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        margin-right: 14px; /* Define el margen derecho. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 23px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+    }
 
-        .tarjeta_ventas_dia {
-            min-height: 105px;
-            display: flex;
-            align-items: center;
-            background-color: #ffffff;
-            border: 1px solid #dce4e8;
-            border-radius: 8px;
-            padding: 18px;
-            box-sizing: border-box;
-        }
+    .imagen_icono_indicador_ventas {
+        width: 24px; /* Define el ancho del elemento. */
+        height: 24px; /* Define el alto del elemento. */
+        display: block; /* Muestra el elemento como un bloque. */
+        object-fit: contain; /* Define cómo se ajusta la imagen dentro de sus dimensiones. */
+    }
 
-        .icono_ventas_dia {
-            width: 46px;
-            height: 46px;
-            min-width: 46px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #e9f0fb;
-            color: #3869a8;
-            border-radius: 8px;
-            margin-right: 14px;
-            font-family: Arial, sans-serif;
-            font-size: 23px;
-            font-weight: bold;
-        }
+    .contenido_ventas_dia {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+    }
 
-        .imagen_icono_indicador_ventas{
-            width: 24px;
-            height: 24px;
-            display: block;
-            object-fit: contain;
-        }
+    .texto_ventas_dia {
+        color: #697a83; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
+    }
 
-        .contenido_ventas_dia {
-            display: flex;
-            flex-direction: column;
-        }
+    .valor_ventas_dia {
+        color: #3869A8; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 23px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+    }
 
-        .texto_ventas_dia {
-            color: #697a83;
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            margin-bottom: 6px;
-        }
+/* SUBTITULO 3 TOTAL VENDIDO */
 
-        .valor_ventas_dia {
-            color: #3869A8;
-            font-family: Arial, sans-serif;
-            font-size: 23px;
-            font-weight: bold;
-        }
+    .tarjeta_total_vendido {
+        min-height: 105px; /* Establece el alto mínimo del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        padding: 18px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+    }
 
+    .icono_total_vendido {
+        width: 46px; /* Define el ancho del elemento. */
+        height: 46px; /* Define el alto del elemento. */
+        min-width: 46px; /* Establece el ancho mínimo del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        background-color: #edf8ee; /* Establece el color de fondo. */
+        color: #469451; /* Establece el color del texto. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        margin-right: 14px; /* Define el margen derecho. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 23px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+    }
 
-    /* SUBTITULO 3 TOTAL VENDIDO */
+    .imagen_icono_indicador_ventas {
+        width: 24px; /* Define el ancho del elemento. */
+        height: 24px; /* Define el alto del elemento. */
+        display: block; /* Muestra el elemento como un bloque. */
+        object-fit: contain; /* Define cómo se ajusta la imagen dentro de sus dimensiones. */
+    }
 
-        .tarjeta_total_vendido {
-            min-height: 105px;
-            display: flex;
-            align-items: center;
-            background-color: #ffffff;
-            border: 1px solid #dce4e8;
-            border-radius: 8px;
-            padding: 18px;
-            box-sizing: border-box;
-        }
+    .contenido_total_vendido {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+    }
 
-        .icono_total_vendido {
-            width: 46px;
-            height: 46px;
-            min-width: 46px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #edf8ee;
-            color: #469451;
-            border-radius: 8px;
-            margin-right: 14px;
-            font-family: Arial, sans-serif;
-            font-size: 23px;
-            font-weight: bold;
-        }
+    .texto_total_vendido {
+        color: #697a83; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        margin-bottom: 6px; /* Define el margen inferior. */
+    }
 
-        .imagen_icono_indicador_ventas{
-            width: 24px;
-            height: 24px;
-            display: block;
-            object-fit: contain;        
-        }
-
-        .contenido_total_vendido {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .texto_total_vendido {
-            color: #697a83;
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            margin-bottom: 6px;
-        }
-
-        .valor_total_vendido {
-            color: #288447;
-            font-family: Arial, sans-serif;
-            font-size: 23px;
-            font-weight: bold;
-        }
-
+    .valor_total_vendido {
+        color: #288447; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 23px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+    }
 
 /* TITULO 4 FILTROS VENTAS */
 
-    /* organiza los filtros */
     .contenedor_filtros_ventas {
-        width: 100%;
-        display: grid;
-        grid-template-columns: minmax(180px, 2fr) minmax(130px, 1fr) minmax(130px, 1fr) minmax(155px, 1.1fr) auto;
-        gap: 16px;
-        align-items: end;
-        background-color: #ffffff;
-        border: 1px solid #dce4e8;
-        border-radius: 8px;
-        padding: 18px;
-        margin-bottom: 20px;
-        box-sizing: border-box;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: minmax(180px, 2fr) minmax(130px, 1fr) minmax(130px, 1fr) minmax(155px, 1.1fr) auto; /* Define la distribución y el ancho de las columnas. */
+        gap: 16px; /* Define la separación entre los elementos. */
+        align-items: end; /* Define la alineación de los elementos en el eje transversal. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        padding: 18px; /* Define el espacio interior del elemento. */
+        margin-bottom: 20px; /* Define el margen inferior. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
     .contenedor_busqueda_ventas {
-        display: flex;
-        flex-direction: column;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
     .contenedor_fecha_desde_ventas {
-        display: flex;
-        flex-direction: column;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
     .contenedor_fecha_hasta_ventas {
-        display: flex;
-        flex-direction: column;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
-    .texto_busqueda_ventas,
-    .texto_fecha_desde_ventas,
-    .texto_fecha_hasta_ventas,
-    .texto_orden_ventas {
-        color: #536873;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 7px;
+    .texto_busqueda_ventas, .texto_fecha_desde_ventas, .texto_fecha_hasta_ventas, .texto_orden_ventas {
+        color: #536873; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-bottom: 7px; /* Define el margen inferior. */
     }
 
-    .input_busqueda_ventas,
-    .input_fecha_desde_ventas,
-    .input_fecha_hasta_ventas {
-        width: 100%;
-        height: 40px;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        padding: 0 12px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        box-sizing: border-box;
-        outline: none;
-        background-color: #ffffff;
+    .input_busqueda_ventas, .input_fecha_desde_ventas, .input_fecha_hasta_ventas {
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 40px; /* Define el alto del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        padding: 0 12px; /* Define el espacio interior del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        outline: none; /* Define el contorno visual del elemento. */
+        background-color: #ffffff; /* Establece el color de fondo. */
     }
-
 
 /* SUBTITULO 1 SELECTOR DE ORDENAMIENTO VENTAS */
 
-    /* alinea el selector con el resto de los filtros de ventas */
     .contenedor_orden_ventas {
-        min-width: 0;
-        display: flex;
-        flex-direction: column;
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
     }
 
-    /* permite desplegar las opciones debajo del campo */
     .selector_orden_ventas {
-        position: relative;
-        width: 100%;
+        position: relative; /* Define el sistema de posicionamiento del elemento. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
     }
 
-    /* mantiene el diseño de los filtros desplegables de TresStock */
     .boton_orden_ventas {
-        width: 100%;
-        height: 40px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 8px;
-        padding: 0 12px;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        background-color: #ffffff;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        text-align: left;
-        cursor: pointer;
-        box-sizing: border-box;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 40px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        justify-content: space-between; /* Define la distribución de los elementos en el eje principal. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 8px; /* Define la separación entre los elementos. */
+        padding: 0 12px; /* Define el espacio interior del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* muestra la flecha del selector */
     .flecha_orden_ventas {
-        width: 8px;
-        height: 8px;
-        border-right: 2px solid #607782;
-        border-bottom: 2px solid #607782;
-        transform: translateY(-2px) rotate(45deg);
-        transition: transform 0.2s;
-        flex-shrink: 0;
+        width: 8px; /* Define el ancho del elemento. */
+        height: 8px; /* Define el alto del elemento. */
+        border-right: 2px solid #607782; /* Define el borde derecho. */
+        border-bottom: 2px solid #607782; /* Define el borde inferior. */
+        transform: translateY(-2px) rotate(45deg); /* Aplica una transformación visual al elemento. */
+        transition: transform 0.2s; /* Define la transición entre los cambios de estilo. */
+        flex-shrink: 0; /* Define cuánto puede reducirse el elemento en Flexbox. */
     }
 
-    /* gira la flecha cuando el selector está abierto */
     .boton_orden_ventas[aria-expanded="true"] .flecha_orden_ventas {
-        transform: translateY(2px) rotate(225deg);
+        transform: translateY(2px) rotate(225deg); /* Aplica una transformación visual al elemento. */
     }
 
-    /* lista de opciones del selector */
     .opciones_orden_ventas {
-        position: absolute;
-        top: calc(100% + 5px);
-        left: 0;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 3px;
-        padding: 5px;
-        background-color: #ffffff;
-        border: 1px solid #dce4e8;
-        border-radius: 7px;
-        box-shadow: 0 8px 22px rgba(11, 54, 80, 0.12);
-        z-index: 20;
-        box-sizing: border-box;
+        position: absolute; /* Define el sistema de posicionamiento del elemento. */
+        top: calc(100% + 5px); /* Define la posición respecto al borde superior. */
+        left: 0; /* Define la posición respecto al borde izquierdo. */
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        flex-direction: column; /* Organiza los elementos en una columna. */
+        gap: 3px; /* Define la separación entre los elementos. */
+        padding: 5px; /* Define el espacio interior del elemento. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        box-shadow: 0 8px 22px rgba(11, 54, 80, 0.12); /* Agrega o ajusta la sombra del elemento. */
+        z-index: 20; /* Define el orden de superposición del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* oculta las opciones cuando el selector está cerrado */
     .opciones_orden_ventas[hidden] {
-        display: none;
+        display: none; /* Oculta el elemento. */
     }
 
-    /* diseño de las opciones del selector */
     .opcion_orden_ventas {
-        width: 100%;
-        min-height: 36px;
-        padding: 8px 10px;
-        border: none;
-        border-radius: 5px;
-        background: transparent;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        text-align: left;
-        cursor: pointer;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-height: 36px; /* Establece el alto mínimo del elemento. */
+        padding: 8px 10px; /* Define el espacio interior del elemento. */
+        border: none; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 5px; /* Define el redondeado de las esquinas. */
+        background: transparent; /* Define el fondo del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        text-align: left; /* Define la alineación horizontal del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
     }
 
-    /* destaca la opción seleccionada y el efecto al pasar el cursor */
-    .opcion_orden_ventas:hover,
-    .opcion_orden_ventas:focus-visible,
-    .opcion_orden_ventas_seleccionada {
-        background-color: #e4f6f6;
-        color: #0f858d;
+    .opcion_orden_ventas:hover, .opcion_orden_ventas:focus-visible, .opcion_orden_ventas_seleccionada {
+        background-color: #e4f6f6; /* Establece el color de fondo. */
+        color: #0f858d; /* Establece el color del texto. */
     }
-
 
 /* SUBTITULO 2 ICONOS DE INDICADORES DE VENTAS */
 
-    /* mantiene los iconos oscuros y del mismo tamaño que en Inventario */
-    .icono_total_ventas svg,
-    .icono_ventas_dia svg,
-    .icono_total_vendido svg {
-        width: 25px;
-        height: 25px;
-        color: #111111;
-        flex-shrink: 0;
+    .icono_total_ventas svg, .icono_ventas_dia svg, .icono_total_vendido svg {
+        width: 25px; /* Define el ancho del elemento. */
+        height: 25px; /* Define el alto del elemento. */
+        color: #111111; /* Establece el color del texto. */
+        flex-shrink: 0; /* Define cuánto puede reducirse el elemento en Flexbox. */
     }
-
 
 /* SUBTITULO 3 LIMPIAR FILTROS Y VALIDAR FECHAS */
 
-    /* alinea el botón con los tres campos de búsqueda */
     .contenedor_limpiar_filtros_ventas {
-        display: flex;
-        align-items: flex-end;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: flex-end; /* Define la alineación de los elementos en el eje transversal. */
     }
 
-    /* mantiene el estilo de botón secundario de TresStock */
     .boton_limpiar_filtros_ventas {
-        min-height: 40px;
-        padding: 0 13px;
-        border: 1px solid #159ba3;
-        border-radius: 6px;
-        background-color: #ffffff;
-        color: #0f858d;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        font-weight: bold;
-        white-space: nowrap;
-        cursor: pointer;
-        transition: background-color 0.2s;
+        min-height: 40px; /* Establece el alto mínimo del elemento. */
+        padding: 0 13px; /* Define el espacio interior del elemento. */
+        border: 1px solid #159ba3; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        color: #0f858d; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        transition: background-color 0.2s; /* Define la transición entre los cambios de estilo. */
     }
 
     .boton_limpiar_filtros_ventas:hover {
-        background-color: #e4f6f6;
-        border-color: #159ba3;
+        background-color: #e4f6f6; /* Establece el color de fondo. */
+        border-color: #159ba3; /* Establece el color del borde. */
     }
 
-    .boton_limpiar_filtros_ventas:focus-visible,
-    .boton_orden_ventas:focus-visible,
-    .input_busqueda_ventas:focus-visible,
-    .input_fecha_desde_ventas:focus-visible,
-    .input_fecha_hasta_ventas:focus-visible {
-        outline: 2px solid #159ba3;
-        outline-offset: 2px;
+    .boton_limpiar_filtros_ventas:focus-visible, .boton_orden_ventas:focus-visible, .input_busqueda_ventas:focus-visible, .input_fecha_desde_ventas:focus-visible, .input_fecha_hasta_ventas:focus-visible {
+        outline: 2px solid #159ba3; /* Define el contorno visual del elemento. */
+        outline-offset: 2px; /* Define la separación entre el contorno y el borde. */
     }
 
     .boton_limpiar_filtros_ventas svg {
-        width: 16px;
-        height: 16px;
+        width: 16px; /* Define el ancho del elemento. */
+        height: 16px; /* Define el alto del elemento. */
     }
 
-    /* avisa si el rango de fechas ingresado no es valido */
     .mensaje_fechas_ventas {
-        grid-column: 1 / -1;
-        color: #c2413a;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
+        grid-column: 1 / -1; /* Define las columnas que ocupa el elemento. */
+        color: #c2413a; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
     }
 
     .mensaje_fechas_ventas[hidden] {
-        display: none;
+        display: none; /* Oculta el elemento. */
     }
-
 
 /* TITULO 5 TABLA VENTAS */
 
-    /* contenedor de tabla */
     .contenedor_tabla_ventas {
-        width: 100%;
-        background-color: #ffffff;
-        border: 1px solid #dce4e8;
-        border-radius: 8px;
-        overflow-x: auto;
-        box-sizing: border-box;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        overflow-x: auto; /* Permite desplazar horizontalmente el contenido cuando no cabe. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
     .cabecera_contenedor_tabla_ventas {
-        padding: 17px 18px;
-        border-bottom: 1px solid #e2e8eb;
-        box-sizing: border-box;
+        padding: 17px 18px; /* Define el espacio interior del elemento. */
+        border-bottom: 1px solid #e2e8eb; /* Define el borde inferior. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
     .titulo_tabla_ventas {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        font-weight: bold;
+        color: #0b3650; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 14px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
     }
 
     .tabla_ventas {
-        width: 100%;
-        min-width: 720px;
-        border-collapse: collapse;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-width: 720px; /* Establece el ancho mínimo del elemento. */
+        border-collapse: collapse; /* Define cómo se combinan los bordes de las celdas. */
     }
 
     .encabezado_tabla_ventas {
-        background-color: #f4f7f8;
+        background-color: #f4f7f8; /* Establece el color de fondo. */
     }
 
     .fila_encabezado_ventas {
-        border-bottom: 1px solid #dce4e8;
+        border-bottom: 1px solid #dce4e8; /* Define el borde inferior. */
     }
 
-    .columna_boleta_ventas,
-    .columna_fecha_ventas,
-    .columna_hora_ventas,
-    .columna_total_ventas,
-    .columna_acciones_ventas {
-        padding: 13px 12px;
-        color: #667881;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        white-space: nowrap;
+    .columna_boleta_ventas, .columna_fecha_ventas, .columna_hora_ventas, .columna_total_ventas, .columna_acciones_ventas {
+        padding: 13px 12px; /* Define el espacio interior del elemento. */
+        color: #667881; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 11px; /* Define el tamaño del texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
 
     .columna_boleta_ventas {
-        text-align: left;
+        text-align: left; /* Define la alineación horizontal del texto. */
     }
 
     .columna_fecha_ventas {
-        text-align: left;
+        text-align: left; /* Define la alineación horizontal del texto. */
     }
 
     .columna_hora_ventas {
-        text-align: center;
+        text-align: center; /* Define la alineación horizontal del texto. */
     }
 
     .columna_total_ventas {
-        text-align: right;
+        text-align: right; /* Define la alineación horizontal del texto. */
     }
 
     .columna_acciones_ventas {
-        text-align: center;
+        text-align: center; /* Define la alineación horizontal del texto. */
     }
-
 
 /* TITULO 6 DATOS TABLA VENTAS */
 
     .fila_venta {
-        border-bottom: 1px solid #edf1f3;
+        border-bottom: 1px solid #edf1f3; /* Define el borde inferior. */
     }
 
     .fila_venta:hover {
-        background-color: #f8fafb;
+        background-color: #f8fafb; /* Establece el color de fondo. */
     }
 
-    .dato_boleta_ventas,
-    .dato_fecha_ventas,
-    .dato_hora_ventas,
-    .dato_total_ventas,
-    .dato_acciones_ventas {
-        padding: 14px 12px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        white-space: nowrap;
+    .dato_boleta_ventas, .dato_fecha_ventas, .dato_hora_ventas, .dato_total_ventas, .dato_acciones_ventas {
+        padding: 14px 12px; /* Define el espacio interior del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
 
     .dato_boleta_ventas {
-        text-align: left;
-        font-weight: bold;
+        text-align: left; /* Define la alineación horizontal del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
     }
 
     .dato_fecha_ventas {
-        text-align: left;
+        text-align: left; /* Define la alineación horizontal del texto. */
     }
 
     .dato_hora_ventas {
-        text-align: center;
+        text-align: center; /* Define la alineación horizontal del texto. */
     }
 
     .dato_total_ventas {
-        text-align: right;
-        font-weight: bold;
+        text-align: right; /* Define la alineación horizontal del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
     }
 
     .dato_acciones_ventas {
-        text-align: center;
+        text-align: center; /* Define la alineación horizontal del texto. */
     }
 
-    /* clase para establecer el boton de ver boleta */
     .boton_ver_venta {
-        width: 44px;
-        height: 44px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #ffffff;
-        border: 1px solid #dce4e8;
-        border-radius: 8px;
-        color: #159ba3;
-        padding: 0;
-        cursor: pointer;
-        box-sizing: border-box;
-        transition: background-color 0.2s, border-color 0.2s;
+        width: 44px; /* Define el ancho del elemento. */
+        height: 44px; /* Define el alto del elemento. */
+        display: inline-flex; /* Organiza el contenido con Flexbox dentro de la línea. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        color: #159ba3; /* Establece el color del texto. */
+        padding: 0; /* Define el espacio interior del elemento. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        transition: background-color 0.2s, border-color 0.2s; /* Define la transición entre los cambios de estilo. */
     }
 
-    /* cambia el fondo del boton al posicionar el cursor */
     .boton_ver_venta:hover {
-        background-color: #e4f6f6;
-        border-color: #159ba3;
+        background-color: #e4f6f6; /* Establece el color de fondo. */
+        border-color: #159ba3; /* Establece el color del borde. */
     }
 
-    /* clase para establecer el tamaño del icono de ver boleta */
     .boton_ver_venta svg {
-        width: 20px;
-        height: 20px;
+        width: 20px; /* Define el ancho del elemento. */
+        height: 20px; /* Define el alto del elemento. */
     }
 
     .fila_sin_ventas {
-        border-bottom: 1px solid #edf1f3;
+        border-bottom: 1px solid #edf1f3; /* Define el borde inferior. */
     }
 
     .dato_sin_ventas {
-        padding: 38px 15px;
-        text-align: center;
-        color: #84939a;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
+        padding: 38px 15px; /* Define el espacio interior del elemento. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        color: #84939a; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
     }
-
 
 /* TITULO 7 PAGINACION VENTAS */
 
-    /* contenedor principal de la paginacion */
     .contenedor_paginacion_ventas {
-        width: 100%;
-        min-height: 70px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 20px;
-        padding: 15px 20px;
-        border-top: 1px solid #edf1f3;
-        box-sizing: border-box;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-height: 70px; /* Establece el alto mínimo del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: space-between; /* Define la distribución de los elementos en el eje principal. */
+        gap: 20px; /* Define la separación entre los elementos. */
+        padding: 15px 20px; /* Define el espacio interior del elemento. */
+        border-top: 1px solid #edf1f3; /* Define el borde superior. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-    /* informacion de los ventas mostrados */
     .informacion_paginacion_ventas {
-        color: #536873;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        white-space: nowrap;
+        color: #536873; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
 
-    /* contenedor de los controles de paginacion */
     .controles_paginacion_ventas {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        gap: 6px;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: flex-end; /* Define la distribución de los elementos en el eje principal. */
+        gap: 6px; /* Define la separación entre los elementos. */
     }
 
-    /* contenedor de los numeros de pagina */
     .numeros_paginas_ventas {
-        display: flex;
-        align-items: center;
-        gap: 6px;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 6px; /* Define la separación entre los elementos. */
     }
 
-    /* diseño general de los botones de paginacion */
-    .boton_numero_pagina_ventas,
-    .boton_pagina_anterior_ventas,
-    .boton_pagina_siguiente_ventas {
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        background-color: #ffffff;
-        border: 1px solid #dce4e8;
-        border-radius: 6px;
-        color: #536873;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        cursor: pointer;
-        padding: 0;
-        box-sizing: border-box;
-        transition: background-color 0.2s, border-color 0.2s;
+    .boton_numero_pagina_ventas, .boton_pagina_anterior_ventas, .boton_pagina_siguiente_ventas {
+        width: 40px; /* Define el ancho del elemento. */
+        height: 40px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        flex-shrink: 0; /* Define cuánto puede reducirse el elemento en Flexbox. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        color: #536873; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        padding: 0; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        transition: background-color 0.2s, border-color 0.2s; /* Define la transición entre los cambios de estilo. */
     }
 
-    /* pagina seleccionada actualmente */
     .pagina_actual_ventas {
-        background-color: #159BA3;
-        border-color: #159BA3;
-        color: #ffffff;
-        font-weight: bold;
+        background-color: #159BA3; /* Establece el color de fondo. */
+        border-color: #159BA3; /* Establece el color del borde. */
+        color: #ffffff; /* Establece el color del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
     }
 
-    /* efecto al pasar el cursor sobre los botones */
-    .boton_numero_pagina_ventas:hover,
-    .boton_pagina_anterior_ventas:hover,
-    .boton_pagina_siguiente_ventas:hover {
-        background-color: #e4f6f6;
-        border-color: #159BA3;
+    .boton_numero_pagina_ventas:hover, .boton_pagina_anterior_ventas:hover, .boton_pagina_siguiente_ventas:hover {
+        background-color: #e4f6f6; /* Establece el color de fondo. */
+        border-color: #159BA3; /* Establece el color del borde. */
     }
 
-    /* mantiene el color de la pagina seleccionada */
     .pagina_actual_ventas:hover {
-        background-color: #0D6970;
-        border-color: #0D6970;
-        color: #ffffff;
+        background-color: #0D6970; /* Establece el color de fondo. */
+        border-color: #0D6970; /* Establece el color del borde. */
+        color: #ffffff; /* Establece el color del texto. */
     }
 
-    /* botones de navegacion deshabilitados */
-    .boton_pagina_anterior_ventas:disabled,
-    .boton_pagina_siguiente_ventas:disabled {
-        opacity: 0.45;
-        cursor: not-allowed;
-        background-color: #ffffff;
-        border-color: #dce4e8;
+    .boton_pagina_anterior_ventas:disabled, .boton_pagina_siguiente_ventas:disabled {
+        opacity: 0.45; /* Define el nivel de opacidad. */
+        cursor: not-allowed; /* Define el cursor al situarlo sobre el elemento. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border-color: #dce4e8; /* Establece el color del borde. */
     }
 
-    /* contenedor de los puntos suspensivos */
     .puntos_paginacion_ventas {
-        width: 30px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 4px;
-        color: #64748b;
+        width: 30px; /* Define el ancho del elemento. */
+        height: 40px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        gap: 4px; /* Define la separación entre los elementos. */
+        color: #64748b; /* Establece el color del texto. */
     }
 
-    /* diseño de los puntos suspensivos */
     .punto_paginacion_ventas {
-        width: 4px;
-        height: 4px;
-        background-color: currentColor;
-        border-radius: 50%;
+        width: 4px; /* Define el ancho del elemento. */
+        height: 4px; /* Define el alto del elemento. */
+        background-color: currentColor; /* Establece el color de fondo. */
+        border-radius: 50%; /* Define el redondeado de las esquinas. */
     }
-
 
 /* SUBTITULO 2 RESPONSIVE PAGINACION */
 
-    /* adapta la paginacion para tablets */
-    @media (max-width: 900px) {
+/* TITULO 8 RESPONSIVE (MAX-WIDTH: 1024PX) */
 
+    @media (max-width: 1024px) {
         .contenedor_paginacion_ventas {
-            flex-direction: column;
-            justify-content: center;
-            gap: 15px;
+            flex-direction: column; /* Organiza los elementos en una columna. */
+            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+            gap: 15px; /* Define la separación entre los elementos. */
         }
 
         .controles_paginacion_ventas {
-            justify-content: center;
+            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
         }
-
     }
 
-    /* adapta la paginacion para dispositivos moviles */
-    @media (max-width: 600px) {
+/* TITULO 9 RESPONSIVE (MAX-WIDTH: 600PX) */
 
-        .boton_numero_pagina_ventas,
-        .boton_pagina_anterior_ventas,
-        .boton_pagina_siguiente_ventas {
-            width: 34px;
-            height: 34px;
-            font-size: 12px;
+    @media (max-width: 600px) {
+        .boton_numero_pagina_ventas, .boton_pagina_anterior_ventas, .boton_pagina_siguiente_ventas {
+            width: 34px; /* Define el ancho del elemento. */
+            height: 34px; /* Define el alto del elemento. */
+            font-size: 12px; /* Define el tamaño del texto. */
         }
 
         .numeros_paginas_ventas {
-            gap: 4px;
+            gap: 4px; /* Define la separación entre los elementos. */
         }
 
         .controles_paginacion_ventas {
-            gap: 4px;
+            gap: 4px; /* Define la separación entre los elementos. */
         }
 
         .informacion_paginacion_ventas {
-            font-size: 12px;
+            font-size: 12px; /* Define el tamaño del texto. */
         }
-
     }
 
+/* TITULO 10 RESPONSIVE (MAX-WIDTH: 480PX) */
 
-
-    /* evita que la paginacion sobresalga en celulares pequeños */
-    @media (max-width: 420px) {
-
+    @media (max-width: 480px) {
         .contenedor_paginacion_ventas {
-            padding: 12px 8px;
+            padding: 12px 8px; /* Define el espacio interior del elemento. */
         }
 
-        .controles_paginacion_ventas,
-        .numeros_paginas_ventas {
-            flex-wrap: wrap;
-            justify-content: center;
+        .controles_paginacion_ventas, .numeros_paginas_ventas {
+            flex-wrap: wrap; /* Define si los elementos pueden pasar a otra línea. */
+            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
         }
-
     }
 
-
-/* TITULO 8 DETALLE VENTA */
+/* TITULO 11 DETALLE VENTA */
 
     .contenedor_detalle_venta {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: fixed;
-        top: 0;
-        left: 0;
-        background-color: rgba(5, 31, 45, 0.55);
-        z-index: 1100;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 100%; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        position: fixed; /* Define el sistema de posicionamiento del elemento. */
+        top: 0; /* Define la posición respecto al borde superior. */
+        left: 0; /* Define la posición respecto al borde izquierdo. */
+        background-color: rgba(5, 31, 45, 0.55); /* Establece el color de fondo. */
+        z-index: 1100; /* Define el orden de superposición del elemento. */
     }
 
     .contenedor_detalle_venta_oculto {
-        display: none;
+        display: none; /* Oculta el elemento. */
     }
 
     .formulario_detalle_venta {
-        width: 760px;
-        max-width: calc(100% - 40px);
-        max-height: calc(100vh - 60px);
-        overflow-y: auto;
-        overflow-x: hidden;
-        background-color: #ffffff;
-        border-radius: 8px;
-        padding: 23px;
-        box-sizing: border-box;
+        width: 760px; /* Define el ancho del elemento. */
+        max-width: calc(100% - 40px); /* Limita el ancho máximo del elemento. */
+        max-height: calc(100vh - 60px); /* Limita el alto máximo del elemento. */
+        overflow-y: auto; /* Controla el contenido que desborda verticalmente. */
+        overflow-x: hidden; /* Controla el contenido que desborda horizontalmente. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        padding: 23px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-
-/* TITULO 9 CABECERA DETALLE */
+/* TITULO 12 CABECERA DETALLE */
 
     .cabecera_detalle_venta {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 18px;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        justify-content: space-between; /* Define la distribución de los elementos en el eje principal. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        margin-bottom: 18px; /* Define el margen inferior. */
     }
 
     .titulo_detalle_venta {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 20px;
-        font-weight: bold;
+        color: #0b3650; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 20px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
     }
 
     .boton_cerrar_detalle_venta {
-        width: 32px;
-        height: 32px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #64727a;
-        font-family: Arial, sans-serif;
-        font-size: 25px;
-        border-radius: 5px;
-        cursor: pointer;
+        width: 32px; /* Define el ancho del elemento. */
+        height: 32px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        color: #64727a; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 25px; /* Define el tamaño del texto. */
+        border-radius: 5px; /* Define el redondeado de las esquinas. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
     }
 
     .boton_cerrar_detalle_venta:hover {
-        background-color: #edf1f3;
+        background-color: #edf1f3; /* Establece el color de fondo. */
     }
 
-
-/* TITULO 10 INFORMACION DETALLE */
+/* TITULO 13 INFORMACION DETALLE */
 
     .informacion_detalle_venta {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 15px;
-        margin-bottom: 18px;
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        justify-content: space-between; /* Define la distribución de los elementos en el eje principal. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 15px; /* Define la separación entre los elementos. */
+        margin-bottom: 18px; /* Define el margen inferior. */
     }
 
     .fecha_detalle_venta {
-        color: #536873;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
+        color: #536873; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
     }
 
     .total_detalle_venta {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 15px;
-        font-weight: bold;
+        color: #0b3650; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 15px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
     }
 
     .contenedor_tabla_detalle_venta {
-        width: 100%;
-        overflow: hidden;
-        border: 1px solid #dce4e8;
-        border-radius: 7px;
-        box-sizing: border-box;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        overflow: hidden; /* Controla el contenido que supera las dimensiones del elemento. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
     .tabla_detalle_venta {
-        width: 100%;
-        min-width: 0;
-        border-collapse: collapse;
-        table-layout: fixed;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        border-collapse: collapse; /* Define cómo se combinan los bordes de las celdas. */
+        table-layout: fixed; /* Define cómo se calcula el ancho de las columnas de la tabla. */
     }
 
-    /* permite ajustar los nombres largos sin generar scroll horizontal */
     .dato_producto_detalle_venta {
-        text-align: left;
-        overflow-wrap: anywhere;
+        text-align: left; /* Define la alineación horizontal del texto. */
+        overflow-wrap: anywhere; /* Permite controlar el salto de palabras largas. */
     }
 
-    /* distribuye el espacio entre las cuatro columnas */
     .columna_producto_detalle_venta {
-        width: 46%;
+        width: 46%; /* Define el ancho del elemento. */
     }
 
     .columna_cantidad_detalle_venta {
-        width: 15%;
+        width: 15%; /* Define el ancho del elemento. */
     }
 
-    .columna_precio_detalle_venta,
-    .columna_valorizado_detalle_venta {
-        width: 19.5%;
+    .columna_precio_detalle_venta, .columna_valorizado_detalle_venta {
+        width: 19.5%; /* Define el ancho del elemento. */
     }
 
     .encabezado_tabla_detalle_venta {
-        background-color: #f4f7f8;
+        background-color: #f4f7f8; /* Establece el color de fondo. */
     }
 
     .fila_encabezado_detalle_venta {
-        border-bottom: 1px solid #dce4e8;
+        border-bottom: 1px solid #dce4e8; /* Define el borde inferior. */
     }
 
-    .columna_producto_detalle_venta,
-    .columna_cantidad_detalle_venta,
-    .columna_precio_detalle_venta,
-    .columna_valorizado_detalle_venta {
-        padding: 12px;
-        color: #667881;
-        font-family: Arial, sans-serif;
-        font-size: 11px;
+    .columna_producto_detalle_venta, .columna_cantidad_detalle_venta, .columna_precio_detalle_venta, .columna_valorizado_detalle_venta {
+        padding: 12px; /* Define el espacio interior del elemento. */
+        color: #667881; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 11px; /* Define el tamaño del texto. */
     }
 
     .columna_producto_detalle_venta {
-        text-align: left;
+        text-align: left; /* Define la alineación horizontal del texto. */
     }
 
     .columna_cantidad_detalle_venta {
-        text-align: center;
+        text-align: center; /* Define la alineación horizontal del texto. */
     }
 
-    .columna_precio_detalle_venta,
-    .columna_valorizado_detalle_venta {
-        text-align: right;
+    .columna_precio_detalle_venta, .columna_valorizado_detalle_venta {
+        text-align: right; /* Define la alineación horizontal del texto. */
     }
 
     .fila_producto_detalle_venta {
-        border-bottom: 1px solid #edf1f3;
+        border-bottom: 1px solid #edf1f3; /* Define el borde inferior. */
     }
 
-    .dato_producto_detalle_venta,
-    .dato_cantidad_detalle_venta,
-    .dato_precio_detalle_venta,
-    .dato_valorizado_detalle_venta {
-        padding: 13px 12px;
-        color: #37434b;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
+    .dato_producto_detalle_venta, .dato_cantidad_detalle_venta, .dato_precio_detalle_venta, .dato_valorizado_detalle_venta {
+        padding: 13px 12px; /* Define el espacio interior del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
     }
 
     .dato_producto_detalle_venta {
-        text-align: left;
+        text-align: left; /* Define la alineación horizontal del texto. */
     }
 
     .dato_cantidad_detalle_venta {
-        text-align: center;
+        text-align: center; /* Define la alineación horizontal del texto. */
     }
 
-    .dato_precio_detalle_venta,
-    .dato_valorizado_detalle_venta {
-        text-align: right;
-        white-space: nowrap;
+    .dato_precio_detalle_venta, .dato_valorizado_detalle_venta {
+        text-align: right; /* Define la alineación horizontal del texto. */
+        white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
 
-
-/* TITULO 11 FORMULARIO IMPORTACION VENTAS */
+/* TITULO 14 FORMULARIO IMPORTACION VENTAS */
 
     .contenedor_importacion_ventas {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: fixed;
-        top: 0;
-        left: 0;
-        background-color: rgba(5, 31, 45, 0.55);
-        z-index: 1100;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 100%; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        position: fixed; /* Define el sistema de posicionamiento del elemento. */
+        top: 0; /* Define la posición respecto al borde superior. */
+        left: 0; /* Define la posición respecto al borde izquierdo. */
+        background-color: rgba(5, 31, 45, 0.55); /* Establece el color de fondo. */
+        z-index: 1100; /* Define el orden de superposición del elemento. */
     }
 
     .contenedor_importacion_ventas_oculto {
-        display: none;
+        display: none; /* Oculta el elemento. */
     }
 
     .formulario_importacion_ventas {
-        width: 500px;
-        max-width: calc(100% - 40px);
-        background-color: #ffffff;
-        border-radius: 8px;
-        padding: 23px;
-        box-sizing: border-box;
+        width: 500px; /* Define el ancho del elemento. */
+        max-width: calc(100% - 40px); /* Limita el ancho máximo del elemento. */
+        background-color: #ffffff; /* Establece el color de fondo. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        padding: 23px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-
-/* TITULO 12 CABECERA IMPORTACION */
+/* TITULO 15 CABECERA IMPORTACION */
 
     .cabecera_importacion_ventas {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 22px;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: space-between; /* Define la distribución de los elementos en el eje principal. */
+        margin-bottom: 22px; /* Define el margen inferior. */
     }
 
     .titulo_importacion_ventas {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 20px;
-        font-weight: bold;
+        color: #0b3650; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 20px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
     }
 
     .boton_cerrar_importacion_ventas {
-        width: 32px;
-        height: 32px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #64727a;
-        font-family: Arial, sans-serif;
-        font-size: 25px;
-        cursor: pointer;
-        border-radius: 5px;
+        width: 32px; /* Define el ancho del elemento. */
+        height: 32px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        color: #64727a; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 25px; /* Define el tamaño del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        border-radius: 5px; /* Define el redondeado de las esquinas. */
     }
 
     .boton_cerrar_importacion_ventas:hover {
-        background-color: #edf1f3;
+        background-color: #edf1f3; /* Establece el color de fondo. */
     }
 
-
-/* TITULO 13 CONTENIDO IMPORTACION */
+/* TITULO 16 CONTENIDO IMPORTACION */
 
     .contenido_importacion_ventas {
-        width: 100%;
+        width: 100%; /* Ocupa todo el ancho disponible. */
     }
 
     .descripcion_importacion_ventas {
-        color: #71818a;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        line-height: 19px;
-        margin-bottom: 20px;
+        color: #71818a; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        line-height: 19px; /* Define la separación entre líneas de texto. */
+        margin-bottom: 20px; /* Define el margen inferior. */
     }
 
     .zona_seleccion_archivo_ventas {
-        width: 100%;
-        padding: 38px 20px;
-        border: 2px dashed #b8c7ce;
-        border-radius: 8px;
-        text-align: center;
-        cursor: pointer;
-        box-sizing: border-box;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        padding: 38px 20px; /* Define el espacio interior del elemento. */
+        border: 2px dashed #b8c7ce; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 8px; /* Define el redondeado de las esquinas. */
+        text-align: center; /* Define la alineación horizontal del texto. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
     .zona_seleccion_archivo_ventas:hover {
-        background-color: #f6fafb;
-        border-color: #159ba3;
+        background-color: #f6fafb; /* Establece el color de fondo. */
+        border-color: #159ba3; /* Establece el color del borde. */
     }
 
     .icono_archivo_ventas {
-        color: #159ba3;
-        font-family: Arial, sans-serif;
-        font-size: 35px;
-        font-weight: bold;
+        color: #159ba3; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 35px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
     }
 
     .texto_seleccion_archivo_ventas {
-        color: #0b3650;
-        font-family: Arial, sans-serif;
-        font-size: 14px;
-        font-weight: bold;
-        margin-top: 10px;
+        color: #0b3650; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 14px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        margin-top: 10px; /* Define el margen superior. */
     }
 
     .formatos_archivo_ventas {
-        color: #84939a;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        margin-top: 8px;
+        color: #84939a; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        margin-top: 8px; /* Define el margen superior. */
     }
 
     .informacion_archivo_ventas {
-        color: #536873;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        line-height: 18px;
-        margin-top: 15px;
-        white-space: pre-line;
+        color: #536873; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 12px; /* Define el tamaño del texto. */
+        line-height: 18px; /* Define la separación entre líneas de texto. */
+        margin-top: 15px; /* Define el margen superior. */
+        white-space: pre-line; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
 
-
-/* TITULO 14 ACCIONES IMPORTACION */
+/* TITULO 17 ACCIONES IMPORTACION */
 
     .contenedor_acciones_importacion_ventas {
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;
-        gap: 10px;
-        margin-top: 25px;
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        justify-content: flex-end; /* Define la distribución de los elementos en el eje principal. */
+        gap: 10px; /* Define la separación entre los elementos. */
+        margin-top: 25px; /* Define el margen superior. */
     }
 
     .boton_cancelar_importacion_ventas {
-        height: 40px;
-        display: flex;
-        align-items: center;
-        padding: 0 16px;
-        background-color: #edf1f3;
-        color: #44515a;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        font-weight: bold;
-        border-radius: 5px;
-        cursor: pointer;
-        box-sizing: border-box;
+        height: 40px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        padding: 0 16px; /* Define el espacio interior del elemento. */
+        background-color: #edf1f3; /* Establece el color de fondo. */
+        color: #44515a; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        border-radius: 5px; /* Define el redondeado de las esquinas. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
     .boton_cancelar_importacion_ventas:hover {
-        background-color: #dfe6e9;
+        background-color: #dfe6e9; /* Establece el color de fondo. */
     }
 
     .boton_confirmar_importacion_ventas {
-        height: 40px;
-        display: flex;
-        align-items: center;
-        padding: 0 16px;
-        background-color: #159ba3;
-        color: #ffffff;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        font-weight: bold;
-        border-radius: 5px;
-        cursor: pointer;
-        box-sizing: border-box;
+        height: 40px; /* Define el alto del elemento. */
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        padding: 0 16px; /* Define el espacio interior del elemento. */
+        background-color: #159ba3; /* Establece el color de fondo. */
+        color: #ffffff; /* Establece el color del texto. */
+        font-family: Arial, sans-serif; /* Define la familia tipográfica. */
+        font-size: 13px; /* Define el tamaño del texto. */
+        font-weight: bold; /* Define el grosor del texto. */
+        border-radius: 5px; /* Define el redondeado de las esquinas. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
     .boton_confirmar_importacion_ventas:hover {
-        background-color: #0f858d;
+        background-color: #0f858d; /* Establece el color de fondo. */
     }
 
+/* TITULO 18 RESPONSIVE VENTAS */
 
-/* TITULO 15 RESPONSIVE VENTAS */
-
-    /* evita que los cinco controles queden apretados en ventanas medianas */
     @media (max-width: 1200px) {
-
         .contenedor_filtros_ventas {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-columns: repeat(2, minmax(0, 1fr)); /* Define la distribución y el ancho de las columnas. */
         }
 
         .contenedor_busqueda_ventas {
-            grid-column: 1 / -1;
+            grid-column: 1 / -1; /* Define las columnas que ocupa el elemento. */
         }
 
         .contenedor_limpiar_filtros_ventas {
-            justify-content: flex-end;
+            justify-content: flex-end; /* Define la distribución de los elementos en el eje principal. */
         }
-
     }
 
-    @media (max-width: 900px) {
+/* TITULO 19 RESPONSIVE (MAX-WIDTH: 1024PX) */
 
+    @media (max-width: 1024px) {
         .contenedor_indicadores_ventas {
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
         }
 
         .contenedor_filtros_ventas {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-columns: repeat(2, minmax(0, 1fr)); /* Define la distribución y el ancho de las columnas. */
         }
 
         .contenedor_busqueda_ventas {
-            grid-column: 1 / -1;
+            grid-column: 1 / -1; /* Define las columnas que ocupa el elemento. */
         }
 
         .contenedor_limpiar_filtros_ventas {
-            grid-column: 1 / -1;
+            grid-column: 1 / -1; /* Define las columnas que ocupa el elemento. */
         }
-
     }
 
+/* TITULO 20 RESPONSIVE (MAX-WIDTH: 600PX) */
 
     @media (max-width: 600px) {
-
         .contenedor_ventas {
-            padding: 18px;
+            padding: 18px; /* Define el espacio interior del elemento. */
         }
 
         .contenedor_filtros_ventas {
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
         }
 
-        .contenedor_busqueda_ventas,
-        .contenedor_limpiar_filtros_ventas {
-            grid-column: auto;
+        .contenedor_busqueda_ventas, .contenedor_limpiar_filtros_ventas {
+            grid-column: auto; /* Define las columnas que ocupa el elemento. */
         }
 
         .boton_limpiar_filtros_ventas {
-            width: 100%;
+            width: 100%; /* Ocupa todo el ancho disponible. */
         }
 
-        /* ajusta las cinco columnas de ventas sin desplazamiento horizontal */
         .tabla_ventas {
-            min-width: 0;
-            table-layout: fixed;
+            min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+            table-layout: fixed; /* Define cómo se calcula el ancho de las columnas de la tabla. */
         }
 
-        .columna_boleta_ventas { width: 25%; }
-        .columna_fecha_ventas { width: 24%; }
-        .columna_hora_ventas { width: 12%; }
-        .columna_total_ventas { width: 23%; }
-        .columna_acciones_ventas { width: 16%; }
+        .columna_boleta_ventas {
+            width: 25%; /* Define el ancho del elemento. */
+        }
 
-        .columna_boleta_ventas,
-        .columna_fecha_ventas,
-        .columna_hora_ventas,
-        .columna_total_ventas,
-        .columna_acciones_ventas,
-        .dato_boleta_ventas,
-        .dato_fecha_ventas,
-        .dato_hora_ventas,
-        .dato_total_ventas,
-        .dato_acciones_ventas {
-            padding: 11px 4px;
-            font-size: 10px;
-            overflow-wrap: anywhere;
+        .columna_fecha_ventas {
+            width: 24%; /* Define el ancho del elemento. */
+        }
+
+        .columna_hora_ventas {
+            width: 12%; /* Define el ancho del elemento. */
+        }
+
+        .columna_total_ventas {
+            width: 23%; /* Define el ancho del elemento. */
+        }
+
+        .columna_acciones_ventas {
+            width: 16%; /* Define el ancho del elemento. */
+        }
+
+        .columna_boleta_ventas, .columna_fecha_ventas, .columna_hora_ventas, .columna_total_ventas, .columna_acciones_ventas, .dato_boleta_ventas, .dato_fecha_ventas, .dato_hora_ventas, .dato_total_ventas, .dato_acciones_ventas {
+            padding: 11px 4px; /* Define el espacio interior del elemento. */
+            font-size: 10px; /* Define el tamaño del texto. */
+            overflow-wrap: anywhere; /* Permite controlar el salto de palabras largas. */
         }
 
         .dato_total_ventas {
-            white-space: normal;
+            white-space: normal; /* Define cómo se conservan los espacios y los saltos de línea. */
         }
 
         .boton_ver_venta {
-            min-height: 28px;
-            padding: 0 9px;
-            font-size: 11px;
+            min-height: 28px; /* Establece el alto mínimo del elemento. */
+            padding: 0 9px; /* Define el espacio interior del elemento. */
+            font-size: 11px; /* Define el tamaño del texto. */
         }
 
         .contenedor_encabezado_ventas {
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
         }
 
         .boton_importar_ventas {
-            width: 100%;
+            width: 100%; /* Ocupa todo el ancho disponible. */
         }
 
-        .formulario_detalle_venta,
-        .formulario_importacion_ventas {
-            max-width: calc(100% - 24px);
-            padding: 20px;
+        .formulario_detalle_venta, .formulario_importacion_ventas {
+            max-width: calc(100% - 24px); /* Limita el ancho máximo del elemento. */
+            padding: 20px; /* Define el espacio interior del elemento. */
         }
 
         .contenedor_acciones_importacion_ventas {
-            flex-direction: column;
+            flex-direction: column; /* Organiza los elementos en una columna. */
         }
 
-        .boton_cancelar_importacion_ventas,
-        .boton_confirmar_importacion_ventas {
-            justify-content: center;
+        .boton_cancelar_importacion_ventas, .boton_confirmar_importacion_ventas {
+            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
         }
-
     }
 
-/* TITULO 16 MODALIDADES DE IMPORTACION Y FECHA INICIAL */
+/* TITULO 21 MODALIDADES DE IMPORTACION Y FECHA INICIAL */
+
     .contenedor_modalidad_importacion_ventas {
-        margin: 0 0 19px;
+        margin: 0 0 19px; /* Define el margen exterior del elemento. */
     }
 
-    .etiqueta_modalidad_importacion_ventas,
-    .titulo_inicio_control_ventas,
-    .formulario_inicio_control_ventas > label:first-child {
-        display: block;
-        margin-bottom: 9px;
-        color: #0b3650;
-        font: bold 13px Arial, sans-serif;
+    .etiqueta_modalidad_importacion_ventas, .titulo_inicio_control_ventas, .formulario_inicio_control_ventas > label:first-child {
+        display: block; /* Muestra el elemento como un bloque. */
+        margin-bottom: 9px; /* Define el margen inferior. */
+        color: #0b3650; /* Establece el color del texto. */
+        font: bold 13px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
     }
 
     .opciones_modalidad_importacion_ventas {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 9px;
+        display: grid; /* Activa CSS Grid para distribuir el contenido. */
+        grid-template-columns: repeat(2, minmax(0, 1fr)); /* Define la distribución y el ancho de las columnas. */
+        gap: 9px; /* Define la separación entre los elementos. */
     }
 
     .opcion_modalidad_importacion_ventas {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        min-width: 0;
-        min-height: 54px;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        padding: 10px;
-        color: #37434b;
-        background: white;
-        box-sizing: border-box;
-        font: 12px/1.45 Arial, sans-serif;
-        cursor: pointer;
-    }
-    .opcion_modalidad_importacion_ventas:has(input:checked) {
-        border-color: #159ba3;
-        background: #e4f6f6;
-        color: #0f858d;
-    }
-    .opcion_modalidad_importacion_ventas input,
-    .confirmacion_inicio_control_ventas input {
-        accent-color: #159ba3;
-        flex-shrink: 0;
-    }
-    .ayuda_modalidad_importacion_ventas,
-    .estado_inicio_control_ventas,
-    .aviso_inicio_control_ventas {
-        margin-top: 9px;
-        color: #536873;
-        font: 12px/1.5 Arial, sans-serif;
-    }
-    .contenedor_inicio_control_ventas {
-        margin-bottom: 18px;
-        padding: 14px;
-        border: 1px solid #dce4e8;
-        border-radius: 7px;
-        background: #f6fafb;
-    }
-    .contenedor_inicio_control_ventas[hidden],
-    .formulario_inicio_control_ventas[hidden] { display: none; }
-    .formulario_inicio_control_ventas { margin-top: 10px; }
-    .formulario_inicio_control_ventas > label:first-child { color: #536873; font-size: 12px; }
-    #fecha_inicio_control_ventas {
-        width: 100%;
-        height: 40px;
-        border: 1px solid #ced9de;
-        border-radius: 6px;
-        background: white;
-        color: #37434b;
-        padding: 0 10px;
-        box-sizing: border-box;
-        font: 13px Arial, sans-serif;
-    }
-    .aviso_inicio_control_ventas { margin: 12px 0; }
-    .confirmacion_inicio_control_ventas {
-        display: flex;
-        gap: 8px;
-        align-items: flex-start;
-        font: 12px/1.5 Arial, sans-serif;
-        color: #37434b;
-    }
-    .boton_inicio_control_ventas {
-        min-height: 39px;
-        padding: 0 13px;
-        margin-top: 11px;
-        border: 1px solid #159ba3;
-        border-radius: 6px;
-        background: white;
-        color: #0f858d;
-        font: bold 12px Arial, sans-serif;
-        cursor: pointer;
-    }
-    .boton_inicio_control_ventas:hover:enabled { background: #e4f6f6; }
-    .boton_inicio_control_ventas:disabled,
-    .boton_confirmar_importacion_ventas:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-    }
-    .boton_confirmar_importacion_ventas { border: 0; }
-    @media (max-width: 500px) {
-        .opciones_modalidad_importacion_ventas { grid-template-columns: 1fr; }
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        align-items: center; /* Define la alineación de los elementos en el eje transversal. */
+        gap: 8px; /* Define la separación entre los elementos. */
+        min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        min-height: 54px; /* Establece el alto mínimo del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        padding: 10px; /* Define el espacio interior del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        background: white; /* Define el fondo del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        font: 12px/1.45 Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
     }
 
-    /* permite consultar todas las opciones sin cortar el modal en pantalla chica */
+    .opcion_modalidad_importacion_ventas:has(input:checked) {
+        border-color: #159ba3; /* Establece el color del borde. */
+        background: #e4f6f6; /* Define el fondo del elemento. */
+        color: #0f858d; /* Establece el color del texto. */
+    }
+
+    .opcion_modalidad_importacion_ventas input, .confirmacion_inicio_control_ventas input {
+        accent-color: #159ba3; /* Establece el color de los controles nativos. */
+        flex-shrink: 0; /* Define cuánto puede reducirse el elemento en Flexbox. */
+    }
+
+    .ayuda_modalidad_importacion_ventas, .estado_inicio_control_ventas, .aviso_inicio_control_ventas {
+        margin-top: 9px; /* Define el margen superior. */
+        color: #536873; /* Establece el color del texto. */
+        font: 12px/1.5 Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+    }
+
+    .contenedor_inicio_control_ventas {
+        margin-bottom: 18px; /* Define el margen inferior. */
+        padding: 14px; /* Define el espacio interior del elemento. */
+        border: 1px solid #dce4e8; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 7px; /* Define el redondeado de las esquinas. */
+        background: #f6fafb; /* Define el fondo del elemento. */
+    }
+
+    .contenedor_inicio_control_ventas[hidden], .formulario_inicio_control_ventas[hidden] {
+        display: none; /* Oculta el elemento. */
+    }
+
+    .formulario_inicio_control_ventas {
+        margin-top: 10px; /* Define el margen superior. */
+    }
+
+    .formulario_inicio_control_ventas > label:first-child {
+        color: #536873; /* Establece el color del texto. */
+        font-size: 12px; /* Define el tamaño del texto. */
+    }
+
+    #fecha_inicio_control_ventas {
+        width: 100%; /* Ocupa todo el ancho disponible. */
+        height: 40px; /* Define el alto del elemento. */
+        border: 1px solid #ced9de; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        background: white; /* Define el fondo del elemento. */
+        color: #37434b; /* Establece el color del texto. */
+        padding: 0 10px; /* Define el espacio interior del elemento. */
+        box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+        font: 13px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+    }
+
+    .aviso_inicio_control_ventas {
+        margin: 12px 0; /* Define el margen exterior del elemento. */
+    }
+
+    .confirmacion_inicio_control_ventas {
+        display: flex; /* Activa Flexbox para organizar el contenido. */
+        gap: 8px; /* Define la separación entre los elementos. */
+        align-items: flex-start; /* Define la alineación de los elementos en el eje transversal. */
+        font: 12px/1.5 Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        color: #37434b; /* Establece el color del texto. */
+    }
+
+    .boton_inicio_control_ventas {
+        min-height: 39px; /* Establece el alto mínimo del elemento. */
+        padding: 0 13px; /* Define el espacio interior del elemento. */
+        margin-top: 11px; /* Define el margen superior. */
+        border: 1px solid #159ba3; /* Define el grosor, el estilo y el color del borde. */
+        border-radius: 6px; /* Define el redondeado de las esquinas. */
+        background: white; /* Define el fondo del elemento. */
+        color: #0f858d; /* Establece el color del texto. */
+        font: bold 12px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
+    }
+
+    .boton_inicio_control_ventas:hover:enabled {
+        background: #e4f6f6; /* Define el fondo del elemento. */
+    }
+
+    .boton_inicio_control_ventas:disabled, .boton_confirmar_importacion_ventas:disabled {
+        opacity: 0.5; /* Define el nivel de opacidad. */
+        cursor: not-allowed; /* Define el cursor al situarlo sobre el elemento. */
+    }
+
+    .boton_confirmar_importacion_ventas {
+        border: 0; /* Define el grosor, el estilo y el color del borde. */
+    }
+
+/* TITULO 22 RESPONSIVE (MAX-WIDTH: 480PX) */
+
+    @media (max-width: 480px) {
+        .opciones_modalidad_importacion_ventas {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+        }
+    }
+
     .formulario_importacion_ventas {
-        max-height: calc(100vh - 40px);
-        overflow-y: auto;
-        overflow-x: hidden;
+        max-height: calc(100vh - 40px); /* Limita el alto máximo del elemento. */
+        overflow-y: auto; /* Controla el contenido que desborda verticalmente. */
+        overflow-x: hidden; /* Controla el contenido que desborda horizontalmente. */
     }
