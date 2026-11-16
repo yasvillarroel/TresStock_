@@ -223,63 +223,7 @@ CREATE TABLE movimientos_inventario (
 
 
 -- ============================================================
--- 7. PREDICCIONES
--- Resultados generados por Python / Machine Learning.
--- El modelo utiliza principalmente el histórico de ventas
--- ============================================================
-
-CREATE TABLE predicciones (
-    id_prediccion       SERIAL PRIMARY KEY,
-    codigo              VARCHAR(50) NOT NULL,
-    fecha_prediccion    TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    fecha_objetivo      DATE NOT NULL,
-    demanda_predicha    DECIMAL(12,2) NOT NULL,
-    modelo              VARCHAR(100) NOT NULL,
-
-    CONSTRAINT fk_prediccion_producto
-        FOREIGN KEY (codigo)
-        REFERENCES productos(codigo)
-        ON DELETE CASCADE,
-
-    CONSTRAINT chk_demanda_predicha
-        CHECK (demanda_predicha >= 0)
-);
-
-
--- ============================================================
--- 8. RECOMENDACIONES
---
--- Resultado generado a partir de:
---
--- • Predicciones
--- • Stock actual
--- • Stock mínimo
--- • Historial de ventas
--- • Reglas de negocio
---
--- Ejemplo:
--- "Se recomienda reponer 20 unidades de Coca-Cola."
--- ============================================================
-
-CREATE TABLE recomendaciones (
-    id_recomendacion    SERIAL PRIMARY KEY,
-    codigo              VARCHAR(50) NOT NULL,
-    fecha               TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    tipo                VARCHAR(50) NOT NULL,
-    mensaje             TEXT NOT NULL,
-    prioridad           VARCHAR(20),
-
-    CONSTRAINT fk_recomendacion_producto
-        FOREIGN KEY (codigo)
-        REFERENCES productos(codigo)
-        ON DELETE CASCADE,
-
-    CONSTRAINT chk_prioridad
-        CHECK (prioridad IN ('BAJA', 'MEDIA', 'ALTA'))
-);
-
--- ============================================================
--- 9. USUARIOS Y ROLES
+-- 7. USUARIOS Y ROLES
 -- ============================================================
 
 CREATE TABLE roles (
@@ -320,7 +264,7 @@ CREATE TABLE productos_excluidos_ranking (
 );
 
 -- ============================================================
--- 10. PROVEEDORES
+-- 8. PROVEEDORES
 --
 -- nombre_comercial:
 -- Nombre utilizado normalmente por el minimarket.
@@ -382,7 +326,7 @@ CREATE TABLE producto_proveedor (
 );
 
 -- ============================================================
--- 11. VENCIMIENTOS
+-- 9. VENCIMIENTOS
 -- ============================================================
 
 CREATE TABLE lotes_vencimiento (
@@ -467,7 +411,7 @@ ALTER TABLE base_datos.lotes_vencimiento
 
 
 -- ============================================================
--- 12. REGISTRO, RECUPERACIÓN Y SEGURIDAD DE AUTENTICACIÓN
+-- 10. REGISTRO, RECUPERACIÓN Y SEGURIDAD DE AUTENTICACIÓN
 -- ============================================================
 
 -- Registra fallos por IP y bloquea el inicio de sesión según la política configurada.
@@ -508,7 +452,7 @@ CREATE TABLE base_datos.reenvios_registro_ip (
 );
 
 -- ============================================================
--- 13. RECUPERACION DE CONTRASENA
+-- 11. RECUPERACION DE CONTRASENA
 -- ============================================================
 
 CREATE TABLE base_datos.recuperaciones_contrasena (
@@ -603,7 +547,7 @@ VALUES
 
 
 -- ============================================================
--- 14. ÍNDICES
+-- 12. ÍNDICES
 -- Ayudan a acelerar búsquedas por código, fechas y relaciones.
 -- ============================================================
 
@@ -631,18 +575,6 @@ CREATE INDEX idx_movimientos_codigo_fecha
 CREATE INDEX idx_movimientos_correo_usuario
     ON movimientos_inventario(correo_usuario)
     WHERE correo_usuario IS NOT NULL;
-
-CREATE INDEX idx_predicciones_codigo_fecha_objetivo
-    ON predicciones(codigo, fecha_objetivo);
-
-CREATE INDEX idx_predicciones_fecha_objetivo
-    ON predicciones(fecha_objetivo);
-
-CREATE INDEX idx_recomendaciones_codigo_fecha
-    ON recomendaciones(codigo, fecha DESC);
-
-CREATE INDEX idx_recomendaciones_fecha
-    ON recomendaciones(fecha DESC);
 
 CREATE INDEX idx_lotes_codigo_fecha_vencimiento
     ON lotes_vencimiento(codigo, fecha_vencimiento);
