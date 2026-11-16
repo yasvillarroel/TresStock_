@@ -875,41 +875,7 @@
         background-color: #0f858d; /* Establece el color de fondo. */
     }
 
-/* TITULO 10 RESPONSIVE PROVEEDORES */
-
-    @media (max-width: 1200px) {
-        .contenedor_indicadores_proveedores {
-            grid-template-columns: repeat(2, 1fr); /* Define la distribución y el ancho de las columnas. */
-        }
-    }
-
-/* TITULO 11 RESPONSIVE (MAX-WIDTH: 1024PX) */
-
-    @media (max-width: 1024px) {
-        .contenedor_campos_proveedor {
-            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
-        }
-    }
-
-/* TITULO 12 RESPONSIVE (MAX-WIDTH: 600PX) */
-
-    @media (max-width: 600px) {
-        .contenedor_proveedores {
-            padding: 18px; /* Define el espacio interior del elemento. */
-        }
-
-        .contenedor_encabezado_proveedores {
-            align-items: flex-start; /* Define la alineación de los elementos en el eje transversal. */
-            flex-direction: column; /* Organiza los elementos en una columna. */
-            gap: 16px; /* Define la separación entre los elementos. */
-        }
-
-        .contenedor_indicadores_proveedores {
-            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
-        }
-    }
-
-/* TITULO 13 FILTROS PERSONALIZADOS DE PROVEEDORES */
+/* TITULO 10 FILTROS PERSONALIZADOS DE PROVEEDORES */
 
     .contenedor_filtros_proveedores {
         width: 100%; /* Ocupa todo el ancho disponible. */
@@ -1057,7 +1023,7 @@
         outline-offset: 2px; /* Define la separación entre el contorno y el borde. */
     }
 
-/* TITULO 14 ESTADO Y ACCIONES DE LA TABLA DE PROVEEDORES */
+/* TITULO 11 ESTADO Y ACCIONES DE LA TABLA DE PROVEEDORES */
 
     .contenedor_tabla_proveedores {
         overflow-x: hidden; /* Controla el contenido que desborda horizontalmente. */
@@ -1200,113 +1166,7 @@
         padding: 9px 5px; /* Define el espacio interior del elemento. */
     }
 
-/* TITULO 15 RESPONSIVE (MAX-WIDTH: 1440PX) */
-
-    @media (max-width: 1440px) {
-        .columna_direccion_proveedores, .dato_direccion_proveedores {
-            display: none; /* Oculta el elemento. */
-        }
-
-        .columna_nombre_proveedores {
-            width: 15%; /* Define el ancho del elemento. */
-        }
-
-        .columna_razon_social_proveedores {
-            width: 17%; /* Define el ancho del elemento. */
-        }
-
-        .columna_rut_proveedores {
-            width: 12%; /* Define el ancho del elemento. */
-        }
-
-        .columna_telefono_proveedores {
-            width: 11%; /* Define el ancho del elemento. */
-        }
-
-        .columna_email_proveedores {
-            width: 14%; /* Define el ancho del elemento. */
-        }
-
-        .columna_tiempo_entrega_proveedores {
-            width: 9%; /* Define el ancho del elemento. */
-        }
-
-        .columna_estado_proveedores {
-            width: 10%; /* Define el ancho del elemento. */
-        }
-
-        .columna_acciones_proveedores {
-            width: 12%; /* Define el ancho del elemento. */
-        }
-    }
-
-/* TITULO 16 RESPONSIVE (MAX-WIDTH: 1200PX) */
-
-    @media (max-width: 1200px) {
-        .columna_razon_social_proveedores, .dato_razon_social_proveedores, .columna_email_proveedores, .dato_email_proveedores {
-            display: none; /* Oculta el elemento. */
-        }
-
-        .columna_nombre_proveedores {
-            width: 28%; /* Define el ancho del elemento. */
-        }
-
-        .columna_rut_proveedores {
-            width: 18%; /* Define el ancho del elemento. */
-        }
-
-        .columna_telefono_proveedores {
-            width: 18%; /* Define el ancho del elemento. */
-        }
-
-        .columna_tiempo_entrega_proveedores {
-            width: 12%; /* Define el ancho del elemento. */
-        }
-
-        .columna_estado_proveedores {
-            width: 12%; /* Define el ancho del elemento. */
-        }
-
-        .columna_acciones_proveedores {
-            width: 12%; /* Define el ancho del elemento. */
-        }
-    }
-
-/* TITULO 17 RESPONSIVE (MAX-WIDTH: 768PX) */
-
-    @media (max-width: 768px) {
-        .columna_rut_proveedores, .dato_rut_proveedores, .columna_telefono_proveedores, .dato_telefono_proveedores {
-            display: none; /* Oculta el elemento. */
-        }
-
-        .columna_nombre_proveedores {
-            width: 40%; /* Define el ancho del elemento. */
-        }
-
-        .columna_tiempo_entrega_proveedores {
-            width: 18%; /* Define el ancho del elemento. */
-        }
-
-        .columna_estado_proveedores {
-            width: 18%; /* Define el ancho del elemento. */
-        }
-
-        .columna_acciones_proveedores {
-            width: 24%; /* Define el ancho del elemento. */
-        }
-
-        .boton_ver_proveedor, .boton_editar_proveedor, .boton_desactivar_proveedor, .boton_activar_proveedor {
-            width: 29px; /* Define el ancho del elemento. */
-            height: 29px; /* Define el alto del elemento. */
-            padding: 5px; /* Define el espacio interior del elemento. */
-        }
-
-        .contenedor_acciones_proveedores {
-            gap: 3px; /* Define la separación entre los elementos. */
-        }
-    }
-
-/* TITULO 18 MODAL DE MENSAJES DE PROVEEDORES */
+/* TITULO 12 MODAL DE MENSAJES DE PROVEEDORES */
 
     .contenedor_alerta_proveedores {
         position: fixed; /* Define el sistema de posicionamiento del elemento. */
@@ -1432,9 +1292,86 @@
         cursor: default; /* Define el cursor al situarlo sobre el elemento. */
     }
 
-/* TITULO 19 RESPONSIVE FILTROS PROVEEDORES */
+/* TITULO 13 RESPONSIVE PROVEEDORES */
 
+    /* pantallas grandes (monitores Full HD+, iMac, monitores gaming QHD/4K) */
+    @media (min-width: 1441px) {
+        /* Sin media */
+    }
+
+    /* notebooks grandes (1600x900, 1920x1080) */
+    @media (max-width: 1440px) {
+        .columna_direccion_proveedores, .dato_direccion_proveedores {
+            display: none; /* Oculta el elemento. */
+        }
+
+        .columna_nombre_proveedores {
+            width: 15%; /* Define el ancho del elemento. */
+        }
+
+        .columna_razon_social_proveedores {
+            width: 17%; /* Define el ancho del elemento. */
+        }
+
+        .columna_rut_proveedores {
+            width: 12%; /* Define el ancho del elemento. */
+        }
+
+        .columna_telefono_proveedores {
+            width: 11%; /* Define el ancho del elemento. */
+        }
+
+        .columna_email_proveedores {
+            width: 14%; /* Define el ancho del elemento. */
+        }
+
+        .columna_tiempo_entrega_proveedores {
+            width: 9%; /* Define el ancho del elemento. */
+        }
+
+        .columna_estado_proveedores {
+            width: 10%; /* Define el ancho del elemento. */
+        }
+
+        .columna_acciones_proveedores {
+            width: 12%; /* Define el ancho del elemento. */
+        }
+    }
+
+    /* notebooks comunes (1366x768, MacBook Air/Pro) */
     @media (max-width: 1200px) {
+        .contenedor_indicadores_proveedores {
+            grid-template-columns: repeat(2, 1fr); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .columna_razon_social_proveedores, .dato_razon_social_proveedores, .columna_email_proveedores, .dato_email_proveedores {
+            display: none; /* Oculta el elemento. */
+        }
+
+        .columna_nombre_proveedores {
+            width: 28%; /* Define el ancho del elemento. */
+        }
+
+        .columna_rut_proveedores {
+            width: 18%; /* Define el ancho del elemento. */
+        }
+
+        .columna_telefono_proveedores {
+            width: 18%; /* Define el ancho del elemento. */
+        }
+
+        .columna_tiempo_entrega_proveedores {
+            width: 12%; /* Define el ancho del elemento. */
+        }
+
+        .columna_estado_proveedores {
+            width: 12%; /* Define el ancho del elemento. */
+        }
+
+        .columna_acciones_proveedores {
+            width: 12%; /* Define el ancho del elemento. */
+        }
+
         .contenedor_filtros_proveedores {
             grid-template-columns: repeat(2, minmax(0, 1fr)); /* Define la distribución y el ancho de las columnas. */
         }
@@ -1444,9 +1381,62 @@
         }
     }
 
-/* TITULO 20 RESPONSIVE (MAX-WIDTH: 600PX) */
+    /* tablets horizontales / pantallas medianas (iPad Pro en horizontal, notebooks pequeños) */
+    @media (max-width: 992px) {
+        .contenedor_campos_proveedor {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+        }
+    }
 
-    @media (max-width: 600px) {
+    /* tablets verticales (iPad clásico, tablets Android estándar) */
+    @media (max-width: 768px) {
+        .columna_rut_proveedores, .dato_rut_proveedores, .columna_telefono_proveedores, .dato_telefono_proveedores {
+            display: none; /* Oculta el elemento. */
+        }
+
+        .columna_nombre_proveedores {
+            width: 40%; /* Define el ancho del elemento. */
+        }
+
+        .columna_tiempo_entrega_proveedores {
+            width: 18%; /* Define el ancho del elemento. */
+        }
+
+        .columna_estado_proveedores {
+            width: 18%; /* Define el ancho del elemento. */
+        }
+
+        .columna_acciones_proveedores {
+            width: 24%; /* Define el ancho del elemento. */
+        }
+
+        .boton_ver_proveedor, .boton_editar_proveedor, .boton_desactivar_proveedor, .boton_activar_proveedor {
+            width: 29px; /* Define el ancho del elemento. */
+            height: 29px; /* Define el alto del elemento. */
+            padding: 5px; /* Define el espacio interior del elemento. */
+        }
+
+        .contenedor_acciones_proveedores {
+            gap: 3px; /* Define la separación entre los elementos. */
+        }
+    }
+
+    /* móviles extragrandes (pantallas compactas y dispositivos de gran tamaño) */
+    @media (max-width: 576px) {
+        .contenedor_proveedores {
+            padding: 18px; /* Define el espacio interior del elemento. */
+        }
+
+        .contenedor_encabezado_proveedores {
+            align-items: flex-start; /* Define la alineación de los elementos en el eje transversal. */
+            flex-direction: column; /* Organiza los elementos en una columna. */
+            gap: 16px; /* Define la separación entre los elementos. */
+        }
+
+        .contenedor_indicadores_proveedores {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+        }
+
         .contenedor_filtros_proveedores {
             grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
         }
@@ -1472,4 +1462,54 @@
             width: 100%; /* Ocupa todo el ancho disponible. */
             justify-content: center; /* Define la distribución de los elementos en el eje principal. */
         }
+
+        .contenedor_tabla_proveedores {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+            min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+            max-width: 100%; /* Evita que el elemento supere el ancho disponible. */
+            overflow-x: auto; /* Permite desplazar horizontalmente el contenido cuando no cabe. */
+            overscroll-behavior-x: contain; /* Mantiene el desplazamiento horizontal dentro de la tabla. */
+        }
+
+        .tabla_proveedores {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+            min-width: 500px; /* Ajusta el ancho a las columnas visibles sin comprimir su contenido. */
+            table-layout: fixed; /* Define cómo se calcula el ancho de las columnas de la tabla. */
+            border-collapse: collapse; /* Define cómo se combinan los bordes de las celdas. */
+        }
+
+        .tabla_proveedores th, .tabla_proveedores td {
+            padding: 12px; /* Define el espacio interior del elemento. */
+            box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+            white-space: normal; /* Define cómo se conservan los espacios y los saltos de línea. */
+            overflow-wrap: anywhere; /* Permite controlar el salto de palabras largas. */
+            overflow: hidden; /* Controla el contenido que supera las dimensiones del elemento. */
+            line-height: 1.4; /* Define la separación entre líneas de texto. */
+            vertical-align: middle; /* Define la alineación vertical del contenido. */
+        }
+
+        .tabla_proveedores th {
+            font-size: 11px; /* Mantiene el tamaño de encabezados de la tabla de Productos. */
+            padding: 13px 5px; /* Usa el mismo espacio lateral compacto que Productos. */
+        }
+
+        .tabla_proveedores td {
+            font-size: 12px; /* Mantiene el tamaño de datos de la tabla de Productos. */
+            padding: 14px 5px; /* Compacta los lados y conserva espacio vertical para leer la fila. */
+        }
+    }
+
+    /* móviles grandes (iPhone 11, iPhone Plus/Max, Android grandes) */
+    @media (max-width: 414px) {
+        /* Sin media */
+    }
+
+    /* móviles medianos (iPhone 12/13/14, Android gama media) */
+    @media (max-width: 390px) {
+        /* Sin media */
+    }
+
+    /* móviles pequeños (Android estándar, iPhone SE) */
+    @media (max-width: 360px) {
+        /* Sin media */
     }

@@ -680,58 +680,7 @@
         border-radius: 50%; /* Define el redondeado de las esquinas. */
     }
 
-/* SUBTITULO 2 RESPONSIVE PAGINACION */
-
-/* TITULO 8 RESPONSIVE (MAX-WIDTH: 1024PX) */
-
-    @media (max-width: 1024px) {
-        .contenedor_paginacion_ventas {
-            flex-direction: column; /* Organiza los elementos en una columna. */
-            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
-            gap: 15px; /* Define la separación entre los elementos. */
-        }
-
-        .controles_paginacion_ventas {
-            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
-        }
-    }
-
-/* TITULO 9 RESPONSIVE (MAX-WIDTH: 600PX) */
-
-    @media (max-width: 600px) {
-        .boton_numero_pagina_ventas, .boton_pagina_anterior_ventas, .boton_pagina_siguiente_ventas {
-            width: 34px; /* Define el ancho del elemento. */
-            height: 34px; /* Define el alto del elemento. */
-            font-size: 12px; /* Define el tamaño del texto. */
-        }
-
-        .numeros_paginas_ventas {
-            gap: 4px; /* Define la separación entre los elementos. */
-        }
-
-        .controles_paginacion_ventas {
-            gap: 4px; /* Define la separación entre los elementos. */
-        }
-
-        .informacion_paginacion_ventas {
-            font-size: 12px; /* Define el tamaño del texto. */
-        }
-    }
-
-/* TITULO 10 RESPONSIVE (MAX-WIDTH: 480PX) */
-
-    @media (max-width: 480px) {
-        .contenedor_paginacion_ventas {
-            padding: 12px 8px; /* Define el espacio interior del elemento. */
-        }
-
-        .controles_paginacion_ventas, .numeros_paginas_ventas {
-            flex-wrap: wrap; /* Define si los elementos pueden pasar a otra línea. */
-            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
-        }
-    }
-
-/* TITULO 11 DETALLE VENTA */
+/* TITULO 8 DETALLE VENTA */
 
     .contenedor_detalle_venta {
         width: 100%; /* Ocupa todo el ancho disponible. */
@@ -762,7 +711,7 @@
         box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-/* TITULO 12 CABECERA DETALLE */
+/* TITULO 9 CABECERA DETALLE */
 
     .cabecera_detalle_venta {
         width: 100%; /* Ocupa todo el ancho disponible. */
@@ -796,7 +745,7 @@
         background-color: #edf1f3; /* Establece el color de fondo. */
     }
 
-/* TITULO 13 INFORMACION DETALLE */
+/* TITULO 10 INFORMACION DETALLE */
 
     .informacion_detalle_venta {
         display: flex; /* Activa Flexbox para organizar el contenido. */
@@ -902,7 +851,7 @@
         white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
 
-/* TITULO 14 FORMULARIO IMPORTACION VENTAS */
+/* TITULO 11 FORMULARIO IMPORTACION VENTAS */
 
     .contenedor_importacion_ventas {
         width: 100%; /* Ocupa todo el ancho disponible. */
@@ -930,7 +879,7 @@
         box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
     }
 
-/* TITULO 15 CABECERA IMPORTACION */
+/* TITULO 12 CABECERA IMPORTACION */
 
     .cabecera_importacion_ventas {
         width: 100%; /* Ocupa todo el ancho disponible. */
@@ -964,7 +913,7 @@
         background-color: #edf1f3; /* Establece el color de fondo. */
     }
 
-/* TITULO 16 CONTENIDO IMPORTACION */
+/* TITULO 13 CONTENIDO IMPORTACION */
 
     .contenido_importacion_ventas {
         width: 100%; /* Ocupa todo el ancho disponible. */
@@ -1024,7 +973,7 @@
         white-space: pre-line; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
 
-/* TITULO 17 ACCIONES IMPORTACION */
+/* TITULO 14 ACCIONES IMPORTACION */
 
     .contenedor_acciones_importacion_ventas {
         width: 100%; /* Ocupa todo el ancho disponible. */
@@ -1072,125 +1021,7 @@
         background-color: #0f858d; /* Establece el color de fondo. */
     }
 
-/* TITULO 18 RESPONSIVE VENTAS */
-
-    @media (max-width: 1200px) {
-        .contenedor_filtros_ventas {
-            grid-template-columns: repeat(2, minmax(0, 1fr)); /* Define la distribución y el ancho de las columnas. */
-        }
-
-        .contenedor_busqueda_ventas {
-            grid-column: 1 / -1; /* Define las columnas que ocupa el elemento. */
-        }
-
-        .contenedor_limpiar_filtros_ventas {
-            justify-content: flex-end; /* Define la distribución de los elementos en el eje principal. */
-        }
-    }
-
-/* TITULO 19 RESPONSIVE (MAX-WIDTH: 1024PX) */
-
-    @media (max-width: 1024px) {
-        .contenedor_indicadores_ventas {
-            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
-        }
-
-        .contenedor_filtros_ventas {
-            grid-template-columns: repeat(2, minmax(0, 1fr)); /* Define la distribución y el ancho de las columnas. */
-        }
-
-        .contenedor_busqueda_ventas {
-            grid-column: 1 / -1; /* Define las columnas que ocupa el elemento. */
-        }
-
-        .contenedor_limpiar_filtros_ventas {
-            grid-column: 1 / -1; /* Define las columnas que ocupa el elemento. */
-        }
-    }
-
-/* TITULO 20 RESPONSIVE (MAX-WIDTH: 600PX) */
-
-    @media (max-width: 600px) {
-        .contenedor_ventas {
-            padding: 18px; /* Define el espacio interior del elemento. */
-        }
-
-        .contenedor_filtros_ventas {
-            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
-        }
-
-        .contenedor_busqueda_ventas, .contenedor_limpiar_filtros_ventas {
-            grid-column: auto; /* Define las columnas que ocupa el elemento. */
-        }
-
-        .boton_limpiar_filtros_ventas {
-            width: 100%; /* Ocupa todo el ancho disponible. */
-        }
-
-        .tabla_ventas {
-            min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
-            table-layout: fixed; /* Define cómo se calcula el ancho de las columnas de la tabla. */
-        }
-
-        .columna_boleta_ventas {
-            width: 25%; /* Define el ancho del elemento. */
-        }
-
-        .columna_fecha_ventas {
-            width: 24%; /* Define el ancho del elemento. */
-        }
-
-        .columna_hora_ventas {
-            width: 12%; /* Define el ancho del elemento. */
-        }
-
-        .columna_total_ventas {
-            width: 23%; /* Define el ancho del elemento. */
-        }
-
-        .columna_acciones_ventas {
-            width: 16%; /* Define el ancho del elemento. */
-        }
-
-        .columna_boleta_ventas, .columna_fecha_ventas, .columna_hora_ventas, .columna_total_ventas, .columna_acciones_ventas, .dato_boleta_ventas, .dato_fecha_ventas, .dato_hora_ventas, .dato_total_ventas, .dato_acciones_ventas {
-            padding: 11px 4px; /* Define el espacio interior del elemento. */
-            font-size: 10px; /* Define el tamaño del texto. */
-            overflow-wrap: anywhere; /* Permite controlar el salto de palabras largas. */
-        }
-
-        .dato_total_ventas {
-            white-space: normal; /* Define cómo se conservan los espacios y los saltos de línea. */
-        }
-
-        .boton_ver_venta {
-            min-height: 28px; /* Establece el alto mínimo del elemento. */
-            padding: 0 9px; /* Define el espacio interior del elemento. */
-            font-size: 11px; /* Define el tamaño del texto. */
-        }
-
-        .contenedor_encabezado_ventas {
-            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
-        }
-
-        .boton_importar_ventas {
-            width: 100%; /* Ocupa todo el ancho disponible. */
-        }
-
-        .formulario_detalle_venta, .formulario_importacion_ventas {
-            max-width: calc(100% - 24px); /* Limita el ancho máximo del elemento. */
-            padding: 20px; /* Define el espacio interior del elemento. */
-        }
-
-        .contenedor_acciones_importacion_ventas {
-            flex-direction: column; /* Organiza los elementos en una columna. */
-        }
-
-        .boton_cancelar_importacion_ventas, .boton_confirmar_importacion_ventas {
-            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
-        }
-    }
-
-/* TITULO 21 MODALIDADES DE IMPORTACION Y FECHA INICIAL */
+/* TITULO 15 MODALIDADES DE IMPORTACION Y FECHA INICIAL */
 
     .contenedor_modalidad_importacion_ventas {
         margin: 0 0 19px; /* Define el margen exterior del elemento. */
@@ -1312,16 +1143,264 @@
         border: 0; /* Define el grosor, el estilo y el color del borde. */
     }
 
-/* TITULO 22 RESPONSIVE (MAX-WIDTH: 480PX) */
+    .formulario_importacion_ventas {
+        max-height: calc(100vh - 40px); /* Limita el alto máximo del elemento. */
+        overflow-y: auto; /* Controla el contenido que desborda verticalmente. */
+        overflow-x: hidden; /* Controla el contenido que desborda horizontalmente. */
+    }
 
-    @media (max-width: 480px) {
+/* TITULO 16 RESPONSIVE VENTAS */
+
+    /* pantallas grandes (monitores Full HD+, iMac, monitores gaming QHD/4K) */
+    @media (min-width: 1441px) {
+        /* Sin media */
+    }
+
+    /* notebooks grandes (1600x900, 1920x1080) */
+    @media (max-width: 1440px) {
+        /* Sin media */
+    }
+
+    /* notebooks comunes (1366x768, MacBook Air/Pro) */
+    @media (max-width: 1200px) {
+        .contenedor_filtros_ventas {
+            grid-template-columns: repeat(2, minmax(0, 1fr)); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .contenedor_busqueda_ventas {
+            grid-column: 1 / -1; /* Define las columnas que ocupa el elemento. */
+        }
+
+        .contenedor_limpiar_filtros_ventas {
+            justify-content: flex-end; /* Define la distribución de los elementos en el eje principal. */
+        }
+    }
+
+    /* tablets horizontales / pantallas medianas (iPad Pro en horizontal, notebooks pequeños) */
+    @media (max-width: 992px) {
+        .contenedor_paginacion_ventas {
+            flex-direction: column; /* Organiza los elementos en una columna. */
+            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+            gap: 15px; /* Define la separación entre los elementos. */
+        }
+
+        .controles_paginacion_ventas {
+            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        }
+
+        .contenedor_indicadores_ventas {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .contenedor_filtros_ventas {
+            grid-template-columns: repeat(2, minmax(0, 1fr)); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .contenedor_busqueda_ventas {
+            grid-column: 1 / -1; /* Define las columnas que ocupa el elemento. */
+        }
+
+        .contenedor_limpiar_filtros_ventas {
+            grid-column: 1 / -1; /* Define las columnas que ocupa el elemento. */
+        }
+    }
+
+    /* tablets verticales (iPad clásico, tablets Android estándar) */
+    @media (max-width: 768px) {
+        /* Sin media */
+    }
+
+    /* móviles extragrandes (pantallas compactas y dispositivos de gran tamaño) */
+    @media (max-width: 576px) {
+        .boton_numero_pagina_ventas, .boton_pagina_anterior_ventas, .boton_pagina_siguiente_ventas {
+            width: 34px; /* Define el ancho del elemento. */
+            height: 34px; /* Define el alto del elemento. */
+            font-size: 12px; /* Define el tamaño del texto. */
+        }
+
+        .numeros_paginas_ventas {
+            gap: 4px; /* Define la separación entre los elementos. */
+        }
+
+        .controles_paginacion_ventas {
+            gap: 4px; /* Define la separación entre los elementos. */
+        }
+
+        .informacion_paginacion_ventas {
+            font-size: 12px; /* Define el tamaño del texto. */
+        }
+
+        .contenedor_ventas {
+            padding: 18px; /* Define el espacio interior del elemento. */
+        }
+
+        .contenedor_filtros_ventas {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .contenedor_busqueda_ventas, .contenedor_limpiar_filtros_ventas {
+            grid-column: auto; /* Define las columnas que ocupa el elemento. */
+        }
+
+        .boton_limpiar_filtros_ventas {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+        }
+
+        .tabla_ventas {
+            min-width: 700px; /* Ajusta el ancho a las columnas visibles sin comprimir su contenido. */
+            table-layout: fixed; /* Define cómo se calcula el ancho de las columnas de la tabla. */
+        }
+
+        .columna_boleta_ventas {
+            width: 25%; /* Define el ancho del elemento. */
+        }
+
+        .columna_fecha_ventas {
+            width: 24%; /* Define el ancho del elemento. */
+        }
+
+        .columna_hora_ventas {
+            width: 12%; /* Define el ancho del elemento. */
+        }
+
+        .columna_total_ventas {
+            width: 23%; /* Define el ancho del elemento. */
+        }
+
+        .columna_acciones_ventas {
+            width: 16%; /* Define el ancho del elemento. */
+        }
+
+        .columna_boleta_ventas, .columna_fecha_ventas, .columna_hora_ventas, .columna_total_ventas, .columna_acciones_ventas, .dato_boleta_ventas, .dato_fecha_ventas, .dato_hora_ventas, .dato_total_ventas, .dato_acciones_ventas {
+            padding: 11px 4px; /* Define el espacio interior del elemento. */
+            font-size: 10px; /* Define el tamaño del texto. */
+            overflow-wrap: anywhere; /* Permite controlar el salto de palabras largas. */
+        }
+
+        .dato_total_ventas {
+            white-space: normal; /* Define cómo se conservan los espacios y los saltos de línea. */
+        }
+
+        .boton_ver_venta {
+            min-height: 28px; /* Establece el alto mínimo del elemento. */
+            padding: 0 9px; /* Define el espacio interior del elemento. */
+            font-size: 11px; /* Define el tamaño del texto. */
+        }
+
+        .contenedor_encabezado_ventas {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .boton_importar_ventas {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+        }
+
+        .formulario_detalle_venta, .formulario_importacion_ventas {
+            max-width: calc(100% - 24px); /* Limita el ancho máximo del elemento. */
+            padding: 20px; /* Define el espacio interior del elemento. */
+        }
+
+        .contenedor_acciones_importacion_ventas {
+            flex-direction: column; /* Organiza los elementos en una columna. */
+        }
+
+        .boton_cancelar_importacion_ventas, .boton_confirmar_importacion_ventas {
+            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        }
+
+        .contenedor_tabla_ventas {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+            min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+            max-width: 100%; /* Evita que el elemento supere el ancho disponible. */
+            overflow-x: auto; /* Permite desplazar horizontalmente el contenido cuando no cabe. */
+            overscroll-behavior-x: contain; /* Mantiene el desplazamiento horizontal dentro de la tabla. */
+        }
+
+        .tabla_ventas {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+            min-width: 700px; /* Ajusta el ancho a las columnas visibles sin comprimir su contenido. */
+            table-layout: fixed; /* Define cómo se calcula el ancho de las columnas de la tabla. */
+            border-collapse: collapse; /* Define cómo se combinan los bordes de las celdas. */
+        }
+
+        .tabla_ventas th, .tabla_ventas td {
+            padding: 12px; /* Define el espacio interior del elemento. */
+            box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+            white-space: normal; /* Define cómo se conservan los espacios y los saltos de línea. */
+            overflow-wrap: anywhere; /* Permite controlar el salto de palabras largas. */
+            overflow: hidden; /* Controla el contenido que supera las dimensiones del elemento. */
+            line-height: 1.4; /* Define la separación entre líneas de texto. */
+            vertical-align: middle; /* Define la alineación vertical del contenido. */
+        }
+
+        .tabla_ventas th {
+            font-size: 11px; /* Mantiene el tamaño de encabezados de la tabla de Productos. */
+            padding: 13px 5px; /* Usa el mismo espacio lateral compacto que Productos. */
+        }
+
+        .tabla_ventas td {
+            font-size: 12px; /* Mantiene el tamaño de datos de la tabla de Productos. */
+            padding: 14px 5px; /* Compacta los lados y conserva espacio vertical para leer la fila. */
+        }
+
+        .contenedor_tabla_detalle_venta {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+            min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+            max-width: 100%; /* Evita que el elemento supere el ancho disponible. */
+            overflow-x: auto; /* Permite desplazar horizontalmente el contenido cuando no cabe. */
+            overscroll-behavior-x: contain; /* Mantiene el desplazamiento horizontal dentro de la tabla. */
+        }
+
+        .tabla_detalle_venta {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+            min-width: 700px; /* Ajusta el ancho a las columnas visibles sin comprimir su contenido. */
+            table-layout: fixed; /* Define cómo se calcula el ancho de las columnas de la tabla. */
+            border-collapse: collapse; /* Define cómo se combinan los bordes de las celdas. */
+        }
+
+        .tabla_detalle_venta th, .tabla_detalle_venta td {
+            padding: 12px; /* Define el espacio interior del elemento. */
+            box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+            white-space: normal; /* Define cómo se conservan los espacios y los saltos de línea. */
+            overflow-wrap: anywhere; /* Permite controlar el salto de palabras largas. */
+            overflow: hidden; /* Controla el contenido que supera las dimensiones del elemento. */
+            line-height: 1.4; /* Define la separación entre líneas de texto. */
+            vertical-align: middle; /* Define la alineación vertical del contenido. */
+        }
+
+        .tabla_detalle_venta th {
+            font-size: 11px; /* Mantiene el tamaño de encabezados de la tabla de Productos. */
+            padding: 13px 5px; /* Usa el mismo espacio lateral compacto que Productos. */
+        }
+
+        .tabla_detalle_venta td {
+            font-size: 12px; /* Mantiene el tamaño de datos de la tabla de Productos. */
+            padding: 14px 5px; /* Compacta los lados y conserva espacio vertical para leer la fila. */
+        }
+    }
+
+    /* móviles grandes (iPhone 11, iPhone Plus/Max, Android grandes) */
+    @media (max-width: 414px) {
+        .contenedor_paginacion_ventas {
+            padding: 12px 8px; /* Define el espacio interior del elemento. */
+        }
+
+        .controles_paginacion_ventas, .numeros_paginas_ventas {
+            flex-wrap: wrap; /* Define si los elementos pueden pasar a otra línea. */
+            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        }
+
         .opciones_modalidad_importacion_ventas {
             grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
         }
     }
 
-    .formulario_importacion_ventas {
-        max-height: calc(100vh - 40px); /* Limita el alto máximo del elemento. */
-        overflow-y: auto; /* Controla el contenido que desborda verticalmente. */
-        overflow-x: hidden; /* Controla el contenido que desborda horizontalmente. */
+    /* móviles medianos (iPhone 12/13/14, Android gama media) */
+    @media (max-width: 390px) {
+        /* Sin media */
+    }
+
+    /* móviles pequeños (Android estándar, iPhone SE) */
+    @media (max-width: 360px) {
+        /* Sin media */
     }

@@ -60,7 +60,23 @@
 
 /* TITULO 7 RESPONSIVE INDEX */
 
-    @media (max-width: 1024px) {
+    /* pantallas grandes (monitores Full HD+, iMac, monitores gaming QHD/4K) */
+    @media (min-width: 1441px) {
+        /* Sin media */
+    }
+
+    /* notebooks grandes (1600x900, 1920x1080) */
+    @media (max-width: 1440px) {
+        /* Sin media */
+    }
+
+    /* notebooks comunes (1366x768, MacBook Air/Pro) */
+    @media (max-width: 1200px) {
+        /* Sin media */
+    }
+
+    /* tablets horizontales / pantallas medianas (iPad Pro en horizontal, notebooks pequeños) */
+    @media (max-width: 992px) {
         .contenedor_menu {
             width: 0; /* Define el ancho del elemento. */
             min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
@@ -73,10 +89,31 @@
         }
     }
 
-/* TITULO 8 CAMPOS LEGIBLES EN TELEFONOS */
-
+    /* tablets verticales (iPad clásico, tablets Android estándar) */
     @media (max-width: 768px) {
         .body_index input:not([type="checkbox"]):not([type="radio"]), .body_index select, .body_index textarea {
             font-size: 16px; /* Define un tamaño de texto legible para el campo en teléfonos. */
         }
+    }
+
+    /* móviles extragrandes (pantallas compactas y dispositivos de gran tamaño) */
+    @media (max-width: 576px) {
+        .body_index .contenedor_contenido input[type="search"]::placeholder, .body_index .contenedor_contenido input[class*="busqueda"]::placeholder, .body_index .contenedor_contenido input[id*="busqueda"]::placeholder {
+            font-size: 13px; /* Iguala el placeholder al texto de los demás filtros. */
+        }
+    }
+
+    /* móviles grandes (iPhone 11, iPhone Plus/Max, Android grandes) */
+    @media (max-width: 414px) {
+        /* Sin media */
+    }
+
+    /* móviles medianos (iPhone 12/13/14, Android gama media) */
+    @media (max-width: 390px) {
+        /* Sin media */
+    }
+
+    /* móviles pequeños (Android estándar, iPhone SE) */
+    @media (max-width: 360px) {
+        /* Sin media */
     }

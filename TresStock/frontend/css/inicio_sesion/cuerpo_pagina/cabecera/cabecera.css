@@ -410,15 +410,39 @@
 
 /* TITULO 4 RESPONSIVE CABECERA */
 
-    @media (max-width: 1024px) {
+    /* pantallas grandes (monitores Full HD+, iMac, monitores gaming QHD/4K) */
+    @media (min-width: 1441px) {
+
+        /* Sin media */
+
+    }
+
+    /* notebooks grandes (1600x900, 1920x1080) */
+    @media (max-width: 1440px) {
+
+        /* Sin media */
+
+    }
+
+    /* notebooks comunes (1366x768, MacBook Air/Pro) */
+    @media (max-width: 1200px) {
+
+        /* Sin media */
+
+    }
+
+    /* tablets horizontales / pantallas medianas (iPad Pro en horizontal, notebooks pequeños) */
+    @media (max-width: 992px) {
+
         .boton_menu_cabecera {
             display: flex; /* Activa Flexbox para organizar el contenido. */
         }
+
     }
 
-/* TITULO 5 RESPONSIVE (MAX-WIDTH: 768PX) */
-
+    /* tablets verticales (iPad clásico, tablets Android estándar) */
     @media (max-width: 768px) {
+
         .contenedor_principal_cabecera {
             height: 64px; /* Define el alto del elemento. */
             padding: 0 16px; /* Define el espacio interior del elemento. */
@@ -450,11 +474,81 @@
             width: 36px; /* Define el ancho del elemento. */
             height: 36px; /* Define el alto del elemento. */
         }
+
     }
 
-/* TITULO 6 RESPONSIVE (MAX-WIDTH: 480PX) */
+    /* móviles extragrandes (pantallas compactas y dispositivos de gran tamaño) */
+    @media (max-width: 576px) {
 
-    @media (max-width: 480px) {
+        .panel_notificaciones_cabecera {
+            position: fixed; /* Sitúa el panel respecto a la pantalla del teléfono. */
+            top: 72px; /* Deja espacio debajo de la cabecera de 64 píxeles. */
+            right: 12px; /* Conserva un margen junto al borde derecho. */
+            left: 12px; /* Conserva un margen junto al borde izquierdo. */
+            width: auto; /* Ajusta el ancho al espacio disponible entre los márgenes. */
+            max-width: none; /* Permite aprovechar el ancho disponible del teléfono. */
+            max-height: calc(100vh - 84px); /* Limita el panel al alto visible en navegadores anteriores. */
+            max-height: calc(100dvh - 84px); /* Ajusta el alto cuando cambian las barras del navegador. */
+            box-sizing: border-box; /* Incluye el borde dentro del tamaño del panel. */
+        }
+
+        .panel_notificaciones_cabecera:not([hidden]) {
+            display: flex; /* Distribuye el encabezado, las pestañas y la lista. */
+            flex-direction: column; /* Coloca las partes del panel en una columna. */
+        }
+
+        .encabezado_notificaciones_cabecera {
+            flex-shrink: 0; /* Mantiene visibles el título y el botón de actualizar. */
+            gap: 8px; /* Reduce la separación para aprovechar el ancho del teléfono. */
+            padding: 12px; /* Ajusta los márgenes interiores del encabezado. */
+        }
+
+        .titulo_notificaciones_cabecera {
+            min-width: 0; /* Permite adaptar el título al espacio disponible. */
+        }
+
+        .boton_actualizar_notificaciones_cabecera {
+            flex-shrink: 0; /* Conserva completo el botón de actualizar. */
+            min-height: 36px; /* Facilita pulsar el botón desde el teléfono. */
+        }
+
+        .pestanas_notificaciones_cabecera {
+            flex-shrink: 0; /* Mantiene las pestañas visibles al desplazar la lista. */
+            padding: 0 8px; /* Reduce el espacio lateral de las pestañas. */
+        }
+
+        .pestana_notificaciones_cabecera {
+            min-height: 40px; /* Facilita seleccionar el tipo de alerta desde el teléfono. */
+        }
+
+        .lista_notificaciones_cabecera {
+            min-height: 0; /* Permite reducir la lista dentro del alto disponible. */
+            max-height: none; /* Deja que el panel determine el alto de la lista. */
+            overscroll-behavior-y: contain; /* Evita desplazar la página al llegar al extremo de la lista. */
+        }
+
+        .item_notificacion_cabecera {
+            gap: 8px; /* Reserva más espacio para la descripción del producto. */
+            padding: 12px; /* Ajusta el espacio interior de cada notificación. */
+            box-sizing: border-box; /* Incluye el relleno dentro del ancho de la notificación. */
+        }
+
+        .titulo_item_notificacion_cabecera {
+            white-space: normal; /* Permite leer los nombres largos en varias líneas. */
+            overflow-wrap: anywhere; /* Evita que un código o nombre largo desborde el panel. */
+            line-height: 1.4; /* Separa las líneas para facilitar la lectura. */
+        }
+
+        .detalle_item_notificacion_cabecera {
+            overflow-wrap: anywhere; /* Ajusta los detalles largos al ancho disponible. */
+            line-height: 1.4; /* Mantiene legibles los detalles en varias líneas. */
+        }
+
+    }
+
+    /* móviles grandes (iPhone 11, iPhone Plus/Max, Android grandes) */
+    @media (max-width: 414px) {
+
         .contenedor_principal_cabecera {
             padding: 0 12px; /* Define el espacio interior del elemento. */
         }
@@ -469,4 +563,19 @@
         .boton_usuario_cabecera {
             display: none; /* Oculta el elemento. */
         }
+
+    }
+
+    /* móviles medianos (iPhone 12/13/14, Android gama media) */
+    @media (max-width: 390px) {
+
+        /* Sin media */
+
+    }
+
+    /* móviles pequeños (Android estándar, iPhone SE) */
+    @media (max-width: 360px) {
+
+        /* Sin media */
+
     }

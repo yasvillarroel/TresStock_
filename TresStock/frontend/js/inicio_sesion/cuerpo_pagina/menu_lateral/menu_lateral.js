@@ -77,7 +77,7 @@
 
         // cierra el menú lateral después de seleccionar una opción
         // solamente en tablets y dispositivos móviles
-        if (window.innerWidth <= 1024) {
+        if (window.innerWidth <= 992) {
 
             const menuLateral = document.getElementById('contenedor_menu_lateral');
 
@@ -170,6 +170,15 @@
                 }
             );
 
+        }
+
+        // cierra el panel desde la X sin cambiar la vista actual
+        const botonCerrarMenu = document.getElementById('boton_cerrar_menu_lateral');
+
+        if (botonCerrarMenu && menuLateral) {
+            botonCerrarMenu.addEventListener('click', () => {
+                menuLateral.classList.remove('contenedor_menu_lateral_abierto');
+            });
         }
 
         // marca la vista actual en el menu

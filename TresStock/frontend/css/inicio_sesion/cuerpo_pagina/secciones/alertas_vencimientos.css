@@ -728,33 +728,6 @@
         color: #71818a; /* Establece el color del texto. */
     }
 
-/* TITULO 2 RESPONSIVE (MAX-WIDTH: 768PX) */
-
-    @media (max-width: 768px) {
-        .contenedor_alertas_vencimientos {
-            padding: 18px; /* Define el espacio interior del elemento. */
-        }
-
-        .paginador_vencimientos {
-            align-items: flex-start; /* Define la alineación de los elementos en el eje transversal. */
-            flex-direction: column; /* Organiza los elementos en una columna. */
-        }
-
-        .controles_paginador_vencimientos {
-            width: 100%; /* Ocupa todo el ancho disponible. */
-            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
-            flex-wrap: wrap; /* Define si los elementos pueden pasar a otra línea. */
-        }
-
-        .contenido_modal_editar_vencimiento {
-            padding: 22px 18px; /* Define el espacio interior del elemento. */
-        }
-
-        .filtros_alertas_stock, .filtros_lista_vencimientos {
-            grid-template-columns: minmax(0, 1fr); /* Define la distribución y el ancho de las columnas. */
-        }
-    }
-
     .aviso_datos_alertas_stock {
         margin-top: 6px; /* Define el margen superior. */
         color: #71818a; /* Establece el color del texto. */
@@ -773,34 +746,6 @@
     .estado_alerta_stock_bajo {
         background: #fff2dc; /* Define el fondo del elemento. */
         color: #a35a11; /* Establece el color del texto. */
-    }
-
-/* TITULO 3 RESPONSIVE (MAX-WIDTH: 1200PX) */
-
-    @media (max-width: 1200px) {
-        .filtros_alertas_stock {
-            grid-template-columns: repeat(2, minmax(0,1fr)); /* Define la distribución y el ancho de las columnas. */
-        }
-
-        .filtros_alertas_stock > .campo_filtro_alertas:first-child {
-            grid-column: 1 / -1; /* Define las columnas que ocupa el elemento. */
-        }
-    }
-
-/* TITULO 4 RESPONSIVE (MAX-WIDTH: 768PX) */
-
-    @media (max-width: 768px) {
-        .filtros_alertas_stock {
-            grid-template-columns: minmax(0,1fr); /* Define la distribución y el ancho de las columnas. */
-        }
-
-        .filtros_alertas_stock > .campo_filtro_alertas:first-child {
-            grid-column: auto; /* Define las columnas que ocupa el elemento. */
-        }
-
-        .filtros_alertas_stock .campo_boton_filtros_alertas button {
-            width: 100%; /* Ocupa todo el ancho disponible. */
-        }
     }
 
     .resumen_alertas_vencimientos {
@@ -887,54 +832,6 @@
         font-family: Arial, sans-serif; /* Define la familia tipográfica. */
         font-size: 11px; /* Define el tamaño del texto. */
         line-height: 1.4; /* Define la separación entre líneas de texto. */
-    }
-
-/* TITULO 5 RESPONSIVE (MAX-WIDTH: 1024PX) */
-
-    @media (max-width: 1024px) {
-        .resumen_alertas_vencimientos {
-            grid-template-columns: repeat(2, minmax(0, 1fr)); /* Define la distribución y el ancho de las columnas. */
-        }
-    }
-
-/* TITULO 6 RESPONSIVE (MAX-WIDTH: 768PX) */
-
-    @media (max-width: 768px) {
-        .resumen_alertas_vencimientos {
-            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
-        }
-    }
-
-/* TITULO 7 RESPONSIVE (MAX-WIDTH: 1200PX) */
-
-    @media (max-width: 1200px) {
-        .filtros_alertas_stock {
-            grid-template-columns: repeat(2, minmax(0,1fr)); /* Define la distribución y el ancho de las columnas. */
-        }
-
-        .filtros_alertas_stock > .campo_filtro_alertas:first-child {
-            grid-column: 1 / -1; /* Define las columnas que ocupa el elemento. */
-        }
-    }
-
-/* TITULO 8 RESPONSIVE (MAX-WIDTH: 768PX) */
-
-    @media (max-width: 768px) {
-        .resumen_alertas_vencimientos {
-            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
-        }
-
-        .filtros_alertas_stock {
-            grid-template-columns: minmax(0,1fr); /* Define la distribución y el ancho de las columnas. */
-        }
-
-        .filtros_alertas_stock > .campo_filtro_alertas:first-child {
-            grid-column: auto; /* Define las columnas que ocupa el elemento. */
-        }
-
-        .filtros_alertas_stock .campo_boton_filtros_alertas button {
-            width: 100%; /* Ocupa todo el ancho disponible. */
-        }
     }
 
     .seccion_vencimientos .contenedor_tabla_vencimientos {
@@ -1142,58 +1039,6 @@
 
         .seccion_vencimientos .tabla_lotes_vencimiento .fila_vencimiento.fila_lotes_vencimiento > .acciones_lote_vencimiento::before {
             flex: 0 0 100%; /* Define cómo el elemento ocupa el espacio disponible en Flexbox. */
-        }
-    }
-
-/* TITULO 9 RESPONSIVE (MAX-WIDTH: 1024PX) */
-
-    @media (max-width: 1024px) {
-        .tabla_alertas_stock {
-            min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
-        }
-
-        .tabla_alertas_stock .fila_encabezado_vencimientos {
-            display: none; /* Oculta el elemento. */
-        }
-
-        .tabla_alertas_stock .fila_vencimiento.fila_stock_alertas {
-            grid-template-columns: repeat(2, minmax(0, 1fr)); /* Define la distribución y el ancho de las columnas. */
-            gap: 12px; /* Define la separación entre los elementos. */
-            padding: 16px; /* Define el espacio interior del elemento. */
-        }
-
-        .tabla_alertas_stock .fila_vencimiento.fila_stock_alertas > [role="cell"] {
-            display: flex; /* Activa Flexbox para organizar el contenido. */
-            flex-direction: column; /* Organiza los elementos en una columna. */
-            align-items: flex-start; /* Define la alineación de los elementos en el eje transversal. */
-            gap: 5px; /* Define la separación entre los elementos. */
-            padding: 0; /* Define el espacio interior del elemento. */
-            min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
-        }
-
-        .tabla_alertas_stock .fila_vencimiento.fila_stock_alertas > [role="cell"]::before {
-            display: block; /* Muestra el elemento como un bloque. */
-            content: attr(data-etiqueta); /* Define el contenido generado por el pseudoelemento. */
-            color: #697a83; /* Establece el color del texto. */
-            font: 700 11px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
-        }
-
-        .tabla_alertas_stock .fila_vencimiento.fila_stock_alertas > [role="cell"]:first-child {
-            grid-column: 1 / -1; /* Define las columnas que ocupa el elemento. */
-            color: #0b3650; /* Establece el color del texto. */
-            font-weight: 700; /* Define el grosor del texto. */
-        }
-    }
-
-/* TITULO 10 RESPONSIVE (MAX-WIDTH: 480PX) */
-
-    @media (max-width: 480px) {
-        .tabla_alertas_stock .fila_vencimiento.fila_stock_alertas {
-            grid-template-columns: minmax(0, 1fr); /* Define la distribución y el ancho de las columnas. */
-        }
-
-        .tabla_alertas_stock .fila_vencimiento.fila_stock_alertas > [role="cell"]:first-child {
-            grid-column: auto; /* Define las columnas que ocupa el elemento. */
         }
     }
 
@@ -1435,53 +1280,6 @@
         border-radius: 50%; /* Define el redondeado de las esquinas. */
     }
 
-/* TITULO 11 RESPONSIVE (MAX-WIDTH: 1024PX) */
-
-    @media (max-width: 1024px) {
-        .paginador_vencimientos {
-            flex-direction: column; /* Organiza los elementos en una columna. */
-            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
-            gap: 15px; /* Define la separación entre los elementos. */
-        }
-
-        .controles_paginador_vencimientos {
-            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
-        }
-    }
-
-/* TITULO 12 RESPONSIVE (MAX-WIDTH: 600PX) */
-
-    @media (max-width: 600px) {
-        .boton_pagina_vencimientos, .boton_numero_pagina_vencimientos {
-            width: 34px; /* Define el ancho del elemento. */
-            height: 34px; /* Define el alto del elemento. */
-            min-width: 34px; /* Establece el ancho mínimo del elemento. */
-            min-height: 34px; /* Establece el alto mínimo del elemento. */
-            font-size: 12px; /* Define el tamaño del texto. */
-        }
-
-        .numeros_paginas_vencimientos, .controles_paginador_vencimientos {
-            gap: 4px; /* Define la separación entre los elementos. */
-        }
-
-        .informacion_paginador_vencimientos {
-            font-size: 12px; /* Define el tamaño del texto. */
-        }
-    }
-
-/* TITULO 13 RESPONSIVE (MAX-WIDTH: 480PX) */
-
-    @media (max-width: 480px) {
-        .paginador_vencimientos {
-            padding: 12px 8px; /* Define el espacio interior del elemento. */
-        }
-
-        .controles_paginador_vencimientos, .numeros_paginas_vencimientos {
-            flex-wrap: wrap; /* Define si los elementos pueden pasar a otra línea. */
-            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
-        }
-    }
-
     .contenedor_alertas_vencimientos > .contenedor_tabla_vencimientos {
         overflow: visible; /* Controla el contenido que supera las dimensiones del elemento. */
         min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
@@ -1531,4 +1329,315 @@
         .contenedor_alertas_vencimientos .filtros_alertas_stock .campo_boton_filtros_alertas button {
             width: 100%; /* Ocupa todo el ancho disponible. */
         }
+    }
+
+/* TITULO 2 RESPONSIVE ALERTAS VENCIMIENTOS */
+
+    /* pantallas grandes (monitores Full HD+, iMac, monitores gaming QHD/4K) */
+    @media (min-width: 1441px) {
+        /* Sin media */
+    }
+
+    /* notebooks grandes (1600x900, 1920x1080) */
+    @media (max-width: 1440px) {
+        /* Sin media */
+    }
+
+    /* notebooks comunes (1366x768, MacBook Air/Pro) */
+    @media (max-width: 1200px) {
+        .filtros_alertas_stock {
+            grid-template-columns: repeat(2, minmax(0,1fr)); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .filtros_alertas_stock > .campo_filtro_alertas:first-child {
+            grid-column: 1 / -1; /* Define las columnas que ocupa el elemento. */
+        }
+
+        .filtros_alertas_stock {
+            grid-template-columns: repeat(2, minmax(0,1fr)); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .filtros_alertas_stock > .campo_filtro_alertas:first-child {
+            grid-column: 1 / -1; /* Define las columnas que ocupa el elemento. */
+        }
+    }
+
+    /* tablets horizontales / pantallas medianas (iPad Pro en horizontal, notebooks pequeños) */
+    @media (max-width: 992px) {
+        .resumen_alertas_vencimientos {
+            grid-template-columns: repeat(2, minmax(0, 1fr)); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .tabla_alertas_stock {
+            min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        }
+
+        .tabla_alertas_stock .fila_encabezado_vencimientos {
+            display: none; /* Oculta el elemento. */
+        }
+
+        .tabla_alertas_stock .fila_vencimiento.fila_stock_alertas {
+            grid-template-columns: repeat(2, minmax(0, 1fr)); /* Define la distribución y el ancho de las columnas. */
+            gap: 12px; /* Define la separación entre los elementos. */
+            padding: 16px; /* Define el espacio interior del elemento. */
+        }
+
+        .tabla_alertas_stock .fila_vencimiento.fila_stock_alertas > [role="cell"] {
+            display: flex; /* Activa Flexbox para organizar el contenido. */
+            flex-direction: column; /* Organiza los elementos en una columna. */
+            align-items: flex-start; /* Define la alineación de los elementos en el eje transversal. */
+            gap: 5px; /* Define la separación entre los elementos. */
+            padding: 0; /* Define el espacio interior del elemento. */
+            min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        }
+
+        .tabla_alertas_stock .fila_vencimiento.fila_stock_alertas > [role="cell"]::before {
+            display: block; /* Muestra el elemento como un bloque. */
+            content: attr(data-etiqueta); /* Define el contenido generado por el pseudoelemento. */
+            color: #697a83; /* Establece el color del texto. */
+            font: 700 11px Arial, sans-serif; /* Define la tipografía y sus dimensiones. */
+        }
+
+        .tabla_alertas_stock .fila_vencimiento.fila_stock_alertas > [role="cell"]:first-child {
+            grid-column: 1 / -1; /* Define las columnas que ocupa el elemento. */
+            color: #0b3650; /* Establece el color del texto. */
+            font-weight: 700; /* Define el grosor del texto. */
+        }
+
+        .paginador_vencimientos {
+            flex-direction: column; /* Organiza los elementos en una columna. */
+            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+            gap: 15px; /* Define la separación entre los elementos. */
+        }
+
+        .controles_paginador_vencimientos {
+            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        }
+    }
+
+    /* tablets verticales (iPad clásico, tablets Android estándar) */
+    @media (max-width: 768px) {
+        .contenedor_alertas_vencimientos {
+            padding: 18px; /* Define el espacio interior del elemento. */
+        }
+
+        .paginador_vencimientos {
+            align-items: flex-start; /* Define la alineación de los elementos en el eje transversal. */
+            flex-direction: column; /* Organiza los elementos en una columna. */
+        }
+
+        .controles_paginador_vencimientos {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+            flex-wrap: wrap; /* Define si los elementos pueden pasar a otra línea. */
+        }
+
+        .contenido_modal_editar_vencimiento {
+            padding: 22px 18px; /* Define el espacio interior del elemento. */
+        }
+
+        .filtros_alertas_stock, .filtros_lista_vencimientos {
+            grid-template-columns: minmax(0, 1fr); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .filtros_alertas_stock {
+            grid-template-columns: minmax(0,1fr); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .filtros_alertas_stock > .campo_filtro_alertas:first-child {
+            grid-column: auto; /* Define las columnas que ocupa el elemento. */
+        }
+
+        .filtros_alertas_stock .campo_boton_filtros_alertas button {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+        }
+
+        .resumen_alertas_vencimientos {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .resumen_alertas_vencimientos {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .filtros_alertas_stock {
+            grid-template-columns: minmax(0,1fr); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .filtros_alertas_stock > .campo_filtro_alertas:first-child {
+            grid-column: auto; /* Define las columnas que ocupa el elemento. */
+        }
+
+        .filtros_alertas_stock .campo_boton_filtros_alertas button {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+        }
+    }
+
+    /* móviles extragrandes (pantallas compactas y dispositivos de gran tamaño) */
+    @media (max-width: 576px) {
+        .boton_pagina_vencimientos, .boton_numero_pagina_vencimientos {
+            width: 34px; /* Define el ancho del elemento. */
+            height: 34px; /* Define el alto del elemento. */
+            min-width: 34px; /* Establece el ancho mínimo del elemento. */
+            min-height: 34px; /* Establece el alto mínimo del elemento. */
+            font-size: 12px; /* Define el tamaño del texto. */
+        }
+
+        .numeros_paginas_vencimientos, .controles_paginador_vencimientos {
+            gap: 4px; /* Define la separación entre los elementos. */
+        }
+
+        .informacion_paginador_vencimientos {
+            font-size: 12px; /* Define el tamaño del texto. */
+        }
+
+        .contenedor_alertas_vencimientos .tabla_vencimientos_desplazable {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+            min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+            max-width: 100%; /* Evita que el elemento supere el ancho disponible. */
+            overflow-x: auto; /* Permite desplazar horizontalmente el contenido cuando no cabe. */
+            overscroll-behavior-x: contain; /* Mantiene el desplazamiento horizontal dentro de la tabla. */
+        }
+
+        .contenedor_alertas_vencimientos [role="table"] {
+            display: table; /* Define cómo se muestra y distribuye el elemento. */
+            width: 100%; /* Ocupa todo el ancho disponible. */
+            min-width: 900px; /* Ajusta el ancho a las columnas visibles sin comprimir su contenido. */
+            table-layout: fixed; /* Define cómo se calcula el ancho de las columnas de la tabla. */
+            border-collapse: collapse; /* Define cómo se combinan los bordes de las celdas. */
+        }
+
+        .contenedor_alertas_vencimientos [role="table"] [role="rowgroup"] {
+            display: table-row-group; /* Define cómo se muestra y distribuye el elemento. */
+        }
+
+        .contenedor_alertas_vencimientos [role="table"] [role="row"]:not([hidden]) {
+            display: table-row; /* Define cómo se muestra y distribuye el elemento. */
+            padding: 0; /* Define el espacio interior del elemento. */
+            height: auto; /* Define el alto del elemento. */
+        }
+
+        .contenedor_alertas_vencimientos [role="table"] [role="columnheader"]:not([hidden]), .contenedor_alertas_vencimientos [role="table"] [role="cell"]:not([hidden]) {
+            display: table-cell; /* Define cómo se muestra y distribuye el elemento. */
+            width: auto; /* Define el ancho del elemento. */
+            min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+            padding: 12px; /* Define el espacio interior del elemento. */
+            box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+            grid-column: auto; /* Define las columnas que ocupa el elemento. */
+            grid-row: auto; /* Define las filas que ocupa el elemento. */
+            white-space: normal; /* Define cómo se conservan los espacios y los saltos de línea. */
+            overflow-wrap: anywhere; /* Permite controlar el salto de palabras largas. */
+            overflow: hidden; /* Controla el contenido que supera las dimensiones del elemento. */
+            vertical-align: middle; /* Define la alineación vertical del contenido. */
+            text-align: left; /* Define la alineación horizontal del texto. */
+            line-height: 1.4; /* Define la separación entre líneas de texto. */
+        }
+
+        .contenedor_alertas_vencimientos [role="table"] [role="columnheader"]:not([hidden]) {
+            font-size: 11px; /* Mantiene el tamaño de encabezados de la tabla de Productos. */
+            padding: 13px 5px; /* Usa el mismo espacio lateral compacto que Productos. */
+        }
+
+        .contenedor_alertas_vencimientos [role="table"] [role="cell"]:not([hidden]) {
+            font-size: 12px; /* Mantiene el tamaño de datos de la tabla de Productos. */
+            padding: 14px 5px; /* Compacta los lados y conserva espacio vertical para leer la fila. */
+        }
+
+        .contenedor_alertas_vencimientos [role="table"] [role="cell"]:not([hidden])::before {
+            display: none; /* Oculta el elemento. */
+        }
+
+        .contenedor_alertas_vencimientos [role="table"] [hidden] {
+            display: none !important; /* Define cómo se muestra y distribuye el elemento. */
+        }
+
+        .contenedor_alertas_vencimientos .seccion_vencimientos .tabla_vencimientos_desplazable {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+            min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+            max-width: 100%; /* Evita que el elemento supere el ancho disponible. */
+            overflow-x: auto; /* Permite desplazar horizontalmente el contenido cuando no cabe. */
+            overscroll-behavior-x: contain; /* Mantiene el desplazamiento horizontal dentro de la tabla. */
+        }
+
+        .contenedor_alertas_vencimientos .seccion_vencimientos [role="table"] {
+            display: table; /* Define cómo se muestra y distribuye el elemento. */
+            width: 100%; /* Ocupa todo el ancho disponible. */
+            min-width: 900px; /* Ajusta el ancho a las columnas visibles sin comprimir su contenido. */
+            table-layout: fixed; /* Define cómo se calcula el ancho de las columnas de la tabla. */
+            border-collapse: collapse; /* Define cómo se combinan los bordes de las celdas. */
+        }
+
+        .contenedor_alertas_vencimientos .seccion_vencimientos [role="table"] [role="rowgroup"] {
+            display: table-row-group; /* Define cómo se muestra y distribuye el elemento. */
+        }
+
+        .contenedor_alertas_vencimientos .seccion_vencimientos [role="table"] [role="row"]:not([hidden]) {
+            display: table-row; /* Define cómo se muestra y distribuye el elemento. */
+            padding: 0; /* Define el espacio interior del elemento. */
+            height: auto; /* Define el alto del elemento. */
+        }
+
+        .contenedor_alertas_vencimientos .seccion_vencimientos [role="table"] [role="columnheader"]:not([hidden]), .contenedor_alertas_vencimientos .seccion_vencimientos [role="table"] [role="cell"]:not([hidden]) {
+            display: table-cell; /* Define cómo se muestra y distribuye el elemento. */
+            width: auto; /* Define el ancho del elemento. */
+            min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+            padding: 12px; /* Define el espacio interior del elemento. */
+            box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+            grid-column: auto; /* Define las columnas que ocupa el elemento. */
+            grid-row: auto; /* Define las filas que ocupa el elemento. */
+            white-space: normal; /* Define cómo se conservan los espacios y los saltos de línea. */
+            overflow-wrap: anywhere; /* Permite controlar el salto de palabras largas. */
+            overflow: hidden; /* Controla el contenido que supera las dimensiones del elemento. */
+            vertical-align: middle; /* Define la alineación vertical del contenido. */
+            text-align: left; /* Define la alineación horizontal del texto. */
+            line-height: 1.4; /* Define la separación entre líneas de texto. */
+        }
+
+        .contenedor_alertas_vencimientos .seccion_vencimientos [role="table"] [role="columnheader"]:not([hidden]) {
+            font-size: 11px; /* Mantiene el tamaño de encabezados de la tabla de Productos. */
+            padding: 13px 5px; /* Usa el mismo espacio lateral compacto que Productos. */
+        }
+
+        .contenedor_alertas_vencimientos .seccion_vencimientos [role="table"] [role="cell"]:not([hidden]) {
+            font-size: 12px; /* Mantiene el tamaño de datos de la tabla de Productos. */
+            padding: 14px 5px; /* Compacta los lados y conserva espacio vertical para leer la fila. */
+        }
+
+        .contenedor_alertas_vencimientos .seccion_vencimientos [role="table"] [role="cell"]:not([hidden])::before {
+            display: none; /* Oculta el elemento. */
+        }
+
+        .contenedor_alertas_vencimientos .seccion_vencimientos [role="table"] [hidden] {
+            display: none !important; /* Define cómo se muestra y distribuye el elemento. */
+        }
+    }
+
+    /* móviles grandes (iPhone 11, iPhone Plus/Max, Android grandes) */
+    @media (max-width: 414px) {
+        .tabla_alertas_stock .fila_vencimiento.fila_stock_alertas {
+            grid-template-columns: minmax(0, 1fr); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .tabla_alertas_stock .fila_vencimiento.fila_stock_alertas > [role="cell"]:first-child {
+            grid-column: auto; /* Define las columnas que ocupa el elemento. */
+        }
+
+        .paginador_vencimientos {
+            padding: 12px 8px; /* Define el espacio interior del elemento. */
+        }
+
+        .controles_paginador_vencimientos, .numeros_paginas_vencimientos {
+            flex-wrap: wrap; /* Define si los elementos pueden pasar a otra línea. */
+            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        }
+    }
+
+    /* móviles medianos (iPhone 12/13/14, Android gama media) */
+    @media (max-width: 390px) {
+        /* Sin media */
+    }
+
+    /* móviles pequeños (Android estándar, iPhone SE) */
+    @media (max-width: 360px) {
+        /* Sin media */
     }

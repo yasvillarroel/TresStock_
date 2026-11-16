@@ -6,13 +6,14 @@
 
     .boton_escanear_producto {
         background-color: #159ba3; /* Establece el color de fondo. */
-        margin: 20px; /* Define el margen exterior del elemento. */
+        margin: 20px auto; /* Define el margen exterior del elemento. */
         text-align: center; /* Define la alineación horizontal del texto. */
-        padding: 15px; /* Define el espacio interior del elemento. */
+        padding: 15px 20px; /* Define el espacio interior del elemento. */
         border-radius: 10px; /* Define el redondeado de las esquinas. */
         cursor: pointer; /* Define el cursor al situarlo sobre el elemento. */
         user-select: none; /* Define si el usuario puede seleccionar el contenido. */
         transition: background-color .2s ease; /* Define la transición entre los cambios de estilo. */
+        width: fit-content; /* Ajusta el ancho al contenido. */
     }
 
     .boton_escanear_producto:hover {
@@ -893,26 +894,39 @@
         display: none !important; /* Define cómo se muestra y distribuye el elemento. */
     }
 
-/* TITULO 8 RESPONSIVE (MAX-WIDTH: 480PX) */
+/* TITULO 8 RESPONSIVE ESCANER */
 
-    @media (max-width: 480px) {
-        .modal_alerta_escaner {
-            padding: 24px 18px; /* Define el espacio interior del elemento. */
-        }
+    /* pantallas grandes (monitores Full HD+, iMac, monitores gaming QHD/4K) */
+    @media (min-width: 1441px) {
 
-        .titulo_alerta_escaner {
-            font-size: 18px; /* Define el tamaño del texto. */
-        }
+        /* Sin media */
 
-        .contenedor_escaner_producto .boton_cancelar_alerta_escaner, .contenedor_escaner_producto .boton_aceptar_alerta_escaner {
-            flex: 1; /* Define cómo el elemento ocupa el espacio disponible en Flexbox. */
-            min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
-        }
     }
 
-/* TITULO 9 RESPONSIVE */
+    /* notebooks grandes (1600x900, 1920x1080) */
+    @media (max-width: 1440px) {
 
+        /* Sin media */
+
+    }
+
+    /* notebooks comunes (1366x768, MacBook Air/Pro) */
+    @media (max-width: 1200px) {
+
+        /* Sin media */
+
+    }
+
+    /* tablets horizontales / pantallas medianas (iPad Pro en horizontal, notebooks pequeños) */
+    @media (max-width: 992px) {
+
+        /* Sin media */
+
+    }
+
+    /* tablets verticales (iPad clásico, tablets Android estándar) */
     @media (max-width: 768px) {
+
         .contenedor_escaner_producto {
             padding: 18px 10px 28px; /* Define el espacio interior del elemento. */
         }
@@ -934,11 +948,12 @@
             width: 112px; /* Define el ancho del elemento. */
             height: 124px; /* Define el alto del elemento. */
         }
+
     }
 
-/* TITULO 10 RESPONSIVE (MAX-WIDTH: 600PX) */
+    /* móviles extragrandes (pantallas compactas y dispositivos de gran tamaño) */
+    @media (max-width: 576px) {
 
-    @media (max-width: 600px) {
         .opciones_operacion_ajuste {
             grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
         }
@@ -1017,11 +1032,25 @@
         .pie_modal_ajuste_escaner {
             padding: 15px 18px 20px; /* Define el espacio interior del elemento. */
         }
+
     }
 
-/* TITULO 11 RESPONSIVE (MAX-WIDTH: 480PX) */
+    /* móviles grandes (iPhone 11, iPhone Plus/Max, Android grandes) */
+    @media (max-width: 414px) {
 
-    @media (max-width: 480px) {
+        .modal_alerta_escaner {
+            padding: 24px 18px; /* Define el espacio interior del elemento. */
+        }
+
+        .titulo_alerta_escaner {
+            font-size: 18px; /* Define el tamaño del texto. */
+        }
+
+        .contenedor_escaner_producto .boton_cancelar_alerta_escaner, .contenedor_escaner_producto .boton_aceptar_alerta_escaner {
+            flex: 1; /* Define cómo el elemento ocupa el espacio disponible en Flexbox. */
+            min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        }
+
         .campos_ajuste_escaner {
             grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
         }
@@ -1033,4 +1062,19 @@
         .indicadores_ficha_escaner {
             grid-template-columns: 1fr 1fr; /* Define la distribución y el ancho de las columnas. */
         }
+
+    }
+
+    /* móviles medianos (iPhone 12/13/14, Android gama media) */
+    @media (max-width: 390px) {
+
+        /* Sin media */
+
+    }
+
+    /* móviles pequeños (Android estándar, iPhone SE) */
+    @media (max-width: 360px) {
+
+        /* Sin media */
+
     }

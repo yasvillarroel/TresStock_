@@ -645,164 +645,6 @@
         white-space: nowrap; /* Define cómo se conservan los espacios y los saltos de línea. */
     }
 
-/* TITULO 9 RESPONSIVE (MAX-WIDTH: 1200PX) */
-
-    @media (max-width: 1200px) {
-        .resumen_kpi_analisis {
-            gap: 12px; /* Define la separación entre los elementos. */
-        }
-
-        .tarjeta_kpi_analisis {
-            gap: 10px; /* Define la separación entre los elementos. */
-            padding: 14px; /* Define el espacio interior del elemento. */
-        }
-
-        .filtros_analisis_pronostico {
-            grid-template-columns: minmax(0,1fr) minmax(0,.85fr); /* Define la distribución y el ancho de las columnas. */
-        }
-
-        .controles_filtro_reposicion_analisis {
-            grid-template-columns: minmax(0,1fr) minmax(0,1fr); /* Define la distribución y el ancho de las columnas. */
-        }
-
-        .grupo_boton_limpieza_analisis {
-            justify-self: start; /* Define la alineación del elemento dentro de su celda. */
-        }
-
-        .tabla_analisis_pronostico, .tabla_reposicion_analisis_pronostico {
-            min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
-        }
-
-        .encabezado_tabla_analisis_pronostico, .encabezado_reposicion_analisis_pronostico {
-            display: none; /* Oculta el elemento. */
-        }
-
-        .fila_analisis_pronostico, .fila_reposicion_analisis_pronostico {
-            display: grid; /* Activa CSS Grid para distribuir el contenido. */
-            grid-template-columns: 54px minmax(0,1fr) minmax(0,1fr); /* Define la distribución y el ancho de las columnas. */
-            padding: 10px 14px; /* Define el espacio interior del elemento. */
-            gap: 2px 10px; /* Define la separación entre los elementos. */
-        }
-
-        .fila_analisis_pronostico > div, .fila_reposicion_analisis_pronostico > div {
-            text-align: left; /* Define la alineación horizontal del texto. */
-            padding: 6px 2px; /* Define el espacio interior del elemento. */
-        }
-
-        .fila_analisis_pronostico > div:first-child, .fila_reposicion_analisis_pronostico > div:first-child {
-            grid-column: 1; /* Define las columnas que ocupa el elemento. */
-            grid-row: 1 / 4; /* Define las filas que ocupa el elemento. */
-        }
-
-        .fila_analisis_pronostico > div:nth-child(2), .fila_reposicion_analisis_pronostico > div:nth-child(2) {
-            grid-column: 2 / 4; /* Define las columnas que ocupa el elemento. */
-        }
-
-        .fila_analisis_pronostico > div:nth-child(n+3), .fila_reposicion_analisis_pronostico > div:nth-child(n+3) {
-            grid-column: auto; /* Define las columnas que ocupa el elemento. */
-        }
-
-        .fila_analisis_pronostico > div[data-etiqueta]:nth-child(n+3)::before, .fila_reposicion_analisis_pronostico > div[data-etiqueta]:nth-child(n+3)::before {
-            content: attr(data-etiqueta); /* Define el contenido generado por el pseudoelemento. */
-            display: block; /* Muestra el elemento como un bloque. */
-            margin-bottom: 3px; /* Define el margen inferior. */
-            color: #7a8f9b; /* Establece el color del texto. */
-            font: 11px Arial,sans-serif; /* Define la tipografía y sus dimensiones. */
-        }
-    }
-
-/* TITULO 10 RESPONSIVE (MAX-WIDTH: 768PX) */
-
-    @media (max-width: 768px) {
-        .contenedor_analisis_pronostico {
-            padding: 16px 10px 22px; /* Define el espacio interior del elemento. */
-        }
-
-        .titulo_general_analisis {
-            font-size: 24px; /* Define el tamaño del texto. */
-        }
-
-        .resumen_kpi_analisis {
-            grid-template-columns: minmax(0,1fr); /* Define la distribución y el ancho de las columnas. */
-            gap: 10px; /* Define la separación entre los elementos. */
-        }
-
-        .tarjeta_kpi_analisis {
-            min-height: 94px; /* Establece el alto mínimo del elemento. */
-        }
-
-        .pestanas_analisis {
-            gap: 16px; /* Define la separación entre los elementos. */
-            overflow-x: auto; /* Permite desplazar horizontalmente el contenido cuando no cabe. */
-        }
-
-        .pestana_analisis {
-            font-size: 13px; /* Define el tamaño del texto. */
-        }
-
-        .cabecera_panel_analisis {
-            padding: 16px; /* Define el espacio interior del elemento. */
-        }
-
-        .area_filtros_analisis {
-            padding: 16px; /* Define el espacio interior del elemento. */
-        }
-
-        .filtros_analisis_pronostico, .controles_filtro_reposicion_analisis {
-            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
-            gap: 12px; /* Define la separación entre los elementos. */
-        }
-
-        .grupo_boton_limpieza_analisis, .boton_limpiar_analisis {
-            width: 100%; /* Ocupa todo el ancho disponible. */
-        }
-
-        .paginacion_analisis_pronostico {
-            flex-direction: column; /* Organiza los elementos en una columna. */
-            align-items: flex-start; /* Define la alineación de los elementos en el eje transversal. */
-            padding: 14px 16px; /* Define el espacio interior del elemento. */
-        }
-
-        .controles_paginacion_analisis_pronostico {
-            max-width: 100%; /* Evita que el elemento supere el ancho disponible. */
-            flex-wrap: wrap; /* Define si los elementos pueden pasar a otra línea. */
-        }
-
-        .descripcion_reposicion_analisis_pronostico {
-            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
-        }
-    }
-
-/* TITULO 11 RESPONSIVE (MAX-WIDTH: 480PX) */
-
-    @media (max-width: 480px) {
-        .fila_analisis_pronostico, .fila_reposicion_analisis_pronostico {
-            grid-template-columns: 48px minmax(0,1fr); /* Define la distribución y el ancho de las columnas. */
-        }
-
-        .fila_analisis_pronostico > div:first-child, .fila_reposicion_analisis_pronostico > div:first-child {
-            grid-row: 1 / 6; /* Define las filas que ocupa el elemento. */
-        }
-
-        .fila_analisis_pronostico > div:nth-child(2), .fila_reposicion_analisis_pronostico > div:nth-child(2) {
-            grid-column: 2; /* Define las columnas que ocupa el elemento. */
-        }
-
-        .fila_analisis_pronostico > div:nth-child(n+3), .fila_reposicion_analisis_pronostico > div:nth-child(n+3) {
-            grid-column: 2; /* Define las columnas que ocupa el elemento. */
-        }
-
-        .imagen_producto_analisis_pronostico {
-            width: 38px; /* Define el ancho del elemento. */
-            height: 38px; /* Define el alto del elemento. */
-        }
-
-        .boton_pagina_analisis_pronostico, .boton_numero_analisis_pronostico {
-            min-width: 38px; /* Establece el ancho mínimo del elemento. */
-            height: 38px; /* Define el alto del elemento. */
-        }
-    }
-
     .contenedor_analisis_pronostico .imagen_icono_kpi_analisis {
         display: block; /* Muestra el elemento como un bloque. */
         width: 24px; /* Define el ancho del elemento. */
@@ -939,18 +781,153 @@
         border-color: #159ba3; /* Establece el color del borde. */
     }
 
-/* TITULO 12 RESPONSIVE (MAX-WIDTH: 1200PX) */
+/* TITULO 9 RESPONSIVE REPORTES ANALITICA */
 
+    /* pantallas grandes (monitores Full HD+, iMac, monitores gaming QHD/4K) */
+    @media (min-width: 1441px) {
+        /* Sin media */
+    }
+
+    /* notebooks grandes (1600x900, 1920x1080) */
+    @media (max-width: 1440px) {
+        /* Sin media */
+    }
+
+    /* notebooks comunes (1366x768, MacBook Air/Pro) */
     @media (max-width: 1200px) {
+        .resumen_kpi_analisis {
+            gap: 12px; /* Define la separación entre los elementos. */
+        }
+
+        .tarjeta_kpi_analisis {
+            gap: 10px; /* Define la separación entre los elementos. */
+            padding: 14px; /* Define el espacio interior del elemento. */
+        }
+
+        .filtros_analisis_pronostico {
+            grid-template-columns: minmax(0,1fr) minmax(0,.85fr); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .controles_filtro_reposicion_analisis {
+            grid-template-columns: minmax(0,1fr) minmax(0,1fr); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .grupo_boton_limpieza_analisis {
+            justify-self: start; /* Define la alineación del elemento dentro de su celda. */
+        }
+
+        .tabla_analisis_pronostico, .tabla_reposicion_analisis_pronostico {
+            min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+        }
+
+        .encabezado_tabla_analisis_pronostico, .encabezado_reposicion_analisis_pronostico {
+            display: none; /* Oculta el elemento. */
+        }
+
+        .fila_analisis_pronostico, .fila_reposicion_analisis_pronostico {
+            display: grid; /* Activa CSS Grid para distribuir el contenido. */
+            grid-template-columns: 54px minmax(0,1fr) minmax(0,1fr); /* Define la distribución y el ancho de las columnas. */
+            padding: 10px 14px; /* Define el espacio interior del elemento. */
+            gap: 2px 10px; /* Define la separación entre los elementos. */
+        }
+
+        .fila_analisis_pronostico > div, .fila_reposicion_analisis_pronostico > div {
+            text-align: left; /* Define la alineación horizontal del texto. */
+            padding: 6px 2px; /* Define el espacio interior del elemento. */
+        }
+
+        .fila_analisis_pronostico > div:first-child, .fila_reposicion_analisis_pronostico > div:first-child {
+            grid-column: 1; /* Define las columnas que ocupa el elemento. */
+            grid-row: 1 / 4; /* Define las filas que ocupa el elemento. */
+        }
+
+        .fila_analisis_pronostico > div:nth-child(2), .fila_reposicion_analisis_pronostico > div:nth-child(2) {
+            grid-column: 2 / 4; /* Define las columnas que ocupa el elemento. */
+        }
+
+        .fila_analisis_pronostico > div:nth-child(n+3), .fila_reposicion_analisis_pronostico > div:nth-child(n+3) {
+            grid-column: auto; /* Define las columnas que ocupa el elemento. */
+        }
+
+        .fila_analisis_pronostico > div[data-etiqueta]:nth-child(n+3)::before, .fila_reposicion_analisis_pronostico > div[data-etiqueta]:nth-child(n+3)::before {
+            content: attr(data-etiqueta); /* Define el contenido generado por el pseudoelemento. */
+            display: block; /* Muestra el elemento como un bloque. */
+            margin-bottom: 3px; /* Define el margen inferior. */
+            color: #7a8f9b; /* Establece el color del texto. */
+            font: 11px Arial,sans-serif; /* Define la tipografía y sus dimensiones. */
+        }
+
         .contenedor_analisis_pronostico .marco_imagen_analisis_pronostico {
             width: 40px; /* Define el ancho del elemento. */
             height: 40px; /* Define el alto del elemento. */
         }
     }
 
-/* TITULO 13 RESPONSIVE (MAX-WIDTH: 768PX) */
+    /* tablets horizontales / pantallas medianas (iPad Pro en horizontal, notebooks pequeños) */
+    @media (max-width: 992px) {
+        /* Sin media */
+    }
 
+    /* tablets verticales (iPad clásico, tablets Android estándar) */
     @media (max-width: 768px) {
+        .contenedor_analisis_pronostico {
+            padding: 16px 10px 22px; /* Define el espacio interior del elemento. */
+        }
+
+        .titulo_general_analisis {
+            font-size: 24px; /* Define el tamaño del texto. */
+        }
+
+        .resumen_kpi_analisis {
+            grid-template-columns: minmax(0,1fr); /* Define la distribución y el ancho de las columnas. */
+            gap: 10px; /* Define la separación entre los elementos. */
+        }
+
+        .tarjeta_kpi_analisis {
+            min-height: 94px; /* Establece el alto mínimo del elemento. */
+        }
+
+        .pestanas_analisis {
+            gap: 16px; /* Define la separación entre los elementos. */
+            overflow-x: auto; /* Permite desplazar horizontalmente el contenido cuando no cabe. */
+        }
+
+        .pestana_analisis {
+            font-size: 13px; /* Define el tamaño del texto. */
+        }
+
+        .cabecera_panel_analisis {
+            padding: 16px; /* Define el espacio interior del elemento. */
+        }
+
+        .area_filtros_analisis {
+            padding: 16px; /* Define el espacio interior del elemento. */
+        }
+
+        .filtros_analisis_pronostico, .controles_filtro_reposicion_analisis {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+            gap: 12px; /* Define la separación entre los elementos. */
+        }
+
+        .grupo_boton_limpieza_analisis, .boton_limpiar_analisis {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+        }
+
+        .paginacion_analisis_pronostico {
+            flex-direction: column; /* Organiza los elementos en una columna. */
+            align-items: flex-start; /* Define la alineación de los elementos en el eje transversal. */
+            padding: 14px 16px; /* Define el espacio interior del elemento. */
+        }
+
+        .controles_paginacion_analisis_pronostico {
+            max-width: 100%; /* Evita que el elemento supere el ancho disponible. */
+            flex-wrap: wrap; /* Define si los elementos pueden pasar a otra línea. */
+        }
+
+        .descripcion_reposicion_analisis_pronostico {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+        }
+
         .contenedor_analisis_pronostico {
             padding: 18px 12px 26px; /* Define el espacio interior del elemento. */
         }
@@ -962,4 +939,118 @@
         .contenedor_analisis_pronostico .instruccion_grafico_analisis {
             margin: 12px 14px; /* Define el margen exterior del elemento. */
         }
+    }
+
+    /* móviles extragrandes (pantallas compactas y dispositivos de gran tamaño) */
+    @media (max-width: 576px) {
+        .contenedor_tabla_analisis_pronostico, .contenedor_tabla_reposicion_analisis_pronostico {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+            min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+            max-width: 100%; /* Evita que el elemento supere el ancho disponible. */
+            overflow-x: auto; /* Permite desplazar horizontalmente el contenido cuando no cabe. */
+            overscroll-behavior-x: contain; /* Mantiene el desplazamiento horizontal dentro de la tabla. */
+        }
+
+        .contenedor_analisis_pronostico [role="table"] {
+            display: table; /* Define cómo se muestra y distribuye el elemento. */
+            width: 100%; /* Ocupa todo el ancho disponible. */
+            min-width: 900px; /* Ajusta el ancho a las columnas visibles sin comprimir su contenido. */
+            table-layout: fixed; /* Define cómo se calcula el ancho de las columnas de la tabla. */
+            border-collapse: collapse; /* Define cómo se combinan los bordes de las celdas. */
+        }
+
+        .contenedor_analisis_pronostico [role="table"] [role="rowgroup"] {
+            display: table-row-group; /* Define cómo se muestra y distribuye el elemento. */
+        }
+
+        .contenedor_analisis_pronostico [role="table"] [role="row"]:not([hidden]) {
+            display: table-row; /* Define cómo se muestra y distribuye el elemento. */
+            padding: 0; /* Define el espacio interior del elemento. */
+            height: auto; /* Define el alto del elemento. */
+        }
+
+        .contenedor_analisis_pronostico [role="table"] [role="columnheader"]:not([hidden]), .contenedor_analisis_pronostico [role="table"] [role="cell"]:not([hidden]) {
+            display: table-cell; /* Define cómo se muestra y distribuye el elemento. */
+            width: auto; /* Define el ancho del elemento. */
+            min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+            padding: 12px; /* Define el espacio interior del elemento. */
+            box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+            grid-column: auto; /* Define las columnas que ocupa el elemento. */
+            grid-row: auto; /* Define las filas que ocupa el elemento. */
+            white-space: normal; /* Define cómo se conservan los espacios y los saltos de línea. */
+            overflow-wrap: anywhere; /* Permite controlar el salto de palabras largas. */
+            overflow: hidden; /* Controla el contenido que supera las dimensiones del elemento. */
+            vertical-align: middle; /* Define la alineación vertical del contenido. */
+            text-align: left; /* Define la alineación horizontal del texto. */
+            line-height: 1.4; /* Define la separación entre líneas de texto. */
+        }
+
+        .contenedor_analisis_pronostico [role="table"] [role="columnheader"]:not([hidden]) {
+            font-size: 11px; /* Mantiene el tamaño de encabezados de la tabla de Productos. */
+            padding: 13px 5px; /* Usa el mismo espacio lateral compacto que Productos. */
+        }
+
+        .contenedor_analisis_pronostico [role="table"] [role="cell"]:not([hidden]) {
+            font-size: 12px; /* Mantiene el tamaño de datos de la tabla de Productos. */
+            padding: 14px 5px; /* Compacta los lados y conserva espacio vertical para leer la fila. */
+        }
+
+        .contenedor_analisis_pronostico [role="table"] [role="cell"]:not([hidden])::before {
+            display: none; /* Oculta el elemento. */
+        }
+
+        .contenedor_analisis_pronostico [role="table"] [hidden] {
+            display: none !important; /* Define cómo se muestra y distribuye el elemento. */
+        }
+
+        .contenedor_analisis_pronostico [role="table"] [role="columnheader"]:nth-child(1) {
+            width: 8%; /* Define el ancho del elemento. */
+        }
+
+        .contenedor_analisis_pronostico [role="table"] [role="columnheader"]:nth-child(2) {
+            width: 32%; /* Define el ancho del elemento. */
+        }
+
+        .contenedor_analisis_pronostico [role="table"] [role="columnheader"]:nth-child(n+3) {
+            width: 15%; /* Define el ancho del elemento. */
+        }
+    }
+
+    /* móviles grandes (iPhone 11, iPhone Plus/Max, Android grandes) */
+    @media (max-width: 414px) {
+        .fila_analisis_pronostico, .fila_reposicion_analisis_pronostico {
+            grid-template-columns: 48px minmax(0,1fr); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .fila_analisis_pronostico > div:first-child, .fila_reposicion_analisis_pronostico > div:first-child {
+            grid-row: 1 / 6; /* Define las filas que ocupa el elemento. */
+        }
+
+        .fila_analisis_pronostico > div:nth-child(2), .fila_reposicion_analisis_pronostico > div:nth-child(2) {
+            grid-column: 2; /* Define las columnas que ocupa el elemento. */
+        }
+
+        .fila_analisis_pronostico > div:nth-child(n+3), .fila_reposicion_analisis_pronostico > div:nth-child(n+3) {
+            grid-column: 2; /* Define las columnas que ocupa el elemento. */
+        }
+
+        .imagen_producto_analisis_pronostico {
+            width: 38px; /* Define el ancho del elemento. */
+            height: 38px; /* Define el alto del elemento. */
+        }
+
+        .boton_pagina_analisis_pronostico, .boton_numero_analisis_pronostico {
+            min-width: 38px; /* Establece el ancho mínimo del elemento. */
+            height: 38px; /* Define el alto del elemento. */
+        }
+    }
+
+    /* móviles medianos (iPhone 12/13/14, Android gama media) */
+    @media (max-width: 390px) {
+        /* Sin media */
+    }
+
+    /* móviles pequeños (Android estándar, iPhone SE) */
+    @media (max-width: 360px) {
+        /* Sin media */
     }

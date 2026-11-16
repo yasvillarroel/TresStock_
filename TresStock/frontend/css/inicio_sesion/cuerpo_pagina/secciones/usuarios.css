@@ -916,66 +916,7 @@
         background-color: #0f858d; /* Establece el color de fondo. */
     }
 
-/* TITULO 11 RESPONSIVE USUARIOS */
-
-    @media (max-width: 1200px) {
-        .contenedor_indicadores_usuarios {
-            grid-template-columns: repeat(2, 1fr); /* Define la distribución y el ancho de las columnas. */
-        }
-    }
-
-/* TITULO 12 RESPONSIVE (MAX-WIDTH: 1024PX) */
-
-    @media (max-width: 1024px) {
-        .contenedor_filtros_usuarios {
-            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
-        }
-
-        .contenedor_campos_usuario {
-            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
-        }
-    }
-
-/* TITULO 13 RESPONSIVE (MAX-WIDTH: 600PX) */
-
-    @media (max-width: 600px) {
-        .contenedor_usuarios {
-            padding: 18px; /* Define el espacio interior del elemento. */
-        }
-
-        .contenedor_encabezado_usuarios {
-            align-items: flex-start; /* Define la alineación de los elementos en el eje transversal. */
-            flex-direction: column; /* Organiza los elementos en una columna. */
-            gap: 16px; /* Define la separación entre los elementos. */
-        }
-
-        .boton_nuevo_usuario {
-            width: 100%; /* Ocupa todo el ancho disponible. */
-        }
-
-        .contenedor_indicadores_usuarios {
-            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
-        }
-
-        .formulario_usuario {
-            max-width: calc(100% - 24px); /* Limita el ancho máximo del elemento. */
-            padding: 20px; /* Define el espacio interior del elemento. */
-        }
-
-        .contenedor_acciones_formulario_usuario {
-            flex-direction: column; /* Organiza los elementos en una columna. */
-        }
-
-        .boton_cancelar_usuario {
-            width: 100%; /* Ocupa todo el ancho disponible. */
-        }
-
-        .boton_guardar_usuario {
-            width: 100%; /* Ocupa todo el ancho disponible. */
-        }
-    }
-
-/* TITULO 14 FILTROS Y SELECTORES PERSONALIZADOS */
+/* TITULO 11 FILTROS Y SELECTORES PERSONALIZADOS */
 
     .contenedor_filtros_usuarios {
         grid-template-columns: minmax(190px, 2fr) repeat(2, minmax(130px, 1fr)) auto; /* Define la distribución y el ancho de las columnas. */
@@ -1111,7 +1052,7 @@
         background: #e4f6f6; /* Define el fondo del elemento. */
     }
 
-/* TITULO 15 BOTONES DE ACCIONES USUARIOS */
+/* TITULO 12 BOTONES DE ACCIONES USUARIOS */
 
     .contenedor_acciones_usuario {
         display: flex; /* Activa Flexbox para organizar el contenido. */
@@ -1234,7 +1175,7 @@
         padding-right: 4px; /* Define el espacio interior derecho. */
     }
 
-/* TITULO 16 FORMULARIO USUARIO */
+/* TITULO 13 FORMULARIO USUARIO */
 
     .contenedor_formulario_usuario:not(.contenedor_formulario_usuario_oculto) {
         display: flex; /* Activa Flexbox para organizar el contenido. */
@@ -1297,32 +1238,7 @@
         display: none !important; /* Define cómo se muestra y distribuye el elemento. */
     }
 
-/* TITULO 17 RESPONSIVE (MAX-HEIGHT: 700PX) */
-
-    @media (max-height: 700px) {
-        .contenedor_formulario_usuario {
-            padding-top: 10px; /* Define el espacio interior superior. */
-            padding-bottom: 10px; /* Define el espacio interior inferior. */
-        }
-
-        .formulario_usuario {
-            padding: 18px; /* Define el espacio interior del elemento. */
-        }
-
-        .cabecera_formulario_usuario {
-            margin-bottom: 14px; /* Define el margen inferior. */
-        }
-
-        .contenedor_campos_usuario {
-            gap: 12px; /* Define la separación entre los elementos. */
-        }
-
-        .contenedor_acciones_formulario_usuario {
-            margin-top: 16px; /* Define el margen superior. */
-        }
-    }
-
-/* TITULO 18 MODAL CENTRADO DE ALERTAS Y CONFIRMACIONES */
+/* TITULO 14 MODAL CENTRADO DE ALERTAS Y CONFIRMACIONES */
 
     .contenedor_alerta_usuarios {
         position: fixed; /* Define el sistema de posicionamiento del elemento. */
@@ -1446,29 +1362,92 @@
         outline-offset: 2px; /* Define la separación entre el contorno y el borde. */
     }
 
-/* TITULO 19 RESPONSIVE EXTRA */
+/* TITULO 15 RESPONSIVE USUARIOS */
 
-    @media (max-width: 1200px) and (min-width: 1025px) {
-        .contenedor_filtros_usuarios {
-            grid-template-columns: repeat(2, minmax(0,1fr)); /* Define la distribución y el ancho de las columnas. */
+    /* pantallas grandes (monitores Full HD+, iMac, monitores gaming QHD/4K) */
+    @media (min-width: 1441px) {
+        /* Sin media */
+    }
+
+    /* notebooks grandes (1600x900, 1920x1080) */
+    @media (max-width: 1440px) {
+        /* Sin media */
+    }
+
+    /* notebooks comunes (1366x768, MacBook Air/Pro) */
+    @media (max-width: 1200px) {
+        .contenedor_indicadores_usuarios {
+            grid-template-columns: repeat(2, 1fr); /* Define la distribución y el ancho de las columnas. */
         }
 
-        .contenedor_busqueda_usuarios {
-            grid-column: 1 / -1; /* Define las columnas que ocupa el elemento. */
+        @media (min-width: 993px) {
+            .contenedor_filtros_usuarios {
+                grid-template-columns: repeat(2, minmax(0,1fr)); /* Define la distribución y el ancho de las columnas. */
+            }
+
+            .contenedor_busqueda_usuarios {
+                grid-column: 1 / -1; /* Define las columnas que ocupa el elemento. */
+            }
         }
     }
 
-/* TITULO 20 RESPONSIVE (MAX-WIDTH: 1024PX) */
+    /* tablets horizontales / pantallas medianas (iPad Pro en horizontal, notebooks pequeños) */
+    @media (max-width: 992px) {
+        .contenedor_filtros_usuarios {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+        }
 
-    @media (max-width: 1024px) {
+        .contenedor_campos_usuario {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+        }
+
         .contenedor_filtros_usuarios {
             grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
         }
     }
 
-/* TITULO 21 RESPONSIVE (MAX-WIDTH: 600PX) */
+    /* tablets verticales (iPad clásico, tablets Android estándar) */
+    @media (max-width: 768px) {
+        /* Sin media */
+    }
 
-    @media (max-width: 600px) {
+    /* móviles extragrandes (pantallas compactas y dispositivos de gran tamaño) */
+    @media (max-width: 576px) {
+        .contenedor_usuarios {
+            padding: 18px; /* Define el espacio interior del elemento. */
+        }
+
+        .contenedor_encabezado_usuarios {
+            align-items: flex-start; /* Define la alineación de los elementos en el eje transversal. */
+            flex-direction: column; /* Organiza los elementos en una columna. */
+            gap: 16px; /* Define la separación entre los elementos. */
+        }
+
+        .boton_nuevo_usuario {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+        }
+
+        .contenedor_indicadores_usuarios {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .formulario_usuario {
+            max-width: calc(100% - 24px); /* Limita el ancho máximo del elemento. */
+            padding: 20px; /* Define el espacio interior del elemento. */
+        }
+
+        .contenedor_acciones_formulario_usuario {
+            flex-direction: column; /* Organiza los elementos en una columna. */
+        }
+
+        .boton_cancelar_usuario {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+        }
+
+        .boton_guardar_usuario {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+        }
+
         .contenedor_limpiar_filtros_usuarios, .boton_limpiar_filtros_usuarios {
             width: 100%; /* Ocupa todo el ancho disponible. */
         }
@@ -1479,5 +1458,114 @@
 
         .formulario_usuario {
             max-width: 100%; /* Evita que el elemento supere el ancho disponible. */
+        }
+
+        .contenedor_tabla_usuarios {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+            min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+            max-width: 100%; /* Evita que el elemento supere el ancho disponible. */
+            overflow-x: auto; /* Permite desplazar horizontalmente el contenido cuando no cabe. */
+            overscroll-behavior-x: contain; /* Mantiene el desplazamiento horizontal dentro de la tabla. */
+        }
+
+        .tabla_usuarios {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+            min-width: 760px; /* Ajusta el ancho a las columnas visibles sin comprimir su contenido. */
+            table-layout: fixed; /* Define cómo se calcula el ancho de las columnas de la tabla. */
+            border-collapse: collapse; /* Define cómo se combinan los bordes de las celdas. */
+        }
+
+        .tabla_usuarios th, .tabla_usuarios td {
+            padding: 12px; /* Define el espacio interior del elemento. */
+            box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+            white-space: normal; /* Define cómo se conservan los espacios y los saltos de línea. */
+            overflow-wrap: anywhere; /* Permite controlar el salto de palabras largas. */
+            overflow: hidden; /* Controla el contenido que supera las dimensiones del elemento. */
+            line-height: 1.4; /* Define la separación entre líneas de texto. */
+            vertical-align: middle; /* Define la alineación vertical del contenido. */
+        }
+
+        .tabla_usuarios th {
+            font-size: 11px; /* Mantiene el tamaño de encabezados de la tabla de Productos. */
+            padding: 13px 5px; /* Usa el mismo espacio lateral compacto que Productos. */
+        }
+
+        .tabla_usuarios td {
+            font-size: 12px; /* Mantiene el tamaño de datos de la tabla de Productos. */
+            padding: 14px 5px; /* Compacta los lados y conserva espacio vertical para leer la fila. */
+        }
+
+        .tabla_usuarios .columna_nombre_usuarios {
+            width: 19%; /* Define el ancho del elemento. */
+        }
+
+        .tabla_usuarios .columna_email_usuarios {
+            width: 25%; /* Define el ancho del elemento. */
+        }
+
+        .tabla_usuarios .columna_rol_tabla_usuarios {
+            width: 14%; /* Define el ancho del elemento. */
+        }
+
+        .tabla_usuarios .columna_estado_tabla_usuarios {
+            width: 12%; /* Define el ancho del elemento. */
+        }
+
+        .tabla_usuarios .columna_fecha_creacion_usuarios {
+            width: 15%; /* Define el ancho del elemento. */
+        }
+
+        .tabla_usuarios .columna_acciones_usuarios {
+            width: 15%; /* Define el ancho del elemento. */
+        }
+
+        .tabla_usuarios .contenedor_acciones_usuario {
+            display: flex; /* Activa Flexbox para organizar el contenido. */
+            flex-wrap: nowrap; /* Define si los elementos pueden pasar a otra línea. */
+            gap: 6px; /* Define la separación entre los elementos. */
+        }
+
+        .tabla_usuarios .boton_accion_usuario {
+            flex-shrink: 0; /* Define cuánto puede reducirse el elemento en Flexbox. */
+        }
+    }
+
+    /* móviles grandes (iPhone 11, iPhone Plus/Max, Android grandes) */
+    @media (max-width: 414px) {
+        /* Sin media */
+    }
+
+    /* móviles medianos (iPhone 12/13/14, Android gama media) */
+    @media (max-width: 390px) {
+        /* Sin media */
+    }
+
+    /* móviles pequeños (Android estándar, iPhone SE) */
+    @media (max-width: 360px) {
+        /* Sin media */
+    }
+
+/* TITULO 16 AJUSTES PARA PANTALLAS DE POCA ALTURA */
+
+    @media (max-height: 700px) {
+        .contenedor_formulario_usuario {
+            padding-top: 10px; /* Define el espacio interior superior. */
+            padding-bottom: 10px; /* Define el espacio interior inferior. */
+        }
+
+        .formulario_usuario {
+            padding: 18px; /* Define el espacio interior del elemento. */
+        }
+
+        .cabecera_formulario_usuario {
+            margin-bottom: 14px; /* Define el margen inferior. */
+        }
+
+        .contenedor_campos_usuario {
+            gap: 12px; /* Define la separación entre los elementos. */
+        }
+
+        .contenedor_acciones_formulario_usuario {
+            margin-top: 16px; /* Define el margen superior. */
         }
     }

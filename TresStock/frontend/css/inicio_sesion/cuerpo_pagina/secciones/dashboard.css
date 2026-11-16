@@ -527,113 +527,6 @@
         border-left-color: #159ba3; /* Define el color del borde izquierdo. */
     }
 
-/* TITULO 8 RESPONSIVE */
-
-    @media (max-width: 1440px) {
-        .contenedor_indicadores_dashboard {
-            grid-template-columns: repeat(2, minmax(0, 1fr)); /* Define la distribución y el ancho de las columnas. */
-        }
-    }
-
-/* TITULO 9 RESPONSIVE (MAX-WIDTH: 1200PX) */
-
-    @media (max-width: 1200px) {
-        .contenedor_informacion_dashboard {
-            grid-template-columns: minmax(0, 1fr); /* Define la distribución y el ancho de las columnas. */
-        }
-
-        .contenedor_lateral_dashboard {
-            display: grid; /* Activa CSS Grid para distribuir el contenido. */
-            grid-template-columns: repeat(2, minmax(0, 1fr)); /* Define la distribución y el ancho de las columnas. */
-        }
-    }
-
-/* TITULO 10 RESPONSIVE (MAX-WIDTH: 1024PX) */
-
-    @media (max-width: 1024px) {
-        .contenedor_dashboard {
-            padding: 22px; /* Define el espacio interior del elemento. */
-        }
-
-        .contenedor_graficos_dashboard {
-            grid-template-columns: minmax(0, 1fr); /* Define la distribución y el ancho de las columnas. */
-        }
-
-        .contenedor_acciones_dashboard {
-            gap: 10px; /* Define la separación entre los elementos. */
-        }
-
-        .boton_importar_dashboard, .boton_entrada_dashboard, .boton_salida_dashboard {
-            padding: 12px; /* Define el espacio interior del elemento. */
-        }
-    }
-
-/* TITULO 11 RESPONSIVE (MAX-WIDTH: 768PX) */
-
-    @media (max-width: 768px) {
-        .contenedor_dashboard {
-            padding: 18px; /* Define el espacio interior del elemento. */
-        }
-
-        .contenedor_acciones_dashboard {
-            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
-            gap: 10px; /* Define la separación entre los elementos. */
-        }
-
-        .contenedor_lateral_dashboard {
-            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
-        }
-
-        .descripcion_seccion_dashboard {
-            display: none; /* Oculta el elemento. */
-        }
-
-        .contenedor_mas_vendidos_dashboard {
-            display: block; /* Muestra el elemento como un bloque. */
-        }
-
-        .boton_mas_vendidos_dashboard {
-            width: 100%; /* Ocupa todo el ancho disponible. */
-            justify-content: space-between; /* Define la distribución de los elementos en el eje principal. */
-        }
-
-        .panel_mas_vendidos_dashboard {
-            position: static; /* Define el sistema de posicionamiento del elemento. */
-            width: 100%; /* Ocupa todo el ancho disponible. */
-            margin-top: 8px; /* Define el margen superior. */
-        }
-    }
-
-/* TITULO 12 RESPONSIVE (MAX-WIDTH: 480PX) */
-
-    @media (max-width: 480px) {
-        .contenedor_dashboard {
-            padding: 14px; /* Define el espacio interior del elemento. */
-        }
-
-        .contenedor_indicadores_dashboard {
-            grid-template-columns: minmax(0, 1fr); /* Define la distribución y el ancho de las columnas. */
-            gap: 11px; /* Define la separación entre los elementos. */
-        }
-
-        .tarjeta_stock_actual_dashboard, .tarjeta_stock_bajo_dashboard, .tarjeta_productos_agotados_dashboard, .tarjeta_ventas_mes_dashboard {
-            min-height: 97px; /* Establece el alto mínimo del elemento. */
-            padding: 15px; /* Define el espacio interior del elemento. */
-        }
-
-        .titulo_dashboard {
-            font-size: 21px; /* Define el tamaño del texto. */
-        }
-
-        .filtros_mas_vendidos_dashboard {
-            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
-        }
-
-        .tarjeta_ventas_seis_meses_dashboard, .tarjeta_inventario_familia_dashboard, .tarjeta_productos_stock_bajo_dashboard, .tarjeta_alertas_actuales_dashboard, .tarjeta_recomendaciones_dashboard {
-            padding: 15px; /* Define el espacio interior del elemento. */
-        }
-    }
-
     .icono_stock_actual_dashboard::before {
         -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%223%22%20y%3D%227%22%20width%3D%227%22%20height%3D%2213%22%20rx%3D%221%22%2F%3E%3Crect%20x%3D%2214%22%20y%3D%224%22%20width%3D%227%22%20height%3D%2216%22%20rx%3D%221%22%2F%3E%3Cpath%20d%3D%22M3%2011h7M14%209h7M1%2020h22%22%2F%3E%3C%2Fsvg%3E"); /* Define la imagen usada como máscara visual. */
         mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%223%22%20y%3D%227%22%20width%3D%227%22%20height%3D%2213%22%20rx%3D%221%22%2F%3E%3Crect%20x%3D%2214%22%20y%3D%224%22%20width%3D%227%22%20height%3D%2216%22%20rx%3D%221%22%2F%3E%3Cpath%20d%3D%22M3%2011h7M14%209h7M1%2020h22%22%2F%3E%3C%2Fsvg%3E"); /* Define la imagen usada como máscara visual. */
@@ -1058,80 +951,6 @@
         display: none !important; /* Define cómo se muestra y distribuye el elemento. */
     }
 
-/* TITULO 13 RESPONSIVE (MAX-WIDTH: 1440PX) */
-
-    @media (max-width: 1440px) {
-        .contenedor_indicadores_dashboard {
-            grid-template-columns: repeat(4,minmax(0,1fr)); /* Define la distribución y el ancho de las columnas. */
-        }
-    }
-
-/* TITULO 14 RESPONSIVE (MAX-WIDTH: 1200PX) */
-
-    @media (max-width: 1200px) {
-        .contenedor_indicadores_dashboard {
-            grid-template-columns: repeat(2,minmax(0,1fr)); /* Define la distribución y el ancho de las columnas. */
-        }
-    }
-
-/* TITULO 15 RESPONSIVE (MAX-WIDTH: 768PX) */
-
-    @media (max-width: 768px) {
-        .contenedor_dashboard {
-            padding: 18px; /* Define el espacio interior del elemento. */
-        }
-
-        .cabecera_mas_vendidos_dashboard {
-            flex-direction: column; /* Organiza los elementos en una columna. */
-            align-items: stretch; /* Define la alineación de los elementos en el eje transversal. */
-        }
-
-        .boton_mas_vendidos_dashboard {
-            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
-        }
-
-        .panel_mas_vendidos_dashboard,.vista_previa_mas_vendidos_dashboard {
-            padding: 12px; /* Define el espacio interior del elemento. */
-        }
-
-        .filtros_mas_vendidos_dashboard {
-            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
-        }
-
-        .tabla_previa_mas_vendidos_dashboard th:last-child,.tabla_previa_mas_vendidos_dashboard td:last-child {
-            width: 105px; /* Define el ancho del elemento. */
-        }
-
-        .descripcion_seccion_dashboard {
-            display: block; /* Muestra el elemento como un bloque. */
-        }
-    }
-
-/* TITULO 16 RESPONSIVE (MAX-WIDTH: 480PX) */
-
-    @media (max-width: 480px) {
-        .contenedor_dashboard {
-            padding: 14px; /* Define el espacio interior del elemento. */
-        }
-
-        .contenedor_indicadores_dashboard {
-            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
-        }
-
-        .contenedor_graficos_dashboard {
-            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
-        }
-
-        .fila_familia_dashboard {
-            grid-template-columns: minmax(72px,1fr) minmax(70px,1.5fr) 38px; /* Define la distribución y el ancho de las columnas. */
-            gap: 6px; /* Define la separación entre los elementos. */
-        }
-
-        .tabla_previa_mas_vendidos_dashboard th,.tabla_previa_mas_vendidos_dashboard td {
-            padding: 10px 6px; /* Define el espacio interior del elemento. */
-        }
-    }
-
     .subtitulo_ventas_dashboard {
         color: #71818a; /* Establece el color del texto. */
         font-family: Arial,sans-serif; /* Define la familia tipográfica. */
@@ -1231,30 +1050,6 @@
         text-align: left; /* Define la alineación horizontal del texto. */
     }
 
-/* TITULO 17 RESPONSIVE (MAX-WIDTH: 600PX) */
-
-    @media(max-width: 600px) {
-        .ventas_barras_dashboard {
-            gap: 5px; /* Define la separación entre los elementos. */
-        }
-
-        .ventas_monto_dashboard {
-            font-size: 9px; /* Define el tamaño del texto. */
-        }
-
-        .ventas_columna_dashboard {
-            height: 210px; /* Define el alto del elemento. */
-        }
-
-        .ventas_pista_dashboard {
-            height: 145px; /* Define el alto del elemento. */
-        }
-
-        .ventas_mes_dashboard {
-            font-size: 10px; /* Define el tamaño del texto. */
-        }
-    }
-
     .ventas_columna_dashboard.ventas_mes_maximo_dashboard .ventas_barra_dashboard {
         background: linear-gradient(180deg, #3869a8 0%, #0b3650 100%); /* Define el fondo del elemento. */
     }
@@ -1294,4 +1089,239 @@
     .icono_ventas_mes_dashboard::before {
         -webkit-mask-image: url("../../../../imagenes/inicio_sesion/cuerpo_pagina/secciones/chart-no-axes-column-increasing.svg"); /* Define la imagen usada como máscara visual. */
         mask-image: url("../../../../imagenes/inicio_sesion/cuerpo_pagina/secciones/chart-column.svg"); /* Define la imagen usada como máscara visual. */
+    }
+
+/* TITULO 8 RESPONSIVE DASHBOARD */
+
+    /* pantallas grandes (monitores Full HD+, iMac, monitores gaming QHD/4K) */
+    @media (min-width: 1441px) {
+        /* Sin media */
+    }
+
+    /* notebooks grandes (1600x900, 1920x1080) */
+    @media (max-width: 1440px) {
+        .contenedor_indicadores_dashboard {
+            grid-template-columns: repeat(2, minmax(0, 1fr)); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .contenedor_indicadores_dashboard {
+            grid-template-columns: repeat(4,minmax(0,1fr)); /* Define la distribución y el ancho de las columnas. */
+        }
+    }
+
+    /* notebooks comunes (1366x768, MacBook Air/Pro) */
+    @media (max-width: 1200px) {
+        .contenedor_informacion_dashboard {
+            grid-template-columns: minmax(0, 1fr); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .contenedor_lateral_dashboard {
+            display: grid; /* Activa CSS Grid para distribuir el contenido. */
+            grid-template-columns: repeat(2, minmax(0, 1fr)); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .contenedor_indicadores_dashboard {
+            grid-template-columns: repeat(2,minmax(0,1fr)); /* Define la distribución y el ancho de las columnas. */
+        }
+    }
+
+    /* tablets horizontales / pantallas medianas (iPad Pro en horizontal, notebooks pequeños) */
+    @media (max-width: 992px) {
+        .contenedor_dashboard {
+            padding: 22px; /* Define el espacio interior del elemento. */
+        }
+
+        .contenedor_graficos_dashboard {
+            grid-template-columns: minmax(0, 1fr); /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .contenedor_acciones_dashboard {
+            gap: 10px; /* Define la separación entre los elementos. */
+        }
+
+        .boton_importar_dashboard, .boton_entrada_dashboard, .boton_salida_dashboard {
+            padding: 12px; /* Define el espacio interior del elemento. */
+        }
+    }
+
+    /* tablets verticales (iPad clásico, tablets Android estándar) */
+    @media (max-width: 768px) {
+        .contenedor_dashboard {
+            padding: 18px; /* Define el espacio interior del elemento. */
+        }
+
+        .contenedor_acciones_dashboard {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+            gap: 10px; /* Define la separación entre los elementos. */
+        }
+
+        .contenedor_lateral_dashboard {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .descripcion_seccion_dashboard {
+            display: none; /* Oculta el elemento. */
+        }
+
+        .contenedor_mas_vendidos_dashboard {
+            display: block; /* Muestra el elemento como un bloque. */
+        }
+
+        .boton_mas_vendidos_dashboard {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+            justify-content: space-between; /* Define la distribución de los elementos en el eje principal. */
+        }
+
+        .panel_mas_vendidos_dashboard {
+            position: static; /* Define el sistema de posicionamiento del elemento. */
+            width: 100%; /* Ocupa todo el ancho disponible. */
+            margin-top: 8px; /* Define el margen superior. */
+        }
+
+        .contenedor_dashboard {
+            padding: 18px; /* Define el espacio interior del elemento. */
+        }
+
+        .cabecera_mas_vendidos_dashboard {
+            flex-direction: column; /* Organiza los elementos en una columna. */
+            align-items: stretch; /* Define la alineación de los elementos en el eje transversal. */
+        }
+
+        .boton_mas_vendidos_dashboard {
+            justify-content: center; /* Define la distribución de los elementos en el eje principal. */
+        }
+
+        .panel_mas_vendidos_dashboard,.vista_previa_mas_vendidos_dashboard {
+            padding: 12px; /* Define el espacio interior del elemento. */
+        }
+
+        .filtros_mas_vendidos_dashboard {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .tabla_previa_mas_vendidos_dashboard th:last-child,.tabla_previa_mas_vendidos_dashboard td:last-child {
+            width: 105px; /* Define el ancho del elemento. */
+        }
+
+        .descripcion_seccion_dashboard {
+            display: block; /* Muestra el elemento como un bloque. */
+        }
+    }
+
+    /* móviles extragrandes (pantallas compactas y dispositivos de gran tamaño) */
+    @media (max-width: 576px) {
+        .ventas_barras_dashboard {
+            gap: 5px; /* Define la separación entre los elementos. */
+        }
+
+        .ventas_monto_dashboard {
+            font-size: 9px; /* Define el tamaño del texto. */
+        }
+
+        .ventas_columna_dashboard {
+            height: 210px; /* Define el alto del elemento. */
+        }
+
+        .ventas_pista_dashboard {
+            height: 145px; /* Define el alto del elemento. */
+        }
+
+        .ventas_mes_dashboard {
+            font-size: 10px; /* Define el tamaño del texto. */
+        }
+
+        .contenedor_tabla_stock_bajo_dashboard, .tabla_mas_vendidos_dashboard, .vista_previa_mas_vendidos_dashboard {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+            min-width: 0; /* Permite reducir el ancho sin forzar el desbordamiento del contenedor. */
+            max-width: 100%; /* Evita que el elemento supere el ancho disponible. */
+            overflow-x: auto; /* Permite desplazar horizontalmente el contenido cuando no cabe. */
+            overscroll-behavior-x: contain; /* Mantiene el desplazamiento horizontal dentro de la tabla. */
+        }
+
+        .contenedor_dashboard table {
+            width: 100%; /* Ocupa todo el ancho disponible. */
+            min-width: 700px; /* Ajusta el ancho a las columnas visibles sin comprimir su contenido. */
+            table-layout: fixed; /* Define cómo se calcula el ancho de las columnas de la tabla. */
+            border-collapse: collapse; /* Define cómo se combinan los bordes de las celdas. */
+        }
+
+        .contenedor_dashboard table th, .contenedor_dashboard table td {
+            padding: 12px; /* Define el espacio interior del elemento. */
+            box-sizing: border-box; /* Incluye bordes y relleno dentro del tamaño definido. */
+            white-space: normal; /* Define cómo se conservan los espacios y los saltos de línea. */
+            overflow-wrap: anywhere; /* Permite controlar el salto de palabras largas. */
+            overflow: hidden; /* Controla el contenido que supera las dimensiones del elemento. */
+            line-height: 1.4; /* Define la separación entre líneas de texto. */
+            vertical-align: middle; /* Define la alineación vertical del contenido. */
+        }
+
+        .contenedor_dashboard table th {
+            font-size: 11px; /* Mantiene el tamaño de encabezados de la tabla de Productos. */
+            padding: 13px 5px; /* Usa el mismo espacio lateral compacto que Productos. */
+        }
+
+        .contenedor_dashboard table td {
+            font-size: 12px; /* Mantiene el tamaño de datos de la tabla de Productos. */
+            padding: 14px 5px; /* Compacta los lados y conserva espacio vertical para leer la fila. */
+        }
+    }
+
+    /* móviles grandes (iPhone 11, iPhone Plus/Max, Android grandes) */
+    @media (max-width: 414px) {
+        .contenedor_dashboard {
+            padding: 14px; /* Define el espacio interior del elemento. */
+        }
+
+        .contenedor_indicadores_dashboard {
+            grid-template-columns: minmax(0, 1fr); /* Define la distribución y el ancho de las columnas. */
+            gap: 11px; /* Define la separación entre los elementos. */
+        }
+
+        .tarjeta_stock_actual_dashboard, .tarjeta_stock_bajo_dashboard, .tarjeta_productos_agotados_dashboard, .tarjeta_ventas_mes_dashboard {
+            min-height: 97px; /* Establece el alto mínimo del elemento. */
+            padding: 15px; /* Define el espacio interior del elemento. */
+        }
+
+        .titulo_dashboard {
+            font-size: 21px; /* Define el tamaño del texto. */
+        }
+
+        .filtros_mas_vendidos_dashboard {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .tarjeta_ventas_seis_meses_dashboard, .tarjeta_inventario_familia_dashboard, .tarjeta_productos_stock_bajo_dashboard, .tarjeta_alertas_actuales_dashboard, .tarjeta_recomendaciones_dashboard {
+            padding: 15px; /* Define el espacio interior del elemento. */
+        }
+
+        .contenedor_dashboard {
+            padding: 14px; /* Define el espacio interior del elemento. */
+        }
+
+        .contenedor_indicadores_dashboard {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .contenedor_graficos_dashboard {
+            grid-template-columns: 1fr; /* Define la distribución y el ancho de las columnas. */
+        }
+
+        .fila_familia_dashboard {
+            grid-template-columns: minmax(72px,1fr) minmax(70px,1.5fr) 38px; /* Define la distribución y el ancho de las columnas. */
+            gap: 6px; /* Define la separación entre los elementos. */
+        }
+
+        .tabla_previa_mas_vendidos_dashboard th,.tabla_previa_mas_vendidos_dashboard td {
+            padding: 10px 6px; /* Define el espacio interior del elemento. */
+        }
+    }
+
+    /* móviles medianos (iPhone 12/13/14, Android gama media) */
+    @media (max-width: 390px) {
+        /* Sin media */
+    }
+
+    /* móviles pequeños (Android estándar, iPhone SE) */
+    @media (max-width: 360px) {
+        /* Sin media */
     }

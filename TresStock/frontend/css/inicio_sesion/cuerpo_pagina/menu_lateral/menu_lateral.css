@@ -12,6 +12,30 @@
         overflow-y: auto; /* Controla el contenido que desborda verticalmente. */
     }
 
+    .boton_cerrar_menu_lateral {
+        display: none; /* Oculta el botón cuando el menú permanece abierto en escritorio. */
+        width: 44px; /* Facilita pulsar el botón desde una pantalla táctil. */
+        height: 30px; /* Mantiene un área cómoda para cerrar el menú. */
+        margin: 8px 0 0 auto; /* Coloca la X en la esquina superior derecha del menú. */
+        padding: 0; /* Centra el icono sin relleno adicional. */
+        align-items: center; /* Centra la X verticalmente. */
+        justify-content: center; /* Centra la X horizontalmente. */
+        border: 0; /* Elimina el borde predeterminado del botón. */
+        border-radius: 8px; /* Suaviza las esquinas del área del botón. */
+        background: transparent; /* Integra el botón con el fondo del menú. */
+        color: #ffffff; /* Mantiene visible la X sobre el fondo oscuro. */
+        cursor: pointer; /* Indica que el botón permite cerrar el menú. */
+    }
+
+    .boton_cerrar_menu_lateral:hover {
+        background: rgba(255, 255, 255, 0.12); /* Resalta el botón al pasar el cursor. */
+    }
+
+    .boton_cerrar_menu_lateral:focus-visible {
+        outline: 2px solid #5dd5dc; /* Identifica el botón al navegar con el teclado. */
+        outline-offset: 2px; /* Separa el indicador del borde del botón. */
+    }
+
 /* TITULO 2 IDENTIDAD TRESSTOCK */
 
     .contenedor_identidad_menu_lateral {
@@ -382,7 +406,43 @@
 
 /* TITULO 13 RESPONSIVE MENU LATERAL */
 
-    @media (max-width: 1024px) {
+    /* pantallas grandes (monitores Full HD+, iMac, monitores gaming QHD/4K) */
+    @media (min-width: 1441px) {
+
+        /* Sin media */
+
+    }
+
+    /* notebooks grandes (1600x900, 1920x1080) */
+    @media (max-width: 1440px) {
+
+        /* Sin media */
+
+    }
+
+    /* notebooks comunes (1366x768, MacBook Air/Pro) */
+    @media (max-width: 1200px) {
+
+        /* Sin media */
+
+    }
+
+    /* tablets horizontales / pantallas medianas (iPad Pro en horizontal, notebooks pequeños) */
+    @media (max-width: 992px) {
+
+        .boton_cerrar_menu_lateral {
+            display: flex; /* Muestra la X cuando el menú funciona como panel desplegable. */
+            position: absolute; /* Evita que el botón agregue una fila encima del logo. */
+            top: 8px; /* Acerca la X al borde superior del menú. */
+            right: 8px; /* Coloca la X junto al borde derecho. */
+            height: 44px; /* Mantiene una zona cómoda para pulsar sin ocupar espacio adicional. */
+            margin: 0; /* Elimina el espacio exterior de la fila anterior. */
+        }
+
+        .imagen_logo_menu_lateral {
+            width: 120px; /* Reduce el área del logo para acercar las opciones al borde superior. */
+        }
+
         .contenedor_menu_lateral {
             width: 260px; /* Define el ancho del elemento. */
             height: 100dvh; /* Define el alto del elemento. */
@@ -393,19 +453,49 @@
         .contenedor_menu_lateral_abierto {
             left: 0; /* Define la posición respecto al borde izquierdo. */
         }
+
     }
 
-/* TITULO 14 RESPONSIVE (MAX-WIDTH: 480PX) */
+    /* tablets verticales (iPad clásico, tablets Android estándar) */
+    @media (max-width: 768px) {
 
-    @media (max-width: 480px) {
+        /* Sin media */
+
+    }
+
+    /* móviles extragrandes (pantallas compactas y dispositivos de gran tamaño) */
+    @media (max-width: 576px) {
+
+        /* Sin media */
+
+    }
+
+    /* móviles grandes (iPhone 11, iPhone Plus/Max, Android grandes) */
+    @media (max-width: 414px) {
+
         .contenedor_menu_lateral {
             width: 82%; /* Define el ancho del elemento. */
             max-width: 280px; /* Limita el ancho máximo del elemento. */
             left: -82%; /* Define la posición respecto al borde izquierdo. */
-            padding: 20px 12px; /* Define el espacio interior del elemento. */
+            padding: 8px 12px; /* Reduce el espacio superior e inferior del menú en teléfonos. */
         }
 
         .contenedor_menu_lateral_abierto {
             left: 0; /* Define la posición respecto al borde izquierdo. */
         }
+
+    }
+
+    /* móviles medianos (iPhone 12/13/14, Android gama media) */
+    @media (max-width: 390px) {
+
+        /* Sin media */
+
+    }
+
+    /* móviles pequeños (Android estándar, iPhone SE) */
+    @media (max-width: 360px) {
+
+        /* Sin media */
+
     }
