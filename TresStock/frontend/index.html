@@ -1,13 +1,10 @@
 <!DOCTYPE html>
+
 <html lang="es">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>TresStock</title>
-
 
     <!-- Configuración PWA TresStock -->
     <link rel="manifest" href="./manifest.webmanifest">
@@ -17,7 +14,6 @@
 
     <!-- Icono para dispositivos Apple -->
     <link rel="apple-touch-icon" href="./imagenes/pwa/icon-192.png">
-
 
     <!-- CSS INDEX -->
     <link rel="stylesheet" href="./css/inicio_sesion/index/index.css">
@@ -38,53 +34,37 @@
     <link rel="stylesheet" href="./css/inicio_sesion/cuerpo_pagina/secciones/reportes_analitica.css?v=20261113-9">
     <link rel="stylesheet" href="./css/inicio_sesion/cuerpo_pagina/secciones/usuarios.css?v=20261115-9">
     <link rel="stylesheet" href="./css/inicio_sesion/cuerpo_pagina/secciones/escaner.css">
-
 </head>
-
 
 <!-- Registro del Service Worker de TresStock -->
 <script>
     if ("serviceWorker" in navigator) {
         window.addEventListener("load", async () => {
             try {
-                const registro = await navigator.serviceWorker.register(
-                    "./service-worker.js"
-                );
+                const registro = await navigator.serviceWorker.register("./service-worker.js");
+                console.log( "Service Worker de TresStock registrado:", registro.scope);
 
-                console.log(
-                    "Service Worker de TresStock registrado:",
-                    registro.scope
-                );
             } catch (error) {
-                console.error(
-                    "Error al registrar Service Worker:",
-                    error
-                );
+                console.error( "Error al registrar Service Worker:", error);
             }
         });
     }
 </script>
 
-
 <body class="body_index">
-
     <!-- TITULO 1 CONTENEDOR PRINCIPAL -->
 
         <div class="contenedor_principal">
-
             <!-- lugar donde se cargará el menú lateral -->
             <div class="contenedor_menu" id="contenedor_menu"></div>
 
             <div class="contenedor_area_principal">
-
                 <!-- lugar donde se cargará la cabecera -->
                 <div class="contenedor_cabecera" id="contenedor_cabecera"></div>
 
                 <!-- lugar donde cambiarán las vistas -->
                 <div class="contenedor_contenido" id="contenedor_contenido"></div>
-
             </div>
-
         </div>
 
         <!-- CONFIGURACION DE IP -->
@@ -118,7 +98,5 @@
 
         <!-- JS INDEX -->
         <script src="./js/inicio_sesion/index/index.js?v=20261113-14"></script>
-
 </body>
-
 </html>

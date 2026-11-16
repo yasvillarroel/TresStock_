@@ -2,175 +2,92 @@
 
     <!-- contenedor principal de la vista de inventario -->
     <div class="contenedor_inventario">
-
-
         <!-- TITULO 2 ENCABEZADO INVENTARIO -->
 
             <!-- contenedor de información principal de inventario -->
             <div class="contenedor_encabezado_inventario">
-
                 <div class="contenedor_informacion_inventario">
-
-                    <div class="titulo_inventario">
-                        Gestión de inventario
-                    </div>
-
-                    <div class="descripcion_inventario">
-                        Controla el stock actual, stock mínimo, stock de seguridad y estado de los productos.
-                    </div>
-
+                    <div class="titulo_inventario">Gestión de inventario</div>
+                    <div class="descripcion_inventario">Controla el stock actual, stock mínimo, stock de seguridad y estado de los productos.</div>
                 </div>
-
             </div>
-
 
         <!-- TITULO 3 INDICADORES INVENTARIO -->
 
             <!-- contenedor de indicadores principales -->
             <div class="contenedor_indicadores_inventario">
-
-
                 <!-- indicador total productos -->
                 <div class="tarjeta_total_productos_inventario">
-
                     <div class="icono_total_productos_inventario">
                         <img class="imagen_icono_total_productos" src="./imagenes/inicio_sesion/cuerpo_pagina/secciones/package.svg" alt="Total productos" >
                     </div>
 
-                    
-
                     <div class="contenido_total_productos_inventario">
-
-                        <div class="texto_total_productos_inventario">
-                            Productos inventariables
-                        </div>
-
-                        <div class="valor_total_productos_inventario" id="valor_total_productos_inventario">
-                            0
-                        </div>
-
+                        <div class="texto_total_productos_inventario">Productos inventariables</div>
+                        <div class="valor_total_productos_inventario" id="valor_total_productos_inventario">0</div>
                     </div>
-
                 </div>
-
 
                 <!-- indicador stock bajo -->
                 <div class="tarjeta_stock_bajo_inventario">
-
                     <div class="icono_stock_bajo_inventario">
                         <img class="imagen_icono_stock_bajo" src="./imagenes/inicio_sesion/cuerpo_pagina/secciones/package-minus.svg" alt="Stock bajo" >
                     </div>
 
                     <div class="contenido_stock_bajo_inventario">
-
-                        <div class="texto_stock_bajo_inventario">
-                            Stock bajo
-                        </div>
-
-                        <div class="valor_stock_bajo_inventario" id="valor_stock_bajo_inventario">
-                            0
-                        </div>
-
+                        <div class="texto_stock_bajo_inventario">Stock bajo</div>
+                        <div class="valor_stock_bajo_inventario" id="valor_stock_bajo_inventario">0</div>
                     </div>
-
                 </div>
-
 
                 <!-- indicador sin stock -->
                 <div class="tarjeta_sin_stock_inventario">
-
                     <div class="icono_sin_stock_inventario">
                         <img class="imagen_icono_sin_stock" src="./imagenes/inicio_sesion/cuerpo_pagina/secciones/package-x.svg" alt="Sin stock" >
                     </div>
 
                     <div class="contenido_sin_stock_inventario">
-
-                        <div class="texto_sin_stock_inventario">
-                            Sin stock
-                        </div>
-
-                        <div class="valor_sin_stock_inventario" id="valor_sin_stock_inventario">
-                            0
-                        </div>
-
+                        <div class="texto_sin_stock_inventario">Sin stock</div>
+                        <div class="valor_sin_stock_inventario" id="valor_sin_stock_inventario">0</div>
                     </div>
-
                 </div>
-
 
                 <!-- indicador próximos a vencer -->
                 <div class="tarjeta_proximos_vencer_inventario">
-
                     <div class="icono_proximos_vencer_inventario">
                         <img class="imagen_icono_proximos_vencer" src="./imagenes/inicio_sesion/cuerpo_pagina/secciones/calendar-clock.svg" alt="Próximos a vencer" >
                     </div>
 
                     <div class="contenido_proximos_vencer_inventario">
-
-                        <div class="texto_proximos_vencer_inventario">
-                            Próximos a vencer
-                        </div>
-
-                        <div class="valor_proximos_vencer_inventario" id="valor_proximos_vencer_inventario">
-                            0
-                        </div>
-
+                        <div class="texto_proximos_vencer_inventario">Próximos a vencer</div>
+                        <div class="valor_proximos_vencer_inventario" id="valor_proximos_vencer_inventario">0</div>
                     </div>
-
                 </div>
-
             </div>
-
 
         <!-- TITULO 4 PESTAÑAS INVENTARIO -->
 
             <!-- contenedor de navegación interna de inventario -->
             <div class="contenedor_pestanas_inventario">
-
-                <button class="pestana_stock_actual_inventario pestana_inventario_activa" id="pestana_stock_actual_inventario" type="button" data-vista="stock">
-                    Stock actual
-                </button>
-
-                <button class="pestana_entradas_inventario" id="pestana_entradas_inventario" type="button" data-vista="ENTRADA">
-                    Entradas
-                </button>
-
-                <button class="pestana_salidas_inventario" id="pestana_salidas_inventario" type="button" data-vista="SALIDA">
-                    Salidas
-                </button>
-
-                <button class="pestana_ajustes_inventario" id="pestana_ajustes_inventario" type="button" data-vista="AJUSTE">
-                    Ajustes
-                </button>
-
-                <button class="pestana_movimientos_inventario" id="pestana_movimientos_inventario" type="button" data-vista="MOVIMIENTOS">
-                    Movimientos
-                </button>
-
+                <button class="pestana_stock_actual_inventario pestana_inventario_activa" id="pestana_stock_actual_inventario" type="button" data-vista="stock">Stock actual</button>
+                <button class="pestana_entradas_inventario" id="pestana_entradas_inventario" type="button" data-vista="ENTRADA">Entradas</button>
+                <button class="pestana_salidas_inventario" id="pestana_salidas_inventario" type="button" data-vista="SALIDA">Salidas</button>
+                <button class="pestana_ajustes_inventario" id="pestana_ajustes_inventario" type="button" data-vista="AJUSTE">Ajustes</button>
+                <button class="pestana_movimientos_inventario" id="pestana_movimientos_inventario" type="button" data-vista="MOVIMIENTOS">Movimientos</button>
             </div>
-
 
         <!-- TITULO 5 FILTROS INVENTARIO -->
 
             <!-- contenedor de búsqueda y filtros -->
             <div class="contenedor_filtros_inventario" id="filtros_stock_inventario">
-
-
                 <!-- búsqueda de producto -->
                 <div class="campo_busqueda_inventario">
-
-                    <div class="texto_busqueda_inventario">
-                        Buscar producto
-                    </div>
-
+                    <div class="texto_busqueda_inventario">Buscar producto</div>
                     <input class="input_busqueda_inventario" id="input_busqueda_inventario" type="text" placeholder="Nombre, código o código de barras">
-
                 </div>
-
 
                 <!-- filtro por familia: selector personalizado con búsqueda, como en Productos -->
                 <div class="campo_familia_inventario">
-
                     <div class="texto_familia_inventario">Familia</div>
 
                     <!-- conserva el valor utilizado por filtrarInventario -->
@@ -183,6 +100,7 @@
                             <span class="texto_selector_inventario" id="texto_selector_familia_inventario">Todas las familias</span>
                             <span class="flecha_selector_inventario" aria-hidden="true">▾</span>
                         </button>
+
                         <div class="panel_selector_inventario" id="panel_selector_familia_inventario" hidden>
                             <input class="input_buscar_selector_inventario" id="buscar_selector_familia_inventario" type="search" placeholder="Buscar familia..." autocomplete="off" aria-label="Buscar familia">
                             <div class="lista_opciones_selector_inventario" id="lista_opciones_familia_inventario" role="listbox" aria-label="Familias"></div>
@@ -192,7 +110,6 @@
 
                 <!-- filtro por estado: selector personalizado como en Productos -->
                 <div class="campo_estado_inventario">
-
                     <div class="texto_estado_inventario">Estado</div>
 
                     <!-- mantiene los valores del filtro original -->
@@ -211,6 +128,7 @@
                             <span class="texto_selector_inventario" id="texto_selector_estado_inventario">Todos los estados</span>
                             <span class="flecha_selector_inventario" aria-hidden="true">▾</span>
                         </button>
+
                         <div class="panel_selector_inventario" id="panel_selector_estado_inventario" hidden>
                             <div class="lista_opciones_selector_inventario" id="lista_opciones_estado_inventario" role="listbox" aria-label="Estados"></div>
                         </div>
@@ -233,6 +151,7 @@
                             <span class="texto_selector_inventario" id="texto_selector_actividad_inventario">Ventas recientes</span>
                             <span class="flecha_selector_inventario" aria-hidden="true">▾</span>
                         </button>
+
                         <div class="panel_selector_inventario" id="panel_selector_actividad_inventario" hidden>
                             <div class="lista_opciones_selector_inventario" id="lista_opciones_actividad_inventario" role="listbox" aria-label="Actividad comercial"></div>
                         </div>
@@ -242,16 +161,19 @@
                 <!-- filtro para mostrar productos con o sin datos de pronóstico -->
                 <div class="campo_pronostico_inventario">
                     <div class="texto_pronostico_inventario">Pronóstico</div>
+
                     <select class="select_pronostico_inventario" id="select_pronostico_inventario" hidden tabindex="-1" aria-hidden="true">
                         <option value="">Todos</option>
                         <option value="CON_PRONOSTICO">Con pronóstico (&gt; 0)</option>
                         <option value="SIN_PRONOSTICO">Sin pronóstico (todo en 0)</option>
                     </select>
+
                     <div class="contenedor_selector_inventario" id="contenedor_selector_pronostico_inventario">
                         <button class="boton_selector_inventario" id="boton_selector_pronostico_inventario" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="lista_opciones_pronostico_inventario">
                             <span class="texto_selector_inventario" id="texto_selector_pronostico_inventario">Todos</span>
                             <span class="flecha_selector_inventario" aria-hidden="true">▾</span>
                         </button>
+
                         <div class="panel_selector_inventario" id="panel_selector_pronostico_inventario" hidden>
                             <div class="lista_opciones_selector_inventario" id="lista_opciones_pronostico_inventario" role="listbox" aria-label="Pronóstico"></div>
                         </div>
@@ -259,29 +181,18 @@
                 </div>
 
                 <div class="contenedor_limpiar_filtros_inventario">
-                    <button class="boton_limpiar_filtros_inventario" id="limpiar_filtros_stock_inventario" type="button" title="Restablecer búsqueda, familia, estado, actividad comercial y pronóstico">
-                        Limpiar filtros
-                    </button>
+                    <button class="boton_limpiar_filtros_inventario" id="limpiar_filtros_stock_inventario" type="button" title="Restablecer búsqueda, familia, estado, actividad comercial y pronóstico">Limpiar filtros</button>
                 </div>
-
             </div>
-
 
         <!-- TITULO 6 TABLA INVENTARIO -->
 
             <!-- contenedor principal de la tabla -->
             <div class="contenedor_tabla_inventario" id="vista_stock_actual_inventario">
-
-
                 <!-- cabecera visual de la tabla -->
                 <div class="cabecera_contenedor_tabla_inventario">
-
-                    <div class="titulo_tabla_inventario">
-                        Stock de productos
-                    </div>
-
+                    <div class="titulo_tabla_inventario">Stock de productos</div>
                 </div>
-
 
                 <!-- tabla del inventario -->
                 <div class="tabla_inventario" role="table" aria-label="Stock de productos">
@@ -296,6 +207,7 @@
                         <div class="columna_estado_inventario" role="columnheader">Estado</div>
                         <div class="columna_acciones_inventario" role="columnheader">Acciones</div>
                     </div>
+
                     <div class="cuerpo_tabla_inventario" id="cuerpo_tabla_inventario" role="rowgroup">
                         <div class="fila_sin_inventario" role="row">
                             <div class="dato_sin_inventario" role="cell">No hay productos cargados para mostrar.</div>
@@ -303,80 +215,85 @@
                     </div>
                 </div>
 
-
                 <!-- SUBTITULO 1 PAGINACION INVENTARIO -->
 
                     <!-- contenedor principal de la paginación -->
                     <div class="contenedor_paginacion_inventario" id="contenedor_paginacion_inventario">
-
                         <!-- información de productos mostrados -->
-                        <div class="informacion_paginacion_inventario" id="informacion_paginacion_inventario">
-                            Mostrando 0 a 0 de 0 productos
-                        </div>
+                        <div class="informacion_paginacion_inventario" id="informacion_paginacion_inventario">Mostrando 0 a 0 de 0 productos</div>
 
                         <!-- controles de paginación -->
                         <div class="controles_paginacion_inventario" id="controles_paginacion_inventario">
-
                             <button class="boton_pagina_anterior_inventario" id="boton_pagina_anterior_inventario" type="button">‹</button>
-
                             <div class="numeros_paginas_inventario" id="numeros_paginas_inventario"></div>
-
                             <button class="boton_pagina_siguiente_inventario" id="boton_pagina_siguiente_inventario" type="button">›</button>
-
                         </div>
-
                     </div>
-
             </div>
 
+        <!-- TITULO 7 MODAL AJUSTE DE STOCK -->
+
+            <!-- Agrupa los campos para registrar un ajuste de existencias. -->
             <div class="modal_ajuste_stock_inventario" id="modal_ajuste_stock_inventario" aria-hidden="true" hidden>
                 <div class="contenido_modal_ajuste_stock_inventario" role="dialog" aria-modal="true" aria-labelledby="titulo_modal_ajuste_stock_inventario">
                     <button class="cerrar_modal_ajuste_stock_inventario" id="cerrar_modal_ajuste_stock_inventario" type="button" aria-label="Cerrar">×</button>
                     <div class="titulo_modal_ajuste_stock_inventario" id="titulo_modal_ajuste_stock_inventario">Ajustar stock</div>
                     <div class="producto_modal_ajuste_stock_inventario" id="producto_modal_ajuste_stock_inventario"></div>
+
                     <form id="formulario_ajuste_stock_inventario">
                         <!-- Operación y cantidad: el resto de la lógica de ajuste se conserva. -->
                         <div class="rejilla_campos_modal_ajuste_stock_inventario">
                             <div class="campo_modal_ajuste_stock_inventario">
                                 <label class="texto_modal_ajuste_stock_inventario" for="operacion_ajuste_stock_inventario">Tipo de ajuste</label>
+
                                 <select id="operacion_ajuste_stock_inventario" required>
                                     <option value="sumar">Sumar al stock</option>
                                     <option value="restar">Restar del stock</option>
                                     <option value="fijar">Fijar stock en</option>
                                 </select>
                             </div>
+
                             <div class="campo_modal_ajuste_stock_inventario">
                                 <label class="texto_modal_ajuste_stock_inventario" for="cantidad_ajuste_stock_inventario" id="etiqueta_cantidad_ajuste_stock_inventario">Cantidad a sumar</label>
                                 <input id="cantidad_ajuste_stock_inventario" type="number" min="0.0001" max="99999999.9999" step="0.0001" placeholder="Ingresa la cantidad" required>
                             </div>
                         </div>
+
                         <!-- Mantiene el registro de lotes cuando se suman unidades. -->
                         <div class="campo_lote_vencimiento_inventario" id="campo_lote_vencimiento_inventario" hidden>
                             <button class="boton_toggle_lote_vencimiento_inventario" id="boton_toggle_lote_vencimiento_inventario" type="button" aria-pressed="false">
                                 <span>¿Lote con vencimiento?</span>
                                 <span class="estado_toggle_lote_vencimiento_inventario" id="estado_toggle_lote_vencimiento_inventario">No</span>
                             </button>
+
                             <div class="campo_fecha_lote_vencimiento_inventario" id="campo_fecha_lote_vencimiento_inventario" hidden>
                                 <label class="texto_modal_ajuste_stock_inventario" for="fecha_vencimiento_lote_inventario">Fecha de vencimiento del lote</label>
                                 <input id="fecha_vencimiento_lote_inventario" type="date" disabled>
                             </div>
                         </div>
+
                         <div class="separador_modal_ajuste_stock_inventario" aria-hidden="true"></div>
+
                         <div class="campo_modal_ajuste_stock_inventario">
                             <label class="texto_modal_ajuste_stock_inventario" for="motivo_ajuste_stock_inventario">Motivo del movimiento</label>
+
                             <select id="motivo_ajuste_stock_inventario" required aria-describedby="ayuda_motivo_ajuste_stock_inventario">
                                 <option value="" selected disabled>Selecciona un motivo</option>
                             </select>
                         </div>
+
                         <div class="campo_modal_ajuste_stock_inventario">
                             <label class="texto_modal_ajuste_stock_inventario" id="etiqueta_observaciones_ajuste_stock_inventario" for="observaciones_ajuste_stock_inventario">Observaciones (opcionales)</label>
                             <textarea id="observaciones_ajuste_stock_inventario" rows="3" maxlength="100" placeholder="Escribe información adicional sobre el movimiento..."></textarea>
+
                             <div class="pie_observaciones_ajuste_stock_inventario">
                                 <span id="ayuda_motivo_ajuste_stock_inventario">Se guardarán el motivo y las observaciones en el historial.</span>
                                 <span id="contador_motivo_ajuste_stock_inventario" aria-live="polite">0/100</span>
                             </div>
                         </div>
+
                         <div class="mensaje_modal_ajuste_stock_inventario" id="mensaje_ajuste_stock_inventario" role="status" aria-live="polite"></div>
+
                         <div class="acciones_modal_ajuste_stock_inventario">
                             <button class="boton_cancelar_ajuste_stock_inventario" id="cancelar_ajuste_stock_inventario" type="button">Cancelar</button>
                             <button class="boton_guardar_ajuste_stock_inventario" id="guardar_ajuste_stock_inventario" type="submit">Guardar ajuste</button>
@@ -385,20 +302,30 @@
                 </div>
             </div>
 
+        <!-- TITULO 8 MODAL HISTORIAL DEL PRODUCTO -->
+
+            <!-- Muestra los movimientos de inventario del producto seleccionado. -->
             <div class="modal_historial_producto_inventario" id="modal_historial_producto_inventario" aria-hidden="true" hidden>
                 <div class="contenido_modal_historial_producto_inventario" role="dialog" aria-modal="true" aria-labelledby="titulo_modal_historial_producto_inventario">
                     <button class="cerrar_modal_ajuste_stock_inventario" id="cerrar_modal_historial_producto_inventario" type="button" aria-label="Cerrar">×</button>
                     <div class="titulo_modal_ajuste_stock_inventario" id="titulo_modal_historial_producto_inventario">Últimos movimientos del producto</div>
                     <div class="producto_modal_ajuste_stock_inventario" id="nombre_historial_producto_inventario"></div>
                     <div class="mensaje_historial_producto_inventario" id="mensaje_historial_producto_inventario" role="status" aria-live="polite">Cargando movimientos…</div>
+
                     <div class="tabla_historial_producto_inventario_contenedor" id="tabla_historial_producto_inventario_contenedor" hidden>
                         <div class="tabla_historial_producto_inventario" role="table" aria-label="Movimientos recientes del producto">
                             <div class="encabezado_historial_producto_inventario" role="row">
-                                <div role="columnheader">Fecha</div><div role="columnheader">Tipo</div><div role="columnheader">Cantidad</div><div role="columnheader">Motivo</div><div role="columnheader">Realizado por</div>
+                                <div role="columnheader">Fecha</div>
+                                <div role="columnheader">Tipo</div>
+                                <div role="columnheader">Cantidad</div>
+                                <div role="columnheader">Motivo</div>
+                                <div role="columnheader">Realizado por</div>
                             </div>
+
                             <div id="filas_historial_producto_inventario" role="rowgroup"></div>
                         </div>
                     </div>
+
                     <div class="paginacion_historial_producto_inventario" id="paginacion_historial_producto_inventario" hidden>
                         <button class="boton_pagina_historial_producto_inventario" id="anterior_historial_producto_inventario" type="button">Anterior</button>
                         <div class="texto_pagina_historial_producto_inventario" id="texto_pagina_historial_producto_inventario"></div>
@@ -407,6 +334,9 @@
                 </div>
             </div>
 
+        <!-- TITULO 9 MODAL FOTO DEL PRODUCTO -->
+
+            <!-- Muestra la imagen ampliada del producto. -->
             <div class="modal_foto_producto_inventario" id="modal_foto_producto_inventario" aria-hidden="true" hidden>
                 <div class="contenido_modal_foto_producto_inventario" role="dialog" aria-modal="true" aria-labelledby="titulo_modal_foto_producto_inventario">
                     <button class="cerrar_modal_ajuste_stock_inventario" id="cerrar_modal_foto_producto_inventario" type="button" aria-label="Cerrar">×</button>
@@ -417,7 +347,6 @@
 
             <!-- filtros del historial de inventario -->
             <div class="contenedor_filtros_inventario filtros_movimientos_inventario" id="filtros_movimientos_inventario" hidden>
-
                 <div class="campo_busqueda_inventario campo_busqueda_movimientos_inventario">
                     <div class="texto_busqueda_inventario">Buscar producto o correo</div>
                     <input class="input_busqueda_inventario" id="busqueda_movimientos_inventario" type="search" maxlength="150" placeholder="Nombre, código o correo del usuario">
@@ -434,51 +363,56 @@
                 </div>
 
                 <!-- SUBTITULO 1 TIPO DE MOVIMIENTO: solo en la pestaña Movimientos -->
-                <div class="campo_fecha_movimientos_inventario" id="campo_tipo_movimientos_inventario" hidden>
-                    <div class="texto_busqueda_inventario">Tipo de movimiento</div>
-                    <select id="tipo_movimientos_inventario" hidden tabindex="-1" aria-hidden="true">
-                        <option value="">Todos los movimientos</option>
-                        <option value="ENTRADA">Entradas</option>
-                        <option value="SALIDA">Salidas</option>
-                        <option value="AJUSTE">Ajustes</option>
-                    </select>
-                    <div class="contenedor_selector_inventario" id="contenedor_selector_tipo_movimientos_inventario">
-                        <button class="boton_selector_inventario" id="boton_selector_tipo_movimientos_inventario" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="lista_opciones_tipo_movimientos_inventario">
-                            <span class="texto_selector_inventario" id="texto_selector_tipo_movimientos_inventario">Todos los movimientos</span>
-                            <span class="flecha_selector_inventario" aria-hidden="true">▾</span>
-                        </button>
-                        <div class="panel_selector_inventario" id="panel_selector_tipo_movimientos_inventario" hidden>
-                            <div class="lista_opciones_selector_inventario" id="lista_opciones_tipo_movimientos_inventario" role="listbox" aria-label="Tipo de movimiento"></div>
+
+                    <div class="campo_fecha_movimientos_inventario" id="campo_tipo_movimientos_inventario" hidden>
+                        <div class="texto_busqueda_inventario">Tipo de movimiento</div>
+
+                        <select id="tipo_movimientos_inventario" hidden tabindex="-1" aria-hidden="true">
+                            <option value="">Todos los movimientos</option>
+                            <option value="ENTRADA">Entradas</option>
+                            <option value="SALIDA">Salidas</option>
+                            <option value="AJUSTE">Ajustes</option>
+                        </select>
+
+                        <div class="contenedor_selector_inventario" id="contenedor_selector_tipo_movimientos_inventario">
+                            <button class="boton_selector_inventario" id="boton_selector_tipo_movimientos_inventario" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="lista_opciones_tipo_movimientos_inventario">
+                                <span class="texto_selector_inventario" id="texto_selector_tipo_movimientos_inventario">Todos los movimientos</span>
+                                <span class="flecha_selector_inventario" aria-hidden="true">▾</span>
+                            </button>
+
+                            <div class="panel_selector_inventario" id="panel_selector_tipo_movimientos_inventario" hidden>
+                                <div class="lista_opciones_selector_inventario" id="lista_opciones_tipo_movimientos_inventario" role="listbox" aria-label="Tipo de movimiento"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
                 <!-- SUBTITULO 2 ORDENAR POR: mantiene las opciones originales -->
-                <div class="campo_fecha_movimientos_inventario">
-                    <div class="texto_busqueda_inventario">Ordenar por</div>
-                    <select id="orden_movimientos_inventario" hidden tabindex="-1" aria-hidden="true">
-                        <option value="recientes">Más recientes</option>
-                        <option value="antiguos">Más antiguos</option>
-                        <option value="cantidad_mayor">Mayor cantidad</option>
-                        <option value="cantidad_menor">Menor cantidad</option>
-                    </select>
-                    <div class="contenedor_selector_inventario" id="contenedor_selector_orden_movimientos_inventario">
-                        <button class="boton_selector_inventario" id="boton_selector_orden_movimientos_inventario" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="lista_opciones_orden_movimientos_inventario">
-                            <span class="texto_selector_inventario" id="texto_selector_orden_movimientos_inventario">Más recientes</span>
-                            <span class="flecha_selector_inventario" aria-hidden="true">▾</span>
-                        </button>
-                        <div class="panel_selector_inventario" id="panel_selector_orden_movimientos_inventario" hidden>
-                            <div class="lista_opciones_selector_inventario" id="lista_opciones_orden_movimientos_inventario" role="listbox" aria-label="Orden de movimientos"></div>
+
+                    <div class="campo_fecha_movimientos_inventario">
+                        <div class="texto_busqueda_inventario">Ordenar por</div>
+
+                        <select id="orden_movimientos_inventario" hidden tabindex="-1" aria-hidden="true">
+                            <option value="recientes">Más recientes</option>
+                            <option value="antiguos">Más antiguos</option>
+                            <option value="cantidad_mayor">Mayor cantidad</option>
+                            <option value="cantidad_menor">Menor cantidad</option>
+                        </select>
+
+                        <div class="contenedor_selector_inventario" id="contenedor_selector_orden_movimientos_inventario">
+                            <button class="boton_selector_inventario" id="boton_selector_orden_movimientos_inventario" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="lista_opciones_orden_movimientos_inventario">
+                                <span class="texto_selector_inventario" id="texto_selector_orden_movimientos_inventario">Más recientes</span>
+                                <span class="flecha_selector_inventario" aria-hidden="true">▾</span>
+                            </button>
+
+                            <div class="panel_selector_inventario" id="panel_selector_orden_movimientos_inventario" hidden>
+                                <div class="lista_opciones_selector_inventario" id="lista_opciones_orden_movimientos_inventario" role="listbox" aria-label="Orden de movimientos"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="contenedor_limpiar_filtros_inventario">
-                    <button class="boton_limpiar_filtros_inventario" id="limpiar_filtros_movimientos_inventario" type="button" title="Restablecer búsqueda, fechas, tipo y orden">
-                        Limpiar filtros
-                    </button>
-                </div>
-
+                    <div class="contenedor_limpiar_filtros_inventario">
+                        <button class="boton_limpiar_filtros_inventario" id="limpiar_filtros_movimientos_inventario" type="button" title="Restablecer búsqueda, fechas, tipo y orden">Limpiar filtros</button>
+                    </div>
             </div>
 
             <!-- tabla del historial de inventario -->
@@ -492,13 +426,17 @@
                     <div class="encabezado_tabla_inventario fila_encabezado_inventario" id="encabezado_movimientos_inventario" role="row">
                         <!-- Las columnas se adaptan a Entradas, Salidas, Ajustes o Movimientos mediante inventario.js -->
                     </div>
+
                     <div class="cuerpo_tabla_inventario" id="cuerpo_movimientos_inventario" role="rowgroup">
-                        <div class="fila_sin_inventario" role="row"><div class="dato_sin_inventario" role="cell">Cargando movimientos…</div></div>
+                        <div class="fila_sin_inventario" role="row">
+                            <div class="dato_sin_inventario" role="cell">Cargando movimientos…</div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="contenedor_paginacion_inventario paginacion_movimientos_inventario" id="paginacion_movimientos_inventario">
                     <div class="informacion_paginacion_inventario" id="informacion_movimientos_inventario">Mostrando 0 movimientos</div>
+
                     <div class="controles_paginacion_inventario">
                         <button class="boton_pagina_anterior_inventario" id="anterior_movimientos_inventario" type="button">‹</button>
                         <div class="numeros_paginas_inventario" id="numeros_paginas_movimientos_inventario"></div>
@@ -507,12 +445,7 @@
                 </div>
             </div>
 
-
-
-
-        <!-- TITULO 8 INICIALIZACION INVENTARIO -->
+        <!-- TITULO 10 INICIALIZACION INVENTARIO -->
 
             <!-- sin estructura -->
-
-
     </div>

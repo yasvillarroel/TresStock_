@@ -2,136 +2,95 @@
 
     <!-- contenedor principal de la vista de gestión de productos -->
     <div class="contenedor_productos">
-
         <!-- TITULO 2 ENCABEZADO PRODUCTOS -->
 
             <!-- contenedor que agrupa la información principal y las opciones de productos -->
             <div class="contenedor_encabezado_productos">
-
                 <!-- contenedor de información principal de la vista -->
                 <div class="contenedor_informacion_productos">
-
                     <!-- título principal de la gestión de productos -->
                     <div class="titulo_productos">Gestión de productos</div>
 
                     <!-- descripción de la funcionalidad de la vista -->
                     <div class="descripcion_productos">Administra el catálogo de productos del minimarket.</div>
-
                 </div>
 
                 <!-- opcion para importar la base de datos de productos -->
                 <div class="boton_importar_productos" id="boton_importar_productos" onclick="abrirImportacionProductos()" >
-
                     <!-- icono visual para importar base de datos -->
                     <div class="icono_importar_productos">↑</div>
 
                     <!-- texto de la opción para importar un excel -->
                     <div class="texto_importar_productos">Importar base de datos</div>
-
                 </div>
 
                 <!-- opción para abrir el formulario de registro de producto -->
                 <div class="boton_nuevo_producto" id="boton_nuevo_producto" onclick="abrirFormularioProducto()" >
-
                     <!-- icono visual para agregar un producto -->
                     <div class="icono_nuevo_producto">+</div>
 
                     <!-- texto de la opción para agregar un producto -->
                     <div class="texto_nuevo_producto">Nuevo producto</div>
-
                 </div>
-
             </div>
 
         <!-- TITULO 3 INDICADORES PRODUCTOS -->
 
             <!-- contenedor que agrupa los indicadores principales de productos -->
             <div class="contenedor_indicadores_productos">
-
                 <!-- indicador para mostrar la cantidad total de productos -->
                 <div class="tarjeta_total_productos">
-
                     <div class="icono_total_productos">
-
                         <img class="imagen_icono_total_productos" src="./imagenes/inicio_sesion/cuerpo_pagina/secciones/package.svg" alt="Total productos" >
-
                     </div>
 
                     <div class="contenido_total_productos">
-
-                        <div class="texto_total_productos"> Total productos </div>
-
-                        <div class="valor_total_productos" id="valor_total_productos" > 0 </div>
-
+                        <div class="texto_total_productos">Total productos</div>
+                        <div class="valor_total_productos" id="valor_total_productos" >0</div>
                     </div>
-
                 </div>
 
                 <!-- indicador para mostrar la cantidad de familias -->
                 <div class="tarjeta_familias_productos">
-
                     <div class="icono_familias_productos">
-
                         <img class="imagen_icono_familias_productos" src="./imagenes/inicio_sesion/cuerpo_pagina/secciones/tags.svg" alt="Familias" >
-
                     </div>
 
                     <div class="contenido_familias_productos">
-
-                        <div class="texto_familias_productos"> Familias </div>
-
-                        <div class="valor_familias_productos" id="valor_familias_productos" > 0 </div>
-
+                        <div class="texto_familias_productos">Familias</div>
+                        <div class="valor_familias_productos" id="valor_familias_productos" >0</div>
                     </div>
-
                 </div>
 
                 <!-- indicador para mostrar la cantidad de proveedores -->
                 <div class="tarjeta_proveedores_productos">
-
                     <div class="icono_proveedores_productos">
-
                         <img class="imagen_icono_proveedores_productos" src="./imagenes/inicio_sesion/cuerpo_pagina/secciones/truck.svg" alt="Proveedores" >
-
                     </div>
 
                     <div class="contenido_proveedores_productos">
-
-                        <div class="texto_proveedores_productos"> Productos con proveedor </div>
-
-                        <div class="valor_proveedores_productos" id="valor_productos_con_proveedor"> 0% </div>
-
+                        <div class="texto_proveedores_productos">Productos con proveedor</div>
+                        <div class="valor_proveedores_productos" id="valor_productos_con_proveedor">0%</div>
                     </div>
-
                 </div>
 
                 <!-- indicador para mostrar productos con stock bajo -->
                 <div class="tarjeta_stock_bajo_productos">
-
                     <div class="icono_stock_bajo_productos">
-
                         <img class="imagen_icono_stock_bajo_productos" src="./imagenes/inicio_sesion/cuerpo_pagina/secciones/triangle-alert.svg" alt="Productos con bajo stock" >
-
                     </div>
 
                     <div class="contenido_stock_bajo_productos">
-
-                        <div class="texto_stock_bajo_productos"> Productos sin proveedor </div>
-
-                        <div class="valor_stock_bajo_productos" id="valor_productos_sin_proveedor"> 0 </div>
-
+                        <div class="texto_stock_bajo_productos">Productos sin proveedor</div>
+                        <div class="valor_stock_bajo_productos" id="valor_productos_sin_proveedor">0</div>
                     </div>
-
                 </div>
-
             </div>
-
 
         <!-- TITULO 4 FILTROS PRODUCTOS -->
 
             <!-- contenedor que agrupa la búsqueda y los filtros de productos -->
             <div class="contenedor_filtros_productos">
-
                 <!-- buscador por código, código de barras o descripción -->
                 <div class="contenedor_busqueda_productos">
                     <div class="texto_busqueda_productos">Buscar producto</div>
@@ -202,163 +161,110 @@
 
                 <!-- restablece los filtros a la vista de productos activos -->
                 <div class="contenedor_limpiar_filtros_productos">
-                    <button class="boton_limpiar_filtros_productos" id="boton_limpiar_filtros_productos" type="button" title="Restablecer filtros y mostrar productos activos">
-                        Limpiar filtros
-                    </button>
+                    <button class="boton_limpiar_filtros_productos" id="boton_limpiar_filtros_productos" type="button" title="Restablecer filtros y mostrar productos activos">Limpiar filtros</button>
                 </div>
-
             </div>
 
         <!-- TITULO 5 TABLA PRODUCTOS -->
 
             <!-- contenedor principal de la tabla de productos -->
             <div class="contenedor_tabla_productos">
-
                 <!-- cabecera visual de la tabla -->
                 <div class="cabecera_contenedor_tabla_productos">
-
                     <div class="titulo_tabla_productos">Productos registrados</div>
-
                 </div>
 
                 <!-- tabla para mostrar los productos registrados -->
                 <table class="tabla_productos">
-
                     <!-- encabezado de la tabla -->
                     <thead class="encabezado_tabla_productos">
-
                         <tr class="fila_encabezado_productos">
-
                             <!-- miniatura de la fotografia asociada -->
                             <th class="columna_imagen_productos">Imagen</th>
-
                             <th class="columna_codigo_productos">Código</th>
-
                             <th class="columna_codigo_barra_productos">Código de barras</th>
-
                             <th class="columna_descripcion_productos">Descripción</th>
-
                             <th class="columna_familia_productos">Familia</th>
-
                             <th class="columna_precio_productos">Precio público</th>
-
-
                             <th class="columna_proveedor_productos">Proveedor</th>
 
                             <!-- indica si el producto está activo o inactivo -->
                             <th class="columna_estado_productos">Estado</th>
-
                             <th class="columna_acciones_productos">Acciones</th>
-
                         </tr>
-
                     </thead>
 
                     <!-- cuerpo donde se cargarán los productos -->
                     <tbody class="cuerpo_tabla_productos" id="cuerpo_tabla_productos" >
-
                         <!-- fila temporal mientras no existan datos cargados -->
                         <tr class="fila_sin_productos">
-
-                            <td class="dato_sin_productos" colspan="9" > No hay productos cargados para mostrar. </td>
-
+                            <td class="dato_sin_productos" colspan="9" >No hay productos cargados para mostrar.</td>
                         </tr>
-
                     </tbody>
-
                 </table>
-
 
                 <!-- SUBTITULO 1 CONTENEDOR PAGINACION -->
 
                     <!-- contenedor principal de la paginacion -->
                     <div class="contenedor_paginacion_productos" id="contenedor_paginacion_productos">
-
                         <!-- informacion de productos mostrados -->
-                        <div class="informacion_paginacion_productos" id="informacion_paginacion_productos">
-                            Mostrando 0 a 0 de 0 productos
-                        </div>
+                        <div class="informacion_paginacion_productos" id="informacion_paginacion_productos">Mostrando 0 a 0 de 0 productos</div>
 
                         <!-- contenedor de los controles de paginacion -->
                         <div class="controles_paginacion_productos" id="controles_paginacion_productos">
-
                             <!-- boton pagina anterior -->
-                            <button class="boton_pagina_anterior_productos" id="boton_pagina_anterior_productos" type="button">
-                                ‹
-                            </button>
+                            <button class="boton_pagina_anterior_productos" id="boton_pagina_anterior_productos" type="button">‹</button>
 
                             <!-- numeros de pagina -->
                             <div class="numeros_paginas_productos" id="numeros_paginas_productos"></div>
 
                             <!-- boton pagina siguiente -->
-                            <button class="boton_pagina_siguiente_productos" id="boton_pagina_siguiente_productos" type="button">
-                                ›
-                            </button>
-
+                            <button class="boton_pagina_siguiente_productos" id="boton_pagina_siguiente_productos" type="button">›</button>
                         </div>
-
                     </div>
-
-
             </div>
 
         <!-- TITULO 6 FORMULARIO PRODUCTO -->
 
             <!-- contenedor superpuesto del formulario de producto -->
             <div class="contenedor_formulario_producto contenedor_formulario_producto_oculto" id="contenedor_formulario_producto" >
-
                 <!-- contenedor interior del formulario -->
                 <div class="formulario_producto">
-
                     <!-- TITULO 7 CABECERA FORMULARIO -->
 
                         <!-- contenedor del título y cierre del formulario -->
                         <div class="cabecera_formulario_producto">
-
                             <!-- título del formulario -->
-                            <div class="titulo_formulario_producto" id="titulo_formulario_producto" > Nuevo producto </div>
+                            <div class="titulo_formulario_producto" id="titulo_formulario_producto" >Nuevo producto</div>
 
                             <!-- opción para cerrar el formulario -->
-                            <div class="boton_cerrar_formulario_producto" id="boton_cerrar_formulario_producto" onclick="cerrarFormularioProducto()" > × </div>
-
+                            <div class="boton_cerrar_formulario_producto" id="boton_cerrar_formulario_producto" onclick="cerrarFormularioProducto()" >×</div>
                         </div>
 
                     <!-- TITULO 8 CAMPOS FORMULARIO -->
 
                         <!-- contenedor de los campos del formulario -->
                         <div class="contenedor_campos_producto">
-
                             <!-- campo código -->
                             <div class="campo_codigo_producto">
-
-                                <div class="texto_campo_codigo_producto"> Código </div>
-
+                                <div class="texto_campo_codigo_producto">Código</div>
                                 <input class="input_codigo_producto" id="input_codigo_producto" type="text" >
-
                             </div>
 
                             <!-- campo código de barras -->
                             <div class="campo_codigo_barra_producto">
-
-                                <div class="texto_campo_codigo_barra_producto"> Código de barras </div>
-
+                                <div class="texto_campo_codigo_barra_producto">Código de barras</div>
                                 <input class="input_codigo_barra_producto" id="input_codigo_barra_producto" type="text" >
-
                             </div>
 
                             <!-- campo descripción -->
                             <div class="campo_descripcion_producto">
-
-                                <div class="texto_campo_descripcion_producto"> Descripción </div>
-
+                                <div class="texto_campo_descripcion_producto">Descripción</div>
                                 <input class="input_descripcion_producto" id="input_descripcion_producto" type="text" >
-
                             </div>
-
 
                             <!-- campo familia -->
                             <div class="campo_familia_producto">
-
                                 <div class="texto_campo_familia_producto">Familia</div>
 
                                 <!-- conserva el valor del formulario para crear, editar y guardar -->
@@ -368,7 +274,6 @@
 
                                 <!-- selector personalizado con el mismo diseño de la vista Productos -->
                                 <div class="contenedor_selector_formulario_producto" id="contenedor_selector_familia_formulario_producto">
-
                                     <button class="boton_selector_formulario_producto" id="boton_selector_familia_formulario_producto" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="lista_selector_familia_formulario_producto">
                                         <span class="texto_selector_formulario_producto" id="texto_selector_familia_formulario_producto">Seleccionar familia</span>
                                         <span class="flecha_selector_formulario_producto" aria-hidden="true">▾</span>
@@ -378,25 +283,18 @@
                                         <input class="input_buscar_selector_formulario_producto" id="buscar_selector_familia_formulario_producto" type="search" placeholder="Buscar familia..." autocomplete="off" aria-label="Buscar familia">
                                         <div class="lista_selector_formulario_producto" id="lista_selector_familia_formulario_producto" role="listbox" aria-label="Familias disponibles"></div>
                                     </div>
-
                                 </div>
-
                             </div>
-
 
                             <!-- campo precio público -->
                             <div class="campo_precio_producto">
-
-                                <div class="texto_campo_precio_producto"> Precio público </div>
-
+                                <div class="texto_campo_precio_producto">Precio público</div>
                                 <input class="input_precio_producto" id="input_precio_producto" type="number" min="0" >
-
                             </div>
 
                             <!-- campo proveedor -->
                             <div class="campo_proveedor_producto">
-
-                                <div class="texto_campo_proveedor_producto"> Proveedor </div>
+                                <div class="texto_campo_proveedor_producto">Proveedor</div>
 
                                 <!-- conserva el proveedor que se enviara al backend -->
                                 <select class="select_proveedor_producto" id="select_proveedor_producto" hidden>
@@ -405,7 +303,6 @@
 
                                 <!-- selector personalizado con buscador y scroll hacia abajo -->
                                 <div class="contenedor_selector_formulario_producto" id="contenedor_selector_proveedor_formulario_producto">
-
                                     <button class="boton_selector_formulario_producto" id="boton_selector_proveedor_formulario_producto" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="lista_selector_proveedor_formulario_producto">
                                         <span class="texto_selector_formulario_producto" id="texto_selector_proveedor_formulario_producto">Seleccionar proveedor</span>
                                         <span class="flecha_selector_formulario_producto" aria-hidden="true">▾</span>
@@ -415,138 +312,100 @@
                                         <input class="input_buscar_selector_formulario_producto" id="buscar_selector_proveedor_formulario_producto" type="search" placeholder="Buscar proveedor..." autocomplete="off" aria-label="Buscar proveedor">
                                         <div class="lista_selector_formulario_producto" id="lista_selector_proveedor_formulario_producto" role="listbox" aria-label="Proveedores disponibles"></div>
                                     </div>
-
                                 </div>
-
                             </div>
 
                             <!-- indica si el registro representa mercaderia fisica -->
                             <div class="campo_control_stock_producto">
                                 <div class="texto_campo_control_stock_producto">Control de inventario</div>
+
                                 <div class="opciones_control_stock_producto" role="radiogroup" aria-label="Control de inventario">
                                     <label class="opcion_control_stock_producto">
                                         <input type="radio" id="controla_stock_si_producto" name="controla_stock_producto" value="true" checked>
                                         <span>Sí, controla stock</span>
                                     </label>
+
                                     <label class="opcion_control_stock_producto">
                                         <input type="radio" id="controla_stock_no_producto" name="controla_stock_producto" value="false">
                                         <span>No controla stock</span>
                                     </label>
                                 </div>
-                                <div class="ayuda_control_stock_producto">
-                                    Los registros sin inventario se mantienen en Productos y Ventas, pero no descuentan existencias ni aparecen en Stock actual.
-                                </div>
-                            </div>
 
+                                <div class="ayuda_control_stock_producto">Los registros sin inventario se mantienen en Productos y Ventas, pero no descuentan existencias ni aparecen en Stock actual.</div>
+                            </div>
                         </div>
 
                     <!-- TITULO 9 IMAGEN DEL PRODUCTO -->
 
                         <!-- fotografia del producto y opciones de busqueda -->
                         <div class="contenedor_imagen_producto" id="contenedor_imagen_producto">
-
                             <div class="texto_campo_imagen_producto">Imagen del producto</div>
 
                             <div class="contenido_imagen_producto">
-
                                 <!-- vista previa de la fotografia -->
                                 <div class="marco_imagen_producto">
-
                                     <img class="imagen_vista_previa_producto" id="imagen_vista_previa_producto" alt="Fotografía del producto" hidden>
-
-                                    <div class="mensaje_sin_imagen_producto" id="mensaje_sin_imagen_producto">
-                                        Sin imagen
-                                    </div>
-
+                                    <div class="mensaje_sin_imagen_producto" id="mensaje_sin_imagen_producto">Sin imagen</div>
                                 </div>
 
                                 <!-- botones para buscar o quitar una fotografia -->
                                 <div class="controles_imagen_producto">
-
                                     <div class="botones_imagen_producto">
-
-                                        <button class="boton_buscar_imagen_producto" id="boton_buscar_imagen_producto" type="button">
-                                            Buscar imagen
-                                        </button>
-
-                                        <button class="boton_subir_imagen_producto" id="boton_subir_imagen_producto" type="button">
-                                            Subir imagen
-                                        </button>
-
-                                        <button class="boton_quitar_imagen_producto" id="boton_quitar_imagen_producto" type="button">
-                                            Quitar imagen
-                                        </button>
+                                        <button class="boton_buscar_imagen_producto" id="boton_buscar_imagen_producto" type="button">Buscar imagen</button>
+                                        <button class="boton_subir_imagen_producto" id="boton_subir_imagen_producto" type="button">Subir imagen</button>
+                                        <button class="boton_quitar_imagen_producto" id="boton_quitar_imagen_producto" type="button">Quitar imagen</button>
 
                                         <!-- selector oculto: no envia la foto hasta guardar el producto -->
                                         <input type="file" id="input_archivo_imagen_producto" accept="image/jpeg,image/png,image/webp" hidden>
-
                                     </div>
 
-                                    <div class="texto_estado_imagen_producto" id="texto_estado_imagen_producto" role="status" aria-live="polite">
-                                        Puedes buscar una foto o subir una imagen desde tu dispositivo.
-                                    </div>
+                                    <div class="texto_estado_imagen_producto" id="texto_estado_imagen_producto" role="status" aria-live="polite">Puedes buscar una foto o subir una imagen desde tu dispositivo.</div>
 
                                     <!-- atribucion para fotografias de Open Food Facts -->
-                                    <a class="enlace_fuente_imagen_producto" id="enlace_fuente_imagen_producto" href="https://world.openfoodfacts.org/" target="_blank" rel="noopener noreferrer" hidden>
-                                        Fotografía: Open Food Facts (CC BY-SA)
-                                    </a>
-
+                                    <a class="enlace_fuente_imagen_producto" id="enlace_fuente_imagen_producto" href="https://world.openfoodfacts.org/" target="_blank" rel="noopener noreferrer" hidden>Fotografía: Open Food Facts (CC BY-SA)</a>
                                 </div>
-
                             </div>
-
                         </div>
 
                     <!-- TITULO 10 ACCIONES FORMULARIO -->
 
                         <!-- contenedor de las opciones inferiores del formulario -->
                         <div class="contenedor_acciones_formulario_producto">
-
                             <!-- opción para cancelar el formulario -->
-                            <div class="boton_cancelar_producto" id="boton_cancelar_producto" onclick="cerrarFormularioProducto()" > Cancelar </div>
+                            <div class="boton_cancelar_producto" id="boton_cancelar_producto" onclick="cerrarFormularioProducto()" >Cancelar</div>
 
                             <!-- opción para guardar el producto -->
-                            <div class="boton_guardar_producto" id="boton_guardar_producto" > Guardar producto </div>
-
+                            <div class="boton_guardar_producto" id="boton_guardar_producto" >Guardar producto</div>
                         </div>
-
                 </div>
-
             </div>
 
-
-        <!-- TITULO 10 FORMULARIO IMPORTACION PRODUCTOS -->
+        <!-- TITULO 11 FORMULARIO IMPORTACION PRODUCTOS -->
 
             <!-- contenedor superpuesto del formulario de importación -->
             <div class="contenedor_importacion_productos contenedor_importacion_productos_oculto" id="contenedor_importacion_productos" >
-
                 <!-- contenedor interior de la importación -->
                 <div class="formulario_importacion_productos">
-
-                    <!-- TITULO 11 CABECERA IMPORTACION -->
+                    <!-- TITULO 12 CABECERA IMPORTACION -->
 
                         <!-- contenedor del título y cierre de la importación -->
                         <div class="cabecera_importacion_productos">
-
                             <!-- título del formulario -->
                             <div class="titulo_importacion_productos">Importar base de datos</div>
 
                             <!-- opción para cerrar la importación -->
                             <div class="boton_cerrar_importacion_productos" id="boton_cerrar_importacion_productos" onclick="cerrarImportacionProductos()" >×</div>
-
                         </div>
 
-                    <!-- TITULO 12 CONTENIDO IMPORTACION -->
+                    <!-- TITULO 13 CONTENIDO IMPORTACION -->
 
                         <!-- contenedor del contenido principal -->
                         <div class="contenido_importacion_productos">
-
                             <!-- descripción de la importación -->
                             <div class="descripcion_importacion_productos">Selecciona un archivo Excel para importar los productos.</div>
 
                             <!-- selector del archivo -->
                             <div class="zona_seleccion_archivo_productos" id="zona_seleccion_archivo_productos" onclick="seleccionarArchivoProductos()" >
-
                                 <!-- icono visual -->
                                 <div class="icono_archivo_productos">↑</div>
 
@@ -555,58 +414,41 @@
 
                                 <!-- formatos permitidos -->
                                 <div class="formatos_archivo_productos">Formatos permitidos: .xlsx y .xls</div>
-
                             </div>
 
                             <!-- input oculto para seleccionar el archivo -->
                             <input type="file" id="input_archivo_productos" accept=".xlsx,.xls" hidden >
 
-
                             <!-- información del archivo seleccionado -->
-                            <div class="informacion_archivo_productos" id="informacion_archivo_productos" >No se ha seleccionado ningún archivo. </div>
-
+                            <div class="informacion_archivo_productos" id="informacion_archivo_productos" >No se ha seleccionado ningún archivo.</div>
                         </div>
 
-
-                    <!-- TITULO 13 ACCIONES IMPORTACION -->
+                    <!-- TITULO 14 ACCIONES IMPORTACION -->
 
                         <!-- contenedor de las opciones inferiores -->
                         <div class="contenedor_acciones_importacion_productos">
-
                             <!-- opción para cancelar -->
                             <div class="boton_cancelar_importacion_productos" id="boton_cancelar_importacion_productos" onclick="cerrarImportacionProductos()">Cancelar</div>
 
                             <!-- opción para importar -->
                             <div class="boton_confirmar_importacion_productos" id="boton_confirmar_importacion_productos" onclick="importarProductos()">Importar productos</div>
-
                         </div>
-
                 </div>
-
             </div>
 
-    
-
-        <!-- TITULO 14 MODAL DE MENSAJES Y CONFIRMACIONES -->
+        <!-- TITULO 15 MODAL DE MENSAJES Y CONFIRMACIONES -->
 
             <!-- muestra avisos centrados sin utilizar alert ni confirm del navegador -->
             <div class="contenedor_alerta_productos" id="contenedor_alerta_productos" role="dialog" aria-modal="true" aria-labelledby="titulo_alerta_productos" aria-describedby="mensaje_alerta_productos" hidden>
-
                 <div class="modal_alerta_productos" data-tipo="informacion">
-
                     <div class="icono_alerta_productos" id="icono_alerta_productos" aria-hidden="true">i</div>
-
                     <div class="titulo_alerta_productos" id="titulo_alerta_productos">Aviso</div>
-
                     <div class="mensaje_alerta_productos" id="mensaje_alerta_productos"></div>
 
                     <div class="acciones_alerta_productos">
                         <button class="boton_cancelar_alerta_productos" id="boton_cancelar_alerta_productos" type="button" hidden>Cancelar</button>
                         <button class="boton_aceptar_alerta_productos" id="boton_aceptar_alerta_productos" type="button">Aceptar</button>
                     </div>
-
                 </div>
-
             </div>
-
     </div>

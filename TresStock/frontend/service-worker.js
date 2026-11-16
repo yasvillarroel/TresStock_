@@ -1,4 +1,3 @@
-
 /* Service Worker de TresStock */
 
 self.addEventListener("install", () => {

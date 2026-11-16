@@ -2,131 +2,83 @@
 
     <!-- contenedor principal de la vista de gestión de usuarios -->
     <div class="contenedor_usuarios">
-
-
         <!-- TITULO 2 ENCABEZADO USUARIOS -->
 
             <!-- contenedor que agrupa la información principal y la opción de agregar usuario -->
             <div class="contenedor_encabezado_usuarios">
-
                 <!-- contenedor de información de la vista -->
                 <div class="contenedor_informacion_usuarios">
-
                     <!-- título principal de la gestión de usuarios -->
                     <div class="titulo_usuarios">Gestión de usuarios</div>
 
                     <!-- descripción de la funcionalidad de la vista -->
                     <div class="descripcion_usuarios">Administra los usuarios con acceso al sistema TresStock.</div>
-
                 </div>
-
 
                 <!-- opción para abrir el formulario de registro de usuario -->
                 <div class="boton_nuevo_usuario" id="boton_nuevo_usuario" role="button" tabindex="0" onclick="abrirFormularioUsuario()">
-
                     <div class="icono_nuevo_usuario">+</div>
-
                     <div class="texto_nuevo_usuario">Nuevo usuario</div>
-
                 </div>
-
             </div>
-
 
         <!-- TITULO 3 INDICADORES USUARIOS -->
 
             <!-- contenedor que agrupa los indicadores principales de usuarios -->
             <div class="contenedor_indicadores_usuarios">
-
-
                 <!-- indicador para mostrar la cantidad total de usuarios -->
                 <div class="tarjeta_total_usuarios">
-
                     <div class="icono_total_usuarios">
-
                         <img class="imagen_icono_total_usuarios" src="./imagenes/inicio_sesion/cuerpo_pagina/secciones/user-round-group.svg" alt="Total usuarios" >
-
                     </div>
 
                     <div class="contenido_total_usuarios">
-
                         <div class="texto_total_usuarios">Total usuarios</div>
-
                         <div class="valor_total_usuarios" id="valor_total_usuarios">0</div>
-
                     </div>
-
                 </div>
-
 
                 <!-- indicador para mostrar usuarios activos -->
                 <div class="tarjeta_usuarios_activos">
-
                     <div class="icono_usuarios_activos">
-
                         <img class="imagen_icono_usuarios_activos" src="./imagenes/inicio_sesion/cuerpo_pagina/secciones/user-round-check.svg" alt="Usuarios activos" >
-
                     </div>
 
                     <div class="contenido_usuarios_activos">
-
                         <div class="texto_usuarios_activos">Usuarios activos</div>
-
                         <div class="valor_usuarios_activos" id="valor_usuarios_activos">0</div>
-
                     </div>
-
                 </div>
-
 
                 <!-- indicador para mostrar usuarios inactivos -->
                 <div class="tarjeta_usuarios_inactivos">
-
                     <div class="icono_usuarios_inactivos">
-
                         <img class="imagen_icono_usuarios_inactivos" src="./imagenes/inicio_sesion/cuerpo_pagina/secciones/user-round-x.svg" alt="Usuarios inactivos" >
-
                     </div>
 
                     <div class="contenido_usuarios_inactivos">
-
                         <div class="texto_usuarios_inactivos">Usuarios inactivos</div>
-
                         <div class="valor_usuarios_inactivos" id="valor_usuarios_inactivos">0</div>
-
                     </div>
-
                 </div>
-
 
                 <!-- indicador para mostrar usuarios administradores -->
                 <div class="tarjeta_administradores_usuarios">
-
                     <div class="icono_administradores_usuarios">
-
                         <img class="imagen_icono_administradores_usuarios" src="./imagenes/inicio_sesion/cuerpo_pagina/secciones/shield-user.svg" alt="Administradores" >
-
                     </div>
 
                     <div class="contenido_administradores_usuarios">
-
                         <div class="texto_administradores_usuarios">Administradores</div>
-
                         <div class="valor_administradores_usuarios" id="valor_administradores_usuarios">0</div>
-
                     </div>
-
                 </div>
-
-
             </div>
-
 
         <!-- TITULO 4 FILTROS USUARIOS -->
 
             <!-- filtros con los mismos desplegables personalizados de Productos -->
             <div class="contenedor_filtros_usuarios">
-
                 <div class="contenedor_busqueda_usuarios">
                     <div class="texto_busqueda_usuarios">Buscar usuario</div>
                     <input class="input_busqueda_usuarios" id="input_busqueda_usuarios" type="search" placeholder="Nombre o correo electrónico" autocomplete="off" aria-label="Buscar usuario">
@@ -134,11 +86,15 @@
 
                 <div class="contenedor_rol_usuarios">
                     <div class="texto_rol_usuarios">Rol</div>
+
                     <div class="selector_personalizado_usuarios" id="selector_filtro_rol_usuarios">
                         <input type="hidden" id="select_rol_usuarios" value="">
+
                         <button class="boton_selector_usuarios" id="boton_filtro_rol_usuarios" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="opciones_filtro_rol_usuarios">
-                            <span id="texto_filtro_rol_usuarios">Todos los roles</span><span aria-hidden="true">▾</span>
+                            <span id="texto_filtro_rol_usuarios">Todos los roles</span>
+                            <span aria-hidden="true">▾</span>
                         </button>
+
                         <div class="panel_selector_usuarios" id="panel_filtro_rol_usuarios" hidden>
                             <div class="lista_selector_usuarios" id="opciones_filtro_rol_usuarios" role="listbox" aria-label="Roles"></div>
                         </div>
@@ -147,11 +103,15 @@
 
                 <div class="contenedor_estado_usuarios">
                     <div class="texto_estado_usuarios">Estado</div>
+
                     <div class="selector_personalizado_usuarios" id="selector_filtro_estado_usuarios">
                         <input type="hidden" id="select_estado_usuarios" value="">
+
                         <button class="boton_selector_usuarios" id="boton_filtro_estado_usuarios" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="opciones_filtro_estado_usuarios">
-                            <span id="texto_filtro_estado_usuarios">Todos los estados</span><span aria-hidden="true">▾</span>
+                            <span id="texto_filtro_estado_usuarios">Todos los estados</span>
+                            <span aria-hidden="true">▾</span>
                         </button>
+
                         <div class="panel_selector_usuarios" id="panel_filtro_estado_usuarios" hidden>
                             <div class="lista_selector_usuarios" id="opciones_filtro_estado_usuarios" role="listbox" aria-label="Estados de usuario"></div>
                         </div>
@@ -161,191 +121,144 @@
                 <div class="contenedor_limpiar_filtros_usuarios">
                     <button class="boton_limpiar_filtros_usuarios" id="boton_limpiar_filtros_usuarios" type="button">Limpiar filtros</button>
                 </div>
-
             </div>
 
         <!-- TITULO 5 TABLA USUARIOS -->
 
             <!-- contenedor principal de la tabla -->
             <div class="contenedor_tabla_usuarios">
-
-
                 <!-- cabecera visual de la tabla -->
                 <div class="cabecera_contenedor_tabla_usuarios">
-
                     <div class="titulo_tabla_usuarios">Usuarios registrados</div>
-
                 </div>
-
 
                 <!-- tabla para mostrar los usuarios registrados -->
                 <table class="tabla_usuarios">
-
                     <thead class="encabezado_tabla_usuarios">
-
                         <tr class="fila_encabezado_usuarios">
-
                             <th class="columna_nombre_usuarios">Nombre</th>
-
                             <th class="columna_email_usuarios">Email</th>
-
                             <th class="columna_rol_tabla_usuarios">Rol</th>
-
                             <th class="columna_estado_tabla_usuarios">Estado</th>
-
                             <th class="columna_fecha_creacion_usuarios">Fecha de creación</th>
-
                             <th class="columna_acciones_usuarios">Acciones</th>
-
                         </tr>
-
                     </thead>
 
-
                     <tbody class="cuerpo_tabla_usuarios" id="cuerpo_tabla_usuarios">
-
                         <!-- fila temporal mientras no existan datos cargados -->
                         <tr class="fila_sin_usuarios">
-
                             <td class="dato_sin_usuarios" colspan="6">No hay usuarios cargados para mostrar.</td>
-
                         </tr>
-
                     </tbody>
-
                 </table>
-
             </div>
-
 
         <!-- TITULO 6 FORMULARIO USUARIO -->
 
             <!-- contenedor superpuesto del formulario de usuario -->
             <div class="contenedor_formulario_usuario contenedor_formulario_usuario_oculto" id="contenedor_formulario_usuario">
-
                 <!-- contenedor interior del formulario -->
                 <div class="formulario_usuario">
-
-
                     <!-- TITULO 7 CABECERA FORMULARIO -->
 
                         <!-- contenedor que agrupa el título y cierre del formulario -->
                         <div class="cabecera_formulario_usuario">
-
                             <div class="titulo_formulario_usuario" id="titulo_formulario_usuario">Nuevo usuario</div>
-
                             <div class="boton_cerrar_formulario_usuario" id="boton_cerrar_formulario_usuario" onclick="cerrarFormularioUsuario()">×</div>
-
                         </div>
-
 
                     <!-- TITULO 8 CAMPOS FORMULARIO -->
 
                         <!-- contenedor que agrupa los campos del usuario -->
                         <div class="contenedor_campos_usuario">
-
-
                             <!-- campo nombre -->
                             <div class="campo_nombre_usuario">
-
                                 <div class="texto_campo_nombre_usuario">Nombre</div>
-
                                 <input class="input_nombre_usuario" id="input_nombre_usuario" type="text" minlength="2" maxlength="50">
-
                             </div>
-
 
                             <!-- campo email -->
                             <div class="campo_email_usuario">
-
                                 <div class="texto_campo_email_usuario">Email</div>
-
                                 <input class="input_email_usuario" id="input_email_usuario" type="email" maxlength="90" autocomplete="off" autocapitalize="none" spellcheck="false">
-
                             </div>
-
 
                             <!-- campo contraseña -->
                             <div class="campo_password_usuario">
-
                                 <div class="texto_campo_password_usuario">Contraseña</div>
 
                                 <div class="contenedor_password_usuario">
                                     <input class="input_password_usuario" id="input_password_usuario" type="password" minlength="8" maxlength="40" autocomplete="new-password">
+
                                     <button class="boton_ver_contrasena_usuario" id="boton_ver_password_usuario" type="button" aria-label="Mostrar contraseña" aria-pressed="false" title="Mostrar contraseña">
                                         <img class="icono_ojo_usuario" src="./imagenes/inicio_sesion/eye.svg" alt="">
                                     </button>
                                 </div>
+
                                 <div class="ayuda_politica_contrasena_usuario">Entre 8 y 40 caracteres, una mayúscula y un número.</div>
-
                             </div>
-
 
                             <!-- campo confirmar contraseña -->
                             <div class="campo_confirmar_password_usuario">
-
-                                <div class="texto_campo_confirmar_password_usuario"> Confirmar contraseña </div>
+                                <div class="texto_campo_confirmar_password_usuario">Confirmar contraseña</div>
 
                                 <div class="contenedor_password_usuario">
                                     <input class="input_confirmar_password_usuario" id="input_confirmar_password_usuario" type="password" minlength="8" maxlength="40" autocomplete="new-password">
+
                                     <button class="boton_ver_contrasena_usuario" id="boton_ver_confirmar_password_usuario" type="button" aria-label="Mostrar contraseña" aria-pressed="false" title="Mostrar contraseña">
                                         <img class="icono_ojo_usuario" src="./imagenes/inicio_sesion/eye.svg" alt="">
                                     </button>
                                 </div>
-
                             </div>
-
 
                             <!-- campo rol -->
                             <div class="campo_rol_usuario">
                                 <div class="texto_campo_rol_usuario">Rol</div>
+
                                 <!-- select interno: su valor se envia al backend -->
                                 <select class="select_rol_usuario" id="select_rol_usuario" hidden>
                                     <option value="">Seleccionar rol</option>
                                     <option value="Administrador">Administrador</option>
                                     <option value="Usuario">Usuario</option>
                                 </select>
+
                                 <div class="selector_personalizado_usuarios" id="selector_formulario_rol_usuario">
                                     <button class="boton_selector_usuarios" id="boton_formulario_rol_usuario" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="opciones_formulario_rol_usuario">
                                         <span id="texto_formulario_rol_usuario">Seleccionar rol</span>
                                         <span aria-hidden="true">▾</span>
                                     </button>
+
                                     <div class="panel_selector_usuarios" id="panel_formulario_rol_usuario" hidden>
                                         <div class="lista_selector_usuarios" id="opciones_formulario_rol_usuario" role="listbox" aria-label="Seleccionar rol del usuario"></div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-
 
                     <!-- TITULO 9 ACCIONES FORMULARIO -->
 
                         <!-- contenedor de las opciones inferiores del formulario -->
                         <div class="contenedor_acciones_formulario_usuario">
-
                             <button class="boton_cancelar_usuario" id="boton_cancelar_usuario" type="button" onclick="cerrarFormularioUsuario()">Cancelar</button>
-
                             <button class="boton_guardar_usuario" id="boton_guardar_usuario" type="button" onclick="guardarUsuario()">Guardar usuario</button>
-
                         </div>
-
                 </div>
-
             </div>
-
 
         <!-- TITULO 10 MODAL DE MENSAJES Y CONFIRMACIONES -->
-        <div class="contenedor_alerta_usuarios" id="contenedor_alerta_usuarios" hidden role="dialog" aria-modal="true" aria-labelledby="titulo_alerta_usuarios" aria-describedby="mensaje_alerta_usuarios">
-            <div class="modal_alerta_usuarios" data-tipo="informacion">
-                <div class="icono_alerta_usuarios" id="icono_alerta_usuarios" aria-hidden="true">i</div>
-                <div class="titulo_alerta_usuarios" id="titulo_alerta_usuarios">Aviso</div>
-                <div class="mensaje_alerta_usuarios" id="mensaje_alerta_usuarios"></div>
-                <div class="acciones_alerta_usuarios">
-                    <button class="boton_cancelar_alerta_usuarios" id="boton_cancelar_alerta_usuarios" type="button" hidden>Cancelar</button>
-                    <button class="boton_aceptar_alerta_usuarios" id="boton_aceptar_alerta_usuarios" type="button">Aceptar</button>
+
+            <!-- Agrupa el mensaje y las opciones de respuesta del aviso. -->
+            <div class="contenedor_alerta_usuarios" id="contenedor_alerta_usuarios" hidden role="dialog" aria-modal="true" aria-labelledby="titulo_alerta_usuarios" aria-describedby="mensaje_alerta_usuarios">
+                <div class="modal_alerta_usuarios" data-tipo="informacion">
+                    <div class="icono_alerta_usuarios" id="icono_alerta_usuarios" aria-hidden="true">i</div>
+                    <div class="titulo_alerta_usuarios" id="titulo_alerta_usuarios">Aviso</div>
+                    <div class="mensaje_alerta_usuarios" id="mensaje_alerta_usuarios"></div>
+
+                    <div class="acciones_alerta_usuarios">
+                        <button class="boton_cancelar_alerta_usuarios" id="boton_cancelar_alerta_usuarios" type="button" hidden>Cancelar</button>
+                        <button class="boton_aceptar_alerta_usuarios" id="boton_aceptar_alerta_usuarios" type="button">Aceptar</button>
+                    </div>
                 </div>
             </div>
-        </div>
-
     </div>

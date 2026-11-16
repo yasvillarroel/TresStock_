@@ -2,82 +2,61 @@
 
     <!-- contenedor principal de la vista Dashboard -->
     <div class="contenedor_dashboard">
+        <!-- TITULO 2 ENCABEZADO DEL DASHBOARD -->
 
-        <!-- TITULO 1.1 ENCABEZADO DEL DASHBOARD -->
-        <div class="contenedor_encabezado_dashboard">
-            <div class="titulo_dashboard">Resumen general</div>
-            <div class="descripcion_dashboard">Visualiza las existencias, ventas y alertas del minimarket.</div>
-        </div>
+            <!-- Muestra el título y la descripción del resumen general. -->
+            <div class="contenedor_encabezado_dashboard">
+                <div class="titulo_dashboard">Resumen general</div>
+                <div class="descripcion_dashboard">Visualiza las existencias, ventas y alertas del minimarket.</div>
+            </div>
 
-        <!-- TITULO 2 INDICADORES PRINCIPALES -->
+        <!-- TITULO 3 INDICADORES PRINCIPALES -->
 
             <!-- contenedor que agrupa los indicadores principales del sistema -->
             <div class="contenedor_indicadores_dashboard">
-
                 <!-- indicador para mostrar la cantidad de productos registrados -->
                 <div class="tarjeta_stock_actual_dashboard">
-
                     <div class="icono_stock_actual_dashboard"></div>
 
                     <div class="contenido_stock_actual_dashboard">
-
                         <div class="texto_stock_actual_dashboard">Cantidad de productos</div>
-
                         <div class="valor_stock_actual_dashboard" id="valor_cantidad_productos_dashboard">0</div>
                         <div class="nota_indicador_dashboard">Catálogo completo</div>
-
                     </div>
-
                 </div>
 
                 <!-- indicador para mostrar los productos con stock bajo -->
                 <div class="tarjeta_stock_bajo_dashboard">
-
                     <div class="icono_stock_bajo_dashboard"></div>
 
                     <div class="contenido_stock_bajo_dashboard">
-
                         <div class="texto_stock_bajo_dashboard">Productos con bajo stock</div>
-
                         <div class="valor_stock_bajo_dashboard" id="valor_stock_bajo_dashboard">0</div>
                         <div class="nota_indicador_dashboard">Requieren revisión</div>
-
                     </div>
-
                 </div>
 
                 <!-- indicador para mostrar los productos agotados -->
                 <div class="tarjeta_productos_agotados_dashboard">
-
                     <div class="icono_productos_agotados_dashboard"></div>
 
                     <div class="contenido_productos_agotados_dashboard">
-
                         <div class="texto_productos_agotados_dashboard">Productos agotados</div>
-
                         <div class="valor_productos_agotados_dashboard" id="valor_productos_agotados_dashboard">0</div>
                         <div class="nota_indicador_dashboard">Existencias en cero</div>
-
                     </div>
-
                 </div>
 
                 <!-- indicador para mostrar el total de ventas del mes -->
                 <div class="tarjeta_ventas_mes_dashboard">
-
                     <div class="icono_ventas_mes_dashboard"></div>
 
                     <div class="contenido_ventas_mes_dashboard">
-
                         <div class="texto_ventas_mes_dashboard">Ventas del último mes registrado</div>
-
                         <div class="valor_ventas_mes_dashboard" id="valor_ventas_mes_dashboard">$0</div>
                         <div class="nota_indicador_dashboard" id="periodo_ventas_mes_dashboard">Según última venta registrada</div>
-
                     </div>
-
                 </div>
-
             </div>
 
         <!-- TITULO 4 GRAFICOS -->
@@ -95,85 +74,98 @@
                         <div class="titulo_mas_vendidos_dashboard">Productos más vendidos</div>
                         <div class="descripcion_mas_vendidos_dashboard">Consulta los productos con más ventas registradas y administra las exclusiones del ranking.</div>
                     </div>
-                    <button class="boton_mas_vendidos_dashboard" id="boton_mas_vendidos_dashboard" type="button" aria-expanded="false" aria-controls="panel_mas_vendidos_dashboard">
-                        Ver los 50 productos <span class="flecha_mas_vendidos_dashboard" aria-hidden="true">⌄</span>
-                    </button>
+
+                    <button class="boton_mas_vendidos_dashboard" id="boton_mas_vendidos_dashboard" type="button" aria-expanded="false" aria-controls="panel_mas_vendidos_dashboard">Ver los 50 productos <span class="flecha_mas_vendidos_dashboard" aria-hidden="true">⌄</span></button>
                 </div>
+
                 <div class="vista_previa_mas_vendidos_dashboard" id="vista_previa_mas_vendidos_dashboard" aria-live="polite">
                     <div class="estado_previa_mas_vendidos_dashboard">Cargando los productos más vendidos...</div>
                 </div>
+
                 <div class="panel_mas_vendidos_dashboard" id="panel_mas_vendidos_dashboard" hidden>
                     <div class="filtros_mas_vendidos_dashboard">
                         <label class="campo_mas_vendidos_dashboard" for="busqueda_mas_vendidos_dashboard">
                             <span>Buscar producto</span>
                             <input class="busqueda_mas_vendidos_dashboard" id="busqueda_mas_vendidos_dashboard" type="search" maxlength="150" placeholder="Código o descripción">
                         </label>
+
                         <label class="campo_mas_vendidos_dashboard" for="periodo_mas_vendidos_dashboard">
                             <span>Período</span>
+
                             <select class="periodo_mas_vendidos_dashboard" id="periodo_mas_vendidos_dashboard">
-                            <option value="todo">Todo el historial</option>
-                            <option value="mes">Último mes registrado</option>
-                            <option value="tres_meses">Últimos 3 meses registrados</option>
+                                <option value="todo">Todo el historial</option>
+                                <option value="mes">Último mes registrado</option>
+                                <option value="tres_meses">Últimos 3 meses registrados</option>
                             </select>
                         </label>
                     </div>
+
                     <div class="estado_mas_vendidos_dashboard" id="estado_mas_vendidos_dashboard">Abre el desplegable para cargar los productos.</div>
+
                     <div class="tabla_mas_vendidos_dashboard">
                         <table>
                             <thead>
-                                <tr><th>#</th><th>Producto</th><th>Código</th><th>Cantidad vendida</th><th>Acción</th></tr>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Producto</th>
+                                    <th>Código</th>
+                                    <th>Cantidad vendida</th>
+                                    <th>Acción</th>
+                                </tr>
                             </thead>
-                            <tbody id="cuerpo_mas_vendidos_dashboard"></tbody>
+
+                            <tbody id="cuerpo_mas_vendidos_dashboard">
+
+                            </tbody>
                         </table>
                     </div>
 
                     <div class="nota_unidades_ranking_dashboard">El ranking utiliza cantidades registradas; algunos productos se comercializan por unidad y otros por peso.</div>
-                    <button class="boton_ver_excluidos_dashboard" id="boton_ver_excluidos_dashboard" type="button" aria-expanded="false" aria-controls="panel_excluidos_dashboard">
-                        Ver lista de exclusión
-                    </button>
+                    <button class="boton_ver_excluidos_dashboard" id="boton_ver_excluidos_dashboard" type="button" aria-expanded="false" aria-controls="panel_excluidos_dashboard">Ver lista de exclusión</button>
 
                     <div class="panel_excluidos_dashboard" id="panel_excluidos_dashboard" hidden>
                         <div class="estado_excluidos_dashboard" id="estado_excluidos_dashboard">Cargando lista…</div>
+
                         <div class="tabla_mas_vendidos_dashboard tabla_excluidos_dashboard">
                             <table>
                                 <thead>
-                                    <tr><th>Producto</th><th>Código</th><th>Excluido por</th><th>Fecha</th><th>Acción</th></tr>
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th>Código</th>
+                                        <th>Excluido por</th>
+                                        <th>Fecha</th>
+                                        <th>Acción</th>
+                                    </tr>
                                 </thead>
-                                <tbody id="cuerpo_excluidos_dashboard"></tbody>
+
+                                <tbody id="cuerpo_excluidos_dashboard">
+
+                                </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
 
-
             <div class="contenedor_graficos_dashboard">
-
                 <!-- contenedor del gráfico de ventas -->
                 <div class="tarjeta_ventas_seis_meses_dashboard">
-
                     <div class="titulo_ventas_seis_meses_dashboard">Ventas en los últimos 6 meses</div>
                     <div class="subtitulo_ventas_dashboard" id="periodo_grafico_ventas_dashboard">Según el historial de ventas registrado</div>
 
                     <div class="grafico_ventas_dashboard" id="grafico_ventas_dashboard" aria-live="polite">
                         <div class="texto_grafico_pendiente_dashboard">Cargando ventas mensuales...</div>
                     </div>
-
                 </div>
 
                 <!-- contenedor del gráfico de inventario por familia -->
                 <div class="tarjeta_inventario_familia_dashboard">
-
                     <div class="titulo_inventario_familia_dashboard">Productos inventariables por familia</div>
 
                     <div class="grafico_inventario_dashboard" id="grafico_inventario_dashboard">
-
                         <div class="texto_grafico_inventario_dashboard">Cargando distribución de productos...</div>
-
                     </div>
-
                 </div>
-
             </div>
 
         <!-- TITULO 5 INFORMACION INFERIOR -->
@@ -185,94 +177,59 @@
             </div>
 
             <div class="contenedor_informacion_dashboard">
-
                 <!-- TITULO 6 PRODUCTOS CON BAJO STOCK -->
 
                     <!-- contenedor para mostrar los productos que necesitan reposición -->
                     <div class="tarjeta_productos_stock_bajo_dashboard">
-
                         <div class="titulo_productos_stock_bajo_dashboard">Productos con bajo stock</div>
                         <div class="ayuda_panel_dashboard">Existencias positivas iguales o inferiores a stock mínimo + stock de seguridad.</div>
 
                         <div class="contenedor_tabla_stock_bajo_dashboard">
-
                             <table class="tabla_stock_bajo_dashboard">
-
                                 <thead class="encabezado_tabla_stock_bajo_dashboard">
-
                                     <tr class="fila_encabezado_stock_bajo_dashboard">
-
                                         <th class="columna_producto_stock_bajo_dashboard">Producto</th>
-
                                         <th class="columna_familia_stock_bajo_dashboard">Familia</th>
-
                                         <th class="columna_stock_actual_dashboard">Stock actual</th>
-
                                         <th class="columna_stock_minimo_dashboard">Punto de reposición</th>
-
                                         <th class="columna_estado_stock_dashboard">Estado</th>
-
                                     </tr>
-
                                 </thead>
 
                                 <tbody class="cuerpo_tabla_stock_bajo_dashboard" id="cuerpo_tabla_stock_bajo_dashboard">
-
                                     <tr class="fila_stock_bajo_dashboard">
-
                                         <td class="dato_producto_stock_bajo_dashboard">Sin datos</td>
-
                                         <td class="dato_familia_stock_bajo_dashboard">-</td>
-
                                         <td class="dato_stock_actual_dashboard">-</td>
-
                                         <td class="dato_stock_minimo_dashboard">-</td>
-
                                         <td class="dato_estado_stock_dashboard">-</td>
-
                                     </tr>
-
                                 </tbody>
-
                             </table>
-
                         </div>
-
                     </div>
 
                 <!-- TITULO 7 INFORMACION LATERAL -->
 
                     <!-- contenedor que agrupa alertas y recomendaciones -->
                     <div class="contenedor_lateral_dashboard">
-
                         <!-- contenedor para mostrar las alertas actuales -->
                         <div class="tarjeta_alertas_actuales_dashboard">
-
                             <div class="titulo_alertas_actuales_dashboard">Alertas actuales</div>
 
                             <div class="lista_alertas_dashboard" id="lista_alertas_dashboard">
-
                                 <div class="alerta_dashboard">Sin alertas disponibles</div>
-
                             </div>
-
                         </div>
 
                         <!-- contenedor para mostrar recomendaciones -->
                         <div class="tarjeta_recomendaciones_dashboard">
-
                             <div class="titulo_recomendaciones_dashboard">Recomendaciones</div>
 
                             <div class="lista_recomendaciones_dashboard" id="lista_recomendaciones_dashboard">
-
                                 <div class="recomendacion_dashboard">Sin recomendaciones disponibles</div>
-
                             </div>
-
                         </div>
-
                     </div>
-
             </div>
-
     </div>
