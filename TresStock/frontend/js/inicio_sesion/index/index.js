@@ -20,9 +20,7 @@
     // comprueba el rol actual del usuario para controlar las vistas del frontend
     function puedeAdministrarUsuarios() {
 
-        const idRol = usuarioSesionActual
-            ? (usuarioSesionActual.rol ?? usuarioSesionActual.id_rol)
-            : null;
+        const idRol = usuarioSesionActual ? (usuarioSesionActual.rol ?? usuarioSesionActual.id_rol) : null;
 
         return Number(idRol) === 1;
 
@@ -35,13 +33,7 @@
 
         try {
 
-            const respuesta = await fetch(
-                `${URL_API}/api/autenticacion/sesion`,
-                {
-                    method: 'GET',
-                    credentials: 'include'
-                }
-            );
+            const respuesta = await fetch(`${URL_API}/api/autenticacion/sesion`, { method: 'GET', credentials: 'include' });
 
             if (!respuesta.ok) {
                 return null;
@@ -62,15 +54,9 @@
     // función para cargar los componentes principales de TresStock
     async function cargarSistema(usuario) {
 
-        await cargarComponente(
-            './html/inicio_sesion/cuerpo_pagina/menu_lateral/menu_lateral.html',
-            'contenedor_menu'
-        );
+        await cargarComponente('./html/inicio_sesion/cuerpo_pagina/menu_lateral/menu_lateral.html', 'contenedor_menu');
 
-        await cargarComponente(
-            './html/inicio_sesion/cuerpo_pagina/cabecera/cabecera.html',
-            'contenedor_cabecera'
-        );
+        await cargarComponente('./html/inicio_sesion/cuerpo_pagina/cabecera/cabecera.html', 'contenedor_cabecera');
 
         // muestra el nombre y correo de la sesion en la cabecera ya cargada
         mostrarUsuarioCabecera(usuario);
@@ -80,14 +66,10 @@
         // conecta la campanita con las alertas actuales de inventario
         inicializarNotificacionesCabecera();
 
-        const vistaGuardada = sessionStorage.getItem(
-            'vista_actual'
-        );
+        const vistaGuardada = sessionStorage.getItem('vista_actual');
 
         // evita reabrir Administración si la vista fue guardada con otra cuenta
-        const vistaActual = vistaGuardada === 'administracion' && !puedeAdministrarUsuarios()
-            ? 'dashboard'
-            : (vistaGuardada || 'dashboard');
+        const vistaActual = vistaGuardada === 'administracion' && !puedeAdministrarUsuarios() ? 'dashboard' : (vistaGuardada || 'dashboard');
 
         // activa el funcionamiento responsive y la visibilidad según el rol
         inicializarMenuLateral(vistaActual, usuario);

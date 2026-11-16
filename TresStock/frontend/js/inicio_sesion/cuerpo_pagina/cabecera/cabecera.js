@@ -8,30 +8,20 @@
         }
 
         // obtiene los campos existentes en cabecera.html
-        const nombreUsuarioCabecera = document.getElementById(
-            'nombre_usuario_cabecera'
-        );
+        const nombreUsuarioCabecera = document.getElementById('nombre_usuario_cabecera');
 
-        const emailUsuarioCabecera = document.getElementById(
-            'email_usuario_cabecera'
-        );
+        const emailUsuarioCabecera = document.getElementById('email_usuario_cabecera');
 
         // construye el nombre con los campos recibidos desde la sesion
         const nombres = usuario.nombre || usuario.nombres || '';
         const apellidos = usuario.apellido || usuario.apellidos || '';
 
-        const nombreCompleto = usuario.nombre_completo ||
-            usuario.nombreCompleto ||
-            [nombres, apellidos].filter(Boolean).join(' ') ||
-            usuario.nombre_usuario ||
+        const nombreCompleto = usuario.nombre_completo || usuario.nombreCompleto || [nombres, apellidos].filter(Boolean).join(' ') || usuario.nombre_usuario ||
             usuario.username ||
             'Usuario';
 
         // obtiene el correo sin incluir datos inventados
-        const correo = usuario.correo ||
-            usuario.email ||
-            usuario.correo_electronico ||
-            '';
+        const correo = usuario.correo || usuario.email || usuario.correo_electronico || '';
 
         // actualiza los textos de la cabecera
         if (nombreUsuarioCabecera) {
@@ -100,13 +90,7 @@
             botonCerrarSesion.textContent = 'Cerrando sesión...';
 
             try {
-                const respuesta = await fetchConCsrf(
-                    `${URL_API}/api/autenticacion/logout`,
-                    {
-                        method: 'POST',
-                        credentials: 'include'
-                    }
-                );
+                const respuesta = await fetchConCsrf(`${URL_API}/api/autenticacion/logout`, { method: 'POST', credentials: 'include' });
 
                 if (!respuesta.ok) {
                     throw new Error('No se pudo cerrar la sesión. Inténtalo nuevamente.');

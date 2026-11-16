@@ -228,12 +228,7 @@ async function inicializarAlertasVencimientos() {
         try {
             const respuesta = await fetchConCsrf(
                 `${URL_API}/api/alertas/vencimientos/${idLoteEditado}/fecha`,
-                {
-                    method: 'PATCH',
-                    credentials: 'include',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({fecha_vencimiento: fecha})
-                }
+                { method: 'PATCH', credentials: 'include', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({fecha_vencimiento: fecha}) }
             );
             const datos = await respuesta.json();
             if (!respuesta.ok) throw new Error(datos.mensaje || 'No se pudo actualizar el vencimiento.');
@@ -298,9 +293,7 @@ async function inicializarAlertasVencimientos() {
         const descontarStock = estadoBaja.value === 'MERMA' && descontarStockMerma.checked;
         const textoCantidadMerma = cantidadMermaLote.value.trim();
         const esMerma = estadoBaja.value === 'MERMA';
-        const cantidadMerma = esMerma && /^[0-9]{1,4}([.,][0-9]{1,4})?$/.test(textoCantidadMerma)
-            ? Number(textoCantidadMerma.replace(',', '.'))
-            : NaN;
+        const cantidadMerma = esMerma && /^[0-9]{1,4}([.,][0-9]{1,4})?$/.test(textoCantidadMerma) ? Number(textoCantidadMerma.replace(',', '.')) : NaN;
         if (!idLoteBaja || !estadoBaja.value || !motivo || motivo.length > 255 ||
             (esMerma && (!Number.isFinite(cantidadMerma) || cantidadMerma <= 0 || cantidadMerma > cantidadLoteDisponible))) {
             mensajeBaja.textContent = esMerma
@@ -458,17 +451,14 @@ async function inicializarAlertasVencimientos() {
         const actividadSeleccionada = actividadStock.value;
         const alertasFiltradas = alertasStock.filter(producto => {
             const textoProducto = normalizarTexto(`${producto.descripcion || ''} ${producto.codigo || ''}`);
-            return (!busqueda || textoProducto.includes(busqueda)) &&
-                (!estadoSeleccionado || producto.estado === estadoSeleccionado) &&
+            return (!busqueda || textoProducto.includes(busqueda)) && (!estadoSeleccionado || producto.estado === estadoSeleccionado) &&
                 (!familiaSeleccionada || String(producto.familia || '') === familiaSeleccionada) &&
                 (actividadSeleccionada === 'TODOS' || producto.actividad_comercial === actividadSeleccionada);
         });
         totalPaginasStock = Math.max(1, Math.ceil(alertasFiltradas.length / filasPorPagina));
         paginaStock = Math.min(paginaStock, totalPaginasStock);
         if (!alertasFiltradas.length) {
-            const mensaje = alertasStock.length
-                ? 'Ningún producto coincide con los filtros.'
-                : 'No hay productos con alertas de stock.';
+            const mensaje = alertasStock.length ? 'Ningún producto coincide con los filtros.' : 'No hay productos con alertas de stock.';
             mostrarMensajeTabla(filasStock, mensaje);
             informacionStock.textContent = 'Mostrando 0 productos';
             actualizarEstadoControl(anteriorStock, true);
@@ -508,8 +498,7 @@ async function inicializarAlertasVencimientos() {
             const productos = await respuesta.json();
             if (!respuesta.ok) throw new Error(productos.mensaje || 'No se pudieron cargar las alertas de inventario.');
             const prioridad = {'STOCK NEGATIVO': 0, 'SIN STOCK': 1, 'STOCK BAJO': 2};
-            alertasStock = (Array.isArray(productos) ? productos : [])
-                .filter(producto => Object.prototype.hasOwnProperty.call(prioridad, producto.estado))
+            alertasStock = (Array.isArray(productos) ? productos : []).filter(producto => Object.prototype.hasOwnProperty.call(prioridad, producto.estado))
                 .sort((a, b) => prioridad[a.estado] - prioridad[b.estado] || String(a.descripcion).localeCompare(String(b.descripcion), 'es'));
             const familiaActual = familiaStock.value;
             familiaStock.replaceChildren(new Option('Todas las familias', ''));
@@ -576,8 +565,7 @@ async function inicializarAlertasVencimientos() {
                     const fechaIngreso = formatearFecha(lote.fecha_ingreso, true);
                     const fechaVencimiento = formatearFecha(lote.fecha_vencimiento);
                     const clase = esInactivo
-                        ? lote.estado === 'VENDIDO' ? 'estado_lote_vendido'
-                            : lote.estado === 'VENCIDO' ? 'estado_lote_inactivo' : 'estado_lote_riesgo'
+                        ? lote.estado === 'VENDIDO' ? 'estado_lote_vendido' : lote.estado === 'VENCIDO' ? 'estado_lote_inactivo' : 'estado_lote_riesgo'
                         : lote.estado === 'VENCIDO' || lote.estado === 'AGOTADO' ? 'estado_lote_inactivo'
                             : lote.estado === 'VENCIMIENTO CRÍTICO' ? 'estado_lote_critico'
                                 : lote.estado === 'VENCIMIENTO EN RIESGO' ? 'estado_lote_riesgo'
@@ -621,8 +609,7 @@ async function inicializarAlertasVencimientos() {
                         const dias = diasHastaVencimientoLote(lote.fecha_vencimiento);
                         if (dias !== null) {
                             const detalleDias = dias < 0 ? `Venció hace ${-dias} día${dias === -1 ? '' : 's'}`
-                                : dias === 0 ? 'Vence hoy'
-                                : `En ${dias} día${dias === 1 ? '' : 's'}`;
+                                : dias === 0 ? 'Vence hoy' : `En ${dias} día${dias === 1 ? '' : 's'}`;
                             texto(vencimiento, detalleDias, 'dato_secundario_lote');
                         }
                     }

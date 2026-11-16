@@ -36,98 +36,61 @@
 
         try {
 
-            const respuesta = await fetchConCsrf(
-                `${URL_API}/api/inventario/resumen`,
-                {
-                    method: 'GET',
-                    credentials: 'include'
-                }
-            );
+            const respuesta = await fetchConCsrf(`${URL_API}/api/inventario/resumen`, { method: 'GET', credentials: 'include' });
 
 
-            const resultado =
-                await respuesta.json();
+            const resultado = await respuesta.json();
 
 
             if (!respuesta.ok) {
 
-                console.error(
-                    'Error al obtener resumen de inventario:',
-                    resultado
-                );
+                console.error('Error al obtener resumen de inventario:', resultado);
 
                 return;
 
             }
 
 
-            const valorTotal =
-                document.getElementById(
-                    'valor_total_productos_inventario'
-                );
+            const valorTotal = document.getElementById('valor_total_productos_inventario');
 
-            const valorStockBajo =
-                document.getElementById(
-                    'valor_stock_bajo_inventario'
-                );
+            const valorStockBajo = document.getElementById('valor_stock_bajo_inventario');
 
-            const valorSinStock =
-                document.getElementById(
-                    'valor_sin_stock_inventario'
-                );
+            const valorSinStock = document.getElementById('valor_sin_stock_inventario');
 
-            const valorProximosVencer =
-                document.getElementById(
-                    'valor_proximos_vencer_inventario'
-                );
+            const valorProximosVencer = document.getElementById('valor_proximos_vencer_inventario');
 
 
             if (valorTotal) {
 
-                valorTotal.textContent =
-                    formatearNumeroInventario(
-                        resultado.total_productos
-                    );
+                valorTotal.textContent = formatearNumeroInventario(resultado.total_productos);
 
             }
 
 
             if (valorStockBajo) {
 
-                valorStockBajo.textContent =
-                    formatearNumeroInventario(
-                        resultado.stock_bajo
-                    );
+                valorStockBajo.textContent = formatearNumeroInventario(resultado.stock_bajo);
 
             }
 
 
             if (valorSinStock) {
 
-                valorSinStock.textContent =
-                    formatearNumeroInventario(
-                        resultado.sin_stock
-                    );
+                valorSinStock.textContent = formatearNumeroInventario(resultado.sin_stock);
 
             }
 
 
             if (valorProximosVencer) {
 
-                valorProximosVencer.textContent =
-                    formatearNumeroInventario(
-                        resultado.proximos_vencer
-                    );
+                valorProximosVencer.textContent = formatearNumeroInventario(resultado.proximos_vencer);
 
             }
 
 
         } catch (error) {
 
-            console.error(
-                'Error de conexión al obtener resumen de inventario:',
-                error
-            );
+            console.error('Error de conexión al obtener resumen de inventario:', error);
 
         }
 
@@ -137,13 +100,10 @@
     // función para formatear números
     function formatearNumeroInventario(valor) {
 
-        const numero =
-            Number(valor || 0);
+        const numero = Number(valor || 0);
 
 
-        return numero.toLocaleString(
-            'es-CL'
-        );
+        return numero.toLocaleString('es-CL');
 
     }
 
@@ -160,35 +120,22 @@
 
         try {
 
-            const respuesta = await fetchConCsrf(
-                `${URL_API}/api/inventario/familias`,
-                {
-                    method: 'GET',
-                    credentials: 'include'
-                }
-            );
+            const respuesta = await fetchConCsrf(`${URL_API}/api/inventario/familias`, { method: 'GET', credentials: 'include' });
 
 
-            const resultado =
-                await respuesta.json();
+            const resultado = await respuesta.json();
 
 
             if (!respuesta.ok) {
 
-                console.error(
-                    'Error al obtener familias:',
-                    resultado
-                );
+                console.error('Error al obtener familias:', resultado);
 
                 return;
 
             }
 
 
-            const selectFamilia =
-                document.getElementById(
-                    'select_familia_inventario'
-                );
+            const selectFamilia = document.getElementById('select_familia_inventario');
 
 
             if (!selectFamilia) {
@@ -199,44 +146,31 @@
             selectFamilia.innerHTML = '';
 
 
-            const opcionTodas =
-                document.createElement('option');
+            const opcionTodas = document.createElement('option');
 
-            opcionTodas.className =
-                'opcion_familia_inventario';
+            opcionTodas.className = 'opcion_familia_inventario';
 
             opcionTodas.value = '';
 
-            opcionTodas.textContent =
-                'Todas las familias';
+            opcionTodas.textContent = 'Todas las familias';
 
 
-            selectFamilia.appendChild(
-                opcionTodas
-            );
+            selectFamilia.appendChild(opcionTodas);
 
 
             resultado.forEach(
                 registro => {
 
-                    const opcion =
-                        document.createElement(
-                            'option'
-                        );
+                    const opcion = document.createElement('option');
 
-                    opcion.className =
-                        'opcion_familia_inventario';
+                    opcion.className = 'opcion_familia_inventario';
 
-                    opcion.value =
-                        registro.familia || '';
+                    opcion.value = registro.familia || '';
 
-                    opcion.textContent =
-                        registro.familia || '';
+                    opcion.textContent = registro.familia || '';
 
 
-                    selectFamilia.appendChild(
-                        opcion
-                    );
+                    selectFamilia.appendChild(opcion);
 
                 }
             );
@@ -246,10 +180,7 @@
 
         } catch (error) {
 
-            console.error(
-                'Error de conexión al obtener familias:',
-                error
-            );
+            console.error('Error de conexión al obtener familias:', error);
 
         }
 
@@ -259,50 +190,32 @@
     // función para configurar los filtros
     function configurarFiltrosInventario() {
 
-        const inputBusqueda =
-            document.getElementById(
-                'input_busqueda_inventario'
-            );
+        const inputBusqueda = document.getElementById('input_busqueda_inventario');
 
-        const selectFamilia =
-            document.getElementById(
-                'select_familia_inventario'
-            );
+        const selectFamilia = document.getElementById('select_familia_inventario');
 
-        const selectEstado =
-            document.getElementById(
-                'select_estado_inventario'
-            );
+        const selectEstado = document.getElementById('select_estado_inventario');
 
         const selectActividad = document.getElementById('select_actividad_inventario');
         const selectPronostico = document.getElementById('select_pronostico_inventario');
 
         if (inputBusqueda) {
 
-            inputBusqueda.addEventListener(
-                'input',
-                filtrarInventario
-            );
+            inputBusqueda.addEventListener('input', filtrarInventario);
 
         }
 
 
         if (selectFamilia) {
 
-            selectFamilia.addEventListener(
-                'change',
-                filtrarInventario
-            );
+            selectFamilia.addEventListener('change', filtrarInventario);
 
         }
 
 
         if (selectEstado) {
 
-            selectEstado.addEventListener(
-                'change',
-                filtrarInventario
-            );
+            selectEstado.addEventListener('change', filtrarInventario);
 
         }
 
@@ -311,9 +224,7 @@
         }
         if (selectPronostico) selectPronostico.addEventListener('change', filtrarInventario);
 
-        const botonLimpiar = document.getElementById(
-            'limpiar_filtros_stock_inventario'
-        );
+        const botonLimpiar = document.getElementById('limpiar_filtros_stock_inventario');
 
         if (botonLimpiar) {
             botonLimpiar.addEventListener('click', function() {
@@ -340,117 +251,55 @@
     // función para filtrar el inventario
     function filtrarInventario() {
 
-        const inputBusqueda =
-            document.getElementById(
-                'input_busqueda_inventario'
-            );
+        const inputBusqueda = document.getElementById('input_busqueda_inventario');
 
-        const selectFamilia =
-            document.getElementById(
-                'select_familia_inventario'
-            );
+        const selectFamilia = document.getElementById('select_familia_inventario');
 
-        const selectEstado =
-            document.getElementById(
-                'select_estado_inventario'
-            );
+        const selectEstado = document.getElementById('select_estado_inventario');
 
         const selectActividad = document.getElementById('select_actividad_inventario');
         const actividadSeleccionada = selectActividad?.value || 'RECIENTES';
         const pronosticoSeleccionado = document.getElementById('select_pronostico_inventario')?.value || '';
 
-        const textoBusqueda =
-            inputBusqueda
-                ? inputBusqueda.value
-                    .trim()
-                    .toLowerCase()
-                : '';
+        const textoBusqueda = inputBusqueda ? inputBusqueda.value.trim().toLowerCase() : '';
 
-        const familiaSeleccionada =
-            selectFamilia
-                ? selectFamilia.value
-                : '';
+        const familiaSeleccionada = selectFamilia ? selectFamilia.value : '';
 
-        const estadoSeleccionado =
-            selectEstado
-                ? selectEstado.value
-                : '';
+        const estadoSeleccionado = selectEstado ? selectEstado.value : '';
 
 
         inventarioFiltrado =
             inventarioCargado.filter(
                 producto => {
 
-                    const codigo =
-                        (
-                            producto.codigo ||
-                            ''
-                        ).toLowerCase();
+                    const codigo = (producto.codigo || '').toLowerCase();
 
-                    const codigoBarra =
-                        (
-                            producto.cod_barra ||
-                            ''
-                        ).toLowerCase();
+                    const codigoBarra = (producto.cod_barra || '').toLowerCase();
 
-                    const descripcion =
-                        (
-                            producto.descripcion ||
-                            ''
-                        ).toLowerCase();
+                    const descripcion = (producto.descripcion || '').toLowerCase();
 
-                    const familia =
-                        producto.familia || '';
+                    const familia = producto.familia || '';
 
-                    const estado =
-                        producto.estado || '';
+                    const estado = producto.estado || '';
 
                     const actividadComercial = producto.actividad_comercial || '';
-                    const coincideActividad = actividadSeleccionada === 'TODOS'
-                        || actividadComercial === actividadSeleccionada;
-                    const valoresPronostico = [
-                        producto.pronostico_7_dias,
-                        producto.pronostico_14_dias,
-                        producto.pronostico_30_dias
-                    ].map(Number);
+                    const coincideActividad = actividadSeleccionada === 'TODOS' || actividadComercial === actividadSeleccionada;
+                    const valoresPronostico = [producto.pronostico_7_dias, producto.pronostico_14_dias, producto.pronostico_30_dias].map(Number);
                     const tienePronostico = valoresPronostico.some(valor => Number.isFinite(valor) && valor > 0);
                     const coincidePronostico = pronosticoSeleccionado === 'CON_PRONOSTICO'
                         ? tienePronostico
-                        : pronosticoSeleccionado === 'SIN_PRONOSTICO'
-                            ? !tienePronostico
-                            : true;
+                        : pronosticoSeleccionado === 'SIN_PRONOSTICO' ? !tienePronostico : true;
 
-                    const coincideBusqueda =
-                        codigo.includes(
-                            textoBusqueda
-                        ) ||
-                        codigoBarra.includes(
-                            textoBusqueda
-                        ) ||
-                        descripcion.includes(
-                            textoBusqueda
-                        );
+                    const coincideBusqueda = codigo.includes(textoBusqueda) || codigoBarra.includes(textoBusqueda) || descripcion.includes(textoBusqueda);
 
 
-                    const coincideFamilia =
-                        !familiaSeleccionada ||
-                        familia ===
-                            familiaSeleccionada;
+                    const coincideFamilia = !familiaSeleccionada || familia === familiaSeleccionada;
 
 
-                    const coincideEstado =
-                        !estadoSeleccionado ||
-                        estado ===
-                            estadoSeleccionado;
+                    const coincideEstado = !estadoSeleccionado || estado === estadoSeleccionado;
 
 
-                    return (
-                        coincideBusqueda &&
-                        coincideFamilia &&
-                        coincideEstado &&
-                        coincideActividad &&
-                        coincidePronostico
-                    );
+                    return (coincideBusqueda && coincideFamilia && coincideEstado && coincideActividad && coincidePronostico);
 
                 }
             );
@@ -488,11 +337,7 @@
 
     // normaliza los nombres para buscar familias con y sin tildes
     function normalizarTextoSelectorInventario(valor) {
-        return String(valor ?? '')
-            .normalize('NFD')
-            .replace(/[\u0300-\u036f]/g, '')
-            .toLowerCase()
-            .trim();
+        return String(valor ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
     }
 
     // cierra las listas y restablece sus atributos de accesibilidad
@@ -511,9 +356,7 @@
         const select = document.getElementById('select_' + tipo + '_inventario');
         const etiqueta = document.getElementById('texto_selector_' + tipo + '_inventario');
         const lista = document.getElementById('lista_opciones_' + tipo + '_inventario');
-        const buscador = tipo === 'familia'
-            ? document.getElementById('buscar_selector_familia_inventario')
-            : null;
+        const buscador = tipo === 'familia' ? document.getElementById('buscar_selector_familia_inventario') : null;
         if (!select || !etiqueta || !lista) return;
 
         const opcionActual = Array.from(select.options).find(opcion => opcion.value === select.value);
@@ -567,8 +410,7 @@
                 panel.hidden = !abrir;
                 boton.setAttribute('aria-expanded', String(abrir));
                 if (abrir) {
-                    const buscador = tipo === 'familia'
-                        ? document.getElementById('buscar_selector_familia_inventario') : null;
+                    const buscador = tipo === 'familia' ? document.getElementById('buscar_selector_familia_inventario') : null;
                     if (buscador) buscador.value = '';
                     actualizarSelectorVisualInventario(tipo);
                     if (buscador) buscador.focus();
@@ -616,35 +458,22 @@
 
         try {
 
-            const respuesta = await fetchConCsrf(
-                `${URL_API}/api/inventario`,
-                {
-                    method: 'GET',
-                    credentials: 'include'
-                }
-            );
+            const respuesta = await fetchConCsrf(`${URL_API}/api/inventario`, { method: 'GET', credentials: 'include' });
 
 
-            const resultado =
-                await respuesta.json();
+            const resultado = await respuesta.json();
 
 
             if (!respuesta.ok) {
 
-                console.error(
-                    'Error al obtener inventario:',
-                    resultado
-                );
+                console.error('Error al obtener inventario:', resultado);
 
                 return;
 
             }
 
 
-            inventarioCargado =
-                Array.isArray(resultado)
-                    ? resultado
-                    : [];
+            inventarioCargado = Array.isArray(resultado) ? resultado : [];
 
 
             filtrarInventario();
@@ -652,10 +481,7 @@
 
         } catch (error) {
 
-            console.error(
-                'Error de conexión al obtener inventario:',
-                error
-            );
+            console.error('Error de conexión al obtener inventario:', error);
 
         }
 
@@ -665,10 +491,7 @@
     // función para mostrar los productos en la tabla
     function mostrarInventario() {
 
-        const cuerpoTabla =
-            document.getElementById(
-                'cuerpo_tabla_inventario'
-            );
+        const cuerpoTabla = document.getElementById('cuerpo_tabla_inventario');
 
 
         if (!cuerpoTabla) {
@@ -679,25 +502,20 @@
         cuerpoTabla.innerHTML = '';
 
 
-        const totalProductos =
-            inventarioFiltrado.length;
+        const totalProductos = inventarioFiltrado.length;
 
 
         if (!totalProductos) {
 
-            const fila =
-                document.createElement('div');
+            const fila = document.createElement('div');
 
-            fila.className =
-                'fila_sin_inventario';
+            fila.className = 'fila_sin_inventario';
             fila.setAttribute('role', 'row');
 
 
-            const dato =
-                document.createElement('div');
+            const dato = document.createElement('div');
 
-            dato.className =
-                'dato_sin_inventario';
+            dato.className = 'dato_sin_inventario';
             dato.setAttribute('role', 'cell');
 
             const actividad = document.getElementById('select_actividad_inventario')?.value;
@@ -706,13 +524,9 @@
                 : 'No se encontraron productos para los filtros seleccionados.';
 
 
-            fila.appendChild(
-                dato
-            );
+            fila.appendChild(dato);
 
-            cuerpoTabla.appendChild(
-                fila
-            );
+            cuerpoTabla.appendChild(fila);
 
 
             actualizarPaginacionInventario();
@@ -722,36 +536,21 @@
         }
 
 
-        const inicio =
-            (
-                paginaActualInventario -
-                1
-            ) *
-            productosPorPaginaInventario;
+        const inicio = (paginaActualInventario - 1) * productosPorPaginaInventario;
 
 
-        const fin =
-            inicio +
-            productosPorPaginaInventario;
+        const fin = inicio + productosPorPaginaInventario;
 
 
-        const productosPagina =
-            inventarioFiltrado.slice(
-                inicio,
-                fin
-            );
+        const productosPagina = inventarioFiltrado.slice(inicio, fin);
 
 
         productosPagina.forEach(
             producto => {
 
-                const fila =
-                    document.createElement(
-                        'div'
-                    );
+                const fila = document.createElement('div');
 
-                fila.className =
-                    'fila_producto_inventario';
+                fila.className = 'fila_producto_inventario';
                 fila.setAttribute('role', 'row');
 
 
@@ -789,45 +588,29 @@
 
 
                 // producto
-                const datoProducto =
-                    document.createElement(
-                        'div'
-                    );
+                const datoProducto = document.createElement('div');
 
-                datoProducto.className =
-                    'dato_producto_inventario';
+                datoProducto.className = 'dato_producto_inventario';
                 datoProducto.setAttribute('role', 'cell');
                 datoProducto.dataset.etiqueta = 'Producto';
 
-                datoProducto.textContent =
-                    producto.descripcion ||
-                    '-';
+                datoProducto.textContent = producto.descripcion || '-';
 
 
                 // familia
-                const datoFamilia =
-                    document.createElement(
-                        'div'
-                    );
+                const datoFamilia = document.createElement('div');
 
-                datoFamilia.className =
-                    'dato_familia_inventario';
+                datoFamilia.className = 'dato_familia_inventario';
                 datoFamilia.setAttribute('role', 'cell');
                 datoFamilia.dataset.etiqueta = 'Familia';
 
-                datoFamilia.textContent =
-                    producto.familia ||
-                    '-';
+                datoFamilia.textContent = producto.familia || '-';
 
 
                 // stock actual
-                const datoStockActual =
-                    document.createElement(
-                        'div'
-                    );
+                const datoStockActual = document.createElement('div');
 
-                datoStockActual.className =
-                    'dato_stock_actual_inventario';
+                datoStockActual.className = 'dato_stock_actual_inventario';
                 datoStockActual.setAttribute('role', 'cell');
                 datoStockActual.dataset.etiqueta = 'Stock actual';
 
@@ -838,15 +621,10 @@
 
                 const valorStockActual = document.createElement('span');
                 valorStockActual.className = 'valor_stock_actual_inventario';
-                valorStockActual.textContent = formatearCantidadInventario(
-                    producto.stock_actual,
-                    producto.es_producto_balanza
-                );
+                valorStockActual.textContent = formatearCantidadInventario(producto.stock_actual, producto.es_producto_balanza);
                 datoStockActual.appendChild(valorStockActual);
 
-                const actividadSinVentasRecientes =
-                    producto.actividad_comercial === 'ANTIGUAS' ||
-                    producto.actividad_comercial === 'SIN_HISTORIAL';
+                const actividadSinVentasRecientes = producto.actividad_comercial === 'ANTIGUAS' || producto.actividad_comercial === 'SIN_HISTORIAL';
 
                 if (actividadSinVentasRecientes) {
                     const avisoVerificacion = document.createElement('span');
@@ -858,13 +636,9 @@
 
 
                 // stock mínimo
-                const datoStockMinimo =
-                    document.createElement(
-                        'div'
-                    );
+                const datoStockMinimo = document.createElement('div');
 
-                datoStockMinimo.className =
-                    'dato_stock_minimo_inventario';
+                datoStockMinimo.className = 'dato_stock_minimo_inventario';
                 datoStockMinimo.setAttribute('role', 'cell');
                 datoStockMinimo.dataset.etiqueta = 'Stock mínimo';
 
@@ -884,11 +658,9 @@
                 }
 
                 // stock de seguridad: reserva calculada con las ventas diarias y el plazo de entrega
-                const datoStockSeguridad =
-                    document.createElement('div');
+                const datoStockSeguridad = document.createElement('div');
 
-                datoStockSeguridad.className =
-                    'dato_stock_seguridad_inventario';
+                datoStockSeguridad.className = 'dato_stock_seguridad_inventario';
                 datoStockSeguridad.setAttribute('role', 'cell');
                 datoStockSeguridad.dataset.etiqueta = 'Stock seguridad';
 
@@ -937,36 +709,23 @@
                 }
 
                 // estado
-                const datoEstado =
-                    document.createElement(
-                        'div'
-                    );
+                const datoEstado = document.createElement('div');
 
-                datoEstado.className =
-                    'dato_estado_inventario';
+                datoEstado.className = 'dato_estado_inventario';
                 datoEstado.setAttribute('role', 'cell');
                 datoEstado.dataset.etiqueta = 'Estado';
 
 
-                const estado =
-                    document.createElement(
-                        'div'
-                    );
+                const estado = document.createElement('div');
 
 
-                configurarEstadoInventario(
-                    estado,
-                    producto.estado
-                );
+                configurarEstadoInventario(estado, producto.estado);
 
 
-                datoEstado.appendChild(
-                    estado
-                );
+                datoEstado.appendChild(estado);
 
                 // permite consultar el punto de reposición sin añadir otra columna
-                if (producto.stock_minimo_calculable === true &&
-                    producto.stock_seguridad_calculable === true) {
+                if (producto.stock_minimo_calculable === true && producto.stock_seguridad_calculable === true) {
                     const puntoReposicion = Number(producto.punto_reposicion);
                     if (Number.isFinite(puntoReposicion)) {
                         estado.title = `Punto de reposición: ${formatearCantidadInventario(puntoReposicion, producto.es_producto_balanza)} (mínimo + seguridad)${producto.plazo_estimado ? '. Plazo estimado: 7 días.' : ''}`;
@@ -1001,41 +760,25 @@
                 datoAcciones.appendChild(grupoAcciones);
 
 
-                fila.appendChild(
-                    datoImagen
-                );
+                fila.appendChild(datoImagen);
 
-                fila.appendChild(
-                    datoProducto
-                );
+                fila.appendChild(datoProducto);
 
-                fila.appendChild(
-                    datoFamilia
-                );
+                fila.appendChild(datoFamilia);
 
-                fila.appendChild(
-                    datoStockActual
-                );
+                fila.appendChild(datoStockActual);
 
-                fila.appendChild(
-                    datoStockMinimo
-                );
+                fila.appendChild(datoStockMinimo);
 
-                fila.appendChild(
-                    datoStockSeguridad
-                );
+                fila.appendChild(datoStockSeguridad);
 
                 fila.appendChild(datoPronostico);
 
-                fila.appendChild(
-                    datoEstado
-                );
+                fila.appendChild(datoEstado);
 
                 fila.appendChild(datoAcciones);
 
-                cuerpoTabla.appendChild(
-                    fila
-                );
+                cuerpoTabla.appendChild(fila);
 
             }
         );
@@ -1047,18 +790,13 @@
 
 
     // función para establecer el estado visual
-    function configurarEstadoInventario(
-        elemento,
-        estado
-    ) {
+    function configurarEstadoInventario(elemento, estado) {
 
         if (estado === 'STOCK NEGATIVO') {
 
-            elemento.className =
-                'estado_stock_negativo_inventario';
+            elemento.className = 'estado_stock_negativo_inventario';
 
-            elemento.textContent =
-                'Stock negativo';
+            elemento.textContent = 'Stock negativo';
 
             return;
 
@@ -1066,11 +804,9 @@
 
         if (estado === 'SIN STOCK') {
 
-            elemento.className =
-                'estado_sin_stock_inventario';
+            elemento.className = 'estado_sin_stock_inventario';
 
-            elemento.textContent =
-                'Sin stock';
+            elemento.textContent = 'Sin stock';
 
             return;
 
@@ -1079,11 +815,9 @@
 
         if (estado === 'STOCK BAJO') {
 
-            elemento.className =
-                'estado_stock_bajo_inventario';
+            elemento.className = 'estado_stock_bajo_inventario';
 
-            elemento.textContent =
-                'Stock bajo';
+            elemento.textContent = 'Stock bajo';
 
             return;
 
@@ -1107,45 +841,29 @@
 
         if (estado === 'PENDIENTE') {
 
-            elemento.className =
-                'estado_pendiente_inventario';
+            elemento.className = 'estado_pendiente_inventario';
 
-            elemento.textContent =
-                'Pendiente';
+            elemento.textContent = 'Pendiente';
 
             return;
 
         }
 
 
-        elemento.className =
-            'estado_optimo_inventario';
+        elemento.className = 'estado_optimo_inventario';
 
-        elemento.textContent =
-            'Óptimo';
+        elemento.textContent = 'Óptimo';
 
     }
 
 
     // función para mostrar cantidades
-    function formatearCantidadInventario(
-        valor,
-        esProductoBalanza = false
-    ) {
+    function formatearCantidadInventario(valor, esProductoBalanza = false) {
 
-        const numero =
-            Number(
-                valor || 0
-            );
+        const numero = Number(valor || 0);
 
 
-        const cantidadFormateada = numero.toLocaleString(
-            'es-CL',
-            {
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 3
-            }
-        );
+        const cantidadFormateada = numero.toLocaleString('es-CL', { minimumFractionDigits: 0, maximumFractionDigits: 3 });
 
         return esProductoBalanza ? `${cantidadFormateada} (KG)` : cantidadFormateada;
 
@@ -1157,9 +875,7 @@
     // función para cambiar de página
     function cambiarPaginaInventario(pagina) {
 
-        const totalPaginas = Math.ceil(
-            inventarioFiltrado.length / productosPorPaginaInventario
-        );
+        const totalPaginas = Math.ceil(inventarioFiltrado.length / productosPorPaginaInventario);
 
         if (pagina < 1 || pagina > totalPaginas) {
             return;
@@ -1174,13 +890,9 @@
     // función para configurar los botones anterior y siguiente
     function configurarPaginacionInventario() {
 
-        const botonAnterior = document.getElementById(
-            'boton_pagina_anterior_inventario'
-        );
+        const botonAnterior = document.getElementById('boton_pagina_anterior_inventario');
 
-        const botonSiguiente = document.getElementById(
-            'boton_pagina_siguiente_inventario'
-        );
+        const botonSiguiente = document.getElementById('boton_pagina_siguiente_inventario');
 
         if (botonAnterior) {
             botonAnterior.addEventListener('click', function() {
@@ -1200,25 +912,15 @@
     // función para mostrar el contador y los controles de paginación
     function actualizarPaginacionInventario() {
 
-        const contenedor = document.getElementById(
-            'contenedor_paginacion_inventario'
-        );
+        const contenedor = document.getElementById('contenedor_paginacion_inventario');
 
-        const informacion = document.getElementById(
-            'informacion_paginacion_inventario'
-        );
+        const informacion = document.getElementById('informacion_paginacion_inventario');
 
-        const controles = document.getElementById(
-            'controles_paginacion_inventario'
-        );
+        const controles = document.getElementById('controles_paginacion_inventario');
 
-        const anterior = document.getElementById(
-            'boton_pagina_anterior_inventario'
-        );
+        const anterior = document.getElementById('boton_pagina_anterior_inventario');
 
-        const siguiente = document.getElementById(
-            'boton_pagina_siguiente_inventario'
-        );
+        const siguiente = document.getElementById('boton_pagina_siguiente_inventario');
 
         if (!contenedor || !informacion || !controles || !anterior || !siguiente) {
             return;
@@ -1231,18 +933,12 @@
             paginaActualInventario = totalPaginas;
         }
 
-        const inicio = totalProductos === 0
-            ? 0
-            : (paginaActualInventario - 1) * productosPorPaginaInventario + 1;
+        const inicio = totalProductos === 0 ? 0 : (paginaActualInventario - 1) * productosPorPaginaInventario + 1;
 
-        const fin = Math.min(
-            paginaActualInventario * productosPorPaginaInventario,
-            totalProductos
-        );
+        const fin = Math.min(paginaActualInventario * productosPorPaginaInventario, totalProductos);
 
         informacion.textContent =
-            'Mostrando ' + inicio.toLocaleString('es-CL') +
-            ' a ' + fin.toLocaleString('es-CL') +
+            'Mostrando ' + inicio.toLocaleString('es-CL') + ' a ' + fin.toLocaleString('es-CL') +
             ' de ' + totalProductos.toLocaleString('es-CL') + ' productos';
 
         contenedor.style.display = 'flex';
@@ -1263,9 +959,7 @@
     // función para mostrar los números de página y los puntos suspensivos
     function mostrarNumerosPaginasInventario(totalPaginas) {
 
-        const numeros = document.getElementById(
-            'numeros_paginas_inventario'
-        );
+        const numeros = document.getElementById('numeros_paginas_inventario');
 
         if (!numeros) {
             return;
@@ -1351,43 +1045,27 @@ async function recalcularStockMinimoInventario() {
 
     try {
 
-        const respuesta = await fetchConCsrf(
-            `${URL_API}/api/inventario/recalcular-stock-minimo`,
-            {
-                method: 'PUT',
-                credentials: 'include'
-            }
-        );
+        const respuesta = await fetchConCsrf(`${URL_API}/api/inventario/recalcular-stock-minimo`, { method: 'PUT', credentials: 'include' });
 
 
-        const resultado =
-            await respuesta.json();
+        const resultado = await respuesta.json();
 
 
         if (!respuesta.ok) {
 
-            console.error(
-                'Error al recalcular stock mínimo:',
-                resultado
-            );
+            console.error('Error al recalcular stock mínimo:', resultado);
 
             return;
 
         }
 
 
-        console.log(
-            'Stock mínimo recalculado:',
-            resultado
-        );
+        console.log('Stock mínimo recalculado:', resultado);
 
 
     } catch (error) {
 
-        console.error(
-            'Error al recalcular stock mínimo:',
-            error
-        );
+        console.error('Error al recalcular stock mínimo:', error);
 
     }
 
@@ -1399,9 +1077,7 @@ async function recalcularStockMinimoInventario() {
     // configura las pestañas de stock y movimientos
     function configurarPestanasInventario() {
 
-        const pestañas = document.querySelectorAll(
-            '.contenedor_pestanas_inventario [data-vista]'
-        );
+        const pestañas = document.querySelectorAll('.contenedor_pestanas_inventario [data-vista]');
 
         pestañas.forEach(function(pestaña) {
             pestaña.addEventListener('click', function() {
@@ -1409,10 +1085,7 @@ async function recalcularStockMinimoInventario() {
                 paginaActualMovimientosInventario = 1;
 
                 pestañas.forEach(function(opcion) {
-                    opcion.classList.toggle(
-                        'pestana_inventario_activa',
-                        opcion === pestaña
-                    );
+                    opcion.classList.toggle('pestana_inventario_activa', opcion === pestaña);
                 });
 
                 const esStockActual = vistaActivaInventario === 'stock';
@@ -1478,16 +1151,14 @@ async function recalcularStockMinimoInventario() {
             });
         }
 
-        document.getElementById('anterior_movimientos_inventario')
-            ?.addEventListener('click', function() {
+        document.getElementById('anterior_movimientos_inventario')?.addEventListener('click', function() {
                 if (paginaActualMovimientosInventario > 1) {
                     paginaActualMovimientosInventario--;
                     cargarMovimientosInventario();
                 }
             });
 
-        document.getElementById('siguiente_movimientos_inventario')
-            ?.addEventListener('click', function() {
+        document.getElementById('siguiente_movimientos_inventario')?.addEventListener('click', function() {
                 if (paginaActualMovimientosInventario < totalPaginasMovimientosInventario) {
                     paginaActualMovimientosInventario++;
                     cargarMovimientosInventario();
@@ -1579,8 +1250,7 @@ async function recalcularStockMinimoInventario() {
         const cabecera = document.getElementById('encabezado_movimientos_inventario');
         if (!tabla || !cabecera) return;
 
-        const modo = ['ENTRADA', 'SALIDA', 'AJUSTE'].includes(vistaActivaInventario)
-            ? vistaActivaInventario : 'MOVIMIENTOS';
+        const modo = ['ENTRADA', 'SALIDA', 'AJUSTE'].includes(vistaActivaInventario) ? vistaActivaInventario : 'MOVIMIENTOS';
         tabla.dataset.modo = modo;
         const columnas = modo === 'AJUSTE'
             ? ['Producto', 'Stock anterior', 'Stock nuevo', 'Diferencia', 'Motivo', 'Realizado por', 'Fecha de registro']
@@ -1663,10 +1333,7 @@ async function recalcularStockMinimoInventario() {
         parametros.set('pagina', paginaActualMovimientosInventario);
 
         try {
-            const respuesta = await fetchConCsrf(
-                `${URL_API}/api/inventario/movimientos?${parametros.toString()}`,
-                { method: 'GET', credentials: 'include' }
-            );
+            const respuesta = await fetchConCsrf(`${URL_API}/api/inventario/movimientos?${parametros.toString()}`, { method: 'GET', credentials: 'include' });
             const resultado = await respuesta.json();
 
             if (!respuesta.ok) {
@@ -1691,9 +1358,7 @@ async function recalcularStockMinimoInventario() {
         const anterior = document.getElementById('anterior_movimientos_inventario');
         const siguiente = document.getElementById('siguiente_movimientos_inventario');
         const numeros = document.getElementById('numeros_paginas_movimientos_inventario');
-        const controles = document.querySelector(
-            '#paginacion_movimientos_inventario .controles_paginacion_inventario'
-        );
+        const controles = document.querySelector('#paginacion_movimientos_inventario .controles_paginacion_inventario');
 
         if (!cuerpo) return;
 
@@ -1709,9 +1374,7 @@ async function recalcularStockMinimoInventario() {
             fila.className = 'fila_producto_inventario';
             fila.setAttribute('role', 'row');
 
-            const fecha = movimiento.fecha_hora
-                ? new Date(movimiento.fecha_hora).toLocaleString('es-CL')
-                : '—';
+            const fecha = movimiento.fecha_hora ? new Date(movimiento.fecha_hora).toLocaleString('es-CL') : '—';
             const cantidad = formatearCantidadMovimientoInventario(movimiento.cantidad);
             const tipo = String(movimiento.tipo || '').toUpperCase();
             const motivo = movimiento.motivo || '—';
@@ -1797,9 +1460,7 @@ async function recalcularStockMinimoInventario() {
         if (anterior) anterior.disabled = paginaActualMovimientosInventario <= 1;
         if (siguiente) siguiente.disabled = paginaActualMovimientosInventario >= totalPaginasMovimientosInventario;
         if (controles) {
-            controles.style.display = totalPaginasMovimientosInventario <= 1
-                ? 'none'
-                : 'flex';
+            controles.style.display = totalPaginasMovimientosInventario <= 1 ? 'none' : 'flex';
         }
 
         if (numeros) {
@@ -1884,11 +1545,7 @@ async function recalcularStockMinimoInventario() {
         // recalcula el stock minimo antes de cargar los datos
         await recalcularStockMinimoInventario();
 
-        await Promise.all([
-            cargarFamiliasInventario(),
-            cargarInventario(),
-            cargarResumenInventario()
-        ]);
+        await Promise.all([cargarFamiliasInventario(), cargarInventario(), cargarResumenInventario()]);
 
     }
 
@@ -1919,23 +1576,9 @@ async function recalcularStockMinimoInventario() {
         // El backend recibe el texto completo en "motivo", con un máximo de 100 caracteres.
         const LIMITE_MOTIVO = 100;
         const motivosPorOperacion = {
-            sumar: [
-                'Reposición de proveedor',
-                'Ingreso de mercadería',
-                'Devolución física',
-                'Corrección de ingreso'
-            ],
-            restar: [
-                'Merma o daño',
-                'Pérdida de producto',
-                'Retiro de mercadería',
-                'Uso interno'
-            ],
-            fijar: [
-                'Conteo físico',
-                'Corrección de registro',
-                'Regularización de inventario'
-            ]
+            sumar: ['Reposición de proveedor', 'Ingreso de mercadería', 'Devolución física', 'Corrección de ingreso'],
+            restar: ['Merma o daño', 'Pérdida de producto', 'Retiro de mercadería', 'Uso interno'],
+            fijar: ['Conteo físico', 'Corrección de registro', 'Regularización de inventario']
         };
 
         const obtenerFechaMinimaLote = () => {
@@ -1959,15 +1602,10 @@ async function recalcularStockMinimoInventario() {
         const actualizarContadorMotivo = () => {
             const motivoElegido = motivo.value.trim();
             const textoAdicional = observaciones.value.trim();
-            const prefijo = motivoElegido === 'OTRO' ? 'Otro: '
-                : motivoElegido ? `${motivoElegido}: ` : '';
-            const limiteObservaciones = motivoElegido
-                ? Math.max(0, LIMITE_MOTIVO - prefijo.length)
-                : LIMITE_MOTIVO;
+            const prefijo = motivoElegido === 'OTRO' ? 'Otro: ' : motivoElegido ? `${motivoElegido}: ` : '';
+            const limiteObservaciones = motivoElegido ? Math.max(0, LIMITE_MOTIVO - prefijo.length) : LIMITE_MOTIVO;
             observaciones.maxLength = limiteObservaciones;
-            const caracteres = textoAdicional
-                ? prefijo.length + textoAdicional.length
-                : motivoElegido === 'OTRO' ? 0 : motivoElegido.length;
+            const caracteres = textoAdicional ? prefijo.length + textoAdicional.length : motivoElegido === 'OTRO' ? 0 : motivoElegido.length;
             if (contadorMotivo) {
                 contadorMotivo.textContent = `${caracteres}/${LIMITE_MOTIVO}`;
                 contadorMotivo.classList.toggle('contador_motivo_excedido_inventario', caracteres > LIMITE_MOTIVO);
@@ -1975,9 +1613,7 @@ async function recalcularStockMinimoInventario() {
             const otroMotivo = motivoElegido === 'OTRO';
             observaciones.required = otroMotivo;
             if (etiquetaObservaciones) {
-                etiquetaObservaciones.textContent = otroMotivo
-                    ? 'Observaciones (obligatorias)'
-                    : 'Observaciones (opcionales)';
+                etiquetaObservaciones.textContent = otroMotivo ? 'Observaciones (obligatorias)' : 'Observaciones (opcionales)';
             }
         };
 
@@ -2017,11 +1653,7 @@ async function recalcularStockMinimoInventario() {
 
         const actualizarEtiqueta = () => {
             const unidad = productoBalanzaSeleccionado ? ' (KG)' : '';
-            const etiquetas = {
-                sumar: `Cantidad a sumar${unidad}`,
-                restar: `Cantidad a restar${unidad}`,
-                fijar: `Nuevo stock total${unidad}`
-            };
+            const etiquetas = { sumar: `Cantidad a sumar${unidad}`, restar: `Cantidad a restar${unidad}`, fijar: `Nuevo stock total${unidad}` };
             etiquetaCantidad.textContent = etiquetas[operacion.value] || `Cantidad${unidad}`;
             cantidad.min = operacion.value === 'fijar' ? '0' : '0.0001';
             fechaVencimiento.min = obtenerFechaMinimaLote();
@@ -2093,8 +1725,7 @@ async function recalcularStockMinimoInventario() {
         formulario.onsubmit = async (evento) => {
             evento.preventDefault();
             const valor = Number(cantidad.value);
-            if (!codigoSeleccionado || !cantidad.value.trim() || !Number.isFinite(valor) ||
-                valor < Number(cantidad.min) || valor > 99999999.9999 ||
+            if (!codigoSeleccionado || !cantidad.value.trim() || !Number.isFinite(valor) || valor < Number(cantidad.min) || valor > 99999999.9999 ||
                 Math.abs(valor - Math.round(valor * 10000) / 10000) > 1e-9) {
                 mensaje.textContent = 'Ingresa una cantidad válida (hasta cuatro decimales).';
                 cantidad.focus();

@@ -1,7 +1,5 @@
 // TITULO 1 BODY INICIO DE SESION
 
-    // Sin funcion
-
     // Comprueba la regla común de seguridad para contraseñas nuevas.
     function cumplePoliticaContrasena(password) {
         return password.length >= 8 && /\p{Lu}/u.test(password) && /\d/.test(password);
@@ -17,16 +15,12 @@
 // TITULO 2 CONTENEDOR INICIO SESION
 
     // Busca el formulario de inicio de sesión en el HTML.
-    const formularioInicioSesion = document.getElementById(
-        // Usa el identificador del formulario.
-        'formulario_inicio_sesion'
-    );
+    // Usa el identificador del formulario.
+    const formularioInicioSesion = document.getElementById('formulario_inicio_sesion');
 
     // Busca el elemento donde se muestran los mensajes del inicio de sesión.
-    const mensajeInicioSesion = document.getElementById(
-        // Usa el identificador del mensaje.
-        'mensaje_login'
-    );
+    // Usa el identificador del mensaje.
+    const mensajeInicioSesion = document.getElementById('mensaje_login');
 
     // Busca el campo y el botón que muestran u ocultan la contraseña.
     const campoContrasenaInicioSesion = document.getElementById('contrasena');
@@ -53,25 +47,20 @@
             evento.preventDefault();
 
             // Busca el campo de correo, obtiene su valor y elimina espacios al principio y al final.
-            const email = document.getElementById(
-                // Usa el identificador del campo de correo.
-                'email'
-            ).value.trim().toLowerCase();
+            // Usa el identificador del campo de correo.
+            const email = document.getElementById('email').value.trim().toLowerCase();
 
             // Busca el campo de contraseña y obtiene su valor.
-            const password = document.getElementById(
-                // Usa el identificador del campo de contraseña.
-                'contrasena'
-            ).value;
+            // Usa el identificador del campo de contraseña.
+            const password = document.getElementById('contrasena').value;
 
 
             // Comprueba si el campo de correo está vacío.
             if (email === '') {
 
                 // Muestra un mensaje si no se ingresó el correo.
-                mensajeInicioSesion.textContent =
-                    // Define el texto que verá el usuario.
-                    'Debes ingresar el correo electrónico.';
+                // Define el texto que verá el usuario.
+                mensajeInicioSesion.textContent = 'Debes ingresar el correo electrónico.';
 
                 // Detiene el envío del formulario.
                 return;
@@ -82,9 +71,8 @@
             if (password === '') {
 
                 // Muestra un mensaje si no se ingresó la contraseña.
-                mensajeInicioSesion.textContent =
-                    // Define el texto que verá el usuario.
-                    'Debes ingresar la contraseña.';
+                // Define el texto que verá el usuario.
+                mensajeInicioSesion.textContent = 'Debes ingresar la contraseña.';
 
                 // Detiene el envío del formulario.
                 return;
@@ -132,28 +120,22 @@
                 if (!respuesta.ok) {
 
                     // Muestra el mensaje recibido o un mensaje predeterminado.
-                    mensajeInicioSesion.textContent =
-                        // Usa el mensaje del servidor si está disponible.
-                        datos.mensaje ||
-                        // Usa este texto si el servidor no envió un mensaje.
-                        'No fue posible iniciar sesión.';
+                    // Usa el mensaje del servidor si está disponible.
+                    // Usa este texto si el servidor no envió un mensaje.
+                    mensajeInicioSesion.textContent = datos.mensaje || 'No fue posible iniciar sesión.';
                     // Detiene la ejecución después de mostrar el error.
                     return;
 
                 }
 
                 // Muestra en la consola los datos del usuario recibidos.
-                console.log(
-                    // Identifica el contenido que se muestra en la consola.
-                    'Usuario:',
-                    // Imprime los datos recibidos.
-                    datos
-                );
+                // Identifica el contenido que se muestra en la consola.
+                // Imprime los datos recibidos.
+                console.log('Usuario:', datos);
 
                 // Muestra un saludo con el nombre del usuario.
-                mensajeInicioSesion.textContent =
-                    // Une el saludo con el nombre recibido del servidor.
-                    'Bienvenido ' + datos.nombre;
+                // Une el saludo con el nombre recibido del servidor.
+                mensajeInicioSesion.textContent = 'Bienvenido ' + datos.nombre;
 
                 // Redirige al usuario a la página principal del sistema.
                 actualizarTokenCsrf(datos.csrfToken);
@@ -163,17 +145,13 @@
             } catch (error) {
 
                 // Muestra el error técnico en la consola.
-                console.error(
-                    // Identifica el error en la consola.
-                    'Error al iniciar sesión:',
-                    // Imprime los detalles del error.
-                    error
-                );
+                // Identifica el error en la consola.
+                // Imprime los detalles del error.
+                console.error('Error al iniciar sesión:', error);
 
                 // Muestra un mensaje si no se pudo conectar con el servidor.
-                mensajeInicioSesion.textContent =
-                    // Define el texto que verá el usuario.
-                    'No se pudo conectar con el servidor.';
+                // Define el texto que verá el usuario.
+                mensajeInicioSesion.textContent = 'No se pudo conectar con el servidor.';
 
             }
 
@@ -207,19 +185,15 @@
 // TITULO 9 BOTON INICIO SESION
 
     // Busca el botón que inicia el proceso de inicio de sesión.
-    const botonInicioSesion = document.getElementById(
-        // Usa el identificador del botón.
-        'boton_inicio_sesion'
-    );
+    // Usa el identificador del botón.
+    const botonInicioSesion = document.getElementById('boton_inicio_sesion');
 
     // Ejecuta esta función cuando se hace clic en el botón.
     botonInicioSesion.addEventListener('click', function () {
 
         // Busca el formulario de inicio de sesión.
-        const formularioInicioSesion = document.getElementById(
-            // Usa el identificador del formulario.
-            'formulario_inicio_sesion'
-        );
+        // Usa el identificador del formulario.
+        const formularioInicioSesion = document.getElementById('formulario_inicio_sesion');
 
         // Envía el formulario y activa sus validaciones normales.
         formularioInicioSesion.requestSubmit();
@@ -407,11 +381,9 @@
         }
 
         // Elige la ruta de la API según si ya se envió un código.
-        const ruta = codigoEnviado
-            // Si ya se envió, verifica el código para completar el registro.
-            ? '/api/autenticacion/registro/verificar'
-            // Si todavía no se envió, inicia el proceso y solicita un código.
-            : '/api/autenticacion/registro/iniciar';
+        // Si ya se envió, verifica el código para completar el registro.
+        // Si todavía no se envió, inicia el proceso y solicita un código.
+        const ruta = codigoEnviado ? '/api/autenticacion/registro/verificar' : '/api/autenticacion/registro/iniciar';
 
         // Prepara los datos del formulario que se enviarán al servidor.
         const datosRegistro = { nombre, email, password, confirmar_password: confirmarPassword };

@@ -5,33 +5,21 @@ let productosExcluidosCargadosDashboard = false;
 
 async function cargarResumenDashboard() {
     try {
-        const respuesta = await fetchConCsrf(
-            `${URL_API}/api/dashboard/resumen`,
-            { method: 'GET', credentials: 'include' }
-        );
+        const respuesta = await fetchConCsrf(`${URL_API}/api/dashboard/resumen`, { method: 'GET', credentials: 'include' });
         const resumen = await respuesta.json();
 
         if (!respuesta.ok) {
             throw new Error(resumen.mensaje || 'No se pudo cargar el resumen.');
         }
 
-        document.getElementById('valor_cantidad_productos_dashboard').textContent =
-            Number(resumen.cantidad_productos || 0).toLocaleString('es-CL');
-        document.getElementById('valor_stock_bajo_dashboard').textContent =
-            Number(resumen.productos_stock_bajo || 0).toLocaleString('es-CL');
-        document.getElementById('valor_productos_agotados_dashboard').textContent =
-            Number(resumen.productos_agotados || 0).toLocaleString('es-CL');
+        document.getElementById('valor_cantidad_productos_dashboard').textContent = Number(resumen.cantidad_productos || 0).toLocaleString('es-CL');
+        document.getElementById('valor_stock_bajo_dashboard').textContent = Number(resumen.productos_stock_bajo || 0).toLocaleString('es-CL');
+        document.getElementById('valor_productos_agotados_dashboard').textContent = Number(resumen.productos_agotados || 0).toLocaleString('es-CL');
         document.getElementById('valor_ventas_mes_dashboard').textContent =
-            Number(resumen.ventas_mes_actual || 0).toLocaleString('es-CL', {
-                style: 'currency',
-                currency: 'CLP',
-                maximumFractionDigits: 0
-            });
+            Number(resumen.ventas_mes_actual || 0).toLocaleString('es-CL', { style: 'currency', currency: 'CLP', maximumFractionDigits: 0 });
         const periodo = document.getElementById('periodo_ventas_mes_dashboard');
         if (periodo) {
-            periodo.textContent = resumen.mes_ventas_referencia
-                ? obtenerNombreMesDashboard(resumen.mes_ventas_referencia, 'largo')
-                : 'Sin ventas registradas';
+            periodo.textContent = resumen.mes_ventas_referencia ? obtenerNombreMesDashboard(resumen.mes_ventas_referencia, 'largo') : 'Sin ventas registradas';
         }
     } catch (error) {
         console.error('Error al cargar indicadores del dashboard:', error);
@@ -43,24 +31,17 @@ function obtenerNombreMesDashboard(mes, estilo = 'corto') {
     const partes = /^(\d{4})-(\d{2})$/.exec(String(mes || ''));
     if (!partes) return String(mes || '');
     const fecha = new Date(Number(partes[1]), Number(partes[2]) - 1, 15, 12);
-    return new Intl.DateTimeFormat('es-CL', {
-        month: estilo === 'largo' ? 'long' : 'short',
-        year: estilo === 'largo' ? 'numeric' : undefined
-    }).format(fecha);
+    return new Intl.DateTimeFormat('es-CL', { month: estilo === 'largo' ? 'long' : 'short', year: estilo === 'largo' ? 'numeric' : undefined }).format(fecha);
 }
 
 function formatearMontoDashboard(monto) {
-    return Number(monto || 0).toLocaleString('es-CL', {
-        style: 'currency', currency: 'CLP', maximumFractionDigits: 0
-    });
+    return Number(monto || 0).toLocaleString('es-CL', { style: 'currency', currency: 'CLP', maximumFractionDigits: 0 });
 }
 
 function formatearMontoCompactoDashboard(valor) {
     const cantidad = Number(valor || 0);
-    if (Math.abs(cantidad) >= 1000000)
-        return '$' + (cantidad / 1000000).toLocaleString('es-CL', { maximumFractionDigits: 1 }) + ' M';
-    if (Math.abs(cantidad) >= 1000)
-        return '$' + (cantidad / 1000).toLocaleString('es-CL', { maximumFractionDigits: 1 }) + ' mil';
+    if (Math.abs(cantidad) >= 1000000) return '$' + (cantidad / 1000000).toLocaleString('es-CL', { maximumFractionDigits: 1 }) + ' M';
+    if (Math.abs(cantidad) >= 1000) return '$' + (cantidad / 1000).toLocaleString('es-CL', { maximumFractionDigits: 1 }) + ' mil';
     return formatearMontoDashboard(cantidad);
 }
 
@@ -76,10 +57,7 @@ async function cargarVentasUltimosSeisMesesDashboard() {
     contenedor.appendChild(mensaje);
 
     try {
-        const respuesta = await fetchConCsrf(
-            `${URL_API}/api/dashboard/ventas-ultimos-seis-meses`,
-            { method: 'GET', credentials: 'include' }
-        );
+        const respuesta = await fetchConCsrf(`${URL_API}/api/dashboard/ventas-ultimos-seis-meses`, { method: 'GET', credentials: 'include' });
         const datos = await respuesta.json();
         if (!respuesta.ok) throw new Error(datos.mensaje || 'No se pudieron cargar las ventas mensuales.');
         if (!Array.isArray(datos)) throw new Error('Formato inesperado de ventas mensuales.');
@@ -197,18 +175,13 @@ async function cargarProductosMasVendidosDashboard() {
 function mostrarProductosMasVendidosDashboard() {
     const cuerpo = document.getElementById('cuerpo_mas_vendidos_dashboard');
     const estado = document.getElementById('estado_mas_vendidos_dashboard');
-    const busqueda = (document.getElementById('busqueda_mas_vendidos_dashboard')?.value || '')
-        .trim()
-        .toLocaleLowerCase('es-CL');
+    const busqueda = (document.getElementById('busqueda_mas_vendidos_dashboard')?.value || '').trim().toLocaleLowerCase('es-CL');
 
     if (!cuerpo || !estado) return;
 
-    const filtrados = productosMasVendidosDashboard
-        .map((producto, indice) => ({ producto, puesto: indice + 1 }))
+    const filtrados = productosMasVendidosDashboard.map((producto, indice) => ({ producto, puesto: indice + 1 }))
         .filter(({ producto }) =>
-            `${producto.descripcion || ''} ${producto.codigo || ''}`
-                .toLocaleLowerCase('es-CL')
-                .includes(busqueda)
+            `${producto.descripcion || ''} ${producto.codigo || ''}`.toLocaleLowerCase('es-CL').includes(busqueda)
         );
 
     cuerpo.innerHTML = '';
@@ -228,9 +201,7 @@ function mostrarProductosMasVendidosDashboard() {
             puesto,
             producto.descripcion || 'Producto sin nombre',
             producto.codigo || '-',
-            Number(producto.cantidad_vendida || 0).toLocaleString('es-CL', {
-                maximumFractionDigits: 4
-            })
+            Number(producto.cantidad_vendida || 0).toLocaleString('es-CL', { maximumFractionDigits: 4 })
         ];
 
         valores.forEach((valor) => {
@@ -265,10 +236,7 @@ async function cargarProductosExcluidosDashboard() {
     cuerpo.innerHTML = '';
 
     try {
-        const respuesta = await fetchConCsrf(
-            `${URL_API}/api/dashboard/productos-excluidos`,
-            { method: 'GET', credentials: 'include' }
-        );
+        const respuesta = await fetchConCsrf(`${URL_API}/api/dashboard/productos-excluidos`, { method: 'GET', credentials: 'include' });
         const resultado = await respuesta.json();
 
         if (!respuesta.ok) {
@@ -287,16 +255,12 @@ async function cargarProductosExcluidosDashboard() {
 function mostrarProductosExcluidosDashboard() {
     const cuerpo = document.getElementById('cuerpo_excluidos_dashboard');
     const estado = document.getElementById('estado_excluidos_dashboard');
-    const busqueda = (document.getElementById('busqueda_mas_vendidos_dashboard')?.value || '')
-        .trim()
-        .toLocaleLowerCase('es-CL');
+    const busqueda = (document.getElementById('busqueda_mas_vendidos_dashboard')?.value || '').trim().toLocaleLowerCase('es-CL');
 
     if (!cuerpo || !estado) return;
 
     const filtrados = productosExcluidosDashboard.filter((producto) =>
-        `${producto.descripcion || ''} ${producto.codigo || ''} ${producto.correo_usuario || ''}`
-            .toLocaleLowerCase('es-CL')
-            .includes(busqueda)
+        `${producto.descripcion || ''} ${producto.codigo || ''} ${producto.correo_usuario || ''}`.toLocaleLowerCase('es-CL').includes(busqueda)
     );
 
     cuerpo.innerHTML = '';
@@ -312,16 +276,9 @@ function mostrarProductosExcluidosDashboard() {
 
     filtrados.forEach((producto) => {
         const fila = document.createElement('tr');
-        const fecha = producto.fecha_hora
-            ? new Date(producto.fecha_hora).toLocaleString('es-CL')
-            : '-';
+        const fecha = producto.fecha_hora ? new Date(producto.fecha_hora).toLocaleString('es-CL') : '-';
 
-        [
-            producto.descripcion || 'Producto sin nombre',
-            producto.codigo || '-',
-            producto.correo_usuario || 'No registrado',
-            fecha
-        ].forEach((valor) => {
+        [producto.descripcion || 'Producto sin nombre', producto.codigo || '-', producto.correo_usuario || 'No registrado', fecha].forEach((valor) => {
             const celda = document.createElement('td');
             celda.textContent = valor;
             fila.appendChild(celda);
@@ -347,10 +304,7 @@ async function actualizarListaNegraDashboard(codigo, excluir, boton) {
     try {
         const respuesta = await fetchConCsrf(
             `${URL_API}/api/dashboard/productos/${encodeURIComponent(codigo)}/lista-negra`,
-            {
-                method: excluir ? 'POST' : 'DELETE',
-                credentials: 'include'
-            }
+            { method: excluir ? 'POST' : 'DELETE', credentials: 'include' }
         );
         const resultado = await respuesta.json();
 
@@ -465,8 +419,7 @@ function mostrarVistaPreviaMasVendidosDashboard(mensajeError = '') {
         codigo.textContent = 'Código: ' + (producto.codigo || '-');
         productoCelda.append(nombre, codigo);
         const cantidad = document.createElement('td');
-        cantidad.textContent = Number(producto.cantidad_vendida || 0)
-            .toLocaleString('es-CL', { maximumFractionDigits: 4 });
+        cantidad.textContent = Number(producto.cantidad_vendida || 0).toLocaleString('es-CL', { maximumFractionDigits: 4 });
         fila.append(numero, productoCelda, cantidad);
         cuerpo.appendChild(fila);
     });
@@ -483,9 +436,7 @@ async function cargarInventarioResumenDashboard() {
     const listaRecomendaciones = document.getElementById('lista_recomendaciones_dashboard');
     if (!grafico || !cuerpo || !listaAlertas || !listaRecomendaciones) return;
     try {
-        const respuesta = await fetchConCsrf(`${URL_API}/api/inventario`, {
-            method: 'GET', credentials: 'include'
-        });
+        const respuesta = await fetchConCsrf(`${URL_API}/api/inventario`, { method: 'GET', credentials: 'include' });
         if (!respuesta.ok) throw new Error('No se pudo consultar el inventario.');
         const datos = await respuesta.json();
         if (!Array.isArray(datos)) throw new Error('Formato de inventario no reconocido.');
@@ -545,8 +496,7 @@ function dibujarDistribucionFamiliasDashboard(contenedor, productos) {
         const barra = document.createElement('div');
         barra.className = 'barra_familia_dashboard';
         const nombreNormalizado = nombre.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase().trim();
-        barra.style.setProperty('--color-familia-dashboard',
-            coloresPorFamilia[nombreNormalizado] || paletaAlternativa[indice % paletaAlternativa.length]);
+        barra.style.setProperty('--color-familia-dashboard', coloresPorFamilia[nombreNormalizado] || paletaAlternativa[indice % paletaAlternativa.length]);
         barra.style.width = (100 * cantidad / maximo).toFixed(2) + '%';
         pista.appendChild(barra);
         const valor = document.createElement('span');
@@ -591,8 +541,7 @@ function dibujarStockBajoDashboard(cuerpo, productos) {
         const campos = [p.descripcion || '-',p.familia || '-',
             Number(p.stock_actual || 0).toLocaleString('es-CL', {maximumFractionDigits:3}),
             Number(p.punto_reposicion ?? (Number(p.stock_minimo || 0) + Number(p.stock_seguridad || 0))).toLocaleString('es-CL', {maximumFractionDigits:3})];
-        const clases = ['dato_producto_stock_bajo_dashboard','dato_familia_stock_bajo_dashboard',
-            'dato_stock_actual_dashboard','dato_stock_minimo_dashboard'];
+        const clases = ['dato_producto_stock_bajo_dashboard','dato_familia_stock_bajo_dashboard', 'dato_stock_actual_dashboard','dato_stock_minimo_dashboard'];
         campos.forEach((valor,indice) => {
             const celda=document.createElement('td');celda.className=clases[indice];celda.textContent=valor;fila.appendChild(celda);
         });

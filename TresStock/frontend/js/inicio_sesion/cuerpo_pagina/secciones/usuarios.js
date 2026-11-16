@@ -43,8 +43,7 @@ function configurarAlertasUsuarios() {
     });
 }
 
-function abrirAlertaUsuarios({ titulo, mensaje, tipo = 'informacion', confirmar = false,
-    textoAceptar = 'Aceptar' }) {
+function abrirAlertaUsuarios({ titulo, mensaje, tipo = 'informacion', confirmar = false, textoAceptar = 'Aceptar' }) {
     const fondo = document.getElementById('contenedor_alerta_usuarios');
     const ventana = fondo?.querySelector('.modal_alerta_usuarios');
     const tituloElemento = document.getElementById('titulo_alerta_usuarios');
@@ -58,8 +57,7 @@ function abrirAlertaUsuarios({ titulo, mensaje, tipo = 'informacion', confirmar 
     }
     if (resolverAlertaUsuarios) return Promise.resolve(false);
     configurarAlertasUsuarios();
-    const tipoValido = ['correcto', 'error', 'advertencia', 'informacion'].includes(tipo)
-        ? tipo : 'informacion';
+    const tipoValido = ['correcto', 'error', 'advertencia', 'informacion'].includes(tipo) ? tipo : 'informacion';
     ventana.dataset.tipo = tipoValido;
     tituloElemento.textContent = String(titulo || 'Aviso');
     mensajeElemento.textContent = String(mensaje || '');
@@ -199,14 +197,12 @@ function actualizarSelectorUsuarios(clave, valor) {
 // TITULO 4 FORMULARIO NUEVO, VER Y EDITAR
 
 function limpiarFormularioUsuario() {
-    ['input_nombre_usuario', 'input_email_usuario', 'input_password_usuario',
-        'input_confirmar_password_usuario'].forEach(id => {
+    ['input_nombre_usuario', 'input_email_usuario', 'input_password_usuario', 'input_confirmar_password_usuario'].forEach(id => {
         const elemento = document.getElementById(id);
         if (elemento) elemento.value = '';
     });
     document.querySelectorAll('.boton_ver_contrasena_usuario').forEach(boton => {
-        const idCampo = boton.id === 'boton_ver_password_usuario'
-            ? 'input_password_usuario' : 'input_confirmar_password_usuario';
+        const idCampo = boton.id === 'boton_ver_password_usuario' ? 'input_password_usuario' : 'input_confirmar_password_usuario';
         const campo = document.getElementById(idCampo);
         if (campo) campo.type = 'password';
         boton.classList.remove('mostrando');
@@ -250,8 +246,7 @@ function configurarModoFormularioUsuario() {
     const campoConfirmar = document.querySelector('.campo_confirmar_password_usuario');
     const textoPassword = document.querySelector('.texto_campo_password_usuario');
     const textoConfirmar = document.querySelector('.texto_campo_confirmar_password_usuario');
-    if (titulo) titulo.textContent = viendo ? 'Detalle del usuario' :
-        editando ? 'Editar usuario' : 'Nuevo usuario';
+    if (titulo) titulo.textContent = viendo ? 'Detalle del usuario' : editando ? 'Editar usuario' : 'Nuevo usuario';
     if (guardar) {
         guardar.hidden = viendo;
         guardar.style.display = viendo ? 'none' : 'flex';
@@ -261,8 +256,7 @@ function configurarModoFormularioUsuario() {
     if (campoConfirmar) campoConfirmar.hidden = viendo;
     if (textoPassword) textoPassword.textContent = editando ? 'Nueva contraseña (opcional)' : 'Contraseña';
     if (textoConfirmar) textoConfirmar.textContent = editando ? 'Confirmar nueva contraseña' : 'Confirmar contraseña';
-    ['input_nombre_usuario', 'input_email_usuario', 'input_password_usuario',
-        'input_confirmar_password_usuario'].forEach(id => {
+    ['input_nombre_usuario', 'input_email_usuario', 'input_password_usuario', 'input_confirmar_password_usuario'].forEach(id => {
         const campo = document.getElementById(id);
         if (campo) campo.disabled = viendo;
     });
@@ -308,9 +302,7 @@ async function abrirDetalleUsuario(id, modo) {
 // TITULO 5 OBTENER Y MOSTRAR USUARIOS
 
 function escaparTextoUsuario(texto) {
-    return String(texto ?? '').replace(/[&<>"']/g, caracter => ({
-        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-    }[caracter]));
+    return String(texto ?? '').replace(/[&<>"']/g, caracter => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[caracter]));
 }
 
 function obtenerNombreRolUsuario(usuario) {
@@ -321,8 +313,7 @@ function obtenerNombreRolUsuario(usuario) {
 }
 
 function obtenerEstadoUsuario(usuario) {
-    return usuario.activo === true || usuario.activo === 'true' ||
-        usuario.activo === 1 || usuario.activo === '1';
+    return usuario.activo === true || usuario.activo === 'true' || usuario.activo === 1 || usuario.activo === '1';
 }
 
 function formatearFechaUsuario(fecha) {
@@ -337,8 +328,7 @@ async function cargarUsuarios() {
         const respuesta = await fetchConCsrf(URL_API_USUARIOS, { method: 'GET', credentials: 'include' });
         const resultado = await respuesta.json();
         if (!respuesta.ok) throw new Error(resultado.mensaje || 'No se pudieron cargar los usuarios.');
-        usuariosCargados = Array.isArray(resultado) ? resultado :
-            Array.isArray(resultado.usuarios) ? resultado.usuarios : [];
+        usuariosCargados = Array.isArray(resultado) ? resultado : Array.isArray(resultado.usuarios) ? resultado.usuarios : [];
         filtrarUsuarios();
         actualizarIndicadoresUsuarios(usuariosCargados);
     } catch (error) {
@@ -357,9 +347,7 @@ function mostrarUsuarios(usuarios) {
         const celda = document.createElement('td');
         celda.className = 'dato_sin_usuarios';
         celda.colSpan = 6;
-        celda.textContent = usuariosCargados.length
-            ? 'No se encontraron usuarios con los filtros seleccionados.'
-            : 'No hay usuarios registrados para mostrar.';
+        celda.textContent = usuariosCargados.length ? 'No se encontraron usuarios con los filtros seleccionados.' : 'No hay usuarios registrados para mostrar.';
         fila.appendChild(celda);
         cuerpo.appendChild(fila);
         return;
@@ -422,8 +410,7 @@ function actualizarIndicadoresUsuarios(usuarios) {
 // TITULO 6 BUSQUEDA Y FILTROS
 
 function normalizarBusquedaUsuario(valor) {
-    return String(valor ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-        .toLowerCase().trim().replace(/\s+/g, ' ');
+    return String(valor ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim().replace(/\s+/g, ' ');
 }
 
 function filtrarUsuarios() {
@@ -487,8 +474,7 @@ async function guardarUsuario() {
         await mostrarMensajeUsuarios('Falta seleccionar rol', 'Selecciona un rol para el usuario.', 'advertencia');
         return;
     }
-    if ((nuevo || password || confirmar_password) &&
-        (password.length < 8 || password.length > 40 || !/\p{Lu}/u.test(password) || !/\d/.test(password))) {
+    if ((nuevo || password || confirmar_password) && (password.length < 8 || password.length > 40 || !/\p{Lu}/u.test(password) || !/\d/.test(password))) {
         await mostrarMensajeUsuarios('Contraseña no válida', 'La contraseña debe tener entre 8 y 40 caracteres, una mayúscula y un número.', 'advertencia');
         return;
     }
@@ -552,8 +538,7 @@ async function cambiarEstadoUsuario(idUsuario) {
         const resultado = await respuesta.json();
         if (!respuesta.ok) throw new Error(resultado.mensaje || 'No se pudo cambiar el estado del usuario.');
         await cargarUsuarios();
-        await mostrarMensajeUsuarios('Estado actualizado',
-            'El usuario se ' + (nuevoEstado ? 'activó' : 'desactivó') + ' correctamente.', 'correcto');
+        await mostrarMensajeUsuarios('Estado actualizado', 'El usuario se ' + (nuevoEstado ? 'activó' : 'desactivó') + ' correctamente.', 'correcto');
     } catch (error) {
         await mostrarMensajeUsuarios('No se pudo cambiar el estado', error.message, 'error');
     } finally {
@@ -575,8 +560,7 @@ function configurarAccionesTablaUsuarios() {
         }
         if (boton.classList.contains('boton_ver_usuario')) abrirDetalleUsuario(id, 'ver');
         else if (boton.classList.contains('boton_editar_usuario')) abrirDetalleUsuario(id, 'editar');
-        else if (boton.classList.contains('boton_desactivar_usuario') ||
-            boton.classList.contains('boton_activar_usuario')) cambiarEstadoUsuario(id);
+        else if (boton.classList.contains('boton_desactivar_usuario') || boton.classList.contains('boton_activar_usuario')) cambiarEstadoUsuario(id);
     });
 }
 

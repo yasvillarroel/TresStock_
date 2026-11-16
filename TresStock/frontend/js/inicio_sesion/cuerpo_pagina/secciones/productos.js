@@ -72,8 +72,7 @@ function configurarDialogoProductos() {
 }
 
 // abre una ventana centrada y devuelve true si el usuario confirma
-function abrirDialogoProductos({ titulo, mensaje, tipo = 'informacion', confirmar = false,
-    textoAceptar = 'Aceptar' }) {
+function abrirDialogoProductos({ titulo, mensaje, tipo = 'informacion', confirmar = false, textoAceptar = 'Aceptar' }) {
 
     const fondo = document.getElementById('contenedor_alerta_productos');
     const ventana = fondo?.querySelector('.modal_alerta_productos');
@@ -93,15 +92,12 @@ function abrirDialogoProductos({ titulo, mensaje, tipo = 'informacion', confirma
 
     configurarDialogoProductos();
 
-    const tipoValido = ['correcto', 'error', 'advertencia', 'informacion'].includes(tipo)
-        ? tipo : 'informacion';
+    const tipoValido = ['correcto', 'error', 'advertencia', 'informacion'].includes(tipo) ? tipo : 'informacion';
 
     tituloElemento.textContent = String(titulo || 'Aviso');
     mensajeElemento.textContent = String(mensaje || '');
     ventana.dataset.tipo = tipoValido;
-    icono.textContent = {
-        correcto: '✓', error: '×', advertencia: '!', informacion: 'i'
-    }[tipoValido];
+    icono.textContent = { correcto: '✓', error: '×', advertencia: '!', informacion: 'i' }[tipoValido];
 
     cancelar.hidden = !confirmar;
     aceptar.textContent = textoAceptar;
@@ -137,9 +133,7 @@ function mostrarMensajeProducto(titulo, mensaje, tipo = 'informacion') {
 
 // pregunta al usuario antes de ejecutar una operación
 function confirmarAccionProducto(titulo, mensaje, textoAceptar = 'Confirmar') {
-    return abrirDialogoProductos({
-        titulo, mensaje, tipo: 'advertencia', confirmar: true, textoAceptar
-    });
+    return abrirDialogoProductos({ titulo, mensaje, tipo: 'advertencia', confirmar: true, textoAceptar });
 }
 
 // TITULO 1 FORMULARIO PRODUCTO
@@ -147,13 +141,9 @@ function confirmarAccionProducto(titulo, mensaje, textoAceptar = 'Confirmar') {
     // función para mostrar el formulario de registro de un nuevo producto
     function abrirFormularioProducto() {
 
-        const contenedorFormularioProducto = document.getElementById(
-            'contenedor_formulario_producto'
-        );
+        const contenedorFormularioProducto = document.getElementById('contenedor_formulario_producto');
 
-        const tituloFormularioProducto = document.getElementById(
-            'titulo_formulario_producto'
-        );
+        const tituloFormularioProducto = document.getElementById('titulo_formulario_producto');
 
         if (tituloFormularioProducto) {
 
@@ -175,9 +165,7 @@ function confirmarAccionProducto(titulo, mensaje, textoAceptar = 'Confirmar') {
 
         if (contenedorFormularioProducto) {
 
-            contenedorFormularioProducto.classList.remove(
-                'contenedor_formulario_producto_oculto'
-            );
+            contenedorFormularioProducto.classList.remove('contenedor_formulario_producto_oculto');
 
         }
 
@@ -197,16 +185,12 @@ function confirmarAccionProducto(titulo, mensaje, textoAceptar = 'Confirmar') {
         busquedaImagenProductoSecuencia++;
         buscandoImagenProducto = false;
 
-        const contenedorFormularioProducto = document.getElementById(
-            'contenedor_formulario_producto'
-        );
+        const contenedorFormularioProducto = document.getElementById('contenedor_formulario_producto');
 
 
         if (contenedorFormularioProducto) {
 
-            contenedorFormularioProducto.classList.add(
-                'contenedor_formulario_producto_oculto'
-            );
+            contenedorFormularioProducto.classList.add('contenedor_formulario_producto_oculto');
 
         }
 
@@ -218,29 +202,17 @@ function confirmarAccionProducto(titulo, mensaje, textoAceptar = 'Confirmar') {
     // función para limpiar los campos del formulario de producto
     function limpiarFormularioProducto() {
 
-        const inputCodigoProducto = document.getElementById(
-            'input_codigo_producto'
-        );
+        const inputCodigoProducto = document.getElementById('input_codigo_producto');
 
-        const inputCodigoBarraProducto = document.getElementById(
-            'input_codigo_barra_producto'
-        );
+        const inputCodigoBarraProducto = document.getElementById('input_codigo_barra_producto');
 
-        const inputDescripcionProducto = document.getElementById(
-            'input_descripcion_producto'
-        );
+        const inputDescripcionProducto = document.getElementById('input_descripcion_producto');
 
-        const inputFamiliaProducto = document.getElementById(
-            'input_familia_producto'
-        );
+        const inputFamiliaProducto = document.getElementById('input_familia_producto');
 
-        const inputPrecioProducto = document.getElementById(
-            'input_precio_producto'
-        );
+        const inputPrecioProducto = document.getElementById('input_precio_producto');
 
-        const selectProveedorProducto = document.getElementById(
-            'select_proveedor_producto'
-        );
+        const selectProveedorProducto = document.getElementById('select_proveedor_producto');
 
 
         if (inputCodigoProducto) {
@@ -286,8 +258,7 @@ function confirmarAccionProducto(titulo, mensaje, textoAceptar = 'Confirmar') {
         imagenGuardadaProducto = null;
         imagenNuevaBuscadaProducto = false;
         codigoBarraImagenBuscadaProducto = null;
-        mostrarVistaPreviaImagenProducto(null,
-            'Puedes buscar una imagen o subir una foto desde tu dispositivo.');
+        mostrarVistaPreviaImagenProducto(null, 'Puedes buscar una imagen o subir una foto desde tu dispositivo.');
 
     }
 
@@ -297,15 +268,11 @@ function confirmarAccionProducto(titulo, mensaje, textoAceptar = 'Confirmar') {
     // abre la ventana de importación de productos
     function abrirImportacionProductos() {
 
-        const contenedorImportacion = document.getElementById(
-            'contenedor_importacion_productos'
-        );
+        const contenedorImportacion = document.getElementById('contenedor_importacion_productos');
 
         if (contenedorImportacion) {
 
-            contenedorImportacion.classList.remove(
-                'contenedor_importacion_productos_oculto'
-            );
+            contenedorImportacion.classList.remove('contenedor_importacion_productos_oculto');
 
         }
 
@@ -315,24 +282,16 @@ function confirmarAccionProducto(titulo, mensaje, textoAceptar = 'Confirmar') {
     // cierra la ventana de importación de productos
     function cerrarImportacionProductos() {
 
-        const contenedorImportacion = document.getElementById(
-            'contenedor_importacion_productos'
-        );
+        const contenedorImportacion = document.getElementById('contenedor_importacion_productos');
 
-        const inputArchivo = document.getElementById(
-            'input_archivo_productos'
-        );
+        const inputArchivo = document.getElementById('input_archivo_productos');
 
-        const informacionArchivo = document.getElementById(
-            'informacion_archivo_productos'
-        );
+        const informacionArchivo = document.getElementById('informacion_archivo_productos');
 
 
         if (contenedorImportacion) {
 
-            contenedorImportacion.classList.add(
-                'contenedor_importacion_productos_oculto'
-            );
+            contenedorImportacion.classList.add('contenedor_importacion_productos_oculto');
 
         }
 
@@ -342,8 +301,7 @@ function confirmarAccionProducto(titulo, mensaje, textoAceptar = 'Confirmar') {
 
         if (informacionArchivo) {
 
-            informacionArchivo.textContent =
-                'No se ha seleccionado ningún archivo.';
+            informacionArchivo.textContent = 'No se ha seleccionado ningún archivo.';
 
         }
 
@@ -353,9 +311,7 @@ function confirmarAccionProducto(titulo, mensaje, textoAceptar = 'Confirmar') {
     // abre el explorador de archivos
     function seleccionarArchivoProductos() {
 
-        const inputArchivo = document.getElementById(
-            'input_archivo_productos'
-        );
+        const inputArchivo = document.getElementById('input_archivo_productos');
 
         if (inputArchivo) {
 
@@ -369,9 +325,7 @@ function confirmarAccionProducto(titulo, mensaje, textoAceptar = 'Confirmar') {
     // configura la selección del archivo
     function configurarImportacionProductos() {
 
-        const inputArchivo = document.getElementById(
-            'input_archivo_productos'
-        );
+        const inputArchivo = document.getElementById('input_archivo_productos');
 
 
         if (!inputArchivo) {
@@ -380,9 +334,7 @@ function confirmarAccionProducto(titulo, mensaje, textoAceptar = 'Confirmar') {
 
         inputArchivo.addEventListener('change', function () {
 
-            const informacionArchivo = document.getElementById(
-                'informacion_archivo_productos'
-            );
+            const informacionArchivo = document.getElementById('informacion_archivo_productos');
 
             const archivo = this.files[0];
 
@@ -393,15 +345,13 @@ function confirmarAccionProducto(titulo, mensaje, textoAceptar = 'Confirmar') {
 
             if (!archivo) {
 
-                informacionArchivo.textContent =
-                    'No se ha seleccionado ningún archivo.';
+                informacionArchivo.textContent = 'No se ha seleccionado ningún archivo.';
 
                 return;
 
             }
 
-            informacionArchivo.textContent =
-                'Archivo seleccionado: ' + archivo.name;
+            informacionArchivo.textContent = 'Archivo seleccionado: ' + archivo.name;
 
         });
 
@@ -411,13 +361,9 @@ function confirmarAccionProducto(titulo, mensaje, textoAceptar = 'Confirmar') {
     // importa el archivo seleccionado
     async function importarProductos() {
 
-        const inputArchivo = document.getElementById(
-            'input_archivo_productos'
-        );
+        const inputArchivo = document.getElementById('input_archivo_productos');
 
-        const informacionArchivo = document.getElementById(
-            'informacion_archivo_productos'
-        );
+        const informacionArchivo = document.getElementById('informacion_archivo_productos');
 
         if (!inputArchivo || !informacionArchivo || importandoArchivoProductos) {
             return;
@@ -427,8 +373,7 @@ function confirmarAccionProducto(titulo, mensaje, textoAceptar = 'Confirmar') {
 
         if (!archivo) {
 
-            informacionArchivo.textContent =
-                'Selecciona un archivo antes de importar.';
+            informacionArchivo.textContent = 'Selecciona un archivo antes de importar.';
 
             return;
 
@@ -437,8 +382,7 @@ function confirmarAccionProducto(titulo, mensaje, textoAceptar = 'Confirmar') {
         // aviso visible antes de reemplazar saldos modificados con el escaner
         const confirmado = await confirmarAccionProducto(
             'Confirmar importación',
-            'El Excel debe incluir la columna STOCK ACTUAL.\n\n' +
-            'La importación reemplazará el stock actual de todos los productos ' +
+            'El Excel debe incluir la columna STOCK ACTUAL.\n\n' + 'La importación reemplazará el stock actual de todos los productos ' +
             'incluidos en el archivo, incluso si ya existen.\n\n' +
             'Esto puede sobrescribir ajustes realizados con el escáner.',
             'Importar'
@@ -454,61 +398,38 @@ function confirmarAccionProducto(titulo, mensaje, textoAceptar = 'Confirmar') {
 
         const datos = new FormData();
 
-        datos.append(
-            'archivo',
-            archivo
-        );
+        datos.append('archivo', archivo);
         datos.append('confirmar_reemplazo_stock', 'SI');
 
         try {
 
-            const respuesta = await fetchConCsrf(
-                `${URL_API}/api/productos/importar`,
-                {
-                    method: 'POST',
-                    body: datos,
-                    credentials: 'include'
-                }
-            );
+            const respuesta = await fetchConCsrf(`${URL_API}/api/productos/importar`, { method: 'POST', body: datos, credentials: 'include' });
 
 
             const resultado = await respuesta.json();
 
             if (!respuesta.ok) {
 
-                informacionArchivo.textContent =
-                    resultado.mensaje ||
-                    'No se pudo importar el archivo.';
+                informacionArchivo.textContent = resultado.mensaje || 'No se pudo importar el archivo.';
 
                 return;
 
             }
 
-            console.log(
-                'Resultado de la importación:',
-                resultado
-            );
+            console.log('Resultado de la importación:', resultado);
 
             const resumen = resultado.resumen;
 
             
             informacionArchivo.textContent =
-                'Importación completada\n\n' +
-                'Total de filas: ' +
-                resumen.total_filas +
-                '\n' +
-                'Productos importados: ' +
-                resumen.productos_importados +
+                'Importación completada\n\n' + 'Total de filas: ' + resumen.total_filas + '\n' + 'Productos importados: ' + resumen.productos_importados +
                 '\n' +
                 'Productos existentes (sin duplicar): ' +
                 resumen.productos_existentes +
                 '\nStock actual cargado o actualizado: ' +
                 resumen.stock_actual_actualizados +
                 (resumen.proveedores_procesados
-                    ? '\nProductos con proveedor asignado: ' +
-                        resumen.productos_con_proveedor +
-                    '\nProductos sin proveedor: ' +
-                        resumen.productos_sin_proveedor
+                    ? '\nProductos con proveedor asignado: ' + resumen.productos_con_proveedor + '\nProductos sin proveedor: ' + resumen.productos_sin_proveedor
                     : '');
 
 
@@ -519,13 +440,9 @@ function confirmarAccionProducto(titulo, mensaje, textoAceptar = 'Confirmar') {
 
         } catch (error) {
 
-            console.error(
-                'Error al importar productos:',
-                error
-            );
+            console.error('Error al importar productos:', error);
 
-            informacionArchivo.textContent =
-                'No se pudo conectar con el servidor.';
+            informacionArchivo.textContent = 'No se pudo conectar con el servidor.';
         } finally {
             importandoArchivoProductos = false;
         }
@@ -540,22 +457,13 @@ function confirmarAccionProducto(titulo, mensaje, textoAceptar = 'Confirmar') {
 
         try {
 
-            const respuesta = await fetchConCsrf(
-                `${URL_API}/api/productos`,
-                {
-                    method: 'GET',
-                    credentials: 'include'
-                }
-            );
+            const respuesta = await fetchConCsrf(`${URL_API}/api/productos`, { method: 'GET', credentials: 'include' });
 
             const productos = await respuesta.json();
 
             if (!respuesta.ok) {
 
-                console.error(
-                    'Error al obtener productos:',
-                    productos
-                );
+                console.error('Error al obtener productos:', productos);
 
                 return;
 
@@ -569,17 +477,12 @@ function confirmarAccionProducto(titulo, mensaje, textoAceptar = 'Confirmar') {
             // conserva los filtros y la página actual al recargar los datos
             filtrarProductos(false);
 
-            actualizarIndicadoresProductos(
-                productosCargados
-            );
+            actualizarIndicadoresProductos(productosCargados);
 
 
         } catch (error) {
 
-            console.error(
-                'Error al cargar productos:',
-                error
-            );
+            console.error('Error al cargar productos:', error);
 
         }
 
@@ -591,9 +494,7 @@ function confirmarAccionProducto(titulo, mensaje, textoAceptar = 'Confirmar') {
     // función para mostrar los productos dentro de la tabla
     function mostrarProductos(productos) {
 
-    const cuerpoTabla = document.getElementById(
-        'cuerpo_tabla_productos'
-    );
+    const cuerpoTabla = document.getElementById('cuerpo_tabla_productos');
 
     if (!cuerpoTabla) {
         return;
@@ -607,42 +508,29 @@ function confirmarAccionProducto(titulo, mensaje, textoAceptar = 'Confirmar') {
 
     // calcula la cantidad de paginas
 
-    const totalPaginas = Math.ceil(
-        productos.length / productosPorPagina
-    );
+    const totalPaginas = Math.ceil(productos.length / productosPorPagina);
 
 
     // evita quedar en una pagina que ya no existe
 
-    if (
-        paginaActualProductos > totalPaginas &&
-        totalPaginas > 0
-    ) {
+    if (paginaActualProductos > totalPaginas && totalPaginas > 0) {
         paginaActualProductos = totalPaginas;
     }
 
 
     // calcula desde que producto comienza la pagina
 
-    const indiceInicio =
-        (paginaActualProductos - 1) *
-        productosPorPagina;
+    const indiceInicio = (paginaActualProductos - 1) * productosPorPagina;
 
 
     // calcula hasta que producto llega la pagina
 
-    const indiceFin =
-        indiceInicio +
-        productosPorPagina;
+    const indiceFin = indiceInicio + productosPorPagina;
 
 
     // obtiene solamente los productos de la pagina actual
 
-    const productosPagina =
-        productos.slice(
-            indiceInicio,
-            indiceFin
-        );
+    const productosPagina = productos.slice(indiceInicio, indiceFin);
 
 
     cuerpoTabla.innerHTML = '';
@@ -656,9 +544,7 @@ function confirmarAccionProducto(titulo, mensaje, textoAceptar = 'Confirmar') {
                     class="dato_sin_productos"
                     colspan="9"
                 >
-                    ${productosCargados.length
-                        ? 'No se encontraron productos con los filtros seleccionados.'
-                        : 'No hay productos cargados para mostrar.'}
+                    ${productosCargados.length ? 'No se encontraron productos con los filtros seleccionados.' : 'No hay productos cargados para mostrar.'}
                 </td>
             </tr>
         `;
@@ -671,32 +557,19 @@ function confirmarAccionProducto(titulo, mensaje, textoAceptar = 'Confirmar') {
 
     productosPagina.forEach(function(producto) {
 
-        const fila = document.createElement(
-            'tr'
-        );
+        const fila = document.createElement('tr');
 
 
         const estaActivo = producto.activo !== false;
 
-        fila.className = estaActivo
-            ? 'fila_producto'
-            : 'fila_producto fila_producto_inactivo';
+        fila.className = estaActivo ? 'fila_producto' : 'fila_producto fila_producto_inactivo';
 
         fila.dataset.codigo = producto.codigo;
 
 
         // formatea el precio publico en pesos chilenos
 
-        const precioPublico = Number(
-            producto.precio_publico ?? 0
-        ).toLocaleString(
-            'es-CL',
-            {
-                style: 'currency',
-                currency: 'CLP',
-                maximumFractionDigits: 0
-            }
-        );
+        const precioPublico = Number(producto.precio_publico ?? 0).toLocaleString('es-CL', { style: 'currency', currency: 'CLP', maximumFractionDigits: 0 });
 
 
         fila.innerHTML = `
@@ -812,23 +685,16 @@ function confirmarAccionProducto(titulo, mensaje, textoAceptar = 'Confirmar') {
 
 
         // usa la imagen ya guardada en PostgreSQL, sin consultar la API
-        const miniatura = fila.querySelector(
-            '.imagen_miniatura_producto'
-        );
+        const miniatura = fila.querySelector('.imagen_miniatura_producto');
 
         if (miniatura) {
 
             const imagenGuardada = String(producto.imagen ?? '').trim();
-            const imagenPredeterminada =
-                './imagenes/inicio_sesion/cuerpo_pagina/secciones/package.svg';
+            const imagenPredeterminada = './imagenes/inicio_sesion/cuerpo_pagina/secciones/package.svg';
 
             // si no tiene fotografia, muestra el icono predeterminado
-            miniatura.src = imagenGuardada
-                ? resolverRutaImagenProducto(imagenGuardada)
-                : imagenPredeterminada;
-            miniatura.alt = imagenGuardada
-                ? 'Fotografía de ' + (producto.descripcion || 'producto')
-                : 'Producto sin fotografía';
+            miniatura.src = imagenGuardada ? resolverRutaImagenProducto(imagenGuardada) : imagenPredeterminada;
+            miniatura.alt = imagenGuardada ? 'Fotografía de ' + (producto.descripcion || 'producto') : 'Producto sin fotografía';
 
             if (!imagenGuardada) {
                 miniatura.classList.add('imagen_miniatura_producto_vacia');
@@ -844,18 +710,14 @@ function confirmarAccionProducto(titulo, mensaje, textoAceptar = 'Confirmar') {
 
         }
 
-        cuerpoTabla.appendChild(
-            fila
-        );
+        cuerpoTabla.appendChild(fila);
 
     });
 
 
     // actualiza los botones de paginacion
 
-    mostrarPaginacionProductos(
-        totalPaginas
-    );
+    mostrarPaginacionProductos(totalPaginas);
 }
 
 
@@ -863,13 +725,7 @@ function confirmarAccionProducto(titulo, mensaje, textoAceptar = 'Confirmar') {
 // convierte los datos de texto del catálogo en contenido HTML seguro
 function escaparTextoProducto(valor) {
     return String(valor ?? '').replace(/[&<>"']/g, function(caracter) {
-        return {
-            '&': '&amp;',
-            '<': '&lt;',
-            '>': '&gt;',
-            '"': '&quot;',
-            "'": '&#39;'
-        }[caracter];
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[caracter];
     });
 }
 
@@ -880,21 +736,13 @@ function escaparTextoProducto(valor) {
     function actualizarIndicadoresProductos(productos) {
 
         // obtiene los elementos de los indicadores
-        const valorTotalProductos = document.getElementById(
-            'valor_total_productos'
-        );
+        const valorTotalProductos = document.getElementById('valor_total_productos');
 
-        const valorFamiliasProductos = document.getElementById(
-            'valor_familias_productos'
-        );
+        const valorFamiliasProductos = document.getElementById('valor_familias_productos');
 
-        const valorProductosConProveedor = document.getElementById(
-            'valor_productos_con_proveedor'
-        );
+        const valorProductosConProveedor = document.getElementById('valor_productos_con_proveedor');
 
-        const valorProductosSinProveedor = document.getElementById(
-            'valor_productos_sin_proveedor'
-        );
+        const valorProductosSinProveedor = document.getElementById('valor_productos_sin_proveedor');
 
 
         // SUBTITULO 1 TOTAL PRODUCTOS
@@ -903,8 +751,7 @@ function escaparTextoProducto(valor) {
 
         if (valorTotalProductos) {
 
-            valorTotalProductos.textContent =
-                totalProductos.toLocaleString('es-CL');
+            valorTotalProductos.textContent = totalProductos.toLocaleString('es-CL');
 
         }
 
@@ -915,14 +762,9 @@ function escaparTextoProducto(valor) {
 
         productos.forEach(function(producto) {
 
-            if (
-                producto.familia &&
-                producto.familia.trim() !== ''
-            ) {
+            if (producto.familia && producto.familia.trim() !== '') {
 
-                familias.add(
-                    producto.familia.trim().toUpperCase()
-                );
+                familias.add(producto.familia.trim().toUpperCase());
 
             }
 
@@ -930,8 +772,7 @@ function escaparTextoProducto(valor) {
 
         if (valorFamiliasProductos) {
 
-            valorFamiliasProductos.textContent =
-                familias.size.toLocaleString('es-CL');
+            valorFamiliasProductos.textContent = familias.size.toLocaleString('es-CL');
 
         }
 
@@ -941,9 +782,7 @@ function escaparTextoProducto(valor) {
         const productosConProveedor = productos.filter(
             function(producto) {
 
-                const proveedor = String(
-                    producto.proveedor ?? ''
-                ).trim();
+                const proveedor = String(producto.proveedor ?? '').trim();
 
                 return proveedor !== '' && proveedor !== '-';
 
@@ -951,29 +790,22 @@ function escaparTextoProducto(valor) {
         ).length;
 
         // calcula el porcentaje de productos con proveedor
-        const porcentajeConProveedor = totalProductos > 0
-            ? (productosConProveedor / totalProductos) * 100
-            : 0;
+        const porcentajeConProveedor = totalProductos > 0 ? (productosConProveedor / totalProductos) * 100 : 0;
 
         if (valorProductosConProveedor) {
 
-            valorProductosConProveedor.textContent =
-                porcentajeConProveedor
-                    .toFixed(1)
-                    .replace('.', ',') + '%';
+            valorProductosConProveedor.textContent = porcentajeConProveedor.toFixed(1).replace('.', ',') + '%';
 
         }
 
 
         // SUBTITULO 4 PRODUCTOS SIN PROVEEDOR
 
-        const productosSinProveedor =
-            totalProductos - productosConProveedor;
+        const productosSinProveedor = totalProductos - productosConProveedor;
 
         if (valorProductosSinProveedor) {
 
-            valorProductosSinProveedor.textContent =
-                productosSinProveedor.toLocaleString('es-CL');
+            valorProductosSinProveedor.textContent = productosSinProveedor.toLocaleString('es-CL');
 
         }
 
@@ -992,10 +824,7 @@ function escaparTextoProducto(valor) {
         if (!campoFiltro && !selectFormulario) return;
 
         try {
-            const respuesta = await fetchConCsrf(
-                `${URL_API}/api/productos/familias`,
-                { method: 'GET', credentials: 'include' }
-            );
+            const respuesta = await fetchConCsrf(`${URL_API}/api/productos/familias`, { method: 'GET', credentials: 'include' });
 
             if (!respuesta.ok) throw new Error('No se pudieron obtener las familias');
 
@@ -1055,20 +884,12 @@ function escaparTextoProducto(valor) {
 
     // permite buscar sin diferencias entre mayúsculas, tildes o guiones
     function normalizarTextoFiltroProducto(valor) {
-        return String(valor ?? '')
-            .normalize('NFD')
-            .replace(/[\u0300-\u036f]/g, '')
-            .toLowerCase()
-            .replace(/[^a-z0-9]+/g, ' ')
-            .trim()
-            .replace(/\s+/g, ' ');
+        return String(valor ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim().replace(/\s+/g, ' ');
     }
 
     // admite productos asociados a más de un proveedor (STRING_AGG del backend)
     function proveedoresAsociadosFiltroProducto(producto) {
-        return String(producto.proveedor ?? '')
-            .split(',')
-            .map(nombre => nombre.trim())
+        return String(producto.proveedor ?? '').split(',').map(nombre => nombre.trim())
             .filter(nombre => nombre !== '' && nombre !== '-');
     }
 
@@ -1202,9 +1023,7 @@ function escaparTextoProducto(valor) {
 
 
     // conserva la misma experiencia visual que Proveedor en Familia y Estado
-    let opcionesDisponiblesFiltroFamiliasProductos = [
-        { valor: '', nombre: 'Todas las familias' }
-    ];
+    let opcionesDisponiblesFiltroFamiliasProductos = [{ valor: '', nombre: 'Todas las familias' }];
 
     const opcionesDisponiblesFiltroEstadosProductos = [
         { valor: 'activos', nombre: 'Activos' },
@@ -1228,9 +1047,7 @@ function escaparTextoProducto(valor) {
     }
 
     function opcionesFiltroPersonalizadoProductos(tipo) {
-        return tipo === 'familia'
-            ? opcionesDisponiblesFiltroFamiliasProductos
-            : opcionesDisponiblesFiltroEstadosProductos;
+        return tipo === 'familia' ? opcionesDisponiblesFiltroFamiliasProductos : opcionesDisponiblesFiltroEstadosProductos;
     }
 
     // refleja en el botón la opción elegida (igual que Proveedor)
@@ -1249,9 +1066,7 @@ function escaparTextoProducto(valor) {
         const elementos = elementosFiltroPersonalizadoProductos(tipo);
         if (!elementos?.campo || !elementos.lista) return;
 
-        const busqueda = elementos.buscador
-            ? normalizarTextoFiltroProducto(elementos.buscador.value)
-            : '';
+        const busqueda = elementos.buscador ? normalizarTextoFiltroProducto(elementos.buscador.value) : '';
         elementos.lista.replaceChildren();
 
         const opciones = opcionesFiltroPersonalizadoProductos(tipo).filter(
@@ -1532,18 +1347,15 @@ function escaparTextoProducto(valor) {
                 );
             });
 
-            const coincideFamilia = !familiaSeleccionada ||
-                normalizarTextoFiltroProducto(producto.familia) === familiaSeleccionada;
+            const coincideFamilia = !familiaSeleccionada || normalizarTextoFiltroProducto(producto.familia) === familiaSeleccionada;
 
             const proveedores = proveedoresAsociadosFiltroProducto(producto);
-            const coincideProveedor = !selectProveedor.value ||
-                (selectProveedor.value === '__sin_proveedor__' && proveedores.length === 0) ||
+            const coincideProveedor = !selectProveedor.value || (selectProveedor.value === '__sin_proveedor__' && proveedores.length === 0) ||
                 (selectProveedor.value !== '__sin_proveedor__' &&
                     proveedores.some(nombre => normalizarTextoFiltroProducto(nombre) === proveedorSeleccionado));
 
             const estaActivo = producto.activo !== false;
-            const coincideEstado = estadoSeleccionado === 'todos' ||
-                (estadoSeleccionado === 'activos' && estaActivo) ||
+            const coincideEstado = estadoSeleccionado === 'todos' || (estadoSeleccionado === 'activos' && estaActivo) ||
                 (estadoSeleccionado === 'inactivos' && !estaActivo);
 
             return coincideBusqueda && coincideFamilia && coincideProveedor && coincideEstado;
@@ -1565,9 +1377,7 @@ function escaparTextoProducto(valor) {
 
             productosFiltrados.sort(function(a, b) {
                 const diferencia = prioridadBusqueda(a) - prioridadBusqueda(b);
-                return diferencia || String(a.descripcion || '').localeCompare(
-                    String(b.descripcion || ''), 'es', { sensitivity: 'base' }
-                );
+                return diferencia || String(a.descripcion || '').localeCompare(String(b.descripcion || ''), 'es', { sensitivity: 'base' });
             });
         }
 
@@ -1602,12 +1412,9 @@ function escaparTextoProducto(valor) {
 
     function cambiarPaginaProductos(pagina) {
 
-        paginaActualProductos =
-            pagina;
+        paginaActualProductos = pagina;
 
-        mostrarProductos(
-            productosFiltradosActuales
-        );
+        mostrarProductos(productosFiltradosActuales);
     }
 
 
@@ -1616,14 +1423,10 @@ function escaparTextoProducto(valor) {
     function configurarPaginacionProductos() {
 
         // obtiene el boton de pagina anterior
-        const botonAnterior = document.getElementById(
-            'boton_pagina_anterior_productos'
-        );
+        const botonAnterior = document.getElementById('boton_pagina_anterior_productos');
 
         // obtiene el boton de pagina siguiente
-        const botonSiguiente = document.getElementById(
-            'boton_pagina_siguiente_productos'
-        );
+        const botonSiguiente = document.getElementById('boton_pagina_siguiente_productos');
 
 
         // SUBTITULO 1 BOTON PAGINA ANTERIOR
@@ -1635,9 +1438,7 @@ function escaparTextoProducto(valor) {
                 // verifica que no sea la primera pagina
                 if (paginaActualProductos > 1) {
 
-                    cambiarPaginaProductos(
-                        paginaActualProductos - 1
-                    );
+                    cambiarPaginaProductos(paginaActualProductos - 1);
 
                 }
 
@@ -1653,16 +1454,12 @@ function escaparTextoProducto(valor) {
             botonSiguiente.addEventListener('click', function() {
 
                 // calcula la cantidad total de paginas
-                const totalPaginas = Math.ceil(
-                    productosFiltradosActuales.length / productosPorPagina
-                );
+                const totalPaginas = Math.ceil(productosFiltradosActuales.length / productosPorPagina);
 
                 // verifica que no sea la ultima pagina
                 if (paginaActualProductos < totalPaginas) {
 
-                    cambiarPaginaProductos(
-                        paginaActualProductos + 1
-                    );
+                    cambiarPaginaProductos(paginaActualProductos + 1);
 
                 }
 
@@ -1677,36 +1474,20 @@ function escaparTextoProducto(valor) {
 function mostrarPaginacionProductos(totalPaginas) {
 
     // obtiene el contenedor principal
-    const contenedorPaginacion = document.getElementById(
-        'contenedor_paginacion_productos'
-    );
+    const contenedorPaginacion = document.getElementById('contenedor_paginacion_productos');
 
     // obtiene el texto informativo
-    const informacionPaginacion = document.getElementById(
-        'informacion_paginacion_productos'
-    );
+    const informacionPaginacion = document.getElementById('informacion_paginacion_productos');
 
     // obtiene el contenedor de controles
-    const controlesPaginacion = document.getElementById(
-        'controles_paginacion_productos'
-    );
+    const controlesPaginacion = document.getElementById('controles_paginacion_productos');
 
     // obtiene los botones de navegacion
-    const botonAnterior = document.getElementById(
-        'boton_pagina_anterior_productos'
-    );
+    const botonAnterior = document.getElementById('boton_pagina_anterior_productos');
 
-    const botonSiguiente = document.getElementById(
-        'boton_pagina_siguiente_productos'
-    );
+    const botonSiguiente = document.getElementById('boton_pagina_siguiente_productos');
 
-    if (
-        !contenedorPaginacion ||
-        !informacionPaginacion ||
-        !controlesPaginacion ||
-        !botonAnterior ||
-        !botonSiguiente
-    ) {
+    if (!contenedorPaginacion || !informacionPaginacion || !controlesPaginacion || !botonAnterior || !botonSiguiente) {
         return;
     }
 
@@ -1717,25 +1498,14 @@ function mostrarPaginacionProductos(totalPaginas) {
     const totalProductos = productosFiltradosActuales.length;
 
     // calcula el primer producto mostrado
-    const inicio = totalProductos === 0
-        ? 0
-        : (paginaActualProductos - 1) * productosPorPagina + 1;
+    const inicio = totalProductos === 0 ? 0 : (paginaActualProductos - 1) * productosPorPagina + 1;
 
     // calcula el ultimo producto mostrado
-    const fin = Math.min(
-        paginaActualProductos * productosPorPagina,
-        totalProductos
-    );
+    const fin = Math.min(paginaActualProductos * productosPorPagina, totalProductos);
 
     // muestra la informacion de paginacion
     informacionPaginacion.textContent =
-        'Mostrando ' +
-        inicio.toLocaleString('es-CL') +
-        ' a ' +
-        fin.toLocaleString('es-CL') +
-        ' de ' +
-        totalProductos.toLocaleString('es-CL') +
-        ' productos';
+        'Mostrando ' + inicio.toLocaleString('es-CL') + ' a ' + fin.toLocaleString('es-CL') + ' de ' + totalProductos.toLocaleString('es-CL') + ' productos';
 
 
     // SUBTITULO 2 ESTADO DE LOS CONTROLES
@@ -1744,38 +1514,30 @@ function mostrarPaginacionProductos(totalPaginas) {
     contenedorPaginacion.style.display = 'flex';
 
     // oculta los controles cuando solo existe una pagina
-    controlesPaginacion.style.display =
-        totalPaginas <= 1 ? 'none' : 'flex';
+    controlesPaginacion.style.display = totalPaginas <= 1 ? 'none' : 'flex';
 
     if (totalPaginas <= 1) {
         return;
     }
 
     // deshabilita anterior cuando esta en la primera pagina
-    botonAnterior.disabled =
-        paginaActualProductos === 1;
+    botonAnterior.disabled = paginaActualProductos === 1;
 
     // deshabilita siguiente cuando esta en la ultima pagina
-    botonSiguiente.disabled =
-        paginaActualProductos === totalPaginas;
+    botonSiguiente.disabled = paginaActualProductos === totalPaginas;
 
 
     // SUBTITULO 3 NUMEROS DE PAGINA
 
     // actualiza los numeros de pagina
-    mostrarNumerosPaginasProductos(
-        totalPaginas
-    );
+    mostrarNumerosPaginasProductos(totalPaginas);
 
 }
 
 
 function mostrarNumerosPaginasProductos(totalPaginas) {
 
-    const numerosPaginas =
-        document.getElementById(
-            'numeros_paginas_productos'
-        );
+    const numerosPaginas = document.getElementById('numeros_paginas_productos');
 
     if (!numerosPaginas) {
 
@@ -1792,15 +1554,7 @@ function mostrarNumerosPaginasProductos(totalPaginas) {
 
     if (totalPaginas <= 7) {
 
-        for (
-
-            let pagina = 1;
-
-            pagina <= totalPaginas;
-
-            pagina++
-
-        ) {
+        for (let pagina = 1; pagina <= totalPaginas; pagina++) {
 
             paginasMostrar.push(pagina);
         }
@@ -1818,46 +1572,25 @@ function mostrarNumerosPaginasProductos(totalPaginas) {
             paginasMostrar.push('...');
         }
 
-        const inicio =
-            Math.max(
-                2,
-                paginaActualProductos - 2
-            );
+        const inicio = Math.max(2, paginaActualProductos - 2);
 
-        const fin =
-            Math.min(
-                totalPaginas - 1,
-                paginaActualProductos + 2
-            );
+        const fin = Math.min(totalPaginas - 1, paginaActualProductos + 2);
 
-        for (
-
-            let pagina = inicio;
-
-            pagina <= fin;
-
-            pagina++
-
-        ) {
+        for (let pagina = inicio; pagina <= fin; pagina++) {
 
             paginasMostrar.push(pagina);
         }
 
         // muestra puntos antes de la ultima
 
-        if (
-            paginaActualProductos <
-            totalPaginas - 3
-        ) {
+        if (paginaActualProductos < totalPaginas - 3) {
 
             paginasMostrar.push('...');
         }
 
         // siempre muestra la ultima pagina
 
-        paginasMostrar.push(
-            totalPaginas
-        );
+        paginasMostrar.push(totalPaginas);
     }
 
     // crea los botones
@@ -1869,13 +1602,9 @@ function mostrarNumerosPaginasProductos(totalPaginas) {
 
             if (pagina === '...') {
 
-                const puntos =
-                    document.createElement(
-                        'span'
-                    );
+                const puntos = document.createElement('span');
 
-                puntos.className =
-                    'puntos_paginacion_productos';
+                puntos.className = 'puntos_paginacion_productos';
 
                 puntos.innerHTML = `
                     <div class="punto_paginacion"></div>
@@ -1883,38 +1612,26 @@ function mostrarNumerosPaginasProductos(totalPaginas) {
                     <div class="punto_paginacion"></div>
                 `;
 
-                numerosPaginas.appendChild(
-                    puntos
-                );
+                numerosPaginas.appendChild(puntos);
 
                 return;
             }
 
             // crea el boton de pagina
 
-            const botonPagina =
-                document.createElement(
-                    'button'
-                );
+            const botonPagina = document.createElement('button');
 
-            botonPagina.type =
-                'button';
+            botonPagina.type = 'button';
 
-            botonPagina.className =
-                'boton_numero_pagina_productos';
+            botonPagina.className = 'boton_numero_pagina_productos';
 
-            botonPagina.textContent =
-                pagina;
+            botonPagina.textContent = pagina;
 
             // marca la pagina actual
 
-            if (
-                pagina === paginaActualProductos
-            ) {
+            if (pagina === paginaActualProductos) {
 
-                botonPagina.classList.add(
-                    'pagina_actual_productos'
-                );
+                botonPagina.classList.add('pagina_actual_productos');
             }
 
             // cambia a la pagina seleccionada
@@ -1923,15 +1640,11 @@ function mostrarNumerosPaginasProductos(totalPaginas) {
                 'click',
                 function() {
 
-                    cambiarPaginaProductos(
-                        pagina
-                    );
+                    cambiarPaginaProductos(pagina);
                 }
             );
 
-            numerosPaginas.appendChild(
-                botonPagina
-            );
+            numerosPaginas.appendChild(botonPagina);
         }
     );
 }
@@ -1967,8 +1680,7 @@ function actualizarSelectorFormularioProducto(tipo) {
         opcion => opcion.value === elementos.campo.value
     );
 
-    elementos.texto.textContent = opcionActual?.textContent?.trim() ||
-        (tipo === 'familia' ? 'Seleccionar familia' : 'Seleccionar proveedor');
+    elementos.texto.textContent = opcionActual?.textContent?.trim() || (tipo === 'familia' ? 'Seleccionar familia' : 'Seleccionar proveedor');
 
     mostrarOpcionesSelectorFormularioProducto(tipo);
 }
@@ -1988,9 +1700,7 @@ function mostrarOpcionesSelectorFormularioProducto(tipo) {
     if (!opciones.length) {
         const mensaje = document.createElement('div');
         mensaje.className = 'mensaje_selector_formulario_producto';
-        mensaje.textContent = tipo === 'familia'
-            ? 'No se encontraron familias.'
-            : 'No se encontraron proveedores.';
+        mensaje.textContent = tipo === 'familia' ? 'No se encontraron familias.' : 'No se encontraron proveedores.';
         elementos.lista.appendChild(mensaje);
         return;
     }
@@ -2081,9 +1791,7 @@ function configurarSelectoresFormularioProducto() {
                 evento.preventDefault();
                 const opciones = Array.from(elementos.lista.querySelectorAll('.opcion_selector_formulario_producto'));
                 const indice = opciones.indexOf(document.activeElement);
-                const siguiente = evento.key === 'ArrowDown'
-                    ? Math.min(indice + 1, opciones.length - 1)
-                    : Math.max(indice - 1, 0);
+                const siguiente = evento.key === 'ArrowDown' ? Math.min(indice + 1, opciones.length - 1) : Math.max(indice - 1, 0);
                 opciones[siguiente]?.focus();
             }
         });
@@ -2113,10 +1821,7 @@ async function cargarOpcionesProveedoresProducto() {
 
     if (listaProveedoresProducto === null) {
 
-        const respuesta = await fetchConCsrf(
-            `${URL_API}/api/proveedores`,
-            { credentials: 'include' }
-        );
+        const respuesta = await fetchConCsrf(`${URL_API}/api/proveedores`, { credentials: 'include' });
 
         if (!respuesta.ok) {
             throw new Error('No se pudieron cargar los proveedores');
@@ -2124,29 +1829,20 @@ async function cargarOpcionesProveedoresProducto() {
 
         const datos = await respuesta.json();
 
-        listaProveedoresProducto = Array.isArray(datos)
-            ? datos
-            : (datos.proveedores || []);
+        listaProveedoresProducto = Array.isArray(datos) ? datos : (datos.proveedores || []);
     }
 
-    const select = document.getElementById(
-        'select_proveedor_producto'
-    );
+    const select = document.getElementById('select_proveedor_producto');
 
     if (!select) return;
 
     const seleccionado = select.value;
 
-    select.replaceChildren(
-        new Option('Seleccionar proveedor', '')
-    );
+    select.replaceChildren(new Option('Seleccionar proveedor', ''));
 
     listaProveedoresProducto.forEach(function(proveedor) {
 
-        select.add(new Option(
-            proveedor.nombre_comercial,
-            proveedor.nombre_comercial
-        ));
+        select.add(new Option(proveedor.nombre_comercial, proveedor.nombre_comercial));
 
     });
 
@@ -2181,25 +1877,19 @@ function configurarEstadoFormularioProducto() {
 
     });
 
-    const codigo = document.getElementById(
-        'input_codigo_producto'
-    );
+    const codigo = document.getElementById('input_codigo_producto');
 
     if (codigo) {
         codigo.readOnly = modoFormularioProducto !== 'nuevo';
     }
 
-    const guardar = document.getElementById(
-        'boton_guardar_producto'
-    );
+    const guardar = document.getElementById('boton_guardar_producto');
 
     if (guardar) {
 
         guardar.style.display = soloLectura ? 'none' : '';
 
-        guardar.textContent = modoFormularioProducto === 'editar'
-            ? 'Guardar cambios'
-            : 'Guardar producto';
+        guardar.textContent = modoFormularioProducto === 'editar' ? 'Guardar cambios' : 'Guardar producto';
     }
 
     // los selectores del modal también respetan el modo de solo lectura
@@ -2235,37 +1925,21 @@ async function abrirDetalleProducto(codigo, modo) {
 
     mostrarVistaPreviaImagenProducto(
         imagenOriginalProducto,
-        imagenOriginalProducto
-            ? 'Fotografía asociada al producto.'
-            : 'Este producto todavía no tiene fotografía.'
+        imagenOriginalProducto ? 'Fotografía asociada al producto.' : 'Este producto todavía no tiene fotografía.'
     );
 
-    document.getElementById(
-        'titulo_formulario_producto'
-    ).textContent = modo === 'ver'
-        ? 'Detalle del producto'
-        : 'Editar producto';
+    document.getElementById('titulo_formulario_producto').textContent = modo === 'ver' ? 'Detalle del producto' : 'Editar producto';
 
-    document.getElementById(
-        'input_codigo_producto'
-    ).value = producto.codigo;
+    document.getElementById('input_codigo_producto').value = producto.codigo;
 
-    document.getElementById(
-        'input_codigo_barra_producto'
-    ).value = producto.cod_barra || '';
+    document.getElementById('input_codigo_barra_producto').value = producto.cod_barra || '';
 
-    document.getElementById(
-        'input_descripcion_producto'
-    ).value = producto.descripcion || '';
+    document.getElementById('input_descripcion_producto').value = producto.descripcion || '';
 
-    document.getElementById(
-        'input_familia_producto'
-    ).value = producto.familia || '';
+    document.getElementById('input_familia_producto').value = producto.familia || '';
     actualizarSelectorFormularioProducto('familia');
 
-    document.getElementById(
-        'input_precio_producto'
-    ).value = producto.precio_publico ?? 0;
+    document.getElementById('input_precio_producto').value = producto.precio_publico ?? 0;
 
     // conserva la clasificacion existente al abrir el registro
     document.getElementById('controla_stock_si_producto').checked = producto.controla_stock !== false;
@@ -2277,9 +1951,7 @@ async function abrirDetalleProducto(codigo, modo) {
 
         await cargarOpcionesProveedoresProducto();
 
-        document.getElementById(
-            'select_proveedor_producto'
-        ).value = producto.proveedor || '';
+        document.getElementById('select_proveedor_producto').value = producto.proveedor || '';
         actualizarSelectorFormularioProducto('proveedor');
 
     } catch (error) {
@@ -2288,61 +1960,34 @@ async function abrirDetalleProducto(codigo, modo) {
         return;
     }
 
-    document.getElementById(
-        'contenedor_formulario_producto'
-    ).classList.remove(
-        'contenedor_formulario_producto_oculto'
-    );
+    document.getElementById('contenedor_formulario_producto').classList.remove('contenedor_formulario_producto_oculto');
 }
 
 
 // guarda un producto nuevo o editado
 async function guardarCambiosProducto() {
 
-    if (
-        modoFormularioProducto === 'ver' ||
-        guardandoProducto ||
-        buscandoImagenProducto
-    ) {
+    if (modoFormularioProducto === 'ver' || guardandoProducto || buscandoImagenProducto) {
         return;
     }
 
-    const codigo = document.getElementById(
-        'input_codigo_producto'
-    ).value.trim();
+    const codigo = document.getElementById('input_codigo_producto').value.trim();
 
-    const codigoBarra = document.getElementById(
-        'input_codigo_barra_producto'
-    ).value.trim();
+    const codigoBarra = document.getElementById('input_codigo_barra_producto').value.trim();
 
-    const descripcion = document.getElementById(
-        'input_descripcion_producto'
-    ).value.trim();
+    const descripcion = document.getElementById('input_descripcion_producto').value.trim();
 
-    const familia = document.getElementById(
-        'input_familia_producto'
-    ).value.trim();
+    const familia = document.getElementById('input_familia_producto').value.trim();
 
-    const precioTexto = document.getElementById(
-        'input_precio_producto'
-    ).value.trim();
+    const precioTexto = document.getElementById('input_precio_producto').value.trim();
 
-    const proveedor = document.getElementById(
-        'select_proveedor_producto'
-    ).value;
+    const proveedor = document.getElementById('select_proveedor_producto').value;
 
     const precio = Number(precioTexto);
     const controlaStock = document.getElementById('controla_stock_si_producto').checked;
 
     // valida los datos obligatorios
-    if (
-        !codigo ||
-        !codigoBarra ||
-        !descripcion ||
-        !precioTexto ||
-        !Number.isFinite(precio) ||
-        precio < 0
-    ) {
+    if (!codigo || !codigoBarra || !descripcion || !precioTexto || !Number.isFinite(precio) || precio < 0) {
 
         await mostrarMensajeProducto('Datos incompletos', 'Completa los campos obligatorios con datos válidos.', 'advertencia');
         return;
@@ -2350,10 +1995,7 @@ async function guardarCambiosProducto() {
 
     const esEdicion = modoFormularioProducto === 'editar';
 
-    const url = esEdicion
-        ? `${URL_API}/api/productos/` +
-            encodeURIComponent(codigoOriginalProducto)
-        : `${URL_API}/api/productos`;
+    const url = esEdicion ? `${URL_API}/api/productos/` + encodeURIComponent(codigoOriginalProducto) : `${URL_API}/api/productos`;
 
     guardandoProducto = true;
     actualizarBotonesImagenProducto();
@@ -2371,10 +2013,7 @@ async function guardarCambiosProducto() {
             controla_stock: controlaStock
         };
 
-        const opciones = {
-            method: esEdicion ? 'PUT' : 'POST',
-            credentials: 'include'
-        };
+        const opciones = { method: esEdicion ? 'PUT' : 'POST', credentials: 'include' };
 
         if (archivoImagenManualProducto) {
             // solo al guardar se sube la fotografia a nuestro backend
@@ -2382,11 +2021,7 @@ async function guardarCambiosProducto() {
             Object.entries(datosProducto).forEach(([campo, valor]) => {
                 datosFormulario.append(campo, valor == null ? '' : String(valor));
             });
-            datosFormulario.append(
-                'imagen_archivo',
-                archivoImagenManualProducto,
-                archivoImagenManualProducto.name
-            );
+            datosFormulario.append('imagen_archivo', archivoImagenManualProducto, archivoImagenManualProducto.name);
             opciones.body = datosFormulario;
             // no agregar Content-Type: fetch define el boundary multipart
         } else {
@@ -2399,9 +2034,7 @@ async function guardarCambiosProducto() {
         const resultado = await respuesta.json();
 
         if (!respuesta.ok) {
-            throw new Error(
-                resultado.mensaje || 'No se pudo guardar el producto'
-            );
+            throw new Error(resultado.mensaje || 'No se pudo guardar el producto');
         }
 
         cerrarFormularioProducto();
@@ -2443,9 +2076,7 @@ async function confirmarCambioEstadoProducto(codigo) {
 
     const confirmar = await confirmarAccionProducto(
         nuevoEstado ? 'Activar producto' : 'Desactivar producto',
-        '¿Estás seguro de ' + accion + ' el producto ' +
-        producto.descripcion + '?\n\n' +
-        'El producto y su historial se conservarán en la base de datos.',
+        '¿Estás seguro de ' + accion + ' el producto ' + producto.descripcion + '?\n\n' + 'El producto y su historial se conservarán en la base de datos.',
         nuevoEstado ? 'Activar' : 'Desactivar'
     );
 
@@ -2455,22 +2086,14 @@ async function confirmarCambioEstadoProducto(codigo) {
 
     try {
         const respuesta = await fetchConCsrf(
-            `${URL_API}/api/productos/` +
-                encodeURIComponent(codigo) + '/estado',
-            {
-                method: 'PATCH',
-                headers: { 'Content-Type': 'application/json' },
-                credentials: 'include',
-                body: JSON.stringify({ activo: nuevoEstado })
-            }
+            `${URL_API}/api/productos/` + encodeURIComponent(codigo) + '/estado',
+            { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, credentials: 'include', body: JSON.stringify({ activo: nuevoEstado }) }
         );
 
         const resultado = await respuesta.json();
 
         if (!respuesta.ok) {
-            throw new Error(
-                resultado.mensaje || 'No se pudo cambiar el estado del producto'
-            );
+            throw new Error(resultado.mensaje || 'No se pudo cambiar el estado del producto');
         }
 
         await cargarProductos();
@@ -2491,17 +2114,13 @@ async function confirmarCambioEstadoProducto(codigo) {
 // conecta los botones de la tabla y del formulario
 function configurarAccionesProductos() {
 
-    const cuerpoTabla = document.getElementById(
-        'cuerpo_tabla_productos'
-    );
+    const cuerpoTabla = document.getElementById('cuerpo_tabla_productos');
 
     if (!cuerpoTabla) return;
 
     cuerpoTabla.addEventListener('click', function(evento) {
 
-        const boton = evento.target.closest(
-            'button.boton_accion_producto'
-        );
+        const boton = evento.target.closest('button.boton_accion_producto');
 
         if (!boton || !cuerpoTabla.contains(boton)) {
             return;
@@ -2516,32 +2135,22 @@ function configurarAccionesProductos() {
 
             abrirDetalleProducto(codigo, 'ver');
 
-        } else if (
-            boton.classList.contains('boton_editar_producto')
-        ) {
+        } else if (boton.classList.contains('boton_editar_producto')) {
 
             abrirDetalleProducto(codigo, 'editar');
 
-        } else if (
-            boton.classList.contains('boton_desactivar_producto') ||
-            boton.classList.contains('boton_activar_producto')
-        ) {
+        } else if (boton.classList.contains('boton_desactivar_producto') || boton.classList.contains('boton_activar_producto')) {
 
             confirmarCambioEstadoProducto(codigo);
         }
 
     });
 
-    const botonGuardar = document.getElementById(
-        'boton_guardar_producto'
-    );
+    const botonGuardar = document.getElementById('boton_guardar_producto');
 
     if (botonGuardar) {
 
-        botonGuardar.addEventListener(
-            'click',
-            guardarCambiosProducto
-        );
+        botonGuardar.addEventListener('click', guardarCambiosProducto);
     }
 
     // permite buscar y quitar fotografias desde el formulario
@@ -2577,18 +2186,14 @@ function configurarAccionesProductos() {
             }
 
             // una imagen encontrada para otro codigo de barras no debe guardarse
-            if (
-                imagenNuevaBuscadaProducto &&
-                codigoBarraImagenBuscadaProducto !== codigoActual
-            ) {
+            if (imagenNuevaBuscadaProducto && codigoBarraImagenBuscadaProducto !== codigoActual) {
                 busquedaImagenProductoSecuencia++;
                 buscandoImagenProducto = false;
                 imagenOriginalProducto = imagenGuardadaProducto;
                 imagenNuevaBuscadaProducto = false;
                 codigoBarraImagenBuscadaProducto = null;
 
-                mostrarVistaPreviaImagenProducto(imagenOriginalProducto,
-                    'Cambió el código de barras. Busca nuevamente la fotografía.');
+                mostrarVistaPreviaImagenProducto(imagenOriginalProducto, 'Cambió el código de barras. Busca nuevamente la fotografía.');
             }
         });
     }
@@ -2663,8 +2268,7 @@ function seleccionarArchivoImagenManualProducto(evento) {
 
     if (!tipos.includes(archivo.type) || archivo.size > 5 * 1024 * 1024 || !archivo.size) {
         evento.target.value = '';
-        if (estado) estado.textContent =
-            'Selecciona una foto JPG, PNG o WebP de hasta 5 MB.';
+        if (estado) estado.textContent = 'Selecciona una foto JPG, PNG o WebP de hasta 5 MB.';
         return;
     }
 
@@ -2677,14 +2281,12 @@ function seleccionarArchivoImagenManualProducto(evento) {
     imagenNuevaBuscadaProducto = false;
     codigoBarraImagenBuscadaProducto = null;
 
-    mostrarVistaPreviaImagenProducto(urlVistaPreviaManualProducto,
-        'Fotografía seleccionada: ' + archivo.name + '. Se subirá al presionar Guardar.');
+    mostrarVistaPreviaImagenProducto(urlVistaPreviaManualProducto, 'Fotografía seleccionada: ' + archivo.name + '. Se subirá al presionar Guardar.');
 }
 
 // verifica que la ruta sea una URL web o una ruta local valida
 function esRutaImagenProductoValida(ruta) {
-    return typeof ruta === 'string' &&
-        (/^https?:\/\//i.test(ruta) || /^\/(?!\/)/.test(ruta) || /^blob:/i.test(ruta));
+    return typeof ruta === 'string' && (/^https?:\/\//i.test(ruta) || /^\/(?!\/)/.test(ruta) || /^blob:/i.test(ruta));
 }
 
 // muestra la imagen asociada o la fotografia obtenida desde Open Food Facts
@@ -2716,8 +2318,7 @@ function mostrarVistaPreviaImagenProducto(ruta, mensaje) {
         let esOpenFoodFacts = false;
         try {
             const url = new URL(ruta);
-            esOpenFoodFacts = url.protocol === 'https:' &&
-                ['images.openfoodfacts.org', 'static.openfoodfacts.org'].includes(url.hostname);
+            esOpenFoodFacts = url.protocol === 'https:' && ['images.openfoodfacts.org', 'static.openfoodfacts.org'].includes(url.hostname);
         } catch (error) {
             // una ruta local no proviene de Open Food Facts
         }
@@ -2725,8 +2326,7 @@ function mostrarVistaPreviaImagenProducto(ruta, mensaje) {
         const codigoBarra = document.getElementById('input_codigo_barra_producto')?.value.trim();
         fuente.hidden = !esOpenFoodFacts;
         if (esOpenFoodFacts && codigoBarra) {
-            fuente.href = 'https://world.openfoodfacts.org/product/' +
-                encodeURIComponent(codigoBarra);
+            fuente.href = 'https://world.openfoodfacts.org/product/' + encodeURIComponent(codigoBarra);
         }
     }
 
@@ -2754,8 +2354,7 @@ function actualizarBotonesImagenProducto() {
 
     if (quitar) {
         quitar.hidden = soloLectura;
-        quitar.disabled = buscandoImagenProducto || guardandoProducto ||
-            (!imagenOriginalProducto && !archivoImagenManualProducto);
+        quitar.disabled = buscandoImagenProducto || guardandoProducto || (!imagenOriginalProducto && !archivoImagenManualProducto);
     }
 }
 
@@ -2786,8 +2385,7 @@ async function buscarImagenProductoFormulario() {
 
     try {
         const respuesta = await fetchConCsrf(
-            `${URL_API}/api/productos/buscar-imagen/` +
-                encodeURIComponent(codigoBarra),
+            `${URL_API}/api/productos/buscar-imagen/` + encodeURIComponent(codigoBarra),
             { method: 'GET', credentials: 'include' }
         );
 
@@ -2811,10 +2409,7 @@ async function buscarImagenProductoFormulario() {
 
         // verifica que la URL de la foto provenga de Open Food Facts
         const urlImagen = new URL(datos.imagen_url);
-        if (
-            urlImagen.protocol !== 'https:' ||
-            !['images.openfoodfacts.org', 'static.openfoodfacts.org'].includes(urlImagen.hostname)
-        ) {
+        if (urlImagen.protocol !== 'https:' || !['images.openfoodfacts.org', 'static.openfoodfacts.org'].includes(urlImagen.hostname)) {
             throw new Error('La fuente de la imagen no es válida.');
         }
 
@@ -2825,10 +2420,7 @@ async function buscarImagenProductoFormulario() {
         codigoBarraImagenBuscadaProducto = codigoBarra;
 
         const nombre = datos.nombre ? ' (' + datos.nombre + ')' : '';
-        mostrarVistaPreviaImagenProducto(
-            imagenOriginalProducto,
-            'Imagen encontrada' + nombre + '. Verifica que corresponda al producto y presiona Guardar.'
-        );
+        mostrarVistaPreviaImagenProducto(imagenOriginalProducto, 'Imagen encontrada' + nombre + '. Verifica que corresponda al producto y presiona Guardar.');
 
     } catch (error) {
         if (solicitud === busquedaImagenProductoSecuencia && estado) {
@@ -2855,6 +2447,5 @@ function quitarImagenProductoFormulario() {
     imagenNuevaBuscadaProducto = false;
     codigoBarraImagenBuscadaProducto = null;
 
-    mostrarVistaPreviaImagenProducto(null,
-        'La imagen se quitará del producto al guardar los cambios.');
+    mostrarVistaPreviaImagenProducto(null, 'La imagen se quitará del producto al guardar los cambios.');
 }

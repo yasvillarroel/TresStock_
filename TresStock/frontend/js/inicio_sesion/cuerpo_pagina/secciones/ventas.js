@@ -39,20 +39,16 @@ function actualizarModalidadImportacionVentas() {
     if (formulario) formulario.hidden = !diaria || Boolean(configuracionInventarioVentas?.configurado);
     if (estado && diaria) {
         estado.textContent = errorConfiguracionInventarioVentas || (configuracionInventarioVentas?.configurado
-            ? 'Control activo desde ' + configuracionInventarioVentas.fecha_inicio_descuento +
-              '. Solo las ventas desde esa fecha pueden descontar stock.'
+            ? 'Control activo desde ' + configuracionInventarioVentas.fecha_inicio_descuento + '. Solo las ventas desde esa fecha pueden descontar stock.'
             : 'Sin fecha de inicio configurada. Primero establece el stock inicial de referencia.');
     }
-    if (botonImportar) botonImportar.disabled = importandoVentasEnCurso ||
-        (diaria && !configuracionInventarioVentas?.configurado);
+    if (botonImportar) botonImportar.disabled = importandoVentasEnCurso || (diaria && !configuracionInventarioVentas?.configurado);
 }
 
 // consulta la fecha de inicio guardada por PostgreSQL
 async function cargarConfiguracionInventarioVentas() {
     try {
-        const respuesta = await fetchConCsrf(`${URL_API}/api/ventas/configuracion-inventario`, {
-            method: 'GET', credentials: 'include'
-        });
+        const respuesta = await fetchConCsrf(`${URL_API}/api/ventas/configuracion-inventario`, { method: 'GET', credentials: 'include' });
         const datos = await respuesta.json();
         if (!respuesta.ok) throw new Error(datos.mensaje || 'No se pudo consultar la configuración.');
         configuracionInventarioVentas = datos;
@@ -85,10 +81,7 @@ async function guardarInicioControlVentas() {
         const respuesta = await fetchConCsrf(`${URL_API}/api/ventas/configuracion-inventario`, {
             method: 'POST', credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                fecha_inicio_descuento: fecha,
-                confirmar_stock_inicial: 'SI'
-            })
+            body: JSON.stringify({ fecha_inicio_descuento: fecha, confirmar_stock_inicial: 'SI' })
         });
         const resultado = await respuesta.json();
         if (!respuesta.ok) throw new Error(resultado.mensaje || 'No se pudo guardar la fecha.');
@@ -127,15 +120,11 @@ function configurarModalidadesImportacionVentas() {
     // abre el formulario de importación
     function abrirImportacionVentas() {
 
-        const contenedor = document.getElementById(
-            'contenedor_importacion_ventas'
-        );
+        const contenedor = document.getElementById('contenedor_importacion_ventas');
 
         if (contenedor) {
 
-            contenedor.classList.remove(
-                'contenedor_importacion_ventas_oculto'
-            );
+            contenedor.classList.remove('contenedor_importacion_ventas_oculto');
 
             // refresca el inicio configurado al abrir el formulario
             cargarConfiguracionInventarioVentas();
@@ -147,24 +136,16 @@ function configurarModalidadesImportacionVentas() {
     // cierra el formulario de importación
     function cerrarImportacionVentas() {
 
-        const contenedor = document.getElementById(
-            'contenedor_importacion_ventas'
-        );
+        const contenedor = document.getElementById('contenedor_importacion_ventas');
 
-        const inputArchivo = document.getElementById(
-            'input_archivo_ventas'
-        );
+        const inputArchivo = document.getElementById('input_archivo_ventas');
 
-        const informacionArchivo = document.getElementById(
-            'informacion_archivo_ventas'
-        );
+        const informacionArchivo = document.getElementById('informacion_archivo_ventas');
 
 
         if (contenedor) {
 
-            contenedor.classList.add(
-                'contenedor_importacion_ventas_oculto'
-            );
+            contenedor.classList.add('contenedor_importacion_ventas_oculto');
 
         }
 
@@ -178,8 +159,7 @@ function configurarModalidadesImportacionVentas() {
 
         if (informacionArchivo) {
 
-            informacionArchivo.textContent =
-                'No se ha seleccionado ningún archivo.';
+            informacionArchivo.textContent = 'No se ha seleccionado ningún archivo.';
 
         }
         const historico = document.querySelector('input[name="modalidad_importacion_ventas"][value="historico"]');
@@ -193,9 +173,7 @@ function configurarModalidadesImportacionVentas() {
     // abre el explorador de archivos
     function seleccionarArchivoVentas() {
 
-        const inputArchivo = document.getElementById(
-            'input_archivo_ventas'
-        );
+        const inputArchivo = document.getElementById('input_archivo_ventas');
 
         if (inputArchivo) {
 
@@ -209,9 +187,7 @@ function configurarModalidadesImportacionVentas() {
     // configura el selector del archivo
     function configurarImportacionVentas() {
 
-        const inputArchivo = document.getElementById(
-            'input_archivo_ventas'
-        );
+        const inputArchivo = document.getElementById('input_archivo_ventas');
 
 
         if (!inputArchivo) {
@@ -225,9 +201,7 @@ function configurarModalidadesImportacionVentas() {
             'change',
             function() {
 
-                const informacionArchivo = document.getElementById(
-                    'informacion_archivo_ventas'
-                );
+                const informacionArchivo = document.getElementById('informacion_archivo_ventas');
 
                 const archivo = this.files[0];
 
@@ -241,17 +215,14 @@ function configurarModalidadesImportacionVentas() {
 
                 if (!archivo) {
 
-                    informacionArchivo.textContent =
-                        'No se ha seleccionado ningún archivo.';
+                    informacionArchivo.textContent = 'No se ha seleccionado ningún archivo.';
 
                     return;
 
                 }
 
 
-                informacionArchivo.textContent =
-                    'Archivo seleccionado: ' +
-                    archivo.name;
+                informacionArchivo.textContent = 'Archivo seleccionado: ' + archivo.name;
 
             }
         );
@@ -262,19 +233,12 @@ function configurarModalidadesImportacionVentas() {
     // envía el archivo CSV al backend
     async function importarVentas() {
 
-        const inputArchivo = document.getElementById(
-            'input_archivo_ventas'
-        );
+        const inputArchivo = document.getElementById('input_archivo_ventas');
 
-        const informacionArchivo = document.getElementById(
-            'informacion_archivo_ventas'
-        );
+        const informacionArchivo = document.getElementById('informacion_archivo_ventas');
 
 
-        if (
-            !inputArchivo ||
-            !informacionArchivo
-        ) {
+        if (!inputArchivo || !informacionArchivo) {
 
             return;
 
@@ -286,14 +250,12 @@ function configurarModalidadesImportacionVentas() {
             informacionArchivo.textContent = 'Configura primero la fecha de inicio del inventario.';
             return;
         }
-        const archivo =
-            inputArchivo.files[0];
+        const archivo = inputArchivo.files[0];
 
 
         if (!archivo) {
 
-            informacionArchivo.textContent =
-                'Selecciona un archivo antes de importar.';
+            informacionArchivo.textContent = 'Selecciona un archivo antes de importar.';
 
             return;
 
@@ -302,62 +264,40 @@ function configurarModalidadesImportacionVentas() {
 
         importandoVentasEnCurso = true;
         actualizarModalidadImportacionVentas();
-        informacionArchivo.textContent =
-            'Importando ventas en modo ' + (modalidadImportacionVentas === 'historico' ? 'histórico' : 'diario') + '...';
+        informacionArchivo.textContent = 'Importando ventas en modo ' + (modalidadImportacionVentas === 'historico' ? 'histórico' : 'diario') + '...';
 
 
-        const datos =
-            new FormData();
+        const datos = new FormData();
 
 
-        datos.append(
-            'archivo',
-            archivo
-        );
+        datos.append('archivo', archivo);
         datos.append('modalidad_importacion', modalidadImportacionVentas);
 
 
         try {
 
-            const respuesta = await fetchConCsrf(
-                `${URL_API}/api/ventas/importar`,
-                {
-                    method: 'POST',
-                    body: datos,
-                    credentials: 'include'
-                }
-            );
+            const respuesta = await fetchConCsrf(`${URL_API}/api/ventas/importar`, { method: 'POST', body: datos, credentials: 'include' });
 
 
-            const resultado =
-                await respuesta.json();
+            const resultado = await respuesta.json();
 
 
             // muestra temporalmente los problemas encontrados durante la importacion
-            console.log(
-                'Productos no encontrados:',
-                resultado.productos_no_encontrados
-            );
+            console.log('Productos no encontrados:', resultado.productos_no_encontrados);
 
-            console.log(
-                'Filas ignoradas:',
-                resultado.filas_ignoradas_detalle
-            );
+            console.log('Filas ignoradas:', resultado.filas_ignoradas_detalle);
 
 
             if (!respuesta.ok) {
 
-                informacionArchivo.textContent =
-                    resultado.mensaje ||
-                    'No se pudo importar el archivo.';
+                informacionArchivo.textContent = resultado.mensaje || 'No se pudo importar el archivo.';
 
                 return;
 
             }
 
 
-            const resumen =
-                resultado.resumen;
+            const resumen = resultado.resumen;
 
 
             informacionArchivo.textContent =
@@ -366,39 +306,25 @@ function configurarModalidadesImportacionVentas() {
                 'Movimientos registrados: ' + Number(resumen.movimientos_inventario_registrados || 0).toLocaleString('es-CL') + '\n' +
 
                 'Filas procesadas: ' +
-                Number(
-                    resumen.total_filas || 0
-                ).toLocaleString('es-CL') +
+                Number(resumen.total_filas || 0).toLocaleString('es-CL') +
 
                 '\nBoletas importadas: ' +
-                Number(
-                    resumen.boletas_importadas || 0
-                ).toLocaleString('es-CL') +
+                Number(resumen.boletas_importadas || 0).toLocaleString('es-CL') +
 
                 '\nDetalles importados: ' +
-                Number(
-                    resumen.detalles_importados || 0
-                ).toLocaleString('es-CL') +
+                Number(resumen.detalles_importados || 0).toLocaleString('es-CL') +
 
                 '\nBoletas que ya existían: ' +
-                Number(
-                    resumen.boletas_existentes || 0
-                ).toLocaleString('es-CL') +
+                Number(resumen.boletas_existentes || 0).toLocaleString('es-CL') +
 
                 '\nDetalles sin producto encontrado: ' +
-                Number(
-                    resumen.detalles_sin_producto || 0
-                ).toLocaleString('es-CL') +
+                Number(resumen.detalles_sin_producto || 0).toLocaleString('es-CL') +
 
                 '\nOperaciones negativas importadas: ' +
-                Number(
-                    resumen.operaciones_negativas || 0
-                ).toLocaleString('es-CL') +
+                Number(resumen.operaciones_negativas || 0).toLocaleString('es-CL') +
 
                 '\nFilas ignoradas: ' +
-                Number(
-                    resumen.filas_ignoradas || 0
-                ).toLocaleString('es-CL');
+                Number(resumen.filas_ignoradas || 0).toLocaleString('es-CL');
 
 
             paginaActualVentas = 1;
@@ -409,14 +335,10 @@ function configurarModalidadesImportacionVentas() {
 
         } catch (error) {
 
-            console.error(
-                'Error al importar ventas:',
-                error
-            );
+            console.error('Error al importar ventas:', error);
 
 
-            informacionArchivo.textContent =
-                'No se pudo conectar con el servidor.';
+            informacionArchivo.textContent = 'No se pudo conectar con el servidor.';
 
         } finally {
             importandoVentasEnCurso = false;
@@ -431,33 +353,18 @@ function configurarModalidadesImportacionVentas() {
     // obtiene las ventas desde el backend
     async function cargarVentas() {
 
-        const inputBusqueda = document.getElementById(
-            'input_busqueda_ventas'
-        );
+        const inputBusqueda = document.getElementById('input_busqueda_ventas');
 
-        const inputDesde = document.getElementById(
-            'input_fecha_desde_ventas'
-        );
+        const inputDesde = document.getElementById('input_fecha_desde_ventas');
 
-        const inputHasta = document.getElementById(
-            'input_fecha_hasta_ventas'
-        );
+        const inputHasta = document.getElementById('input_fecha_hasta_ventas');
 
 
-        const buscar =
-            inputBusqueda
-                ? inputBusqueda.value.trim()
-                : '';
+        const buscar = inputBusqueda ? inputBusqueda.value.trim() : '';
 
-        const desde =
-            inputDesde
-                ? inputDesde.value
-                : '';
+        const desde = inputDesde ? inputDesde.value : '';
 
-        const hasta =
-            inputHasta
-                ? inputHasta.value
-                : '';
+        const hasta = inputHasta ? inputHasta.value : '';
 
 
         // el ordenamiento se realiza en PostgreSQL, antes de aplicar la paginación
@@ -486,70 +393,43 @@ function configurarModalidadesImportacionVentas() {
         }
 
 
-        const parametros =
-            new URLSearchParams();
+        const parametros = new URLSearchParams();
 
 
-        parametros.set(
-            'pagina',
-            paginaActualVentas
-        );
+        parametros.set('pagina', paginaActualVentas);
 
-        parametros.set(
-            'limite',
-            ventasPorPagina
-        );
+        parametros.set('limite', ventasPorPagina);
 
-        parametros.set(
-            'ordenar',
-            ordenar
-        );
+        parametros.set('ordenar', ordenar);
 
 
         if (buscar) {
 
-            parametros.set(
-                'buscar',
-                buscar
-            );
+            parametros.set('buscar', buscar);
 
         }
 
 
         if (desde) {
 
-            parametros.set(
-                'desde',
-                desde
-            );
+            parametros.set('desde', desde);
 
         }
 
 
         if (hasta) {
 
-            parametros.set(
-                'hasta',
-                hasta
-            );
+            parametros.set('hasta', hasta);
 
         }
 
 
         try {
 
-            const respuesta = await fetchConCsrf(
-                `${URL_API}/api/ventas?` +
-                parametros.toString(),
-                {
-                    method: 'GET',
-                    credentials: 'include'
-                }
-            );
+            const respuesta = await fetchConCsrf(`${URL_API}/api/ventas?` + parametros.toString(), { method: 'GET', credentials: 'include' });
 
 
-            const resultado =
-                await respuesta.json();
+            const resultado = await respuesta.json();
 
             // descarta resultados que corresponden a filtros anteriores
             if (solicitudActual !== secuenciaSolicitudVentas) return;
@@ -557,48 +437,29 @@ function configurarModalidadesImportacionVentas() {
 
             if (!respuesta.ok) {
 
-                console.error(
-                    'Error al obtener ventas:',
-                    resultado
-                );
+                console.error('Error al obtener ventas:', resultado);
 
                 return;
 
             }
 
 
-            const ventasPagina = Array.isArray(resultado.ventas)
-                ? resultado.ventas
-                : [];
+            const ventasPagina = Array.isArray(resultado.ventas) ? resultado.ventas : [];
 
             mostrarVentas(ventasPagina);
 
-            totalPaginasVentas = Number(
-                resultado.paginacion?.total_paginas || 1
-            );
+            totalPaginasVentas = Number(resultado.paginacion?.total_paginas || 1);
 
             // utiliza el total de registros filtrados informado por la API
             const paginacion = resultado.paginacion || {};
-            const totalRegistros =
-                paginacion.total_registros ??
-                paginacion.total_ventas ??
-                paginacion.total_resultados ??
-                paginacion.total ??
-                null;
+            const totalRegistros = paginacion.total_registros ?? paginacion.total_ventas ?? paginacion.total_resultados ?? paginacion.total ?? null;
 
-            mostrarPaginacionVentas(
-                totalPaginasVentas,
-                totalRegistros,
-                ventasPagina.length
-            );
+            mostrarPaginacionVentas(totalPaginasVentas, totalRegistros, ventasPagina.length);
 
 
         } catch (error) {
 
-            console.error(
-                'Error al cargar ventas:',
-                error
-            );
+            console.error('Error al cargar ventas:', error);
 
         }
 
@@ -610,9 +471,7 @@ function configurarModalidadesImportacionVentas() {
     // muestra las ventas en la tabla
     function mostrarVentas(ventas) {
 
-        const cuerpoTabla = document.getElementById(
-            'cuerpo_tabla_ventas'
-        );
+        const cuerpoTabla = document.getElementById('cuerpo_tabla_ventas');
 
 
         if (!cuerpoTabla) {
@@ -646,20 +505,13 @@ function configurarModalidadesImportacionVentas() {
         ventas.forEach(
             function(venta) {
 
-                const fila =
-                    document.createElement(
-                        'tr'
-                    );
+                const fila = document.createElement('tr');
 
 
-                fila.className =
-                    'fila_venta';
+                fila.className = 'fila_venta';
 
 
-                const total =
-                    formatearDineroVentas(
-                        venta.total
-                    );
+                const total = formatearDineroVentas(venta.total);
 
 
                 fila.innerHTML = `
@@ -701,9 +553,7 @@ function configurarModalidadesImportacionVentas() {
                 `;
 
 
-                cuerpoTabla.appendChild(
-                    fila
-                );
+                cuerpoTabla.appendChild(fila);
 
             }
         );
@@ -718,69 +568,41 @@ function configurarModalidadesImportacionVentas() {
 
         try {
 
-            const respuesta = await fetchConCsrf(
-                `${URL_API}/api/ventas/resumen`,
-                {
-                    method: 'GET',
-                    credentials: 'include'
-                }
-            );
+            const respuesta = await fetchConCsrf(`${URL_API}/api/ventas/resumen`, { method: 'GET', credentials: 'include' });
 
 
-            const resumen =
-                await respuesta.json();
+            const resumen = await respuesta.json();
 
 
             if (!respuesta.ok) {
 
-                console.error(
-                    'Error al obtener resumen de ventas:',
-                    resumen
-                );
+                console.error('Error al obtener resumen de ventas:', resumen);
 
                 return;
 
             }
 
 
-            const valorTotalVentas = document.getElementById(
-                'valor_total_ventas'
-            );
+            const valorTotalVentas = document.getElementById('valor_total_ventas');
 
-            const valorVentasDia = document.getElementById(
-                'valor_ventas_dia'
-            );
+            const valorVentasDia = document.getElementById('valor_ventas_dia');
 
-            const valorTotalVendido = document.getElementById(
-                'valor_total_vendido'
-            );
+            const valorTotalVendido = document.getElementById('valor_total_vendido');
 
             // obtiene el texto del indicador de la ultima jornada
-            const textoVentasDia = document.getElementById(
-                'texto_ventas_dia'
-            );
+            const textoVentasDia = document.getElementById('texto_ventas_dia');
 
 
             if (valorTotalVentas) {
 
-                valorTotalVentas.textContent =
-                    Number(
-                        resumen.total_ventas || 0
-                    ).toLocaleString(
-                        'es-CL'
-                    );
+                valorTotalVentas.textContent = Number(resumen.total_ventas || 0).toLocaleString('es-CL');
 
             }
 
 
             if (valorVentasDia) {
 
-                valorVentasDia.textContent =
-                    Number(
-                        resumen.ventas_dia || 0
-                    ).toLocaleString(
-                        'es-CL'
-                    );
+                valorVentasDia.textContent = Number(resumen.ventas_dia || 0).toLocaleString('es-CL');
 
             }
 
@@ -788,34 +610,24 @@ function configurarModalidadesImportacionVentas() {
             // muestra la fecha de la ultima jornada registrada
             if (textoVentasDia) {
 
-                const fechaUltimaJornada =
-                    resumen.fecha_ultima_jornada;
+                const fechaUltimaJornada = resumen.fecha_ultima_jornada;
 
                 textoVentasDia.textContent =
-                    fechaUltimaJornada
-                        ? 'Ventas de la última jornada registrada (' +
-                          fechaUltimaJornada + ')'
-                        : 'Ventas de la última jornada registrada';
+                    fechaUltimaJornada ? 'Ventas de la última jornada registrada (' + fechaUltimaJornada + ')' : 'Ventas de la última jornada registrada';
 
             }
 
 
             if (valorTotalVendido) {
 
-                valorTotalVendido.textContent =
-                    formatearDineroVentas(
-                        resumen.total_vendido
-                    );
+                valorTotalVendido.textContent = formatearDineroVentas(resumen.total_vendido);
 
             }
 
 
         } catch (error) {
 
-            console.error(
-                'Error al cargar resumen de ventas:',
-                error
-            );
+            console.error('Error al cargar resumen de ventas:', error);
 
         }
 
@@ -829,83 +641,46 @@ function configurarModalidadesImportacionVentas() {
 
         try {
 
-            const respuesta = await fetchConCsrf(
-                `${URL_API}/api/ventas/` +
-                idVenta +
-                '/detalle',
-                {
-                    method: 'GET',
-                    credentials: 'include'
-                }
-            );
+            const respuesta = await fetchConCsrf(`${URL_API}/api/ventas/` + idVenta + '/detalle', { method: 'GET', credentials: 'include' });
 
 
-            const resultado =
-                await respuesta.json();
+            const resultado = await respuesta.json();
 
 
             if (!respuesta.ok) {
 
-                console.error(
-                    'Error al obtener detalle:',
-                    resultado
-                );
+                console.error('Error al obtener detalle:', resultado);
 
                 return;
 
             }
 
 
-            const contenedor = document.getElementById(
-                'contenedor_detalle_venta'
-            );
+            const contenedor = document.getElementById('contenedor_detalle_venta');
 
-            const titulo = document.getElementById(
-                'titulo_detalle_venta'
-            );
+            const titulo = document.getElementById('titulo_detalle_venta');
 
-            const fecha = document.getElementById(
-                'fecha_detalle_venta'
-            );
+            const fecha = document.getElementById('fecha_detalle_venta');
 
-            const total = document.getElementById(
-                'total_detalle_venta'
-            );
+            const total = document.getElementById('total_detalle_venta');
 
-            const cuerpoTabla = document.getElementById(
-                'cuerpo_tabla_detalle_venta'
-            );
+            const cuerpoTabla = document.getElementById('cuerpo_tabla_detalle_venta');
 
 
-            if (
-                !contenedor ||
-                !titulo ||
-                !fecha ||
-                !total ||
-                !cuerpoTabla
-            ) {
+            if (!contenedor || !titulo || !fecha || !total || !cuerpoTabla) {
 
                 return;
 
             }
 
 
-            titulo.textContent =
-                'Boleta Nº ' +
-                resultado.venta.boleta;
+            titulo.textContent = 'Boleta Nº ' + resultado.venta.boleta;
 
 
-            fecha.textContent =
-                resultado.venta.fecha +
-                ' - ' +
-                resultado.venta.hora;
+            fecha.textContent = resultado.venta.fecha + ' - ' + resultado.venta.hora;
 
 
-            total.textContent =
-                'Total: ' +
-                formatearDineroVentas(
-                    resultado.venta.total
-                );
+            total.textContent = 'Total: ' + formatearDineroVentas(resultado.venta.total);
 
 
             cuerpoTabla.innerHTML = '';
@@ -914,14 +689,10 @@ function configurarModalidadesImportacionVentas() {
             resultado.detalles.forEach(
                 function(detalle) {
 
-                    const fila =
-                        document.createElement(
-                            'tr'
-                        );
+                    const fila = document.createElement('tr');
 
 
-                    fila.className =
-                        'fila_producto_detalle_venta';
+                    fila.className = 'fila_producto_detalle_venta';
 
 
                     fila.innerHTML = `
@@ -933,49 +704,36 @@ function configurarModalidadesImportacionVentas() {
 
                         <td class="dato_cantidad_detalle_venta">
 
-                            ${formatearCantidadVentas(
-                                detalle.cantidad
-                            )}
+                            ${formatearCantidadVentas(detalle.cantidad)}
 
                         </td>
 
                         <td class="dato_precio_detalle_venta">
 
-                            ${formatearDineroVentas(
-                                detalle.precio
-                            )}
+                            ${formatearDineroVentas(detalle.precio)}
 
                         </td>
 
                         <td class="dato_valorizado_detalle_venta">
 
-                            ${formatearDineroVentas(
-                                detalle.valorizado
-                            )}
+                            ${formatearDineroVentas(detalle.valorizado)}
 
                         </td>
                     `;
 
 
-                    cuerpoTabla.appendChild(
-                        fila
-                    );
+                    cuerpoTabla.appendChild(fila);
 
                 }
             );
 
 
-            contenedor.classList.remove(
-                'contenedor_detalle_venta_oculto'
-            );
+            contenedor.classList.remove('contenedor_detalle_venta_oculto');
 
 
         } catch (error) {
 
-            console.error(
-                'Error al cargar detalle de venta:',
-                error
-            );
+            console.error('Error al cargar detalle de venta:', error);
 
         }
 
@@ -985,16 +743,12 @@ function configurarModalidadesImportacionVentas() {
     // cierra el detalle
     function cerrarDetalleVenta() {
 
-        const contenedor = document.getElementById(
-            'contenedor_detalle_venta'
-        );
+        const contenedor = document.getElementById('contenedor_detalle_venta');
 
 
         if (contenedor) {
 
-            contenedor.classList.add(
-                'contenedor_detalle_venta_oculto'
-            );
+            contenedor.classList.add('contenedor_detalle_venta_oculto');
 
         }
 
@@ -1018,15 +772,9 @@ function configurarModalidadesImportacionVentas() {
 
     // selecciona un orden de ventas y actualiza el texto del filtro
     function seleccionarOrdenVentas(valor, recargar = true) {
-        const etiquetas = {
-            recientes: 'Más recientes',
-            monto_mayor: 'Mayor monto',
-            monto_menor: 'Menor monto'
-        };
+        const etiquetas = { recientes: 'Más recientes', monto_mayor: 'Mayor monto', monto_menor: 'Menor monto' };
 
-        ordenVentasSeleccionado = Object.prototype.hasOwnProperty.call(etiquetas, valor)
-            ? valor
-            : 'recientes';
+        ordenVentasSeleccionado = Object.prototype.hasOwnProperty.call(etiquetas, valor) ? valor : 'recientes';
 
         const texto = document.getElementById('texto_orden_ventas');
         if (texto) texto.textContent = etiquetas[ordenVentasSeleccionado];
@@ -1127,17 +875,11 @@ function configurarModalidadesImportacionVentas() {
     // configura búsqueda y fechas
     function configurarFiltrosVentas() {
 
-        const inputBusqueda = document.getElementById(
-            'input_busqueda_ventas'
-        );
+        const inputBusqueda = document.getElementById('input_busqueda_ventas');
 
-        const inputDesde = document.getElementById(
-            'input_fecha_desde_ventas'
-        );
+        const inputDesde = document.getElementById('input_fecha_desde_ventas');
 
-        const inputHasta = document.getElementById(
-            'input_fecha_hasta_ventas'
-        );
+        const inputHasta = document.getElementById('input_fecha_hasta_ventas');
 
 
         // configura el filtro de ordenamiento antes de cargar las ventas
@@ -1156,9 +898,7 @@ function configurarModalidadesImportacionVentas() {
                 'input',
                 function() {
 
-                    clearTimeout(
-                        temporizadorBusquedaVentas
-                    );
+                    clearTimeout(temporizadorBusquedaVentas);
 
 
                     temporizadorBusquedaVentas =
@@ -1231,62 +971,39 @@ function configurarModalidadesImportacionVentas() {
     // función para mostrar el contador y los controles de paginación
     function mostrarPaginacionVentas(totalPaginas, totalRegistros, cantidadPagina) {
 
-        const contenedor = document.getElementById(
-            'contenedor_paginacion_ventas'
-        );
+        const contenedor = document.getElementById('contenedor_paginacion_ventas');
 
-        const informacion = document.getElementById(
-            'informacion_paginacion_ventas'
-        );
+        const informacion = document.getElementById('informacion_paginacion_ventas');
 
-        const controles = document.getElementById(
-            'controles_paginacion_ventas'
-        );
+        const controles = document.getElementById('controles_paginacion_ventas');
 
-        const anterior = document.getElementById(
-            'boton_pagina_anterior_ventas'
-        );
+        const anterior = document.getElementById('boton_pagina_anterior_ventas');
 
-        const siguiente = document.getElementById(
-            'boton_pagina_siguiente_ventas'
-        );
+        const siguiente = document.getElementById('boton_pagina_siguiente_ventas');
 
         if (!contenedor || !informacion || !controles || !anterior || !siguiente) {
             return;
         }
 
         // el total debe corresponder a los filtros aplicados en la API
-        const totalConocido = totalRegistros !== null &&
-            Number.isFinite(Number(totalRegistros)) && Number(totalRegistros) >= 0;
+        const totalConocido = totalRegistros !== null && Number.isFinite(Number(totalRegistros)) && Number(totalRegistros) >= 0;
 
         const total = totalConocido ? Number(totalRegistros) : null;
         const cantidad = Number(cantidadPagina) || 0;
 
-        const inicio = cantidad === 0
-            ? 0
-            : (paginaActualVentas - 1) * ventasPorPagina + 1;
+        const inicio = cantidad === 0 ? 0 : (paginaActualVentas - 1) * ventasPorPagina + 1;
 
-        const fin = cantidad === 0
-            ? 0
-            : (paginaActualVentas - 1) * ventasPorPagina + cantidad;
+        const fin = cantidad === 0 ? 0 : (paginaActualVentas - 1) * ventasPorPagina + cantidad;
 
         // si el backend no indica el total, solamente se infiere en la última página
-        const totalReal = total !== null
-            ? total
-            : (totalPaginas <= 1 || paginaActualVentas === totalPaginas)
-                ? fin
-                : null;
+        const totalReal = total !== null ? total : (totalPaginas <= 1 || paginaActualVentas === totalPaginas) ? fin : null;
 
         if (totalReal !== null) {
             informacion.textContent =
-                'Mostrando ' + inicio.toLocaleString('es-CL') +
-                ' a ' + fin.toLocaleString('es-CL') +
-                ' de ' + totalReal.toLocaleString('es-CL') + ' ventas';
+                'Mostrando ' + inicio.toLocaleString('es-CL') + ' a ' + fin.toLocaleString('es-CL') + ' de ' + totalReal.toLocaleString('es-CL') + ' ventas';
         } else {
             informacion.textContent =
-                'Mostrando ' + inicio.toLocaleString('es-CL') +
-                ' a ' + fin.toLocaleString('es-CL') +
-                ' ventas (página ' + paginaActualVentas +
+                'Mostrando ' + inicio.toLocaleString('es-CL') + ' a ' + fin.toLocaleString('es-CL') + ' ventas (página ' + paginaActualVentas +
                 ' de ' + totalPaginas.toLocaleString('es-CL') + ')';
         }
 
@@ -1316,9 +1033,7 @@ function configurarModalidadesImportacionVentas() {
     // función para mostrar los números y los puntos suspensivos
     function mostrarNumerosPaginasVentas(totalPaginas) {
 
-        const numeros = document.getElementById(
-            'numeros_paginas_ventas'
-        );
+        const numeros = document.getElementById('numeros_paginas_ventas');
 
         if (!numeros) {
             return;
@@ -1402,16 +1117,7 @@ function configurarModalidadesImportacionVentas() {
     // formatea valores monetarios
     function formatearDineroVentas(valor) {
 
-        return Number(
-            valor || 0
-        ).toLocaleString(
-            'es-CL',
-            {
-                style: 'currency',
-                currency: 'CLP',
-                maximumFractionDigits: 0
-            }
-        );
+        return Number(valor || 0).toLocaleString('es-CL', { style: 'currency', currency: 'CLP', maximumFractionDigits: 0 });
 
     }
 
@@ -1419,15 +1125,7 @@ function configurarModalidadesImportacionVentas() {
     // formatea cantidades incluyendo productos por peso
     function formatearCantidadVentas(valor) {
 
-        return Number(
-            valor || 0
-        ).toLocaleString(
-            'es-CL',
-            {
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 4
-            }
-        );
+        return Number(valor || 0).toLocaleString('es-CL', { minimumFractionDigits: 0, maximumFractionDigits: 4 });
 
     }
 
@@ -1441,9 +1139,6 @@ function configurarModalidadesImportacionVentas() {
         configurarModalidadesImportacionVentas();
         configurarFiltrosVentas();
 
-        await Promise.all([
-            cargarVentas(),
-            cargarResumenVentas()
-        ]);
+        await Promise.all([cargarVentas(), cargarResumenVentas()]);
 
     }

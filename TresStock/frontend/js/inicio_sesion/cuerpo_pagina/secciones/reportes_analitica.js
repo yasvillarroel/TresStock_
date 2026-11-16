@@ -187,10 +187,7 @@ async function cargarProductosPronosticoAnalisis() {
     cuerpo.innerHTML = '<div class="fila_vacia_analisis_pronostico" role="row"><div role="cell">Cargando pronósticos...</div></div>';
 
     try {
-        const respuesta = await fetchConCsrf(`${URL_API}/api/inventario`, {
-            method: 'GET',
-            credentials: 'include'
-        });
+        const respuesta = await fetchConCsrf(`${URL_API}/api/inventario`, { method: 'GET', credentials: 'include' });
         const datos = await respuesta.json();
         if (!respuesta.ok) throw new Error(datos.mensaje || 'No se pudieron cargar los pronósticos.');
 
@@ -321,9 +318,7 @@ function filtrarProductosPronosticoAnalisis() {
             || String(producto.cod_barra || '').toLocaleLowerCase('es-CL').includes(texto);
         const valoresPronostico = obtenerValoresPronosticoAnalisis(producto).map(Number);
         const tienePronostico = valoresPronostico.some(valor => Number.isFinite(valor) && valor > 0);
-        const coincidePronostico = filtroPronostico === 'CON_PRONOSTICO'
-            ? tienePronostico
-            : filtroPronostico === 'SIN_PRONOSTICO' ? !tienePronostico : true;
+        const coincidePronostico = filtroPronostico === 'CON_PRONOSTICO' ? tienePronostico : filtroPronostico === 'SIN_PRONOSTICO' ? !tienePronostico : true;
         return coincideTexto && coincidePronostico;
     });
     // Primero los productos con mayor demanda estimada, para evitar miles de ceros al inicio.
@@ -352,9 +347,7 @@ function filtrarProductosReposicionAnalisis() {
         const stockNegativo = Number(producto.stock_actual) < 0;
         const necesitaReposicion = calcularReposicionRecomendadaAnalisis(producto).cantidad > 0;
         const coincideEstado = filtro === 'NECESARIA' ? !stockNegativo && necesitaReposicion
-            : filtro === 'NO_REQUERIDA' ? !stockNegativo && !necesitaReposicion
-                : filtro === 'REVISAR_STOCK' ? stockNegativo
-                    : true;
+            : filtro === 'NO_REQUERIDA' ? !stockNegativo && !necesitaReposicion : filtro === 'REVISAR_STOCK' ? stockNegativo : true;
         return coincideBusqueda && coincideEstado;
     });
     productosReposicionFiltradosAnalisis.sort((a, b) => {
@@ -496,9 +489,7 @@ function crearCeldaFotoAnalisis(producto) {
     imagen.loading = 'lazy';
     imagen.decoding = 'async';
     imagen.draggable = false;
-    imagen.src = rutaImagen
-        ? (rutaImagen.startsWith('/api/productos/imagenes/') ? `${URL_API}${rutaImagen}` : rutaImagen)
-        : imagenPredeterminada;
+    imagen.src = rutaImagen ? (rutaImagen.startsWith('/api/productos/imagenes/') ? `${URL_API}${rutaImagen}` : rutaImagen) : imagenPredeterminada;
     if (!rutaImagen) imagen.classList.add('imagen_producto_analisis_pronostico_vacia');
     imagen.onerror = function () {
         this.onerror = null;
@@ -565,10 +556,7 @@ function crearFilaReposicionAnalisis(producto) {
     const stockNegativo = Number(producto.stock_actual) < 0;
     if (stockNegativo) fila.classList.add('fila_revisar_stock_analisis_pronostico');
 
-    [
-        ['Stock actual', producto.stock_actual],
-        ['Punto de reposición', producto.punto_reposicion]
-    ].forEach(([etiqueta, valor]) => {
+    [['Stock actual', producto.stock_actual], ['Punto de reposición', producto.punto_reposicion]].forEach(([etiqueta, valor]) => {
         const celda = document.createElement('div');
         celda.dataset.etiqueta = etiqueta;
         celda.setAttribute('role', 'cell');
@@ -612,9 +600,7 @@ function calcularReposicionRecomendadaAnalisis(producto) {
     const pronosticoSieteDias = Math.max(0, Number(producto.pronostico_7_dias) || 0);
     const objetivo = puntoReposicion + pronosticoSieteDias;
     const cantidadSinRedondear = Math.max(0, objetivo - stock);
-    const cantidad = producto.es_producto_balanza
-        ? Math.ceil((cantidadSinRedondear - 1e-9) * 1000) / 1000
-        : Math.ceil(cantidadSinRedondear - 1e-9);
+    const cantidad = producto.es_producto_balanza ? Math.ceil((cantidadSinRedondear - 1e-9) * 1000) / 1000 : Math.ceil(cantidadSinRedondear - 1e-9);
 
     if (cantidad <= 0) {
         return {cantidad: 0, momento: 'No requerida', detalle: 'El stock actual cubre el objetivo de reposición calculado.'};
@@ -656,8 +642,7 @@ function actualizarPaginacionPronosticoAnalisis(total, totalPaginas, tipo) {
 
     const paginas = totalPaginas <= 7
         ? Array.from({length: totalPaginas}, (_, indice) => indice + 1)
-        : [...new Set([1, paginaActual - 1, paginaActual, paginaActual + 1, totalPaginas])]
-            .filter(numero => numero >= 1 && numero <= totalPaginas)
+        : [...new Set([1, paginaActual - 1, paginaActual, paginaActual + 1, totalPaginas])].filter(numero => numero >= 1 && numero <= totalPaginas)
             .sort((a, b) => a - b);
     let paginaAnterior = 0;
     paginas.forEach(numero => {
@@ -676,9 +661,7 @@ function actualizarPaginacionPronosticoAnalisis(total, totalPaginas, tipo) {
             boton.classList.add('activa');
             boton.setAttribute('aria-current', 'page');
         }
-        boton.addEventListener('click', () => tipo === 'reposicion'
-            ? cambiarPaginaReposicionAnalisis(numero)
-            : cambiarPaginaPronosticoAnalisis(numero));
+        boton.addEventListener('click', () => tipo === 'reposicion' ? cambiarPaginaReposicionAnalisis(numero) : cambiarPaginaPronosticoAnalisis(numero));
         numeros.appendChild(boton);
         paginaAnterior = numero;
     });
@@ -796,8 +779,7 @@ function textoBusquedaAnalisis() {
 // Se cuentan productos, sin sumar unidades y kilos en una sola cifra.
 function actualizarIndicadoresAnalisis() {
     const totalConPronostico = productosPronosticoAnalisis.filter(producto =>
-        [producto.pronostico_7_dias, producto.pronostico_14_dias, producto.pronostico_30_dias]
-            .some(valor => Number(valor) > 0)).length;
+        [producto.pronostico_7_dias, producto.pronostico_14_dias, producto.pronostico_30_dias].some(valor => Number(valor) > 0)).length;
     const recomendaciones = productosPronosticoAnalisis.map(calcularReposicionRecomendadaAnalisis);
     const reponerAhora = recomendaciones.filter(recomendacion => recomendacion.momento === 'Ahora').length;
     const reposicionesSugeridas = recomendaciones.filter(recomendacion => recomendacion.cantidad > 0).length;

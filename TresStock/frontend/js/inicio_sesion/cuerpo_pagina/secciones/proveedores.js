@@ -11,16 +11,8 @@ let cambiandoEstadoProveedor = false;
 
 // conserva filtros y muestra por defecto los proveedores activos
 const opcionesFiltrosProveedores = {
-    estado: [
-        { valor: 'activos', nombre: 'Activos' },
-        { valor: 'inactivos', nombre: 'Inactivos' },
-        { valor: 'todos', nombre: 'Todos' }
-    ],
-    informacion: [
-        { valor: 'todos', nombre: 'Todos' },
-        { valor: 'completa', nombre: 'Completa' },
-        { valor: 'incompleta', nombre: 'Incompleta' }
-    ]
+    estado: [{ valor: 'activos', nombre: 'Activos' }, { valor: 'inactivos', nombre: 'Inactivos' }, { valor: 'todos', nombre: 'Todos' }],
+    informacion: [{ valor: 'todos', nombre: 'Todos' }, { valor: 'completa', nombre: 'Completa' }, { valor: 'incompleta', nombre: 'Incompleta' }]
 };
 
 // controla las ventanas centradas de información y confirmación
@@ -34,11 +26,9 @@ let focoAnteriorDialogoProveedor = null;
     // función para mostrar el formulario de registro de un nuevo proveedor
     function abrirFormularioProveedor() {
 
-        const contenedorFormularioProveedor =
-            document.getElementById('contenedor_formulario_proveedor');
+        const contenedorFormularioProveedor = document.getElementById('contenedor_formulario_proveedor');
 
-        const tituloFormularioProveedor =
-            document.getElementById('titulo_formulario_proveedor');
+        const tituloFormularioProveedor = document.getElementById('titulo_formulario_proveedor');
 
 
         // indica que se creará un nuevo proveedor
@@ -48,8 +38,7 @@ let focoAnteriorDialogoProveedor = null;
 
         if (tituloFormularioProveedor) {
 
-            tituloFormularioProveedor.textContent =
-                'Nuevo proveedor';
+            tituloFormularioProveedor.textContent = 'Nuevo proveedor';
 
         }
 
@@ -60,9 +49,7 @@ let focoAnteriorDialogoProveedor = null;
 
         if (contenedorFormularioProveedor) {
 
-            contenedorFormularioProveedor.classList.remove(
-                'contenedor_formulario_proveedor_oculto'
-            );
+            contenedorFormularioProveedor.classList.remove('contenedor_formulario_proveedor_oculto');
 
         }
 
@@ -72,15 +59,12 @@ let focoAnteriorDialogoProveedor = null;
     // función para ocultar el formulario de proveedor
     function cerrarFormularioProveedor() {
 
-        const contenedorFormularioProveedor =
-            document.getElementById('contenedor_formulario_proveedor');
+        const contenedorFormularioProveedor = document.getElementById('contenedor_formulario_proveedor');
 
 
         if (contenedorFormularioProveedor) {
 
-            contenedorFormularioProveedor.classList.add(
-                'contenedor_formulario_proveedor_oculto'
-            );
+            contenedorFormularioProveedor.classList.add('contenedor_formulario_proveedor_oculto');
 
         }
 
@@ -95,26 +79,19 @@ let focoAnteriorDialogoProveedor = null;
     // función para limpiar los campos del formulario de proveedor
     function limpiarFormularioProveedor() {
 
-        const inputNombreProveedor =
-            document.getElementById('input_nombre_proveedor');
+        const inputNombreProveedor = document.getElementById('input_nombre_proveedor');
 
-        const inputRazonSocialProveedor =
-            document.getElementById('input_razon_social_proveedor');
+        const inputRazonSocialProveedor = document.getElementById('input_razon_social_proveedor');
 
-        const inputRutProveedor =
-            document.getElementById('input_rut_proveedor');
+        const inputRutProveedor = document.getElementById('input_rut_proveedor');
 
-        const inputTelefonoProveedor =
-            document.getElementById('input_telefono_proveedor');
+        const inputTelefonoProveedor = document.getElementById('input_telefono_proveedor');
 
-        const inputEmailProveedor =
-            document.getElementById('input_email_proveedor');
+        const inputEmailProveedor = document.getElementById('input_email_proveedor');
 
-        const inputDireccionProveedor =
-            document.getElementById('input_direccion_proveedor');
+        const inputDireccionProveedor = document.getElementById('input_direccion_proveedor');
 
-        const inputTiempoEntregaProveedor =
-            document.getElementById('input_tiempo_entrega_proveedor');
+        const inputTiempoEntregaProveedor = document.getElementById('input_tiempo_entrega_proveedor');
 
 
         if (inputNombreProveedor) {
@@ -155,13 +132,7 @@ let focoAnteriorDialogoProveedor = null;
 
         try {
 
-            const respuesta = await fetchConCsrf(
-                `${URL_API}/api/proveedores`,
-                {
-                    method: 'GET',
-                    credentials: 'include'
-                }
-            );
+            const respuesta = await fetchConCsrf(`${URL_API}/api/proveedores`, { method: 'GET', credentials: 'include' });
 
 
             const resultado = await respuesta.json();
@@ -169,20 +140,14 @@ let focoAnteriorDialogoProveedor = null;
 
             if (!respuesta.ok) {
 
-                console.error(
-                    'Error al obtener proveedores:',
-                    resultado
-                );
+                console.error('Error al obtener proveedores:', resultado);
 
                 return;
 
             }
 
 
-            proveedoresCargados =
-                Array.isArray(resultado)
-                    ? resultado
-                    : [];
+            proveedoresCargados = Array.isArray(resultado) ? resultado : [];
 
 
             // conserva los filtros seleccionados tras crear, editar o cambiar estado
@@ -194,10 +159,7 @@ let focoAnteriorDialogoProveedor = null;
 
         } catch (error) {
 
-            console.error(
-                'Error de conexión al obtener proveedores:',
-                error
-            );
+            console.error('Error de conexión al obtener proveedores:', error);
 
         }
 
@@ -263,16 +225,13 @@ let focoAnteriorDialogoProveedor = null;
             agregarDato(proveedor.telefono, 'dato_telefono_proveedores');
             agregarDato(proveedor.email, 'dato_email_proveedores');
             agregarDato(proveedor.direccion, 'dato_direccion_proveedores');
-            agregarDato(proveedor.tiempo_entrega_dias == null
-                ? 'Sin configurar'
-                : proveedor.tiempo_entrega_dias + ' días', 'dato_tiempo_entrega_proveedores');
+            agregarDato(proveedor.tiempo_entrega_dias == null ? 'Sin configurar' : proveedor.tiempo_entrega_dias + ' días', 'dato_tiempo_entrega_proveedores');
 
             // estado independiente, igual que en la tabla de Productos
             const datoEstado = document.createElement('td');
             datoEstado.className = 'dato_estado_proveedores';
             const etiquetaEstado = document.createElement('span');
-            etiquetaEstado.className = 'etiqueta_estado_proveedor ' +
-                (activo ? 'etiqueta_proveedor_activo' : 'etiqueta_proveedor_inactivo');
+            etiquetaEstado.className = 'etiqueta_estado_proveedor ' + (activo ? 'etiqueta_proveedor_activo' : 'etiqueta_proveedor_inactivo');
             etiquetaEstado.textContent = activo ? 'Activo' : 'Inactivo';
             datoEstado.appendChild(etiquetaEstado);
             fila.appendChild(datoEstado);
@@ -317,79 +276,53 @@ let focoAnteriorDialogoProveedor = null;
 
         try {
 
-            const respuesta = await fetchConCsrf(
-                `${URL_API}/api/proveedores/resumen`,
-                {
-                    method: 'GET',
-                    credentials: 'include'
-                }
-            );
+            const respuesta = await fetchConCsrf(`${URL_API}/api/proveedores/resumen`, { method: 'GET', credentials: 'include' });
 
             const resumen = await respuesta.json();
 
             if (!respuesta.ok) {
 
-                console.error(
-                    'Error al obtener indicadores de proveedores:',
-                    resumen
-                );
+                console.error('Error al obtener indicadores de proveedores:', resumen);
 
                 return;
 
             }
 
 
-            const totalProveedores =
-                document.getElementById('valor_total_proveedores');
+            const totalProveedores = document.getElementById('valor_total_proveedores');
 
-            const valorMasProductos =
-                document.getElementById('valor_proveedor_mas_productos');
+            const valorMasProductos = document.getElementById('valor_proveedor_mas_productos');
 
-            const nombreMasProductos =
-                document.getElementById('nombre_proveedor_mas_productos');
+            const nombreMasProductos = document.getElementById('nombre_proveedor_mas_productos');
 
-            const valorIncompletos =
-                document.getElementById('valor_proveedores_incompletos');
+            const valorIncompletos = document.getElementById('valor_proveedores_incompletos');
 
-            const valorSinStock =
-                document.getElementById('valor_proveedores_sin_stock');
+            const valorSinStock = document.getElementById('valor_proveedores_sin_stock');
 
 
             if (totalProveedores) {
-                totalProveedores.textContent =
-                    Number(resumen.total_proveedores || 0).toLocaleString('es-CL');
+                totalProveedores.textContent = Number(resumen.total_proveedores || 0).toLocaleString('es-CL');
             }
 
             if (valorMasProductos) {
-                valorMasProductos.textContent =
-                    Number(resumen.cantidad_productos_proveedor || 0)
-                        .toLocaleString('es-CL');
+                valorMasProductos.textContent = Number(resumen.cantidad_productos_proveedor || 0).toLocaleString('es-CL');
             }
 
             if (nombreMasProductos) {
-                nombreMasProductos.textContent =
-                    resumen.nombre_proveedor_mas_productos ||
-                    'Sin productos asociados';
+                nombreMasProductos.textContent = resumen.nombre_proveedor_mas_productos || 'Sin productos asociados';
             }
 
             if (valorIncompletos) {
-                valorIncompletos.textContent =
-                    Number(resumen.proveedores_info_incompleta || 0)
-                        .toLocaleString('es-CL');
+                valorIncompletos.textContent = Number(resumen.proveedores_info_incompleta || 0).toLocaleString('es-CL');
             }
 
             if (valorSinStock) {
-                valorSinStock.textContent =
-                    Number(resumen.proveedores_con_productos_sin_stock || 0)
-                        .toLocaleString('es-CL');
+                valorSinStock.textContent = Number(resumen.proveedores_con_productos_sin_stock || 0).toLocaleString('es-CL');
             }
 
         } catch (error) {
 
-            console.error(
-                'Error de conexión al obtener indicadores de proveedores:',
-                error
-            );
+            console.error('Error de conexión al obtener indicadores de proveedores:', error);
 
         }
 
@@ -400,20 +333,13 @@ let focoAnteriorDialogoProveedor = null;
 
     // permite buscar sin distinguir tildes, mayúsculas ni guiones
     function normalizarTextoFiltroProveedor(valor) {
-        return String(valor ?? '')
-            .normalize('NFD')
-            .replace(/[\u0300-\u036f]/g, '')
-            .toLowerCase()
-            .replace(/[^a-z0-9]+/g, ' ')
-            .trim()
-            .replace(/\s+/g, ' ');
+        return String(valor ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim().replace(/\s+/g, ' ');
     }
 
     // considera los mismos campos que el indicador Información incompleta
     function tieneInformacionCompletaProveedor(proveedor) {
         return Boolean(
-            String(proveedor.rut ?? '').trim() &&
-            String(proveedor.direccion ?? '').trim() &&
+            String(proveedor.rut ?? '').trim() && String(proveedor.direccion ?? '').trim() &&
             (String(proveedor.telefono ?? '').trim() || String(proveedor.email ?? '').trim())
         );
     }
@@ -543,22 +469,17 @@ let focoAnteriorDialogoProveedor = null;
         const busqueda = normalizarTextoFiltroProveedor(entrada.value);
         const compacta = busqueda.replace(/\s+/g, '');
         const resultado = proveedoresCargados.filter(function(proveedor) {
-            const campos = [proveedor.nombre_comercial, proveedor.razon_social,
-                proveedor.rut, proveedor.telefono, proveedor.email, proveedor.direccion];
+            const campos = [proveedor.nombre_comercial, proveedor.razon_social, proveedor.rut, proveedor.telefono, proveedor.email, proveedor.direccion];
             const coincideBusqueda = !busqueda || campos.some(function(campo) {
                 const normalizado = normalizarTextoFiltroProveedor(campo);
-                return normalizado.includes(busqueda) ||
-                    normalizado.replace(/\s+/g, '').includes(compacta);
+                return normalizado.includes(busqueda) || normalizado.replace(/\s+/g, '').includes(compacta);
             });
 
             const activo = proveedor.activo !== false;
-            const coincideEstado = estado.value === 'todos' ||
-                (estado.value === 'activos' && activo) ||
-                (estado.value === 'inactivos' && !activo);
+            const coincideEstado = estado.value === 'todos' || (estado.value === 'activos' && activo) || (estado.value === 'inactivos' && !activo);
 
             const completa = tieneInformacionCompletaProveedor(proveedor);
-            const coincideInformacion = informacion.value === 'todos' ||
-                (informacion.value === 'completa' && completa) ||
+            const coincideInformacion = informacion.value === 'todos' || (informacion.value === 'completa' && completa) ||
                 (informacion.value === 'incompleta' && !completa);
 
             return coincideBusqueda && coincideEstado && coincideInformacion;
@@ -575,72 +496,42 @@ let focoAnteriorDialogoProveedor = null;
 
         if (guardandoProveedor || modoFormularioProveedor === 'ver') return;
 
-        const inputNombre =
-            document.getElementById(
-                'input_nombre_proveedor'
-            );
+        const inputNombre = document.getElementById('input_nombre_proveedor');
 
-        const inputRazonSocial =
-            document.getElementById(
-                'input_razon_social_proveedor'
-            );
+        const inputRazonSocial = document.getElementById('input_razon_social_proveedor');
 
-        const inputRut =
-            document.getElementById(
-                'input_rut_proveedor'
-            );
+        const inputRut = document.getElementById('input_rut_proveedor');
 
-        const inputTelefono =
-            document.getElementById(
-                'input_telefono_proveedor'
-            );
+        const inputTelefono = document.getElementById('input_telefono_proveedor');
 
-        const inputEmail =
-            document.getElementById(
-                'input_email_proveedor'
-            );
+        const inputEmail = document.getElementById('input_email_proveedor');
 
-        const inputDireccion =
-            document.getElementById(
-                'input_direccion_proveedor'
-            );
+        const inputDireccion = document.getElementById('input_direccion_proveedor');
 
-        const inputTiempoEntrega =
-            document.getElementById(
-                'input_tiempo_entrega_proveedor'
-            );
+        const inputTiempoEntrega = document.getElementById('input_tiempo_entrega_proveedor');
 
 
-        const nombreComercial =
-            inputNombre.value.trim();
+        const nombreComercial = inputNombre.value.trim();
 
-        const razonSocial =
-            inputRazonSocial.value.trim();
+        const razonSocial = inputRazonSocial.value.trim();
 
-        const rut =
-            inputRut.value.trim();
+        const rut = inputRut.value.trim();
 
-        const telefono =
-            inputTelefono.value.trim();
+        const telefono = inputTelefono.value.trim();
 
-        const email =
-            inputEmail.value.trim();
+        const email = inputEmail.value.trim();
 
-        const direccion =
-            inputDireccion.value.trim();
+        const direccion = inputDireccion.value.trim();
 
-        const tiempoEntregaTexto =
-            inputTiempoEntrega.value.trim();
+        const tiempoEntregaTexto = inputTiempoEntrega.value.trim();
 
-        const tiempoEntregaDias =
-            Number(tiempoEntregaTexto);
+        const tiempoEntregaDias = Number(tiempoEntregaTexto);
 
 
         // valida nombre comercial
         if (!nombreComercial) {
 
-            await mostrarMensajeProveedor('Datos incompletos',
-                'Debe ingresar el nombre comercial del proveedor.', 'advertencia');
+            await mostrarMensajeProveedor('Datos incompletos', 'Debe ingresar el nombre comercial del proveedor.', 'advertencia');
 
             return;
 
@@ -648,14 +539,9 @@ let focoAnteriorDialogoProveedor = null;
 
 
         // valida los días de entrega
-        if (
-            tiempoEntregaTexto === '' ||
-            !Number.isInteger(tiempoEntregaDias) ||
-            tiempoEntregaDias < 7
-        ) {
+        if (tiempoEntregaTexto === '' || !Number.isInteger(tiempoEntregaDias) || tiempoEntregaDias < 7) {
 
-            await mostrarMensajeProveedor('Tiempo de entrega inválido',
-                'El tiempo de entrega debe ser un número entero de al menos 7 días.', 'advertencia');
+            await mostrarMensajeProveedor('Tiempo de entrega inválido', 'El tiempo de entrega debe ser un número entero de al menos 7 días.', 'advertencia');
 
             return;
 
@@ -664,26 +550,19 @@ let focoAnteriorDialogoProveedor = null;
 
         const datosProveedor = {
 
-            nombre_comercial:
-                nombreComercial,
+            nombre_comercial: nombreComercial,
 
-            razon_social:
-                razonSocial || null,
+            razon_social: razonSocial || null,
 
-            rut:
-                rut || null,
+            rut: rut || null,
 
-            telefono:
-                telefono || null,
+            telefono: telefono || null,
 
-            email:
-                email || null,
+            email: email || null,
 
-            direccion:
-                direccion || null,
+            direccion: direccion || null,
 
-            tiempo_entrega_dias:
-                tiempoEntregaDias
+            tiempo_entrega_dias: tiempoEntregaDias
 
         };
 
@@ -692,52 +571,33 @@ let focoAnteriorDialogoProveedor = null;
 
         try {
 
-            let url =
-                `${URL_API}/api/proveedores`;
+            let url = `${URL_API}/api/proveedores`;
 
-            let metodo =
-                'POST';
+            let metodo = 'POST';
 
 
             // si existe un id se actualiza
             if (idProveedorEditando !== null) {
 
-                url =
-                    `${URL_API}/api/proveedores/${idProveedorEditando}`;
+                url = `${URL_API}/api/proveedores/${idProveedorEditando}`;
 
-                metodo =
-                    'PUT';
+                metodo = 'PUT';
 
             }
 
 
             const respuesta = await fetchConCsrf(
                 url,
-                {
-                    method: metodo,
-
-                    headers: {
-                        'Content-Type':
-                            'application/json'
-                    },
-
-                    credentials: 'include',
-
-                    body: JSON.stringify(
-                        datosProveedor
-                    )
-                }
+                { method: metodo, headers: { 'Content-Type': 'application/json' }, credentials: 'include', body: JSON.stringify(datosProveedor) }
             );
 
 
-            const resultado =
-                await respuesta.json();
+            const resultado = await respuesta.json();
 
 
             if (!respuesta.ok) {
 
-                await mostrarMensajeProveedor('No se pudo guardar',
-                    resultado.mensaje || 'No se pudo guardar el proveedor.', 'error');
+                await mostrarMensajeProveedor('No se pudo guardar', resultado.mensaje || 'No se pudo guardar el proveedor.', 'error');
 
                 return;
 
@@ -747,10 +607,7 @@ let focoAnteriorDialogoProveedor = null;
             const fueEdicion = idProveedorEditando !== null;
             cerrarFormularioProveedor();
 
-            await Promise.all([
-                cargarProveedores(),
-                cargarResumenProveedores()
-            ]);
+            await Promise.all([cargarProveedores(), cargarResumenProveedores()]);
 
             await mostrarMensajeProveedor(
                 fueEdicion ? 'Proveedor actualizado' : 'Proveedor creado',
@@ -760,14 +617,10 @@ let focoAnteriorDialogoProveedor = null;
 
         } catch (error) {
 
-            console.error(
-                'Error al guardar proveedor:',
-                error
-            );
+            console.error('Error al guardar proveedor:', error);
 
 
-            await mostrarMensajeProveedor('Error de conexión',
-                'No se pudo conectar con el servidor.', 'error');
+            await mostrarMensajeProveedor('Error de conexión', 'No se pudo conectar con el servidor.', 'error');
 
         } finally {
             guardandoProveedor = false;
@@ -779,19 +632,12 @@ let focoAnteriorDialogoProveedor = null;
 // TITULO 8 EDITAR PROVEEDOR
 
     // función para cargar un proveedor en el formulario
-    function editarProveedor(
-        idProveedor
-    ) {
+    function editarProveedor(idProveedor) {
 
         const proveedor =
             proveedoresCargados.find(
                 proveedor =>
-                    Number(
-                        proveedor.id_proveedor
-                    ) ===
-                    Number(
-                        idProveedor
-                    )
+                    Number(proveedor.id_proveedor) === Number(idProveedor)
             );
 
 
@@ -804,75 +650,45 @@ let focoAnteriorDialogoProveedor = null;
         modoFormularioProveedor = 'editar';
 
 
-        const titulo =
-            document.getElementById(
-                'titulo_formulario_proveedor'
-            );
+        const titulo = document.getElementById('titulo_formulario_proveedor');
 
 
         if (titulo) {
 
-            titulo.textContent =
-                'Editar proveedor';
+            titulo.textContent = 'Editar proveedor';
 
         }
 
 
-        document.getElementById(
-            'input_nombre_proveedor'
-        ).value =
-            proveedor.nombre_comercial || '';
+        document.getElementById('input_nombre_proveedor').value = proveedor.nombre_comercial || '';
 
 
-        document.getElementById(
-            'input_razon_social_proveedor'
-        ).value =
-            proveedor.razon_social || '';
+        document.getElementById('input_razon_social_proveedor').value = proveedor.razon_social || '';
 
 
-        document.getElementById(
-            'input_rut_proveedor'
-        ).value =
-            proveedor.rut || '';
+        document.getElementById('input_rut_proveedor').value = proveedor.rut || '';
 
 
-        document.getElementById(
-            'input_telefono_proveedor'
-        ).value =
-            proveedor.telefono || '';
+        document.getElementById('input_telefono_proveedor').value = proveedor.telefono || '';
 
 
-        document.getElementById(
-            'input_email_proveedor'
-        ).value =
-            proveedor.email || '';
+        document.getElementById('input_email_proveedor').value = proveedor.email || '';
 
 
-        document.getElementById(
-            'input_direccion_proveedor'
-        ).value =
-            proveedor.direccion || '';
+        document.getElementById('input_direccion_proveedor').value = proveedor.direccion || '';
 
 
-        document.getElementById(
-            'input_tiempo_entrega_proveedor'
-        ).value =
-            proveedor.tiempo_entrega_dias ?? 7;
+        document.getElementById('input_tiempo_entrega_proveedor').value = proveedor.tiempo_entrega_dias ?? 7;
 
 
         configurarModoFormularioProveedor();
 
-        const contenedorFormulario =
-            document.getElementById(
-                'contenedor_formulario_proveedor'
-            );
+        const contenedorFormulario = document.getElementById('contenedor_formulario_proveedor');
 
 
         if (contenedorFormulario) {
 
-            contenedorFormulario.classList.remove(
-                'contenedor_formulario_proveedor_oculto'
-            );
+            contenedorFormulario.classList.remove('contenedor_formulario_proveedor_oculto');
 
         }
 
@@ -896,8 +712,7 @@ let focoAnteriorDialogoProveedor = null;
 
         const confirmado = await confirmarAccionProveedor(
             nuevoEstado ? 'Activar proveedor' : 'Desactivar proveedor',
-            '¿Estás seguro de ' + accion + ' a ' + proveedor.nombre_comercial + '?\n\n' +
-            'El proveedor y sus asociaciones con productos se conservarán.',
+            '¿Estás seguro de ' + accion + ' a ' + proveedor.nombre_comercial + '?\n\n' + 'El proveedor y sus asociaciones con productos se conservarán.',
             nuevoEstado ? 'Activar' : 'Desactivar'
         );
         if (!confirmado) return;
@@ -905,8 +720,7 @@ let focoAnteriorDialogoProveedor = null;
         cambiandoEstadoProveedor = true;
         try {
             const respuesta = await fetchConCsrf(
-                `${URL_API}/api/proveedores/` +
-                    encodeURIComponent(idProveedor) + '/estado', {
+                `${URL_API}/api/proveedores/` + encodeURIComponent(idProveedor) + '/estado', {
                     method: 'PATCH',
                     credentials: 'include',
                     headers: { 'Content-Type': 'application/json' },
@@ -923,8 +737,7 @@ let focoAnteriorDialogoProveedor = null;
                 'El estado del proveedor se actualizó correctamente.', 'correcto'
             );
         } catch (error) {
-            await mostrarMensajeProveedor('No se pudo completar la operación',
-                error.message || 'Ocurrió un error inesperado.', 'error');
+            await mostrarMensajeProveedor('No se pudo completar la operación', error.message || 'Ocurrió un error inesperado.', 'error');
         } finally {
             cambiandoEstadoProveedor = false;
         }
@@ -963,8 +776,7 @@ let focoAnteriorDialogoProveedor = null;
             (modoFormularioProveedor === 'editar' ? 'Editar proveedor' : 'Nuevo proveedor');
         if (guardar) {
             guardar.hidden = soloLectura;
-            guardar.textContent = modoFormularioProveedor === 'editar'
-                ? 'Guardar cambios' : 'Guardar proveedor';
+            guardar.textContent = modoFormularioProveedor === 'editar' ? 'Guardar cambios' : 'Guardar proveedor';
         }
         if (cancelar) cancelar.textContent = soloLectura ? 'Cerrar' : 'Cancelar';
     }
@@ -1064,25 +876,16 @@ let focoAnteriorDialogoProveedor = null;
         configurarFiltrosProveedores();
 
 
-        const botonGuardar =
-            document.getElementById(
-                'boton_guardar_proveedor'
-            );
+        const botonGuardar = document.getElementById('boton_guardar_proveedor');
 
 
         if (botonGuardar) {
 
-            botonGuardar.addEventListener(
-                'click',
-                guardarProveedor
-            );
+            botonGuardar.addEventListener('click', guardarProveedor);
 
         }
 
 
-        await Promise.all([
-                cargarProveedores(),
-                cargarResumenProveedores()
-            ]);
+        await Promise.all([cargarProveedores(), cargarResumenProveedores()]);
 
     }

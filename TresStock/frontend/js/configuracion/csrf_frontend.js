@@ -3,9 +3,7 @@ let tokenCsrf = '';
 
 // Obtiene un token CSRF del backend cuando todavía no hay uno guardado.
 async function obtenerTokenCsrf() {
-    const respuesta = await fetch(`${URL_API}/api/autenticacion/csrf-token`, {
-        credentials: 'include'
-    });
+    const respuesta = await fetch(`${URL_API}/api/autenticacion/csrf-token`, { credentials: 'include' });
 
     if (!respuesta.ok) throw new Error('No se pudo obtener el token CSRF.');
 
@@ -29,11 +27,7 @@ async function fetchConCsrf(url, opciones = {}) {
         headers.set('x-csrf-token', tokenCsrf);
     }
 
-    return fetch(url, {
-        ...opciones,
-        headers,
-        credentials: opciones.credentials || 'include'
-    });
+    return fetch(url, { ...opciones, headers, credentials: opciones.credentials || 'include' });
 }
 
 // Actualiza el token después de que el backend lo rote al iniciar sesión.

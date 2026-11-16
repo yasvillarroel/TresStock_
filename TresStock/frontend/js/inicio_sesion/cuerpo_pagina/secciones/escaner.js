@@ -35,10 +35,7 @@ function formatearCantidadEscaner(valor, esBalanza = false) {
     const cantidad = Number(valor);
     if (!Number.isFinite(cantidad)) return '—';
 
-    const cantidadFormateada = cantidad.toLocaleString('es-CL', {
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 4
-    });
+    const cantidadFormateada = cantidad.toLocaleString('es-CL', { minimumFractionDigits: 0, maximumFractionDigits: 4 });
 
     return esBalanza ? `${cantidadFormateada} (KG)` : cantidadFormateada;
 }
@@ -97,8 +94,7 @@ function configurarDialogoEscaner() {
 }
 
 // muestra un aviso centrado, con confirmación opcional
-function abrirDialogoEscaner({ titulo, mensaje, tipo = 'informacion', confirmar = false,
-    textoAceptar = 'Aceptar' }) {
+function abrirDialogoEscaner({ titulo, mensaje, tipo = 'informacion', confirmar = false, textoAceptar = 'Aceptar' }) {
 
     const fondo = document.getElementById('contenedor_alerta_escaner');
     const ventana = fondo?.querySelector('.modal_alerta_escaner');
@@ -117,15 +113,12 @@ function abrirDialogoEscaner({ titulo, mensaje, tipo = 'informacion', confirmar 
 
     configurarDialogoEscaner();
 
-    const tipoValido = ['correcto', 'error', 'advertencia', 'informacion'].includes(tipo)
-        ? tipo : 'informacion';
+    const tipoValido = ['correcto', 'error', 'advertencia', 'informacion'].includes(tipo) ? tipo : 'informacion';
 
     tituloElemento.textContent = String(titulo || 'Aviso');
     mensajeElemento.textContent = String(mensaje || '');
     ventana.dataset.tipo = tipoValido;
-    icono.textContent = {
-        correcto: '✓', error: '×', advertencia: '!', informacion: 'i'
-    }[tipoValido];
+    icono.textContent = { correcto: '✓', error: '×', advertencia: '!', informacion: 'i' }[tipoValido];
 
     cancelar.hidden = !confirmar;
     aceptar.textContent = textoAceptar;
@@ -161,29 +154,16 @@ function mostrarMensajeEscaner(titulo, mensaje, tipo = 'informacion') {
 
 // solicita autorización antes de cambiar datos
 function confirmarAccionEscaner(titulo, mensaje, textoAceptar = 'Confirmar') {
-    return abrirDialogoEscaner({
-        titulo, mensaje, tipo: 'advertencia', confirmar: true, textoAceptar
-    });
+    return abrirDialogoEscaner({ titulo, mensaje, tipo: 'advertencia', confirmar: true, textoAceptar });
 }
 
 // formatos de codigos de barras admitidos
-const formatosCodigoBarras = [
-    'code_128',
-    'code_39',
-    'ean_13',
-    'ean_8',
-    'upc_a',
-    'upc_e'
-];
+const formatosCodigoBarras = ['code_128', 'code_39', 'ean_13', 'ean_8', 'upc_a', 'upc_e'];
 
 
 // muestra una vista dentro del contenedor principal
 function mostrarVistaProducto(idVista) {
-    const vistas = [
-        'vista_lector_producto',
-        'vista_gestion_producto',
-        'vista_asociar_producto'
-    ];
+    const vistas = ['vista_lector_producto', 'vista_gestion_producto', 'vista_asociar_producto'];
 
     vistas.forEach(function(id) {
         const vista = document.getElementById(id);
@@ -197,9 +177,7 @@ function mostrarVistaProducto(idVista) {
 
 // oculta el boton de eliminar codigo asociado
 function ocultarBotonEliminarCodigoAsociado() {
-    const botonEliminarCodigoAsociado = document.getElementById(
-        'boton_eliminar_codigo_asociado'
-    );
+    const botonEliminarCodigoAsociado = document.getElementById('boton_eliminar_codigo_asociado');
 
     if (botonEliminarCodigoAsociado) {
         botonEliminarCodigoAsociado.hidden = true;
@@ -225,8 +203,7 @@ function esCodigoAsociado(codigo, producto) {
     const codigoPrincipal = String(producto.codigo ?? '').trim();
     const codigoBarrasPrincipal = String(producto.cod_barra ?? '').trim();
 
-    return codigoEscaneado !== codigoPrincipal &&
-        codigoEscaneado !== codigoBarrasPrincipal;
+    return codigoEscaneado !== codigoPrincipal && codigoEscaneado !== codigoBarrasPrincipal;
 }
 
 
@@ -265,21 +242,15 @@ async function inicializarEscaner() {
     // oculta el boton de eliminar al volver a escanear
     ocultarBotonEliminarCodigoAsociado();
 
-    const contenedorContenido = document.querySelector(
-        '.contenedor_contenido'
-    );
+    const contenedorContenido = document.querySelector('.contenedor_contenido');
 
     if (contenedorContenido) {
-        contenedorContenido.classList.add(
-            'contenedor_contenido_escaner'
-        );
+        contenedorContenido.classList.add('contenedor_contenido_escaner');
     }
 
     const miId = ++idInicioEscaner;
 
-    const contenedor = document.getElementById(
-        'contenedor_escaner_producto'
-    );
+    const contenedor = document.getElementById('contenedor_escaner_producto');
 
     const video = document.getElementById('lector_codigo_barras');
 
@@ -289,36 +260,20 @@ async function inicializarEscaner() {
     }
 
     // muestra el contenedor y la vista del lector
-    contenedor.classList.remove(
-        'contenedor_escaner_producto_oculto'
-    );
+    contenedor.classList.remove('contenedor_escaner_producto_oculto');
 
     mostrarVistaProducto('vista_lector_producto');
 
     try {
         // comprueba si el navegador admite BarcodeDetector
         if (!('BarcodeDetector' in window)) {
-            throw new Error(
-                'El navegador no admite BarcodeDetector'
-            );
+            throw new Error('El navegador no admite BarcodeDetector');
         }
 
-        const detector = new BarcodeDetector({
-            formats: formatosCodigoBarras
-        });
+        const detector = new BarcodeDetector({ formats: formatosCodigoBarras });
 
         const flujo = await navigator.mediaDevices.getUserMedia({
-            video: {
-                facingMode: {
-                    ideal: 'environment'
-                },
-                width: {
-                    ideal: 1280
-                },
-                height: {
-                    ideal: 720
-                }
-            },
+            video: { facingMode: { ideal: 'environment' }, width: { ideal: 1280 }, height: { ideal: 720 } },
             audio: false
         });
 
@@ -411,12 +366,7 @@ async function buscarCodigoProducto(video, miId) {
 // consulta el producto correspondiente al codigo escaneado
 async function consultarProductoEscaneado(codigo) {
     try {
-        const respuesta = await fetchConCsrf(
-            `${URL_API}/api/escaneo/producto/${encodeURIComponent(codigo)}`,
-            {
-                credentials: 'include'
-            }
-        );
+        const respuesta = await fetchConCsrf(`${URL_API}/api/escaneo/producto/${encodeURIComponent(codigo)}`, { credentials: 'include' });
 
         // el codigo no esta registrado
         if (respuesta.status === 404) {
@@ -446,25 +396,15 @@ async function consultarProductoEscaneado(codigo) {
 
 // muestra los datos del producto en la vista de gestion
 function abrirMenuProducto(codigo, producto = null) {
-    const elementoCodigo = document.getElementById(
-        'codigo_producto_escaneado'
-    );
+    const elementoCodigo = document.getElementById('codigo_producto_escaneado');
 
-    const botonAsociar = document.getElementById(
-        'boton_asociar_codigo'
-    );
+    const botonAsociar = document.getElementById('boton_asociar_codigo');
 
-    const botonAjustar = document.getElementById(
-        'boton_ajustar_producto'
-    );
+    const botonAjustar = document.getElementById('boton_ajustar_producto');
 
-    const menuAjuste = document.getElementById(
-        'menu_ajustar_producto'
-    );
+    const menuAjuste = document.getElementById('menu_ajustar_producto');
 
-    const botonEliminarCodigoAsociado = document.getElementById(
-        'boton_eliminar_codigo_asociado'
-    );
+    const botonEliminarCodigoAsociado = document.getElementById('boton_eliminar_codigo_asociado');
 
     // oculta el boton mientras no se determine el tipo de codigo
     ocultarBotonEliminarCodigoAsociado();
@@ -485,13 +425,10 @@ function abrirMenuProducto(codigo, producto = null) {
 
         // determina el formato del codigo
         const cantidadUnidadesFormateada = formatearCantidadEscaner(cantidadUnidades);
-        const tipoCodigo = cantidadUnidades === 1
-            ? `Unidad x${cantidadUnidadesFormateada}`
-            : `Caja x${cantidadUnidadesFormateada}`;
+        const tipoCodigo = cantidadUnidades === 1 ? `Unidad x${cantidadUnidadesFormateada}` : `Caja x${cantidadUnidadesFormateada}`;
 
         // muestra el codigo escaneado y su formato
-        elementoCodigo.textContent =
-            'Codigo escaneado: ' + codigo + ' - ' + tipoCodigo;
+        elementoCodigo.textContent = 'Codigo escaneado: ' + codigo + ' - ' + tipoCodigo;
 
         elementoCodigo.hidden = false;
 
@@ -518,8 +455,7 @@ function abrirMenuProducto(codigo, producto = null) {
 
     // permite eliminar solamente cuando el codigo es asociado
     if (botonEliminarCodigoAsociado) {
-        botonEliminarCodigoAsociado.hidden =
-            !esCodigoAsociado(codigo, producto);
+        botonEliminarCodigoAsociado.hidden = !esCodigoAsociado(codigo, producto);
     }
 
     // oculta el menu de ajuste al mostrar otro producto
@@ -696,9 +632,7 @@ async function eliminarCodigoAsociado() {
         return;
     }
 
-    const botonEliminarCodigoAsociado = document.getElementById(
-        'boton_eliminar_codigo_asociado'
-    );
+    const botonEliminarCodigoAsociado = document.getElementById('boton_eliminar_codigo_asociado');
 
     // guarda el codigo para usarlo aunque cambie la variable global
     const codigoEliminar = codigoProductoEscaneado;
@@ -720,18 +654,13 @@ async function eliminarCodigoAsociado() {
     try {
         const respuesta = await fetchConCsrf(
             `${URL_API}/api/escaneo/codigo-asociado/${encodeURIComponent(codigoEliminar)}`,
-            {
-                method: 'DELETE',
-                credentials: 'include'
-            }
+            { method: 'DELETE', credentials: 'include' }
         );
 
         const datos = await respuesta.json();
 
         if (!respuesta.ok) {
-            throw new Error(
-                datos.mensaje || 'No se pudo eliminar el codigo asociado'
-            );
+            throw new Error(datos.mensaje || 'No se pudo eliminar el codigo asociado');
         }
 
         await mostrarMensajeEscaner('Código eliminado', datos.mensaje || 'Código asociado eliminado correctamente', 'correcto');
@@ -759,37 +688,24 @@ function mostrarProductosParaAsociar() {
         return;
     }
 
-    const elementoCodigo = document.getElementById(
-        'codigo_producto_asociar'
-    );
+    const elementoCodigo = document.getElementById('codigo_producto_asociar');
 
-    const busqueda = document.getElementById(
-        'busqueda_producto_asociar'
-    );
+    const busqueda = document.getElementById('busqueda_producto_asociar');
 
-    const cantidadUnidades = document.getElementById(
-        'cantidad_unidades_asociar'
-    );
+    const cantidadUnidades = document.getElementById('cantidad_unidades_asociar');
 
-    const resultados = document.getElementById(
-        'resultados_productos_asociar'
-    );
+    const resultados = document.getElementById('resultados_productos_asociar');
 
-    const botonConfirmar = document.getElementById(
-        'boton_confirmar_asociacion'
-    );
+    const botonConfirmar = document.getElementById('boton_confirmar_asociacion');
 
-    const contenedorSeleccionado = document.getElementById(
-        'producto_seleccionado_asociar'
-    );
+    const contenedorSeleccionado = document.getElementById('producto_seleccionado_asociar');
 
     // invalida busquedas anteriores
     idBusquedaProductosAsociar++;
 
     // muestra el codigo que se desea asociar
     if (elementoCodigo) {
-        elementoCodigo.textContent =
-            'Codigo por asociar: ' + codigoProductoEscaneado;
+        elementoCodigo.textContent = 'Codigo por asociar: ' + codigoProductoEscaneado;
     }
 
     // limpia la busqueda anterior
@@ -837,29 +753,17 @@ function mostrarProductosParaAsociar() {
 
 // busca productos existentes mediante el backend
 async function buscarProductosParaAsociar(termino) {
-    const resultados = document.getElementById(
-        'resultados_productos_asociar'
-    );
+    const resultados = document.getElementById('resultados_productos_asociar');
 
-    const botonConfirmar = document.getElementById(
-        'boton_confirmar_asociacion'
-    );
+    const botonConfirmar = document.getElementById('boton_confirmar_asociacion');
 
-    const contenedorSeleccionado = document.getElementById(
-        'producto_seleccionado_asociar'
-    );
+    const contenedorSeleccionado = document.getElementById('producto_seleccionado_asociar');
 
-    const descripcionSeleccionada = document.getElementById(
-        'descripcion_producto_seleccionado'
-    );
+    const descripcionSeleccionada = document.getElementById('descripcion_producto_seleccionado');
 
-    const codigoSeleccionado = document.getElementById(
-        'codigo_producto_seleccionado'
-    );
+    const codigoSeleccionado = document.getElementById('codigo_producto_seleccionado');
 
-    const barraSeleccionada = document.getElementById(
-        'barra_producto_seleccionado'
-    );
+    const barraSeleccionada = document.getElementById('barra_producto_seleccionado');
 
     const idBusqueda = ++idBusquedaProductosAsociar;
 
@@ -895,10 +799,7 @@ async function buscarProductosParaAsociar(termino) {
     try {
         const respuesta = await fetchConCsrf(
             `${URL_API}/api/escaneo/productos-asociar?busqueda=${encodeURIComponent(termino)}`,
-            {
-                method: 'GET',
-                credentials: 'include'
-            }
+            { method: 'GET', credentials: 'include' }
         );
 
         if (!respuesta.ok) {
@@ -930,10 +831,7 @@ async function buscarProductosParaAsociar(termino) {
 
             opcion.type = 'button';
 
-            opcion.textContent =
-                producto.descripcion +
-                ' | Codigo: ' + producto.codigo +
-                ' | Barra: ' + producto.cod_barra;
+            opcion.textContent = producto.descripcion + ' | Codigo: ' + producto.codigo + ' | Barra: ' + producto.cod_barra;
 
             // permite seleccionar el producto y mostrar su informacion
             opcion.addEventListener('click', function() {
@@ -954,18 +852,15 @@ async function buscarProductosParaAsociar(termino) {
                 }
 
                 if (descripcionSeleccionada) {
-                    descripcionSeleccionada.textContent =
-                        producto.descripcion || 'Sin descripcion';
+                    descripcionSeleccionada.textContent = producto.descripcion || 'Sin descripcion';
                 }
 
                 if (codigoSeleccionado) {
-                    codigoSeleccionado.textContent =
-                        producto.codigo || 'Sin codigo';
+                    codigoSeleccionado.textContent = producto.codigo || 'Sin codigo';
                 }
 
                 if (barraSeleccionada) {
-                    barraSeleccionada.textContent =
-                        producto.cod_barra || 'Sin codigo de barras';
+                    barraSeleccionada.textContent = producto.cod_barra || 'Sin codigo de barras';
                 }
 
                 // habilita la confirmacion
@@ -1007,21 +902,14 @@ async function asociarCodigoSeleccionado() {
         return;
     }
 
-    const botonConfirmar = document.getElementById(
-        'boton_confirmar_asociacion'
-    );
+    const botonConfirmar = document.getElementById('boton_confirmar_asociacion');
 
-    const campoCantidad = document.getElementById(
-        'cantidad_unidades_asociar'
-    );
+    const campoCantidad = document.getElementById('cantidad_unidades_asociar');
 
     // obtiene la cantidad de unidades que representa el codigo
     const cantidadUnidades = Number(campoCantidad?.value);
 
-    if (
-        !Number.isSafeInteger(cantidadUnidades) ||
-        cantidadUnidades <= 0
-    ) {
+    if (!Number.isSafeInteger(cantidadUnidades) || cantidadUnidades <= 0) {
         mostrarMensajeEscaner('Cantidad no válida', 'Ingresa una cantidad de unidades válida', 'advertencia');
 
         if (botonConfirmar) {
@@ -1041,9 +929,7 @@ async function asociarCodigoSeleccionado() {
             {
                 method: 'POST',
                 credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     codigo_producto: productoSeleccionadoAsociar.codigo,
                     codigo_barras: codigoProductoEscaneado,
@@ -1056,9 +942,7 @@ async function asociarCodigoSeleccionado() {
         const datos = await respuesta.json();
 
         if (!respuesta.ok) {
-            throw new Error(
-                datos.mensaje || 'No se pudo asociar el codigo'
-            );
+            throw new Error(datos.mensaje || 'No se pudo asociar el codigo');
         }
 
         await mostrarMensajeEscaner('Código asociado', datos.mensaje || 'Código asociado correctamente', 'correcto');
@@ -1130,21 +1014,13 @@ function ajustarProductoEscaneado() {
         return;
     }
 
-    const menu = document.getElementById(
-        'menu_ajustar_producto'
-    );
+    const menu = document.getElementById('menu_ajustar_producto');
 
-    const campoCantidad = document.getElementById(
-        'cantidad_ingresada_ajuste'
-    );
+    const campoCantidad = document.getElementById('cantidad_ingresada_ajuste');
 
-    const campoUnidades = document.getElementById(
-        'unidades_por_codigo_ajuste'
-    );
+    const campoUnidades = document.getElementById('unidades_por_codigo_ajuste');
 
-    const campoInventario = document.getElementById(
-        'inventario_actual_producto'
-    );
+    const campoInventario = document.getElementById('inventario_actual_producto');
 
     if (!menu || !campoCantidad || !campoUnidades || !campoInventario) {
         console.error('No se encontraron los elementos del ajuste');
@@ -1161,13 +1037,7 @@ function ajustarProductoEscaneado() {
     const factor = Number(productoEscaneado.factor ?? 1);
 
     // obtiene el inventario actual recibido desde el backend
-    const inventario = Number(
-        productoEscaneado.stock_actual ??
-        productoEscaneado.stock ??
-        productoEscaneado.inventario ??
-        productoEscaneado.cantidad ??
-        0
-    );
+    const inventario = Number(productoEscaneado.stock_actual ?? productoEscaneado.stock ?? productoEscaneado.inventario ?? productoEscaneado.cantidad ?? 0);
 
     // establece los valores iniciales del ajuste
     campoCantidad.value = '1';
@@ -1186,34 +1056,21 @@ function ajustarProductoEscaneado() {
         fechaVencimiento.required = false;
     }
 
-    campoUnidades.value =
-        Number.isSafeInteger(factor) && factor >= 1
-            ? factor
-            : 1;
+    campoUnidades.value = Number.isSafeInteger(factor) && factor >= 1 ? factor : 1;
 
     // el stock negativo se muestra tal como lo devuelve PostgreSQL;
     // nunca se reemplaza por cero de manera visual
-    campoInventario.textContent = Number.isFinite(inventario)
-        ? inventario
-        : 0;
+    campoInventario.textContent = Number.isFinite(inventario) ? inventario : 0;
 
     // obtiene las opciones para seleccionar el tipo de cantidad
-    const opcionCodigoActual = document.getElementById(
-        'cantidad_codigo_actual'
-    );
+    const opcionCodigoActual = document.getElementById('cantidad_codigo_actual');
 
-    const opcionCodigoSingular = document.getElementById(
-        'cantidad_codigo_singular'
-    );
+    const opcionCodigoSingular = document.getElementById('cantidad_codigo_singular');
 
     // obtiene las opciones para sumar o restar
-    const opcionSumar = document.getElementById(
-        'operacion_sumar'
-    );
+    const opcionSumar = document.getElementById('operacion_sumar');
 
-    const opcionRestar = document.getElementById(
-        'operacion_restar'
-    );
+    const opcionRestar = document.getElementById('operacion_restar');
 
     const opcionFijar = document.getElementById('operacion_fijar');
 
@@ -1333,8 +1190,7 @@ function actualizarCalculoAjuste() {
     const etiquetaCantidad = document.getElementById('texto_cantidad_ajuste');
     const textoUnidadesAjuste = document.getElementById('texto_unidades_ajuste');
 
-    if (!campoCantidad || !campoUnidades || !campoInventario ||
-        !resultadoCantidad || !resultadoInventario || !productoEscaneado) return;
+    if (!campoCantidad || !campoUnidades || !campoInventario || !resultadoCantidad || !resultadoInventario || !productoEscaneado) return;
 
     const operacion = obtenerOperacionAjuste();
     const esFijo = operacion === 'fijar';
@@ -1357,9 +1213,7 @@ function actualizarCalculoAjuste() {
         }
     }
     const factorProducto = Number(productoEscaneado.factor ?? 1);
-    const factor = !esFijo && opcionCodigoActual?.checked && cantidadValidaEscaner(factorProducto)
-        ? factorProducto
-        : 1;
+    const factor = !esFijo && opcionCodigoActual?.checked && cantidadValidaEscaner(factorProducto) ? factorProducto : 1;
 
     // establecer stock indica unidades individuales, sin multiplicar por la caja
     if (opcionesModalidad) opcionesModalidad.hidden = esFijo;
@@ -1367,9 +1221,7 @@ function actualizarCalculoAjuste() {
     if (contenedorUnidades) contenedorUnidades.hidden = esFijo || factor === 1;
     campoUnidades.value = factor;
 
-    if (etiquetaCantidad) etiquetaCantidad.textContent = esFijo
-        ? 'Nuevo stock (unidades)'
-        : operacion === 'restar' ? 'Cantidad a restar' : 'Cantidad a sumar';
+    if (etiquetaCantidad) etiquetaCantidad.textContent = esFijo ? 'Nuevo stock (unidades)' : operacion === 'restar' ? 'Cantidad a restar' : 'Cantidad a sumar';
     if (textoUnidadesAjuste) textoUnidadesAjuste.textContent = esFijo
         ? 'Stock que deseas establecer:'
         : operacion === 'restar' ? 'Unidades a restar:' : 'Unidades a sumar:';
@@ -1380,9 +1232,7 @@ function actualizarCalculoAjuste() {
     const stockActual = Number(productoEscaneado.stock_actual ?? 0);
     const cantidad = Number(campoCantidad.value);
     const cantidadTotal = esFijo ? cantidad : Number((cantidad * factor).toFixed(4));
-    const valido = campoCantidad.value.trim() !== '' &&
-        cantidadValidaEscaner(cantidad, esFijo) &&
-        cantidadValidaEscaner(cantidadTotal, esFijo) &&
+    const valido = campoCantidad.value.trim() !== '' && cantidadValidaEscaner(cantidad, esFijo) && cantidadValidaEscaner(cantidadTotal, esFijo) &&
         Number.isFinite(stockActual);
 
     if (!valido) {
@@ -1393,8 +1243,7 @@ function actualizarCalculoAjuste() {
     }
 
     const nuevoStock = esFijo ? cantidadTotal
-        : operacion === 'restar' ? Number((stockActual - cantidadTotal).toFixed(4))
-        : Number((stockActual + cantidadTotal).toFixed(4));
+        : operacion === 'restar' ? Number((stockActual - cantidadTotal).toFixed(4)) : Number((stockActual + cantidadTotal).toFixed(4));
 
     // se admite sumar a un saldo negativo existente para recuperarlo;
     // nunca se permite disminuirlo a un valor negativo nuevo
@@ -1425,34 +1274,23 @@ async function aceptarAjusteProducto() {
     const incluirVencimiento = botonVencimiento?.getAttribute('aria-pressed') === 'true';
     const fechaLote = String(fechaVencimiento?.value || '').trim();
     const cantidadIngresada = Number(campoCantidad?.value);
-    const factor = esFijo || !opcionCodigoActual?.checked
-        ? 1
-        : Number(productoEscaneado.factor ?? 1);
+    const factor = esFijo || !opcionCodigoActual?.checked ? 1 : Number(productoEscaneado.factor ?? 1);
     const cantidad = Number((cantidadIngresada * factor).toFixed(4));
     const motivo = String(campoMotivo?.value || '').trim();
 
-    if (!cantidadValidaEscaner(cantidadIngresada, esFijo) ||
-        !cantidadValidaEscaner(factor) ||
-        !cantidadValidaEscaner(cantidad, esFijo) ||
-        !motivo) {
+    if (!cantidadValidaEscaner(cantidadIngresada, esFijo) || !cantidadValidaEscaner(factor) || !cantidadValidaEscaner(cantidad, esFijo) || !motivo) {
         mostrarMensajeEscaner('Datos incompletos', 'Revisa la cantidad y el motivo del movimiento', 'advertencia');
         return;
     }
 
-    if (incluirVencimiento && (
-        operacion !== 'sumar' ||
-        !fechaLote ||
-        fechaLote < obtenerFechaMinimaLoteEscaner()
-    )) {
+    if (incluirVencimiento && (operacion !== 'sumar' || !fechaLote || fechaLote < obtenerFechaMinimaLoteEscaner())) {
         mostrarMensajeEscaner('Fecha no válida', 'Selecciona hoy o una fecha futura para el vencimiento del lote', 'advertencia');
         fechaVencimiento?.focus();
         return;
     }
 
     const stockActual = Number(productoEscaneado.stock_actual ?? 0);
-    const nuevoStock = esFijo ? cantidad
-        : operacion === 'sumar' ? Number((stockActual + cantidad).toFixed(4))
-        : Number((stockActual - cantidad).toFixed(4));
+    const nuevoStock = esFijo ? cantidad : operacion === 'sumar' ? Number((stockActual + cantidad).toFixed(4)) : Number((stockActual - cantidad).toFixed(4));
 
     if (operacion === 'restar' && nuevoStock < 0) {
         mostrarMensajeEscaner('Stock insuficiente', 'No hay existencias suficientes para realizar esta salida', 'advertencia');
@@ -1470,11 +1308,7 @@ async function aceptarAjusteProducto() {
             ? `¿Sumar ${cantidad} unidades al inventario${incluirVencimiento ? ` con vencimiento el ${fechaLote}` : ''}?`
             : `¿Restar ${cantidad} unidades del inventario?`;
 
-    const confirmado = await confirmarAccionEscaner(
-        'Confirmar ajuste de inventario',
-        pregunta,
-        'Confirmar ajuste'
-    );
+    const confirmado = await confirmarAccionEscaner('Confirmar ajuste de inventario', pregunta, 'Confirmar ajuste');
 
     if (!confirmado) return;
     if (botonAceptar) botonAceptar.disabled = true;
@@ -1545,23 +1379,15 @@ function cerrarEscanerProducto() {
     // oculta el boton de eliminar codigo asociado
     ocultarBotonEliminarCodigoAsociado();
 
-    const contenedorContenido = document.querySelector(
-        '.contenedor_contenido'
-    );
+    const contenedorContenido = document.querySelector('.contenedor_contenido');
 
     if (contenedorContenido) {
-        contenedorContenido.classList.remove(
-            'contenedor_contenido_escaner'
-        );
+        contenedorContenido.classList.remove('contenedor_contenido_escaner');
     }
 
-    const contenedor = document.getElementById(
-        'contenedor_escaner_producto'
-    );
+    const contenedor = document.getElementById('contenedor_escaner_producto');
 
     if (contenedor) {
-        contenedor.classList.add(
-            'contenedor_escaner_producto_oculto'
-        );
+        contenedor.classList.add('contenedor_escaner_producto_oculto');
     }
 }
