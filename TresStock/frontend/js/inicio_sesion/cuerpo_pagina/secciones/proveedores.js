@@ -156,7 +156,7 @@ let focoAnteriorDialogoProveedor = null;
         try {
 
             const respuesta = await fetchConCsrf(
-                'http://127.0.0.1:3000/api/proveedores',
+                `${URL_API}/api/proveedores`,
                 {
                     method: 'GET',
                     credentials: 'include'
@@ -318,7 +318,7 @@ let focoAnteriorDialogoProveedor = null;
         try {
 
             const respuesta = await fetchConCsrf(
-                'http://127.0.0.1:3000/api/proveedores/resumen',
+                `${URL_API}/api/proveedores/resumen`,
                 {
                     method: 'GET',
                     credentials: 'include'
@@ -693,7 +693,7 @@ let focoAnteriorDialogoProveedor = null;
         try {
 
             let url =
-                'http://127.0.0.1:3000/api/proveedores';
+                `${URL_API}/api/proveedores`;
 
             let metodo =
                 'POST';
@@ -703,7 +703,7 @@ let focoAnteriorDialogoProveedor = null;
             if (idProveedorEditando !== null) {
 
                 url =
-                    `http://127.0.0.1:3000/api/proveedores/${idProveedorEditando}`;
+                    `${URL_API}/api/proveedores/${idProveedorEditando}`;
 
                 metodo =
                     'PUT';
@@ -905,7 +905,7 @@ let focoAnteriorDialogoProveedor = null;
         cambiandoEstadoProveedor = true;
         try {
             const respuesta = await fetchConCsrf(
-                'http://127.0.0.1:3000/api/proveedores/' +
+                `${URL_API}/api/proveedores/` +
                     encodeURIComponent(idProveedor) + '/estado', {
                     method: 'PATCH',
                     credentials: 'include',

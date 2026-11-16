@@ -1,6 +1,6 @@
 // TITULO 1 CONFIGURACION GENERAL DE USUARIOS
 
-const URL_API_USUARIOS = 'http://127.0.0.1:3000/api/usuarios';
+const URL_API_USUARIOS = `${URL_API}/api/usuarios`;
 let usuariosCargados = [];
 let modoFormularioUsuario = 'nuevo';
 let idUsuarioEditado = null;

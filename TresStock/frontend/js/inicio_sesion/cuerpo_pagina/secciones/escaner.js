@@ -363,9 +363,9 @@ async function inicializarEscaner() {
 
         console.error('Error al iniciar el escaner:', error);
 
-        await mostrarMensajeEscaner('Cámara no disponible', 'No se pudo iniciar el escáner: ' + error.message, 'error');
+        detenerCamara();
 
-        cerrarEscanerProducto();
+        alert('No se pudo iniciar la cámara: ' + error.message);
     }
 }
 

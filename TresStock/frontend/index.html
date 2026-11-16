@@ -8,8 +8,16 @@
 
     <title>TresStock</title>
 
-    <!-- favicon -->
-    <!-- <link rel="icon" type="image/png" href="./imagenes/favicon.png"> -->
+
+    <!-- Configuración PWA TresStock -->
+    <link rel="manifest" href="./manifest.webmanifest">
+
+    <!-- Color del navegador -->
+    <meta name="theme-color" content="#0B3650">
+
+    <!-- Icono para dispositivos Apple -->
+    <link rel="apple-touch-icon" href="./imagenes/pwa/icon-192.png">
+
 
     <!-- CSS INDEX -->
     <link rel="stylesheet" href="./css/inicio_sesion/index/index.css">
@@ -32,6 +40,31 @@
     <link rel="stylesheet" href="./css/inicio_sesion/cuerpo_pagina/secciones/escaner.css">
 
 </head>
+
+
+<!-- Registro del Service Worker de TresStock -->
+<script>
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", async () => {
+            try {
+                const registro = await navigator.serviceWorker.register(
+                    "./service-worker.js"
+                );
+
+                console.log(
+                    "Service Worker de TresStock registrado:",
+                    registro.scope
+                );
+            } catch (error) {
+                console.error(
+                    "Error al registrar Service Worker:",
+                    error
+                );
+            }
+        });
+    }
+</script>
+
 
 <body class="body_index">
 

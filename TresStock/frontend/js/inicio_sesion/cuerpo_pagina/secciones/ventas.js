@@ -50,7 +50,7 @@ function actualizarModalidadImportacionVentas() {
 // consulta la fecha de inicio guardada por PostgreSQL
 async function cargarConfiguracionInventarioVentas() {
     try {
-        const respuesta = await fetchConCsrf('http://127.0.0.1:3000/api/ventas/configuracion-inventario', {
+        const respuesta = await fetchConCsrf(`${URL_API}/api/ventas/configuracion-inventario`, {
             method: 'GET', credentials: 'include'
         });
         const datos = await respuesta.json();
@@ -82,7 +82,7 @@ async function guardarInicioControlVentas() {
     configurandoInicioVentas = true;
     if (boton) boton.disabled = true;
     try {
-        const respuesta = await fetchConCsrf('http://127.0.0.1:3000/api/ventas/configuracion-inventario', {
+        const respuesta = await fetchConCsrf(`${URL_API}/api/ventas/configuracion-inventario`, {
             method: 'POST', credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -320,7 +320,7 @@ function configurarModalidadesImportacionVentas() {
         try {
 
             const respuesta = await fetchConCsrf(
-                'http://127.0.0.1:3000/api/ventas/importar',
+                `${URL_API}/api/ventas/importar`,
                 {
                     method: 'POST',
                     body: datos,
@@ -539,7 +539,7 @@ function configurarModalidadesImportacionVentas() {
         try {
 
             const respuesta = await fetchConCsrf(
-                'http://127.0.0.1:3000/api/ventas?' +
+                `${URL_API}/api/ventas?` +
                 parametros.toString(),
                 {
                     method: 'GET',
@@ -719,7 +719,7 @@ function configurarModalidadesImportacionVentas() {
         try {
 
             const respuesta = await fetchConCsrf(
-                'http://127.0.0.1:3000/api/ventas/resumen',
+                `${URL_API}/api/ventas/resumen`,
                 {
                     method: 'GET',
                     credentials: 'include'
@@ -830,7 +830,7 @@ function configurarModalidadesImportacionVentas() {
         try {
 
             const respuesta = await fetchConCsrf(
-                'http://127.0.0.1:3000/api/ventas/' +
+                `${URL_API}/api/ventas/` +
                 idVenta +
                 '/detalle',
                 {

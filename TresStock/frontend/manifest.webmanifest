@@ -1,0 +1,26 @@
+
+{
+  "id": "/tresstock",
+  "name": "TresStock - Gestión de Inventario",
+  "short_name": "TresStock",
+  "description": "Sistema de gestión de productos, inventario y ventas del Minimarket Los Tres",
+  "lang": "es-CL",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0B3650",
+  "theme_color": "#0B3650",
+  "icons": [
+    {
+      "src": "./imagenes/pwa/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./imagenes/pwa/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

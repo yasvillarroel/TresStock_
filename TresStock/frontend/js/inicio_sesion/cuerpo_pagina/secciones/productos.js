@@ -463,7 +463,7 @@ function confirmarAccionProducto(titulo, mensaje, textoAceptar = 'Confirmar') {
         try {
 
             const respuesta = await fetchConCsrf(
-                'http://127.0.0.1:3000/api/productos/importar',
+                `${URL_API}/api/productos/importar`,
                 {
                     method: 'POST',
                     body: datos,
@@ -541,7 +541,7 @@ function confirmarAccionProducto(titulo, mensaje, textoAceptar = 'Confirmar') {
         try {
 
             const respuesta = await fetchConCsrf(
-                'http://127.0.0.1:3000/api/productos',
+                `${URL_API}/api/productos`,
                 {
                     method: 'GET',
                     credentials: 'include'
@@ -993,7 +993,7 @@ function escaparTextoProducto(valor) {
 
         try {
             const respuesta = await fetchConCsrf(
-                'http://127.0.0.1:3000/api/productos/familias',
+                `${URL_API}/api/productos/familias`,
                 { method: 'GET', credentials: 'include' }
             );
 
@@ -2114,7 +2114,7 @@ async function cargarOpcionesProveedoresProducto() {
     if (listaProveedoresProducto === null) {
 
         const respuesta = await fetchConCsrf(
-            'http://127.0.0.1:3000/api/proveedores',
+            `${URL_API}/api/proveedores`,
             { credentials: 'include' }
         );
 
@@ -2351,9 +2351,9 @@ async function guardarCambiosProducto() {
     const esEdicion = modoFormularioProducto === 'editar';
 
     const url = esEdicion
-        ? 'http://127.0.0.1:3000/api/productos/' +
+        ? `${URL_API}/api/productos/` +
             encodeURIComponent(codigoOriginalProducto)
-        : 'http://127.0.0.1:3000/api/productos';
+        : `${URL_API}/api/productos`;
 
     guardandoProducto = true;
     actualizarBotonesImagenProducto();
@@ -2455,7 +2455,7 @@ async function confirmarCambioEstadoProducto(codigo) {
 
     try {
         const respuesta = await fetchConCsrf(
-            'http://127.0.0.1:3000/api/productos/' +
+            `${URL_API}/api/productos/` +
                 encodeURIComponent(codigo) + '/estado',
             {
                 method: 'PATCH',
@@ -2633,7 +2633,7 @@ function configurarAccionesProductos() {
 // convierte rutas locales de Node.js en direcciones completas para Live Server (:5500)
 function resolverRutaImagenProducto(ruta) {
     if (typeof ruta === 'string' && ruta.startsWith('/api/productos/imagenes/')) {
-        return 'http://127.0.0.1:3000' + ruta;
+        return `${URL_API}` + ruta;
     }
     return ruta;
 }
@@ -2786,7 +2786,7 @@ async function buscarImagenProductoFormulario() {
 
     try {
         const respuesta = await fetchConCsrf(
-            'http://127.0.0.1:3000/api/productos/buscar-imagen/' +
+            `${URL_API}/api/productos/buscar-imagen/` +
                 encodeURIComponent(codigoBarra),
             { method: 'GET', credentials: 'include' }
         );

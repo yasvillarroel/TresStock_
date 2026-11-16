@@ -1,6 +1,9 @@
 // importa express
 const express = require('express');
 
+// permite localizar la carpeta del frontend
+const path = require('path');
+
 // importa cookie-parser para leer cookies
 const cookieParser = require('cookie-parser');
 
@@ -79,6 +82,14 @@ app.use('/api/dashboard', autenticacion, require('./rutas/dashboard_rutas'));
 app.use('/api/alertas', autenticacion, require('./rutas/alertas_rutas'));
 
 // se retiro /api/prueba-cookie: establecia una cookie de sesion no autenticada
+
+// =======================================
+// TITULO 5 ARCHIVOS DEL FRONTEND
+// =======================================
+
+// sirve HTML, CSS, JavaScript e imagenes desde la misma URL que la API.
+// se supone que las carpetas backend y frontend son hermanas.
+app.use(express.static(path.join(__dirname, '../frontend')));
 
 // exporta la aplicacion
 module.exports = app;

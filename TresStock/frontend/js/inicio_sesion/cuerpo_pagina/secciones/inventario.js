@@ -37,7 +37,7 @@
         try {
 
             const respuesta = await fetchConCsrf(
-                'http://127.0.0.1:3000/api/inventario/resumen',
+                `${URL_API}/api/inventario/resumen`,
                 {
                     method: 'GET',
                     credentials: 'include'
@@ -161,7 +161,7 @@
         try {
 
             const respuesta = await fetchConCsrf(
-                'http://127.0.0.1:3000/api/inventario/familias',
+                `${URL_API}/api/inventario/familias`,
                 {
                     method: 'GET',
                     credentials: 'include'
@@ -617,7 +617,7 @@
         try {
 
             const respuesta = await fetchConCsrf(
-                'http://127.0.0.1:3000/api/inventario',
+                `${URL_API}/api/inventario`,
                 {
                     method: 'GET',
                     credentials: 'include'
@@ -775,7 +775,7 @@
                 imagen.decoding = 'async';
                 imagen.draggable = false;
                 imagen.src = rutaImagen
-                    ? (rutaImagen.startsWith('/api/productos/imagenes/') ? `http://127.0.0.1:3000${rutaImagen}` : rutaImagen)
+                    ? (rutaImagen.startsWith('/api/productos/imagenes/') ? `${URL_API}${rutaImagen}` : rutaImagen)
                     : rutaImagenPredeterminada;
                 imagen.onerror = function() {
                     this.onerror = null;
@@ -1352,7 +1352,7 @@ async function recalcularStockMinimoInventario() {
     try {
 
         const respuesta = await fetchConCsrf(
-            'http://127.0.0.1:3000/api/inventario/recalcular-stock-minimo',
+            `${URL_API}/api/inventario/recalcular-stock-minimo`,
             {
                 method: 'PUT',
                 credentials: 'include'
@@ -1664,7 +1664,7 @@ async function recalcularStockMinimoInventario() {
 
         try {
             const respuesta = await fetchConCsrf(
-                `http://127.0.0.1:3000/api/inventario/movimientos?${parametros.toString()}`,
+                `${URL_API}/api/inventario/movimientos?${parametros.toString()}`,
                 { method: 'GET', credentials: 'include' }
             );
             const resultado = await respuesta.json();
