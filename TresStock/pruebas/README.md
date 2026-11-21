@@ -1,10 +1,18 @@
 # Pruebas de TresStock
 
-## Situación inicial
+## Resultados de las pruebas
 
-Actualmente el equipo solo dispone de la base del proyecto. No ejecutar aún los casos que crean cuentas, importan archivos o modifican existencias sobre esa base. Las pruebas automáticas de regresión usan dependencias simuladas y pueden ejecutarse sin tocar PostgreSQL.
+Los resultados de las pruebas manuales ejecutadas por el equipo se registran en [Pruebas_TresStock.xlsx](resultados/Pruebas_TresStock.xlsx).
 
-## Primera ronda
+El Excel es el registro de referencia para consultar los resultados obtenidos, estados, responsables, fechas y capturas de evidencia de cada caso ejecutado.
+
+Los archivos `casos_prueba.md` y `matriz_pruebas.md` conservan la definición y planificación de las pruebas. Sus estados pueden corresponder al registro inicial; para consultar los resultados de la ejecución, utilizar el Excel.
+
+El caso SES-06 se ejecutó en el entorno habitual con SMTP configurado y una cuenta exclusiva para pruebas. El entorno local separado mantiene el envío de correos desactivado.
+
+Para repetir los casos que crean productos, importan ventas o modifican existencias, utilizar el entorno separado descrito a continuación. Las pruebas automáticas de regresión usan dependencias simuladas y pueden ejecutarse sin modificar PostgreSQL.
+
+## Repetir la ronda de pruebas
 
 1. Ejecutar `npm test` desde la carpeta TresStock.
 2. Para la ronda completa, iniciar el entorno aislado con `node pruebas/entorno_local.cjs`. El programa mostrará la dirección y las cuentas de demostración.
@@ -42,11 +50,22 @@ Si Windows tiene PostgreSQL en otra ubicación, definir `TRESSTOCK_PG_BIN` con l
 
 ## Cómo documentar cada caso
 
-Abrir el archivo `casos_prueba.md` del módulo, seguir sus pasos y completar el registro. Usar uno de estos estados: PENDIENTE, APROBADO, FALLIDO o BLOQUEADO. Registrar lo observado, incluso si difiere de lo esperado.
+Consultar los pasos y las precondiciones del archivo `casos_prueba.md` del módulo correspondiente. Los casos están indexados en [matriz_pruebas.md](matriz_pruebas.md).
 
-Guardar capturas con el ID del caso, por ejemplo `pruebas/evidencias/INV-01/stock_despues.png`. No incluir contraseñas, tokens ni correos de personas reales en las evidencias. Ante un fallo, anotar pasos para reproducirlo, resultado esperado, resultado obtenido y su impacto.
+Registrar la ejecución en `resultados/Pruebas_TresStock.xlsx`, indicando el resultado obtenido, estado, fecha, responsable, datos utilizados, navegador, dispositivo y evidencia.
 
-Los casos están indexados en [matriz_pruebas.md](matriz_pruebas.md). Cada prueba declara sus precondiciones: si ya se modificó un saldo, volver a prepararlo en la base aislada antes de repetirla.
+Utilizar uno de estos estados según lo observado:
+
+- PENDIENTE: la prueba aún no se ha ejecutado o falta completar sus comprobaciones.
+- APROBADO: se ejecutaron las comprobaciones y el resultado coincide con lo esperado.
+- FALLIDO: el comportamiento observado no coincide con lo esperado.
+- BLOQUEADO: falta una condición del entorno que impide ejecutar la prueba.
+
+Las capturas de evidencia se encuentran incorporadas en el Excel. Conservar también los archivos originales cuando estén disponibles. No registrar contraseñas, tokens ni códigos de verificación; ocultar los datos personales que no sean necesarios en las capturas.
+
+Ante un fallo, anotar los pasos para reproducirlo, el resultado esperado y el obtenido. Si se repite la prueba, identificar la fecha y el resultado de la nueva ejecución, conservando constancia de la incidencia anterior.
+
+Antes de repetir una prueba que modifica datos, revisar sus precondiciones y preparar los saldos necesarios en la base aislada. El entorno conserva los cambios entre sesiones.
 
 ## Alcance de las pruebas automáticas
 
